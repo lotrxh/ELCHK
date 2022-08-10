@@ -1,0 +1,23 @@
+App As appinfo:
+    BackEnabled: =false
+    OnStart: |-
+        =//设置主色
+        Set(glbThemePrimaryColor,ColorValue( "#01A8F4" ));
+        Set(glbThemeSecondaryColor,ColorValue( "#4E505C" ));
+        Set(glbThemeTertiaryColor,ColorValue( "#66B6E3" ));
+        //设置功能色
+        Set(glbErrorColor,ColorValue( "#E62D36" ));
+        Set(glbSuccessColor,ColorValue( "#009639" ));
+        Set(glbWarningColor,ColorValue( "#F5913B" ));
+        Set(glbLinkColor,ColorValue( "#0086D0" ));
+        //设置中性色
+        Set(glbNeutralPrimaryColor,ColorValue( "#323130" ));
+        Set(glbNeutralSecondaryColor,ColorValue( "#605E5C" ));
+        Set(glbNeutralTertiaryColor,ColorValue( "#A19F9D" ));
+        Set(glbNeutralQuaternaryColor,ColorValue( "#D2D0CE" ));
+        Set(glbNeutralLightColor,ColorValue( "#EDEBE9" ));
+        Set(glbNeutralLighterColor,ColorValue( "#f3f2f1" ));
+        
+        //Set(CurrentUser,User().Email);
+        Set(CurrentUser,"eps-vendor@elchk.org.hk");
+

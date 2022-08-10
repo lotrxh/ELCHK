@@ -1,0 +1,1060 @@
+"'AdminFormListScreen-leo' As screen":
+    OnVisible: =Select(Reset_button)
+
+    Container1_4 As groupContainer.manualLayoutContainer:
+        Fill: =glbThemePrimaryColor
+        Height: =50
+        Width: =1366
+        ZIndex: =1
+
+        Image1_6 As image:
+            Height: =38
+            Image: =logo
+            Width: =203
+            X: =15
+            Y: =5
+            ZIndex: =1
+
+        Circle1_6 As circle:
+            BorderColor: =RGBA(255, 255, 255, 1)
+            BorderThickness: =1
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =32
+            Width: =32
+            X: =1318
+            Y: =8
+            ZIndex: =2
+
+        Label1_82 As label:
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =glbThemePrimaryColor
+            Height: =18
+            Size: =9
+            Text: ="基督教香港信義會社會服務部"
+            Width: =186
+            X: =63
+            Y: =5
+            ZIndex: =3
+
+        Label1_98 As label:
+            Align: =Align.Center
+            Color: =RGBA(255, 255, 255, 1)
+            Height: =32
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =9
+            Text: ="HG"
+            Width: =32
+            X: =1318
+            Y: =8
+            ZIndex: =4
+
+        Label1_99 As label:
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =glbThemePrimaryColor
+            FontWeight: =FontWeight.Bold
+            Height: =24
+            Size: =12
+            Text: ="SYSTEM NAME"
+            Width: =186
+            X: =63
+            Y: =22
+            ZIndex: =5
+
+    Container4_3 As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(247, 247, 247, 1)
+        Height: =718
+        Width: =1206
+        X: =160
+        Y: =50
+        ZIndex: =2
+
+        Container5_5 As groupContainer.manualLayoutContainer:
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =70
+            Width: =1182
+            X: =12
+            Y: =50
+            ZIndex: =4
+
+            drpFilterDepartment As combobox:
+                BorderColor: =glbNeutralTertiaryColor
+                BorderThickness: =1
+                ChevronBackground: =RGBA(255, 255, 255, 1)
+                ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
+                ChevronDisabledFill: =RGBA(202, 202, 202, 1)
+                ChevronFill: =glbNeutralTertiaryColor
+                ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
+                ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
+                Color: =glbNeutralPrimaryColor
+                DisplayFields: =["Result"]
+                FocusedBorderThickness: =0
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                HoverColor: =Self.Color
+                HoverFill: =ColorFade(Self.Fill, -5%)
+                InputTextPlaceholder: ="選擇部門"
+                IsSearchable: =false
+                Items: =Distinct(FormTableType,DepartMentName)
+                NoSelectionText: ="選擇部門"
+                PaddingLeft: =10
+                PressedColor: =Self.Color
+                PressedFill: =ColorFade(Self.Fill, -5%)
+                SearchFields: =["Result"]
+                SearchItems: =[]
+                SelectionColor: =glbThemePrimaryColor
+                SelectionFill: =ColorFade(Self.SelectionColor, 90%)
+                Size: =11
+                Width: =180
+                X: =291
+                Y: =20
+                ZIndex: =1
+
+            ComboBox1_formtype As combobox:
+                BorderColor: =glbNeutralTertiaryColor
+                BorderThickness: =1
+                ChevronBackground: =RGBA(255, 255, 255, 1)
+                ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
+                ChevronDisabledFill: =RGBA(202, 202, 202, 1)
+                ChevronFill: =glbNeutralTertiaryColor
+                ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
+                ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
+                Color: =glbNeutralPrimaryColor
+                DisplayFields: =["Result"]
+                FocusedBorderThickness: =0
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                HoverColor: =Self.Color
+                HoverFill: =ColorFade(Self.Fill, -5%)
+                InputTextPlaceholder: ="表格類型"
+                IsSearchable: =false
+                Items: =Distinct(FormTableType,FormType)
+                NoSelectionText: ="選擇表格類型"
+                PaddingLeft: =10
+                PressedColor: =Self.Color
+                PressedFill: =ColorFade(Self.Fill, -5%)
+                SearchFields: =["Result"]
+                SearchItems: =[]
+                SelectionColor: =glbThemePrimaryColor
+                SelectionFill: =ColorFade(Self.SelectionColor, 90%)
+                Size: =11
+                Width: =180
+                X: =481
+                Y: =20
+                ZIndex: =2
+
+            "'TextInput_name&number' As text":
+                BorderColor: =glbNeutralTertiaryColor
+                BorderThickness: =1
+                Color: =glbNeutralPrimaryColor
+                Default: =""
+                FocusedBorderColor: =glbNeutralSecondaryColor
+                FocusedBorderThickness: =1
+                Height: =32
+                HintText: ="按表格名稱或編號搜索"
+                HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                HoverFill: =ColorFade(Self.Fill, -5%)
+                PaddingBottom: =0
+                PaddingLeft: =10
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =11
+                Width: =260
+                X: =20
+                Y: =20
+                ZIndex: =3
+
+            Search_button As icon.Add:
+                BorderColor: =Self.Fill
+                BorderThickness: =1
+                Color: =RGBA(255, 255, 255, 1)
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                DisabledColor: =RGBA(149, 149, 149, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =glbThemePrimaryColor
+                Height: =32
+                HoverFill: =ColorFade(Self.Fill, -15%)
+                Icon: =Icon.Search
+                OnSelect: |
+                    =If(
+                        !IsBlank('TextInput_name&number'.Text) && IsBlank(drpFilterDepartment.SelectedItems) && IsBlank(ComboBox1_formtype.SelectedItems) && IsBlank(TemplateStartDate_3.SelectedDate) && IsBlank(TemplateEndDate_3.SelectedDate),
+                        ClearCollect(
+                            FilterForm,
+                            Filter(
+                                GenericFormModel,
+                                'TextInput_name&number'.Text in ModelName || 'TextInput_name&number'.Text in ModelFlowNumber
+                            )
+                        )
+                    );
+                      //单独查询表格名称或者编号
+                    If(
+                        IsBlank('TextInput_name&number'.Text) && !IsBlank(drpFilterDepartment.SelectedItems) && IsBlank(ComboBox1_formtype.SelectedItems) && IsBlank(TemplateStartDate_3.SelectedDate) && IsBlank(TemplateEndDate_3.SelectedDate),
+                        ClearCollect(
+                            FilterForm,
+                            Filter(
+                                GenericFormModel,
+                                ModelDepartment in drpFilterDepartment.SelectedItems
+                            )
+                        )
+                    );
+                      //单独查询部门
+                    If(
+                        IsBlank('TextInput_name&number'.Text) && IsBlank(drpFilterDepartment.SelectedItems) && !IsBlank(ComboBox1_formtype.SelectedItems) && IsBlank(TemplateStartDate_3.SelectedDate) && IsBlank(TemplateEndDate_3.SelectedDate),
+                        ClearCollect(
+                            FilterForm,
+                            Filter(
+                                GenericFormModel,
+                                ModelType in ComboBox1_formtype.SelectedItems
+                            )
+                        )
+                    );
+                      //单独查询表格类型
+                    If(
+                        IsBlank('TextInput_name&number'.Text) && IsBlank(drpFilterDepartment.SelectedItems) && IsBlank(ComboBox1_formtype.SelectedItems) && !IsBlank(TemplateStartDate_3.SelectedDate) && !IsBlank(TemplateEndDate_3.SelectedDate),
+                        ClearCollect(
+                            FilterForm,
+                            Filter(
+                                GenericFormModel,
+                                (Modified >= TemplateStartDate_3.SelectedDate && Modified <= TemplateEndDate_3.SelectedDate) || (DateDiff(TemplateStartDate_3.SelectedDate,Modified,Minutes)>=0 && DateDiff(TemplateStartDate_3.SelectedDate,Modified,Minutes)<=1440) || (DateDiff(TemplateEndDate_3.SelectedDate,Modified,Minutes)>=0 && DateDiff(TemplateEndDate_3.SelectedDate,Modified,Minutes)<=1440)
+                            )
+                        )
+                    );
+                      //单独查询时间
+                    If(
+                        !IsBlank('TextInput_name&number'.Text) && !IsBlank(drpFilterDepartment.SelectedItems) && IsBlank(ComboBox1_formtype.SelectedItems) && IsBlank(TemplateStartDate_3.SelectedDate) && IsBlank(TemplateEndDate_3.SelectedDate),
+                        ClearCollect(
+                            FilterForm,
+                            Filter(
+                                GenericFormModel,
+                                'TextInput_name&number'.Text in ModelName || 'TextInput_name&number'.Text in ModelFlowNumber,
+                                ModelDepartment in drpFilterDepartment.SelectedItems
+                            )
+                        )
+                    );
+                      //组合查询表格名称或者编号和部门
+                    If(
+                        !IsBlank('TextInput_name&number'.Text) && IsBlank(drpFilterDepartment.SelectedItems) && !IsBlank(ComboBox1_formtype.SelectedItems) && IsBlank(TemplateStartDate_3.SelectedDate) && IsBlank(TemplateEndDate_3.SelectedDate),
+                        ClearCollect(
+                            FilterForm,
+                            Filter(
+                                GenericFormModel,
+                                'TextInput_name&number'.Text in ModelName || 'TextInput_name&number'.Text in ModelFlowNumber,
+                                ModelType in ComboBox1_formtype.SelectedItems
+                            )
+                        )
+                    );
+                      //组合查询表格名称或者编号和表格类型
+                    If(
+                        !IsBlank('TextInput_name&number'.Text) && IsBlank(drpFilterDepartment.SelectedItems) && IsBlank(ComboBox1_formtype.SelectedItems) && !IsBlank(TemplateStartDate_3.SelectedDate) && !IsBlank(TemplateEndDate_3.SelectedDate),
+                        ClearCollect(
+                            FilterForm,
+                            Filter(
+                                GenericFormModel,
+                                'TextInput_name&number'.Text in ModelName || 'TextInput_name&number'.Text in ModelFlowNumber,
+                                (Modified >= TemplateStartDate_3.SelectedDate && Modified <= TemplateEndDate_3.SelectedDate) || (DateDiff(TemplateStartDate_3.SelectedDate,Modified,Minutes)>=0 && DateDiff(TemplateStartDate_3.SelectedDate,Modified,Minutes)<=1440) || (DateDiff(TemplateEndDate_3.SelectedDate,Modified,Minutes)>=0 && DateDiff(TemplateEndDate_3.SelectedDate,Modified,Minutes)<=1440)
+                            )
+                        )
+                    );
+                      //组合查询表格名称或者编号和时间
+                    If(
+                        IsBlank('TextInput_name&number'.Text) && !IsBlank(drpFilterDepartment.SelectedItems) && !IsBlank(ComboBox1_formtype.SelectedItems) && IsBlank(TemplateStartDate_3.SelectedDate) && IsBlank(TemplateEndDate_3.SelectedDate),
+                        ClearCollect(
+                            FilterForm,
+                            Filter(
+                                GenericFormModel,
+                                ModelType in ComboBox1_formtype.SelectedItems,
+                                ModelDepartment in drpFilterDepartment.SelectedItems
+                            )
+                        )
+                    );
+                      //组合查询部门和表格类型
+                    If(
+                        IsBlank('TextInput_name&number'.Text) && !IsBlank(drpFilterDepartment.SelectedItems) && IsBlank(ComboBox1_formtype.SelectedItems) && !IsBlank(TemplateStartDate_3.SelectedDate) && !IsBlank(TemplateEndDate_3.SelectedDate),
+                        ClearCollect(
+                            FilterForm,
+                            Filter(
+                                GenericFormModel,
+                                ModelDepartment in drpFilterDepartment.SelectedItems,
+                                (Modified >= TemplateStartDate_3.SelectedDate && Modified <= TemplateEndDate_3.SelectedDate) || (DateDiff(TemplateStartDate_3.SelectedDate,Modified,Minutes)>=0 && DateDiff(TemplateStartDate_3.SelectedDate,Modified,Minutes)<=1440) || (DateDiff(TemplateEndDate_3.SelectedDate,Modified,Minutes)>=0 && DateDiff(TemplateEndDate_3.SelectedDate,Modified,Minutes)<=1440)
+                            )
+                        )
+                    );
+                      //组合查询部门和时间
+                    If(
+                        IsBlank('TextInput_name&number'.Text) && IsBlank(drpFilterDepartment.SelectedItems) && !IsBlank(ComboBox1_formtype.SelectedItems) && !IsBlank(TemplateStartDate_3.SelectedDate) && !IsBlank(TemplateEndDate_3.SelectedDate),
+                        ClearCollect(
+                            FilterForm,
+                            Filter(
+                                GenericFormModel,
+                                ModelType in ComboBox1_formtype.SelectedItems,
+                                (Modified >= TemplateStartDate_3.SelectedDate && Modified <= TemplateEndDate_3.SelectedDate) || (DateDiff(TemplateStartDate_3.SelectedDate,Modified,Minutes)>=0 && DateDiff(TemplateStartDate_3.SelectedDate,Modified,Minutes)<=1440) || (DateDiff(TemplateEndDate_3.SelectedDate,Modified,Minutes)>=0 && DateDiff(TemplateEndDate_3.SelectedDate,Modified,Minutes)<=1440)
+                            )
+                        )
+                    );
+                      //组合查询表格类型和时间
+                    If(
+                        !IsBlank('TextInput_name&number'.Text) && !IsBlank(drpFilterDepartment.SelectedItems) && !IsBlank(ComboBox1_formtype.SelectedItems) && IsBlank(TemplateStartDate_3.SelectedDate) && IsBlank(TemplateEndDate_3.SelectedDate),
+                        ClearCollect(
+                            FilterForm,
+                            Filter(
+                                GenericFormModel,
+                                ModelType in ComboBox1_formtype.SelectedItems,
+                                'TextInput_name&number'.Text in ModelName || 'TextInput_name&number'.Text in ModelFlowNumber,
+                                ModelDepartment in drpFilterDepartment.SelectedItems
+                            )
+                        )
+                    );
+                    //组合查询表格名称或者编号和部门及表格类型
+                    If(
+                        !IsBlank('TextInput_name&number'.Text) && !IsBlank(drpFilterDepartment.SelectedItems) && IsBlank(ComboBox1_formtype.SelectedItems) && !IsBlank(TemplateStartDate_3.SelectedDate) && !IsBlank(TemplateEndDate_3.SelectedDate),
+                        ClearCollect(
+                            FilterForm,
+                            Filter(
+                                GenericFormModel,
+                                (Modified >= TemplateStartDate_3.SelectedDate && Modified <= TemplateEndDate_3.SelectedDate) || (DateDiff(TemplateStartDate_3.SelectedDate,Modified,Minutes)>=0 && DateDiff(TemplateStartDate_3.SelectedDate,Modified,Minutes)<=1440) || (DateDiff(TemplateEndDate_3.SelectedDate,Modified,Minutes)>=0 && DateDiff(TemplateEndDate_3.SelectedDate,Modified,Minutes)<=1440),
+                                'TextInput_name&number'.Text in ModelName || 'TextInput_name&number'.Text in ModelFlowNumber,
+                                ModelDepartment in drpFilterDepartment.SelectedItems
+                            )
+                        )
+                    );
+                      //组合查询表格名称或者编号和部门及时间
+                    If(
+                        !IsBlank('TextInput_name&number'.Text) && IsBlank(drpFilterDepartment.SelectedItems) && !IsBlank(ComboBox1_formtype.SelectedItems) && !IsBlank(TemplateStartDate_3.SelectedDate) && !IsBlank(TemplateEndDate_3.SelectedDate),
+                        ClearCollect(
+                            FilterForm,
+                            Filter(
+                                GenericFormModel,
+                                (Modified >= TemplateStartDate_3.SelectedDate && Modified <= TemplateEndDate_3.SelectedDate) || (DateDiff(TemplateStartDate_3.SelectedDate,Modified,Minutes)>=0 && DateDiff(TemplateStartDate_3.SelectedDate,Modified,Minutes)<=1440) || (DateDiff(TemplateEndDate_3.SelectedDate,Modified,Minutes)>=0 && DateDiff(TemplateEndDate_3.SelectedDate,Modified,Minutes)<=1440),
+                                'TextInput_name&number'.Text in ModelName || 'TextInput_name&number'.Text in ModelFlowNumber,
+                                ModelType in ComboBox1_formtype.SelectedItems
+                            )
+                        )
+                    );
+                      //组合查询表格名称或者编号和表格类型及时间
+                    If(
+                        IsBlank('TextInput_name&number'.Text) && !IsBlank(drpFilterDepartment.SelectedItems) && !IsBlank(ComboBox1_formtype.SelectedItems) && !IsBlank(TemplateStartDate_3.SelectedDate) && !IsBlank(TemplateEndDate_3.SelectedDate),
+                        ClearCollect(
+                            FilterForm,
+                            Filter(
+                                GenericFormModel,
+                                (Modified >= TemplateStartDate_3.SelectedDate && Modified <= TemplateEndDate_3.SelectedDate) || (DateDiff(TemplateStartDate_3.SelectedDate,Modified,Minutes)>=0 && DateDiff(TemplateStartDate_3.SelectedDate,Modified,Minutes)<=1440) || (DateDiff(TemplateEndDate_3.SelectedDate,Modified,Minutes)>=0 && DateDiff(TemplateEndDate_3.SelectedDate,Modified,Minutes)<=1440),
+                                ModelDepartment in drpFilterDepartment.SelectedItems,
+                                ModelType in ComboBox1_formtype.SelectedItems
+                            )
+                        )
+                    );
+                      //组合查询部门和表格类型及时间
+                    If(
+                        !IsBlank('TextInput_name&number'.Text) && !IsBlank(drpFilterDepartment.SelectedItems) && !IsBlank(ComboBox1_formtype.SelectedItems) && !IsBlank(TemplateStartDate_3.SelectedDate) && !IsBlank(TemplateEndDate_3.SelectedDate),
+                        ClearCollect(
+                            FilterForm,
+                            Filter(
+                                GenericFormModel,
+                                'TextInput_name&number'.Text in ModelName || 'TextInput_name&number'.Text in ModelFlowNumber,
+                                (Modified >= TemplateStartDate_3.SelectedDate && Modified <= TemplateEndDate_3.SelectedDate) || (DateDiff(TemplateStartDate_3.SelectedDate,Modified,Minutes)>=0 && DateDiff(TemplateStartDate_3.SelectedDate,Modified,Minutes)<=1440) || (DateDiff(TemplateEndDate_3.SelectedDate,Modified,Minutes)>=0 && DateDiff(TemplateEndDate_3.SelectedDate,Modified,Minutes)<=1440),
+                                ModelDepartment in drpFilterDepartment.SelectedItems,
+                                ModelType in ComboBox1_formtype.SelectedItems
+                            )
+                        )
+                    );
+                    //所有组合查询
+                PaddingBottom: =8
+                PaddingTop: =8
+                PressedColor: =White
+                PressedFill: =ColorFade(Self.Fill, -25%)
+                Width: =32
+                X: =947
+                Y: =20
+                ZIndex: =8
+
+            Group1_2 As group:
+                Height: =5
+                Width: =5
+                X: =20
+                Y: =-40
+                ZIndex: =8
+
+                DateBackground_4 As text:
+                    BorderColor: =
+                    BorderThickness: =1
+                    Color: =
+                    Default: =""
+                    DisabledFill: =RGBA(255, 255, 255, 1)
+                    DisplayMode: =DisplayMode.Disabled
+                    FocusedBorderColor: =
+                    FocusedBorderThickness: =1
+                    Font: =Font.Arial
+                    Height: =32
+                    HintText: =""
+                    HoverBorderColor: =
+                    HoverFill: =
+                    PaddingBottom: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =11
+                    Width: =263
+                    X: =671
+                    Y: =20
+                    ZIndex: =4
+
+                TemplateEndDate_3 As datepicker:
+                    BorderColor: =
+                    BorderStyle: =BorderStyle.None
+                    BorderThickness: =0
+                    Color: =RGBA(96, 94, 92, 1)
+                    DefaultDate: =
+                    Fill: =RGBA(0, 0, 0, 0)
+                    FocusedBorderThickness: =1
+                    Font: =Font.Arial
+                    Height: =30
+                    IconBackground: =RGBA(0, 0, 0, 0)
+                    IconFill: =glbNeutralSecondaryColor
+                    InputTextPlaceholder: =//If(IsBlank(Self.SelectedDate), Text(Date(2001,12,31), Self.Format, Self.Language))
+                    OnChange: |-
+                        =/*If(
+                            IsBlank(StartDate.SelectedDate) || IsBlank(EndDate.SelectedDate),
+                            UpdateContext({DateErrorMessage: false}),
+                            If(
+                            EndDate.SelectedDate < StartDate.SelectedDate,
+                            UpdateContext({DateErrorMessage: true})
+                        ));*/
+                        If(TemplateEndDate_3.SelectedDate < TemplateStartDate_3.SelectedDate,Notify("The end time must be greater than the start time");Reset(TemplateEndDate_3))
+                    OnSelect: =
+                    PaddingBottom: =0
+                    PaddingRight: =0
+                    Size: =11
+                    Width: =120
+                    X: =814
+                    Y: =20
+                    ZIndex: =5
+
+                TemplateStartDate_3 As datepicker:
+                    BorderColor: =
+                    BorderStyle: =BorderStyle.None
+                    BorderThickness: =0
+                    Color: =RGBA(96, 94, 92, 1)
+                    DefaultDate: =
+                    Fill: =RGBA(0, 0, 0, 0)
+                    FocusedBorderColor: =White
+                    FocusedBorderThickness: =0
+                    Font: =Font.Arial
+                    Height: =30
+                    IconBackground: =RGBA(0, 0, 0, 0)
+                    IconFill: =glbNeutralSecondaryColor
+                    InputTextPlaceholder: =
+                    PaddingBottom: =0
+                    PaddingRight: =0
+                    Size: =11
+                    Width: =120
+                    X: =672
+                    Y: =20
+                    ZIndex: =6
+
+                DateLineLabel1_41 As label:
+                    Align: =Align.Center
+                    Color: =RGBA(149, 149, 149, 1)
+                    Font: =Font.Arial
+                    Height: =20
+                    PaddingLeft: =0
+                    Size: =10
+                    Text: ="—"
+                    Width: =16
+                    X: =795
+                    Y: =24
+                    ZIndex: =7
+
+            Reset_button As icon.Add:
+                BorderColor: =glbNeutralQuaternaryColor
+                BorderThickness: =1
+                Color: =glbNeutralPrimaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                DisabledColor: =RGBA(149, 149, 149, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                Height: =32
+                HoverBorderColor: =glbThemePrimaryColor
+                HoverColor: =glbThemePrimaryColor
+                HoverFill: =White
+                Icon: =Icon.Erase
+                OnSelect: |-
+                    =Reset('TextInput_name&number');
+                    Reset([@ComboBox1_formtype]);
+                    Reset([@drpFilterDepartment]);
+                    Reset(TemplateEndDate_3);
+                    Reset(TemplateStartDate_3);
+                    ClearCollect(FilterForm,GenericFormModel)
+                PaddingBottom: =8
+                PaddingTop: =8
+                PressedBorderColor: =ColorFade(glbThemePrimaryColor, -15%)
+                PressedColor: =ColorFade(glbThemePrimaryColor, -15%)
+                PressedFill: =ColorFade(glbThemePrimaryColor, 95%)
+                Width: =32
+                X: =989
+                Y: =20
+                ZIndex: =9
+
+        Container5_6 As groupContainer.manualLayoutContainer:
+            BorderColor: =RGBA(56, 96, 178, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =584
+            Width: =1182
+            X: =12
+            Y: =120
+            ZIndex: =5
+
+            Container2_3 As groupContainer.manualLayoutContainer:
+                Fill: =RGBA(247, 247, 247, 1)
+                Height: =40
+                Width: =1142
+                X: =20
+                ZIndex: =1
+
+                Label4_14 As label:
+                    Color: =glbNeutralPrimaryColor
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="表格名稱"
+                    X: =17
+                    ZIndex: =2
+
+                Label4_16 As label:
+                    Color: =glbNeutralPrimaryColor
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="表格類型"
+                    Width: =74
+                    X: =377
+                    ZIndex: =3
+
+                Label4_15 As label:
+                    Color: =glbNeutralPrimaryColor
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="部門"
+                    Width: =100
+                    X: =263
+                    ZIndex: =4
+
+                Label4_17 As label:
+                    Color: =glbNeutralPrimaryColor
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="修改人"
+                    Width: =74
+                    X: =506
+                    ZIndex: =5
+
+                Label4_18 As label:
+                    Color: =glbNeutralPrimaryColor
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="修改時間"
+                    Width: =74
+                    X: =700
+                    ZIndex: =6
+
+                Label4_19 As label:
+                    Color: =glbNeutralPrimaryColor
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="表格編號"
+                    Width: =74
+                    X: =140
+                    ZIndex: =7
+
+            "Gallery_Form As gallery.'BrowseLayout_Vertical_ThreeTextVariant_ver4.0'":
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =500
+                Items: =Sort(FilterForm,Modified,Descending)
+                Layout: =Layout.Vertical
+                OnSelect: |+
+                    =Set(ShowSavebutton,false);
+                    Set(attachment,DisplayMode.Disabled);
+                    
+                    
+                    Navigate('AdminFormDetailScreen-leo',ScreenTransition.Fade);
+                    ClearCollect(EditForm,ThisItem);
+                    ClearCollect(EditAttachment,Filter(TemplateFileList,GenericFormId=ThisItem.Title&&TempType=ThisItem.ModelType));
+                    ClearCollect(EditAttachment2,Filter(TemplateFileList,GenericFormId=ThisItem.Title&&TempType="示範表格"));
+                    ClearCollect(EditAttachment3,Filter(TemplateFileList,GenericFormId=ThisItem.Title&&TempType="填寫指引"));
+                    ClearCollect(CreateNewForm,{name:"查看表格"&"-"&ThisItem.ModelName});//創建集合變更編輯表格頁標題
+                    
+                TemplatePadding: =0
+                TemplateSize: =48
+                Width: =1142
+                X: =20
+                Y: =40
+                ZIndex: =1
+
+                Separator7 As rectangle:
+                    Fill: =glbNeutralLightColor
+                    Height: =1
+                    OnSelect: =Select(Parent)
+                    Width: =Parent.TemplateWidth
+                    Y: =Parent.TemplateHeight - 1
+                    ZIndex: =1
+
+                FormDepartment As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =20
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: =ThisItem.ModelDepartment
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =84
+                    X: =263
+                    Y: =15
+                    ZIndex: =2
+
+                FormName As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =20
+                    HoverColor: =glbLinkColor
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: =ThisItem.ModelName
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =99
+                    X: =18
+                    Y: =14
+                    ZIndex: =3
+
+                ModifiedTime As label:
+                    AutoHeight: =true
+                    Color: =glbNeutralSecondaryColor
+                    Height: =32
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: =ThisItem.Modified
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =152
+                    X: =701
+                    Y: =15
+                    ZIndex: =4
+
+                ModifiedBy As label:
+                    Align: =Align.Center
+                    Color: =glbNeutralSecondaryColor
+                    Height: =34
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =10
+                    Text: =ThisItem.'Modified By'.DisplayName
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =131
+                    X: =499
+                    Y: =7
+                    ZIndex: =5
+
+                FormNumber As label:
+                    AutoHeight: =true
+                    Color: =glbNeutralSecondaryColor
+                    Height: =32
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: =ThisItem.ModelFlowNumber
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =82
+                    X: =140
+                    Y: =15
+                    ZIndex: =6
+
+                FormType As label:
+                    AutoHeight: =true
+                    Color: =glbNeutralSecondaryColor
+                    Height: =32
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: =ThisItem.ModelType
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =112
+                    X: =379
+                    Y: =14
+                    ZIndex: =7
+
+                Edit_button As button:
+                    BorderStyle: =BorderStyle.None
+                    Color: =RGBA(102, 182, 227, 1)
+                    Fill: =RGBA(255, 255, 255, 1)
+                    Height: =34
+                    OnSelect: |
+                        =Set(ShowSavebutton,true);
+                        Set(attachment,DisplayMode.Edit);
+                        Navigate('AdminFormDetailScreen-leo',ScreenTransition.Fade);
+                        ClearCollect(EditForm,ThisItem);
+                        ClearCollect(EditAttachment,Filter(TemplateFileList,GenericFormId=ThisItem.Title&&TempType=ThisItem.ModelType));
+                        ClearCollect(EditAttachment2,Filter(TemplateFileList,GenericFormId=ThisItem.Title&&TempType="示範表格"));
+                        ClearCollect(EditAttachment3,Filter(TemplateFileList,GenericFormId=ThisItem.Title&&TempType="填寫指引"));
+                        ClearCollect(CreateNewForm,{name:"編輯表格"&"-"&ThisItem.ModelName});//創建集合變更編輯表格頁標題
+                    Size: =12
+                    Text: ="編輯"
+                    Width: =56
+                    X: =943
+                    Y: =7
+                    ZIndex: =9
+
+                Disable_button As button:
+                    BorderStyle: =BorderStyle.None
+                    Color: =glbErrorColor
+                    DisabledColor: =RGBA(0, 0, 0, 1)
+                    Fill: =RGBA(255, 255, 255, 1)
+                    Height: =34
+                    OnSelect: |+
+                        =If(Disable_button.Text="启用",UpdateContext({Isenable:0}),UpdateContext({Isenable:1}));
+                        If(Isenable=1,UpdateContext({Isenable:0}),Isenable=0,UpdateContext({Isenable:1}));
+                        If(Isenable=1,UpdateIf(GenericFormModel,ModelName=FormName.Text,{IsEnable:1}),Isenable=0,UpdateIf(GenericFormModel,ModelName=FormName.Text,{IsEnable:0}));
+                        ClearCollect(FilterForm,GenericFormModel)
+                        
+                    Size: =12
+                    Text: |
+                        =If(ThisItem.IsSelected,If(Isenable=0,"启用","停用"),If(ThisItem.IsEnable=0,"启用","停用"))
+                    Width: =56
+                    X: =999
+                    Y: =7
+                    ZIndex: =10
+
+                Delete_button As button:
+                    BorderStyle: =BorderStyle.None
+                    Color: =glbWarningColor
+                    Fill: =RGBA(255, 255, 255, 1)
+                    Height: =34
+                    OnSelect: |-
+                        =Remove([@GenericFormModel],ThisItem);
+                        ClearCollect(FilterForm,GenericFormModel)
+                    Size: =12
+                    Text: ="刪除"
+                    Width: =56
+                    X: =1055
+                    Y: =7
+                    ZIndex: =11
+
+        Label9_15 As label:
+            Color: =glbNeutralPrimaryColor
+            Height: =50
+            PaddingBottom: =0
+            PaddingLeft: =10
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =15
+            Text: ="表格管理"
+            Width: =156
+            X: =12
+            ZIndex: =6
+
+        BtnLgIcon_3 As group:
+            Height: =5
+            Width: =5
+            X: =-181
+            Y: =-421
+            ZIndex: =9
+
+            BtnPrimary_5 As button:
+                BorderColor: =Self.Fill
+                BorderThickness: =1
+                Color: =White
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =glbThemePrimaryColor
+                FocusedBorderThickness: =1
+                Height: =32
+                HoverFill: =ColorFade(Self.Fill, -15%)
+                OnSelect: |-
+                    =Set(ShowSavebutton,true);
+                    Set(attachment,DisplayMode.Edit);
+                    Navigate('AdminFormDetailScreen-leo',ScreenTransition.Fade);
+                    Clear(EditForm);
+                    Clear(EditAttachment);
+                    Clear(EditAttachment2);
+                    Clear(EditAttachment3);
+                    Reset(drpFilter_Department);
+                    Reset(drpFilter_FormType);
+                    Reset(TextInput_FormVersion);
+                    Reset(TextInput_FormName);
+                    Reset(TextInput_FormNumber);
+                    Reset(TextInput_FormDescription);
+                    Reset(TextInput_CustomFilter);
+                    Reset(Attachment_Form);
+                    Reset(Attachment_Demonstrationform);
+                    Reset(Attachment_FillGuide);
+                    Reset(Radio_attachment);
+                    Reset(Radio_mark);
+                    Reset(Radio_password);
+                    Reset(Radio_flowtype);
+                    Reset(Radio_CustomFilter);
+                    Reset(Checkbox1_3);
+                    Reset(Checkbox1_4);
+                    Reset(Checkbox1_5);
+                    Reset(Checkbox1_6);
+                    Reset(Checkbox1_7);
+                    ClearCollect(CreateNewForm,{name:"新增表格"});//創建集合變更新增表格頁標題
+                PaddingBottom: =0
+                PaddingLeft: =20
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedColor: =White
+                PressedFill: =ColorFade(Self.Fill, -25%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =12
+                Text: ="新增表格"
+                Width: =100
+                X: =1093
+                Y: =9
+                ZIndex: =7
+
+            Icon4_27 As icon.Add:
+                Color: =RGBA(255, 255, 255, 1)
+                DisabledColor: =RGBA(149, 149, 149, 1)
+                Height: =16
+                Icon: =Icon.Add
+                OnSelect: |-
+                    =Set(ShowSavebutton,true);
+                    Set(attachment,DisplayMode.Edit);
+                    Navigate('AdminFormDetailScreen-leo',ScreenTransition.Fade);
+                    Clear(EditForm);
+                    Clear(EditAttachment);
+                    Clear(EditAttachment2);
+                    Clear(EditAttachment3);
+                    Reset(drpFilter_Department);
+                    Reset(drpFilter_FormType);
+                    Reset(TextInput_FormVersion);
+                    Reset(TextInput_FormName);
+                    Reset(TextInput_FormNumber);
+                    Reset(TextInput_FormDescription);
+                    Reset(TextInput_CustomFilter);
+                    Reset(Attachment_Form);
+                    Reset(Attachment_Demonstrationform);
+                    Reset(Attachment_FillGuide);
+                    Reset(Radio_attachment);
+                    Reset(Radio_mark);
+                    Reset(Radio_password);
+                    Reset(Radio_flowtype);
+                    Reset(Radio_CustomFilter);
+                    Reset(Checkbox1_3);
+                    Reset(Checkbox1_4);
+                    Reset(Checkbox1_5);
+                    Reset(Checkbox1_6);
+                    Reset(Checkbox1_7);
+                    ClearCollect(CreateNewForm,{name:"新增表格"});//創建集合變更新增表格頁標題
+                PressedColor: =White
+                Width: =16
+                X: =1100
+                Y: =17
+                ZIndex: =8
+
+    Container3_4 As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =718
+        Width: =160
+        Y: =50
+        ZIndex: =3
+
+        GalleryNav_8 As gallery.galleryVertical:
+            Height: =120
+            Items: =["IT服務台","操作手冊","用戶反饋"]
+            Layout: =Layout.Vertical
+            TemplatePadding: =0
+            TemplateSize: =40
+            Width: =160
+            Y: =558
+            ZIndex: =5
+
+            BtnDefault_15 As button:
+                Align: =Align.Left
+                BorderColor: =Self.Color
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                Color: =glbNeutralSecondaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                FontWeight: =Normal
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =ColorFade(glbThemePrimaryColor, 90%)
+                PaddingBottom: =0
+                PaddingLeft: =36
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =12
+                Text: =ThisItem.Value
+                Width: =140
+                X: =10
+                ZIndex: =3
+
+            Icon1_8 As icon.ListScrollWatchlist:
+                Color: =glbNeutralSecondaryColor
+                Height: =20
+                Icon: |
+                    =If(
+                        ThisItem.Value = "IT服務台",
+                        Icon.ComputerDesktop,
+                        ThisItem.Value = "操作手冊",
+                        Icon.Notebook,
+                        ThisItem.Value = "組織機構",
+                        Icon.LogJournal,
+                        ThisItem.Value = "用戶反饋",
+                        Icon.Mail
+                    )
+                    //["IT服務台","操作手冊","用戶反饋"]
+                OnSelect: =Select(Parent)
+                Width: =20
+                X: =20
+                Y: =6
+                ZIndex: =5
+
+        Label8_2 As label:
+            Align: =Align.Center
+            Color: =RGBA(149, 149, 149, 1)
+            Size: =11
+            Text: ="Version 1.0.0"
+            Width: =160
+            Y: =678
+            ZIndex: =6
+
+        GalleryNav_11 As gallery.galleryVertical:
+            Height: =237
+            Items: =["首頁","表格管理","組織機構","用戶管理","任務管理"]
+            Layout: =Layout.Vertical
+            TemplatePadding: =0
+            TemplateSize: =40
+            Width: =160
+            Y: =1
+            ZIndex: =7
+
+            BtnDefault_13 As button:
+                Align: =Align.Left
+                BorderColor: =Self.Color
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                Color: =If(ThisItem.Value="表格管理", glbThemePrimaryColor,glbNeutralSecondaryColor)
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =If(ThisItem.Value="表格管理", ColorFade(Self.Color, 90%),White)
+                FocusedBorderThickness: =1
+                FontWeight: =If(ThisItem.Value="表格管理", FontWeight.Semibold,Normal)
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =ColorFade(glbThemePrimaryColor, 90%)
+                OnSelect: |-
+                    =If(
+                        ThisItem.Value = "首頁",
+                        Navigate(
+                            HomepageScreen,
+                            ScreenTransition.None
+                        ),
+                        ThisItem.Value = "表格管理",
+                        Navigate(
+                            'AdminFormListScreen-leo',
+                            ScreenTransition.None
+                        ),
+                        ThisItem.Value = "組織機構",
+                        "",
+                        ThisItem.Value = "任務管理",
+                        Navigate(
+                            GeneralFormListScreen,
+                            ScreenTransition.None
+                        )
+                    )
+                PaddingBottom: =0
+                PaddingLeft: =36
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =12
+                Text: =ThisItem.Value
+                Width: =140
+                X: =10
+                ZIndex: =3
+
+            Icon1_11 As icon.ListScrollWatchlist:
+                Color: =If(ThisItem.Value="表格管理", glbThemePrimaryColor,glbNeutralSecondaryColor)
+                Height: =20
+                Icon: |
+                    =If(
+                        ThisItem.Value = "首頁",
+                        Icon.Home,
+                        ThisItem.Value = "表格管理",
+                        Icon.ListScrollWatchlist,
+                        ThisItem.Value = "組織機構",
+                        Icon.LogJournal,
+                        ThisItem.Value = "用戶管理",
+                        Icon.People,
+                        ThisItem.Value = "任務管理",
+                        Icon.Lock
+                    )
+                OnSelect: =Select(Parent)
+                Width: =20
+                X: =20
+                Y: =6
+                ZIndex: =5
+

@@ -1,0 +1,720 @@
+HomepageScreen As screen:
+    Fill: =RGBA(243, 243, 243, 1)
+    OnVisible: |+
+        =ClearCollect(approvalCol,Approval_Table);ClearCollect(ApprovalDetailData,ApprovalDetail_Table);
+        // 优先处理
+        With({XXX11:Filter(ApprovalDetailData,(CurrentUser in ApproverEmail||CurrentUser in AgentUserEmail)&&TaskStatus<>Blank()&&(TaskStatus="002"||TaskStatus="001")&&DateDiff(Modified,Today())>3)},ClearCollect(Priority_Processing,XXX11));
+        // 待处理
+        With({SearchPendingData:Filter(ApprovalDetailData,(CurrentUser in ApproverEmail||CurrentUser<>Blank()&&CurrentUser in AgentUserEmail)&&(TaskStatus="001"||TaskStatus="002"))},ClearCollect(FilterPendingDataCol,SearchPendingData));
+        
+        ClearCollect(DataModelName,{ModelName:"招聘職位申請表",FormType:"招聘表格"},{ModelName:"假期批核人資料表",FormType:"假期表格"},{ModelName:"任職資源申請",FormType:"IT財務指引表格"},{ModelName:"預備合約通知書(新入職)",FormType:"預備合約表格"});
+        
+        
+        
+
+    Container1_3 As groupContainer.manualLayoutContainer:
+        Fill: =glbThemePrimaryColor
+        Height: =50
+        Width: =1366
+        ZIndex: =1
+
+        Image1_3 As image:
+            Height: =38
+            Image: =logo
+            Width: =203
+            X: =15
+            Y: =5
+            ZIndex: =1
+
+        Circle1_4 As circle:
+            BorderColor: =RGBA(255, 255, 255, 1)
+            BorderThickness: =1
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =32
+            Width: =32
+            X: =1318
+            Y: =8
+            ZIndex: =2
+
+        Label1_56 As label:
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =glbThemePrimaryColor
+            Height: =18
+            Size: =9
+            Text: ="基督教香港信義會社會服務部"
+            Width: =186
+            X: =63
+            Y: =5
+            ZIndex: =3
+
+        Label1_57 As label:
+            Align: =Align.Center
+            Color: =RGBA(255, 255, 255, 1)
+            Height: =32
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =9
+            Text: ="HG"
+            Width: =32
+            X: =1318
+            Y: =8
+            ZIndex: =4
+
+        Label1_89 As label:
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =glbThemePrimaryColor
+            FontWeight: =FontWeight.Bold
+            Height: =24
+            Size: =12
+            Text: ="SYSTEM NAME"
+            Width: =186
+            X: =63
+            Y: =22
+            ZIndex: =5
+
+    Container3_3 As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =718
+        Width: =160
+        Y: =50
+        ZIndex: =2
+
+        GalleryNav_3 As gallery.galleryVertical:
+            Height: =237
+            Items: =["首頁","表格管理","組織機構","用戶管理","任務管理"]
+            Layout: =Layout.Vertical
+            OnSelect: =
+            TemplatePadding: =0
+            TemplateSize: =40
+            Width: =160
+            ZIndex: =1
+
+            BtnDefault_9 As button:
+                Align: =Align.Left
+                BorderColor: =Self.Color
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                Color: =If(ThisItem.Value="首頁", glbThemePrimaryColor,glbNeutralSecondaryColor)
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =If(ThisItem.Value="首頁", ColorFade(Self.Color, 90%),White)
+                FocusedBorderThickness: =1
+                FontWeight: =If(ThisItem.Value="首頁", FontWeight.Semibold,Normal)
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =ColorFade(glbThemePrimaryColor, 90%)
+                OnSelect: |-
+                    =If(
+                        ThisItem.Value = "首頁",
+                        Navigate(
+                            HomepageScreen,
+                            ScreenTransition.None
+                        ),
+                        ThisItem.Value = "表格管理",
+                        Navigate('AdminFormListScreen-leo',
+                            ScreenTransition.None
+                        ),
+                        ThisItem.Value = "組織機構",
+                        "",
+                        ThisItem.Value = "任務管理",
+                        Navigate(
+                            GeneralFormListScreen,
+                            ScreenTransition.None
+                        )
+                    )
+                PaddingBottom: =0
+                PaddingLeft: =36
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =12
+                Text: =ThisItem.Value
+                Width: =140
+                X: =10
+                ZIndex: =3
+
+            Icon1_3 As icon.ListScrollWatchlist:
+                Color: =If(ThisItem.Value="首頁", glbThemePrimaryColor,glbNeutralSecondaryColor)
+                Height: =20
+                Icon: |
+                    =If(
+                        ThisItem.Value = "首頁",
+                        Icon.Home,
+                        ThisItem.Value = "表格管理",
+                        Icon.ListScrollWatchlist,
+                        ThisItem.Value = "組織機構",
+                        Icon.LogJournal,
+                        ThisItem.Value = "用戶管理",
+                        Icon.People,
+                        ThisItem.Value = "任務管理",
+                        Icon.Lock
+                    )
+                OnSelect: =Select(Parent)
+                Width: =20
+                X: =20
+                Y: =6
+                ZIndex: =5
+
+        GalleryNav_5 As gallery.galleryVertical:
+            Height: =120
+            Items: =["IT服務台","操作手冊","用戶反饋"]
+            Layout: =Layout.Vertical
+            TemplatePadding: =0
+            TemplateSize: =40
+            Width: =160
+            Y: =558
+            ZIndex: =5
+
+            BtnDefault_11 As button:
+                Align: =Align.Left
+                BorderColor: =Self.Color
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                Color: =glbNeutralSecondaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                FontWeight: =Normal
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =ColorFade(glbThemePrimaryColor, 90%)
+                PaddingBottom: =0
+                PaddingLeft: =36
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =12
+                Text: =ThisItem.Value
+                Width: =140
+                X: =10
+                ZIndex: =3
+
+            Icon1_5 As icon.ListScrollWatchlist:
+                Color: =glbNeutralSecondaryColor
+                Height: =20
+                Icon: |
+                    =If(
+                        ThisItem.Value = "IT服務台",
+                        Icon.ComputerDesktop,
+                        ThisItem.Value = "操作手冊",
+                        Icon.Notebook,
+                        ThisItem.Value = "組織機構",
+                        Icon.LogJournal,
+                        ThisItem.Value = "用戶反饋",
+                        Icon.Mail
+                    )
+                    //["IT服務台","操作手冊","用戶反饋"]
+                OnSelect: =Select(Parent)
+                Width: =20
+                X: =20
+                Y: =6
+                ZIndex: =5
+
+        Label8 As label:
+            Align: =Align.Center
+            Color: =RGBA(149, 149, 149, 1)
+            Size: =11
+            Text: ="Version 1.0.0"
+            Width: =160
+            Y: =678
+            ZIndex: =6
+
+    Container4_2 As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(247, 247, 247, 1)
+        Height: =718
+        Width: =1206
+        X: =160
+        Y: =50
+        ZIndex: =3
+
+        Container5_1 As groupContainer.manualLayoutContainer:
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =568
+            Width: =1182
+            X: =12
+            Y: =119
+            ZIndex: =4
+
+            TextInput2_15 As text:
+                BorderColor: =glbNeutralQuaternaryColor
+                BorderThickness: =1
+                Color: =glbNeutralPrimaryColor
+                Default: =""
+                FocusedBorderColor: =glbNeutralSecondaryColor
+                FocusedBorderThickness: =1
+                Height: =32
+                HintText: ="搜索表格"
+                HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                HoverFill: =ColorFade(Self.Fill, -5%)
+                PaddingBottom: =0
+                PaddingLeft: =10
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =11
+                Width: =270
+                X: =892
+                Y: =10
+                ZIndex: =1
+
+            LineRectangle As rectangle:
+                Fill: =RGBA(219, 219, 219, 1)
+                Height: =1
+                Width: =1142
+                X: =20
+                Y: =50
+                ZIndex: =2
+
+            TabGallery3_2 As gallery.galleryHorizontal:
+                Height: =39
+                Items: =["常用表格","行人部","財務部","企業傳訊"]
+                ShowScrollbar: =false
+                TemplatePadding: =0
+                TemplateSize: =130
+                Width: =532
+                X: =20
+                Y: =11
+                ZIndex: =3
+
+                Label2_2 As label:
+                    Align: =Align.Center
+                    Color: |-
+                        =If(
+                            ThisItem.IsSelected,
+                            glbThemePrimaryColor,
+                            glbNeutralSecondaryColor
+                        )
+                    FontWeight: |-
+                        =If(
+                            ThisItem.IsSelected,
+                            FontWeight.Semibold,
+                            FontWeight.Normal
+                        )
+                    Height: =32
+                    HoverColor: =glbThemePrimaryColor
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =15
+                    Text: =ThisItem.Value
+                    Width: =130
+                    ZIndex: =1
+
+                Rectangle2_2 As rectangle:
+                    Fill: =glbThemePrimaryColor
+                    Height: =3
+                    OnSelect: =Select(Parent)
+                    Visible: =If(ThisItem.IsSelected, true, false)
+                    Width: =130
+                    Y: =37
+                    ZIndex: =2
+
+            Icon3 As icon.Search:
+                Color: =RGBA(116, 116, 116, 1)
+                Height: =32
+                Icon: =Icon.Search
+                PaddingBottom: =6
+                PaddingTop: =6
+                Width: =32
+                X: =1130
+                Y: =10
+                ZIndex: =4
+
+            TaskNameGallery As gallery.galleryVertical:
+                Height: =450
+                Items: |-
+                    =If(
+                        TabGallery3_2.Selected.Value = "常用表格",
+                        Search(RenameColumns(SortByColumns(Filter(MyContacts,UserEmail=User().Email,ContatsType=Blank()),"Created",Descending),"TaskFormName","ModelName"),TextInput2_15.Text,"ModelName"),
+                        If(TabGallery3_2.Selected.Value="行人部",
+                        Search(Filter(DataModelName,FormType=TaskTypeNameGallery.Selected.FormType).ModelName,TextInput2_15.Text,"ModelName"),
+                        Search(Filter(GenericFormModel,ModelDepartment =TabGallery3_2.Selected.Value,ModelType=TaskTypeNameGallery.Selected.FormType).ModelName,TextInput2_15.Text,"ModelName"))
+                    )
+                Layout: =Layout.Vertical
+                ShowScrollbar: =false
+                TemplatePadding: =0
+                TemplateSize: =70
+                Width: =1160
+                WrapCount: =4
+                X: =20
+                Y: =118
+                ZIndex: =5
+
+                Button_large_11 As button:
+                    Align: =Align.Left
+                    BorderColor: =glbNeutralQuaternaryColor
+                    BorderThickness: =1
+                    Color: =glbNeutralPrimaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    Fill: =White
+                    FocusedBorderThickness: =1
+                    FontWeight: =FontWeight.Normal
+                    Height: =50
+                    HoverBorderColor: =glbThemePrimaryColor
+                    HoverColor: =glbThemePrimaryColor
+                    HoverFill: =ColorFade(glbThemePrimaryColor, 97%)
+                    OnSelect: |-
+                        =If(
+                            ThisItem.ModelName = "招聘職位申請表",
+                            If(
+                                TabGallery3_2.Selected.Value = "常用表格",
+                                "",
+                                If(
+                                    !IsBlank(
+                                        LookUp(
+                                            MyContacts,
+                                            UserEmail = User().Email && TaskFormName = "招聘職位申請表"
+                                        )
+                                    ),
+                                    "",
+                                    Patch(
+                                        MyContacts,
+                                        Defaults(MyContacts),
+                                        {
+                                            TaskFormName: "招聘職位申請表",
+                                            Title: GUID(),
+                                            UserEmail: User().Email,
+                                            ContatsType: ""
+                                        }
+                                    )
+                                )
+                            );
+                            Launch("https://apps.powerapps.com/play/abc17763-3a85-47e5-99a2-410af57f1a77?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=JobTitleFormScreen&skipAppMetadata=true"),
+                            ThisItem.ModelName = "假期批核人資料表",
+                            If(
+                                TabGallery3_2.Selected.Value = "常用表格",
+                                "",
+                                If(
+                                    !IsBlank(
+                                        LookUp(
+                                            MyContacts,
+                                            UserEmail = User().Email && TaskFormName = "假期批核人資料表"
+                                        )
+                                    ),
+                                    "",
+                                    Patch(
+                                        MyContacts,
+                                        Defaults(MyContacts),
+                                        {
+                                            TaskFormName: "假期批核人資料表",
+                                            Title: GUID(),
+                                            UserEmail: User().Email,
+                                            ContatsType: ""
+                                        }
+                                    )
+                                )
+                            );
+                            Launch("https://apps.powerapps.com/play/8bc833a4-5aff-417c-ab44-f513af1f03f0?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=VacationFormScreen&skipAppMetadata=true"),
+                            ThisItem.ModelName = "任職資源申請",
+                            If(
+                                TabGallery3_2.Selected.Value = "常用表格",
+                                "",
+                                If(
+                                    !IsBlank(
+                                        LookUp(
+                                            MyContacts,
+                                            UserEmail = User().Email && TaskFormName = "任職資源申請"
+                                        )
+                                    ),
+                                    "",
+                                    Patch(
+                                        MyContacts,
+                                        Defaults(MyContacts),
+                                        {
+                                            TaskFormName: "任職資源申請",
+                                            Title: GUID(),
+                                            UserEmail: User().Email,
+                                            ContatsType: ""
+                                        }
+                                    )
+                                )
+                            );
+                            Launch("https://apps.powerapps.com/play/8bc833a4-5aff-417c-ab44-f513af1f03f0?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=EmploymentFormScreen&skipAppMetadata=true"),
+                            ThisItem.ModelName = "預備合約通知書(新入職)",
+                            If(
+                                TabGallery3_2.Selected.Value = "常用表格",
+                                "",
+                                If(
+                                    !IsBlank(
+                                        LookUp(
+                                            MyContacts,
+                                            UserEmail = User().Email && TaskFormName = "預備合約通知書(新入職)"
+                                        )
+                                    ),
+                                    "",
+                                    Patch(
+                                        MyContacts,
+                                        Defaults(MyContacts),
+                                        {
+                                            TaskFormName: "預備合約通知書(新入職)",
+                                            Title: GUID(),
+                                            UserEmail: User().Email,
+                                            ContatsType: ""
+                                        }
+                                    )
+                                )
+                            );
+                            Launch("https://apps.powerapps.com/play/abc17763-3a85-47e5-99a2-410af57f1a77?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=ContractNoticeForm&skipAppMetadata=true"),
+                            If(
+                                TabGallery3_2.Selected.Value = "常用表格",
+                                "",
+                                If(
+                                    !IsBlank(
+                                        LookUp(
+                                            MyContacts,
+                                            UserEmail = User().Email && TaskFormName = ThisItem.ModelName
+                                        )
+                                    ),
+                                    "",
+                                    Patch(
+                                        MyContacts,
+                                        Defaults(MyContacts),
+                                        {
+                                            TaskFormName: ThisItem.ModelName,
+                                            Title: GUID(),
+                                            UserEmail: User().Email,
+                                            ContatsType: ""
+                                        }
+                                    )
+                                )
+                            );
+                            With(
+                                {
+                                    FormModelId: LookUp(
+                                        GenericFormModel,
+                                        ModelName = ThisItem.ModelName
+                                    ).Title
+                                },
+                                Launch("https://apps.powerapps.com/play/b0fe476b-44c4-4c9c-9c05-4608369b9f9f?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=CreateGeneralFormScreen&FormModelId=" & FormModelId)
+                            )
+                        )
+                    PaddingBottom: =0
+                    PaddingLeft: =36
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =glbThemePrimaryColor
+                    PressedColor: =glbThemePrimaryColor
+                    PressedFill: =ColorFade(glbThemePrimaryColor, 95%)
+                    RadiusBottomLeft: =4
+                    RadiusBottomRight: =4
+                    RadiusTopLeft: =4
+                    RadiusTopRight: =4
+                    Size: =14
+                    Text: =ThisItem.ModelName
+                    Tooltip: ="表格簡述信息顯示表格簡述信息顯示表格簡述信息顯示表格簡述信息顯示"
+                    Width: =Parent.TemplateWidth-20
+                    X: =11
+                    Y: =1
+                    ZIndex: =2
+
+                Image5 As image:
+                    Height: =50
+                    Image: |-
+                        ="data:image/svg+xml," & EncodeUrl("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>     <g>         <path fill='none' d='M0 0h24v24H0z'/>         <path fill='#01A8F4' d='M7.243 18H3v-4.243L14.435 2.322a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414L7.243 18zM3 20h18v2H3v-2z'/>     </g> </svg>")
+                    OnSelect: =Select(Parent)
+                    PaddingLeft: =8
+                    PaddingRight: =4
+                    Width: =34
+                    Y: =1
+                    ZIndex: =3
+
+            TaskTypeNameGallery As gallery.galleryHorizontal:
+                Height: =40
+                Items: |-
+                    =If(
+                        TabGallery3_2.Selected.Value = "常用表格",
+                        Table({FormType:"全部"}),
+                        Filter(
+                            FormTableType,
+                            DepartMentName = TabGallery3_2.Selected.Value
+                        ).FormType
+                    )
+                ShowScrollbar: =false
+                TemplatePadding: =0
+                TemplateSize: =130
+                Width: =1160
+                X: =20
+                Y: =64
+                ZIndex: =6
+
+                BtnDefault_10 As button:
+                    BorderColor: =Self.Color
+                    BorderStyle: =BorderStyle.None
+                    BorderThickness: =1
+                    Color: |-
+                        =If(
+                            ThisItem.IsSelected,
+                            glbThemePrimaryColor,
+                            glbNeutralSecondaryColor
+                        )
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    Fill: |-
+                        =If(
+                            ThisItem.IsSelected,
+                            ColorFade(glbThemePrimaryColor, 90%),
+                            glbNeutralLighterColor
+                        )
+                    FocusedBorderThickness: =1
+                    FontWeight: |-
+                        =If(
+                            ThisItem.IsSelected,
+                            FontWeight.Semibold,
+                            FontWeight.Normal
+                        )
+                    Height: =30
+                    HoverBorderColor: =ColorFade(Self.Color, -15%)
+                    HoverColor: =glbThemePrimaryColor
+                    HoverFill: =ColorFade(glbThemePrimaryColor, 90%)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =ColorFade(Self.Color, -25%)
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    PressedFill: =ColorFade(Self.Color, 95%)
+                    RadiusBottomLeft: =4
+                    RadiusBottomRight: =4
+                    RadiusTopLeft: =4
+                    RadiusTopRight: =4
+                    Size: =12
+                    Text: =ThisItem.FormType
+                    Width: =120
+                    Y: =5
+                    ZIndex: =2
+
+        Container5_4 As groupContainer.manualLayoutContainer:
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =90
+            Width: =1182
+            X: =12
+            Y: =16
+            ZIndex: =5
+
+            Image6 As image:
+                Fill: =RGBA(252, 237, 230, 1)
+                Height: =50
+                Image: |-
+                    ="data:image/svg+xml," & EncodeUrl("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>     <g>         <path fill='none' d='M0 0h24v24H0z'/>         <path fill='#FA6400' d='M4 20v-6a8 8 0 1 1 16 0v6h1v2H3v-2h1zm2-6h2a4 4 0 0 1 4-4V8a6 6 0 0 0-6 6zm5-12h2v3h-2V2zm8.778 2.808l1.414 1.414-2.12 2.121-1.415-1.414 2.121-2.121zM2.808 6.222l1.414-1.414 2.121 2.12L4.93 8.344 2.808 6.222z'/>     </g> </svg>")
+                PaddingBottom: =10
+                PaddingTop: =10
+                RadiusBottomLeft: =15
+                RadiusBottomRight: =15
+                RadiusTopLeft: =15
+                RadiusTopRight: =15
+                Width: =50
+                X: =31
+                Y: =20
+                ZIndex: =1
+
+            Label7 As label:
+                Color: =glbNeutralSecondaryColor
+                Font: =Font.'Lato Black'
+                Height: =24
+                HoverColor: =glbThemePrimaryColor
+                OnSelect: =Navigate(GeneralFormListScreen,None)
+                PaddingLeft: =0
+                Size: =11
+                Text: ="優先處理"
+                Width: =80
+                X: =96
+                Y: =46
+                ZIndex: =2
+
+            Label7_1 As label:
+                Color: =RGBA(250, 100, 0, 1)
+                Font: =Font.'Lato Black'
+                Height: =26
+                PaddingLeft: =0
+                Size: =18
+                Text: =CountRows(Priority_Processing)
+                Width: =67
+                X: =96
+                Y: =20
+                ZIndex: =3
+
+            Image6_1 As image:
+                Fill: =RGBA(230, 244, 252, 1)
+                Height: =50
+                Image: |-
+                    ="data:image/svg+xml," & EncodeUrl("<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' id='mdi-table-clock' width='24' height='24' viewBox='0 0 24 24'><path fill='#01a8f4' d='M16.5 15.82L18.94 17.23L18.19 18.53L15 16.69V13H16.5V15.82M20 10.26V5C20 3.9 19.11 3 18 3H4C2.9 3 2 3.9 2 5V17C2 18.11 2.9 19 4 19H9.68C10.81 21.36 13.21 23 16 23C19.87 23 23 19.87 23 16C23 13.62 21.81 11.53 20 10.26M18 7V9.29C17.37 9.11 16.7 9 16 9C14.5 9 13.13 9.47 12 10.26V7H18M4 7H10V11H4V7M4 17V13H9.68C9.25 13.91 9 14.93 9 16C9 16.34 9.03 16.67 9.08 17H4M16 21C13.24 21 11 18.76 11 16S13.24 11 16 11 21 13.24 21 16 18.76 21 16 21Z' /></svg>")
+                PaddingBottom: =10
+                PaddingTop: =10
+                RadiusBottomLeft: =15
+                RadiusBottomRight: =15
+                RadiusTopLeft: =15
+                RadiusTopRight: =15
+                Width: =50
+                X: =271
+                Y: =20
+                ZIndex: =5
+
+            Label7_2 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =24
+                HoverColor: =glbThemePrimaryColor
+                OnSelect: =Navigate(GeneralFormListScreen,None)
+                PaddingLeft: =0
+                Size: =11
+                Text: ="待處理"
+                Width: =80
+                X: =336
+                Y: =46
+                ZIndex: =6
+
+            Label7_3 As label:
+                Color: =glbThemePrimaryColor
+                Font: =Font.'Lato Black'
+                Height: =26
+                PaddingLeft: =0
+                Size: =18
+                Text: =CountRows(FilterPendingDataCol)
+                Width: =67
+                X: =336
+                Y: =20
+                ZIndex: =7
+
+            Icon5 As icon.ChevronRight:
+                Color: =RGBA(149, 149, 149, 1)
+                Height: =24
+                HoverColor: =glbThemePrimaryColor
+                Icon: =Icon.ChevronRight
+                PaddingBottom: =4
+                PaddingTop: =4
+                Width: =24
+                X: =155
+                Y: =46
+                ZIndex: =8
+
+            Icon5_1 As icon.ChevronRight:
+                Color: =RGBA(149, 149, 149, 1)
+                Height: =24
+                HoverColor: =glbThemePrimaryColor
+                Icon: =Icon.ChevronRight
+                PaddingBottom: =4
+                PaddingTop: =4
+                Width: =24
+                X: =379
+                Y: =46
+                ZIndex: =9
+
