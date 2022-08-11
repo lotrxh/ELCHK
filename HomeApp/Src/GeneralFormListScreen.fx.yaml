@@ -14,6 +14,7 @@ GeneralFormListScreen As screen:
         With({ProcessedListCol:Filter(ProcessedDetailCol,(CurrentUser in field_ApproverEmail||CurrentUser<>Blank()&&CurrentUser in field_AgentUserEmail))},ClearCollect(inprogressData,AddColumns(ProcessedListCol,"FlowTaskName",LookUp(approvalCol,Title=field_Approval_No).Task_Name,"FlowOrder",LookUp(approvalCol,Title=field_Approval_No).Application_No,"FlowCreateDate",LookUp(approvalCol,Title=field_Approval_No).Created,"DepartMentName",LookUp(approvalCol,Title=field_Approval_No).DepartMentName,"FormType",LookUp(approvalCol,Title=field_Approval_No).FormType,"Application_Status",LookUp(approvalCol,Title=field_Approval_No).Application_Status)));
         // 生成所有集合
         With({AllApprovalList:Filter(ComplatelDetailCol,(CurrentUser in field_ApproverEmail||CurrentUser<>Blank()&&CurrentUser in field_AgentUserEmail)&&field_TaskStatus<>Blank())},ClearCollect(AllApprovalListDataCol,AddColumns(AllApprovalList,"FlowTaskName",LookUp(approvalCol,Title=field_Approval_No).Task_Name,"FlowOrder",LookUp(approvalCol,Title=field_Approval_No).Application_No,"FlowCreateDate",LookUp(approvalCol,Title=field_Approval_No).Created,"DepartMentName",LookUp(approvalCol,Title=field_Approval_No).DepartMentName,"FormType",LookUp(approvalCol,Title=field_Approval_No).FormType,"Application_Status",LookUp(approvalCol,Title=field_Approval_No).Application_Status)));
+        Select(BtnLgIconOnly_4);
 
     ContainerTitle As groupContainer.manualLayoutContainer:
         Fill: =glbThemePrimaryColor
@@ -103,17 +104,19 @@ GeneralFormListScreen As screen:
                 ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
                 ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
                 Color: =glbNeutralPrimaryColor
+                DisplayFields: =["Value"]
                 FocusedBorderThickness: =0
                 Height: =32
                 HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                 HoverColor: =Self.Color
                 HoverFill: =ColorFade(Self.Fill, -5%)
                 InputTextPlaceholder: ="選擇部門"
-                Items: =ComboBoxSample
+                Items: =["行政部","財務部",""]
                 PaddingLeft: =10
                 PressedColor: =Self.Color
                 PressedFill: =ColorFade(Self.Fill, -5%)
-                SearchItems: =Search(ComboBoxSample,ComboBox1_5.SearchText,"Value1")
+                SearchFields: =["Value"]
+                SearchItems: =Search(["行政部","財務部",""],ComboBox1_5.SearchText,"Value")
                 SelectionColor: =glbThemePrimaryColor
                 SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                 Size: =11
@@ -162,7 +165,66 @@ GeneralFormListScreen As screen:
                 Height: =32
                 HoverFill: =ColorFade(Self.Fill, -15%)
                 Icon: =Icon.Search
-                OnSelect: =
+                OnSelect: |-
+                    =If(
+                        TabGallery3_4.Selected.Value = "全部",
+                        ClearCollect(
+                            AllApprovalData,
+                            Search(
+                                Filter(
+                                    SortByColumns(
+                                        AllApprovalListDataCol,
+                                        "FlowCreateDate",
+                                        Descending
+                                    ),
+                                    IsBlank(ComboBox1_5.Selected.Value) || DepartMentName = ComboBox1_5.Selected.Value,
+                                    IsBlank(ComboBox1_6.Selected.Value1) || FormType = ComboBox1_6.Selected.Value1,
+                                    (DateValue(Text(FlowCreateDate)) >= DateValue(Text(TemplateStartDate_2.SelectedDate)) && DateValue(Text(FlowCreateDate)) <= DateValue(Text(TemplateEndDate_2.SelectedDate)))
+                                ),
+                                TextInput2_13.Text,
+                                "FlowOrder",
+                                "FlowTaskName"
+                            )
+                        ),
+                        TabGallery3_4.Selected.Value = "待處理",
+                        ClearCollect(
+                            AllPendingApprovalData,
+                            Search(
+                                Filter(
+                                    SortByColumns(
+                                        FilterPendingDataCol,
+                                        "FlowCreateDate",
+                                        Descending
+                                    ),
+                                    IsBlank(ComboBox1_5.Selected.Value) || DepartMentName = ComboBox1_5.Selected.Value,
+                                    IsBlank(ComboBox1_6.Selected.Value1) || FormType = ComboBox1_6.Selected.Value1,
+                                    (DateValue(Text(FlowCreateDate)) >= DateValue(Text(TemplateStartDate_2.SelectedDate)) && DateValue(Text(FlowCreateDate)) <= DateValue(Text(TemplateEndDate_2.SelectedDate)))
+                                ),
+                                TextInput2_13.Text,
+                                "FlowOrder",
+                                "FlowTaskName"
+                            )
+                        ),
+                        TabGallery3_4.Selected.Value = "已處理",
+                        ClearCollect(
+                            AllinprogressApprovalData,
+                            Search(
+                                Filter(
+                                    SortByColumns(
+                                        inprogressData,
+                                        "FlowCreateDate",
+                                        Descending
+                                    ),
+                                    IsBlank(ComboBox1_5.Selected.Value) || DepartMentName = ComboBox1_5.Selected.Value,
+                                    IsBlank(ComboBox1_6.Selected.Value1) || FormType = ComboBox1_6.Selected.Value1,
+                                    (DateValue(Text(FlowCreateDate)) >= DateValue(Text(TemplateStartDate_2.SelectedDate)) && DateValue(Text(FlowCreateDate)) <= DateValue(Text(TemplateEndDate_2.SelectedDate)))
+                                ),
+                                TextInput2_13.Text,
+                                "FlowOrder",
+                                "FlowTaskName"
+                            )
+                        )
+                    )
                 PaddingBottom: =8
                 PaddingTop: =8
                 PressedColor: =White
@@ -208,6 +270,7 @@ GeneralFormListScreen As screen:
             TabGallery3_4 As gallery.galleryHorizontal:
                 Height: =40
                 Items: =["全部","待處理","已處理"]
+                OnSelect: =//Select(BtnLgIconOnly_4);
                 TemplatePadding: =0
                 TemplateSize: =147
                 Width: =996
@@ -231,7 +294,7 @@ GeneralFormListScreen As screen:
                         )
                     Height: =32
                     HoverColor: =glbThemePrimaryColor
-                    OnSelect: =Select(Parent)
+                    OnSelect: =Select(BtnLgIconOnly_4);
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
@@ -318,10 +381,10 @@ GeneralFormListScreen As screen:
                     BorderStyle: =BorderStyle.None
                     BorderThickness: =0
                     Color: =RGBA(96, 94, 92, 1)
-                    DefaultDate: =
                     Fill: =RGBA(0, 0, 0, 0)
                     FocusedBorderThickness: =1
                     Font: =Font.Arial
+                    Format: ="dd/mm/yyyy"
                     Height: =30
                     IconBackground: =RGBA(0, 0, 0, 0)
                     IconFill: =glbNeutralSecondaryColor
@@ -349,11 +412,12 @@ GeneralFormListScreen As screen:
                     BorderStyle: =BorderStyle.None
                     BorderThickness: =0
                     Color: =RGBA(96, 94, 92, 1)
-                    DefaultDate: =
+                    DefaultDate: =Today()-30
                     Fill: =RGBA(0, 0, 0, 0)
                     FocusedBorderColor: =White
                     FocusedBorderThickness: =0
                     Font: =Font.Arial
+                    Format: ="dd/mm/yyyy"
                     Height: =30
                     IconBackground: =RGBA(0, 0, 0, 0)
                     IconFill: =glbNeutralSecondaryColor
@@ -514,11 +578,14 @@ GeneralFormListScreen As screen:
                 Items: |-
                     =If(
                         TabGallery3_4.Selected.Value = "全部",
-                        SortByColumns(AllApprovalListDataCol,"FlowCreateDate",Ascending),
+                        AllApprovalData,
+                        //SortByColumns(AllApprovalListDataCol,"FlowCreateDate",Descending),
                         TabGallery3_4.Selected.Value = "待處理",
-                        SortByColumns(FilterPendingDataCol,"FlowCreateDate",Ascending),
+                        AllPendingApprovalData,
+                        //SortByColumns(FilterPendingDataCol,"FlowCreateDate",Descending),
                         TabGallery3_4.Selected.Value = "已處理",
-                        SortByColumns(inprogressData,"FlowCreateDate",Ascending)
+                        AllinprogressApprovalData
+                        //SortByColumns(inprogressData,"FlowCreateDate",Descending)
                     )
                 Layout: =Layout.Vertical
                 OnSelect: |-
