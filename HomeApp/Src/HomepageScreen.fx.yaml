@@ -286,7 +286,7 @@ HomepageScreen As screen:
 
             TabGallery3_2 As gallery.galleryHorizontal:
                 Height: =39
-                Items: =["常用表格","行人部","財務部","企業傳訊"]
+                Items: =["常用表格","行政部","財務部","企業傳訊"]
                 ShowScrollbar: =false
                 TemplatePadding: =0
                 TemplateSize: =130
@@ -347,7 +347,7 @@ HomepageScreen As screen:
                     =If(
                         TabGallery3_2.Selected.Value = "常用表格",
                         Search(RenameColumns(SortByColumns(Filter(MyContacts,UserEmail=User().Email,ContatsType=Blank()),"Created",Descending),"TaskFormName","ModelName"),TextInput2_15.Text,"ModelName"),
-                        If(TabGallery3_2.Selected.Value="行人部",
+                        If(TabGallery3_2.Selected.Value="行政部",
                         Search(Filter(DataModelName,FormType=TaskTypeNameGallery.Selected.FormType).ModelName,TextInput2_15.Text,"ModelName"),
                         Search(Filter(GenericFormModel,ModelDepartment =TabGallery3_2.Selected.Value,ModelType=TaskTypeNameGallery.Selected.FormType).ModelName,TextInput2_15.Text,"ModelName"))
                     )
