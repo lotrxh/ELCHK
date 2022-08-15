@@ -170,7 +170,7 @@
                         ModelFlowUser:User().Email,
                         CustomFilter:If(Radio_CustomFilter.SelectedText.Value="有",TextInput_CustomFilter.Text,""),
                         ModelMark:Radio_mark.SelectedText.Value,
-                        ModelAttachMent:Radio_attachment.SelectedText.Value,
+                        ModelFlowUserType:Radio_attachment.SelectedText.Value,
                         FlowType:Radio_flowtype.SelectedText.Value,
                         SelectedActions:If(Radio_flowtype.SelectedText.Value="Generic Flow","補充資料;跟進;檢查;"&If(Checkbox1_3.Value=true,Checkbox1_3.Text&";","")&If(Checkbox1_4.Value=true,Checkbox1_4.Text&";","")&If(Checkbox1_5.Value=true,Checkbox1_5.Text&";","")&If(Checkbox1_6.Value=true,Checkbox1_6.Text&";","")&If(Checkbox1_7.Value=true,Checkbox1_7.Text&";",""),""),
                         IsPassWord:If(Radio_password.SelectedText.Value="有",1,If(Radio_password.SelectedText.Value="無",2,1)) //默认为0，即可有可无
@@ -216,7 +216,7 @@
                         CustomFilter:If(Radio_CustomFilter.SelectedText.Value="有",TextInput_CustomFilter.Text,""),
                         IsEnable:1,
                         ModelMark:Radio_mark.SelectedText.Value,
-                        ModelAttachMent:Radio_attachment.SelectedText.Value,
+                        ModelFlowUserType:Radio_attachment.SelectedText.Value,
                         FlowType:Radio_flowtype.SelectedText.Value,
                         SelectedActions:If(Radio_flowtype.SelectedText.Value="Generic Flow","補充資料;跟進;檢查;"&If(Checkbox1_3.Value=true,Checkbox1_3.Text&";","")&If(Checkbox1_4.Value=true,Checkbox1_4.Text&";","")&If(Checkbox1_5.Value=true,Checkbox1_5.Text&";","")&If(Checkbox1_6.Value=true,Checkbox1_6.Text&";","")&If(Checkbox1_7.Value=true,Checkbox1_7.Text&";",""),""),
                         IsPassWord:If(Radio_password.SelectedText.Value="有",1,If(Radio_password.SelectedText.Value="無",2,1)) //默认为0，即可有可无
@@ -437,7 +437,7 @@
                 ZIndex: =28
 
                 Radio_attachment As radio:
-                    Default: =First(EditForm).ModelAttachMent//加载编辑表格的表格名称
+                    Default: =First(EditForm).ModelFlowUserType//加载编辑表格的表格名称
                     FocusedBorderThickness: =0
                     Height: =37
                     HoverColor: =RGBA(0, 0, 0, 1)

@@ -1,19 +1,197 @@
 GeneralFormListScreen As screen:
     Fill: =RGBA(243, 243, 243, 1)
-    OnVisible: |-
-        =ClearCollect(approvalCol,Approval_Table);
+    OnVisible: |
+        =ClearCollect(
+            approvalCol,
+            Approval_Table
+        );
         //生成待处理集合
-        ClearCollect(ApprovalDetailCol,Filter(ShowColumns(ApprovalDetail_Table,"Title","field_Approval_No","field_Approver","field_ApproverEmail","field_Priortty","field_TaskStatus","field_AgentUserEmail"),field_TaskStatus="001"||field_TaskStatus="002"));
+        ClearCollect(
+            ApprovalDetailCol,
+            Filter(
+                ShowColumns(
+                    ApprovalDetail_Table,
+                    "Title",
+                    "field_Approval_No",
+                    "field_Approver",
+                    "field_ApproverEmail",
+                    "field_Priortty",
+                    "field_TaskStatus",
+                    "field_AgentUserEmail"
+                ),
+                field_TaskStatus = "001" || field_TaskStatus = "002"
+            )
+        );
         //生成已处理集合
-        ClearCollect(ProcessedDetailCol,Filter(ShowColumns(ApprovalDetail_Table,"Title","field_Approval_No","field_Approver","field_ApproverEmail","field_Priortty","field_TaskStatus","Editor","field_AgentUserEmail"),field_TaskStatus="004"||field_TaskStatus="006"||field_TaskStatus="000"));
+        ClearCollect(
+            ProcessedDetailCol,
+            Filter(
+                ShowColumns(
+                    ApprovalDetail_Table,
+                    "Title",
+                    "field_Approval_No",
+                    "field_Approver",
+                    "field_ApproverEmail",
+                    "field_Priortty",
+                    "field_TaskStatus",
+                    "Editor",
+                    "field_AgentUserEmail"
+                ),
+                field_TaskStatus = "004" || field_TaskStatus = "006" || field_TaskStatus = "000"
+            )
+        );
         //全部集合
-        ClearCollect(ComplatelDetailCol,Filter(ShowColumns(ApprovalDetail_Table,"Title","field_Approval_No","field_Approver","field_ApproverEmail","field_Priortty","field_TaskStatus","Editor","field_AgentUserEmail"),field_TaskStatus="000"||field_TaskStatus="001"||field_TaskStatus="004"||field_TaskStatus="006"||field_TaskStatus="002"));
-        
-        With({SearchPendingData:Filter(ApprovalDetailCol,(CurrentUser in field_ApproverEmail||CurrentUser<>Blank()&&CurrentUser in field_AgentUserEmail))},ClearCollect(FilterPendingDataCol,AddColumns(SearchPendingData,"FlowTaskName",LookUp(approvalCol,Title=field_Approval_No).Task_Name,"FlowOrder",LookUp(approvalCol,Title=field_Approval_No).Application_No,"FlowCreateDate",LookUp(approvalCol,Title=field_Approval_No).Created,"DepartMentName",LookUp(approvalCol,Title=field_Approval_No).DepartMentName,"FormType",LookUp(approvalCol,Title=field_Approval_No).FormType,"Application_Status",LookUp(approvalCol,Title=field_Approval_No).Application_Status)));
+        ClearCollect(
+            ComplatelDetailCol,
+            Filter(
+                ShowColumns(
+                    ApprovalDetail_Table,
+                    "Title",
+                    "field_Approval_No",
+                    "field_Approver",
+                    "field_ApproverEmail",
+                    "field_Priortty",
+                    "field_TaskStatus",
+                    "Editor",
+                    "field_AgentUserEmail"
+                ),
+                field_TaskStatus = "000" || field_TaskStatus = "001" || field_TaskStatus = "004" || field_TaskStatus = "006" || field_TaskStatus = "002"
+            )
+        );
+        With(
+            {
+                SearchPendingData: Filter(
+                    ApprovalDetailCol,
+                    (CurrentUser in field_ApproverEmail || CurrentUser <> Blank() && CurrentUser in field_AgentUserEmail)
+                )
+            },
+            ClearCollect(
+                FilterPendingDataCol,
+                AddColumns(
+                    SearchPendingData,
+                    "FlowTaskName",
+                    LookUp(
+                        approvalCol,
+                        Title = field_Approval_No
+                    ).Task_Name,
+                    "FlowOrder",
+                    LookUp(
+                        approvalCol,
+                        Title = field_Approval_No
+                    ).Application_No,
+                    "FlowCreateDate",
+                    LookUp(
+                        approvalCol,
+                        Title = field_Approval_No
+                    ).Created,
+                    "DepartMentName",
+                    LookUp(
+                        approvalCol,
+                        Title = field_Approval_No
+                    ).DepartMentName,
+                    "FormType",
+                    LookUp(
+                        approvalCol,
+                        Title = field_Approval_No
+                    ).FormType,
+                    "Application_Status",
+                    LookUp(
+                        approvalCol,
+                        Title = field_Approval_No
+                    ).Application_Status
+                )
+            )
+        );
         ///生成已处理集合
-        With({ProcessedListCol:Filter(ProcessedDetailCol,(CurrentUser in field_ApproverEmail||CurrentUser<>Blank()&&CurrentUser in field_AgentUserEmail))},ClearCollect(inprogressData,AddColumns(ProcessedListCol,"FlowTaskName",LookUp(approvalCol,Title=field_Approval_No).Task_Name,"FlowOrder",LookUp(approvalCol,Title=field_Approval_No).Application_No,"FlowCreateDate",LookUp(approvalCol,Title=field_Approval_No).Created,"DepartMentName",LookUp(approvalCol,Title=field_Approval_No).DepartMentName,"FormType",LookUp(approvalCol,Title=field_Approval_No).FormType,"Application_Status",LookUp(approvalCol,Title=field_Approval_No).Application_Status)));
+        With(
+            {
+                ProcessedListCol: Filter(
+                    ProcessedDetailCol,
+                    (CurrentUser in field_ApproverEmail || CurrentUser <> Blank() && CurrentUser in field_AgentUserEmail)
+                )
+            },
+            ClearCollect(
+                inprogressData,
+                AddColumns(
+                    ProcessedListCol,
+                    "FlowTaskName",
+                    LookUp(
+                        approvalCol,
+                        Title = field_Approval_No
+                    ).Task_Name,
+                    "FlowOrder",
+                    LookUp(
+                        approvalCol,
+                        Title = field_Approval_No
+                    ).Application_No,
+                    "FlowCreateDate",
+                    LookUp(
+                        approvalCol,
+                        Title = field_Approval_No
+                    ).Created,
+                    "DepartMentName",
+                    LookUp(
+                        approvalCol,
+                        Title = field_Approval_No
+                    ).DepartMentName,
+                    "FormType",
+                    LookUp(
+                        approvalCol,
+                        Title = field_Approval_No
+                    ).FormType,
+                    "Application_Status",
+                    LookUp(
+                        approvalCol,
+                        Title = field_Approval_No
+                    ).Application_Status
+                )
+            )
+        );
         // 生成所有集合
-        With({AllApprovalList:Filter(ComplatelDetailCol,(CurrentUser in field_ApproverEmail||CurrentUser<>Blank()&&CurrentUser in field_AgentUserEmail)&&field_TaskStatus<>Blank())},ClearCollect(AllApprovalListDataCol,AddColumns(AllApprovalList,"FlowTaskName",LookUp(approvalCol,Title=field_Approval_No).Task_Name,"FlowOrder",LookUp(approvalCol,Title=field_Approval_No).Application_No,"FlowCreateDate",LookUp(approvalCol,Title=field_Approval_No).Created,"DepartMentName",LookUp(approvalCol,Title=field_Approval_No).DepartMentName,"FormType",LookUp(approvalCol,Title=field_Approval_No).FormType,"Application_Status",LookUp(approvalCol,Title=field_Approval_No).Application_Status)));
+        With(
+            {
+                AllApprovalList: Filter(
+                    ComplatelDetailCol,
+                    (CurrentUser in field_ApproverEmail || CurrentUser <> Blank() && CurrentUser in field_AgentUserEmail) && field_TaskStatus <> Blank()
+                )
+            },
+            ClearCollect(
+                AllApprovalListDataCol,
+                AddColumns(
+                    AllApprovalList,
+                    "FlowTaskName",
+                    LookUp(
+                        approvalCol,
+                        Title = field_Approval_No
+                    ).Task_Name,
+                    "FlowOrder",
+                    LookUp(
+                        approvalCol,
+                        Title = field_Approval_No
+                    ).Application_No,
+                    "FlowCreateDate",
+                    LookUp(
+                        approvalCol,
+                        Title = field_Approval_No
+                    ).Created,
+                    "DepartMentName",
+                    LookUp(
+                        approvalCol,
+                        Title = field_Approval_No
+                    ).DepartMentName,
+                    "FormType",
+                    LookUp(
+                        approvalCol,
+                        Title = field_Approval_No
+                    ).FormType,
+                    "Application_Status",
+                    LookUp(
+                        approvalCol,
+                        Title = field_Approval_No
+                    ).Application_Status
+                )
+            )
+        );
         Select(BtnLgIconOnly_4);
 
     ContainerTitle As groupContainer.manualLayoutContainer:
@@ -554,9 +732,9 @@ GeneralFormListScreen As screen:
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =12
-                    Text: ="當前節點"
-                    Width: =74
-                    X: =840
+                    Text: ="自定義查詢"
+                    Width: =84
+                    X: =830
                     ZIndex: =8
 
                 Label4_20 As label:
@@ -884,7 +1062,10 @@ GeneralFormListScreen As screen:
                     PaddingTop: =0
                     Size: =12
                     Text: |-
-                        =Switch(
+                        =//ThisItem.FlowTaskName
+                        
+                        /*
+                        Switch(
                                 ThisItem.TaskStatus,
                                 "001",
                                 "準備中",
@@ -900,6 +1081,7 @@ GeneralFormListScreen As screen:
                                 "已拒絕",
                                 "進行中"
                             )
+                        */
                     Width: =74
                     X: =840
                     ZIndex: =17

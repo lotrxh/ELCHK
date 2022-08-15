@@ -346,7 +346,7 @@ HomepageScreen As screen:
                 Items: |-
                     =If(
                         TabGallery3_2.Selected.Value = "常用表格",
-                        Search(RenameColumns(SortByColumns(Filter(MyContacts,UserEmail=User().Email,ContatsType=Blank()),"Created",Descending),"TaskFormName","ModelName"),TextInput2_15.Text,"ModelName"),
+                        Search(RenameColumns(SortByColumns(Filter(MyContacts,UserEmail=User().Email,ContatsEmail=Blank()),"Created",Descending),"TaskFormName","ModelName"),TextInput2_15.Text,"ModelName"),
                         If(TabGallery3_2.Selected.Value="行政部",
                         Search(Filter(DataModelName,FormType=TaskTypeNameGallery.Selected.FormType).ModelName,TextInput2_15.Text,"ModelName"),
                         Search(Filter(GenericFormModel,ModelDepartment =TabGallery3_2.Selected.Value,ModelType=TaskTypeNameGallery.Selected.FormType).ModelName,TextInput2_15.Text,"ModelName"))
@@ -395,7 +395,7 @@ HomepageScreen As screen:
                                             TaskFormName: "招聘職位申請表",
                                             Title: GUID(),
                                             UserEmail: User().Email,
-                                            ContatsType: ""
+                                            ContatsEmail: ""
                                         }
                                     )
                                 )
@@ -420,7 +420,7 @@ HomepageScreen As screen:
                                             TaskFormName: "假期批核人資料表",
                                             Title: GUID(),
                                             UserEmail: User().Email,
-                                            ContatsType: ""
+                                            ContatsEmail: ""
                                         }
                                     )
                                 )
@@ -445,7 +445,7 @@ HomepageScreen As screen:
                                             TaskFormName: "任職資源申請",
                                             Title: GUID(),
                                             UserEmail: User().Email,
-                                            ContatsType: ""
+                                            ContatsEmail: ""
                                         }
                                     )
                                 )
@@ -470,7 +470,7 @@ HomepageScreen As screen:
                                             TaskFormName: "預備合約通知書(新入職)",
                                             Title: GUID(),
                                             UserEmail: User().Email,
-                                            ContatsType: ""
+                                            ContatsEmail: ""
                                         }
                                     )
                                 )
@@ -494,7 +494,7 @@ HomepageScreen As screen:
                                             TaskFormName: ThisItem.ModelName,
                                             Title: GUID(),
                                             UserEmail: User().Email,
-                                            ContatsType: ""
+                                            ContatsEmail: ""
                                         }
                                     )
                                 )
