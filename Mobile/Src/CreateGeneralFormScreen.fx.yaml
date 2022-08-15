@@ -10,81 +10,13 @@
             )
         );
         */
-        UpdateContext(
-            {
-                FormModelId: If(
-                    IsBlank(Param("FormModelId")),
-                    FormModelId,
-                    LookUp(
-                        GenericFormModel,
-                        Title = Param("FormModelId"),
-                        Title
-                    )
-                )
-            }
-        );
-        Set(
-            FlowType,
-            LookUp(
-                GenericFormModel,
+        UpdateContext({FormModelId:If(IsBlank(Param("FormModelId")),FormModelId,LookUp(GenericFormModel,Title=Param("FormModelId"),Title))});Set(FlowType,LookUp(GenericFormModel,
                 //Title = "99e27121-5d4d-4dd2-81dd-a9fcc5953814"
-                Title = "73c5c595-1781-419f-88ad-0961a2382398"
-            ).FlowType
-        );
-        If(
-            IsBlank(
-                LookUp(
-                    GenericFormModel,
+        Title="73c5c595-1781-419f-88ad-0961a2382398").FlowType);If(IsBlank(LookUp(GenericFormModel,
                 //Title = "99e27121-5d4d-4dd2-81dd-a9fcc5953814"
-                    Title = "73c5c595-1781-419f-88ad-0961a2382398"
-                ).SelectedActions
-            ),
-            ClearCollect(
-                DataFlowActionCol,
-                "補充資料",
-                "跟進",
-                "檢查",
-                "單位提交",
-                "服務總監簽批",
-                "助總審批",
-                "總幹事審批",
-                "執行"
-            ),
-            ClearCollect(
-                DataFlowActionCol,
-                Split(LookUp(
-                    GenericFormModel,
-                    Title = "73c5c595-1781-419f-88ad-0961a2382398"
-                ).SelectedActions,";").Result
-            )
-        );
-        ClearCollect(
-            ApprovalListCol,
-            {
-                idNumber: 0,
-                ActionName: "填写",
-                Approver: User().FullName,
-                ApprovalEmail: User().Email,
-                IsComplate: true,
-                BCCUser: "",
-                remark: ""
-            }
-        );
-        ClearCollect(
-            EditUserForm,
-            Filter(
-                GenericFormModel,
-                Title = Param("FormModelId")
-            )
-        );
+        Title="73c5c595-1781-419f-88ad-0961a2382398").SelectedActions),ClearCollect(DataFlowActionCol,Split("補充資料;跟進;檢查;單位提交;服務總監簽批;助總審批;總幹事審批;執行",";").Result),ClearCollect(DataFlowActionCol,Split(LookUp(GenericFormModel,Title="73c5c595-1781-419f-88ad-0961a2382398").SelectedActions,";").Result));ClearCollect(ApprovalListCol,{idNumber:0,ActionName:"填写",Approver:User().FullName,ApprovalEmail:User().Email,IsComplate: true ,BCCUser:"",remark:""});ClearCollect(EditUserForm,Filter(GenericFormModel,Title=Param("FormModelId")));
         //创建集合EditUserForm收集表格信息
-        ClearCollect(
-            EditUserAttachment,
-            Filter(
-                TemplateFileList,
-                GenericFormId = Param("FormModelId")
-            )
-        );
+        ClearCollect(EditUserAttachment,Filter(TemplateFileList,GenericFormId=Param("FormModelId")));
         //创建集合EditUserAttachment获得附件信息
 
     BottomContainer_1 As groupContainer.manualLayoutContainer:
