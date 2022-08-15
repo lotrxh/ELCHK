@@ -200,7 +200,8 @@
                                     "004",
                                     "002"
                                 ),
-                                Priortty: ApprovalListCol[@idNumber]
+                                Priortty: ApprovalListCol[@idNumber],
+                                ActionNode:ApprovalListCol[@ActionName]
                             }
                         )
                     );
@@ -223,7 +224,7 @@
                         //ReferNumber:TextInput_ReferNumber.Text,
                         FormType:Label1_132.Text,
                         Department:drpFilterDepartment_1.Selected.Result,
-                        FilterLabel:TextInput_ReferNumber.Text
+                        'Filter Label':TextInput_ReferNumber.Text
                     }
                     ));//創建NewUserForm集合用作後續更新list-GenericUploadAttachMentFile中的FormId
                     UpdateIf(GenericUploadAttachMentFile,FormId=First(EditUserForm).Title,
@@ -267,7 +268,7 @@
                         //ReferNumber:TextInput_ReferNumber.Text,
                         FormType:Label1_132.Text,
                         Department:drpFilterDepartment_1.Selected.Result,
-                        FilterLabel:TextInput_ReferNumber.Text
+                        'Filter Label':TextInput_ReferNumber.Text
                     }
                     ));//創建NewUserForm集合用作後續更新list-GenericUploadAttachMentFile中的FormId
                     UpdateIf(GenericUploadAttachMentFile,FormId=First(EditUserForm).Title,
@@ -669,7 +670,7 @@
                             HoverFill: =RGBA(255, 255, 255, 1)
                             OnSelect: |
                                 =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).附件).AbsoluteUri)
-                                Launch("https://elcss.sharepoint.com/sites/eps/Lists/TemplateFileList/Attachments/" & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).附件).DisplayName & "?web=1")
+                                Launch("https://elcss.sharepoint.com/sites/eps/Lists/TemplateFileList/Attachments/" & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).Attachments).DisplayName & "?web=1")
                             PaddingBottom: =0
                             PaddingLeft: =0
                             PaddingRight: =0
@@ -702,7 +703,7 @@
                             HoverFill: =RGBA(255, 255, 255, 1)
                             OnSelect: |-
                                 =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text)).附件).AbsoluteUri)
-                                Launch("https://elcss.sharepoint.com/sites/eps/Lists/TemplateFileList/Attachments/" & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text)).附件).DisplayName & "?web=1")
+                                Launch("https://elcss.sharepoint.com/sites/eps/Lists/TemplateFileList/Attachments/" & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text)).Attachments).DisplayName & "?web=1")
                             PaddingBottom: =0
                             PaddingLeft: =0
                             PaddingRight: =0
@@ -735,7 +736,7 @@
                             HoverFill: =RGBA(255, 255, 255, 1)
                             OnSelect: |-
                                 =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text)).附件).AbsoluteUri)
-                                Launch("https://elcss.sharepoint.com/sites/eps/Lists/TemplateFileList/Attachments/" & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text)).附件).DisplayName & "?web=1")
+                                Launch("https://elcss.sharepoint.com/sites/eps/Lists/TemplateFileList/Attachments/" & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text)).Attachments).DisplayName & "?web=1")
                             PaddingBottom: =0
                             PaddingLeft: =0
                             PaddingRight: =0
@@ -866,7 +867,7 @@
                     LayoutMinWidth: =250
                     LayoutMode: =LayoutMode.Auto
                     PaddingLeft: =20
-                    Visible: =If(First(EditUserForm).ModelAttachMent="有"&&First(EditUserForm).FlowType<>"Template",true,false)
+                    Visible: =If(First(EditUserForm).ModelFlowUserType="有"&&First(EditUserForm).FlowType<>"Template",true,false)
                     ZIndex: =2
 
                     Label9_22 As label:
@@ -1773,6 +1774,7 @@
         Button2 As button:
             OnSelect: =Set(FlowType,LookUp(GenericFormModel,Title="99e27121-5d4d-4dd2-81dd-a9fcc5953814").FlowType);
             Text: ="按钮"
+            Visible: =false
             ZIndex: =3
 
     HeaderContainer_4 As groupContainer.manualLayoutContainer:
@@ -2002,7 +2004,7 @@
                                 Filter(
                                     MyContacts,
                                     UserEmail = User().Email,
-                                    ContatsType = "個人"
+                                    ContatsEmail = "個人"
                                 ),
                                 "Created",
                                 Descending
@@ -2096,7 +2098,7 @@
                                     Filter(
                                         MyContacts,
                                         UserEmail = User().Email,
-                                        ContatsType= "個人",
+                                        ContatsEmail= "個人",
                                         AllOwnerName.Email = ComboBox1_5.Selected.Email
                                     ).Title
                                 )<=0,
@@ -2107,7 +2109,7 @@
                                         Title: GUID(),
                                         UserEmail: User().Email,
                                         AllOwnerName: ComboBox1_5.Selected,
-                                        ContatsType: "個人"
+                                        ContatsEmail: "個人"
                                     }
                                 )),
                                 Set(CreateApproverCol,Gallery2_2.Selected)

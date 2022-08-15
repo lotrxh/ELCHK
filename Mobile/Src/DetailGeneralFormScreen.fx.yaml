@@ -533,7 +533,7 @@
                             HoverFill: =RGBA(255, 255, 255, 1)
                             OnSelect: |-
                                 =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=Label1_142.Text)).附件).AbsoluteUri)
-                                Launch("https://elcss.sharepoint.com/sites/eps/Lists/TemplateFileList/Attachments/" & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=Label1_142.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=Label1_142.Text)).附件).DisplayName & "?web=1")
+                                Launch("https://elcss.sharepoint.com/sites/eps/Lists/TemplateFileList/Attachments/" & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=Label1_142.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=Label1_142.Text)).Attachments).DisplayName & "?web=1")
                             PaddingBottom: =0
                             PaddingLeft: =0
                             PaddingRight: =0
@@ -566,7 +566,7 @@
                             HoverFill: =RGBA(255, 255, 255, 1)
                             OnSelect: |-
                                 =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=BtnDefault_21.Text)).附件).AbsoluteUri)
-                                Launch("https://elcss.sharepoint.com/sites/eps/Lists/TemplateFileList/Attachments/" & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=BtnDefault_21.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=BtnDefault_21.Text)).附件).DisplayName & "?web=1")
+                                Launch("https://elcss.sharepoint.com/sites/eps/Lists/TemplateFileList/Attachments/" & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=BtnDefault_21.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=BtnDefault_21.Text)).Attachments).DisplayName & "?web=1")
                             PaddingBottom: =0
                             PaddingLeft: =0
                             PaddingRight: =0
@@ -599,7 +599,7 @@
                             HoverFill: =RGBA(255, 255, 255, 1)
                             OnSelect: |-
                                 =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=BtnDefault_22.Text)).附件).AbsoluteUri)
-                                Launch("https://elcss.sharepoint.com/sites/eps/Lists/TemplateFileList/Attachments/" & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=BtnDefault_22.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=BtnDefault_22.Text)).附件).DisplayName & "?web=1")
+                                Launch("https://elcss.sharepoint.com/sites/eps/Lists/TemplateFileList/Attachments/" & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=BtnDefault_22.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=BtnDefault_22.Text)).Attachments).DisplayName & "?web=1")
                             PaddingBottom: =0
                             PaddingLeft: =0
                             PaddingRight: =0
@@ -749,7 +749,7 @@
                                 HoverColor: =glbThemePrimaryColor
                                 HoverFill: =RGBA(0, 0, 0, 0)
                                 Icon: =Icon.Download
-                                OnSelect: =Launch(First(Last(Filter(GenericUploadAttachMentFile,FormId=First(EditDetailUserForm_1).Title)).附件).AbsoluteUri)
+                                OnSelect: =Launch(First(Last(Filter(GenericUploadAttachMentFile,FormId=First(EditDetailUserForm_1).Title)).Attachments).AbsoluteUri)
                                 PaddingBottom: =7
                                 PaddingTop: =7
                                 PressedBorderColor: =ColorFade(glbThemePrimaryColor, -15%)
@@ -924,7 +924,7 @@
                     LayoutMode: =LayoutMode.Auto
                     PaddingLeft: =20
                     PaddingRight: =20
-                    Visible: =If(First(EditDetailUserForm_2).ModelAttachMent="有",true,false)
+                    Visible: =If(First(EditDetailUserForm_2).ModelFlowUserType="有",true,false)
                     ZIndex: =2
 
                     Label9_27 As label:
@@ -1011,7 +1011,7 @@
                             HoverColor: =glbThemePrimaryColor
                             HoverFill: =RGBA(0, 0, 0, 0)
                             Icon: =Icon.Download
-                            OnSelect: =Launch(First(ThisItem.附件).AbsoluteUri)
+                            OnSelect: =Launch(First(ThisItem.Attachments).AbsoluteUri)
                             PaddingBottom: =7
                             PaddingTop: =7
                             PressedBorderColor: =ColorFade(glbThemePrimaryColor, -15%)
@@ -1277,7 +1277,7 @@
                         PaddingRight: =0
                         PaddingTop: =0
                         Size: =12
-                        Text: =First(EditDetailUserForm_1).FilterLabel
+                        Text: =First(EditDetailUserForm_1).'Filter Label'
                         Width: =140
                         X: =20
                         Y: =363
@@ -1333,7 +1333,9 @@
                         PaddingRight: =0
                         PaddingTop: =0
                         Size: =12
-                        Text: =Switch(ThisItem.Priortty,"0","填写","1","提交","2","檢查","3","簽批","4","審批","5","執行")
+                        Text: |-
+                            =//Switch(ThisItem.ActionNode,"0","填写","1","提交","2","檢查","3","簽批","4","審批","5","執行")
+                            ThisItem.ActionNode
                         Width: =70
                         X: =30
                         ZIndex: =2
@@ -2156,7 +2158,7 @@
                 Gallery2_1 As gallery.galleryVertical:
                     FillPortions: =0
                     Height: =340
-                    Items: =If(TabGallery3_4.Selected.Value="常用",Filter(MyContacts,UserEmail=User().Email,ContatsType="個人"))
+                    Items: =If(TabGallery3_4.Selected.Value="常用",Filter(MyContacts,UserEmail=User().Email,ContatsEmail="個人"))
                     Layout: =Layout.Vertical
                     LayoutMinHeight: =287
                     LayoutMinWidth: =320
@@ -2244,7 +2246,7 @@
                                     Filter(
                                         MyContacts,
                                         UserEmail = User().Email,
-                                        ContatsType = "個人",
+                                        ContatsEmail = "個人",
                                         AllOwnerName.Email = ComboBox1_4.Selected.Email
                                     ).Title
                                 ) <= 0,
@@ -2257,7 +2259,7 @@
                                             Title: GUID(),
                                             UserEmail: User().Email,
                                             AllOwnerName: ComboBox1_4.Selected,
-                                            ContatsType: "個人"
+                                            ContatsEmail: "個人"
                                         }
                                     )
                                 ),
@@ -2402,7 +2404,7 @@
                 HoverFill: =RGBA(0, 0, 0, 0)
                 Icon: =Icon.Download
                 OnSelect: |
-                    =Launch(First(ThisItem.附件).AbsoluteUri)
+                    =Launch(First(ThisItem.Attachments).AbsoluteUri)
                 PaddingBottom: =7
                 PaddingTop: =7
                 PressedBorderColor: =ColorFade(glbThemePrimaryColor, -15%)
