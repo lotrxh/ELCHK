@@ -98,7 +98,12 @@ GeneralFormListScreen As screen:
                     LookUp(
                         approvalCol,
                         Title = field_Approval_No
-                    ).Application_Status
+                    ).Application_Status,
+                    "CustomerSearch",
+                    LookUp(
+                        GenericFormList,
+                        ApprovalId = field_Approval_No
+                    ).'Filter Label'
                 )
             )
         );
@@ -143,7 +148,12 @@ GeneralFormListScreen As screen:
                     LookUp(
                         approvalCol,
                         Title = field_Approval_No
-                    ).Application_Status
+                    ).Application_Status,
+                    "CustomerSearch",
+                    LookUp(
+                        GenericFormList,
+                        ApprovalId = field_Approval_No
+                    ).'Filter Label'
                 )
             )
         );
@@ -188,7 +198,12 @@ GeneralFormListScreen As screen:
                     LookUp(
                         approvalCol,
                         Title = field_Approval_No
-                    ).Application_Status
+                    ).Application_Status,
+                    "CustomerSearch",
+                    LookUp(
+                        GenericFormList,
+                        ApprovalId = field_Approval_No
+                    ).'Filter Label'
                 )
             )
         );
