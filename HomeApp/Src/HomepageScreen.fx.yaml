@@ -7,7 +7,7 @@ HomepageScreen As screen:
         // 待处理
         With({SearchPendingData:Filter(ApprovalDetailData,(CurrentUser in ApproverEmail||CurrentUser<>Blank()&&CurrentUser in AgentUserEmail)&&(TaskStatus="001"||TaskStatus="002"))},ClearCollect(FilterPendingDataCol,SearchPendingData));
         
-        ClearCollect(DataModelName,{ModelName:"招聘職位申請表",FormType:"招聘表格"},{ModelName:"假期批核人資料表",FormType:"假期表格"},{ModelName:"任職資源申請",FormType:"IT財務指引表格"},{ModelName:"預備合約通知書(新入職)",FormType:"預備合約表格"});
+        ClearCollect(DataModelName,{ModelName:"招聘職位申請表",ModelDescription:"招聘表格"},{ModelName:"假期批核人資料表",ModelDescription:"假期表格"},{ModelName:"任職資源申請",ModelDescription:"IT財務指引表格"},{ModelName:"預備合約通知書(新入職)",ModelDescription:"預備合約表格"});
         
         
         
@@ -346,10 +346,54 @@ HomepageScreen As screen:
                 Items: |-
                     =If(
                         TabGallery3_2.Selected.Value = "常用表格",
-                        Search(RenameColumns(SortByColumns(Filter(MyContacts,UserEmail=User().Email,ContatsEmail=Blank()),"Created",Descending),"TaskFormName","ModelName"),TextInput2_15.Text,"ModelName"),
-                        If(TabGallery3_2.Selected.Value="行政部",
-                        Search(Filter(DataModelName,FormType=TaskTypeNameGallery.Selected.FormType).ModelName,TextInput2_15.Text,"ModelName"),
-                        Search(Filter(GenericFormModel,ModelDepartment =TabGallery3_2.Selected.Value,ModelType=TaskTypeNameGallery.Selected.FormType).ModelName,TextInput2_15.Text,"ModelName"))
+                        Search(
+                            ShowColumns(RenameColumns(
+                                SortByColumns(
+                                    Filter(
+                                        MyContacts,
+                                        UserEmail = User().Email,
+                                        ContatsEmail = Blank()
+                                    ),
+                                    "Created",
+                                    Descending
+                                ),
+                                "TaskFormName",
+                                "ModelName",
+                                "TaskFormDescription",
+                                "ModelDescription"
+                            ),"ModelName","ModelDescription"),
+                            TextInput2_15.Text,
+                            "ModelName"
+                        ),
+                        If(
+                            TabGallery3_2.Selected.Value = "行政部",
+                            Search(
+                                ShowColumns(
+                                    DataModelName,
+                                   /* Filter(
+                                        ,
+                                        ModelDescription = TaskTypeNameGallery.Selected.FormType
+                                    ),*/
+                                    "ModelName",
+                                    "ModelDescription"
+                                ),
+                                TextInput2_15.Text,
+                                "ModelName"
+                            ),
+                            Search(
+                                ShowColumns(
+                                    Filter(
+                                        GenericFormModel,
+                                        ModelDepartment = TabGallery3_2.Selected.Value,
+                                        ModelType = TaskTypeNameGallery.Selected.FormType
+                                    ),
+                                    "ModelName",
+                                    "ModelDescription"
+                                ),
+                                TextInput2_15.Text,
+                                "ModelName"
+                            )
+                        )
                     )
                 Layout: =Layout.Vertical
                 ShowScrollbar: =false
@@ -494,7 +538,8 @@ HomepageScreen As screen:
                                             TaskFormName: ThisItem.ModelName,
                                             Title: GUID(),
                                             UserEmail: User().Email,
-                                            ContatsEmail: ""
+                                            ContatsEmail: "",
+                                            TaskFormDescription: ThisItem.ModelDescription
                                         }
                                     )
                                 )
@@ -522,7 +567,7 @@ HomepageScreen As screen:
                     RadiusTopRight: =4
                     Size: =14
                     Text: =ThisItem.ModelName
-                    Tooltip: ="表格簡述信息顯示表格簡述信息顯示表格簡述信息顯示表格簡述信息顯示"
+                    Tooltip: =ThisItem.ModelDescription
                     Width: =Parent.TemplateWidth-20
                     X: =11
                     Y: =1
