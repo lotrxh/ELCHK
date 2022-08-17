@@ -1823,6 +1823,17 @@
                         Layout: =Layout.Vertical
                         TemplatePadding: =0
                         TemplateSize: =Min(160, Self.Height - 60)
+                        Visible: |-
+                            =If(
+                                FlowType = "Generic Flow" && !IsBlank(
+                                    LookUp(
+                                        GenericFormModel,
+                                        Title = asid
+                                    ).SelectedActions
+                                ),
+                                true,
+                                false
+                            )
                         Width: =477
                         ZIndex: =13
 
