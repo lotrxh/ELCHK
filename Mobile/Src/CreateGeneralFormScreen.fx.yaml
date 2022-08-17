@@ -1986,12 +1986,6 @@
                             Y: =25
                             ZIndex: =13
 
-        Button2 As button:
-            OnSelect: =Set(FlowType,LookUp(GenericFormModel,Title="99e27121-5d4d-4dd2-81dd-a9fcc5953814").FlowType);
-            Text: ="按钮"
-            Visible: =false
-            ZIndex: =3
-
     HeaderContainer_4 As groupContainer.manualLayoutContainer:
         Fill: =glbThemePrimaryColor
         Height: =60
