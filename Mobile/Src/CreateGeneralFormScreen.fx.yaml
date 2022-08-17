@@ -1307,7 +1307,7 @@
                         ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
                         ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
                         Color: =glbNeutralPrimaryColor
-                        DisplayFields: =["Email","DisplayName"]
+                        DisplayFields: =["Claims"]
                         FocusedBorderThickness: =1
                         Height: =36
                         HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
@@ -1317,7 +1317,7 @@
                         PaddingLeft: =10
                         PressedColor: =Self.Color
                         PressedFill: =ColorFade(Self.Fill, -5%)
-                        SearchFields: =["Email"]
+                        SearchFields: =["Claims"]
                         SearchItems: =Choices(MyContacts.AllOwnerName,ComboBox1_11.SearchText)
                         SelectionColor: =glbThemePrimaryColor
                         SelectionFill: =ColorFade(Self.SelectionColor, 90%)
@@ -1503,7 +1503,7 @@
                         ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
                         ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
                         Color: =glbNeutralPrimaryColor
-                        DisplayFields: =["Email","DisplayName"]
+                        DisplayFields: =["Claims"]
                         FocusedBorderThickness: =1
                         Height: =36
                         HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
@@ -1513,7 +1513,7 @@
                         PaddingLeft: =10
                         PressedColor: =Self.Color
                         PressedFill: =ColorFade(Self.Fill, -5%)
-                        SearchFields: =["Email"]
+                        SearchFields: =["Claims"]
                         SearchItems: =Choices(MyContacts.AllOwnerName,ComboBox1_13.SearchText)
                         SelectionColor: =glbThemePrimaryColor
                         SelectionFill: =ColorFade(Self.SelectionColor, 90%)
@@ -1699,7 +1699,7 @@
                         ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
                         ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
                         Color: =glbNeutralPrimaryColor
-                        DisplayFields: =["Email","DisplayName"]
+                        DisplayFields: =["Claims"]
                         FocusedBorderThickness: =1
                         Height: =36
                         HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
@@ -1709,7 +1709,7 @@
                         PaddingLeft: =10
                         PressedColor: =Self.Color
                         PressedFill: =ColorFade(Self.Fill, -5%)
-                        SearchFields: =["Email"]
+                        SearchFields: =["Claims"]
                         SearchItems: =Choices(MyContacts.AllOwnerName,ComboBox1_14.SearchText)
                         SelectionColor: =glbThemePrimaryColor
                         SelectionFill: =ColorFade(Self.SelectionColor, 90%)
@@ -1879,7 +1879,7 @@
                     ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
                     ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
                     Color: =glbNeutralPrimaryColor
-                    DisplayFields: =["Email","DisplayName"]
+                    DisplayFields: =["Claims"]
                     FocusedBorderThickness: =1
                     HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                     HoverColor: =Self.Color
@@ -1888,7 +1888,7 @@
                     PaddingLeft: =10
                     PressedColor: =Self.Color
                     PressedFill: =ColorFade(Self.Fill, -5%)
-                    SearchFields: =["Email"]
+                    SearchFields: =["Claims"]
                     SearchItems: =Choices(MyContacts.AllOwnerName,ComboBox1_5.SearchText)
                     SelectionColor: =glbThemePrimaryColor
                     SelectionFill: =ColorFade(Self.SelectionColor, 90%)
