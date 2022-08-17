@@ -49,10 +49,18 @@
             ClearCollect(
                 DataFlowActionCol,
                 Split(
-                    LookUp(
-                        GenericFormModel,
-                        Title = "73c5c595-1781-419f-88ad-0961a2382398"
-                    ).SelectedActions,
+                    Left(
+                        LookUp(
+                            GenericFormModel,
+                            Title = "73c5c595-1781-419f-88ad-0961a2382398"
+                        ).SelectedActions,
+                        Len(
+                            LookUp(
+                                GenericFormModel,
+                                Title = "73c5c595-1781-419f-88ad-0961a2382398"
+                            ).SelectedActions
+                        ) - 1
+                    ),
                     ";"
                 ).Result
             )
