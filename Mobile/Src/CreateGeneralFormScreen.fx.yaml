@@ -1828,7 +1828,7 @@
                     ZIndex: =6
 
                     "PredefineFlowGallery As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
-                        Height: =240
+                        Height: =CountRows(Self.AllItems)*200
                         Items: =DataFlowActionCol.Result
                         Layout: =Layout.Vertical
                         TemplatePadding: =0
