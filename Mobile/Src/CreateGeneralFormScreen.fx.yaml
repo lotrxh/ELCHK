@@ -1114,7 +1114,17 @@
             RightContainer As groupContainer.verticalAutoLayoutContainer:
                 AlignInContainer: =AlignInContainer.SetByContainer
                 Fill: =RGBA(255, 255, 255, 1)
-                Height: =PredefinedFlowContainer.Y+PredefinedFlowContainer.Height+20
+                Height: |-
+                    =If(
+                        FlowType = "Generic Flow" && IsBlank(
+                            LookUp(
+                                GenericFormModel,
+                                Title = asid
+                            ).SelectedActions
+                        ),
+                         GeneralFlowContainer.Y+GeneralFlowContainer.Height+20,
+                        PredefinedFlowContainer.Y+PredefinedFlowContainer.Height+20
+                    )
                 LayoutAlignItems: =LayoutAlignItems.Stretch
                 LayoutDirection: =LayoutDirection.Vertical
                 LayoutMinHeight: =100
