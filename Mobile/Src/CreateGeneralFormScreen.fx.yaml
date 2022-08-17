@@ -1,16 +1,6 @@
 "CreateGeneralFormScreen As screen.'phoneLayout_FluidGridWithHeaderPageLayout_ver3.0'":
     OnVisible: |-
-        =/*
-        ClearCollect(
-            MyContactsCol,
-            Filter(
-                MyContacts,
-                UserEmail = User().Email,
-                ContatsType = "個人"
-            )
-        );
-        */
-        UpdateContext(
+        =UpdateContext(
             {
                 FormModelId: If(
                     IsBlank(Param("FormModelId")),
@@ -28,7 +18,7 @@
             LookUp(
                 GenericFormModel,
                 //Title = "99e27121-5d4d-4dd2-81dd-a9fcc5953814"
-                Title = "73c5c595-1781-419f-88ad-0961a2382398"
+                Title = asid
             ).FlowType
         );
         If(
@@ -36,7 +26,7 @@
                 LookUp(
                     GenericFormModel,
                 //Title = "99e27121-5d4d-4dd2-81dd-a9fcc5953814"
-                    Title = "73c5c595-1781-419f-88ad-0961a2382398"
+                    Title = asid
                 ).SelectedActions
             ),
             ClearCollect(
@@ -52,12 +42,12 @@
                     Left(
                         LookUp(
                             GenericFormModel,
-                            Title = "73c5c595-1781-419f-88ad-0961a2382398"
+                            Title = asid
                         ).SelectedActions,
                         Len(
                             LookUp(
                                 GenericFormModel,
-                                Title = "73c5c595-1781-419f-88ad-0961a2382398"
+                                Title = asid
                             ).SelectedActions
                         ) - 1
                     ),
@@ -1218,7 +1208,7 @@
                             FlowType = "Generic Flow" && IsBlank(
                                 LookUp(
                                     GenericFormModel,
-                                    Title = "73c5c595-1781-419f-88ad-0961a2382398"
+                                    Title = asid
                                 ).SelectedActions
                             ),
                             true,
@@ -1816,7 +1806,7 @@
                             FlowType = "Generic Flow" && !IsBlank(
                                 LookUp(
                                     GenericFormModel,
-                                    Title = "73c5c595-1781-419f-88ad-0961a2382398"
+                                    Title = asid
                                 ).SelectedActions
                             ),
                             true,
