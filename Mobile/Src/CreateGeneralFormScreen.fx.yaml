@@ -1124,7 +1124,7 @@
             RightContainer As groupContainer.verticalAutoLayoutContainer:
                 AlignInContainer: =AlignInContainer.SetByContainer
                 Fill: =RGBA(255, 255, 255, 1)
-                Height: =GeneralFlowContainer.Y+GeneralFlowContainer.Height+20
+                Height: =PredefinedFlowContainer.Y+PredefinedFlowContainer.Height+20
                 LayoutAlignItems: =LayoutAlignItems.Stretch
                 LayoutDirection: =LayoutDirection.Vertical
                 LayoutMinHeight: =100
@@ -1808,7 +1808,7 @@
                 PredefinedFlowContainer As groupContainer.manualLayoutContainer:
                     AlignInContainer: =AlignInContainer.SetByContainer
                     FillPortions: =0
-                    Height: =240
+                    Height: =PredefineFlowGallery.Height
                     LayoutMinHeight: =100
                     LayoutMinWidth: =250
                     Visible: |-
@@ -1827,189 +1827,164 @@
                     Y: =94
                     ZIndex: =6
 
-                    Label6_33 As label:
-                        Height: =28
-                        OnSelect: =
-                        PaddingBottom: =0
-                        PaddingLeft: =0
-                        PaddingRight: =0
-                        PaddingTop: =0
-                        Size: =12
-                        Text: ="下一節處理行動"
-                        Width: =116
-                        X: =30
-                        ZIndex: =1
-
-                    Circle2_13 As circle:
-                        DisplayMode: =DisplayMode.View
-                        Fill: =glbNeutralQuaternaryColor
-                        Height: =14
-                        OnSelect: =
-                        Width: =14
-                        Y: =7
-                        ZIndex: =2
-
-                    Label6_34 As label:
-                        Height: =28
-                        OnSelect: =
-                        PaddingBottom: =0
-                        PaddingLeft: =0
-                        PaddingRight: =0
-                        PaddingTop: =0
-                        Size: =12
-                        Text: ="下一節處理人"
-                        Width: =147
-                        X: =30
-                        Y: =72
-                        ZIndex: =3
-
-                    Dropdown1_9 As dropdown:
-                        BorderColor: =glbNeutralTertiaryColor
-                        BorderThickness: =1
-                        ChevronBackground: =RGBA(0, 0, 0, 0)
-                        ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
-                        ChevronDisabledFill: =RGBA(202, 202, 202, 1)
-                        ChevronFill: =glbNeutralTertiaryColor
-                        ChevronHoverBackground: =ColorFade(Self.Fill, -5%)
-                        ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
-                        Color: =glbNeutralPrimaryColor
-                        FocusedBorderColor: =ColorFade(Self.BorderColor, -20%)
-                        FocusedBorderThickness: =1
-                        Height: =36
-                        HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
-                        HoverFill: =ColorFade(Self.Fill, -5%)
+                    "PredefineFlowGallery As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+                        Height: =240
                         Items: =DataFlowActionCol.Result
-                        PaddingBottom: =5
-                        PaddingRight: =0
-                        PaddingTop: =5
-                        PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
-                        PressedColor: =Self.Color
-                        PressedFill: =ColorFade(Self.Fill, -5%)
-                        SelectionFill: =glbThemePrimaryColor
-                        Size: =12
-                        Width: =120
-                        X: =30
-                        Y: =28
-                        ZIndex: =4
+                        Layout: =Layout.Vertical
+                        TemplatePadding: =0
+                        TemplateSize: =Min(160, Self.Height - 60)
+                        Width: =477
+                        ZIndex: =13
 
-                    BtnDefault_27 As button:
-                        BorderColor: =Self.Color
-                        BorderThickness: =1
-                        Color: =glbThemePrimaryColor
-                        DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                        Fill: =White
-                        FocusedBorderThickness: =1
-                        Height: =36
-                        HoverBorderColor: =ColorFade(Self.Color, -15%)
-                        HoverColor: =ColorFade(Self.Color, -15%)
-                        HoverFill: =RGBA(255, 255, 255, 1)
-                        OnSelect: |-
-                            =UpdateContext({SelectUservisiable:true});
-                        PaddingBottom: =0
-                        PaddingLeft: =0
-                        PaddingRight: =0
-                        PaddingTop: =0
-                        PressedBorderColor: =ColorFade(Self.Color, -25%)
-                        PressedColor: =ColorFade(Self.Color, -25%)
-                        PressedFill: =ColorFade(Self.Color, 95%)
-                        RadiusBottomLeft: =0
-                        RadiusBottomRight: =0
-                        RadiusTopLeft: =0
-                        RadiusTopRight: =0
-                        Size: =11
-                        Text: ="選擇"
-                        Width: =120
-                        X: =30
-                        Y: =100
-                        ZIndex: =5
+                        Circle2_13 As circle:
+                            DisplayMode: =DisplayMode.View
+                            Fill: =glbNeutralQuaternaryColor
+                            Height: =14
+                            OnSelect: =
+                            Width: =14
+                            Y: =7
+                            ZIndex: =4
 
-                    Label1_155 As label:
-                        BorderStyle: =BorderStyle.None
-                        BorderThickness: =1
-                        Color: =glbNeutralSecondaryColor
-                        Fill: =RGBA(245, 245, 245, 1)
-                        Height: =36
-                        PaddingBottom: =0
-                        PaddingLeft: =28
-                        PaddingRight: =10
-                        PaddingTop: =0
-                        Size: =11
-                        Text: =First(Split(CreateApproverCol.AllOwnerName.DisplayName," ").Result).Result&"/"&CreateApproverCol.AllOwnerName.Email
-                        Width: =Parent.Width-Self.X
-                        X: =161
-                        Y: =100
-                        ZIndex: =6
+                        BtnDefault_27 As button:
+                            BorderColor: =Self.Color
+                            BorderThickness: =1
+                            Color: =glbThemePrimaryColor
+                            DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                            Fill: =White
+                            FocusedBorderThickness: =1
+                            Height: =36
+                            HoverBorderColor: =ColorFade(Self.Color, -15%)
+                            HoverColor: =ColorFade(Self.Color, -15%)
+                            HoverFill: =RGBA(255, 255, 255, 1)
+                            OnSelect: |-
+                                =UpdateContext({SelectUservisiable:true});
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            PressedBorderColor: =ColorFade(Self.Color, -25%)
+                            PressedColor: =ColorFade(Self.Color, -25%)
+                            PressedFill: =ColorFade(Self.Color, 95%)
+                            RadiusBottomLeft: =0
+                            RadiusBottomRight: =0
+                            RadiusTopLeft: =0
+                            RadiusTopRight: =0
+                            Size: =11
+                            Text: ="選擇"
+                            Width: =120
+                            X: =30
+                            Y: =54
+                            ZIndex: =7
 
-                    BtnSecondIconOnly_23 As icon.Add:
-                        BorderColor: =glbNeutralQuaternaryColor
-                        BorderStyle: =BorderStyle.None
-                        BorderThickness: =1
-                        Color: =glbNeutralSecondaryColor
-                        DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                        DisabledColor: =RGBA(149, 149, 149, 1)
-                        DisabledFill: =RGBA(0, 0, 0, 0)
-                        DisplayMode: =DisplayMode.View
-                        FocusedBorderThickness: =1
-                        Height: =32
-                        HoverBorderColor: =glbThemePrimaryColor
-                        HoverColor: =glbThemePrimaryColor
-                        HoverFill: =RGBA(0, 0, 0, 0)
-                        Icon: =Icon.Person
-                        OnSelect: =
-                        PaddingBottom: =6
-                        PaddingTop: =6
-                        PressedBorderColor: =ColorFade(glbThemePrimaryColor, -15%)
-                        PressedColor: =glbThemePrimaryColor
-                        PressedFill: =RGBA(0, 0, 0, 0)
-                        Width: =28
-                        X: =161
-                        Y: =102
-                        ZIndex: =10
+                        Label1_155 As label:
+                            BorderStyle: =BorderStyle.None
+                            BorderThickness: =1
+                            Color: =glbNeutralSecondaryColor
+                            Fill: =RGBA(245, 245, 245, 1)
+                            Height: =36
+                            PaddingBottom: =0
+                            PaddingLeft: =28
+                            PaddingRight: =10
+                            PaddingTop: =0
+                            Size: =11
+                            Text: =First(Split(CreateApproverCol.AllOwnerName.DisplayName," ").Result).Result&"/"&CreateApproverCol.AllOwnerName.Email
+                            Width: =Parent.Width-Self.X
+                            X: =161
+                            Y: =54
+                            ZIndex: =8
 
-                    Label6_35 As label:
-                        Height: =28
-                        OnSelect: =
-                        PaddingBottom: =0
-                        PaddingLeft: =0
-                        PaddingRight: =0
-                        PaddingTop: =0
-                        Size: =12
-                        Text: ="抄送人"
-                        Width: =147
-                        X: =30
-                        Y: =145
-                        ZIndex: =11
+                        BtnSecondIconOnly_23 As icon.Add:
+                            BorderColor: =glbNeutralQuaternaryColor
+                            BorderStyle: =BorderStyle.None
+                            BorderThickness: =1
+                            Color: =glbNeutralSecondaryColor
+                            DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                            DisabledColor: =RGBA(149, 149, 149, 1)
+                            DisabledFill: =RGBA(0, 0, 0, 0)
+                            DisplayMode: =DisplayMode.View
+                            FocusedBorderThickness: =1
+                            Height: =32
+                            HoverBorderColor: =glbThemePrimaryColor
+                            HoverColor: =glbThemePrimaryColor
+                            HoverFill: =RGBA(0, 0, 0, 0)
+                            Icon: =Icon.Person
+                            OnSelect: =
+                            PaddingBottom: =6
+                            PaddingTop: =6
+                            PressedBorderColor: =ColorFade(glbThemePrimaryColor, -15%)
+                            PressedColor: =glbThemePrimaryColor
+                            PressedFill: =RGBA(0, 0, 0, 0)
+                            Width: =28
+                            X: =161
+                            Y: =58
+                            ZIndex: =9
 
-                    ComboBox1_15 As combobox:
-                        BorderColor: =glbNeutralTertiaryColor
-                        BorderThickness: =1
-                        ChevronBackground: =RGBA(255, 255, 255, 1)
-                        ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
-                        ChevronDisabledFill: =RGBA(202, 202, 202, 1)
-                        ChevronFill: =glbNeutralTertiaryColor
-                        ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
-                        ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
-                        Color: =glbNeutralPrimaryColor
-                        DisplayFields: =["Claims"]
-                        FocusedBorderThickness: =1
-                        Height: =36
-                        HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
-                        HoverColor: =Self.Color
-                        HoverFill: =ColorFade(Self.Fill, -5%)
-                        Items: =Choices(MyContacts.AllOwnerName)
-                        PaddingLeft: =10
-                        PressedColor: =Self.Color
-                        PressedFill: =ColorFade(Self.Fill, -5%)
-                        SearchFields: =["Claims"]
-                        SearchItems: =Choices(MyContacts.AllOwnerName,ComboBox1_15.SearchText)
-                        SelectionColor: =glbThemePrimaryColor
-                        SelectionFill: =ColorFade(Self.SelectionColor, 90%)
-                        Size: =12
-                        Template: =ListItemTemplate.Double
-                        Width: =Parent.Width-Self.X-1
-                        X: =30
-                        Y: =173
-                        ZIndex: =12
+                        Label6_35 As label:
+                            Height: =28
+                            OnSelect: =
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =12
+                            Text: ="抄送人"
+                            Width: =147
+                            X: =30
+                            Y: =96
+                            ZIndex: =10
+
+                        ComboBox1_15 As combobox:
+                            BorderColor: =glbNeutralTertiaryColor
+                            BorderThickness: =1
+                            ChevronBackground: =RGBA(255, 255, 255, 1)
+                            ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
+                            ChevronDisabledFill: =RGBA(202, 202, 202, 1)
+                            ChevronFill: =glbNeutralTertiaryColor
+                            ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
+                            ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
+                            Color: =glbNeutralPrimaryColor
+                            DisplayFields: =["Claims"]
+                            FocusedBorderThickness: =1
+                            Height: =36
+                            HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                            HoverColor: =Self.Color
+                            HoverFill: =ColorFade(Self.Fill, -5%)
+                            Items: =Choices(MyContacts.AllOwnerName)
+                            PaddingLeft: =10
+                            PressedColor: =Self.Color
+                            PressedFill: =ColorFade(Self.Fill, -5%)
+                            SearchFields: =["Claims"]
+                            SearchItems: =Choices(MyContacts.AllOwnerName,ComboBox1_15.SearchText)
+                            SelectionColor: =glbThemePrimaryColor
+                            SelectionFill: =ColorFade(Self.SelectionColor, 90%)
+                            Size: =12
+                            Template: =ListItemTemplate.Double
+                            Width: =Parent.Width-Self.X-1
+                            X: =30
+                            Y: =124
+                            ZIndex: =11
+
+                        Label6_33 As label:
+                            Height: =28
+                            OnSelect: =
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =12
+                            Text: =ThisItem.Result
+                            Width: =70
+                            X: =30
+                            ZIndex: =12
+
+                        Rectangle5_5 As rectangle:
+                            Fill: =glbNeutralQuaternaryColor
+                            Height: =140
+                            OnSelect: =
+                            Width: =2
+                            X: =6
+                            Y: =25
+                            ZIndex: =13
 
         Button2 As button:
             OnSelect: =Set(FlowType,LookUp(GenericFormModel,Title="99e27121-5d4d-4dd2-81dd-a9fcc5953814").FlowType);
