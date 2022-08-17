@@ -560,7 +560,7 @@
                         ZIndex: =2
 
         FillInContainer As groupContainer.horizontalAutoLayoutContainer:
-            AlignInContainer: =AlignInContainer.SetByContainer
+            AlignInContainer: =AlignInContainer.Center
             Fill: =RGBA(242, 242, 242, 1)
             FillPortions: =0
             Height: =Max(LeftContainer12.Y+LeftContainer12.Height+40,RightContainer.Y+RightContainer.Height+40)
