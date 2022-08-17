@@ -84,7 +84,7 @@
         );
         //创建集合EditUserAttachment获得附件信息
 
-    BottomContainer_1 As groupContainer.manualLayoutContainer:
+    BottomContainer As groupContainer.manualLayoutContainer:
         Fill: =White
         Height: =60
         Visible: =If(First(EditUserForm).FlowType<>"Template",true,false)
@@ -333,7 +333,7 @@
                 Y: =12
                 ZIndex: =2
 
-    Container10 As groupContainer.verticalAutoLayoutContainer:
+    MainflowContainer As groupContainer.verticalAutoLayoutContainer:
         Fill: =RGBA(242, 242, 242, 1)
         Height: =Parent.Height - 120
         LayoutDirection: =LayoutDirection.Vertical
@@ -345,6 +345,7 @@
         ZIndex: =5
 
         InfoContainer As groupContainer.horizontalAutoLayoutContainer:
+            AlignInContainer: =AlignInContainer.SetByContainer
             Fill: =RGBA(255, 255, 255, 1)
             FillPortions: =0
             Height: =InfoContainer12_2.Y+InfoContainer12_2.Height+20
@@ -559,7 +560,7 @@
                         ZIndex: =2
 
         FillInContainer As groupContainer.horizontalAutoLayoutContainer:
-            AlignInContainer: =AlignInContainer.Center
+            AlignInContainer: =AlignInContainer.SetByContainer
             Fill: =RGBA(242, 242, 242, 1)
             FillPortions: =0
             Height: =Max(LeftContainer12.Y+LeftContainer12.Height+40,RightContainer.Y+RightContainer.Height+40)
