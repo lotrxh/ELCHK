@@ -1311,6 +1311,63 @@
                     Y: =20
                     ZIndex: =1
 
+                StartFlowContainer_1 As groupContainer.manualLayoutContainer:
+                    AlignInContainer: =AlignInContainer.SetByContainer
+                    FillPortions: =0
+                    Height: =70
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    Width: =Parent.Width-40
+                    X: =20
+                    Y: =24
+                    ZIndex: =2
+
+                    Label6_34 As label:
+                        Height: =28
+                        OnSelect: =
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: =First(ApprovalListCol).ActionName
+                        Width: =70
+                        X: =30
+                        ZIndex: =3
+
+                    Label6_36 As label:
+                        Color: =glbNeutralSecondaryColor
+                        Height: =24
+                        OnSelect: =
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =11
+                        Text: =First(ApprovalListCol).Approver&"/"&First(ApprovalListCol).ApprovalEmail
+                        Width: =447
+                        X: =30
+                        Y: =28
+                        ZIndex: =4
+
+                    Circle2_14 As circle:
+                        DisplayMode: =DisplayMode.View
+                        Fill: =glbThemePrimaryColor
+                        Height: =14
+                        OnSelect: =
+                        Width: =14
+                        Y: =7
+                        ZIndex: =5
+
+                    Rectangle5_7 As rectangle:
+                        Fill: =glbThemePrimaryColor
+                        Height: =42
+                        OnSelect: =
+                        Width: =2
+                        X: =6
+                        Y: =27
+                        ZIndex: =6
+
                 Gallery7 As gallery.galleryVertical:
                     Fill: =RGBA(255, 255, 255, 1)
                     FillPortions: =0
