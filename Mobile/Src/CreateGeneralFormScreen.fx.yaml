@@ -1201,11 +1201,11 @@
 
                     Rectangle5_4 As rectangle:
                         Fill: =glbThemePrimaryColor
-                        Height: =42
+                        Height: =55
                         OnSelect: =
                         Width: =2
                         X: =6
-                        Y: =27
+                        Y: =22
                         ZIndex: =6
 
                 GeneralFlowContainer As groupContainer.manualLayoutContainer:
@@ -1843,7 +1843,7 @@
                     ZIndex: =6
 
                     "PredefineFlowGallery As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
-                        Height: =CountRows(Self.AllItems)*200
+                        Height: =CountRows(Self.AllItems)*170
                         Items: =DataFlowActionCol.Result
                         Layout: =Layout.Vertical
                         TemplatePadding: =0
