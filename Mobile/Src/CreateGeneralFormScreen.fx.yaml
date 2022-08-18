@@ -18,7 +18,7 @@
             LookUp(
                 GenericFormModel,
                 //Title = "99e27121-5d4d-4dd2-81dd-a9fcc5953814"
-                Title = asid
+                Title = FormModelId
             ).FlowType
         );
         If(
@@ -26,7 +26,7 @@
                 LookUp(
                     GenericFormModel,
                 //Title = "99e27121-5d4d-4dd2-81dd-a9fcc5953814"
-                    Title = asid
+                    Title = FormModelId
                 ).SelectedActions
             ),
             ClearCollect(
@@ -42,12 +42,12 @@
                     Left(
                         LookUp(
                             GenericFormModel,
-                            Title = asid
+                            Title = FormModelId
                         ).SelectedActions,
                         Len(
                             LookUp(
                                 GenericFormModel,
-                                Title = asid
+                                Title = FormModelId
                             ).SelectedActions
                         ) - 1
                     ),
@@ -1120,7 +1120,7 @@
                         FlowType = "Generic Flow" && IsBlank(
                             LookUp(
                                 GenericFormModel,
-                                Title = asid
+                                Title = FormModelId
                             ).SelectedActions
                         ),
                          GeneralFlowContainer.Y+GeneralFlowContainer.Height+20,
@@ -1231,7 +1231,7 @@
                          FlowType = "Generic Flow" && IsBlank(
                                 LookUp(
                                     GenericFormModel,
-                                    Title = asid
+                                    Title = FormModelId
                                 ).SelectedActions
                             )
                     Width: =Parent.Width-40
@@ -1835,7 +1835,7 @@
                         FlowType = "Generic Flow" && !IsBlank(
                             LookUp(
                                 GenericFormModel,
-                                Title = asid
+                                Title = FormModelId
                             ).SelectedActions
                         )
                     Width: =Parent.Width-40
@@ -1849,15 +1849,11 @@
                         Layout: =Layout.Vertical
                         TemplateSize: =Min(160, Self.Height - 60)
                         Visible: |-
-                            =If(
-                                FlowType = "Generic Flow" && !IsBlank(
-                                    LookUp(
-                                        GenericFormModel,
-                                        Title = asid
-                                    ).SelectedActions
-                                ),
-                                true,
-                                false
+                            =FlowType = "Generic Flow" && !IsBlank(
+                                LookUp(
+                                    GenericFormModel,
+                                    Title = FormModelId
+                                ).SelectedActions
                             )
                         Width: =477
                         Y: =-6
