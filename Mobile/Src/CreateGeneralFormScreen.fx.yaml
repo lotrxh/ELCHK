@@ -1842,11 +1842,10 @@
                     Y: =94
                     ZIndex: =6
 
-                    "PredefineFlowGallery As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
-                        Height: =CountRows(Self.AllItems)*170
+                    PredefineFlowGallery As gallery.variableTemplateHeightGallery:
+                        Height: =CountRows(Self.AllItems)*180-180
                         Items: =DataFlowActionCol.Result
                         Layout: =Layout.Vertical
-                        TemplatePadding: =0
                         TemplateSize: =Min(160, Self.Height - 60)
                         Visible: |-
                             =If(
@@ -1860,18 +1859,18 @@
                                 false
                             )
                         Width: =477
-                        ZIndex: =13
+                        ZIndex: =14
 
-                        Circle2_13 As circle:
+                        Circle2_15 As circle:
                             DisplayMode: =DisplayMode.View
                             Fill: =glbNeutralQuaternaryColor
                             Height: =14
                             OnSelect: =
                             Width: =14
-                            Y: =7
-                            ZIndex: =4
+                            Y: =5
+                            ZIndex: =2
 
-                        BtnDefault_27 As button:
+                        BtnDefault_28 As button:
                             BorderColor: =Self.Color
                             BorderThickness: =1
                             Color: =glbThemePrimaryColor
@@ -1897,13 +1896,13 @@
                             RadiusTopRight: =0
                             Size: =11
                             Text: ="選擇處理人"
-                            Visible: =If(First(DataFlowActionCol.Result).Result=Label6_33.Text,true,false)
+                            Visible: =If(First(DataFlowActionCol.Result).Result=Label6_38.Text,true,false)
                             Width: =120
                             X: =30
                             Y: =54
-                            ZIndex: =7
+                            ZIndex: =3
 
-                        Label6_35 As label:
+                        Label6_37 As label:
                             Height: =28
                             OnSelect: =
                             PaddingBottom: =0
@@ -1912,13 +1911,13 @@
                             PaddingTop: =0
                             Size: =12
                             Text: ="抄送人"
-                            Visible: =If(First(DataFlowActionCol.Result).Result=Label6_33.Text,true,false)
+                            Visible: =If(First(DataFlowActionCol.Result).Result=Label6_38.Text,true,false)
                             Width: =147
-                            X: =30
-                            Y: =96
-                            ZIndex: =10
+                            X: =20
+                            Y: =91
+                            ZIndex: =6
 
-                        ComboBox1_15 As combobox:
+                        ComboBox1_16 As combobox:
                             BorderColor: =glbNeutralTertiaryColor
                             BorderThickness: =1
                             ChevronBackground: =RGBA(255, 255, 255, 1)
@@ -1939,18 +1938,18 @@
                             PressedColor: =Self.Color
                             PressedFill: =ColorFade(Self.Fill, -5%)
                             SearchFields: =["Claims"]
-                            SearchItems: =Choices(MyContacts.AllOwnerName,ComboBox1_15.SearchText)
+                            SearchItems: =Choices(MyContacts.AllOwnerName,ComboBox1_16.SearchText)
                             SelectionColor: =glbThemePrimaryColor
                             SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                             Size: =12
                             Template: =ListItemTemplate.Double
-                            Visible: =If(First(DataFlowActionCol.Result).Result=Label6_33.Text,true,false)
+                            Visible: =If(First(DataFlowActionCol.Result).Result=Label6_38.Text,true,false)
                             Width: =Parent.Width-Self.X-1
-                            X: =30
-                            Y: =124
-                            ZIndex: =11
+                            X: =25
+                            Y: =119
+                            ZIndex: =7
 
-                        Label6_33 As label:
+                        Label6_38 As label:
                             Height: =25
                             OnSelect: =
                             PaddingBottom: =0
@@ -1960,26 +1959,29 @@
                             Size: =12
                             Text: =ThisItem.Result
                             Width: =131
-                            X: =30
-                            ZIndex: =12
+                            X: =20
+                            ZIndex: =8
 
-                        Rectangle5_5 As rectangle:
+                        Rectangle5_8 As rectangle:
                             Fill: =glbNeutralQuaternaryColor
                             Height: =140
                             OnSelect: =
+                            Visible: |-
+                                =//true
+                                If(Label6_38.Text="執行",false,true)
                             Width: =2
                             X: =6
                             Y: =25
-                            ZIndex: =13
+                            ZIndex: =9
 
-                        UserdisplayGroup As group:
+                        UserdisplayGroup_1 As group:
                             Height: =5
                             Width: =5
                             X: =40
-                            Y: =40
-                            ZIndex: =14
+                            Y: =60
+                            ZIndex: =10
 
-                            Label1_155 As label:
+                            Label1_156 As label:
                                 BorderStyle: =BorderStyle.None
                                 BorderThickness: =1
                                 Color: =glbNeutralSecondaryColor
@@ -1991,13 +1993,13 @@
                                 PaddingTop: =0
                                 Size: =11
                                 Text: =First(Split(CreateApproverCol.AllOwnerName.DisplayName," ").Result).Result&"/"&CreateApproverCol.AllOwnerName.Email
-                                Visible: =If(First(DataFlowActionCol.Result).Result=Label6_33.Text,true,false)
-                                Width: =Parent.Width-Self.X
+                                Visible: =If(First(DataFlowActionCol.Result).Result=Label6_38.Text,true,false)
+                                Width: =316
                                 X: =161
                                 Y: =54
-                                ZIndex: =8
+                                ZIndex: =4
 
-                            BtnSecondIconOnly_23 As icon.Add:
+                            BtnSecondIconOnly_24 As icon.Add:
                                 BorderColor: =glbNeutralQuaternaryColor
                                 BorderStyle: =BorderStyle.None
                                 BorderThickness: =1
@@ -2018,11 +2020,11 @@
                                 PressedBorderColor: =ColorFade(glbThemePrimaryColor, -15%)
                                 PressedColor: =glbThemePrimaryColor
                                 PressedFill: =RGBA(0, 0, 0, 0)
-                                Visible: =If(First(DataFlowActionCol.Result).Result=Label6_33.Text,true,false)
-                                Width: =28
+                                Visible: =If(First(DataFlowActionCol.Result).Result=Label6_38.Text,true,false)
+                                Width: =26
                                 X: =161
                                 Y: =55
-                                ZIndex: =9
+                                ZIndex: =5
 
     HeaderContainer_4 As groupContainer.manualLayoutContainer:
         Fill: =glbThemePrimaryColor
