@@ -165,8 +165,21 @@
                         ApprovalListCol,
                         Defaults(ApprovalListCol),
                         {
-                            idNumber: If(CountA(ApprovalListCol.ActionName)=1,1, CountA(ApprovalListCol.ActionName) + 1),
-                            ActionName: Dropdown1_5.Selected.Value,
+                            idNumber: If(
+                                CountA(ApprovalListCol.ActionName) = 1,
+                                1,
+                                CountA(ApprovalListCol.ActionName) + 1
+                            ),
+                            ActionName: If(
+                                FlowType = "Generic Flow" && !IsBlank(
+                                    LookUp(
+                                        GenericFormModel,
+                                        Title = FormModelId
+                                    ).SelectedActions
+                                ),
+                                First(DataFlowActionCol.Result).Result,
+                                Dropdown1_5.Selected.Result
+                            ),
                             ApprovalEmail: Gallery2_2.Selected.AllOwnerName.Email,
                             Approver: First(
                                 Split(
@@ -183,20 +196,25 @@
                             remark: ""
                         }
                     );
-                    Set(ApprovalIDNumber,
-                    Patch(
-                        Approval_Table,
-                        Defaults(Approval_Table),
-                        {
-                            Application_No: Label1_134.Text&Text(Now(),"yyyymmdd"),
-                            Title: ApprovalGuid,
-                            Application_Status: "審批中",
-                            DepartMentName: Label1_130.Text,
-                            FormType: Label1_132.Text,
-                            'Operator ': User().Email,
-                            Task_Name: FormNameLabel_1.Text
-                        }
-                    ));
+                    Set(
+                        ApprovalIDNumber,
+                        Patch(
+                            Approval_Table,
+                            Defaults(Approval_Table),
+                            {
+                                Application_No: Label1_134.Text & Text(
+                                    Now(),
+                                    "yyyymmdd"
+                                ),
+                                Title: ApprovalGuid,
+                                Application_Status: "審批中",
+                                DepartMentName: Label1_130.Text,
+                                FormType: Label1_132.Text,
+                                'Operator ': User().Email,
+                                Task_Name: FormNameLabel_1.Text
+                            }
+                        )
+                    );
                     ForAll(
                         ApprovalListCol,
                         Patch(
@@ -215,102 +233,198 @@
                                     "002"
                                 ),
                                 Priortty: ApprovalListCol[@idNumber],
-                                ActionNode:ApprovalListCol[@ActionName]
+                                ActionNode: ApprovalListCol[@ActionName]
                             }
                         )
                     );
-                    
-                    
-                    
-                    
                     //左边填写内容上传
-                    If(Label6.Visible=true&&Label6_1.Visible=true,If(IsBlank(TextInput_FormPWD)||IsBlank(TextInput_zipPWD),Notify( "密碼不能爲空", NotificationType.Error ),
-                    Set(GenericFormlistGuid,GUID());
-                    ClearCollect(NewUserForm,Patch(GenericFormList,Defaults(GenericFormList),
-                    {
-                        Title:GenericFormlistGuid,
-                        ApprovalId:ApprovalGuid,
-                        ModelId:First(EditUserForm).Title,
-                        ModelName:FormNameLabel_1.Text,
-                        UploadFileId:Last(GenericUploadAttachMentFile).Title,//目前取的是最后一个附件的id
-                        MarkValue:TextInput_FormMark.Text,
-                        //UploadFilePWD:TextInput_FormPWD.Text,
+                    If(
+                        Label6.Visible = true && Label6_1.Visible = true,
+                        If(
+                            IsBlank(TextInput_FormPWD) || IsBlank(TextInput_zipPWD),
+                            Notify(
+                                "密碼不能爲空",
+                                NotificationType.Error
+                            ),
+                            Set(
+                                GenericFormlistGuid,
+                                GUID()
+                            );
+                            ClearCollect(
+                                NewUserForm,
+                                Patch(
+                                    GenericFormList,
+                                    Defaults(GenericFormList),
+                                    {
+                                        Title: GenericFormlistGuid,
+                                        ApprovalId: ApprovalGuid,
+                                        ModelId: First(EditUserForm).Title,
+                                        ModelName: FormNameLabel_1.Text,
+                                        UploadFileId: Last(GenericUploadAttachMentFile).Title,
+                                        //目前取的是最后一个附件的id
+                                        MarkValue: TextInput_FormMark.Text,
+                                        //UploadFilePWD:TextInput_FormPWD.Text,
                         //ReferNumber:TextInput_ReferNumber.Text,
-                        FormType:Label1_132.Text,
-                        Department:drpFilterDepartment_1.Selected.Result,
-                        'Filter Label':TextInput_ReferNumber.Text
-                    }
-                    ));//創建NewUserForm集合用作後續更新list-GenericUploadAttachMentFile中的FormId
-                    UpdateIf(GenericUploadAttachMentFile,FormId=First(EditUserForm).Title,
-                    {
-                        FormId:GenericFormlistGuid,
-                        UploadFilePWD:TextInput_FormPWD.Text
-                    });//更新FormId和PWD到GenericUploadAttachMentFile中
-                    
-                    UpdateIf(UploadFlowAttachMent,FlowAttachName=First(AttachmentZipName).Name,
-                    {
-                        Title:GenericFormlistGuid,
-                        ApprovalDetailid:ApprovalGuid,
-                        FlowAttachPWD:TextInput_zipPWD.Text
-                    });//更新FormId和PWD到UploadFlowAttachMent中
-                    
+                    FormType: Label1_132.Text,
+                                        Department: drpFilterDepartment_1.Selected.Result,
+                                        'Filter Label': TextInput_ReferNumber.Text
+                                    }
+                                )
+                            );
+                            //創建NewUserForm集合用作後續更新list-GenericUploadAttachMentFile中的FormId
+                    UpdateIf(
+                                GenericUploadAttachMentFile,
+                                FormId = First(EditUserForm).Title,
+                                {
+                                    FormId: GenericFormlistGuid,
+                                    UploadFilePWD: TextInput_FormPWD.Text
+                                }
+                            );
+                            //更新FormId和PWD到GenericUploadAttachMentFile中
+                    UpdateIf(
+                                UploadFlowAttachMent,
+                                FlowAttachName = First(AttachmentZipName).Name,
+                                {
+                                    Title: GenericFormlistGuid,
+                                    ApprovalDetailid: ApprovalGuid,
+                                    FlowAttachPWD: TextInput_zipPWD.Text
+                                }
+                            );
+                            //更新FormId和PWD到UploadFlowAttachMent中
                     Reset(drpFilterDepartment_1);
-                    Reset(Attachment_Excel);
-                    Reset(Attachment_Zip);
-                    Reset(TextInput_FormMark);
-                    Reset(TextInput_ReferNumber);
-                    Reset(TextInput_FormPWD);
-                    Reset(TextInput_zipPWD);//保存后重置输入内容
-                    
-                    Navigate(DetailGeneralFormScreen,ScreenTransition.Fade);//导航到DetailGeneralFormScreen
-                    ClearCollect(EditDetailUserForm_1,Filter(GenericFormList,Title=First(NewUserForm).Title));//创建集合EditDetailUserForm收集表格信息，用作待人表格名称等数据
-                    ClearCollect(EditDetailUserForm_2,Filter(GenericFormModel,ModelName=FormNameLabel_1.Text));//创建集合EditUserForm收集表格信息,用作带入部门表格类型等数据
-                    ClearCollect(EditDetailUserAttachment,Filter(GenericUploadAttachMentFile,FormId=First(NewUserForm).Title));
-                    ClearCollect(EditDetailUserAttachment2,Filter(UploadFlowAttachMent,Title=First(NewUserForm).Title));
-                    ),
+                            Reset(Attachment_Excel);
+                            Reset(Attachment_Zip);
+                            Reset(TextInput_FormMark);
+                            Reset(TextInput_ReferNumber);
+                            Reset(TextInput_FormPWD);
+                            Reset(TextInput_zipPWD);
+                            //保存后重置输入内容
+                    Navigate(
+                                DetailGeneralFormScreen,
+                                ScreenTransition.Fade
+                            );
+                            //导航到DetailGeneralFormScreen
+                    ClearCollect(
+                                EditDetailUserForm_1,
+                                Filter(
+                                    GenericFormList,
+                                    Title = First(NewUserForm).Title
+                                )
+                            );
+                            //创建集合EditDetailUserForm收集表格信息，用作待人表格名称等数据
+                    ClearCollect(
+                                EditDetailUserForm_2,
+                                Filter(
+                                    GenericFormModel,
+                                    ModelName = FormNameLabel_1.Text
+                                )
+                            );
+                            //创建集合EditUserForm收集表格信息,用作带入部门表格类型等数据
+                    ClearCollect(
+                                EditDetailUserAttachment,
+                                Filter(
+                                    GenericUploadAttachMentFile,
+                                    FormId = First(NewUserForm).Title
+                                )
+                            );
+                            ClearCollect(
+                                EditDetailUserAttachment2,
+                                Filter(
+                                    UploadFlowAttachMent,
+                                    Title = First(NewUserForm).Title
+                                )
+                            );
+                        ),
                     //密码为非必要填写项目时，执行的操作
-                    Set(GenericFormlistGuid,GUID());
-                    ClearCollect(NewUserForm,Patch(GenericFormList,Defaults(GenericFormList),
-                    {
-                        Title:GenericFormlistGuid,
-                        ApprovalId:ApprovalGuid,
-                        ModelId:First(EditUserForm).Title,
-                        ModelName:FormNameLabel_1.Text,
-                        UploadFileId:Last(GenericUploadAttachMentFile).Title,//目前取的是最后一个附件的id
-                        MarkValue:TextInput_FormMark.Text,
-                        //UploadFilePWD:TextInput_FormPWD.Text,
+                        Set(
+                            GenericFormlistGuid,
+                            GUID()
+                        );
+                        ClearCollect(
+                            NewUserForm,
+                            Patch(
+                                GenericFormList,
+                                Defaults(GenericFormList),
+                                {
+                                    Title: GenericFormlistGuid,
+                                    ApprovalId: ApprovalGuid,
+                                    ModelId: First(EditUserForm).Title,
+                                    ModelName: FormNameLabel_1.Text,
+                                    UploadFileId: Last(GenericUploadAttachMentFile).Title,
+                                    //目前取的是最后一个附件的id
+                                    MarkValue: TextInput_FormMark.Text,
+                                    //UploadFilePWD:TextInput_FormPWD.Text,
                         //ReferNumber:TextInput_ReferNumber.Text,
-                        FormType:Label1_132.Text,
-                        Department:drpFilterDepartment_1.Selected.Result,
-                        'Filter Label':TextInput_ReferNumber.Text
-                    }
-                    ));//創建NewUserForm集合用作後續更新list-GenericUploadAttachMentFile中的FormId
-                    UpdateIf(GenericUploadAttachMentFile,FormId=First(EditUserForm).Title,
-                    {
-                        FormId:GenericFormlistGuid,
-                        UploadFilePWD:TextInput_FormPWD.Text
-                    });//更新FormId和PWD到GenericUploadAttachMentFile中
-                    
-                    UpdateIf(UploadFlowAttachMent,FlowAttachName=First(AttachmentZipName).Name,
-                    {
-                        Title:GenericFormlistGuid,
-                        ApprovalDetailid:ApprovalGuid,
-                        FlowAttachPWD:TextInput_zipPWD.Text
-                    });//更新FormId和PWD到UploadFlowAttachMent中
-                    
+                    FormType: Label1_132.Text,
+                                    Department: drpFilterDepartment_1.Selected.Result,
+                                    'Filter Label': TextInput_ReferNumber.Text
+                                }
+                            )
+                        );
+                        //創建NewUserForm集合用作後續更新list-GenericUploadAttachMentFile中的FormId
+                    UpdateIf(
+                            GenericUploadAttachMentFile,
+                            FormId = First(EditUserForm).Title,
+                            {
+                                FormId: GenericFormlistGuid,
+                                UploadFilePWD: TextInput_FormPWD.Text
+                            }
+                        );
+                        //更新FormId和PWD到GenericUploadAttachMentFile中
+                    UpdateIf(
+                            UploadFlowAttachMent,
+                            FlowAttachName = First(AttachmentZipName).Name,
+                            {
+                                Title: GenericFormlistGuid,
+                                ApprovalDetailid: ApprovalGuid,
+                                FlowAttachPWD: TextInput_zipPWD.Text
+                            }
+                        );
+                        //更新FormId和PWD到UploadFlowAttachMent中
                     Reset(drpFilterDepartment_1);
-                    Reset(Attachment_Excel);
-                    Reset(Attachment_Zip);
-                    Reset(TextInput_FormMark);
-                    Reset(TextInput_ReferNumber);
-                    Reset(TextInput_FormPWD);
-                    Reset(TextInput_zipPWD);//保存后重置输入内容
-                    
-                    Navigate(DetailGeneralFormScreen,ScreenTransition.Fade);//导航到DetailGeneralFormScreen
-                    ClearCollect(EditDetailUserForm_1,Filter(GenericFormList,Title=First(NewUserForm).Title));//创建集合EditDetailUserForm收集表格信息，用作待人表格名称等数据
-                    ClearCollect(EditDetailUserForm_2,Filter(GenericFormModel,ModelName=FormNameLabel_1.Text));//创建集合EditUserForm收集表格信息,用作带入部门表格类型等数据
-                    ClearCollect(EditDetailUserAttachment,Filter(GenericUploadAttachMentFile,FormId=First(NewUserForm).Title));
-                    ClearCollect(EditDetailUserAttachment2,Filter(UploadFlowAttachMent,Title=First(NewUserForm).Title)));
+                        Reset(Attachment_Excel);
+                        Reset(Attachment_Zip);
+                        Reset(TextInput_FormMark);
+                        Reset(TextInput_ReferNumber);
+                        Reset(TextInput_FormPWD);
+                        Reset(TextInput_zipPWD);
+                        //保存后重置输入内容
+                    Navigate(
+                            DetailGeneralFormScreen,
+                            ScreenTransition.Fade
+                        );
+                        //导航到DetailGeneralFormScreen
+                    ClearCollect(
+                            EditDetailUserForm_1,
+                            Filter(
+                                GenericFormList,
+                                Title = First(NewUserForm).Title
+                            )
+                        );
+                        //创建集合EditDetailUserForm收集表格信息，用作待人表格名称等数据
+                    ClearCollect(
+                            EditDetailUserForm_2,
+                            Filter(
+                                GenericFormModel,
+                                ModelName = FormNameLabel_1.Text
+                            )
+                        );
+                        //创建集合EditUserForm收集表格信息,用作带入部门表格类型等数据
+                    ClearCollect(
+                            EditDetailUserAttachment,
+                            Filter(
+                                GenericUploadAttachMentFile,
+                                FormId = First(NewUserForm).Title
+                            )
+                        );
+                        ClearCollect(
+                            EditDetailUserAttachment2,
+                            Filter(
+                                UploadFlowAttachMent,
+                                Title = First(NewUserForm).Title
+                            )
+                        )
+                    );
                     Navigate(
                         DetailGeneralFormScreen,
                         None,

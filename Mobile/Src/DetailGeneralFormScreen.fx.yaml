@@ -1372,9 +1372,7 @@
                     Fill: =RGBA(255, 255, 255, 1)
                     FillPortions: =0
                     Height: =CountRows(Self.AllItems)*180
-                    Items: |-
-                        =//HistoryList
-                        Filter(ApprovalDetail_Table,Approval_No=FLowId)
+                    Items: =Filter(ApprovalDetail_Table,Approval_No=FLowId)
                     Layout: =Layout.Vertical
                     LayoutMinHeight: =287
                     LayoutMinWidth: =320
