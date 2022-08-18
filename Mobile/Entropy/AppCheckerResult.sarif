@@ -4204,19 +4204,19 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "DetailGeneralFormScreen.Container10_1.FillInContainer_1.RightContainer_1.Gallery7.AccessibleLabel"
+                  "fullyQualifiedName": "DetailGeneralFormScreen.Container10_1.FillInContainer_1.RightContainer_1.ActionFlowGallery.AccessibleLabel"
                 }
               ],
               "physicalLocation": {
                 "address": {
-                  "fullyQualifiedName": "DetailGeneralFormScreen.Container10_1.FillInContainer_1.RightContainer_1.Gallery7.AccessibleLabel",
+                  "fullyQualifiedName": "DetailGeneralFormScreen.Container10_1.FillInContainer_1.RightContainer_1.ActionFlowGallery.AccessibleLabel",
                   "relativeAddress": 0
                 }
               },
               "properties": {
                 "member": "AccessibleLabel",
                 "module": "DetailGeneralFormScreen",
-                "type": "DetailGeneralFormScreen.Container10_1.FillInContainer_1.RightContainer_1.Gallery7"
+                "type": "DetailGeneralFormScreen.Container10_1.FillInContainer_1.RightContainer_1.ActionFlowGallery"
               }
             }
           ],
@@ -4234,19 +4234,19 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "DetailGeneralFormScreen.Container10_1.FillInContainer_1.RightContainer_1.Gallery7.TabIndex"
+                  "fullyQualifiedName": "DetailGeneralFormScreen.Container10_1.FillInContainer_1.RightContainer_1.ActionFlowGallery.TabIndex"
                 }
               ],
               "physicalLocation": {
                 "address": {
-                  "fullyQualifiedName": "DetailGeneralFormScreen.Container10_1.FillInContainer_1.RightContainer_1.Gallery7.TabIndex",
+                  "fullyQualifiedName": "DetailGeneralFormScreen.Container10_1.FillInContainer_1.RightContainer_1.ActionFlowGallery.TabIndex",
                   "relativeAddress": 0
                 }
               },
               "properties": {
                 "member": "TabIndex",
                 "module": "DetailGeneralFormScreen",
-                "type": "DetailGeneralFormScreen.Container10_1.FillInContainer_1.RightContainer_1.Gallery7"
+                "type": "DetailGeneralFormScreen.Container10_1.FillInContainer_1.RightContainer_1.ActionFlowGallery"
               }
             }
           ],
@@ -4354,36 +4354,6 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "App.FormModelId"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "App.FormModelId",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "FormModelId",
-                "module": "App",
-                "type": "App"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "app-UnusedVariables",
-          "ruleIndex": 5
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
                   "fullyQualifiedName": "App.logo"
                 }
               ],
@@ -4407,7 +4377,7 @@
             "level": "Medium"
           },
           "ruleId": "app-UnusedMediaResources",
-          "ruleIndex": 6
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -4436,7 +4406,7 @@
             "level": "Medium"
           },
           "ruleId": "app-DataSourceDefaultMaxRowsLimit",
-          "ruleIndex": 7
+          "ruleIndex": 6
         },
         {
           "locations": [
@@ -4465,7 +4435,7 @@
             "level": "Medium"
           },
           "ruleId": "app-ScreenHasManyControls",
-          "ruleIndex": 8
+          "ruleIndex": 7
         },
         {
           "locations": [
@@ -4495,7 +4465,7 @@
             "level": "Medium"
           },
           "ruleId": "app-InefficientDelayLoading",
-          "ruleIndex": 9
+          "ruleIndex": 8
         }
       ],
       "tool": {
@@ -4588,23 +4558,6 @@
                 "level": "Medium",
                 "primaryCategory": "accessibility",
                 "whyFix": "People who use the keyboard with your app will not be able to access this element without a tab stop."
-              }
-            },
-            {
-              "id": "app-UnusedVariables",
-              "messageStrings": {
-                "issue": {
-                  "text": "Unused variable"
-                }
-              },
-              "properties": {
-                "componentType": "app",
-                "howToFix": [
-                  "Remove the unused variable."
-                ],
-                "level": "Medium",
-                "primaryCategory": "performance",
-                "whyFix": "This variable is declared but is not referenced by any control, so it is not needed."
               }
             },
             {
