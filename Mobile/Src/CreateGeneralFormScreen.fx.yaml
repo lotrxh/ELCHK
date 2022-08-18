@@ -1154,7 +1154,7 @@
                 StartFlowContainer As groupContainer.manualLayoutContainer:
                     AlignInContainer: =AlignInContainer.SetByContainer
                     FillPortions: =0
-                    Height: =70
+                    Height: =75
                     LayoutMinHeight: =100
                     LayoutMinWidth: =250
                     Width: =Parent.Width-40
@@ -1196,15 +1196,16 @@
                         Height: =14
                         OnSelect: =
                         Width: =14
+                        X: =4
                         Y: =7
                         ZIndex: =5
 
                     Rectangle5_4 As rectangle:
                         Fill: =glbThemePrimaryColor
-                        Height: =55
+                        Height: =65
                         OnSelect: =
                         Width: =2
-                        X: =6
+                        X: =10
                         Y: =22
                         ZIndex: =6
 
@@ -1859,6 +1860,7 @@
                                 false
                             )
                         Width: =477
+                        Y: =-6
                         ZIndex: =14
 
                         Circle2_15 As circle:
