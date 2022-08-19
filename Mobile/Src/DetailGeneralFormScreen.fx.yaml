@@ -1983,9 +1983,9 @@
                     Set(AddApproverCol,{});
                     
                     
-                    If(Label6_2.Visible=true&&Label6_3.Visible=true&&Last(Attachment_Excel2.Attachments).Name=""&&Last(Attachment_Zip2.Attachments).Name="",
+                    If((Label6_2.Visible=true&&Last(Attachment_Excel2.Attachments).Name<>Blank())||(Label6_3.Visible=true&&Last(Attachment_Zip2.Attachments).Name<>Blank()),
                     //密码为必填字段时执行下面操作
-                    If(IsBlank(TextInput2_30)||IsBlank(TextInput2_31),Notify( "密碼不能爲空", NotificationType.Error ),
+                    If((Label6_2.Visible=true&&Last(Attachment_Excel2.Attachments).Name<>Blank()&&IsBlank(TextInput2_30))||(Label6_3.Visible=true&&Last(Attachment_Zip2.Attachments).Name<>Blank()&&IsBlank(TextInput2_31)),Notify( "密碼不能爲空", NotificationType.Error ),
                     UpdateIf(GenericUploadAttachMentFile,FormId=First(EditDetailUserForm_1).Title&&FormAttachMent=First(AttachmentExcelName).Name,
                     {
                         FormId:First(EditDetailUserForm_1).Title,
