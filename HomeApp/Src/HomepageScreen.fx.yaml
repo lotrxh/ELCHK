@@ -352,7 +352,7 @@ HomepageScreen As screen:
                                     Filter(
                                         MyContacts,
                                         UserEmail = User().Email,
-                                        ContatsType = Blank()
+                                        ContatsEmail = Blank()
                                     ),
                                     "Created",
                                     Descending
@@ -439,7 +439,7 @@ HomepageScreen As screen:
                                             TaskFormName: "招聘職位申請表",
                                             Title: GUID(),
                                             UserEmail: User().Email,
-                                            ContatsType: ""
+                                            ContatsEmail: ""
                                         }
                                     )
                                 )
@@ -464,7 +464,7 @@ HomepageScreen As screen:
                                             TaskFormName: "假期批核人資料表",
                                             Title: GUID(),
                                             UserEmail: User().Email,
-                                            ContatsType: ""
+                                            ContatsEmail: ""
                                         }
                                     )
                                 )
@@ -489,7 +489,7 @@ HomepageScreen As screen:
                                             TaskFormName: "任職資源申請",
                                             Title: GUID(),
                                             UserEmail: User().Email,
-                                            ContatsType: ""
+                                            ContatsEmail: ""
                                         }
                                     )
                                 )
@@ -514,7 +514,7 @@ HomepageScreen As screen:
                                             TaskFormName: "預備合約通知書(新入職)",
                                             Title: GUID(),
                                             UserEmail: User().Email,
-                                            ContatsType: ""
+                                            ContatsEmail: ""
                                         }
                                     )
                                 )
@@ -538,7 +538,7 @@ HomepageScreen As screen:
                                             TaskFormName: ThisItem.ModelName,
                                             Title: GUID(),
                                             UserEmail: User().Email,
-                                            ContatsType: "",
+                                            ContatsEmail: "",
                                             TaskFormDescription: ThisItem.ModelDescription
                                         }
                                     )
