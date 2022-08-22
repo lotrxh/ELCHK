@@ -213,33 +213,81 @@
                             }
                         )
                     );
-                    ForAll(
-                        ApprovalListCol,
-                        Patch(
-                            ApprovalDetail_Table,
-                            Defaults(ApprovalDetail_Table),
-                            {
-                                Title: GUID(),
-                                Advise: ApprovalListCol[@remark],
-                                Approval_No: ApprovalGuid,
-                                ApprovalBCC: ApprovalListCol[@BCCUser],
-                                Approver: ApprovalListCol[@Approver],
-                                ApproverEmail: ApprovalListCol[@ApprovalEmail],
-                                TaskStatus: If(
-                                    ApprovalListCol[@IsComplate],
-                                    "004",
-                                    "002"
-                                ),
-                                Priortty: ApprovalListCol[@idNumber],
-                                ActionNode: ApprovalListCol[@ActionName]
-                            }
+                    If(
+                        FlowType = "Generic Flow" && IsBlank(
+                            LookUp(
+                                GenericFormModel,
+                                Title = FormModelId
+                            ).SelectedActions
+                        ),
+                        ForAll(
+                            ApprovalListCol,
+                            Patch(
+                                ApprovalDetail_Table,
+                                Defaults(ApprovalDetail_Table),
+                                {
+                                    Title: GUID(),
+                                    Advise: ApprovalListCol[@remark],
+                                    Approval_No: ApprovalGuid,
+                                    ApprovalBCC: ApprovalListCol[@BCCUser],
+                                    Approver: ApprovalListCol[@Approver],
+                                    ApproverEmail: ApprovalListCol[@ApprovalEmail],
+                                    TaskStatus: If(
+                                        ApprovalListCol[@IsComplate],
+                                        "004",
+                                        "002"
+                                    ),
+                                    Priortty: ApprovalListCol[@idNumber],
+                                    ActionNode: ApprovalListCol[@ActionName]
+                                }
+                            )
+                        ),
+                        ForAll(
+                            ApprovalListCol,
+                            Patch(
+                                ApprovalDetail_Table,
+                                Defaults(ApprovalDetail_Table),
+                                {
+                                    Title: GUID(),
+                                    Advise: ApprovalListCol[@remark],
+                                    Approval_No: ApprovalGuid,
+                                    ApprovalBCC: ApprovalListCol[@BCCUser],
+                                    Approver: ApprovalListCol[@Approver],
+                                    ApproverEmail: ApprovalListCol[@ApprovalEmail],
+                                    TaskStatus: If(
+                                        ApprovalListCol[@IsComplate],
+                                        "004",
+                                        "002"
+                                    ),
+                                    Priortty: ApprovalListCol[@idNumber],
+                                    ActionNode: ApprovalListCol[@ActionName]
+                                }
+                            )
+                        );
+                        ForAll(
+                            DataFlowActionCol.Result,
+                            Patch(
+                                ApprovalDetail_Table,
+                                Defaults(ApprovalDetail_Table),
+                                {
+                                    Title: GUID(),
+                                    Advise: "",
+                                    Approval_No: ApprovalGuid,
+                                    ApprovalBCC: "",
+                                    Approver: "",
+                                    ApproverEmail: "",
+                                    TaskStatus: "",
+                                    Priortty: 0,
+                                    ActionNode: ThisRecord.Result
+                                }
+                            )
                         )
                     );
                     //左边填写内容上传
                     If(
                         Label6.Visible = true || Label6_1.Visible = true,
                         If(
-                            (Label6.Visible = true&&IsBlank(TextInput_FormPWD)) || (Label6_1.Visible = true&&IsBlank(TextInput_zipPWD)),
+                            (Label6.Visible = true && IsBlank(TextInput_FormPWD)) || (Label6_1.Visible = true && IsBlank(TextInput_zipPWD)),
                             Notify(
                                 "密碼不能爲空",
                                 NotificationType.Error
