@@ -1,6 +1,6 @@
 App As appinfo:
     BackEnabled: =false
-    OnStart: |+
+    OnStart: |
         =//设置主色
         Set(glbThemePrimaryColor,ColorValue( "#01A8F4" ));
         Set(glbThemeSecondaryColor,ColorValue( "#4E505C" ));
@@ -17,8 +17,7 @@ App As appinfo:
         Set(glbNeutralQuaternaryColor,ColorValue( "#D2D0CE" ));
         Set(glbNeutralLightColor,ColorValue( "#EDEBE9" ));
         Set(glbNeutralLighterColor,ColorValue( "#f3f2f1" ));
-        Set(FormModelId,"b688c327-6382-42fb-ab60-2009cadc6463");
-        
+        Set(FormModelIds,"b688c327-6382-42fb-ab60-2009cadc6463");
     StartScreen: |-
         =If(
             Param("Screen") = "CreateGeneralFormScreen",

@@ -4,7 +4,7 @@
             {
                 FormModelId: If(
                     IsBlank(Param("FormModelId")),
-                    FormModelId,
+                    FormModelIds,
                     LookUp(
                         GenericFormModel,
                         Title = Param("FormModelId"),
@@ -2277,7 +2277,7 @@
                     ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
                     ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
                     Color: =glbNeutralPrimaryColor
-                    DisplayFields: =["Claims"]
+                    DisplayFields: =["DisplayName","Email"]
                     FocusedBorderThickness: =1
                     HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                     HoverColor: =Self.Color
