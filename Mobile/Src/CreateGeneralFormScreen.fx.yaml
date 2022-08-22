@@ -4,7 +4,7 @@
             {
                 FormModelId: If(
                     IsBlank(Param("FormModelId")),
-                    FormModelId,
+                    FormModelIds,
                     LookUp(
                         GenericFormModel,
                         Title = Param("FormModelId"),
@@ -17,7 +17,6 @@
             FlowType,
             LookUp(
                 GenericFormModel,
-                //Title = "99e27121-5d4d-4dd2-81dd-a9fcc5953814"
                 Title = FormModelId
             ).FlowType
         );
@@ -25,7 +24,6 @@
             IsBlank(
                 LookUp(
                     GenericFormModel,
-                //Title = "99e27121-5d4d-4dd2-81dd-a9fcc5953814"
                     Title = FormModelId
                 ).SelectedActions
             ),
@@ -1330,24 +1328,12 @@
                     LayoutMinHeight: =100
                     LayoutMinWidth: =250
                     Visible: |-
-                        =/*
-                        If(
-                            FlowType = "Generic Flow" && IsBlank(
-                                LookUp(
-                                    GenericFormModel,
-                                    Title = asid
-                                ).SelectedActions
-                            ),
-                            true,
-                            false
+                        =FlowType = "Generic Flow" && IsBlank(
+                            LookUp(
+                                GenericFormModel,
+                                Title = FormModelId
+                            ).SelectedActions
                         )
-                        */
-                         FlowType = "Generic Flow" && IsBlank(
-                                LookUp(
-                                    GenericFormModel,
-                                    Title = FormModelId
-                                ).SelectedActions
-                            )
                     Width: =Parent.Width-40
                     X: =20
                     Y: =94
@@ -2291,7 +2277,7 @@
                     ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
                     ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
                     Color: =glbNeutralPrimaryColor
-                    DisplayFields: =["Claims"]
+                    DisplayFields: =["DisplayName","Email"]
                     FocusedBorderThickness: =1
                     HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                     HoverColor: =Self.Color

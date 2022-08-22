@@ -1378,6 +1378,13 @@
                     LayoutMinWidth: =320
                     TemplatePadding: =0
                     TemplateSize: =180
+                    Visible: |-
+                        =FlowType = "Generic Flow" && IsBlank(
+                            LookUp(
+                                GenericFormModel,
+                                Title = FormModelIds
+                            ).SelectedActions
+                        )
                     ZIndex: =3
 
                     Label6_27 As label:
@@ -1497,7 +1504,23 @@
                     Height: =240
                     LayoutMinHeight: =100
                     LayoutMinWidth: =250
-                    Visible: =!(First(SortByColumns(Filter(ApprovalDetail_Table,Approval_No=FLowId),"Created",Descending)).ActionNode="執行")
+                    Visible: |-
+                        =// flow类型是通用且当前节点不为执行时显示，否则不显示
+                        FlowType = "Generic Flow" && IsBlank(
+                            LookUp(
+                                GenericFormModel,
+                                Title = FormModelIds
+                            ).SelectedActions
+                        ) And !(First(
+                            SortByColumns(
+                                Filter(
+                                    ApprovalDetail_Table,
+                                    Approval_No = FLowId
+                                ),
+                                "Created",
+                                Descending
+                            )
+                        ).ActionNode = "執行")
                     Width: =Parent.Width-40
                     X: =20
                     Y: =ActionFlowGallery.Y+ActionFlowGallery.Height
@@ -1691,12 +1714,12 @@
                     LayoutMinHeight: =100
                     LayoutMinWidth: =250
                     Visible: |-
-                        = FlowType = "Generic Flow" && IsBlank(
-                                LookUp(
-                                    GenericFormModel,
-                                    Title = FormModelId
-                                ).SelectedActions
-                            )
+                        =FlowType = "Generic Flow" && IsBlank(
+                            LookUp(
+                                GenericFormModel,
+                                Title = FormModelIds
+                            ).SelectedActions
+                        )
                     ZIndex: =5
 
     BottomContainer_2 As groupContainer.manualLayoutContainer:
