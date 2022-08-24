@@ -19,5 +19,76 @@ App As appinfo:
         Set(glbNeutralLighterColor,ColorValue( "#f3f2f1" ));
         
         //Set(CurrentUser,User().Email);
-        Set(CurrentUser,"eps-vendor@elchk.org.hk");
+        //Set(CurrentUser,"eps-vendor@elchk.org.hk");
+        
+        Set(
+            CurrentUser,
+            Dropdown1_2.Selected.Value
+        );
+        Set(
+            CurrentUserName,
+        First(
+            Split(
+                CurrentUser,
+                "@"
+            ).Result
+        ).Result);
+        Set(
+            CurrentRole,
+            CurrentUser in Filter(
+                SignerInfo,
+                S_Mechanism_No = "HO-ADM"
+            ).Signer_Email
+        );
+        Set(
+            CurrentRoleName,
+             LookUp(
+                SignerInfo,
+                Signer_Email = CurrentUser
+            ).Role
+        );
+        //二期權限測試添加
+        //-----------
+        Set(
+            CurrentRoleFormPermission,
+             If(LookUp(
+                UserInfo,
+                User_Email = CurrentUser
+            ).FormPermission = LookUp(
+                UserInfo,
+                User_Email = CurrentUser
+            ).O_Mechanism_No,LookUp(
+                UserInfo,
+                User_Email = CurrentUser
+            ).O_Mechanism,If(LookUp(
+                UserInfo,
+                User_Email = CurrentUser
+            ).FormPermission = "全部表單","All","None")
+        ));
+        Set(
+            CurrentRoleTaskPermission,
+            If(LookUp(
+                UserInfo,
+                User_Email = CurrentUser
+            ).IsManger="是",LookUp(
+                UserInfo,
+                User_Email = CurrentUser
+            ).O_Mechanism,Blank())
+        );
+        Set(
+            HRAO,
+            CurrentUser in Filter(
+                UserInfo,
+                O_Mechanism_No = "HO-ADM" && Post = "行政及人力資源主任"
+            ).User_Email
+        );
+        Set(
+            SuperUser,
+            CurrentUser in Filter(
+                UserInfo,
+                IsSuperUser = "是"
+            ).User_Email
+        );
+        //------------
+        //Select(uploadButton)
 

@@ -21,6 +21,18 @@ HomepageScreen As screen:
         Image1_3 As image:
             Height: =38
             Image: =logo
+            OnSelect: |-
+                =If(
+                    visiblecount >= 4,
+                    Set(
+                        visiblecount,
+                        0
+                    ),
+                    Set(
+                        visiblecount,
+                        visiblecount + 1
+                    )
+                )
             Width: =203
             X: =15
             Y: =5
@@ -56,7 +68,7 @@ HomepageScreen As screen:
             PaddingRight: =0
             PaddingTop: =0
             Size: =9
-            Text: ="HG"
+            Text: =CurrentUserName
             Width: =32
             X: =1318
             Y: =8
@@ -352,7 +364,7 @@ HomepageScreen As screen:
                                     Filter(
                                         MyContacts,
                                         UserEmail = User().Email,
-                                        ContatsEmail = Blank()
+                                        ContatsType = Blank()
                                     ),
                                     "Created",
                                     Descending
@@ -439,7 +451,7 @@ HomepageScreen As screen:
                                             TaskFormName: "招聘職位申請表",
                                             Title: GUID(),
                                             UserEmail: User().Email,
-                                            ContatsEmail: ""
+                                            ContatsType: ""
                                         }
                                     )
                                 )
@@ -464,7 +476,7 @@ HomepageScreen As screen:
                                             TaskFormName: "假期批核人資料表",
                                             Title: GUID(),
                                             UserEmail: User().Email,
-                                            ContatsEmail: ""
+                                            ContatsType: ""
                                         }
                                     )
                                 )
@@ -489,7 +501,7 @@ HomepageScreen As screen:
                                             TaskFormName: "任職資源申請",
                                             Title: GUID(),
                                             UserEmail: User().Email,
-                                            ContatsEmail: ""
+                                            ContatsType: ""
                                         }
                                     )
                                 )
@@ -514,7 +526,7 @@ HomepageScreen As screen:
                                             TaskFormName: "預備合約通知書(新入職)",
                                             Title: GUID(),
                                             UserEmail: User().Email,
-                                            ContatsEmail: ""
+                                            ContatsType: ""
                                         }
                                     )
                                 )
@@ -538,7 +550,7 @@ HomepageScreen As screen:
                                             TaskFormName: ThisItem.ModelName,
                                             Title: GUID(),
                                             UserEmail: User().Email,
-                                            ContatsEmail: "",
+                                            ContatsType: "",
                                             TaskFormDescription: ThisItem.ModelDescription
                                         }
                                     )
@@ -763,4 +775,90 @@ HomepageScreen As screen:
                 X: =379
                 Y: =46
                 ZIndex: =9
+
+    Dropdown1_2 As dropdown:
+        Default: =""
+        Items: =["e@test.com","e1@test.com","b@test.com","b1@test.com","f@test.com","f1@test.com","c@test.com","c1@test.com","d@test.com","d1@test.com","eps-vendor@elchk.org.hk","raymondwong@elchk.org.hk","eps-tester1@elchk.org.hk","eps-tester4@elchk.org.hk"]
+        OnChange: |-
+            =Set(
+                CurrentUser,
+                Dropdown1_2.Selected.Value
+            );
+            Set(
+                CurrentUserName,
+            First(
+                Split(
+                    CurrentUser,
+                    "@"
+                ).Result
+            ).Result);
+            Set(
+                CurrentRole,
+                CurrentUser in Filter(
+                    SignerInfo,
+                    S_Mechanism_No = "HO-ADM"
+                ).Signer_Email
+            );
+            Set(
+                CurrentRoleName,
+                 LookUp(
+                    SignerInfo,
+                    Signer_Email = CurrentUser
+                ).Role
+            );
+            //二期權限測試添加
+            //-----------
+            Set(
+                CurrentRoleFormPermission,
+                 If(LookUp(
+                    UserInfo,
+                    User_Email = CurrentUser
+                ).FormPermission = LookUp(
+                    UserInfo,
+                    User_Email = CurrentUser
+                ).O_Mechanism_No,LookUp(
+                    UserInfo,
+                    User_Email = CurrentUser
+                ).O_Mechanism,If(LookUp(
+                    UserInfo,
+                    User_Email = CurrentUser
+                ).FormPermission = "全部表單","All","None")
+            ));
+            Set(
+                CurrentRoleTaskPermission,
+                If(LookUp(
+                    UserInfo,
+                    User_Email = CurrentUser
+                ).IsManger="是",LookUp(
+                    UserInfo,
+                    User_Email = CurrentUser
+                ).O_Mechanism,Blank())
+            );
+            Set(
+                HRAO,
+                CurrentUser in Filter(
+                    UserInfo,
+                    O_Mechanism_No = "HO-ADM" && Post = "行政及人力資源主任"
+                ).User_Email
+            );
+            Set(
+                SuperUser,
+                CurrentUser in Filter(
+                    UserInfo,
+                    IsSuperUser = "是"
+                ).User_Email
+            );
+            //------------
+            //Select(uploadButton)
+        Visible: |
+            =//User().Email in ["wangxuhui@chinasofti.com"]
+            If(
+                visiblecount = 3,
+                true,
+                false
+            )
+        Width: =259
+        X: =847
+        Y: =5
+        ZIndex: =4
 

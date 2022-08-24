@@ -1,5 +1,8 @@
 "'AdminFormListScreen-leo' As screen":
-    OnVisible: =Select(Reset_button)
+    OnVisible: |-
+        =Select(Reset_button);
+        ClearCollect(FilterFormDepartment,Filter(GenericFormModel,If(CurrentRoleFormPermission="All",ModelDepartment<>Blank(),If(CurrentRoleFormPermission="None",ModelDepartment=Blank(),ModelDepartment=CurrentRoleFormPermission))));
+        ClearCollect(FilterDepartment,Filter(FormTableType,If(CurrentRoleFormPermission="All",DepartMentName<>Blank(),If(CurrentRoleFormPermission="None",DepartMentName=Blank(),DepartMentName=CurrentRoleFormPermission))));
 
     Container1_4 As groupContainer.manualLayoutContainer:
         Fill: =glbThemePrimaryColor
@@ -97,7 +100,7 @@
                 HoverFill: =ColorFade(Self.Fill, -5%)
                 InputTextPlaceholder: ="選擇部門"
                 IsSearchable: =false
-                Items: =Distinct(FormTableType,DepartMentName)
+                Items: =Distinct(FilterDepartment,DepartMentName)
                 NoSelectionText: ="選擇部門"
                 PaddingLeft: =10
                 PressedColor: =Self.Color
@@ -596,7 +599,7 @@
             "Gallery_Form As gallery.'BrowseLayout_Vertical_ThreeTextVariant_ver4.0'":
                 Fill: =RGBA(255, 255, 255, 1)
                 Height: =500
-                Items: =Sort(FilterForm,Modified,Descending)
+                Items: =Sort(FilterFormDepartment,Modified,Descending)
                 Layout: =Layout.Vertical
                 OnSelect: |+
                     =Set(ShowSavebutton,false);
