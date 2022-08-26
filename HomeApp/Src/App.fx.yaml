@@ -79,7 +79,7 @@ App As appinfo:
             HRAO,
             CurrentUser in Filter(
                 UserInfo,
-                O_Mechanism_No = "HO-ADM" && Post = "行政及人力資源主任"
+                O_Mechanism = "人力資源部" && Post_No = "ADMO"
             ).User_Email
         );
         Set(

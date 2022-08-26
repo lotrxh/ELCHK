@@ -533,7 +533,8 @@
                     PaddingTop: =0
                     Size: =12
                     Text: ="表格名稱"
-                    X: =17
+                    Width: =89
+                    X: =129
                     ZIndex: =2
 
                 Label4_16 As label:
@@ -545,7 +546,7 @@
                     Size: =12
                     Text: ="表格類型"
                     Width: =74
-                    X: =377
+                    X: =262
                     ZIndex: =3
 
                 Label4_15 As label:
@@ -557,7 +558,7 @@
                     Size: =12
                     Text: ="部門"
                     Width: =100
-                    X: =263
+                    X: =375
                     ZIndex: =4
 
                 Label4_17 As label:
@@ -569,7 +570,7 @@
                     Size: =12
                     Text: ="修改人"
                     Width: =74
-                    X: =506
+                    X: =538
                     ZIndex: =5
 
                 Label4_18 As label:
@@ -581,7 +582,7 @@
                     Size: =12
                     Text: ="修改時間"
                     Width: =74
-                    X: =700
+                    X: =752
                     ZIndex: =6
 
                 Label4_19 As label:
@@ -593,7 +594,7 @@
                     Size: =12
                     Text: ="表格編號"
                     Width: =74
-                    X: =140
+                    X: =18
                     ZIndex: =7
 
             "Gallery_Form As gallery.'BrowseLayout_Vertical_ThreeTextVariant_ver4.0'":
@@ -640,7 +641,7 @@
                     Text: =ThisItem.ModelDepartment
                     VerticalAlign: =VerticalAlign.Top
                     Width: =84
-                    X: =263
+                    X: =374
                     Y: =15
                     ZIndex: =2
 
@@ -657,7 +658,7 @@
                     Text: =ThisItem.ModelName
                     VerticalAlign: =VerticalAlign.Top
                     Width: =99
-                    X: =18
+                    X: =132
                     Y: =14
                     ZIndex: =3
 
@@ -674,24 +675,24 @@
                     Text: =ThisItem.Modified
                     VerticalAlign: =VerticalAlign.Top
                     Width: =152
-                    X: =701
+                    X: =731
                     Y: =15
                     ZIndex: =4
 
                 ModifiedBy As label:
                     Align: =Align.Center
                     Color: =glbNeutralSecondaryColor
-                    Height: =34
+                    Height: =41
                     OnSelect: =Select(Parent)
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =10
-                    Text: =ThisItem.'Modified By'.DisplayName
+                    Text: =ThisItem.'Modified By'.DisplayName & Char(13) & ThisItem.Modified
                     VerticalAlign: =VerticalAlign.Top
-                    Width: =131
-                    X: =499
+                    Width: =232
+                    X: =458
                     Y: =7
                     ZIndex: =5
 
@@ -708,7 +709,7 @@
                     Text: =ThisItem.ModelFlowNumber
                     VerticalAlign: =VerticalAlign.Top
                     Width: =82
-                    X: =140
+                    X: =19
                     Y: =15
                     ZIndex: =6
 
@@ -725,7 +726,7 @@
                     Text: =ThisItem.ModelType
                     VerticalAlign: =VerticalAlign.Top
                     Width: =112
-                    X: =379
+                    X: =262
                     Y: =14
                     ZIndex: =7
 
@@ -769,21 +770,6 @@
                     X: =999
                     Y: =7
                     ZIndex: =10
-
-                Delete_button As button:
-                    BorderStyle: =BorderStyle.None
-                    Color: =glbWarningColor
-                    Fill: =RGBA(255, 255, 255, 1)
-                    Height: =34
-                    OnSelect: |-
-                        =Remove([@GenericFormModel],ThisItem);
-                        ClearCollect(FilterForm,GenericFormModel)
-                    Size: =12
-                    Text: ="刪除"
-                    Width: =56
-                    X: =1055
-                    Y: =7
-                    ZIndex: =11
 
         Label9_15 As label:
             Color: =glbNeutralPrimaryColor
