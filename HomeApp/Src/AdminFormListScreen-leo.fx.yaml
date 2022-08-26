@@ -978,7 +978,23 @@
 
         GalleryNav_11 As gallery.galleryVertical:
             Height: =237
-            Items: =["首頁","表格管理","組織機構","用戶管理","任務管理"]
+            Items: |-
+                =If(
+                    CurrentRoleFormPermission = "None" || CurrentRoleFormPermission = Blank(),
+                    [
+                        "首頁",
+                        "組織機構",
+                        "用戶管理",
+                        "任務管理"
+                    ],
+                    [
+                        "首頁",
+                        "表格管理",
+                        "組織機構",
+                        "用戶管理",
+                        "任務管理"
+                    ]
+                )
             Layout: =Layout.Vertical
             TemplatePadding: =0
             TemplateSize: =40

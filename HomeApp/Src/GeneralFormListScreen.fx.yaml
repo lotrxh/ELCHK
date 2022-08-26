@@ -58,12 +58,20 @@ GeneralFormListScreen As screen:
                 field_TaskStatus = "000" || field_TaskStatus = "001" || field_TaskStatus = "004" || field_TaskStatus = "006" || field_TaskStatus = "002"
             )
         );
+        //生成带部门字段的ApprovalDetail_Table已处理任务
+        ClearCollect(ApprovalDetailColwithdepartment,AddColumns(ApprovalDetailCol,"DepartMentName",
+                    LookUp(
+                        approvalCol,
+                        Title = field_Approval_No
+                    ).DepartMentUnit));
+        //生成待处理集合，新增Ismanger判断
         With(
             {
-                SearchPendingData: Filter(
+                SearchPendingData: If(CurrentRoleTaskPermission=Blank(),Filter(
                     ApprovalDetailCol,
-                    (CurrentUser in field_ApproverEmail || CurrentUser <> Blank() && CurrentUser in field_AgentUserEmail)
-                )
+                    (CurrentUser in field_ApproverEmail || CurrentUser <> Blank() && CurrentUser in field_AgentUserEmail)),Filter(
+                    ApprovalDetailColwithdepartment,
+                    (CurrentUser in field_ApproverEmail || CurrentUser <> Blank() && CurrentUser in field_AgentUserEmail) || CurrentRoleTaskPermission in DepartMentName))
             },
             ClearCollect(
                 FilterPendingDataCol,
@@ -88,7 +96,7 @@ GeneralFormListScreen As screen:
                     LookUp(
                         approvalCol,
                         Title = field_Approval_No
-                    ).DepartMentName,
+                    ).DepartMentUnit,
                     "FormType",
                     LookUp(
                         approvalCol,
@@ -107,13 +115,21 @@ GeneralFormListScreen As screen:
                 )
             )
         );
-        ///生成已处理集合
+        //生成带部门字段的ApprovalDetail_Table已处理任务
+        ClearCollect(ProcessedDetailColwithdepartment,AddColumns(ProcessedDetailCol,"DepartMentName",
+                    LookUp(
+                        approvalCol,
+                        Title = field_Approval_No
+                    ).DepartMentUnit));
+        ///生成已处理集合，新增Ismanger判断
         With(
             {
-                ProcessedListCol: Filter(
+                ProcessedListCol: If(CurrentRoleTaskPermission=Blank(),Filter(
                     ProcessedDetailCol,
                     (CurrentUser in field_ApproverEmail || CurrentUser <> Blank() && CurrentUser in field_AgentUserEmail)
-                )
+                ),Filter(
+                    ProcessedDetailColwithdepartment,
+                    (CurrentUser in field_ApproverEmail || CurrentUser <> Blank() && CurrentUser in field_AgentUserEmail) || CurrentRoleTaskPermission in DepartMentName))
             },
             ClearCollect(
                 inprogressData,
@@ -138,7 +154,7 @@ GeneralFormListScreen As screen:
                     LookUp(
                         approvalCol,
                         Title = field_Approval_No
-                    ).DepartMentName,
+                    ).DepartMentUnit,
                     "FormType",
                     LookUp(
                         approvalCol,
@@ -157,13 +173,23 @@ GeneralFormListScreen As screen:
                 )
             )
         );
-        // 生成所有集合
+        //生成带部门字段的ApprovalDetail_Table全部任务
+        ClearCollect(ComplatelDetailColwithdepartment,AddColumns(ComplatelDetailCol,"DepartMentName",
+                    LookUp(
+                        approvalCol,
+                        Title = field_Approval_No
+                    ).DepartMentUnit));
+        
+        
+        // 生成所有集合，新增Ismanger判断
         With(
             {
-                AllApprovalList: Filter(
+                AllApprovalList: If(CurrentRoleTaskPermission=Blank(),Filter(
                     ComplatelDetailCol,
                     (CurrentUser in field_ApproverEmail || CurrentUser <> Blank() && CurrentUser in field_AgentUserEmail) && field_TaskStatus <> Blank()
-                )
+                ),Filter(
+                    ComplatelDetailColwithdepartment,
+                    ((CurrentUser in field_ApproverEmail || CurrentUser <> Blank() && CurrentUser in field_AgentUserEmail) && field_TaskStatus <> Blank()) || CurrentRoleTaskPermission in DepartMentName))
             },
             ClearCollect(
                 AllApprovalListDataCol,
@@ -188,7 +214,7 @@ GeneralFormListScreen As screen:
                     LookUp(
                         approvalCol,
                         Title = field_Approval_No
-                    ).DepartMentName,
+                    ).DepartMentUnit,
                     "FormType",
                     LookUp(
                         approvalCol,
@@ -1110,7 +1136,23 @@ GeneralFormListScreen As screen:
 
         GalleryNav_6 As gallery.galleryVertical:
             Height: =237
-            Items: =["首頁","表格管理","組織機構","用戶管理","任務管理"]
+            Items: |-
+                =If(
+                    CurrentRoleFormPermission = "None" || CurrentRoleFormPermission = Blank(),
+                    [
+                        "首頁",
+                        "組織機構",
+                        "用戶管理",
+                        "任務管理"
+                    ],
+                    [
+                        "首頁",
+                        "表格管理",
+                        "組織機構",
+                        "用戶管理",
+                        "任務管理"
+                    ]
+                )
             Layout: =Layout.Vertical
             TemplatePadding: =0
             TemplateSize: =40

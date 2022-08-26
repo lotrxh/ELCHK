@@ -95,7 +95,23 @@ HomepageScreen As screen:
 
         GalleryNav_3 As gallery.galleryVertical:
             Height: =237
-            Items: =["首頁","表格管理","組織機構","用戶管理","任務管理"]
+            Items: |-
+                =If(
+                    CurrentRoleFormPermission = "None" || CurrentRoleFormPermission = Blank(),
+                    [
+                        "首頁",
+                        "組織機構",
+                        "用戶管理",
+                        "任務管理"
+                    ],
+                    [
+                        "首頁",
+                        "表格管理",
+                        "組織機構",
+                        "用戶管理",
+                        "任務管理"
+                    ]
+                )
             Layout: =Layout.Vertical
             OnSelect: =
             TemplatePadding: =0
@@ -778,7 +794,7 @@ HomepageScreen As screen:
 
     Dropdown1_2 As dropdown:
         Default: =""
-        Items: =["e@test.com","e1@test.com","b@test.com","b1@test.com","f@test.com","f1@test.com","c@test.com","c1@test.com","d@test.com","d1@test.com","eps-vendor@elchk.org.hk","raymondwong@elchk.org.hk","eps-tester1@elchk.org.hk","eps-tester4@elchk.org.hk"]
+        Items: =["e@test.com","e1@test.com","b@test.com","b1@test.com","f@test.com","f1@test.com","c@test.com","c1@test.com","d@test.com","d1@test.com","eps-vendor@elchk.org.hk","raymondwong@elchk.org.hk","eps-tester1@elchk.org.hk","eps-tester4@elchk.org.hk","eps-tester2@elchk.org.hk","eps-tester3@elchk.org.hk"]
         OnChange: |-
             =Set(
                 CurrentUser,
@@ -858,7 +874,7 @@ HomepageScreen As screen:
                 false
             )
         Width: =259
-        X: =847
+        X: =820
         Y: =5
         ZIndex: =4
 
