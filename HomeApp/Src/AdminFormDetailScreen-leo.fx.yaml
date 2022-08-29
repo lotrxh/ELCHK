@@ -614,7 +614,7 @@
                 HoverFill: =ColorFade(Self.Fill, -5%)
                 InputTextPlaceholder: ="選擇部門"
                 IsSearchable: =false
-                Items: =Distinct(FormTableType,DepartMentName)
+                Items: =Distinct(Filter(FormTableType,If(CurrentRoleFormPermission="All",DepartMentName<>Blank(),If(CurrentRoleFormPermission="None",DepartMentName=Blank(),DepartMentName=CurrentRoleFormPermission))),DepartMentName)
                 NoSelectionText: ="選擇部門"
                 PaddingLeft: =10
                 PressedColor: =Self.Color
