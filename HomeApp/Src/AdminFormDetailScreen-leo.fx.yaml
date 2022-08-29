@@ -161,18 +161,17 @@
                 Height: =36
                 HoverFill: =ColorFade(Self.Fill, -15%)
                 OnSelect: |-
-                    =If(IsEmpty(drpFilter_Department.SelectedItems)||IsEmpty(drpFilter_FormType.SelectedItems)||IsBlank(TextInput_FormName.Text)||(Label1_123.Visible=true&&IsBlank(TextInput_CustomFilter.Text)||IsBlank(TextInput_FormNumber)||Last(Attachment_Form.Attachments).Name=Blank()||Radio_flowtype.SelectedText.Value=Blank()),Notify( "必选项不能为空", NotificationType.Error ),If(TextInput_FormName.Text in GenericFormModel.ModelName,(UpdateIf(GenericFormModel,ModelName=TextInput_FormName.Text,{
+                    =If(IsEmpty(drpFilter_Department.SelectedItems)||IsEmpty(drpFilter_FormType.SelectedItems)||IsBlank(TextInput_FormName.Text)||IsBlank(TextInput_FormNumber)||Last(Attachment_Form.Attachments).Name=Blank()||Radio_flowtype.SelectedText.Value=Blank()||Radio_password.SelectedText.Value=Blank()||Radio_attachment.SelectedText.Value=Blank(),Notify( "必选项不能为空", NotificationType.Error ),If(TextInput_FormName.Text in GenericFormModel.ModelName,(UpdateIf(GenericFormModel,ModelName=TextInput_FormName.Text,{
                         ModelDepartment:drpFilter_Department.Selected.Result,
                         ModelType:drpFilter_FormType.Selected.Result,
                         ModelFlowNumber:TextInput_FormNumber.Text,
                         ModelVersion:TextInput_FormVersion.Text,
                         ModelDescription:[@TextInput_FormDescription].Text,
                         ModelFlowUser:User().Email,
-                        CustomFilter:If(Radio_CustomFilter.SelectedText.Value="有",TextInput_CustomFilter.Text,""),
-                        ActionControl:Radio_ActionControl.SelectedText.Value,
+                        CustomFilter:TextInput_CustomFilter.Text,
                         ModelAttachMent:Radio_attachment.SelectedText.Value,
                         FlowType:Radio_flowtype.SelectedText.Value,
-                        SelectedActions:If(Radio_flowtype.SelectedText.Value="Generic Flow",If(Radio_ActionControl.SelectedText.Value="Free Style","補充資料;跟進;檢查;提交;簽批;助理總幹事審批;總幹事審批;執行;","補充資料;跟進;檢查;提交;"&If(Checkbox1_4.Value=true,Checkbox1_4.Text&";","")&If(Checkbox1_5.Value=true,Checkbox1_5.Text&";","")&If(Checkbox1_6.Value=true,Checkbox1_6.Text&";","")&"執行;"),""),
+                        SelectedActions:If(Radio_flowtype.SelectedText.Value="通用流程","補充資料;跟進;檢查;提交;簽批;助理總幹事審批;總幹事審批;執行;",If(Radio_flowtype.SelectedText.Value="預設通用流程","補充資料;跟進;檢查;提交;"&If(Checkbox1_4.Value=true,Checkbox1_4.Text&";","")&If(Checkbox1_5.Value=true,Checkbox1_5.Text&";","")&If(Checkbox1_6.Value=true,Checkbox1_6.Text&";","")&"執行;","")),
                         IsPassWord:If(Radio_password.SelectedText.Value="有",1,If(Radio_password.SelectedText.Value="無",2,0)),
                         IsAttachmentPassWord:If(Radio_password_1.SelectedText.Value="有",1,If(Radio_password_1.SelectedText.Value="無",2,0)) //默认为0，即可有可无
                     }));UpdateIf(TemplateFileList,TempFileName=TextInput_FormName.Text,
@@ -194,11 +193,9 @@
                     Reset(Attachment_Demonstrationform);
                     Reset(Attachment_FillGuide);
                     Reset(Radio_attachment);
-                    Reset(Radio_ActionControl);
                     Reset(Radio_password);
                     Reset(Radio_password_1);
                     Reset(Radio_flowtype);
-                    Reset(Radio_CustomFilter);
                     Reset(Checkbox1_4);
                     Reset(Checkbox1_5);
                     Reset(Checkbox1_6);
@@ -213,12 +210,11 @@
                         ModelName:[@TextInput_FormName].Text,
                         ModelDescription:[@TextInput_FormDescription].Text,
                         ModelFlowUser:User().Email,
-                        CustomFilter:If(Radio_CustomFilter.SelectedText.Value="有",TextInput_CustomFilter.Text,""),
+                        CustomFilter:TextInput_CustomFilter.Text,
                         IsEnable:1,
-                        ActionControl:Radio_ActionControl.SelectedText.Value,
                         ModelAttachMent:Radio_attachment.SelectedText.Value,
                         FlowType:Radio_flowtype.SelectedText.Value,
-                        SelectedActions:If(Radio_flowtype.SelectedText.Value="Generic Flow",If(Radio_ActionControl.SelectedText.Value="Free Style","補充資料;跟進;檢查;提交;簽批;助理總幹事審批;總幹事審批;執行;","補充資料;跟進;檢查;提交;"&If(Checkbox1_4.Value=true,Checkbox1_4.Text&";","")&If(Checkbox1_5.Value=true,Checkbox1_5.Text&";","")&If(Checkbox1_6.Value=true,Checkbox1_6.Text&";","")&"執行;"),""),
+                        SelectedActions:If(Radio_flowtype.SelectedText.Value="通用流程","補充資料;跟進;檢查;提交;簽批;助理總幹事審批;總幹事審批;執行;",If(Radio_flowtype.SelectedText.Value="預設通用流程","補充資料;跟進;檢查;提交;"&If(Checkbox1_4.Value=true,Checkbox1_4.Text&";","")&If(Checkbox1_5.Value=true,Checkbox1_5.Text&";","")&If(Checkbox1_6.Value=true,Checkbox1_6.Text&";","")&"執行;","")),
                         IsPassWord:If(Radio_password.SelectedText.Value="有",1,If(Radio_password.SelectedText.Value="無",2,0)),
                         IsAttachmentPassWord:If(Radio_password_1.SelectedText.Value="有",1,If(Radio_password_1.SelectedText.Value="無",2,0)) //默认为0，即可有可无
                     }
@@ -243,11 +239,9 @@
                     Reset(Attachment_Demonstrationform);
                     Reset(Attachment_FillGuide);
                     Reset(Radio_attachment);
-                    Reset(Radio_ActionControl);
                     Reset(Radio_password);
                     Reset(Radio_password_1);
                     Reset(Radio_flowtype);
-                    Reset(Radio_CustomFilter);
                     Reset(Checkbox1_4);
                     Reset(Checkbox1_5);
                     Reset(Checkbox1_6);
@@ -294,11 +288,9 @@
                     Reset(Attachment_Demonstrationform);
                     Reset(Attachment_FillGuide);
                     Reset(Radio_attachment);
-                    Reset(Radio_ActionControl);
                     Reset(Radio_password);
                     Reset(Radio_password_1);
                     Reset(Radio_flowtype);
-                    Reset(Radio_CustomFilter);
                     Reset(Checkbox1_4);
                     Reset(Checkbox1_5);
                     Reset(Checkbox1_6);
@@ -437,7 +429,7 @@
                 ZIndex: =28
 
                 Radio_attachment As radio:
-                    Default: =If(First(EditForm).ModelAttachMent="有","有","無")//加载编辑表格的表格名称
+                    Default: =First(EditForm).ModelAttachMent//加载编辑表格的表格名称
                     FocusedBorderThickness: =0
                     Height: =37
                     HoverColor: =RGBA(0, 0, 0, 1)
@@ -452,8 +444,8 @@
                     RadioSize: =24
                     Size: =11
                     Width: =150
-                    X: =22
-                    Y: =453
+                    X: =312
+                    Y: =440
                     ZIndex: =3
 
                 Label1_87 As label:
@@ -464,54 +456,11 @@
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =12
-                    Text: ="附件"
+                    Text: ="申請附件"
                     Width: =64
-                    X: =22
-                    Y: =412
+                    X: =312
+                    Y: =406
                     ZIndex: =8
-
-            Group3 As group:
-                Height: =5
-                Width: =5
-                X: =40
-                Y: =40
-                ZIndex: =28
-
-                Radio_ActionControl As radio:
-                    Default: =If(First(EditForm).ActionControl="Predefine Flow","Predefine Flow","Free Style")//加载编辑表格的表格名称
-                    FocusedBorderThickness: =0
-                    Height: =60
-                    HoverColor: =RGBA(0, 0, 0, 1)
-                    HoverFill: =RGBA(0, 0, 0, 0)
-                    Items: =["Free Style","Predefine Flow"]
-                    Layout: =Layout.Horizontal
-                    PaddingBottom: =0
-                    PaddingTop: =0
-                    PressedColor: =RGBA(0, 0, 0, 1)
-                    RadioBorderColor: =glbNeutralTertiaryColor
-                    RadioSelectionFill: =glbLinkColor
-                    RadioSize: =24
-                    Size: =11
-                    Visible: =If(Radio_flowtype.Selected.Value="Generic Flow",true,false)
-                    Width: =165
-                    X: =437
-                    Y: =534
-                    ZIndex: =9
-
-                Label1_88 As label:
-                    Color: =glbNeutralSecondaryColor
-                    Height: =45
-                    PaddingBottom: =0
-                    PaddingLeft: =0
-                    PaddingRight: =0
-                    PaddingTop: =0
-                    Size: =12
-                    Text: ="行動控制"
-                    Visible: =If(Radio_flowtype.Selected.Value="Generic Flow",true,false)
-                    Width: =70
-                    X: =444
-                    Y: =487
-                    ZIndex: =10
 
             Group4 As group:
                 Height: =5
@@ -896,8 +845,8 @@
                     RadioSize: =24
                     Size: =11
                     Width: =233
-                    X: =312
-                    Y: =454
+                    X: =23
+                    Y: =442
                     ZIndex: =43
 
                 Label1_120 As label:
@@ -910,8 +859,8 @@
                     Size: =12
                     Text: ="表格密碼"
                     Width: =120
-                    X: =320
-                    Y: =412
+                    X: =23
+                    Y: =405
                     ZIndex: =44
 
             Group2_4 As group:
@@ -927,7 +876,7 @@
                     Height: =30
                     HoverColor: =RGBA(0, 0, 0, 1)
                     HoverFill: =RGBA(0, 0, 0, 0)
-                    Items: =["Generic Flow","Simple Flow","Template"]
+                    Items: =["通用流程","預設通用流程","部門簡單流程","範本"]
                     Layout: =Layout.Horizontal
                     PaddingBottom: =0
                     PaddingTop: =0
@@ -936,7 +885,7 @@
                     RadioSelectionFill: =glbLinkColor
                     RadioSize: =24
                     Size: =11
-                    Width: =422
+                    Width: =504
                     X: =22
                     Y: =535
                     ZIndex: =46
@@ -970,10 +919,10 @@
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =12
-                    Text: ="選擇行動"
-                    Visible: =If(Radio_ActionControl.Selected.Value="Predefine Flow",true,false)
+                    Text: ="預設通用流程選擇行動"
+                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程",true,false)
                     Width: =175
-                    X: =640
+                    X: =604
                     Y: =491
                     ZIndex: =49
 
@@ -981,7 +930,7 @@
                     CheckboxBorderColor: =glbNeutralTertiaryColor
                     CheckboxSize: =24
                     CheckmarkFill: =glbLinkColor
-                    Default: =If("簽批" in First(EditForm).SelectedActions,true,false)
+                    Default: =If(("簽批" in First(EditForm).SelectedActions) && First(EditForm).FlowType="預設通用流程",true,false)
                     FocusedBorderColor: =RGBA(0, 0, 0, 0)
                     Height: =29
                     HoverBorderColor: =RGBA(0, 0, 0, 0)
@@ -990,9 +939,9 @@
                     PressedBorderColor: =RGBA(0, 0, 0, 0)
                     Size: =11
                     Text: ="簽批"
-                    Visible: =If(Radio_ActionControl.Selected.Value="Predefine Flow",true,false)
+                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程",true,false)
                     Width: =134
-                    X: =639
+                    X: =603
                     Y: =531
                     ZIndex: =53
 
@@ -1000,7 +949,7 @@
                     CheckboxBorderColor: =glbNeutralTertiaryColor
                     CheckboxSize: =24
                     CheckmarkFill: =glbLinkColor
-                    Default: =If("助總總幹事審批" in First(EditForm).SelectedActions,true,false)
+                    Default: =If(("助總總幹事審批" in First(EditForm).SelectedActions) && First(EditForm).FlowType="預設通用流程",true,false)
                     FocusedBorderColor: =RGBA(0, 0, 0, 0)
                     Height: =29
                     HoverBorderColor: =RGBA(0, 0, 0, 0)
@@ -1009,9 +958,9 @@
                     PressedBorderColor: =RGBA(0, 0, 0, 0)
                     Size: =11
                     Text: ="助總總幹事審批"
-                    Visible: =If(Radio_ActionControl.Selected.Value="Predefine Flow",true,false)
+                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程",true,false)
                     Width: =151
-                    X: =753
+                    X: =717
                     Y: =531
                     ZIndex: =54
 
@@ -1019,7 +968,7 @@
                     CheckboxBorderColor: =glbNeutralTertiaryColor
                     CheckboxSize: =24
                     CheckmarkFill: =glbLinkColor
-                    Default: =If("總幹事審批" in First(EditForm).SelectedActions,true,false)
+                    Default: =If(("總幹事審批" in First(EditForm).SelectedActions) && First(EditForm).FlowType="預設通用流程",true,false)
                     FocusedBorderColor: =RGBA(0, 0, 0, 0)
                     Height: =29
                     HoverBorderColor: =RGBA(0, 0, 0, 0)
@@ -1028,52 +977,11 @@
                     PressedBorderColor: =RGBA(0, 0, 0, 0)
                     Size: =11
                     Text: ="總幹事審批"
-                    Visible: =If(Radio_ActionControl.Selected.Value="Predefine Flow",true,false)
+                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程",true,false)
                     Width: =120
-                    X: =928
+                    X: =892
                     Y: =531
                     ZIndex: =55
-
-            Group3_1 As group:
-                Height: =5
-                Width: =5
-                X: =-192
-                Y: =-372
-                ZIndex: =62
-
-                Radio_CustomFilter As radio:
-                    Default: =If(First(EditForm).CustomFilter=Blank(),"無","有") //加载编辑表格的表格名称
-                    FocusedBorderThickness: =0
-                    Height: =37
-                    HoverColor: =RGBA(0, 0, 0, 1)
-                    HoverFill: =RGBA(0, 0, 0, 0)
-                    Items: =["有","無"]
-                    Layout: =Layout.Horizontal
-                    PaddingBottom: =0
-                    PaddingTop: =0
-                    PressedColor: =RGBA(0, 0, 0, 1)
-                    RadioBorderColor: =glbNeutralTertiaryColor
-                    RadioSelectionFill: =glbLinkColor
-                    RadioSize: =24
-                    Size: =11
-                    Width: =159
-                    X: =892
-                    Y: =453
-                    ZIndex: =60
-
-                Label1_94 As label:
-                    Color: =glbNeutralSecondaryColor
-                    Height: =33
-                    PaddingBottom: =0
-                    PaddingLeft: =0
-                    PaddingRight: =0
-                    PaddingTop: =0
-                    Size: =12
-                    Text: ="自定義篩選"
-                    Width: =84
-                    X: =898
-                    Y: =412
-                    ZIndex: =61
 
             Label1_124 As label:
                 Color: =glbErrorColor
@@ -1104,8 +1012,7 @@
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =12
-                    Text: ="自定義篩選提示"
-                    Visible: =If(Radio_CustomFilter.Selected.Value="有",true,false)
+                    Text: ="標籤輸入指引"
                     Width: =120
                     X: =892
                     Y: =277
@@ -1133,26 +1040,10 @@
                     RadiusTopLeft: =0
                     RadiusTopRight: =0
                     Size: =12
-                    Visible: =If(Radio_CustomFilter.Selected.Value="有",true,false)
                     Width: =270
                     X: =892
                     Y: =311
                     ZIndex: =59
-
-                Label1_123 As label:
-                    Color: =glbErrorColor
-                    Height: =25
-                    PaddingBottom: =0
-                    PaddingLeft: =0
-                    PaddingRight: =0
-                    PaddingTop: =0
-                    Size: =12
-                    Text: ="*"
-                    Visible: =If(Radio_CustomFilter.Selected.Value="有",true,false)
-                    Width: =12
-                    X: =880
-                    Y: =277
-                    ZIndex: =62
 
             Label1_125 As label:
                 Color: =glbErrorColor
@@ -1206,7 +1097,7 @@
                     Size: =11
                     Width: =233
                     X: =603
-                    Y: =454
+                    Y: =440
                     ZIndex: =65
 
                 Label1_126 As label:
@@ -1220,8 +1111,36 @@
                     Text: ="附件密碼"
                     Width: =120
                     X: =601
-                    Y: =412
+                    Y: =399
                     ZIndex: =66
+
+            Label1_128 As label:
+                Color: =glbErrorColor
+                Height: =28
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =12
+                Text: ="*"
+                Width: =120
+                X: =13
+                Y: =405
+                ZIndex: =68
+
+            Label1_129 As label:
+                Color: =glbErrorColor
+                Height: =28
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =12
+                Text: ="*"
+                Width: =120
+                X: =304
+                Y: =403
+                ZIndex: =69
 
         NewForm_title As group:
             Height: =5
@@ -1251,11 +1170,9 @@
                     Reset(Attachment_Demonstrationform);
                     Reset(Attachment_FillGuide);
                     Reset(Radio_attachment);
-                    Reset(Radio_ActionControl);
                     Reset(Radio_password);
                     Reset(Radio_password_1);
                     Reset(Radio_flowtype);
-                    Reset(Radio_CustomFilter);
                     Reset(Checkbox1_4);
                     Reset(Checkbox1_5);
                     Reset(Checkbox1_6);

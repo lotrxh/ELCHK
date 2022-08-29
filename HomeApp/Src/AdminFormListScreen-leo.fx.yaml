@@ -580,9 +580,9 @@
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =12
-                    Text: ="修改時間"
+                    Text: ="修改日期"
                     Width: =74
-                    X: =752
+                    X: =763
                     ZIndex: =6
 
                 Label4_19 As label:
@@ -675,25 +675,27 @@
                     Text: =ThisItem.Modified
                     VerticalAlign: =VerticalAlign.Top
                     Width: =152
-                    X: =731
+                    X: =750
                     Y: =15
                     ZIndex: =4
 
                 ModifiedBy As label:
                     Align: =Align.Center
                     Color: =glbNeutralSecondaryColor
-                    Height: =41
+                    Height: =21
                     OnSelect: =Select(Parent)
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
                     PaddingTop: =0
-                    Size: =10
-                    Text: =ThisItem.'Modified By'.DisplayName & Char(13) & ThisItem.Modified
+                    Size: =12
+                    Text: |-
+                        =//ThisItem.'Modified By'.DisplayName & Char(13) & ThisItem.Modified;
+                        ThisItem.'Modified By'.DisplayName
                     VerticalAlign: =VerticalAlign.Top
-                    Width: =232
+                    Width: =252
                     X: =458
-                    Y: =7
+                    Y: =14
                     ZIndex: =5
 
                 FormNumber As label:
@@ -819,11 +821,9 @@
                     Reset(Attachment_Demonstrationform);
                     Reset(Attachment_FillGuide);
                     Reset(Radio_attachment);
-                    Reset(Radio_ActionControl);
                     Reset(Radio_password);
                     Reset(Radio_password_1);
                     Reset(Radio_flowtype);
-                    Reset(Radio_CustomFilter);
                     Reset(Checkbox1_4);
                     Reset(Checkbox1_5);
                     Reset(Checkbox1_6);
@@ -869,11 +869,9 @@
                     Reset(Attachment_Demonstrationform);
                     Reset(Attachment_FillGuide);
                     Reset(Radio_attachment);
-                    Reset(Radio_ActionControl);
                     Reset(Radio_password);
                     Reset(Radio_password_1);
                     Reset(Radio_flowtype);
-                    Reset(Radio_CustomFilter);
                     Reset(Checkbox1_4);
                     Reset(Checkbox1_5);
                     Reset(Checkbox1_6);
