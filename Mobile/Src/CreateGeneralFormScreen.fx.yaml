@@ -1008,6 +1008,7 @@
                         ZIndex: =4
 
                     Container1 As groupContainer.horizontalAutoLayoutContainer:
+                        LayoutGap: =5
                         LayoutJustifyContent: =LayoutJustifyContent.Center
                         LayoutMinHeight: =50
                         LayoutMinWidth: =250
@@ -1033,7 +1034,7 @@
                             FocusedBorderColor: =glbNeutralSecondaryColor
                             FocusedBorderThickness: =1
                             Height: =36
-                            HintText: ="附件密碼"
+                            HintText: ="請輸入附件密碼"
                             HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                             HoverFill: =ColorFade(Self.Fill, -5%)
                             Mode: =TextMode.Password
@@ -1048,10 +1049,40 @@
                             RadiusTopRight: =0
                             Size: =12
                             Visible: =If(First(EditUserForm).IsPassWord=0||First(EditUserForm).IsPassWord=1||IsBlank(First(EditUserForm).IsPassWord),true,false)
-                            Width: =Parent.Width-16
+                            Width: =Parent.Width-335
                             X: =20
                             Y: =82
                             ZIndex: =2
+
+                        TextInput_FormPWD_1 As text:
+                            AlignInContainer: =AlignInContainer.Center
+                            BorderColor: =glbNeutralTertiaryColor
+                            BorderThickness: =1
+                            Color: =glbNeutralPrimaryColor
+                            Default: =""
+                            FocusedBorderColor: =glbNeutralSecondaryColor
+                            FocusedBorderThickness: =1
+                            Height: =36
+                            HintText: ="請再次輸入附件密碼"
+                            HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                            HoverFill: =ColorFade(Self.Fill, -5%)
+                            Mode: =TextMode.Password
+                            OnChange: =If(TextInput_FormPWD_1.Text<>TextInput_FormPWD.Text,Notify("密碼輸入不一致，請重新輸入",Warning),TextInput_FormPWD_1.Text=TextInput_FormPWD.Text,Notify("密碼輸入一致",Success,4000))
+                            PaddingBottom: =0
+                            PaddingLeft: =10
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                            RadiusBottomLeft: =0
+                            RadiusBottomRight: =0
+                            RadiusTopLeft: =0
+                            RadiusTopRight: =0
+                            Size: =12
+                            Visible: =If(First(EditUserForm).IsPassWord=0||First(EditUserForm).IsPassWord=1||IsBlank(First(EditUserForm).IsPassWord),true,false)
+                            Width: =Parent.Width-335
+                            X: =20
+                            Y: =82
+                            ZIndex: =3
 
                 UploadAttachmentsContainer As groupContainer.verticalAutoLayoutContainer:
                     AlignInContainer: =AlignInContainer.SetByContainer
