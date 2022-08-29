@@ -2417,15 +2417,11 @@
         ZIndex: =9
 
         Container16_6 As groupContainer.verticalAutoLayoutContainer:
-            AlignInContainer: =AlignInContainer.SetByContainer
             Fill: =RGBA(253, 222, 207, 1)
-            FillPortions: =0
             Height: =600
             LayoutAlignItems: =LayoutAlignItems.Center
             LayoutDirection: =LayoutDirection.Vertical
             LayoutJustifyContent: =LayoutJustifyContent.Center
-            LayoutMinHeight: =100
-            LayoutMinWidth: =250
             LayoutMode: =LayoutMode.Auto
             Width: |
                 =Switch(
