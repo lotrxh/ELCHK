@@ -63,7 +63,12 @@ GeneralFormListScreen As screen:
                     LookUp(
                         approvalCol,
                         Title = field_Approval_No
-                    ).DepartMentUnit));
+                    ).DepartMentUnit,
+                    "FormDepartMentName",
+                    LookUp(
+                        approvalCol,
+                        Title = field_Approval_No
+                    ).DepartMentName));
         //生成待处理集合，新增Ismanger判断
         With(
             {
@@ -71,7 +76,7 @@ GeneralFormListScreen As screen:
                     ApprovalDetailCol,
                     (CurrentUser in field_ApproverEmail || CurrentUser <> Blank() && CurrentUser in field_AgentUserEmail)),Filter(
                     ApprovalDetailColwithdepartment,
-                    (CurrentUser in field_ApproverEmail || CurrentUser <> Blank() && CurrentUser in field_AgentUserEmail) || CurrentRoleTaskPermission in DepartMentName))
+                    (CurrentUser in field_ApproverEmail || CurrentUser <> Blank() && CurrentUser in field_AgentUserEmail) || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermission in FormDepartMentName))
             },
             ClearCollect(
                 FilterPendingDataCol,
@@ -120,7 +125,12 @@ GeneralFormListScreen As screen:
                     LookUp(
                         approvalCol,
                         Title = field_Approval_No
-                    ).DepartMentUnit));
+                    ).DepartMentUnit,
+                    "FormDepartMentName",
+                    LookUp(
+                        approvalCol,
+                        Title = field_Approval_No
+                    ).DepartMentName));
         ///生成已处理集合，新增Ismanger判断
         With(
             {
@@ -129,7 +139,7 @@ GeneralFormListScreen As screen:
                     (CurrentUser in field_ApproverEmail || CurrentUser <> Blank() && CurrentUser in field_AgentUserEmail)
                 ),Filter(
                     ProcessedDetailColwithdepartment,
-                    (CurrentUser in field_ApproverEmail || CurrentUser <> Blank() && CurrentUser in field_AgentUserEmail) || CurrentRoleTaskPermission in DepartMentName))
+                    (CurrentUser in field_ApproverEmail || CurrentUser <> Blank() && CurrentUser in field_AgentUserEmail) || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermission in FormDepartMentName))
             },
             ClearCollect(
                 inprogressData,
@@ -178,7 +188,12 @@ GeneralFormListScreen As screen:
                     LookUp(
                         approvalCol,
                         Title = field_Approval_No
-                    ).DepartMentUnit));
+                    ).DepartMentUnit,
+                    "FormDepartMentName",
+                    LookUp(
+                        approvalCol,
+                        Title = field_Approval_No
+                    ).DepartMentName));
         
         
         // 生成所有集合，新增Ismanger判断
@@ -189,7 +204,7 @@ GeneralFormListScreen As screen:
                     (CurrentUser in field_ApproverEmail || CurrentUser <> Blank() && CurrentUser in field_AgentUserEmail) && field_TaskStatus <> Blank()
                 ),Filter(
                     ComplatelDetailColwithdepartment,
-                    ((CurrentUser in field_ApproverEmail || CurrentUser <> Blank() && CurrentUser in field_AgentUserEmail) && field_TaskStatus <> Blank()) || CurrentRoleTaskPermission in DepartMentName))
+                    ((CurrentUser in field_ApproverEmail || CurrentUser <> Blank() && CurrentUser in field_AgentUserEmail) && field_TaskStatus <> Blank()) || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermission in FormDepartMentName))
             },
             ClearCollect(
                 AllApprovalListDataCol,
