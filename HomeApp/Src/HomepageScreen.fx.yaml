@@ -100,16 +100,16 @@ HomepageScreen As screen:
                     CurrentRoleFormPermission = "None" || CurrentRoleFormPermission = Blank(),
                     [
                         "首頁",
-                        "組織機構",
-                        "用戶管理",
-                        "任務管理"
+                        "任務管理",
+                        "統計",
+                        "系統"
                     ],
                     [
                         "首頁",
                         "表格管理",
-                        "組織機構",
-                        "用戶管理",
-                        "任務管理"
+                        "任務管理",
+                        "統計",
+                        "系統"
                     ]
                 )
             Layout: =Layout.Vertical
@@ -144,8 +144,12 @@ HomepageScreen As screen:
                         Navigate('AdminFormListScreen-leo',
                             ScreenTransition.None
                         ),
-                        ThisItem.Value = "組織機構",
-                        "",
+                        ThisItem.Value = "統計",
+                        Launch("https://apps.powerapps.com/play/c030168f-5133-4c9d-8e17-3c870ba99ab4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=StatisticsScreen&skipAppMetadata=true"),
+                    
+                        ThisItem.Value = "系統",
+                        Launch("https://apps.powerapps.com/play/c030168f-5133-4c9d-8e17-3c870ba99ab4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=UserScreen&skipAppMetadata=true"),
+                    
                         ThisItem.Value = "任務管理",
                         Navigate(
                             GeneralFormListScreen,
@@ -178,9 +182,9 @@ HomepageScreen As screen:
                         Icon.Home,
                         ThisItem.Value = "表格管理",
                         Icon.ListScrollWatchlist,
-                        ThisItem.Value = "組織機構",
+                        ThisItem.Value = "統計",
                         Icon.LogJournal,
-                        ThisItem.Value = "用戶管理",
+                        ThisItem.Value = "系統",
                         Icon.People,
                         ThisItem.Value = "任務管理",
                         Icon.Lock
@@ -794,7 +798,7 @@ HomepageScreen As screen:
 
     Dropdown1_2 As dropdown:
         Default: =""
-        Items: =["e@test.com","e1@test.com","b@test.com","b1@test.com","f@test.com","f1@test.com","c@test.com","c1@test.com","d@test.com","d1@test.com","eps-vendor@elchk.org.hk","raymondwong@elchk.org.hk","eps-tester1@elchk.org.hk","eps-tester4@elchk.org.hk","eps-tester2@elchk.org.hk","eps-tester3@elchk.org.hk"]
+        Items: =["eps-vendor@elchk.org.hk","eps-tester1@elchk.org.hk","e@test.com","e1@test.com","b@test.com","b1@test.com","f@test.com","f1@test.com","c@test.com","c1@test.com","d@test.com","d1@test.com","raymondwong@elchk.org.hk","eps-tester4@elchk.org.hk","eps-tester2@elchk.org.hk","eps-tester3@elchk.org.hk"]
         OnChange: |-
             =Set(
                 CurrentUser,
