@@ -522,6 +522,9 @@
                 Fill: =RGBA(255, 255, 255, 1)
                 FillPortions: =0
                 Height: =FormNameLabel_1.Y+FormNameLabel_1.Height+10
+                LayoutAlignItems: =LayoutAlignItems.Center
+                LayoutGap: =10
+                LayoutJustifyContent: =LayoutJustifyContent.SpaceBetween
                 LayoutMinHeight: =100
                 LayoutMinWidth: =250
                 LayoutMode: =LayoutMode.Auto
@@ -540,19 +543,117 @@
                 ZIndex: =1
 
                 FormNameLabel_1 As label:
-                    AutoHeight: =true
                     Color: =glbNeutralPrimaryColor
                     FontWeight: =FontWeight.Semibold
-                    Height: =60
+                    Height: =30
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =18
                     Text: =First(EditUserForm).ModelName
-                    Width: =Parent.Width
+                    Width: =Parent.Width-800
                     X: =58
                     ZIndex: =1
+
+                BtnDefault_23 As button:
+                    BorderColor: =Self.Color
+                    BorderThickness: =1
+                    Color: =glbThemePrimaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    Fill: =White
+                    FocusedBorderThickness: =1
+                    FontWeight: =FontWeight.Normal
+                    Height: =28
+                    HoverBorderColor: =ColorFade(Self.Color, -15%)
+                    HoverColor: =ColorFade(Self.Color, -15%)
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    OnSelect: |
+                        =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).附件).AbsoluteUri)
+                        Launch("https://elcss.sharepoint.com/sites/eps/Lists/TemplateFileList/Attachments/" & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).附件).DisplayName & "?web=1")
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =ColorFade(Self.Color, -25%)
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    PressedFill: =ColorFade(Self.Color, 95%)
+                    RadiusBottomLeft: =2
+                    RadiusBottomRight: =2
+                    RadiusTopLeft: =2
+                    RadiusTopRight: =2
+                    Size: =11
+                    Text: ="模板下載"
+                    Width: =100
+                    X: =Parent.Width-Self.Width-1
+                    Y: =1
+                    ZIndex: =2
+
+                BtnDefault_24 As button:
+                    BorderColor: =Self.Color
+                    BorderThickness: =1
+                    Color: =glbThemePrimaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    Fill: =White
+                    FocusedBorderThickness: =1
+                    FontWeight: =FontWeight.Normal
+                    Height: =28
+                    HoverBorderColor: =ColorFade(Self.Color, -15%)
+                    HoverColor: =ColorFade(Self.Color, -15%)
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    OnSelect: |-
+                        =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text)).附件).AbsoluteUri)
+                        Launch("https://elcss.sharepoint.com/sites/eps/Lists/TemplateFileList/Attachments/" & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text)).附件).DisplayName & "?web=1")
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =ColorFade(Self.Color, -25%)
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    PressedFill: =ColorFade(Self.Color, 95%)
+                    RadiusBottomLeft: =2
+                    RadiusBottomRight: =2
+                    RadiusTopLeft: =2
+                    RadiusTopRight: =2
+                    Size: =11
+                    Text: ="填寫指引"
+                    Width: =100
+                    X: =Parent.Width-Self.Width-1
+                    Y: =1
+                    ZIndex: =3
+
+                BtnDefault_25 As button:
+                    BorderColor: =Self.Color
+                    BorderThickness: =1
+                    Color: =glbThemePrimaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    Fill: =White
+                    FocusedBorderThickness: =1
+                    FontWeight: =FontWeight.Normal
+                    Height: =28
+                    HoverBorderColor: =ColorFade(Self.Color, -15%)
+                    HoverColor: =ColorFade(Self.Color, -15%)
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    OnSelect: |-
+                        =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text)).附件).AbsoluteUri)
+                        Launch("https://elcss.sharepoint.com/sites/eps/Lists/TemplateFileList/Attachments/" & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text)).附件).DisplayName & "?web=1")
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =ColorFade(Self.Color, -25%)
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    PressedFill: =ColorFade(Self.Color, 95%)
+                    RadiusBottomLeft: =2
+                    RadiusBottomRight: =2
+                    RadiusTopLeft: =2
+                    RadiusTopRight: =2
+                    Size: =11
+                    Text: ="示範表格"
+                    Width: =100
+                    X: =Parent.Width-Self.Width-1
+                    Y: =1
+                    ZIndex: =4
 
             InfoContainer12_2 As groupContainer.horizontalAutoLayoutContainer:
                 AlignInContainer: =AlignInContainer.SetByContainer
@@ -852,105 +953,6 @@
                             Text: =If(First(EditUserForm).FlowType<>"Template","上傳申請表","下載申請表")
                             Width: =300
                             ZIndex: =1
-
-                        BtnDefault_23 As button:
-                            BorderColor: =Self.Color
-                            BorderThickness: =1
-                            Color: =glbThemePrimaryColor
-                            DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                            Fill: =White
-                            FocusedBorderThickness: =1
-                            FontWeight: =FontWeight.Normal
-                            Height: =28
-                            HoverBorderColor: =ColorFade(Self.Color, -15%)
-                            HoverColor: =ColorFade(Self.Color, -15%)
-                            HoverFill: =RGBA(255, 255, 255, 1)
-                            OnSelect: |
-                                =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).附件).AbsoluteUri)
-                                Launch("https://elcss.sharepoint.com/sites/eps/Lists/TemplateFileList/Attachments/" & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).附件).DisplayName & "?web=1")
-                            PaddingBottom: =0
-                            PaddingLeft: =0
-                            PaddingRight: =0
-                            PaddingTop: =0
-                            PressedBorderColor: =ColorFade(Self.Color, -25%)
-                            PressedColor: =ColorFade(Self.Color, -25%)
-                            PressedFill: =ColorFade(Self.Color, 95%)
-                            RadiusBottomLeft: =2
-                            RadiusBottomRight: =2
-                            RadiusTopLeft: =2
-                            RadiusTopRight: =2
-                            Size: =11
-                            Text: ="模板下載"
-                            Width: =100
-                            X: =Parent.Width-Self.Width-1
-                            Y: =1
-                            ZIndex: =2
-
-                        BtnDefault_24 As button:
-                            BorderColor: =Self.Color
-                            BorderThickness: =1
-                            Color: =glbThemePrimaryColor
-                            DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                            Fill: =White
-                            FocusedBorderThickness: =1
-                            FontWeight: =FontWeight.Normal
-                            Height: =28
-                            HoverBorderColor: =ColorFade(Self.Color, -15%)
-                            HoverColor: =ColorFade(Self.Color, -15%)
-                            HoverFill: =RGBA(255, 255, 255, 1)
-                            OnSelect: |-
-                                =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text)).附件).AbsoluteUri)
-                                Launch("https://elcss.sharepoint.com/sites/eps/Lists/TemplateFileList/Attachments/" & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text)).附件).DisplayName & "?web=1")
-                            PaddingBottom: =0
-                            PaddingLeft: =0
-                            PaddingRight: =0
-                            PaddingTop: =0
-                            PressedBorderColor: =ColorFade(Self.Color, -25%)
-                            PressedColor: =ColorFade(Self.Color, -25%)
-                            PressedFill: =ColorFade(Self.Color, 95%)
-                            RadiusBottomLeft: =2
-                            RadiusBottomRight: =2
-                            RadiusTopLeft: =2
-                            RadiusTopRight: =2
-                            Size: =11
-                            Text: ="填寫指引"
-                            Width: =100
-                            X: =Parent.Width-Self.Width-1
-                            Y: =1
-                            ZIndex: =3
-
-                        BtnDefault_25 As button:
-                            BorderColor: =Self.Color
-                            BorderThickness: =1
-                            Color: =glbThemePrimaryColor
-                            DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                            Fill: =White
-                            FocusedBorderThickness: =1
-                            FontWeight: =FontWeight.Normal
-                            Height: =28
-                            HoverBorderColor: =ColorFade(Self.Color, -15%)
-                            HoverColor: =ColorFade(Self.Color, -15%)
-                            HoverFill: =RGBA(255, 255, 255, 1)
-                            OnSelect: |-
-                                =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text)).附件).AbsoluteUri)
-                                Launch("https://elcss.sharepoint.com/sites/eps/Lists/TemplateFileList/Attachments/" & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text)).附件).DisplayName & "?web=1")
-                            PaddingBottom: =0
-                            PaddingLeft: =0
-                            PaddingRight: =0
-                            PaddingTop: =0
-                            PressedBorderColor: =ColorFade(Self.Color, -25%)
-                            PressedColor: =ColorFade(Self.Color, -25%)
-                            PressedFill: =ColorFade(Self.Color, 95%)
-                            RadiusBottomLeft: =2
-                            RadiusBottomRight: =2
-                            RadiusTopLeft: =2
-                            RadiusTopRight: =2
-                            Size: =11
-                            Text: ="示範表格"
-                            Width: =100
-                            X: =Parent.Width-Self.Width-1
-                            Y: =1
-                            ZIndex: =4
 
                         Image4_2 As image:
                             Height: =10

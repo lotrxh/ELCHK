@@ -1294,36 +1294,6 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "CompleteScreen.TextInput1.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "CompleteScreen.TextInput1.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "CompleteScreen",
-                "type": "CompleteScreen.TextInput1"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 1
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
                   "fullyQualifiedName": "CreateGeneralFormScreen.SelectUserContainer_2.Container16_4.Container16_5.Container17_2.BtnSecondIconOnly_21.AccessibleLabel"
                 }
               ],
@@ -3077,6 +3047,36 @@
                 "member": "AccessibleLabel",
                 "module": "Design Guide Screen",
                 "type": "'Design Guide Screen'.canDesignGuide.crdFont.TextInput2_1"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 1
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CompleteScreen.TextInput1.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "CompleteScreen.TextInput1.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "CompleteScreen",
+                "type": "CompleteScreen.TextInput1"
               }
             }
           ],
