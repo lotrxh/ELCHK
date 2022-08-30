@@ -95,21 +95,22 @@ HomepageScreen As screen:
 
         GalleryNav_3 As gallery.galleryVertical:
             Height: =237
-            Items: |-
+            Items: |
                 =If(
                     CurrentRoleFormPermission = "None" || CurrentRoleFormPermission = Blank(),
                     [
                         "首頁",
                         "任務管理",
-                        "統計",
-                        "系統"
+                        If(CurrentRole,"統計",HRAO || SuperUser,"系統"),
+                        If(If(CurrentRole,"統計",HRAO || SuperUser,"系統")="系統",Blank(),HRAO || SuperUser,"系統")
+                        
                     ],
                     [
                         "首頁",
                         "表格管理",
                         "任務管理",
-                        "統計",
-                        "系統"
+                        If(CurrentRole,"統計",HRAO || SuperUser,"系統"),
+                        If(If(CurrentRole,"統計",HRAO || SuperUser,"系統")="系統",Blank(),HRAO || SuperUser,"系統")
                     ]
                 )
             Layout: =Layout.Vertical
@@ -132,7 +133,7 @@ HomepageScreen As screen:
                 Height: =32
                 HoverBorderColor: =ColorFade(Self.Color, -15%)
                 HoverColor: =ColorFade(Self.Color, -15%)
-                HoverFill: =ColorFade(glbThemePrimaryColor, 90%)
+                HoverFill: =If(ThisItem.Value<>Blank(),ColorFade(glbThemePrimaryColor, 90%))
                 OnSelect: |-
                     =If(
                         ThisItem.Value = "首頁",
@@ -141,7 +142,7 @@ HomepageScreen As screen:
                             ScreenTransition.None
                         ),
                         ThisItem.Value = "表格管理",
-                        Navigate('AdminFormListScreen-leo',
+                        Navigate(AdminFormListScreen,
                             ScreenTransition.None
                         ),
                         ThisItem.Value = "統計",
@@ -526,7 +527,7 @@ HomepageScreen As screen:
                                     )
                                 )
                             );
-                            Launch("https://apps.powerapps.com/play/8bc833a4-5aff-417c-ab44-f513af1f03f0?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=EmploymentFormScreen&skipAppMetadata=true"),
+                            Launch("https://apps.powerapps.com/play/c030168f-5133-4c9d-8e17-3c870ba99ab4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=EmploymentFormScreen&skipAppMetadata=true"),
                             ThisItem.ModelName = "預備合約通知書(新入職)",
                             If(
                                 TabGallery3_2.Selected.Value = "常用表格",
@@ -878,7 +879,7 @@ HomepageScreen As screen:
                 false
             )
         Width: =259
-        X: =820
+        X: =804
         Y: =5
         ZIndex: =4
 

@@ -1,4 +1,4 @@
-"'AdminFormDetailScreen-leo' As screen":
+AdminFormDetailScreen As screen:
 
     Container_title As groupContainer.manualLayoutContainer:
         Fill: =glbThemePrimaryColor
@@ -199,7 +199,7 @@
                     Reset(Checkbox1_4);
                     Reset(Checkbox1_5);
                     Reset(Checkbox1_6);
-                    Navigate('AdminFormListScreen-leo',ScreenTransition.Fade),
+                    Navigate(AdminFormListScreen,ScreenTransition.Fade),
                     ClearCollect(NewForm,Patch(GenericFormModel,Defaults(GenericFormModel),
                     {
                         Title:GUID(),
@@ -245,7 +245,7 @@
                     Reset(Checkbox1_4);
                     Reset(Checkbox1_5);
                     Reset(Checkbox1_6);
-                    Navigate('AdminFormListScreen-leo',ScreenTransition.Fade));
+                    Navigate(AdminFormListScreen,ScreenTransition.Fade));
                 PaddingBottom: =0
                 PaddingLeft: =0
                 PaddingRight: =0
@@ -294,7 +294,7 @@
                     Reset(Checkbox1_4);
                     Reset(Checkbox1_5);
                     Reset(Checkbox1_6);
-                    Navigate('AdminFormListScreen-leo',ScreenTransition.Fade);
+                    Navigate(AdminFormListScreen,ScreenTransition.Fade);
                 PaddingBottom: =0
                 PaddingLeft: =0
                 PaddingRight: =0
@@ -1154,7 +1154,7 @@
                 Height: =50
                 Icon: =Icon.ChevronLeft
                 OnSelect: |-
-                    =Navigate('AdminFormListScreen-leo',ScreenTransition.Fade);
+                    =Navigate(AdminFormListScreen,ScreenTransition.Fade);
                     Clear(EditForm);
                     Clear(EditAttachment);
                     Clear(EditAttachment2);
@@ -1275,21 +1275,22 @@
 
         GalleryNav_9 As gallery.galleryVertical:
             Height: =237
-            Items: |-
+            Items: |
                 =If(
                     CurrentRoleFormPermission = "None" || CurrentRoleFormPermission = Blank(),
                     [
                         "首頁",
-                        "組織機構",
-                        "用戶管理",
-                        "任務管理"
+                        "任務管理",
+                        If(CurrentRole,"統計",HRAO || SuperUser,"系統"),
+                        If(If(CurrentRole,"統計",HRAO || SuperUser,"系統")="系統",Blank(),HRAO || SuperUser,"系統")
+                        
                     ],
                     [
                         "首頁",
                         "表格管理",
-                        "組織機構",
-                        "用戶管理",
-                        "任務管理"
+                        "任務管理",
+                        If(CurrentRole,"統計",HRAO || SuperUser,"系統"),
+                        If(If(CurrentRole,"統計",HRAO || SuperUser,"系統")="系統",Blank(),HRAO || SuperUser,"系統")
                     ]
                 )
             Layout: =Layout.Vertical
@@ -1310,7 +1311,7 @@
                 FontWeight: =If(ThisItem.Value="表格管理", FontWeight.Semibold,Normal)
                 Height: =32
                 HoverBorderColor: =ColorFade(Self.Color, -15%)
-                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =If(ThisItem.Value<>Blank(),ColorFade(glbThemePrimaryColor, 90%))
                 HoverFill: =ColorFade(glbThemePrimaryColor, 90%)
                 OnSelect: |-
                     =If(
@@ -1320,12 +1321,15 @@
                             ScreenTransition.None
                         ),
                         ThisItem.Value = "表格管理",
-                        Navigate(
-                            'AdminFormListScreen-leo',
+                        Navigate(AdminFormListScreen,
                             ScreenTransition.None
                         ),
-                        ThisItem.Value = "組織機構",
-                        "",
+                        ThisItem.Value = "統計",
+                        Launch("https://apps.powerapps.com/play/c030168f-5133-4c9d-8e17-3c870ba99ab4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=StatisticsScreen"),
+                    
+                        ThisItem.Value = "系統",
+                        Launch("https://apps.powerapps.com/play/c030168f-5133-4c9d-8e17-3c870ba99ab4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=UserScreen"),
+                    
                         ThisItem.Value = "任務管理",
                         Navigate(
                             GeneralFormListScreen,
@@ -1358,9 +1362,9 @@
                         Icon.Home,
                         ThisItem.Value = "表格管理",
                         Icon.ListScrollWatchlist,
-                        ThisItem.Value = "組織機構",
+                        ThisItem.Value = "統計",
                         Icon.LogJournal,
-                        ThisItem.Value = "用戶管理",
+                        ThisItem.Value = "系統",
                         Icon.People,
                         ThisItem.Value = "任務管理",
                         Icon.Lock

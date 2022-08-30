@@ -91,4 +91,15 @@ App As appinfo:
         );
         //------------
         //Select(uploadButton)
+    StartScreen: |-
+        =If(
+            Param("Screen") = "HomepageScreen",
+            HomepageScreen,
+            Param("Screen") = "GeneralFormListScreen",
+            GeneralFormListScreen,
+            Param("Screen") = "AdminFormListScree",
+            AdminFormListScreen,
+            Param("Screen") = "AdminFormDetailScreen",
+            AdminFormDetailScreen
+        )
 

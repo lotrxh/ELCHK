@@ -1151,21 +1151,22 @@ GeneralFormListScreen As screen:
 
         GalleryNav_6 As gallery.galleryVertical:
             Height: =237
-            Items: |-
+            Items: |
                 =If(
                     CurrentRoleFormPermission = "None" || CurrentRoleFormPermission = Blank(),
                     [
                         "首頁",
                         "任務管理",
-                        "統計",
-                        "系統"
+                        If(CurrentRole,"統計",HRAO || SuperUser,"系統"),
+                        If(If(CurrentRole,"統計",HRAO || SuperUser,"系統")="系統",Blank(),HRAO || SuperUser,"系統")
+                        
                     ],
                     [
                         "首頁",
                         "表格管理",
                         "任務管理",
-                        "統計",
-                        "系統"
+                        If(CurrentRole,"統計",HRAO || SuperUser,"系統"),
+                        If(If(CurrentRole,"統計",HRAO || SuperUser,"系統")="系統",Blank(),HRAO || SuperUser,"系統")
                     ]
                 )
             Layout: =Layout.Vertical
@@ -1187,7 +1188,7 @@ GeneralFormListScreen As screen:
                 Height: =32
                 HoverBorderColor: =ColorFade(Self.Color, -15%)
                 HoverColor: =ColorFade(Self.Color, -15%)
-                HoverFill: =ColorFade(glbThemePrimaryColor, 90%)
+                HoverFill: =If(ThisItem.Value<>Blank(),ColorFade(glbThemePrimaryColor, 90%))
                 OnSelect: |-
                     =If(
                         ThisItem.Value = "首頁",
@@ -1196,7 +1197,7 @@ GeneralFormListScreen As screen:
                             ScreenTransition.None
                         ),
                         ThisItem.Value = "表格管理",
-                        Navigate('AdminFormListScreen-leo',
+                        Navigate(AdminFormListScreen,
                             ScreenTransition.None
                         ),
                         ThisItem.Value = "統計",
