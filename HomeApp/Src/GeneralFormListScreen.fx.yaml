@@ -1156,16 +1156,16 @@ GeneralFormListScreen As screen:
                     CurrentRoleFormPermission = "None" || CurrentRoleFormPermission = Blank(),
                     [
                         "首頁",
-                        "組織機構",
-                        "用戶管理",
-                        "任務管理"
+                        "任務管理",
+                        "統計",
+                        "系統"
                     ],
                     [
                         "首頁",
                         "表格管理",
-                        "組織機構",
-                        "用戶管理",
-                        "任務管理"
+                        "任務管理",
+                        "統計",
+                        "系統"
                     ]
                 )
             Layout: =Layout.Vertical
@@ -1196,12 +1196,15 @@ GeneralFormListScreen As screen:
                             ScreenTransition.None
                         ),
                         ThisItem.Value = "表格管理",
-                        Navigate(
-                            'AdminFormListScreen-leo',
+                        Navigate('AdminFormListScreen-leo',
                             ScreenTransition.None
                         ),
-                        ThisItem.Value = "組織機構",
-                        "",
+                        ThisItem.Value = "統計",
+                        Launch("https://apps.powerapps.com/play/c030168f-5133-4c9d-8e17-3c870ba99ab4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=StatisticsScreen"),
+                    
+                        ThisItem.Value = "系統",
+                        Launch("https://apps.powerapps.com/play/c030168f-5133-4c9d-8e17-3c870ba99ab4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=UserScreen"),
+                    
                         ThisItem.Value = "任務管理",
                         Navigate(
                             GeneralFormListScreen,
@@ -1234,9 +1237,9 @@ GeneralFormListScreen As screen:
                         Icon.Home,
                         ThisItem.Value = "表格管理",
                         Icon.ListScrollWatchlist,
-                        ThisItem.Value = "組織機構",
+                        ThisItem.Value = "統計",
                         Icon.LogJournal,
-                        ThisItem.Value = "用戶管理",
+                        ThisItem.Value = "系統",
                         Icon.People,
                         ThisItem.Value = "任務管理",
                         Icon.Lock
