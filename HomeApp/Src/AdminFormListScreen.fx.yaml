@@ -1,8 +1,39 @@
 AdminFormListScreen As screen:
-    OnVisible: |-
+    OnVisible: |+
         =Select(Reset_button);
         ClearCollect(FilterFormDepartment,Filter(GenericFormModel,If(CurrentRoleFormPermission="All",ModelDepartment<>Blank(),If(CurrentRoleFormPermission="None",ModelDepartment=Blank(),ModelDepartment=CurrentRoleFormPermission))));
         ClearCollect(FilterDepartment,Filter(FormTableType,If(CurrentRoleFormPermission="All",DepartMentName<>Blank(),If(CurrentRoleFormPermission="None",DepartMentName=Blank(),DepartMentName=CurrentRoleFormPermission))));
+        
+        ClearCollect(
+            approvalCol1,
+            Approval_Table
+        );
+        //生產待處理任務集合
+        ClearCollect(
+            ApprovalDetailCol1,
+            Filter(
+                ShowColumns(
+                    ApprovalDetail_Table,
+                    "Title",
+                    "field_Approval_No",
+                    "field_Approver",
+                    "field_ApproverEmail",
+                    "field_Priortty",
+                    "field_TaskStatus",
+                    "field_AgentUserEmail"
+                ),
+                field_TaskStatus = "001" || field_TaskStatus = "002"
+            )
+        );
+        
+        //生成带表格模板名稱字段的ApprovalDetail_Table待理任务
+        ClearCollect(ApprovalDetailColwithFormName1,AddColumns(ApprovalDetailCol,"FormName",
+                    LookUp(
+                        approvalCol1,
+                        Title = field_Approval_No
+                    ).Task_Name
+                    ));
+        
 
     Container1_4 As groupContainer.manualLayoutContainer:
         Fill: =glbThemePrimaryColor
@@ -760,10 +791,13 @@ AdminFormListScreen As screen:
                     Fill: =RGBA(255, 255, 255, 1)
                     Height: =34
                     OnSelect: |+
-                        =If(Disable_button.Text="启用",UpdateContext({Isenable:0}),UpdateContext({Isenable:1}));
+                        =If(ThisItem.ModelName in ApprovalDetailColwithFormName1.FormName, Notify("該表單有待處理任務，當前無法停用，請處理后再停用",Warning),
+                        
+                        
+                        If(Disable_button.Text="启用",UpdateContext({Isenable:0}),UpdateContext({Isenable:1}));
                         If(Isenable=1,UpdateContext({Isenable:0}),Isenable=0,UpdateContext({Isenable:1}));
                         If(Isenable=1,UpdateIf(GenericFormModel,ModelName=FormName.Text,{IsEnable:1}),Isenable=0,UpdateIf(GenericFormModel,ModelName=FormName.Text,{IsEnable:0}));
-                        ClearCollect(FilterForm,GenericFormModel)
+                        ClearCollect(FilterForm,GenericFormModel))
                         
                     Size: =12
                     Text: |

@@ -58,7 +58,7 @@ GeneralFormListScreen As screen:
                 field_TaskStatus = "000" || field_TaskStatus = "001" || field_TaskStatus = "004" || field_TaskStatus = "006" || field_TaskStatus = "002"
             )
         );
-        //生成带部门字段的ApprovalDetail_Table已处理任务
+        //生成带部门字段的ApprovalDetail_Table待理任务
         ClearCollect(ApprovalDetailColwithdepartment,AddColumns(ApprovalDetailCol,"DepartMentName",
                     LookUp(
                         approvalCol,

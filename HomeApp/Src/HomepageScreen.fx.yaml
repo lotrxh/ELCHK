@@ -7,7 +7,7 @@ HomepageScreen As screen:
         // 待处理
         With({SearchPendingData:Filter(ApprovalDetailData,(CurrentUser in ApproverEmail||CurrentUser<>Blank()&&CurrentUser in AgentUserEmail)&&(TaskStatus="001"||TaskStatus="002"))},ClearCollect(FilterPendingDataCol,SearchPendingData));
         
-        ClearCollect(DataModelName,{ModelName:"招聘職位申請表",ModelDescription:"招聘表格"},{ModelName:"假期批核人資料表",ModelDescription:"假期表格"},{ModelName:"任職資源申請",ModelDescription:"IT財務指引表格"},{ModelName:"預備合約通知書(新入職)",ModelDescription:"預備合約表格"});
+        ClearCollect(DataModelName,{ModelName:"招聘職位申請表",ModelDescription:"招聘表格",ModelFlowNumber:"A103"},{ModelName:"假期批核人資料表",ModelDescription:"假期表格",ModelFlowNumber:"A111"},{ModelName:"任職資源申請",ModelDescription:"IT財務指引表格",ModelFlowNumber:"A306"},{ModelName:"預備合約通知書(新入職)",ModelDescription:"預備合約表格",ModelFlowNumber:"A104"});
         
         
         
@@ -394,7 +394,7 @@ HomepageScreen As screen:
                                 "ModelName",
                                 "TaskFormDescription",
                                 "ModelDescription"
-                            ),"ModelName","ModelDescription"),
+                            ),"ModelName","ModelDescription","ModelFlowNumber"),
                             TextInput2_15.Text,
                             "ModelName"
                         ),
@@ -408,7 +408,8 @@ HomepageScreen As screen:
                                         ModelDescription = TaskTypeNameGallery.Selected.FormType
                                     ),*/
                                     "ModelName",
-                                    "ModelDescription"
+                                    "ModelDescription",
+                                    "ModelFlowNumber"
                                 ),
                                 TextInput2_15.Text,
                                 "ModelName"
@@ -421,7 +422,8 @@ HomepageScreen As screen:
                                         ModelType = TaskTypeNameGallery.Selected.FormType
                                     ),
                                     "ModelName",
-                                    "ModelDescription"
+                                    "ModelDescription",
+                                    "ModelFlowNumber"
                                 ),
                                 TextInput2_15.Text,
                                 "ModelName"
@@ -599,7 +601,7 @@ HomepageScreen As screen:
                     RadiusTopLeft: =4
                     RadiusTopRight: =4
                     Size: =14
-                    Text: =ThisItem.ModelName
+                    Text: =ThisItem.ModelFlowNumber&ThisItem.ModelName
                     Tooltip: =ThisItem.ModelDescription
                     Width: =Parent.TemplateWidth-20
                     X: =11
@@ -879,7 +881,7 @@ HomepageScreen As screen:
                 false
             )
         Width: =259
-        X: =804
+        X: =835
         Y: =5
         ZIndex: =4
 
