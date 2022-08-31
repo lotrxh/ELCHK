@@ -1180,11 +1180,11 @@ GeneralFormListScreen As screen:
                 BorderColor: =Self.Color
                 BorderStyle: =BorderStyle.None
                 BorderThickness: =1
-                Color: =If(ThisItem.Value="任務管理", glbThemePrimaryColor,glbNeutralSecondaryColor)
+                Color: =If(ThisItem.Value="任務", glbThemePrimaryColor,glbNeutralSecondaryColor)
                 DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                Fill: =If(ThisItem.Value="任務管理", ColorFade(Self.Color, 90%),White)
+                Fill: =If(ThisItem.Value="任務", ColorFade(Self.Color, 90%),White)
                 FocusedBorderThickness: =1
-                FontWeight: =If(ThisItem.Value="任務管理", FontWeight.Semibold,Normal)
+                FontWeight: =If(ThisItem.Value="任務", FontWeight.Semibold,Normal)
                 Height: =32
                 HoverBorderColor: =ColorFade(Self.Color, -15%)
                 HoverColor: =ColorFade(Self.Color, -15%)

@@ -1026,11 +1026,11 @@ AdminFormListScreen As screen:
                 BorderColor: =Self.Color
                 BorderStyle: =BorderStyle.None
                 BorderThickness: =1
-                Color: =If(ThisItem.Value="表格管理", glbThemePrimaryColor,glbNeutralSecondaryColor)
+                Color: =If(ThisItem.Value="表格", glbThemePrimaryColor,glbNeutralSecondaryColor)
                 DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                Fill: =If(ThisItem.Value="表格管理", ColorFade(Self.Color, 90%),White)
+                Fill: =If(ThisItem.Value="表格", ColorFade(Self.Color, 90%),White)
                 FocusedBorderThickness: =1
-                FontWeight: =If(ThisItem.Value="表格管理", FontWeight.Semibold,Normal)
+                FontWeight: =If(ThisItem.Value="表格", FontWeight.Semibold,Normal)
                 Height: =32
                 HoverBorderColor: =ColorFade(Self.Color, -15%)
                 HoverColor: =ColorFade(Self.Color, -15%)
