@@ -100,15 +100,15 @@ HomepageScreen As screen:
                     CurrentRoleFormPermission = "None" || CurrentRoleFormPermission = Blank(),
                     [
                         "首頁",
-                        "任務管理",
+                        "任務",
                         If(CurrentRole,"統計",HRAO || SuperUser,"系統"),
                         If(If(CurrentRole,"統計",HRAO || SuperUser,"系統")="系統",Blank(),HRAO || SuperUser,"系統")
                         
                     ],
                     [
                         "首頁",
-                        "表格管理",
-                        "任務管理",
+                        "表格",
+                        "任務",
                         If(CurrentRole,"統計",HRAO || SuperUser,"系統"),
                         If(If(CurrentRole,"統計",HRAO || SuperUser,"系統")="系統",Blank(),HRAO || SuperUser,"系統")
                     ]
@@ -141,7 +141,7 @@ HomepageScreen As screen:
                             HomepageScreen,
                             ScreenTransition.None
                         ),
-                        ThisItem.Value = "表格管理",
+                        ThisItem.Value = "表格",
                         Navigate(AdminFormListScreen,
                             ScreenTransition.None
                         ),
@@ -151,7 +151,7 @@ HomepageScreen As screen:
                         ThisItem.Value = "系統",
                         Launch("https://apps.powerapps.com/play/c030168f-5133-4c9d-8e17-3c870ba99ab4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=UserScreen"),
                     
-                        ThisItem.Value = "任務管理",
+                        ThisItem.Value = "任務",
                         Navigate(
                             GeneralFormListScreen,
                             ScreenTransition.None
@@ -181,13 +181,13 @@ HomepageScreen As screen:
                     =If(
                         ThisItem.Value = "首頁",
                         Icon.Home,
-                        ThisItem.Value = "表格管理",
+                        ThisItem.Value = "表格",
                         Icon.ListScrollWatchlist,
                         ThisItem.Value = "統計",
                         Icon.LogJournal,
                         ThisItem.Value = "系統",
                         Icon.People,
-                        ThisItem.Value = "任務管理",
+                        ThisItem.Value = "任務",
                         Icon.Lock
                     )
                 OnSelect: =Select(Parent)
