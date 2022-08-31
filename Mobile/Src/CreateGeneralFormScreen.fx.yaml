@@ -309,7 +309,7 @@
                     If(
                         Label6.Visible = true || Label6_1.Visible = true,
                         If(
-                            (Label6.Visible = true && IsBlank(TextInput_FormPWD)) || (Label6_1.Visible = true && IsBlank(TextInput_zipPWD)),
+                            (Label6.Visible = true && IsBlank(TextInput_FormPWD) && IsBlank(TextInput_FormPWD_1)) || (Label6_1.Visible = true && IsBlank(TextInput_zipPWD)&& IsBlank(TextInput_zipPWD_1)),
                             Notify(
                                 "密碼不能爲空",
                                 NotificationType.Error

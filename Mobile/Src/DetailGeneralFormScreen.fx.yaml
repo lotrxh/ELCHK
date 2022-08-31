@@ -857,6 +857,7 @@
                         ZIndex: =3
 
                     Container6 As groupContainer.horizontalAutoLayoutContainer:
+                        LayoutGap: =5
                         LayoutJustifyContent: =LayoutJustifyContent.Center
                         LayoutMinHeight: =40
                         LayoutMinWidth: =250
@@ -881,10 +882,11 @@
                             FocusedBorderColor: =glbNeutralSecondaryColor
                             FocusedBorderThickness: =1
                             Height: =36
-                            HintText: ="附件密碼"
+                            HintText: ="請輸入表格密碼"
                             HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                             HoverFill: =ColorFade(Self.Fill, -5%)
                             Mode: =TextMode.Password
+                            OnChange: =If(TextInput2_35.Text<>TextInput2_30.Text,Notify("密碼輸入不一致，請重新輸入",Warning),TextInput2_35.Text=TextInput2_30.Text,Notify("密碼輸入一致",Success,4000))
                             PaddingBottom: =0
                             PaddingLeft: =10
                             PaddingRight: =0
@@ -896,10 +898,40 @@
                             RadiusTopRight: =0
                             Size: =12
                             Visible: =If(First(EditDetailUserForm_2).IsPassWord=0||First(EditDetailUserForm_2).IsPassWord=1||IsBlank(First(EditDetailUserForm_2).IsPassWord),true,false)
-                            Width: =Parent.Width-17
+                            Width: =Parent.Width-335
                             X: =20
                             Y: =82
                             ZIndex: =2
+
+                        TextInput2_35 As text:
+                            AlignInContainer: =AlignInContainer.Center
+                            BorderColor: =glbNeutralTertiaryColor
+                            BorderThickness: =1
+                            Color: =glbNeutralPrimaryColor
+                            Default: =""
+                            FocusedBorderColor: =glbNeutralSecondaryColor
+                            FocusedBorderThickness: =1
+                            Height: =36
+                            HintText: ="請再次輸入表格密碼"
+                            HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                            HoverFill: =ColorFade(Self.Fill, -5%)
+                            Mode: =TextMode.Password
+                            OnChange: =If(TextInput2_35.Text<>TextInput2_30.Text,Notify("密碼輸入不一致，請重新輸入",Warning),TextInput2_35.Text=TextInput2_30.Text,Notify("密碼輸入一致",Success,4000))
+                            PaddingBottom: =0
+                            PaddingLeft: =10
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                            RadiusBottomLeft: =0
+                            RadiusBottomRight: =0
+                            RadiusTopLeft: =0
+                            RadiusTopRight: =0
+                            Size: =12
+                            Visible: =If(First(EditDetailUserForm_2).IsPassWord=0||First(EditDetailUserForm_2).IsPassWord=1||IsBlank(First(EditDetailUserForm_2).IsPassWord),true,false)
+                            Width: =Parent.Width-335
+                            X: =20
+                            Y: =82
+                            ZIndex: =3
 
                     Image2 As image:
                         Height: =1
@@ -1147,6 +1179,7 @@
                         ZIndex: =3
 
                     Container7 As groupContainer.horizontalAutoLayoutContainer:
+                        LayoutGap: =5
                         LayoutJustifyContent: =LayoutJustifyContent.Center
                         LayoutMinHeight: =40
                         LayoutMinWidth: =250
@@ -1170,7 +1203,7 @@
                             FocusedBorderColor: =glbNeutralSecondaryColor
                             FocusedBorderThickness: =1
                             Height: =36
-                            HintText: ="附件密碼"
+                            HintText: ="請輸入附件密碼"
                             HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                             HoverFill: =ColorFade(Self.Fill, -5%)
                             Mode: =TextMode.Password
@@ -1185,10 +1218,40 @@
                             RadiusTopRight: =0
                             Size: =12
                             Visible: =If(First(EditDetailUserForm_2).IsAttachmentPassWord=0||First(EditDetailUserForm_2).IsAttachmentPassWord=1||IsBlank(First(EditDetailUserForm_2).IsAttachmentPassWord),true,false)
-                            Width: =Parent.Width-17
+                            Width: =Parent.Width-335
                             X: =20
                             Y: =117
                             ZIndex: =2
+
+                        TextInput2_37 As text:
+                            AlignInContainer: =AlignInContainer.Center
+                            BorderColor: =glbNeutralTertiaryColor
+                            BorderThickness: =1
+                            Color: =glbNeutralPrimaryColor
+                            Default: =""
+                            FocusedBorderColor: =glbNeutralSecondaryColor
+                            FocusedBorderThickness: =1
+                            Height: =36
+                            HintText: ="請再次輸入附件密碼"
+                            HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                            HoverFill: =ColorFade(Self.Fill, -5%)
+                            Mode: =TextMode.Password
+                            OnChange: =If(TextInput2_37.Text<>TextInput2_31.Text,Notify("密碼輸入不一致，請重新輸入",Warning),TextInput2_37.Text=TextInput2_31.Text,Notify("密碼輸入一致",Success,4000))
+                            PaddingBottom: =0
+                            PaddingLeft: =10
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                            RadiusBottomLeft: =0
+                            RadiusBottomRight: =0
+                            RadiusTopLeft: =0
+                            RadiusTopRight: =0
+                            Size: =12
+                            Visible: =If(First(EditDetailUserForm_2).IsAttachmentPassWord=0||First(EditDetailUserForm_2).IsAttachmentPassWord=1||IsBlank(First(EditDetailUserForm_2).IsAttachmentPassWord),true,false)
+                            Width: =Parent.Width-335
+                            X: =20
+                            Y: =117
+                            ZIndex: =3
 
                     Image3 As image:
                         Image: =Last(Attachment_Zip2.Attachments).Value
@@ -1215,7 +1278,7 @@
                         PaddingLeft: =0
                         PaddingRight: =0
                         PaddingTop: =0
-                        Text: ="Filter Label"
+                        Text: ="標籤"
                         Width: =140
                         X: =20
                         Y: =363
@@ -2004,7 +2067,7 @@
                     
                     If((Label6_2.Visible=true&&Last(Attachment_Excel2.Attachments).Name<>Blank())||(Label6_3.Visible=true&&Last(Attachment_Zip2.Attachments).Name<>Blank()),
                     //密码为必填字段时执行下面操作
-                    If((Label6_2.Visible=true&&Last(Attachment_Excel2.Attachments).Name<>Blank()&&IsBlank(TextInput2_30))||(Label6_3.Visible=true&&Last(Attachment_Zip2.Attachments).Name<>Blank()&&IsBlank(TextInput2_31)),Notify( "密碼不能爲空", NotificationType.Error ),
+                    If((Label6_2.Visible=true&&Last(Attachment_Excel2.Attachments).Name<>Blank()&&IsBlank(TextInput2_30)&&IsBlank(TextInput2_35))||(Label6_3.Visible=true&&Last(Attachment_Zip2.Attachments).Name<>Blank()&&IsBlank(TextInput2_31)&&IsBlank(TextInput2_37)),Notify( "密碼不能爲空", NotificationType.Error ),
                     UpdateIf(GenericUploadAttachMentFile,FormId=First(EditDetailUserForm_1).Title&&FormAttachMent=First(AttachmentExcelName).Name,
                     {
                         FormId:First(EditDetailUserForm_1).Title,
