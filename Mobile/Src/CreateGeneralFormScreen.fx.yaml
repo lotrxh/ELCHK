@@ -230,7 +230,8 @@
                                 DepartMentName: Label1_130.Text,
                                 FormType: Label1_132.Text,
                                 'Operator ': User().Email,
-                                Task_Name: FormNameLabel_1.Text
+                                Task_Name: FormNameLabel_1.Text,
+                                DepartMentUnit:drpFilterDepartment_1.Selected.Result
                             }
                         )
                     );
