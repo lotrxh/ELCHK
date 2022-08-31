@@ -40,6 +40,23 @@
     "dependents": [],
     "id": "7c4cb0cb-4057-4e8f-9e81-658856e779cf"
   },
+  "c63818b0-6a22-4c7d-8e8a-4c662dfaa20f": {
+    "connectionParameters": {
+      "sku": "Enterprise"
+    },
+    "connectionRef": {
+      "displayName": "Office 365 用户",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1593/1.0.1593.2980/office365users/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_office365users"
+    },
+    "datasets": {},
+    "dataSources": [
+      "Office365用户"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "c63818b0-6a22-4c7d-8e8a-4c662dfaa20f"
+  },
   "d8c8758b-8da6-4da9-b896-855b4b1f6419": {
     "connectionParameters": {
       "workFlowCallbackUri": "https://prod-27.southeastasia.logic.azure.com:443/workflows/561669a65331404eb2b2f78532551773/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=fKwP87pxi8_s8oM5PtQ0wMjIL1NaBwdyoLiI7cFVBK8",

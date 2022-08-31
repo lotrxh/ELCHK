@@ -522,9 +522,7 @@
                 Fill: =RGBA(255, 255, 255, 1)
                 FillPortions: =0
                 Height: =FormNameLabel_1.Y+FormNameLabel_1.Height+10
-                LayoutAlignItems: =LayoutAlignItems.Center
-                LayoutGap: =10
-                LayoutJustifyContent: =LayoutJustifyContent.SpaceBetween
+                LayoutGap: =5
                 LayoutMinHeight: =100
                 LayoutMinWidth: =250
                 LayoutMode: =LayoutMode.Auto
@@ -552,7 +550,7 @@
                     PaddingTop: =0
                     Size: =18
                     Text: =First(EditUserForm).ModelName
-                    Width: =Parent.Width-800
+                    Width: =Parent.Width-330
                     X: =58
                     ZIndex: =1
 
@@ -1003,7 +1001,7 @@
                         PressedFill: =
                         Size: =10
                         Tooltip: =
-                        Visible: =If(First(EditUserForm).FlowType<>"Template",true,false)
+                        Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
                         Width: =Parent.Width-40
                         X: =20
                         Y: =56
@@ -1015,7 +1013,7 @@
                         LayoutMinHeight: =50
                         LayoutMinWidth: =250
                         LayoutMode: =LayoutMode.Auto
-                        Visible: =If(First(EditUserForm).FlowType<>"Template",true,false)
+                        Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
                         ZIndex: =5
 
                         Label6 As label:
@@ -1097,7 +1095,7 @@
                     LayoutMinWidth: =250
                     LayoutMode: =LayoutMode.Auto
                     PaddingLeft: =20
-                    Visible: =If(First(EditUserForm).ModelAttachMent="有"&&First(EditUserForm).FlowType<>"Template",true,false)
+                    Visible: =If(First(EditUserForm).ModelAttachMent="有"&&First(EditUserForm).FlowType<>"範本",true,false)
                     ZIndex: =2
 
                     Label9_22 As label:
@@ -1226,7 +1224,7 @@
                     LayoutMode: =LayoutMode.Auto
                     PaddingLeft: =20
                     PaddingRight: =20
-                    Visible: =If(First(EditUserForm).FlowType<>"Template"||First(EditUserForm).CustomFilter<>Blank(),true,false)
+                    Visible: =If(First(EditUserForm).FlowType<>"範本"||First(EditUserForm).CustomFilter<>Blank(),true,false)
                     ZIndex: =3
 
                     Label9_23 As label:
@@ -1281,7 +1279,7 @@
                     LayoutMode: =LayoutMode.Auto
                     PaddingLeft: =20
                     PaddingRight: =20
-                    Visible: =If(First(EditUserForm).FlowType<>"Template",true,false)
+                    Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
                     ZIndex: =4
 
                     Label9_24 As label:

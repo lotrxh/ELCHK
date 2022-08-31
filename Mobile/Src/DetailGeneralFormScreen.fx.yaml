@@ -921,7 +921,7 @@
                     LayoutMode: =LayoutMode.Auto
                     PaddingLeft: =20
                     PaddingRight: =20
-                    Visible: =If(First(EditDetailUserForm_2).ModelAttachMent="有"&&First(EditDetailUserForm_2).FlowType<>"Template",true,false)
+                    Visible: =If(First(EditDetailUserForm_2).ModelAttachMent="有",true,false)
                     ZIndex: =2
 
                     Label9_27 As label:
@@ -1204,7 +1204,7 @@
                     LayoutMinWidth: =250
                     LayoutMode: =LayoutMode.Auto
                     PaddingLeft: =20
-                    Visible: =If(First(EditDetailUserForm_2).FlowType<>"Template"||First(EditDetailUserForm_2).CustomFilter<>Blank(),true,false)
+                    Visible: =If(First(EditDetailUserForm_2).CustomFilter<>Blank(),true,false)
                     ZIndex: =3
 
                     Label9_28 As label:
@@ -1246,7 +1246,6 @@
                     LayoutMinWidth: =250
                     LayoutMode: =LayoutMode.Auto
                     PaddingLeft: =20
-                    Visible: =If(First(EditDetailUserForm_2).FlowType<>"Template",true,false)
                     ZIndex: =4
 
                     Label9_29 As label:
