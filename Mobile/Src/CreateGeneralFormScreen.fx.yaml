@@ -160,22 +160,12 @@
                         
                     //左边填写内容上传必選項判斷
                     If( 
-                        (Attachment_Excel.Visible = true &&Last(Attachment_Excel.Attachments).Name = Blank()) || (Attachment_Zip.Visible = true && Last(Attachment_Zip.Attachments).Name = Blank())
+                        (Attachment_Excel.Visible = true &&Last(Attachment_Excel.Attachments).Name = Blank()) || (Attachment_Zip.Visible = true && Last(Attachment_Zip.Attachments).Name = Blank()) || (Label6.Visible = true && IsBlank(TextInput_FormPWD) && IsBlank(TextInput_FormPWD_1)) || (Label6_1.Visible = true && IsBlank(TextInput_zipPWD)&& IsBlank(TextInput_zipPWD_1)) || (drpFilterDepartment_1.Visible = true && IsEmpty(drpFilterDepartment_1.SelectedItems))
                             ,
                             Notify(
-                                "請上傳表單或附件",
+                                "必選項不能爲空",
                                 NotificationType.Error
                             ), 
-                            If( 
-                                (Label6.Visible = true && IsBlank(TextInput_FormPWD) && IsBlank(TextInput_FormPWD_1)) || (Label6_1.Visible = true && IsBlank(TextInput_zipPWD)&& IsBlank(TextInput_zipPWD_1))
-                                ,
-                                Notify(
-                                    "密碼不能爲空",
-                                    NotificationType.Error
-                            ),If(IsEmpty(drpFilterDepartment_1.SelectedItems),Notify(
-                                    "請選擇部門/單位",
-                                    NotificationType.Error
-                            ),
                         //右边流程
                         Set(
                         ApprovalGuid,
@@ -419,7 +409,7 @@
                         None,
                         {HistoryList: ApprovalIDNumber}
                     );
-                        )));
+                        );
                     
                 PaddingBottom: =0
                 PaddingLeft: =0
@@ -813,13 +803,24 @@
                     PaddingLeft: =20
                     PaddingRight: =20
                     PaddingTop: =20
+                    Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
                     ZIndex: =1
 
                     Container8 As groupContainer.horizontalAutoLayoutContainer:
                         LayoutMinHeight: =40
                         LayoutMinWidth: =250
                         LayoutMode: =LayoutMode.Auto
+                        Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
                         ZIndex: =1
+
+                        Label6_4 As label:
+                            AlignInContainer: =AlignInContainer.Start
+                            Color: =glbErrorColor
+                            Height: =30
+                            Size: =12
+                            Text: ="*"
+                            Width: =15
+                            ZIndex: =1
 
                         Label9_34 As label:
                             AlignInContainer: =AlignInContainer.Center
@@ -834,7 +835,7 @@
                             Width: =140
                             X: =20
                             Y: =363
-                            ZIndex: =1
+                            ZIndex: =2
 
                         drpFilterDepartment_1 As combobox:
                             AlignInContainer: =AlignInContainer.Center
@@ -870,13 +871,12 @@
                             Width: =300
                             X: =90
                             Y: =3
-                            ZIndex: =2
+                            ZIndex: =3
 
                     Container12_3 As groupContainer.horizontalAutoLayoutContainer:
                         Fill: =RGBA(255, 255, 255, 1)
                         FillPortions: =0
                         Height: =30
-                        LayoutJustifyContent: =LayoutJustifyContent.SpaceBetween
                         LayoutMinHeight: =100
                         LayoutMinWidth: =250
                         LayoutMode: =LayoutMode.Auto
@@ -884,6 +884,15 @@
                         PaddingRight: =1
                         PaddingTop: =1
                         ZIndex: =3
+
+                        Label6_5 As label:
+                            AlignInContainer: =AlignInContainer.Start
+                            Color: =glbErrorColor
+                            Height: =30
+                            Size: =12
+                            Text: ="*"
+                            Width: =15
+                            ZIndex: =1
 
                         Label9_33 As label:
                             Color: =glbNeutralPrimaryColor
@@ -893,16 +902,16 @@
                             PaddingLeft: =0
                             PaddingRight: =0
                             PaddingTop: =0
-                            Text: =If(First(EditUserForm).FlowType<>"Template","上傳申請表","下載申請表")
+                            Text: ="上傳申請表"
                             Width: =300
-                            ZIndex: =1
+                            ZIndex: =2
 
                         Image4_2 As image:
                             Height: =10
                             Image: =Last(Attachment_Excel.Attachments).Value
                             Visible: =false
                             Width: =10
-                            ZIndex: =5
+                            ZIndex: =3
 
                     Attachment_Excel As attachments:
                         AddAttachmentText: ="Click or drag the file here to upload"
@@ -1045,19 +1054,35 @@
                         //true
                     ZIndex: =2
 
-                    Label9_22 As label:
-                        Color: =glbNeutralPrimaryColor
-                        FontWeight: =FontWeight.Semibold
+                    Container5 As groupContainer.horizontalAutoLayoutContainer:
+                        FillPortions: =0
                         Height: =30
-                        PaddingBottom: =0
-                        PaddingLeft: =0
-                        PaddingRight: =0
-                        PaddingTop: =0
-                        Text: ="上傳附件"
-                        Width: =100
-                        X: =20
-                        Y: =192
+                        LayoutMinHeight: =30
+                        LayoutMinWidth: =250
+                        LayoutMode: =LayoutMode.Auto
                         ZIndex: =1
+
+                        Label6_6 As label:
+                            Color: =glbErrorColor
+                            Height: =30
+                            Size: =12
+                            Text: ="*"
+                            Width: =15
+                            ZIndex: =2
+
+                        Label9_22 As label:
+                            Color: =glbNeutralPrimaryColor
+                            FontWeight: =FontWeight.Semibold
+                            Height: =30
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Text: ="上傳附件"
+                            Width: =100
+                            X: =20
+                            Y: =192
+                            ZIndex: =3
 
                     Attachment_Zip As attachments:
                         AddAttachmentText: ="Click or drag the file here to upload"
@@ -1103,7 +1128,7 @@
                         Width: =Parent.Width-40
                         X: =20
                         Y: =35
-                        ZIndex: =2
+                        ZIndex: =3
 
                     Image4_1 As image:
                         Height: =10
