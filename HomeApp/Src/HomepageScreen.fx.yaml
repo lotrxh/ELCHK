@@ -574,7 +574,8 @@ HomepageScreen As screen:
                                             Title: GUID(),
                                             UserEmail: User().Email,
                                             ContatsType: "",
-                                            TaskFormDescription: ThisItem.ModelDescription
+                                            TaskFormDescription: ThisItem.ModelDescription,
+                                            ModelFlowNumber:ThisItem.ModelFlowNumber
                                         }
                                     )
                                 )
@@ -881,7 +882,7 @@ HomepageScreen As screen:
                 false
             )
         Width: =259
-        X: =871
+        X: =898
         Y: =5
         ZIndex: =4
 

@@ -405,7 +405,7 @@ AdminFormDetailScreen As screen:
                 HintText: ="示例：A111(字母+3個數字)"
                 HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                 HoverFill: =ColorFade(Self.Fill, -5%)
-                OnChange: =If(IsMatch(TextInput_FormNumber.Text,Letter&Digit&Digit&Digit),Notify("格式正確",Success,3000),Notify("格式錯誤，請輸入字母+3個數字",Warning,3000))
+                OnChange: =If(IsMatch(TextInput_FormNumber.Text,Letter&Digit&Digit&Digit),If(TextInput_FormNumber in GenericFormModel.ModelFlowNumber,Notify("該表格編號已經存在",Warning),Notify("格式正確",Success,3000)),Notify("格式錯誤，請輸入字母+3個數字",Warning))
                 PaddingBottom: =0
                 PaddingLeft: =10
                 PaddingRight: =0
