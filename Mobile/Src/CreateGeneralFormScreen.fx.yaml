@@ -319,6 +319,9 @@
                                 Notify(
                                     "密碼不能爲空",
                                     NotificationType.Error
+                            ),If(IsEmpty(drpFilterDepartment_1.SelectedItems),Notify(
+                                    "請選擇部門/單位",
+                                    NotificationType.Error
                             ),
                             Set(
                                 GenericFormlistGuid,
@@ -406,7 +409,7 @@
                                     Title = First(NewUserForm).Title
                                 )
                             );
-                        ));
+                        )));
                     Navigate(
                         DetailGeneralFormScreen,
                         None,
