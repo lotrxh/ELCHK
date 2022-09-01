@@ -155,8 +155,29 @@
                 FocusedBorderThickness: =1
                 Height: =36
                 HoverFill: =ColorFade(Self.Fill, -15%)
-                OnSelect: |
-                    =Set(
+                OnSelect: |+
+                    =
+                        
+                    //左边填写内容上传必選項判斷
+                    If( 
+                        (Attachment_Excel.Visible = true &&Last(Attachment_Excel.Attachments).Name = Blank()) || (Attachment_Zip.Visible = true && Last(Attachment_Zip.Attachments).Name = Blank())
+                            ,
+                            Notify(
+                                "請上傳表單或附件",
+                                NotificationType.Error
+                            ), 
+                            If( 
+                                (Label6.Visible = true && IsBlank(TextInput_FormPWD) && IsBlank(TextInput_FormPWD_1)) || (Label6_1.Visible = true && IsBlank(TextInput_zipPWD)&& IsBlank(TextInput_zipPWD_1))
+                                ,
+                                Notify(
+                                    "密碼不能爲空",
+                                    NotificationType.Error
+                            ),If(IsEmpty(drpFilterDepartment_1.SelectedItems),Notify(
+                                    "請選擇部門/單位",
+                                    NotificationType.Error
+                            ),
+                        //右边流程
+                        Set(
                         ApprovalGuid,
                         GUID()
                     );
@@ -236,12 +257,13 @@
                         )
                     );
                     If(
-                        FlowType = "Generic Flow" && IsBlank(
+                        FlowType = "通用流程" /*&& IsBlank(
                             LookUp(
                                 GenericFormModel,
                                 Title = FormModelId
                             ).SelectedActions
-                        ),
+                        )*/
+                        ,
                         ForAll(
                             ApprovalListCol,
                             Patch(
@@ -306,23 +328,6 @@
                         )
                     );
                     //左边填写内容上传
-                    If( 
-                        (Attachment_Excel.Visible = true &&Last(Attachment_Excel.Attachments).Name = Blank()) || (Attachment_Zip.Visible = true && Last(Attachment_Zip.Attachments).Name = Blank())
-                            ,
-                            Notify(
-                                "請上傳表單或附件",
-                                NotificationType.Error
-                            ), 
-                            If( 
-                                (Label6.Visible = true && IsBlank(TextInput_FormPWD) && IsBlank(TextInput_FormPWD_1)) || (Label6_1.Visible = true && IsBlank(TextInput_zipPWD)&& IsBlank(TextInput_zipPWD_1))
-                                ,
-                                Notify(
-                                    "密碼不能爲空",
-                                    NotificationType.Error
-                            ),If(IsEmpty(drpFilterDepartment_1.SelectedItems),Notify(
-                                    "請選擇部門/單位",
-                                    NotificationType.Error
-                            ),
                             Set(
                                 GenericFormlistGuid,
                                 GUID()
@@ -409,12 +414,13 @@
                                     Title = First(NewUserForm).Title
                                 )
                             );
-                        )));
                     Navigate(
                         DetailGeneralFormScreen,
                         None,
                         {HistoryList: ApprovalIDNumber}
                     );
+                        )));
+                    
                 PaddingBottom: =0
                 PaddingLeft: =0
                 PaddingRight: =0
