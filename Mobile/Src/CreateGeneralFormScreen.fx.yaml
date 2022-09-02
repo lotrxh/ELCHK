@@ -86,7 +86,7 @@
     BottomContainer As groupContainer.manualLayoutContainer:
         Fill: =White
         Height: =60
-        Visible: =If(First(EditUserForm).FlowType<>"Template",true,false)
+        Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
         Width: =Parent.Width
         Y: =Parent.Height-Self.Height
         ZIndex: =2
@@ -790,6 +790,7 @@
                 LayoutMinHeight: =100
                 LayoutMinWidth: =250
                 LayoutMode: =LayoutMode.Auto
+                Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
                 ZIndex: =1
 
                 UploadTemplateContainer As groupContainer.verticalAutoLayoutContainer:
@@ -1229,7 +1230,7 @@
                     LayoutMode: =LayoutMode.Auto
                     PaddingLeft: =20
                     PaddingRight: =20
-                    Visible: =If(First(EditUserForm).FlowType<>"範本"||First(EditUserForm).CustomFilter<>Blank(),true,false)
+                    Visible: =If(First(EditUserForm).CustomFilter<>Blank(),true,false)
                     ZIndex: =3
 
                     Label9_23 As label:
@@ -1352,7 +1353,7 @@
                 PaddingLeft: =20
                 PaddingRight: =20
                 PaddingTop: =20
-                Visible: =If(First(EditUserForm).FlowType<>"Template",true,false)
+                Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
                 ZIndex: =2
 
                 Label9_25 As label:
