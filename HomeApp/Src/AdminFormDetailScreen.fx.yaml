@@ -177,7 +177,12 @@ AdminFormDetailScreen As screen:
                     }));UpdateIf(TemplateFileList,TempFileName=TextInput_FormName.Text,
                     {
                         GenericFormId:First(EditForm).Title
-                    });Clear(EditForm);
+                    });
+                    UpdateIf(TemplateFileList,TempFileName=TextInput_FormName.Text&&TempType=Last(EditAttachment).TempType,
+                    {
+                        TempType:drpFilter_FormType.Selected.Result
+                    });
+                    Clear(EditForm);
                     Clear(EditAttachment);
                     Clear(EditAttachment2);
                     Clear(EditAttachment3);
@@ -346,6 +351,7 @@ AdminFormDetailScreen As screen:
                 BorderThickness: =1
                 Color: =glbNeutralPrimaryColor
                 Default: =First(EditForm).ModelName//加载编辑表格的表格名称
+                DisplayMode: =Formname
                 FocusedBorderColor: =glbNeutralSecondaryColor
                 FocusedBorderThickness: =1
                 Height: =32
