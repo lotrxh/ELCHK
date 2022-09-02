@@ -96,7 +96,7 @@ HomepageScreen As screen:
         GalleryNav_3 As gallery.galleryVertical:
             Height: =237
             Items: |
-                =If(
+                =Filter(If(
                     CurrentRoleFormPermission = "None" || CurrentRoleFormPermission = Blank(),
                     [
                         "首頁",
@@ -112,7 +112,7 @@ HomepageScreen As screen:
                         If(CurrentRole,"統計",HRAO || SuperUser,"系統"),
                         If(If(CurrentRole,"統計",HRAO || SuperUser,"系統")="系統",Blank(),HRAO || SuperUser,"系統")
                     ]
-                )
+                ),ThisRecord.Value <> Blank())
             Layout: =Layout.Vertical
             OnSelect: =
             TemplatePadding: =0
@@ -882,7 +882,7 @@ HomepageScreen As screen:
                 false
             )
         Width: =259
-        X: =932
+        X: =949
         Y: =5
         ZIndex: =4
 
