@@ -160,97 +160,206 @@ AdminFormDetailScreen As screen:
                 FocusedBorderThickness: =1
                 Height: =36
                 HoverFill: =ColorFade(Self.Fill, -15%)
-                OnSelect: |-
-                    =If(IsEmpty(drpFilter_Department.SelectedItems)||IsEmpty(drpFilter_FormType.SelectedItems)||IsBlank(TextInput_FormName.Text)||IsBlank(TextInput_FormNumber)||Last(Attachment_Form.Attachments).Name=Blank()||Radio_flowtype.SelectedText.Value=Blank()||Radio_password.SelectedText.Value=Blank()||Radio_attachment.SelectedText.Value=Blank(),Notify( "必选项不能为空", NotificationType.Error ),If(TextInput_FormName.Text in GenericFormModel.ModelName,(UpdateIf(GenericFormModel,ModelName=TextInput_FormName.Text,{
-                        ModelDepartment:drpFilter_Department.Selected.Result,
-                        ModelType:drpFilter_FormType.Selected.Result,
-                        ModelFlowNumber:TextInput_FormNumber.Text,
-                        ModelVersion:TextInput_FormVersion.Text,
-                        ModelDescription:[@TextInput_FormDescription].Text,
-                        ModelFlowUser:User().Email,
-                        CustomFilter:TextInput_CustomFilter.Text,
-                        ModelAttachMent:Radio_attachment.SelectedText.Value,
-                        FlowType:Radio_flowtype.SelectedText.Value,
-                        SelectedActions:If(Radio_flowtype.SelectedText.Value="通用流程","補充資料;跟進;檢查;提交;簽批;助理總幹事審批;總幹事審批;執行;",If(Radio_flowtype.SelectedText.Value="預設通用流程","補充資料;跟進;檢查;提交;"&If(Checkbox1_4.Value=true,Checkbox1_4.Text&";","")&If(Checkbox1_5.Value=true,Checkbox1_5.Text&";","")&If(Checkbox1_6.Value=true,Checkbox1_6.Text&";","")&"執行;","")),
-                        IsPassWord:If(Radio_password.SelectedText.Value="有",1,If(Radio_password.SelectedText.Value="無",2,0)),
-                        IsAttachmentPassWord:If(Radio_password_1.SelectedText.Value="有",1,If(Radio_password_1.SelectedText.Value="無",2,0)) //默认为0，即可有可无
-                    }));UpdateIf(TemplateFileList,TempFileName=TextInput_FormName.Text,
-                    {
-                        GenericFormId:First(EditForm).Title
-                    });
-                    UpdateIf(TemplateFileList,TempFileName=TextInput_FormName.Text&&TempType=Last(EditAttachment).TempType,
-                    {
-                        TempType:drpFilter_FormType.Selected.Result
-                    });
-                    Clear(EditForm);
-                    Clear(EditAttachment);
-                    Clear(EditAttachment2);
-                    Clear(EditAttachment3);
-                    
-                    Reset(Attachment_Form);
-                    Reset(drpFilter_Department);
-                    Reset(drpFilter_FormType);
-                    Reset(TextInput_FormVersion);
-                    Reset(TextInput_FormName);
-                    Reset(TextInput_FormDescription);
-                    Reset(TextInput_FormNumber);
-                    Reset(TextInput_CustomFilter);
-                    Reset(Attachment_Demonstrationform);
-                    Reset(Attachment_FillGuide);
-                    Reset(Radio_attachment);
-                    Reset(Radio_password);
-                    Reset(Radio_password_1);
-                    Reset(Radio_flowtype);
-                    Reset(Checkbox1_4);
-                    Reset(Checkbox1_5);
-                    Reset(Checkbox1_6);
-                    Navigate(AdminFormListScreen,ScreenTransition.Fade),
-                    ClearCollect(NewForm,Patch(GenericFormModel,Defaults(GenericFormModel),
-                    {
-                        Title:GUID(),
-                        ModelDepartment:drpFilter_Department.Selected.Result,
-                        ModelType:drpFilter_FormType.Selected.Result,
-                        ModelFlowNumber:TextInput_FormNumber.Text,
-                        ModelVersion:TextInput_FormVersion.Text,
-                        ModelName:[@TextInput_FormName].Text,
-                        ModelDescription:[@TextInput_FormDescription].Text,
-                        ModelFlowUser:User().Email,
-                        CustomFilter:TextInput_CustomFilter.Text,
-                        IsEnable:1,
-                        ModelAttachMent:Radio_attachment.SelectedText.Value,
-                        FlowType:Radio_flowtype.SelectedText.Value,
-                        SelectedActions:If(Radio_flowtype.SelectedText.Value="通用流程","補充資料;跟進;檢查;提交;簽批;助理總幹事審批;總幹事審批;執行;",If(Radio_flowtype.SelectedText.Value="預設通用流程","補充資料;跟進;檢查;提交;"&If(Checkbox1_4.Value=true,Checkbox1_4.Text&";","")&If(Checkbox1_5.Value=true,Checkbox1_5.Text&";","")&If(Checkbox1_6.Value=true,Checkbox1_6.Text&";","")&"執行;","")),
-                        IsPassWord:If(Radio_password.SelectedText.Value="有",1,If(Radio_password.SelectedText.Value="無",2,0)),
-                        IsAttachmentPassWord:If(Radio_password_1.SelectedText.Value="有",1,If(Radio_password_1.SelectedText.Value="無",2,0)) //默认为0，即可有可无
-                    }
-                    )));
-                    UpdateIf(TemplateFileList,TempFileName=TextInput_FormName.Text,
-                    {
-                        GenericFormId:First(NewForm).Title
-                    });
-                    Clear(EditForm);
-                    Clear(EditAttachment);
-                    Clear(EditAttachment2);
-                    Clear(EditAttachment3);
-                    
-                    Reset(Attachment_Form);
-                    Reset(drpFilter_Department);
-                    Reset(drpFilter_FormType);
-                    Reset(TextInput_FormVersion);
-                    Reset(TextInput_FormName);
-                    Reset(TextInput_FormDescription);
-                    Reset(TextInput_FormNumber);
-                    Reset(TextInput_CustomFilter);
-                    Reset(Attachment_Demonstrationform);
-                    Reset(Attachment_FillGuide);
-                    Reset(Radio_attachment);
-                    Reset(Radio_password);
-                    Reset(Radio_password_1);
-                    Reset(Radio_flowtype);
-                    Reset(Checkbox1_4);
-                    Reset(Checkbox1_5);
-                    Reset(Checkbox1_6);
-                    Navigate(AdminFormListScreen,ScreenTransition.Fade));
+                OnSelect: |
+                    =If(
+                        IsEmpty(drpFilter_Department.SelectedItems) || IsEmpty(drpFilter_FormType.SelectedItems) || IsBlank(TextInput_FormName.Text) || IsBlank(TextInput_FormNumber) || Last(Attachment_Form.Attachments).Name = Blank() || Radio_flowtype.SelectedText.Value = Blank() || Radio_password.SelectedText.Value = Blank() || Radio_attachment.SelectedText.Value = Blank(),
+                        Notify(
+                            "必选项不能为空",
+                            NotificationType.Error
+                        ),
+                        //編輯表單模板
+                        If(
+                            TextInput_FormName.Text in GenericFormModel.ModelName,
+                            (UpdateIf(
+                                GenericFormModel,
+                                ModelName = TextInput_FormName.Text,
+                                {
+                                    ModelDepartment: drpFilter_Department.Selected.Result,
+                                    ModelType: drpFilter_FormType.Selected.Result,
+                                    ModelFlowNumber: TextInput_FormNumber.Text,
+                                    ModelVersion: TextInput_FormVersion.Text,
+                                    ModelDescription: [@TextInput_FormDescription].Text,
+                                    ModelFlowUser: User().Email,
+                                    CustomFilter: TextInput_CustomFilter.Text,
+                                    ModelAttachMent: Radio_attachment.SelectedText.Value,
+                                    FlowType: Radio_flowtype.SelectedText.Value,
+                                    SelectedActions: If(
+                                        Radio_flowtype.SelectedText.Value = "通用流程",
+                                        "補充資料;跟進;檢查;提交;簽批;助理總幹事審批;總幹事審批;執行;",
+                                        If(
+                                            Radio_flowtype.SelectedText.Value = "預設通用流程",
+                                            "補充資料;跟進;檢查;提交;" & If(
+                                                Checkbox1_4.Value = true,
+                                                Checkbox1_4.Text & ";",
+                                                ""
+                                            ) & If(
+                                                Checkbox1_5.Value = true,
+                                                Checkbox1_5.Text & ";",
+                                                ""
+                                            ) & If(
+                                                Checkbox1_6.Value = true,
+                                                Checkbox1_6.Text & ";",
+                                                ""
+                                            ) & "執行;",
+                                            ""
+                                        )
+                                    ),
+                                    IsPassWord: If(
+                                        Radio_password.SelectedText.Value = "有",
+                                        1,
+                                        If(
+                                            Radio_password.SelectedText.Value = "無",
+                                            2,
+                                            0
+                                        )
+                                    ),
+                                    IsAttachmentPassWord: If(
+                                        Radio_password_1.SelectedText.Value = "有",
+                                        1,
+                                        If(
+                                            Radio_password_1.SelectedText.Value = "無",
+                                            2,
+                                            0
+                                        )
+                                    )//默认为0，即可有可无
+                                }
+                            ));
+                            UpdateIf(
+                                TemplateFileList,
+                                TempFileName = TextInput_FormName.Text,
+                                {GenericFormId: First(EditForm).Title}
+                            );
+                            UpdateIf(
+                                TemplateFileList,
+                                TempFileName = TextInput_FormName.Text && TempType = Last(EditAttachment).TempType,
+                                {TempType: drpFilter_FormType.Selected.Result}
+                            );
+                            Notify(
+                                "編輯成功！",
+                                NotificationType.Success
+                            );
+                            Clear(EditForm);
+                            Clear(EditAttachment);
+                            Clear(EditAttachment2);
+                            Clear(EditAttachment3);
+                            Reset(Attachment_Form);
+                            Reset(drpFilter_Department);
+                            Reset(drpFilter_FormType);
+                            Reset(TextInput_FormVersion);
+                            Reset(TextInput_FormName);
+                            Reset(TextInput_FormDescription);
+                            Reset(TextInput_FormNumber);
+                            Reset(TextInput_CustomFilter);
+                            Reset(Attachment_Demonstrationform);
+                            Reset(Attachment_FillGuide);
+                            Reset(Radio_attachment);
+                            Reset(Radio_password);
+                            Reset(Radio_password_1);
+                            Reset(Radio_flowtype);
+                            Reset(Checkbox1_4);
+                            Reset(Checkbox1_5);
+                            Reset(Checkbox1_6);
+                            Navigate(
+                                AdminFormListScreen,
+                                ScreenTransition.Fade
+                            ),
+                            //新建表單模板
+                            ClearCollect(
+                                NewForm,
+                                Patch(
+                                    GenericFormModel,
+                                    Defaults(GenericFormModel),
+                                    {
+                                        Title: GUID(),
+                                        ModelDepartment: drpFilter_Department.Selected.Result,
+                                        ModelType: drpFilter_FormType.Selected.Result,
+                                        ModelFlowNumber: TextInput_FormNumber.Text,
+                                        ModelVersion: TextInput_FormVersion.Text,
+                                        ModelName: [@TextInput_FormName].Text,
+                                        ModelDescription: [@TextInput_FormDescription].Text,
+                                        ModelFlowUser: User().Email,
+                                        CustomFilter: TextInput_CustomFilter.Text,
+                                        IsEnable: 1,
+                                        ModelAttachMent: Radio_attachment.SelectedText.Value,
+                                        FlowType: Radio_flowtype.SelectedText.Value,
+                                        SelectedActions: If(
+                                            Radio_flowtype.SelectedText.Value = "通用流程",
+                                            "補充資料;跟進;檢查;提交;簽批;助理總幹事審批;總幹事審批;執行;",
+                                            If(
+                                                Radio_flowtype.SelectedText.Value = "預設通用流程",
+                                                "補充資料;跟進;檢查;提交;" & If(
+                                                    Checkbox1_4.Value = true,
+                                                    Checkbox1_4.Text & ";",
+                                                    ""
+                                                ) & If(
+                                                    Checkbox1_5.Value = true,
+                                                    Checkbox1_5.Text & ";",
+                                                    ""
+                                                ) & If(
+                                                    Checkbox1_6.Value = true,
+                                                    Checkbox1_6.Text & ";",
+                                                    ""
+                                                ) & "執行;",
+                                                ""
+                                            )
+                                        ),
+                                        IsPassWord: If(
+                                            Radio_password.SelectedText.Value = "有",
+                                            1,
+                                            If(
+                                                Radio_password.SelectedText.Value = "無",
+                                                2,
+                                                0
+                                            )
+                                        ),
+                                        IsAttachmentPassWord: If(
+                                            Radio_password_1.SelectedText.Value = "有",
+                                            1,
+                                            If(
+                                                Radio_password_1.SelectedText.Value = "無",
+                                                2,
+                                                0
+                                            )
+                                        )//默认为0，即可有可无
+                                    }
+                                )
+                            )
+                        );
+                        UpdateIf(
+                            TemplateFileList,
+                            TempFileName = TextInput_FormName.Text,
+                            {GenericFormId: First(NewForm).Title}
+                        );
+                        Notify(
+                            "保存成功！",
+                            NotificationType.Success
+                        );
+                        Clear(EditForm);
+                        Clear(EditAttachment);
+                        Clear(EditAttachment2);
+                        Clear(EditAttachment3);
+                        Reset(Attachment_Form);
+                        Reset(drpFilter_Department);
+                        Reset(drpFilter_FormType);
+                        Reset(TextInput_FormVersion);
+                        Reset(TextInput_FormName);
+                        Reset(TextInput_FormDescription);
+                        Reset(TextInput_FormNumber);
+                        Reset(TextInput_CustomFilter);
+                        Reset(Attachment_Demonstrationform);
+                        Reset(Attachment_FillGuide);
+                        Reset(Radio_attachment);
+                        Reset(Radio_password);
+                        Reset(Radio_password_1);
+                        Reset(Radio_flowtype);
+                        Reset(Checkbox1_4);
+                        Reset(Checkbox1_5);
+                        Reset(Checkbox1_6);
+                        Navigate(
+                            AdminFormListScreen,
+                            ScreenTransition.Fade
+                        )
+                    );
                 PaddingBottom: =0
                 PaddingLeft: =0
                 PaddingRight: =0
