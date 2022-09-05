@@ -448,7 +448,6 @@ AdminFormListScreen As screen:
                     BorderStyle: =BorderStyle.None
                     BorderThickness: =0
                     Color: =RGBA(96, 94, 92, 1)
-                    DefaultDate: =
                     Fill: =RGBA(0, 0, 0, 0)
                     FocusedBorderThickness: =1
                     Font: =Font.Arial
@@ -479,7 +478,7 @@ AdminFormListScreen As screen:
                     BorderStyle: =BorderStyle.None
                     BorderThickness: =0
                     Color: =RGBA(96, 94, 92, 1)
-                    DefaultDate: =
+                    DefaultDate: =Today()-30
                     Fill: =RGBA(0, 0, 0, 0)
                     FocusedBorderColor: =White
                     FocusedBorderThickness: =0
@@ -771,7 +770,7 @@ AdminFormListScreen As screen:
                     OnSelect: |
                         =Set(ShowSavebutton,true);
                         Set(attachment,DisplayMode.Edit);
-                        Set(Formname,DisplayMode.Disabled);//設置編輯模式下，表單名稱不可編輯
+                        Set(Formnumber,DisplayMode.Disabled);//設置編輯模式下，表單名稱不可編輯
                         Navigate(AdminFormDetailScreen,ScreenTransition.Fade);
                         ClearCollect(EditForm,ThisItem);
                         //ClearCollect(EditAttachment,Filter(TemplateFileList,GenericFormId=ThisItem.Title&&TempType=ThisItem.ModelType));//編輯表格類型后不可用，下面方法替換
@@ -841,7 +840,7 @@ AdminFormListScreen As screen:
                 OnSelect: |-
                     =Set(ShowSavebutton,true);//設置保存按鈕可見
                     Set(attachment,DisplayMode.Edit);//設置附件可編輯
-                    Set(Formname,DisplayMode.Edit);//設置表單名字可編輯
+                    Set(Formnumber,DisplayMode.Edit);//設置表單名字可編輯
                     Navigate(AdminFormDetailScreen,ScreenTransition.Fade);
                     Clear(EditForm);
                     Clear(EditAttachment);
@@ -890,7 +889,7 @@ AdminFormListScreen As screen:
                 OnSelect: |-
                     =Set(ShowSavebutton,true);//設置保存按鈕可見
                     Set(attachment,DisplayMode.Edit);//設置附件可編輯
-                    Set(Formname,DisplayMode.Edit);//設置表單名字可編輯
+                    Set(Formnumber,DisplayMode.Edit);//設置表單名字可編輯
                     Navigate(AdminFormDetailScreen,ScreenTransition.Fade);
                     Clear(EditForm);
                     Clear(EditAttachment);

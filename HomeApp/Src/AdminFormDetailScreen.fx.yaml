@@ -167,16 +167,16 @@ AdminFormDetailScreen As screen:
                             "必选项不能为空",
                             NotificationType.Error
                         ),
-                        //編輯表單模板
+                        //編輯表單模板，表格標號為不可更改項
                         If(
-                            TextInput_FormName.Text in GenericFormModel.ModelName,
+                            TextInput_FormNumber.Text in GenericFormModel.ModelName,
                             (UpdateIf(
                                 GenericFormModel,
-                                ModelName = TextInput_FormName.Text,
+                                ModelFlowNumber = TextInput_FormNumber.Text,
                                 {
                                     ModelDepartment: drpFilter_Department.Selected.Result,
                                     ModelType: drpFilter_FormType.Selected.Result,
-                                    ModelFlowNumber: TextInput_FormNumber.Text,
+                                    ModelName: TextInput_FormName.Text,
                                     ModelVersion: TextInput_FormVersion.Text,
                                     ModelDescription: [@TextInput_FormDescription].Text,
                                     ModelFlowUser: User().Email,
@@ -460,7 +460,6 @@ AdminFormDetailScreen As screen:
                 BorderThickness: =1
                 Color: =glbNeutralPrimaryColor
                 Default: =First(EditForm).ModelName//加载编辑表格的表格名称
-                DisplayMode: =Formname
                 FocusedBorderColor: =glbNeutralSecondaryColor
                 FocusedBorderThickness: =1
                 Height: =32
@@ -514,6 +513,7 @@ AdminFormDetailScreen As screen:
                 BorderThickness: =1
                 Color: =glbNeutralPrimaryColor
                 Default: =First(EditForm).ModelFlowNumber//加载编辑表格的表格编号
+                DisplayMode: =Formnumber
                 FocusedBorderColor: =glbNeutralSecondaryColor
                 FocusedBorderThickness: =1
                 Height: =32
