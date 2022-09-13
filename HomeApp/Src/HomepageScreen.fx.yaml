@@ -7,7 +7,7 @@ HomepageScreen As screen:
         // 待处理
         With({SearchPendingData:Filter(ApprovalDetailData,(CurrentUser in ApproverEmail||CurrentUser<>Blank()&&CurrentUser in AgentUserEmail)&&(TaskStatus="001"||TaskStatus="002"))},ClearCollect(FilterPendingDataCol,SearchPendingData));
         
-        ClearCollect(DataModelName,{ModelName:"招聘職位申請表",ModelDescription:"招聘表格",ModelFlowNumber:"A103"},{ModelName:"假期批核人資料表",ModelDescription:"假期表格",ModelFlowNumber:"A111"},{ModelName:"任職資源申請",ModelDescription:"IT財務指引表格",ModelFlowNumber:"A306"},{ModelName:"預備合約通知書(新入職)",ModelDescription:"預備合約表格",ModelFlowNumber:"A104"});
+        ClearCollect(DataModelName,{ModelName:"招聘職位申請表",ModelDescription:"招聘表格",ModelFlowNumber:"A103"},{ModelName:"假期批核人資料表",ModelDescription:"假期表格",ModelFlowNumber:"A306"},{ModelName:"任職資源申請",ModelDescription:"IT財務指引表格",ModelFlowNumber:"A111"},{ModelName:"預備合約通知書(新入職)",ModelDescription:"預備合約表格",ModelFlowNumber:"A104"});
         
         
         

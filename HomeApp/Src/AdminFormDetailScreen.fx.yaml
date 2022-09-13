@@ -185,10 +185,14 @@ AdminFormDetailScreen As screen:
                                     FlowType: Radio_flowtype.SelectedText.Value,
                                     SelectedActions: If(
                                         Radio_flowtype.SelectedText.Value = "通用流程",
-                                        "補充資料;跟進;檢查;提交;簽批;助理總幹事審批;總幹事審批;執行;",
+                                        "補充資料;提交;檢查;簽批;助理總幹事審批;總幹事審批;跟進;",
                                         If(
                                             Radio_flowtype.SelectedText.Value = "預設通用流程",
-                                            "補充資料;跟進;檢查;提交;" & If(
+                                            "補充資料;提交;" & If(
+                                                Checkbox1_3.Value = true,
+                                                Checkbox1_3.Text & ";",
+                                                ""
+                                            ) & If(
                                                 Checkbox1_4.Value = true,
                                                 Checkbox1_4.Text & ";",
                                                 ""
@@ -200,7 +204,7 @@ AdminFormDetailScreen As screen:
                                                 Checkbox1_6.Value = true,
                                                 Checkbox1_6.Text & ";",
                                                 ""
-                                            ) & "執行;",
+                                            ) & "跟進;",
                                             ""
                                         )
                                     ),
@@ -256,6 +260,7 @@ AdminFormDetailScreen As screen:
                             Reset(Radio_password);
                             Reset(Radio_password_1);
                             Reset(Radio_flowtype);
+                            Reset(Checkbox1_3);
                             Reset(Checkbox1_4);
                             Reset(Checkbox1_5);
                             Reset(Checkbox1_6);
@@ -284,10 +289,14 @@ AdminFormDetailScreen As screen:
                                         FlowType: Radio_flowtype.SelectedText.Value,
                                         SelectedActions: If(
                                             Radio_flowtype.SelectedText.Value = "通用流程",
-                                            "補充資料;跟進;檢查;提交;簽批;助理總幹事審批;總幹事審批;執行;",
+                                            "補充資料;提交;檢查;簽批;助理總幹事審批;總幹事審批;跟進;",
                                             If(
                                                 Radio_flowtype.SelectedText.Value = "預設通用流程",
-                                                "補充資料;跟進;檢查;提交;" & If(
+                                                "補充資料;提交;" & If(
+                                                    Checkbox1_3.Value = true,
+                                                    Checkbox1_3.Text & ";",
+                                                    ""
+                                                ) & If(
                                                     Checkbox1_4.Value = true,
                                                     Checkbox1_4.Text & ";",
                                                     ""
@@ -299,7 +308,7 @@ AdminFormDetailScreen As screen:
                                                     Checkbox1_6.Value = true,
                                                     Checkbox1_6.Text & ";",
                                                     ""
-                                                ) & "執行;",
+                                                ) & "跟進;",
                                                 ""
                                             )
                                         ),
@@ -352,6 +361,7 @@ AdminFormDetailScreen As screen:
                         Reset(Radio_password);
                         Reset(Radio_password_1);
                         Reset(Radio_flowtype);
+                        Reset(Checkbox1_3);
                         Reset(Checkbox1_4);
                         Reset(Checkbox1_5);
                         Reset(Checkbox1_6);
@@ -405,6 +415,7 @@ AdminFormDetailScreen As screen:
                     Reset(Radio_password);
                     Reset(Radio_password_1);
                     Reset(Radio_flowtype);
+                    Reset(Checkbox1_3);
                     Reset(Checkbox1_4);
                     Reset(Checkbox1_5);
                     Reset(Checkbox1_6);
@@ -520,7 +531,7 @@ AdminFormDetailScreen As screen:
                 HintText: ="示例：A111(字母+3個數字)"
                 HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                 HoverFill: =ColorFade(Self.Fill, -5%)
-                OnChange: =If(IsMatch(TextInput_FormNumber.Text,Letter&Digit&Digit&Digit),If(TextInput_FormNumber in GenericFormModel.ModelFlowNumber,Notify("該表格編號已經存在",Warning),Notify("格式正確",Success,3000)),Notify("格式錯誤，請輸入字母+3個數字",Warning))
+                OnChange: =If(IsMatch(TextInput_FormNumber.Text,Letter&Digit&Digit&Digit),If(TextInput_FormNumber in GenericFormModel.ModelFlowNumber||TextInput_FormNumber.Text="A103"||TextInput_FormNumber.Text="A104"||TextInput_FormNumber.Text="A111"||TextInput_FormNumber.Text="A306",Notify("該表格編號已經存在",Warning),Notify("格式正確",Success,3000)),Notify("格式錯誤，請輸入字母+3個數字",Warning))
                 PaddingBottom: =0
                 PaddingLeft: =10
                 PaddingRight: =0
@@ -1055,9 +1066,9 @@ AdminFormDetailScreen As screen:
                     Size: =11
                     Text: ="簽批"
                     Visible: =If(Radio_flowtype.Selected.Value="預設通用流程",true,false)
-                    Width: =134
-                    X: =603
-                    Y: =531
+                    Width: =77
+                    X: =702
+                    Y: =529
                     ZIndex: =53
 
                 Checkbox1_5 As checkbox:
@@ -1075,8 +1086,8 @@ AdminFormDetailScreen As screen:
                     Text: ="助總總幹事審批"
                     Visible: =If(Radio_flowtype.Selected.Value="預設通用流程",true,false)
                     Width: =151
-                    X: =717
-                    Y: =531
+                    X: =802
+                    Y: =529
                     ZIndex: =54
 
                 Checkbox1_6 As checkbox:
@@ -1094,8 +1105,8 @@ AdminFormDetailScreen As screen:
                     Text: ="總幹事審批"
                     Visible: =If(Radio_flowtype.Selected.Value="預設通用流程",true,false)
                     Width: =120
-                    X: =892
-                    Y: =531
+                    X: =967
+                    Y: =529
                     ZIndex: =55
 
             Label1_124 As label:
@@ -1257,6 +1268,25 @@ AdminFormDetailScreen As screen:
                 Y: =403
                 ZIndex: =69
 
+            Checkbox1_3 As checkbox:
+                CheckboxBorderColor: =glbNeutralTertiaryColor
+                CheckboxSize: =24
+                CheckmarkFill: =glbLinkColor
+                Default: =If(("檢查" in First(EditForm).SelectedActions) && First(EditForm).FlowType="預設通用流程",true,false)
+                FocusedBorderColor: =RGBA(0, 0, 0, 0)
+                Height: =30
+                HoverBorderColor: =RGBA(0, 0, 0, 0)
+                OnCheck: =
+                OnUncheck: =
+                PressedBorderColor: =RGBA(0, 0, 0, 0)
+                Size: =11
+                Text: ="檢查"
+                Visible: =If(Radio_flowtype.Selected.Value="預設通用流程",true,false)
+                Width: =83
+                X: =604
+                Y: =528
+                ZIndex: =70
+
         NewForm_title As group:
             Height: =5
             Width: =5
@@ -1288,6 +1318,7 @@ AdminFormDetailScreen As screen:
                     Reset(Radio_password);
                     Reset(Radio_password_1);
                     Reset(Radio_flowtype);
+                    Reset(Checkbox1_3);
                     Reset(Checkbox1_4);
                     Reset(Checkbox1_5);
                     Reset(Checkbox1_6);
