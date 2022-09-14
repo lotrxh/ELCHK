@@ -21,6 +21,7 @@
         UpdateContext({ShowHidePwd1:false});
         UpdateContext({ShowPwd2:true});
         UpdateContext({ShowHidePwd2:false});
+        UpdateContext({ShowFormHistory: false});
         
         If(IsBlank(Param("FormId")),"",ClearCollect(EditDetailUserForm_1,Filter(GenericFormList,Title=Param("FormId")));//创建集合EditDetailUserForm收集表格信息，用作人表格名称等数据
         ClearCollect(EditDetailUserAttachment,Filter(GenericUploadAttachMentFile,FormId=Param("FormId")));//创建集合EditDetailUserAttachment获得表单信息，用作带入表格附件
