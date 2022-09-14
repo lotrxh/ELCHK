@@ -21,7 +21,7 @@
                 Title = FormModelId
             ).FlowType
         );
-        If(
+        /*If(
             IsBlank(
                 LookUp(
                     GenericFormModel,
@@ -31,10 +31,10 @@
             ClearCollect(
                 DataFlowActionCol,
                 Split(
-                    "補充資料;跟進;檢查;單位提交;服務總監簽批;助總審批;總幹事審批;執行",
+                    "補充資料;提交;檢查;簽批;助理總幹事審批;總幹事審批;跟進",
                     ";"
                 ).Result
-            ),
+            ),*/
             ClearCollect(
                 DataFlowActionCol,
                 Split(
@@ -52,13 +52,13 @@
                     ),
                     ";"
                 ).Result
-            )
-        );
+            );
+        //);
         ClearCollect(
             ApprovalListCol,
             {
                 idNumber: 0,
-                ActionName: "填写",
+                ActionName: "填寫",
                 Approver: User().FullName,
                 ApprovalEmail: User().Email,
                 IsComplate: true,
@@ -70,7 +70,8 @@
             EditUserForm,
             Filter(
                 GenericFormModel,
-                Title = Param("FormModelId")
+                Title = FormModelId
+                //Title = Param("FormModelId")
             )
         );
         //创建集合EditUserForm收集表格信息
@@ -78,7 +79,8 @@
             EditUserAttachment,
             Filter(
                 TemplateFileList,
-                GenericFormId = Param("FormModelId")
+                Title = FormModelId
+                //GenericFormId = Param("FormModelId")
             )
         );
         //创建集合EditUserAttachment获得附件信息
@@ -129,6 +131,8 @@
                 HoverBorderColor: =ColorFade(Self.Color, -15%)
                 HoverColor: =ColorFade(Self.Color, -15%)
                 HoverFill: =RGBA(255, 255, 255, 1)
+                OnSelect: |-
+                    =Launch("https://apps.powerapps.com/play/8793c6b3-448b-4c69-90ce-4ae75c7911d0?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=HomepageScreen")
                 PaddingBottom: =0
                 PaddingLeft: =0
                 PaddingRight: =0
@@ -181,14 +185,14 @@
                                 CountA(ApprovalListCol.ActionName) + 1
                             ),
                             ActionName: If(
-                                FlowType = "Generic Flow" && !IsBlank(
+                                FlowType = "通用流程" && !IsBlank(
                                     LookUp(
                                         GenericFormModel,
                                         Title = FormModelId
                                     ).SelectedActions
                                 ),
-                                First(DataFlowActionCol.Result).Result,
-                                Dropdown1_5.Selected.Result
+                                Dropdown1_5.Selected.Result,
+                                If(FlowType = "預設通用流程",Dropdown1_9.Selected.Result,If(FlowType = "部門簡單流程",Dropdown1_7.Selected.Value))
                             ),
                             ApprovalEmail: Gallery2_2.Selected.AllOwnerName.Email,
                             Approver: First(
@@ -198,10 +202,19 @@
                                 ).Result
                             ).Result,
                             IsComplate: false,
-                            BCCUser: Concat(
+                            BCCUser: If(FlowType = "通用流程",Concat(
                                 ComboBox1_11.SelectedItems.Email,
                                 Email,
                                 ","
+                            ),If(FlowType = "預設通用流程",Concat(
+                                ComboBox1_15.SelectedItems.Email,
+                                Email,
+                                ","
+                            ),If(FlowType = "部門簡單流程",Concat(
+                                ComboBox1_13.SelectedItems.Email,
+                                Email,
+                                ","
+                            )))
                             ),
                             remark: ""
                         }
@@ -248,15 +261,7 @@
                             }
                         )
                     );
-                    If(
-                        FlowType = "通用流程" /*&& IsBlank(
-                            LookUp(
-                                GenericFormModel,
-                                Title = FormModelId
-                            ).SelectedActions
-                        )*/
-                        ,
-                        ForAll(
+                    ForAll(
                             ApprovalListCol,
                             Patch(
                                 ApprovalDetail_Table,
@@ -277,48 +282,8 @@
                                     ActionNode: ApprovalListCol[@ActionName]
                                 }
                             )
-                        ),
-                        ForAll(
-                            ApprovalListCol,
-                            Patch(
-                                ApprovalDetail_Table,
-                                Defaults(ApprovalDetail_Table),
-                                {
-                                    Title: GUID(),
-                                    Advise: ApprovalListCol[@remark],
-                                    Approval_No: ApprovalGuid,
-                                    ApprovalBCC: ApprovalListCol[@BCCUser],
-                                    Approver: ApprovalListCol[@Approver],
-                                    ApproverEmail: ApprovalListCol[@ApprovalEmail],
-                                    TaskStatus: If(
-                                        ApprovalListCol[@IsComplate],
-                                        "004",
-                                        "002"
-                                    ),
-                                    Priortty: ApprovalListCol[@idNumber],
-                                    ActionNode: ApprovalListCol[@ActionName]
-                                }
-                            )
-                        );
-                        ForAll(
-                            DataFlowActionCol.Result,
-                            Patch(
-                                ApprovalDetail_Table,
-                                Defaults(ApprovalDetail_Table),
-                                {
-                                    Title: GUID(),
-                                    Advise: "",
-                                    Approval_No: ApprovalGuid,
-                                    ApprovalBCC: "",
-                                    Approver: "",
-                                    ApproverEmail: "",
-                                    TaskStatus: "",
-                                    Priortty: 0,
-                                    ActionNode: ThisRecord.Result
-                                }
-                            )
-                        )
                     );
+                        
                     //左边填写内容上传
                             Set(
                                 GenericFormlistGuid,
@@ -870,7 +835,7 @@
                             SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                             SelectMultiple: =false
                             Size: =11
-                            Visible: =If(First(EditUserForm).FlowType<>"Template",true,false)
+                            Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
                             Width: =300
                             X: =90
                             Y: =3
@@ -1128,6 +1093,7 @@
                         PressedFill: =
                         Size: =10
                         Tooltip: =
+                        Visible: =If(First(EditUserForm).ModelAttachMent="有"&&First(EditUserForm).FlowType<>"範本",true,false)
                         Width: =Parent.Width-40
                         X: =20
                         Y: =35
@@ -1335,8 +1301,8 @@
                 AlignInContainer: =AlignInContainer.SetByContainer
                 Fill: =RGBA(255, 255, 255, 1)
                 Height: |-
-                    =If(
-                        FlowType = "Generic Flow" && IsBlank(
+                    =/*If(
+                        FlowType = "通用流程" && IsBlank(
                             LookUp(
                                 GenericFormModel,
                                 Title = FormModelId
@@ -1344,7 +1310,9 @@
                         ),
                          GeneralFlowContainer.Y+GeneralFlowContainer.Height+20,
                         PredefinedFlowContainer.Y+PredefinedFlowContainer.Height+20
-                    )
+                    )*/
+                    
+                    CommentsContainer.Y+CommentsContainer.Height+20
                 LayoutAlignItems: =LayoutAlignItems.Stretch
                 LayoutDirection: =LayoutDirection.Vertical
                 LayoutMinHeight: =100
@@ -1694,7 +1662,7 @@
                         Height: =36
                         HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                         HoverFill: =ColorFade(Self.Fill, -5%)
-                        Items: =["提交","檢查","簽批","審批","執行"]
+                        Items: =["提交"]
                         PaddingBottom: =5
                         PaddingRight: =0
                         PaddingTop: =5
@@ -2026,7 +1994,7 @@
                 PredefinedFlowContainer As groupContainer.manualLayoutContainer:
                     AlignInContainer: =AlignInContainer.SetByContainer
                     FillPortions: =0
-                    Height: =PredefineFlowGallery.Height
+                    Height: =240
                     LayoutMinHeight: =100
                     LayoutMinWidth: =250
                     Visible: |
@@ -2051,188 +2019,191 @@
                     Width: =Parent.Width-40
                     X: =20
                     Y: =94
-                    ZIndex: =6
+                    ZIndex: =7
 
-                    PredefineFlowGallery As gallery.variableTemplateHeightGallery:
-                        Height: =CountRows(Self.AllItems)*180-180
+                    Label6_33 As label:
+                        Height: =28
+                        OnSelect: =
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: ="下一節處理行動"
+                        Width: =116
+                        X: =30
+                        ZIndex: =1
+
+                    Circle2_13 As circle:
+                        DisplayMode: =DisplayMode.View
+                        Fill: =glbNeutralQuaternaryColor
+                        Height: =14
+                        OnSelect: =
+                        Width: =14
+                        Y: =7
+                        ZIndex: =2
+
+                    Label6_35 As label:
+                        Height: =28
+                        OnSelect: =
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: ="下一節處理人"
+                        Width: =147
+                        X: =30
+                        Y: =72
+                        ZIndex: =3
+
+                    Dropdown1_9 As dropdown:
+                        BorderColor: =glbNeutralTertiaryColor
+                        BorderThickness: =1
+                        ChevronBackground: =RGBA(0, 0, 0, 0)
+                        ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
+                        ChevronDisabledFill: =RGBA(202, 202, 202, 1)
+                        ChevronFill: =glbNeutralTertiaryColor
+                        ChevronHoverBackground: =ColorFade(Self.Fill, -5%)
+                        ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
+                        Color: =glbNeutralPrimaryColor
+                        FocusedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                        FocusedBorderThickness: =1
+                        Height: =36
+                        HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                        HoverFill: =ColorFade(Self.Fill, -5%)
                         Items: =DataFlowActionCol.Result
-                        Layout: =Layout.Vertical
-                        TemplateSize: =Min(160, Self.Height - 60)
-                        Visible: |-
-                            =FlowType = "Generic Flow" && !IsBlank(
-                                LookUp(
-                                    GenericFormModel,
-                                    Title = FormModelId
-                                ).SelectedActions
-                            )
-                        Width: =477
-                        Y: =-6
-                        ZIndex: =14
+                        PaddingBottom: =5
+                        PaddingRight: =0
+                        PaddingTop: =5
+                        PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                        PressedColor: =Self.Color
+                        PressedFill: =ColorFade(Self.Fill, -5%)
+                        SelectionFill: =glbThemePrimaryColor
+                        Size: =12
+                        Width: =120
+                        X: =30
+                        Y: =28
+                        ZIndex: =4
 
-                        Circle2_15 As circle:
-                            DisplayMode: =DisplayMode.View
-                            Fill: =glbNeutralQuaternaryColor
-                            Height: =14
-                            OnSelect: =
-                            Width: =14
-                            Y: =5
-                            ZIndex: =2
+                    BtnDefault_27 As button:
+                        BorderColor: =Self.Color
+                        BorderThickness: =1
+                        Color: =glbThemePrimaryColor
+                        DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                        Fill: =White
+                        FocusedBorderThickness: =1
+                        Height: =36
+                        HoverBorderColor: =ColorFade(Self.Color, -15%)
+                        HoverColor: =ColorFade(Self.Color, -15%)
+                        HoverFill: =RGBA(255, 255, 255, 1)
+                        OnSelect: |-
+                            =UpdateContext({SelectUservisiable:true});
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        PressedBorderColor: =ColorFade(Self.Color, -25%)
+                        PressedColor: =ColorFade(Self.Color, -25%)
+                        PressedFill: =ColorFade(Self.Color, 95%)
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Size: =11
+                        Text: ="選擇"
+                        Width: =120
+                        X: =30
+                        Y: =100
+                        ZIndex: =5
 
-                        BtnDefault_28 As button:
-                            BorderColor: =Self.Color
-                            BorderThickness: =1
-                            Color: =glbThemePrimaryColor
-                            DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                            Fill: =White
-                            FocusedBorderThickness: =1
-                            Height: =36
-                            HoverBorderColor: =ColorFade(Self.Color, -15%)
-                            HoverColor: =ColorFade(Self.Color, -15%)
-                            HoverFill: =RGBA(255, 255, 255, 1)
-                            OnSelect: |-
-                                =UpdateContext({SelectUservisiable:true});
-                            PaddingBottom: =0
-                            PaddingLeft: =0
-                            PaddingRight: =0
-                            PaddingTop: =0
-                            PressedBorderColor: =ColorFade(Self.Color, -25%)
-                            PressedColor: =ColorFade(Self.Color, -25%)
-                            PressedFill: =ColorFade(Self.Color, 95%)
-                            RadiusBottomLeft: =0
-                            RadiusBottomRight: =0
-                            RadiusTopLeft: =0
-                            RadiusTopRight: =0
-                            Size: =11
-                            Text: ="選擇處理人"
-                            Visible: =If(First(DataFlowActionCol.Result).Result=Label6_38.Text,true,false)
-                            Width: =120
-                            X: =30
-                            Y: =54
-                            ZIndex: =3
+                    Label1_155 As label:
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =1
+                        Color: =glbNeutralSecondaryColor
+                        Fill: =RGBA(245, 245, 245, 1)
+                        Height: =36
+                        PaddingBottom: =0
+                        PaddingLeft: =28
+                        PaddingRight: =10
+                        PaddingTop: =0
+                        Size: =11
+                        Text: =First(Split(CreateApproverCol.AllOwnerName.DisplayName," ").Result).Result&"/"&CreateApproverCol.AllOwnerName.Email
+                        Width: =Parent.Width-Self.X
+                        X: =161
+                        Y: =100
+                        ZIndex: =6
 
-                        Label6_37 As label:
-                            Height: =28
-                            OnSelect: =
-                            PaddingBottom: =0
-                            PaddingLeft: =0
-                            PaddingRight: =0
-                            PaddingTop: =0
-                            Size: =12
-                            Text: ="抄送人"
-                            Visible: =If(First(DataFlowActionCol.Result).Result=Label6_38.Text,true,false)
-                            Width: =147
-                            X: =20
-                            Y: =91
-                            ZIndex: =6
+                    BtnSecondIconOnly_25 As icon.Add:
+                        BorderColor: =glbNeutralQuaternaryColor
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =1
+                        Color: =glbNeutralSecondaryColor
+                        DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                        DisabledColor: =RGBA(149, 149, 149, 1)
+                        DisabledFill: =RGBA(0, 0, 0, 0)
+                        DisplayMode: =DisplayMode.View
+                        FocusedBorderThickness: =1
+                        Height: =32
+                        HoverBorderColor: =glbThemePrimaryColor
+                        HoverColor: =glbThemePrimaryColor
+                        HoverFill: =RGBA(0, 0, 0, 0)
+                        Icon: =Icon.Person
+                        OnSelect: =
+                        PaddingBottom: =6
+                        PaddingTop: =6
+                        PressedBorderColor: =ColorFade(glbThemePrimaryColor, -15%)
+                        PressedColor: =glbThemePrimaryColor
+                        PressedFill: =RGBA(0, 0, 0, 0)
+                        Width: =28
+                        X: =161
+                        Y: =102
+                        ZIndex: =10
 
-                        ComboBox1_16 As combobox:
-                            BorderColor: =glbNeutralTertiaryColor
-                            BorderThickness: =1
-                            ChevronBackground: =RGBA(255, 255, 255, 1)
-                            ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
-                            ChevronDisabledFill: =RGBA(202, 202, 202, 1)
-                            ChevronFill: =glbNeutralTertiaryColor
-                            ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
-                            ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
-                            Color: =glbNeutralPrimaryColor
-                            DisplayFields: =["Claims"]
-                            FocusedBorderThickness: =1
-                            Height: =36
-                            HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
-                            HoverColor: =Self.Color
-                            HoverFill: =ColorFade(Self.Fill, -5%)
-                            Items: =Choices(MyContacts.AllOwnerName)
-                            PaddingLeft: =10
-                            PressedColor: =Self.Color
-                            PressedFill: =ColorFade(Self.Fill, -5%)
-                            SearchFields: =["Claims"]
-                            SearchItems: =Choices(MyContacts.AllOwnerName,ComboBox1_16.SearchText)
-                            SelectionColor: =glbThemePrimaryColor
-                            SelectionFill: =ColorFade(Self.SelectionColor, 90%)
-                            Size: =12
-                            Template: =ListItemTemplate.Double
-                            Visible: =If(First(DataFlowActionCol.Result).Result=Label6_38.Text,true,false)
-                            Width: =Parent.Width-Self.X-1
-                            X: =25
-                            Y: =119
-                            ZIndex: =7
+                    Label6_39 As label:
+                        Height: =28
+                        OnSelect: =
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: ="抄送人"
+                        Width: =147
+                        X: =30
+                        Y: =145
+                        ZIndex: =11
 
-                        Label6_38 As label:
-                            Height: =25
-                            OnSelect: =
-                            PaddingBottom: =0
-                            PaddingLeft: =0
-                            PaddingRight: =0
-                            PaddingTop: =0
-                            Size: =12
-                            Text: =ThisItem.Result
-                            Width: =131
-                            X: =20
-                            ZIndex: =8
-
-                        Rectangle5_8 As rectangle:
-                            Fill: =glbNeutralQuaternaryColor
-                            Height: =140
-                            OnSelect: =
-                            Visible: |-
-                                =//true
-                                If(Label6_38.Text="執行",false,true)
-                            Width: =2
-                            X: =6
-                            Y: =25
-                            ZIndex: =9
-
-                        UserdisplayGroup_1 As group:
-                            Height: =5
-                            Width: =5
-                            X: =40
-                            Y: =60
-                            ZIndex: =10
-
-                            Label1_156 As label:
-                                BorderStyle: =BorderStyle.None
-                                BorderThickness: =1
-                                Color: =glbNeutralSecondaryColor
-                                Fill: =RGBA(245, 245, 245, 1)
-                                Height: =36
-                                PaddingBottom: =0
-                                PaddingLeft: =28
-                                PaddingRight: =10
-                                PaddingTop: =0
-                                Size: =11
-                                Text: =First(Split(CreateApproverCol.AllOwnerName.DisplayName," ").Result).Result&"/"&CreateApproverCol.AllOwnerName.Email
-                                Visible: =If(First(DataFlowActionCol.Result).Result=Label6_38.Text,true,false)
-                                Width: =316
-                                X: =161
-                                Y: =54
-                                ZIndex: =4
-
-                            BtnSecondIconOnly_24 As icon.Add:
-                                BorderColor: =glbNeutralQuaternaryColor
-                                BorderStyle: =BorderStyle.None
-                                BorderThickness: =1
-                                Color: =glbNeutralSecondaryColor
-                                DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                                DisabledColor: =RGBA(149, 149, 149, 1)
-                                DisabledFill: =RGBA(0, 0, 0, 0)
-                                DisplayMode: =DisplayMode.View
-                                FocusedBorderThickness: =1
-                                Height: =32
-                                HoverBorderColor: =glbThemePrimaryColor
-                                HoverColor: =glbThemePrimaryColor
-                                HoverFill: =RGBA(0, 0, 0, 0)
-                                Icon: =Icon.Person
-                                OnSelect: =
-                                PaddingBottom: =6
-                                PaddingTop: =6
-                                PressedBorderColor: =ColorFade(glbThemePrimaryColor, -15%)
-                                PressedColor: =glbThemePrimaryColor
-                                PressedFill: =RGBA(0, 0, 0, 0)
-                                Visible: =If(First(DataFlowActionCol.Result).Result=Label6_38.Text,true,false)
-                                Width: =26
-                                X: =161
-                                Y: =55
-                                ZIndex: =5
+                    ComboBox1_15 As combobox:
+                        BorderColor: =glbNeutralTertiaryColor
+                        BorderThickness: =1
+                        ChevronBackground: =RGBA(255, 255, 255, 1)
+                        ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
+                        ChevronDisabledFill: =RGBA(202, 202, 202, 1)
+                        ChevronFill: =glbNeutralTertiaryColor
+                        ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
+                        ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
+                        Color: =glbNeutralPrimaryColor
+                        DisplayFields: =["Claims"]
+                        FocusedBorderThickness: =1
+                        Height: =36
+                        HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                        HoverColor: =Self.Color
+                        HoverFill: =ColorFade(Self.Fill, -5%)
+                        Items: =Choices(MyContacts.AllOwnerName)
+                        PaddingLeft: =10
+                        PressedColor: =Self.Color
+                        PressedFill: =ColorFade(Self.Fill, -5%)
+                        SearchFields: =["Claims"]
+                        SearchItems: =Choices(MyContacts.AllOwnerName,ComboBox1_15.SearchText)
+                        SelectionColor: =glbThemePrimaryColor
+                        SelectionFill: =ColorFade(Self.SelectionColor, 90%)
+                        Size: =12
+                        Template: =ListItemTemplate.Double
+                        Width: =Parent.Width-Self.X-1
+                        X: =30
+                        Y: =173
+                        ZIndex: =12
 
     HeaderContainer_4 As groupContainer.manualLayoutContainer:
         Fill: =glbThemePrimaryColor
