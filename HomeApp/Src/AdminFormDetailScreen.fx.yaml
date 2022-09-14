@@ -169,7 +169,7 @@ AdminFormDetailScreen As screen:
                         ),
                         //編輯表單模板，表格標號為不可更改項
                         If(
-                            TextInput_FormNumber.Text in GenericFormModel.ModelName,
+                            TextInput_FormNumber.Text in GenericFormModel.ModelFlowNumber,
                             (UpdateIf(
                                 GenericFormModel,
                                 ModelFlowNumber = TextInput_FormNumber.Text,
@@ -188,7 +188,7 @@ AdminFormDetailScreen As screen:
                                         "補充資料;提交;檢查;簽批;助理總幹事審批;總幹事審批;跟進;",
                                         If(
                                             Radio_flowtype.SelectedText.Value = "預設通用流程",
-                                            "補充資料;提交;" & If(
+                                            "提交;" & If(
                                                 Checkbox1_3.Value = true,
                                                 Checkbox1_3.Text & ";",
                                                 ""
@@ -292,7 +292,7 @@ AdminFormDetailScreen As screen:
                                             "補充資料;提交;檢查;簽批;助理總幹事審批;總幹事審批;跟進;",
                                             If(
                                                 Radio_flowtype.SelectedText.Value = "預設通用流程",
-                                                "補充資料;提交;" & If(
+                                                "提交;" & If(
                                                     Checkbox1_3.Value = true,
                                                     Checkbox1_3.Text & ";",
                                                     ""
@@ -634,7 +634,9 @@ AdminFormDetailScreen As screen:
                     OnRemoveFile: |-
                         =Remove(TemplateFileList,First(Filter(TemplateFileList,(TempFileName=TextInput_FormName.Text)&&(TempAttachMent=First(AttachmentDemonstrationformName).Name))));//删除list中的附件记录
                         
-                        Reset(Attachment_Demonstrationform)//重置申請表附件控件
+                        Reset(Attachment_Demonstrationform);//重置申請表附件控件
+                        
+                        Clear(EditAttachment2)
                     PaddingLeft: =10
                     PaddingRight: =10
                     PaddingTop: =10
@@ -751,7 +753,9 @@ AdminFormDetailScreen As screen:
                     OnRemoveFile: |-
                         =Remove(TemplateFileList,First(Filter(TemplateFileList,(TempFileName=TextInput_FormName.Text)&&(TempAttachMent=First(AttachmentFormName).Name))));//删除list中的附件记录
                         
-                        Reset(Attachment_Form)//重置申請表附件控件
+                        Reset(Attachment_Form);//重置申請表附件控件
+                        
+                        Clear(EditAttachment)
                     PaddingLeft: =10
                     PaddingRight: =10
                     PaddingTop: =10
@@ -849,7 +853,9 @@ AdminFormDetailScreen As screen:
                     OnRemoveFile: |-
                         =Remove(TemplateFileList,First(Filter(TemplateFileList,(TempFileName=TextInput_FormName.Text)&&(TempAttachMent=First(AttachmentFillGuideName).Name))));//删除list中的附件记录
                         
-                        Reset(Attachment_FillGuide)//重置申請表附件控件
+                        Reset(Attachment_FillGuide);//重置申請表附件控件
+                        
+                        Clear(EditAttachment3)
                     PaddingLeft: =10
                     PaddingRight: =10
                     PaddingTop: =10
