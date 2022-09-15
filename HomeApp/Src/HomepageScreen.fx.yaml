@@ -149,7 +149,8 @@ HomepageScreen As screen:
                         Launch("https://apps.powerapps.com/play/c030168f-5133-4c9d-8e17-3c870ba99ab4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=StatisticsScreen"),
                     
                         ThisItem.Value = "系統",
-                        Launch("https://apps.powerapps.com/play/c030168f-5133-4c9d-8e17-3c870ba99ab4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=UserScreen"),
+                        Navigate(SystemsScreen,None,{ToUserInfoManager:"用戶管理"}),
+                        //Launch("https://apps.powerapps.com/play/c030168f-5133-4c9d-8e17-3c870ba99ab4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=UserScreen"),
                     
                         ThisItem.Value = "任務",
                         Navigate(
@@ -385,7 +386,7 @@ HomepageScreen As screen:
                                     Filter(
                                         MyContacts,
                                         UserEmail = User().Email,
-                                        ContatsType = Blank()
+                                        ContatsEmail = Blank()
                                     ),
                                     "Created",
                                     Descending
@@ -474,7 +475,7 @@ HomepageScreen As screen:
                                             TaskFormName: "招聘職位申請表",
                                             Title: GUID(),
                                             UserEmail: User().Email,
-                                            ContatsType: ""
+                                            ContatsEmail: ""
                                         }
                                     )
                                 )
@@ -499,7 +500,7 @@ HomepageScreen As screen:
                                             TaskFormName: "假期批核人資料表",
                                             Title: GUID(),
                                             UserEmail: User().Email,
-                                            ContatsType: ""
+                                            ContatsEmail: ""
                                         }
                                     )
                                 )
@@ -524,7 +525,7 @@ HomepageScreen As screen:
                                             TaskFormName: "任職資源申請",
                                             Title: GUID(),
                                             UserEmail: User().Email,
-                                            ContatsType: ""
+                                            ContatsEmail: ""
                                         }
                                     )
                                 )
@@ -549,7 +550,7 @@ HomepageScreen As screen:
                                             TaskFormName: "預備合約通知書(新入職)",
                                             Title: GUID(),
                                             UserEmail: User().Email,
-                                            ContatsType: ""
+                                            ContatsEmail: ""
                                         }
                                     )
                                 )
@@ -573,7 +574,7 @@ HomepageScreen As screen:
                                             TaskFormName: ThisItem.ModelName,
                                             Title: GUID(),
                                             UserEmail: User().Email,
-                                            ContatsType: "",
+                                            ContatsEmail: "",
                                             TaskFormDescription: ThisItem.ModelDescription,
                                             ModelFlowNumber:ThisItem.ModelFlowNumber
                                         }

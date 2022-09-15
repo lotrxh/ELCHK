@@ -181,7 +181,7 @@ AdminFormDetailScreen As screen:
                                     ModelDescription: [@TextInput_FormDescription].Text,
                                     ModelFlowUser: User().Email,
                                     CustomFilter: TextInput_CustomFilter.Text,
-                                    ModelAttachMent: Radio_attachment.SelectedText.Value,
+                                    ModelFlowUserType: Radio_attachment.SelectedText.Value,
                                     FlowType: Radio_flowtype.SelectedText.Value,
                                     SelectedActions: If(
                                         Radio_flowtype.SelectedText.Value = "通用流程",
@@ -285,7 +285,7 @@ AdminFormDetailScreen As screen:
                                         ModelFlowUser: User().Email,
                                         CustomFilter: TextInput_CustomFilter.Text,
                                         IsEnable: 1,
-                                        ModelAttachMent: Radio_attachment.SelectedText.Value,
+                                        ModelFlowUserType: Radio_attachment.SelectedText.Value,
                                         FlowType: Radio_flowtype.SelectedText.Value,
                                         SelectedActions: If(
                                             Radio_flowtype.SelectedText.Value = "通用流程",
@@ -555,7 +555,7 @@ AdminFormDetailScreen As screen:
                 ZIndex: =28
 
                 Radio_attachment As radio:
-                    Default: =First(EditForm).ModelAttachMent//加载编辑表格的表格名称
+                    Default: =First(EditForm).ModelFlowUserType//加载编辑表格的表格名称
                     FocusedBorderThickness: =0
                     Height: =37
                     HoverColor: =RGBA(0, 0, 0, 1)

@@ -1,0 +1,3307 @@
+SystemsScreen As screen:
+    Fill: =RGBA(230, 230, 230, 1)
+    OnVisible: |-
+        =UpdateContext(
+            {
+                Ariter: 4,
+                System: true,
+                UnitOrganizational:Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="003")
+            }
+        );
+        ClearCollect(
+            Servicetable,
+            Filter(
+                ConfigurationInfo,
+                Type_No = "0003" && Code_No1 = "002"
+            )
+        );
+        ClearCollect(
+            general_administration,
+            Filter(
+                ConfigurationInfo,
+                Type_No = "0003" && Code_No1 = "001" || Type_No = "0003" && Code_No1 = "003"
+            )
+        );
+        //中间变量 解决委派
+        ClearCollect(
+            TempAllUserTable,
+            UserInfo
+        );
+        ClearCollect(
+            Organization,
+            Servicetable
+        );
+        ClearCollect(
+            Department,
+            ConfigurationInfo
+        );
+        ClearCollect(
+            User_Management,
+            SignerInfo
+        );
+        UpdateContext({prelodingvisable:true});
+
+    UserManagementContainer As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =718
+        Visible: =If(ToUserInfoManager = "用戶管理", true, false)
+        Width: =1192
+        X: =173
+        Y: =50
+        ZIndex: =3
+
+        Button9_4 As button:
+            Align: =Align.Left
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =0
+            Fill: =RGBA(1, 168, 244, 1)
+            FocusedBorderThickness: =1
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Normal
+            Height: =32
+            HoverFill: =RGBA(1, 168, 244, 1)
+            OnSelect: |-
+                =UpdateContext({
+                    UserSetIsShow:true
+                })
+            PaddingLeft: =30
+            PressedColor: =RGBA(255, 255, 255, 1)
+            PressedFill: =RGBA(1, 168, 244, 1)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =FountSise
+            Text: ="添加用戶"
+            Width: =98
+            X: =1047
+            Y: =28
+            ZIndex: =7
+
+        UserListGallery_1 As gallery.galleryVertical:
+            Height: =451
+            Items: |-
+                =Search(
+                    Filter(
+                        UserInfo,
+                        Dropdown2_22.Selected.Data2 = Blank() || O_Mechanism =Last(Split(Dropdown2_22.Selected.Data2,"-").Result).Result,
+                        Dropdown2_23.Selected.PR_Name = Blank() || Post = Dropdown2_23.Selected.PR_Name
+                    ),
+                    TextInput4_9.Text,"field_User_Name","field_User_Email"
+                    
+                )
+            Layout: =Layout.Vertical
+            TemplateSize: =50
+            Width: =1157
+            X: =6
+            Y: =179
+            ZIndex: =17
+
+            Rectangle15_4 As rectangle:
+                Fill: =RGBA(230, 230, 230, 1)
+                Height: =1
+                OnSelect: =Select(Parent)
+                Width: =1100
+                Y: =49
+                ZIndex: =2
+
+            Label27 As label:
+                Color: =RGBA(102, 102, 102, 1)
+                Height: =20
+                OnSelect: =Select(Parent)
+                PaddingLeft: =0
+                Size: =FountSise
+                Text: =ThisItem.User_Name
+                Width: =209
+                X: =12
+                Y: =5
+                ZIndex: =10
+
+            Label30 As label:
+                OnSelect: =Select(Parent)
+                Size: =10.5
+                Text: =ThisItem.O_Mechanism_No
+                Width: =162
+                X: =235
+                Y: =10
+                ZIndex: =11
+
+            Label39 As label:
+                Align: =Align.Center
+                Color: =RGBA(102, 102, 102, 1)
+                Height: =50
+                OnSelect: =Select(Parent)
+                Size: =FountSise
+                Text: =ThisItem.Post
+                Width: =135
+                X: =589
+                ZIndex: =20
+
+            Label27_1 As label:
+                Color: =RGBA(149, 149, 149, 1)
+                Height: =20
+                OnSelect: =Select(Parent)
+                PaddingLeft: =0
+                Size: =9.5
+                Text: =ThisItem.User_Email
+                Width: =230
+                X: =12
+                Y: =24
+                ZIndex: =21
+
+            Label34_1 As label:
+                Align: =Align.Center
+                Color: =RGBA(102, 102, 102, 1)
+                Height: =50
+                OnSelect: =Select(Parent)
+                Size: =FountSise
+                Text: |
+                    =ThisItem.O_Mechanism
+                Width: =164
+                X: =375
+                ZIndex: =22
+
+            Icon6_4 As icon.Tag:
+                Color: =RGBA(0, 133, 192, 1)
+                Height: =24
+                Icon: =Icon.DocumentWithContent
+                OnSelect: |-
+                    =UpdateContext({
+                        UserEditShow:true
+                    })
+                PaddingBottom: =4
+                PaddingTop: =4
+                Width: =24
+                X: =1040
+                Y: =13
+                ZIndex: =26
+
+            Icon6_5 As icon.Tag:
+                Color: =RGBA(0, 133, 192, 1)
+                Height: =24
+                Icon: =Icon.Trash
+                OnSelect: |-
+                    =UpdateContext({
+                        UserDeletShow:true
+                    })
+                PaddingBottom: =4
+                PaddingTop: =4
+                Width: =24
+                X: =1070
+                Y: =13
+                ZIndex: =27
+
+            Label27_3 As label:
+                Color: =RGBA(102, 102, 102, 1)
+                Height: =20
+                OnSelect: =Select(Parent)
+                PaddingLeft: =0
+                Size: =FountSise
+                Text: =""
+                Width: =209
+                X: =810
+                Y: =5
+                ZIndex: =28
+
+            Label27_4 As label:
+                Color: =RGBA(149, 149, 149, 1)
+                Height: =20
+                OnSelect: =Select(Parent)
+                PaddingLeft: =0
+                Size: =9.5
+                Text: =ThisItem.Agent_Email
+                Width: =230
+                X: =810
+                Y: =24
+                ZIndex: =29
+
+        Label1_62 As label:
+            Align: =Align.Right
+            Color: =RGBA(73, 77, 82, 100)
+            Font: =Font.'Segoe UI'
+            Height: =20
+            Size: |-
+                =//FountSise
+                9
+            Text: |
+                ="共計："&CountRows(TempAllUserTable)&"條"
+            Width: =133
+            X: =1008
+            Y: =638
+            ZIndex: =18
+
+        Label40 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            PaddingLeft: =0
+            Size: =14
+            Text: ="用戶詳情"
+            X: =24
+            Y: =20
+            ZIndex: =28
+
+        Icon5_41 As icon.Search:
+            Color: =RGBA(152, 152, 152, 1)
+            FocusedBorderThickness: =0
+            Height: =20
+            Icon: =Icon.Search
+            Visible: =
+            Width: =25
+            X: =281
+            Y: =87
+            ZIndex: =36
+
+        Group26 As group:
+            Height: =5
+            Width: =5
+            X: =60
+            Y: =60
+            ZIndex: =38
+
+            Button10_2 As button:
+                BorderThickness: =0
+                DisplayMode: =DisplayMode.View
+                Fill: =RGBA(242, 244, 245, 1)
+                Height: =48
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Text: =""
+                Width: =1139
+                X: =24
+                Y: =131
+                ZIndex: =10
+
+            Label32_14 As label:
+                Color: =RGBA(25, 32, 41, 100)
+                Font: =Font.'Segoe UI'
+                Height: =48
+                Size: =FountSise
+                Text: ="職員"
+                Width: =136
+                X: =40
+                Y: =131
+                ZIndex: =12
+
+            Label32_16 As label:
+                Color: =RGBA(25, 32, 41, 100)
+                Font: =Font.'Segoe UI'
+                Height: =48
+                Size: =FountSise
+                Text: ="職位"
+                Width: =75
+                X: =658
+                Y: =131
+                ZIndex: =14
+
+            Label32_19 As label:
+                Color: =RGBA(25, 32, 41, 100)
+                Font: =Font.'Segoe UI'
+                Height: =48
+                Size: =FountSise
+                Text: ="單位/部門"
+                Width: =103
+                X: =456
+                Y: =131
+                ZIndex: =33
+
+            Label32_17 As label:
+                Color: =RGBA(25, 32, 41, 100)
+                Font: =Font.'Segoe UI'
+                Height: =48
+                Size: =FountSise
+                Text: ="代理人"
+                Width: =136
+                X: =852
+                Y: =131
+                ZIndex: =37
+
+        Icon8 As icon.Add:
+            BorderColor: =RGBA(255, 255, 255, 1)
+            BorderStyle: =BorderStyle.None
+            Color: =RGBA(255, 255, 255, 1)
+            Height: =20
+            Icon: =Icon.Add
+            Width: =15
+            X: =1057
+            Y: =34
+            ZIndex: =40
+
+        Label32_20 As label:
+            Color: =RGBA(25, 32, 41, 100)
+            Font: =Font.'Segoe UI'
+            Height: =48
+            Size: =FountSise
+            Text: ="單位/部門編號"
+            Width: =124
+            X: =241
+            Y: =131
+            ZIndex: =42
+
+        Group29 As group:
+            Height: =5
+            Width: =5
+            X: =60
+            Y: =60
+            ZIndex: =42
+
+            TextInput4_9 As text:
+                BorderColor: =RGBA(196, 200, 204, 1)
+                BorderThickness: =1
+                Color: =RGBA(153, 153, 153, 1)
+                Default: =""
+                DisabledBorderColor: =RGBA(196, 200, 204, 1)
+                DisabledColor: =RGBA(153, 153, 153, 1)
+                DisabledFill: =RGBA(0, 0, 0, 0)
+                FocusedBorderColor: =RGBA(128,128,128,1)
+                FocusedBorderThickness: =1
+                Font: =Font.'Segoe UI'
+                Height: =32
+                HintText: ="請輸入姓名/郵箱關鍵字"
+                HoverBorderColor: =RGBA(196, 200, 204, 1)
+                HoverColor: =RGBA(153, 153, 153, 1)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                PressedColor: =RGBA(153, 153, 153, 1)
+                PressedFill: =
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =FountSise
+                Width: =286
+                X: =24
+                Y: =81
+                ZIndex: =29
+
+            Dropdown2_22 As combobox:
+                BorderColor: =RGBA(196, 200, 204, 1)
+                BorderThickness: =1
+                ChevronBackground: =RGBA(255, 255, 255, 1)
+                ChevronFill: =RGBA(197, 197, 197, 1)
+                ChevronHoverBackground: =
+                ChevronHoverFill: =RGBA(153, 153, 153, 1)
+                DisplayFields: =["Data2"]
+                FocusedBorderThickness: =1
+                Height: =32
+                HoverBorderColor: =RGBA(196, 200, 204, 1)
+                InputTextPlaceholder: ="單位/部門"
+                IsSearchable: =false
+                Items: =SearchDepartment
+                NoSelectionText: ="單位/部門"
+                OnSelect: |-
+                    =false
+                    //UpdateContext({Updata:Last(Split(Dropdown2_22.Selected.Value3,"-").Result).Result})
+                PaddingLeft: =12
+                PressedColor: =RGBA(50, 50, 50, 1)
+                PressedFill: =RGBA(0, 0, 0, 1)
+                SearchFields: =["Data2"]
+                SearchItems: =[]
+                SelectionColor: =RGBA(73, 77, 82, 1)
+                SelectionFill: =RGBA(0, 0, 0, 0)
+                SelectionTagFill: =
+                SelectMultiple: =false
+                Size: =FountSise
+                Width: =203
+                X: =331
+                Y: =81
+                ZIndex: =30
+
+            Dropdown2_23 As combobox:
+                BorderColor: =RGBA(196, 200, 204, 1)
+                BorderThickness: =1
+                ChevronBackground: =RGBA(255, 255, 255, 1)
+                ChevronFill: =RGBA(197, 197, 197, 1)
+                ChevronHoverBackground: =
+                ChevronHoverFill: =RGBA(153, 153, 153, 1)
+                DisplayFields: =["PR_Name"]
+                FocusedBorderThickness: =1
+                Height: =32
+                HoverBorderColor: =RGBA(196, 200, 204, 1)
+                InputTextPlaceholder: ="職位"
+                IsSearchable: =false
+                Items: =Filter(PostRankInfo,PR_Type="職位").PR_Name
+                NoSelectionText: ="職位"
+                PaddingLeft: =12
+                PressedColor: =RGBA(50, 50, 50, 1)
+                PressedFill: =RGBA(0, 0, 0, 1)
+                SearchFields: =["PR_Name"]
+                SearchItems: =[]
+                SelectionColor: =RGBA(73, 77, 82, 1)
+                SelectionFill: =RGBA(0, 0, 0, 0)
+                SelectionTagFill: =
+                SelectMultiple: =false
+                Size: =FountSise
+                Width: =203
+                X: =556
+                Y: =81
+                ZIndex: =38
+
+    AuthorityManagementContainer As groupContainer.manualLayoutContainer:
+        Height: =696
+        Visible: =If(ToUserInfoManager = "權限管理", true, false)
+        Width: =1206
+        X: =160
+        Y: =72
+        ZIndex: =4
+
+        RightBg_9 As button:
+            DisplayMode: =DisplayMode.View
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =696
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            Text: =
+            Width: =1170
+            ZIndex: =2
+
+        Button9_6 As button:
+            BorderThickness: =0
+            Fill: =RGBA(1, 168, 244, 1)
+            FocusedBorderThickness: =1
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Normal
+            Height: =32
+            HoverFill: =RGBA(1, 168, 244, 1)
+            OnSelect: |-
+                =UpdateContext({
+                    GAMask:true
+                })
+            PaddingLeft: =20
+            PaddingRight: =0
+            PressedColor: =RGBA(255, 255, 255, 1)
+            PressedFill: =RGBA(1, 168, 244, 1)
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            Size: =FountSise
+            Text: ="新增權限"
+            Width: =106
+            X: =1042
+            Y: =15
+            ZIndex: =7
+
+        GAListGallery_1 As gallery.galleryVertical:
+            Height: =462
+            Items: |-
+                =Search(
+                    Filter(
+                        SignerInfo,
+                        Service_Dropdown_1.Selected.Data2 = Blank() || S_Mechanism = Last(
+                            Split(
+                                Service_Dropdown_1.Selected.Data2,
+                                "-"
+                            ).Result
+                        ).Result,
+                        Service_Dropdown_2.Selected.Value2 = Blank() || Role = Service_Dropdown_2.Selected.Value2
+                    ),
+                    TextInput3_4.Text,
+                    "field_Signer",
+                    "field_Signer_Email",
+                    "field_Role",
+                    "field_S_Mechanism"
+                )
+            Layout: =Layout.Vertical
+            TemplateSize: =40
+            Width: =1140
+            X: =24
+            Y: =165
+            ZIndex: =8
+
+            Label33_30 As label:
+                Color: =RGBA(73, 77, 82, 100)
+                Font: =Font.'Segoe UI'
+                OnSelect: =Select(Parent)
+                Size: =FountSise
+                Text: =ThisItem.Signer
+                Width: =136
+                X: =284
+                ZIndex: =1
+
+            Rectangle15_6 As rectangle:
+                Fill: =RGBA(230, 230, 230, 1)
+                Height: =1
+                OnSelect: =Select(Parent)
+                Width: =1121
+                Y: =39
+                ZIndex: =2
+
+            Label33_31 As label:
+                Color: =RGBA(73, 77, 82, 100)
+                Font: =Font.'Segoe UI'
+                OnSelect: =Select(Parent)
+                Size: =FountSise
+                Text: =ThisItem.Role
+                Width: =117
+                X: =829
+                ZIndex: =3
+
+            Label33_32 As label:
+                Color: =RGBA(73, 77, 82, 100)
+                Font: =Font.'Segoe UI'
+                OnSelect: =Select(Parent)
+                Size: =FountSise
+                Text: =ThisItem.S_Mechanism
+                Width: =174
+                X: =17
+                ZIndex: =5
+
+            Label33_34 As label:
+                Color: =RGBA(73, 77, 82, 100)
+                Font: =Font.'Segoe UI'
+                OnSelect: =Select(Parent)
+                Size: =FountSise
+                Text: =ThisItem.Signer_Email
+                Width: =203
+                X: =536
+                ZIndex: =9
+
+            Icon6_6 As icon.Tag:
+                Color: =RGBA(0, 133, 192, 1)
+                Height: =24
+                Icon: =Icon.DocumentWithContent
+                OnSelect: |-
+                    =UpdateContext({
+                        EditGAMask:true
+                    })
+                PaddingBottom: =4
+                PaddingTop: =4
+                Width: =24
+                X: =1009
+                Y: =7
+                ZIndex: =10
+
+            Icon6_7 As icon.Tag:
+                Color: =RGBA(0, 134, 208, 1)
+                Height: =24
+                Icon: =Icon.Trash
+                OnSelect: |-
+                    =UpdateContext({
+                        DeletGAMask:true
+                    })
+                PaddingBottom: =4
+                PaddingTop: =4
+                Width: =24
+                X: =1039
+                Y: =7
+                ZIndex: =11
+
+        Label1_63 As label:
+            Color: =RGBA(73, 77, 82, 100)
+            Font: =Font.'Segoe UI'
+            Height: =53
+            Size: =FountSise
+            Text: =//"共计："&CountRows(Filter(Signer_Table,S_Mechanism_Type="部門"))&"条"
+            Width: =133
+            X: =915
+            Y: =563
+            ZIndex: =9
+
+        Label13_11 As label:
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Semibold
+            Size: =14
+            Text: ="權限詳情"
+            Width: =210
+            X: =22
+            Y: =15
+            ZIndex: =16
+
+        Icon9 As icon.Add:
+            Color: =RGBA(255, 255, 255, 1)
+            FocusedBorderColor: =
+            Height: =20
+            Icon: =Icon.Add
+            Width: =15
+            X: =1048
+            Y: =21
+            ZIndex: =19
+
+        Group42 As group:
+            Height: =5
+            Width: =5
+            X: =16
+            Y: =20
+            ZIndex: =20
+
+            TextInput3_4 As text:
+                BorderColor: =RGBA(196, 200, 204, 1)
+                BorderThickness: =1
+                Color: =RGBA(73, 77, 82, 100)
+                Default: =""
+                DisabledBorderColor: =RGBA(196, 200, 204, 1)
+                DisabledColor: =RGBA(73, 77, 82, 100)
+                DisabledFill: =RGBA(255, 255, 255, 1)
+                FocusedBorderThickness: =1
+                Font: =Font.'Segoe UI'
+                Height: =32
+                HintText: ="請輸入姓名/郵箱關鍵字"
+                HoverBorderColor: =RGBA(196, 200, 204, 1)
+                HoverColor: =RGBA(73, 77, 82, 100)
+                HoverFill: =RGBA(255, 255, 255, 1)
+                PressedBorderColor: =RGBA(196, 200, 204, 1)
+                PressedColor: =RGBA(73, 77, 82, 100)
+                PressedFill: =RGBA(255, 255, 255, 1)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =FountSise
+                Width: =298
+                X: =25
+                Y: =65
+                ZIndex: =10
+
+            Service_Dropdown_1 As combobox:
+                BorderColor: =RGBA(196, 200, 204, 1)
+                BorderThickness: =1
+                ChevronBackground: =RGBA(255, 255, 255, 1)
+                ChevronFill: =RGBA(153, 153, 153, 1)
+                ChevronHoverBackground: =
+                ChevronHoverFill: =RGBA(153, 153, 153, 1)
+                DisplayFields: =["Data2"]
+                FocusedBorderThickness: =1
+                Height: =32
+                HoverBorderColor: =RGBA(196, 200, 204, 1)
+                InputTextPlaceholder: ="單位/部門"
+                IsSearchable: =false
+                Items: =SearchDepartment
+                NoSelectionText: ="單位/部門"
+                OnSelect: |-
+                    =false
+                    //UpdateContext({Updata:Last(Split(Service_Dropdown_1.Selected.Value3,"-").Result).Result})
+                PaddingLeft: =12
+                PressedColor: =RGBA(50, 50, 50, 1)
+                PressedFill: =RGBA(0, 0, 0, 1)
+                SearchFields: =["Data2"]
+                SearchItems: =[]
+                SelectionColor: =RGBA(73, 77, 82, 1)
+                SelectionFill: =RGBA(0, 0, 0, 0)
+                SelectionTagFill: =
+                SelectMultiple: =false
+                Size: =FountSise
+                Width: =204
+                X: =344
+                Y: =65
+                ZIndex: =17
+
+            Service_Dropdown_2 As combobox:
+                BorderColor: =RGBA(196, 200, 204, 1)
+                BorderThickness: =1
+                ChevronBackground: =RGBA(255, 255, 255, 1)
+                ChevronFill: =RGBA(153, 153, 153, 1)
+                ChevronHoverBackground: =
+                ChevronHoverFill: =RGBA(153, 153, 153, 1)
+                DisplayFields: =["field_6"]
+                FocusedBorderThickness: =1
+                Height: =32
+                HoverBorderColor: =RGBA(196, 200, 204, 1)
+                InputTextPlaceholder: ="權限"
+                Items: =Filter(ConfigurationInfo,Type_No="0002"&&Code_No1="001").Value2
+                NoSelectionText: ="權限"
+                PaddingLeft: =12
+                PressedColor: =RGBA(50, 50, 50, 1)
+                PressedFill: =RGBA(0, 0, 0, 1)
+                SearchFields: =["field_6"]
+                SearchItems: =Search(Filter(ConfigurationInfo,Type_No="0002"&&Code_No1="001").Value2,Service_Dropdown_2.SearchText,"field_6")
+                SelectionColor: =RGBA(73, 77, 82, 1)
+                SelectionFill: =RGBA(0, 0, 0, 0)
+                SelectionTagFill: =
+                SelectMultiple: =false
+                Size: =FountSise
+                Width: =204
+                X: =563
+                Y: =65
+                ZIndex: =18
+
+        Group11 As group:
+            Height: =5
+            Width: =5
+            X: =16
+            Y: =20
+            ZIndex: =21
+
+            GalleryTitleBg_4 As button:
+                BorderThickness: =0
+                DisplayMode: =DisplayMode.View
+                Fill: =RGBA(242, 244, 245, 1)
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Normal
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =FountSise
+                Text: =""
+                Width: =1140
+                X: =24
+                Y: =125
+                ZIndex: =11
+
+            Label46_25 As label:
+                Color: =RGBA(25, 32, 41, 100)
+                Font: =Font.'Segoe UI'
+                Size: =FountSise
+                Text: ="單位/部門"
+                Width: =82
+                X: =76
+                Y: =125
+                ZIndex: =12
+
+            Label46_26 As label:
+                Color: =RGBA(25, 32, 41, 100)
+                Font: =Font.'Segoe UI'
+                Size: =FountSise
+                Text: ="權限"
+                Width: =92
+                X: =892
+                Y: =125
+                ZIndex: =13
+
+            Label46_28 As label:
+                Color: =RGBA(25, 32, 41, 100)
+                Font: =Font.'Segoe UI'
+                Size: =FountSise
+                Text: ="負責人"
+                Width: =166
+                X: =321
+                Y: =125
+                ZIndex: =14
+
+            Label46_29 As label:
+                Color: =RGBA(25, 32, 41, 100)
+                Font: =Font.'Segoe UI'
+                Size: =FountSise
+                Text: ="郵箱"
+                Width: =116
+                X: =621
+                Y: =125
+                ZIndex: =15
+
+        Label1_64 As label:
+            Color: =RGBA(73, 77, 82, 100)
+            Font: =Font.'Segoe UI'
+            Height: =20
+            Size: =9
+            Text: |
+                ="共計："&CountRows(GAListGallery_1.AllItems)&"條"
+            Width: =133
+            X: =1037
+            Y: =645
+            ZIndex: =22
+
+    OrganizationContainer As groupContainer.manualLayoutContainer:
+        Height: =696
+        Visible: =If(ToUserInfoManager = "組織機構", true, false)
+        Width: =1206
+        X: =160
+        Y: =72
+        ZIndex: =5
+
+        RightBg_10 As button:
+            DisplayMode: =DisplayMode.View
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =694
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            Text: =
+            Width: =1170
+            ZIndex: =2
+
+        GAContainer_2 As groupContainer.manualLayoutContainer:
+            Height: =621
+            Visible: =If(ProjectTitleGallery_3.Selected.Value = "單位／部門", true, false)
+            Width: =1165
+            Y: =57
+            ZIndex: =5
+
+            GAListGallery_2 As gallery.galleryVertical:
+                Height: =455
+                Items: |-
+                    =Filter(
+                            general_administration,
+                            Dropdown2_25.Selected.Data2 = Blank() || Value2 = Last(Split(Dropdown2_25.Selected.Data2,"-").Result).Result,
+                            Dropdown2_26.Selected.Value2 = Blank() || Value3 = Dropdown2_26.Selected.Value2
+                        )
+                Layout: =Layout.Vertical
+                TemplateSize: =40
+                Width: =1139
+                X: =24
+                Y: =112
+                ZIndex: =8
+
+                Rectangle15_10 As rectangle:
+                    Fill: =RGBA(230, 230, 230, 1)
+                    Height: =1
+                    OnSelect: =Select(Parent)
+                    Width: =1104
+                    Y: =39
+                    ZIndex: =2
+
+                Label33_56 As label:
+                    Color: =RGBA(102, 102, 102, 1)
+                    Font: =Font.'Segoe UI'
+                    OnSelect: =Select(Parent)
+                    Size: =FountSise
+                    Text: =ThisItem.Value2
+                    Width: =174
+                    X: =58
+                    ZIndex: =5
+
+                Label33_58 As label:
+                    Color: =RGBA(102, 102, 102, 1)
+                    Font: =Font.'Segoe UI'
+                    OnSelect: =Select(Parent)
+                    Size: =FountSise
+                    Text: =ThisItem.Value5
+                    Width: =129
+                    X: =975
+                    ZIndex: =6
+
+                Label33_57 As label:
+                    Color: =RGBA(102, 102, 102, 1)
+                    Font: =Font.'Segoe UI'
+                    OnSelect: =Select(Parent)
+                    Size: =FountSise
+                    Text: =ThisItem.Value3
+                    Width: =158
+                    X: =289
+                    ZIndex: =9
+
+                Label33_61 As label:
+                    Color: =RGBA(102, 102, 102, 1)
+                    Font: =Font.'Segoe UI'
+                    OnSelect: =Select(Parent)
+                    Size: =FountSise
+                    Text: =ThisItem.Value4
+                    Width: =180
+                    X: =785
+                    ZIndex: =11
+
+                Label33_60 As label:
+                    Color: =RGBA(102, 102, 102, 1)
+                    Font: =Font.'Segoe UI'
+                    OnSelect: =Select(Parent)
+                    Size: =FountSise
+                    Text: =LookUp(SignerInfo,S_Mechanism=ThisItem.Value2).Signer
+                    Width: =127
+                    X: =476
+                    ZIndex: =12
+
+                Label33_62 As label:
+                    Color: =RGBA(102, 102, 102, 1)
+                    Font: =Font.'Segoe UI'
+                    OnSelect: =Select(Parent)
+                    Size: =FountSise
+                    Text: =LookUp(SignerInfo,S_Mechanism=ThisItem.Value2).Signer_Email
+                    Width: =167
+                    X: =603
+                    ZIndex: =13
+
+            Label1_65 As label:
+                Color: =RGBA(73, 77, 82, 100)
+                Font: =Font.'Segoe UI'
+                Height: =23
+                Size: =9
+                Text: ="共计："&CountRows(general_administration)&"条"
+                Width: =105
+                X: =1060
+                Y: =598
+                ZIndex: =9
+
+            Dropdown2_25 As combobox:
+                BorderColor: =RGBA(196, 200, 204, 1)
+                BorderThickness: =1
+                ChevronBackground: =RGBA(255, 255, 255, 1)
+                ChevronFill: =RGBA(197, 197, 197, 1)
+                ChevronHoverBackground: =
+                ChevronHoverFill: =RGBA(153, 153, 153, 1)
+                DisplayFields: =["Data2"]
+                FocusedBorderThickness: =1
+                Height: =32
+                HoverBorderColor: =RGBA(196, 200, 204, 1)
+                InputTextPlaceholder: ="單位/部門"
+                IsSearchable: =false
+                Items: =SearchDepartment
+                NoSelectionText: ="單位/部門"
+                OnSelect: |-
+                    =false
+                    //UpdateContext({Updata:Last(Split(Dropdown2_25.Selected.Value3,"-").Result).Result})
+                PaddingLeft: =12
+                PressedColor: =RGBA(50, 50, 50, 1)
+                PressedFill: =RGBA(0, 0, 0, 1)
+                SearchFields: =["Data2"]
+                SearchItems: =[]
+                SelectionColor: =RGBA(73, 77, 82, 1)
+                SelectionFill: =RGBA(0, 0, 0, 0)
+                SelectionTagFill: =
+                SelectMultiple: =false
+                Size: =FountSise
+                Width: =200
+                X: =24
+                Y: =15
+                ZIndex: =35
+
+            Group43 As group:
+                Height: =5
+                Width: =5
+                X: =40
+                Y: =40
+                ZIndex: =35
+
+                GalleryTitleBg_8 As button:
+                    BorderThickness: =0
+                    DisplayMode: =DisplayMode.View
+                    Fill: =RGBA(242, 244, 245, 1)
+                    Height: =48
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Text: =""
+                    Width: =1139
+                    X: =24
+                    Y: =67
+                    ZIndex: =20
+
+                Label46_58 As label:
+                    Color: =RGBA(25, 32, 41, 100)
+                    Font: =Font.'Segoe UI'
+                    Height: =48
+                    Size: =FountSise
+                    Text: ="單位/部門"
+                    Width: =83
+                    X: =81
+                    Y: =68
+                    ZIndex: =21
+
+                Label46_54 As label:
+                    Color: =RGBA(25, 32, 41, 100)
+                    Font: =Font.'Segoe UI'
+                    Height: =48
+                    Size: =FountSise
+                    Text: ="電郵"
+                    Width: =92
+                    X: =637
+                    Y: =68
+                    ZIndex: =22
+
+                Label46_53 As label:
+                    Color: =RGBA(25, 32, 41, 100)
+                    Font: =Font.'Segoe UI'
+                    Height: =48
+                    Size: =FountSise
+                    Text: ="電郵地址"
+                    Width: =85
+                    X: =1035
+                    Y: =68
+                    ZIndex: =24
+
+                Label46_55 As label:
+                    Color: =RGBA(25, 32, 41, 100)
+                    Font: =Font.'Segoe UI'
+                    Height: =48
+                    Size: =FountSise
+                    Text: ="郵寄地址"
+                    Width: =117
+                    X: =820
+                    Y: =68
+                    ZIndex: =25
+
+                Label46_65 As label:
+                    Color: =RGBA(25, 32, 41, 100)
+                    Font: =Font.'Segoe UI'
+                    Height: =48
+                    Size: =FountSise
+                    Text: ="服務"
+                    Width: =83
+                    X: =318
+                    Y: =68
+                    ZIndex: =33
+
+                Label46_57 As label:
+                    Color: =RGBA(25, 32, 41, 100)
+                    Font: =Font.'Segoe UI'
+                    Height: =48
+                    Size: =FountSise
+                    Text: ="簽批人"
+                    Width: =92
+                    X: =507
+                    Y: =68
+                    ZIndex: =34
+
+            Dropdown2_26 As combobox:
+                BorderColor: =RGBA(196, 200, 204, 1)
+                BorderThickness: =1
+                ChevronBackground: =RGBA(255, 255, 255, 1)
+                ChevronFill: =RGBA(197, 197, 197, 1)
+                ChevronHoverBackground: =
+                ChevronHoverFill: =RGBA(153, 153, 153, 1)
+                DisplayFields: =["field_6"]
+                FocusedBorderThickness: =1
+                Height: =32
+                HoverBorderColor: =RGBA(196, 200, 204, 1)
+                InputTextPlaceholder: ="服務"
+                IsSearchable: =false
+                Items: =Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="002").Value2
+                NoSelectionText: ="服務"
+                PaddingLeft: =12
+                PressedColor: =RGBA(50, 50, 50, 1)
+                PressedFill: =RGBA(0, 0, 0, 1)
+                SearchFields: =["field_6"]
+                SearchItems: =[]
+                SelectionColor: =RGBA(73, 77, 82, 1)
+                SelectionFill: =RGBA(0, 0, 0, 0)
+                SelectionTagFill: =
+                SelectMultiple: =false
+                Size: =FountSise
+                Width: =200
+                X: =247
+                Y: =15
+                ZIndex: =36
+
+        ServiceContainer_2 As groupContainer.manualLayoutContainer:
+            Height: =637
+            Visible: =If(ProjectTitleGallery_3.Selected.Value = "服務項目", true, false)
+            Width: =1170
+            Y: =57
+            ZIndex: =6
+
+            Label1_66 As label:
+                Color: =RGBA(73, 77, 82, 100)
+                Font: =Font.'Segoe UI'
+                Height: =23
+                Size: =9
+                Text: ="共計："&CountRows(Servicetable)&"條"
+                Width: =105
+                X: =1065
+                Y: =600
+                ZIndex: =9
+
+            Dropdown2_29 As combobox:
+                BorderColor: =RGBA(196, 200, 204, 1)
+                BorderThickness: =1
+                ChevronBackground: =RGBA(255, 255, 255, 1)
+                ChevronFill: =RGBA(153, 153, 153, 1)
+                ChevronHoverBackground: =
+                ChevronHoverFill: =RGBA(153, 153, 153, 1)
+                DisplayFields: =["field_6"]
+                FocusedBorderThickness: =1
+                Font: =Font.'Segoe UI'
+                Height: =32
+                HoverBorderColor: =RGBA(196, 200, 204, 1)
+                InputTextPlaceholder: ="服務"
+                IsSearchable: =false
+                Items: =Filter(ConfigurationInfo, Value1 = "服務信息").Value2
+                NoSelectionText: ="服務"
+                PaddingLeft: =12
+                PressedColor: =RGBA(50, 50, 50, 1)
+                PressedFill: =RGBA(0, 0, 0, 1)
+                SearchFields: =["field_6"]
+                SearchItems: =[]
+                SelectionColor: =RGBA(73, 77, 82, 1)
+                SelectionFill: =RGBA(0, 0, 0, 0)
+                SelectionTagFill: =
+                SelectMultiple: =false
+                Size: =FountSise
+                Width: =200
+                X: =24
+                Y: =15
+                ZIndex: =28
+
+            RoleListGallery_2 As gallery.galleryVertical:
+                Height: =400
+                Items: |-
+                    =Filter(
+                       Servicetable,
+                        Value2 = Dropdown2_29.Selected.Value2 || If(
+                            Dropdown2_29.Selected.Value2 = Blank(),
+                            true,
+                            false
+                        )
+                    )
+                Layout: =Layout.Vertical
+                TemplateSize: =40
+                Width: =1112
+                X: =22
+                Y: =104
+                ZIndex: =29
+
+                Label33_49 As label:
+                    Color: =RGBA(73, 77, 82, 100)
+                    Font: =Font.'Segoe UI'
+                    OnSelect: =Select(Parent)
+                    PaddingLeft: =22
+                    Size: =FountSise
+                    Text: =ThisItem.Code_No2
+                    Width: =136
+                    X: =130
+                    ZIndex: =1
+
+                Rectangle15_9 As rectangle:
+                    Fill: =RGBA(230, 230, 230, 1)
+                    Height: =1
+                    OnSelect: =Select(Parent)
+                    Width: =1102
+                    Y: =39
+                    ZIndex: =2
+
+                Label33_52 As label:
+                    Color: =RGBA(73, 77, 82, 100)
+                    Font: =Font.'Segoe UI'
+                    OnSelect: =Select(Parent)
+                    Size: =FountSise
+                    Text: =ThisItem.Value2
+                    Width: =259
+                    X: =497
+                    ZIndex: =6
+
+            Group11_2 As group:
+                Height: =5
+                Width: =5
+                X: =60
+                Y: =60
+                ZIndex: =31
+
+                GalleryTitleBg_7 As button:
+                    BorderThickness: =0
+                    DisplayMode: =DisplayMode.View
+                    Fill: =RGBA(242, 244, 245, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Text: =""
+                    Width: =1110
+                    X: =24
+                    Y: =66
+                    ZIndex: =20
+
+                Label46_21 As label:
+                    Color: =RGBA(25, 32, 41, 100)
+                    Font: =Font.'Segoe UI'
+                    Size: =FountSise
+                    Text: ="編號"
+                    Width: =162
+                    X: =175
+                    Y: =65
+                    ZIndex: =21
+
+                Label46_47 As label:
+                    Color: =RGBA(25, 32, 41, 100)
+                    Font: =Font.'Segoe UI'
+                    Size: =FountSise
+                    Text: ="服務"
+                    Width: =216
+                    X: =541
+                    Y: =68
+                    ZIndex: =22
+
+        TitleSelectGroup_3 As group:
+            Height: =5
+            Width: =5
+            X: =40
+            Y: =40
+            ZIndex: =33
+
+            Rectangle13_16 As rectangle:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderStyle: =BorderStyle.None
+                Fill: =RGBA(242, 244, 245, 1)
+                Height: =57
+                Width: =1192
+                ZIndex: =1
+
+            Rectangle13_17 As rectangle:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderStyle: =BorderStyle.None
+                Fill: =RGBA(242, 244, 245, 1)
+                Height: =3
+                Width: =1184
+                X: =8
+                Y: =57
+                ZIndex: =3
+
+            ProjectTitleGallery_3 As gallery.galleryHorizontal:
+                BorderColor: =RGBA(0, 0, 0, 0)
+                BorderStyle: =BorderStyle.None
+                Fill: =RGBA(242, 244, 245, 1)
+                Height: =57
+                Items: =["服務項目", "單位／部門"]
+                TemplateSize: =105
+                Width: =1192
+                ZIndex: =4
+
+                Label45_3 As label:
+                    Align: =Align.Center
+                    Color: =If(ThisItem.IsSelected, RGBA(0, 133, 192, 100), RGBA(73, 77, 82, 100))
+                    Font: =Font.'Segoe UI'
+                    Height: =21
+                    OnSelect: =Select(Parent)
+                    Size: =FountSise
+                    Text: =ThisItem.Value
+                    Width: =100
+                    Y: =14
+                    ZIndex: =1
+
+                Rectangle18_3 As rectangle:
+                    BorderColor: =RGBA(0, 0, 0, 0)
+                    BorderStyle: =BorderStyle.None
+                    Fill: =RGBA(0, 133, 192, 1)
+                    Height: =2
+                    OnSelect: =Select(Parent)
+                    Visible: =If(ThisItem.IsSelected, true, false)
+                    Width: =100
+                    Y: =43
+                    ZIndex: =2
+
+    UserSetIsShow As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(0, 0, 0, 0.3)
+        Height: =768
+        Visible: =UserSetIsShow
+        Width: =1366
+        ZIndex: =6
+
+        Button4_21 As button:
+            BorderThickness: =0
+            DisplayMode: =DisplayMode.View
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =768
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: =""
+            Width: =734
+            X: =632
+            ZIndex: =2
+
+        UnitTitle_4 As group:
+            Height: =5
+            Width: =5
+            X: =40
+            Y: =40
+            ZIndex: =5
+
+            Rectangle3_10 As rectangle:
+                Fill: =RGBA(242, 244, 245, 1)
+                Height: =2
+                Width: =650
+                X: =668
+                Y: =58
+                ZIndex: =3
+
+            Label3_13 As label:
+                Color: =RGBA(25, 32, 41, 100)
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Semibold
+                Height: =58
+                Size: =TitleSise
+                Text: ="創建用户"
+                X: =662
+                ZIndex: =4
+
+        SaveBtn_12 As button:
+            BorderColor: =
+            BorderStyle: =BorderStyle.None
+            BorderThickness: =0
+            DisabledColor: =RGBA(255, 255, 255, 1)
+            Fill: =RGBA(0, 133, 192, 1)
+            FocusedBorderThickness: =0
+            FontWeight: =FontWeight.Normal
+            HoverBorderColor: =
+            HoverFill: =RGBA(0, 133, 192, 1)
+            OnSelect: |
+                =//ClearCollect(MechanismType,Filter(ConfigurationInfo,Type_Name="組織配置"&&(Value1 = "單位信息"||Value1="部門信息")));
+                
+                UpdateContext({S_Mechanism_T:LookUp(ConfigurationInfo,Code_No2=Dropdown_Mechanism.Selected.Code_No2).Value1});
+                
+                If(
+                    IsBlank(UserTextInput.Text) && IsBlank(UsaerEmaiLTextInput.Text) && IsBlank(UserTextInput_5.Text) && IsBlank(Dropdown_Mechanism.Selected.Code_No2) && IsBlank(UserTextInput_7.Text) && IsBlank(Dropdown_Post.Selected.PR_Name),
+                    UpdateContext({UserSetIsShow: true}),
+                    Patch(
+                        UserInfo,
+                        Defaults(UserInfo),
+                        {
+                            Title: GUID(),
+                            User_Name: UserTextInput.Text,
+                            User_Email: UsaerEmaiLTextInput.Text,
+                            O_Mechanism_No:Dropdown_Mechanism.Selected.Code_No2,
+                            O_Mechanism: UserTextInput_5.Text,
+                            O_Mechanism_Type:If(S_Mechanism_T="單位信息","單位",If(S_Mechanism_T="部門信息","部門","服務")),
+                            Post_No: UserTextInput_7.Text,
+                            Post: Dropdown_Post.Selected.PR_Name
+                          
+                        }
+                    );
+                    Notify(
+                    "添加成功！",
+                    NotificationType.Success
+                );UpdateContext({UserSetIsShow: false});Refresh(UserInfo);
+                //数据赋值解除委派
+                ClearCollect(
+                    TempAllUserTable,
+                    UserInfo
+                );
+                );
+                
+                Concurrent(
+                    Reset(UserTextInput),
+                    Reset(UsaerEmaiLTextInput),
+                    Reset(UserTextInput_5),
+                    Reset(Dropdown_Mechanism),
+                    Reset(UserTextInput_7),
+                    Reset(Dropdown_Post)
+                    
+                );
+            PressedBorderColor: =
+            PressedColor: =RGBA(255, 255, 255, 1)
+            PressedFill: =RGBA(0, 133, 192, 1)
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            Size: =13
+            Text: ="保存"
+            Width: =122
+            X: =1188
+            Y: =705
+            ZIndex: =15
+
+        Group43_2 As group:
+            Height: =5
+            Width: =5
+            X: =40
+            Y: =40
+            ZIndex: =24
+
+            Label4_49 As label:
+                Color: =RGBA(25, 32, 41, 100)
+                Font: =Font.'Segoe UI'
+                Size: =10.5
+                Text: ="職員姓名"
+                X: =692
+                Y: =73
+                ZIndex: =6
+
+            UserTextInput As text:
+                BorderColor: =RGBA(196, 200, 204, 1)
+                BorderThickness: =1
+                Color: =RGBA(25, 32, 41, 100)
+                Default: =""
+                DisabledBorderColor: =RGBA(196, 200, 204, 1)
+                DisabledColor: =RGBA(25, 32, 41, 100)
+                DisabledFill: =RGBA(0, 0, 0, 0)
+                FocusedBorderThickness: =1
+                Font: =Font.'Segoe UI'
+                Height: =28
+                HoverBorderColor: =RGBA(196, 200, 204, 1)
+                HoverColor: =RGBA(25, 32, 41, 100)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                PressedBorderColor: =RGBA(196, 200, 204, 1)
+                PressedColor: =RGBA(25, 32, 41, 100)
+                PressedFill: =
+                RadiusBottomLeft: =2
+                RadiusBottomRight: =2
+                RadiusTopLeft: =2
+                RadiusTopRight: =2
+                Size: =10.5
+                Width: =272
+                X: =692
+                Y: =113
+                ZIndex: =23
+
+        Group43_3 As group:
+            Height: =5
+            Width: =5
+            X: =-1004
+            Y: =-20
+            ZIndex: =27
+
+            Label4_57 As label:
+                Color: =RGBA(25, 32, 41, 100)
+                Font: =Font.'Segoe UI'
+                Size: =10.5
+                Text: ="職員郵箱"
+                X: =1038
+                Y: =73
+                ZIndex: =25
+
+            UsaerEmaiLTextInput As text:
+                BorderColor: =RGBA(196, 200, 204, 1)
+                BorderThickness: =1
+                Color: =RGBA(25, 32, 41, 100)
+                Default: =""
+                DisabledBorderColor: =RGBA(196, 200, 204, 1)
+                DisabledColor: =RGBA(25, 32, 41, 100)
+                DisabledFill: =RGBA(0, 0, 0, 0)
+                FocusedBorderThickness: =1
+                Font: =Font.'Segoe UI'
+                Height: =28
+                HoverBorderColor: =RGBA(196, 200, 204, 1)
+                HoverColor: =RGBA(25, 32, 41, 100)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                PressedBorderColor: =RGBA(196, 200, 204, 1)
+                PressedColor: =RGBA(25, 32, 41, 100)
+                PressedFill: =
+                RadiusBottomLeft: =2
+                RadiusBottomRight: =2
+                RadiusTopLeft: =2
+                RadiusTopRight: =2
+                Size: =10.5
+                Width: =272
+                X: =1038
+                Y: =113
+                ZIndex: =26
+
+        Group45_6 As group:
+            Height: =5
+            Width: =5
+            X: =-1030
+            Y: =-417
+            ZIndex: =35
+
+            Label4_61 As label:
+                Color: =RGBA(25, 32, 41, 100)
+                Font: =Font.'Segoe UI'
+                Size: =10.5
+                Text: ="職位"
+                X: =692
+                Y: =238
+                ZIndex: =33
+
+            Dropdown_Post As combobox:
+                BorderColor: =RGBA(196, 200, 204, 1)
+                BorderThickness: =1
+                ChevronBackground: =RGBA(255, 255, 255, 1)
+                ChevronFill: =RGBA(197, 197, 197, 1)
+                ChevronHoverBackground: =
+                ChevronHoverFill: =RGBA(153, 153, 153, 1)
+                DisplayFields: =["PR_Name"]
+                FocusedBorderThickness: =1
+                Height: =28
+                HoverBorderColor: =RGBA(196, 200, 204, 1)
+                InputTextPlaceholder: ="請選擇職位"
+                IsSearchable: =false
+                Items: =Filter(PostRankInfo,PR_Type="職位").PR_Name
+                NoSelectionText: =
+                PaddingLeft: =12
+                PressedColor: =RGBA(50, 50, 50, 1)
+                PressedFill: =RGBA(0, 0, 0, 1)
+                SearchFields: =["PR_Name"]
+                SearchItems: =[]
+                SelectionColor: =RGBA(73, 77, 82, 1)
+                SelectionFill: =RGBA(0, 0, 0, 0)
+                SelectionTagFill: =
+                SelectMultiple: =false
+                Size: =FountSise
+                Width: =272
+                X: =692
+                Y: =278
+                ZIndex: =34
+
+        SaveBtn_13 As button:
+            BorderColor: =RGBA(0, 134, 208, 1)
+            BorderThickness: =1
+            Color: =RGBA(0, 134, 208, 1)
+            DisabledColor: =RGBA(255, 255, 255, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            FocusedBorderThickness: =0
+            FontWeight: =FontWeight.Normal
+            HoverBorderColor: =RGBA(0, 134, 208, 1)
+            HoverColor: =RGBA(0, 134, 208, 1)
+            HoverFill: =RGBA(255, 255, 255, 1)
+            OnSelect: |-
+                =UpdateContext({UserSetIsShow: false});
+                Concurrent(
+                    Reset(UserTextInput),
+                    Reset(UsaerEmaiLTextInput),
+                    Reset(UserTextInput_5),
+                    Reset(Dropdown_Mechanism),
+                    Reset(UserTextInput_7),
+                    Reset(Dropdown_Post)
+                    )
+            PressedBorderColor: =RGBA(0, 134, 208, 1)
+            PressedColor: =RGBA(0, 134, 208, 1)
+            PressedFill: =RGBA(255, 255, 255, 1)
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            Size: =13
+            Text: ="取消"
+            Width: =122
+            X: =1038
+            Y: =705
+            ZIndex: =56
+
+        Group19 As group:
+            Height: =5
+            Width: =5
+            X: =40
+            Y: =40
+            ZIndex: =61
+
+            Label4_64 As label:
+                Color: =RGBA(25, 32, 41, 100)
+                Font: =Font.'Segoe UI'
+                Size: =10.5
+                Text: ="職位編號"
+                X: =1038
+                Y: =238
+                ZIndex: =39
+
+            UserTextInput_7 As text:
+                BorderColor: =RGBA(196, 200, 204, 1)
+                BorderThickness: =1
+                Color: =RGBA(25, 32, 41, 100)
+                Default: =LookUp(PostRankInfo, PR_Name = Dropdown_Post.Selected.PR_Name).PR_No
+                DisabledBorderColor: =RGBA(196, 200, 204, 1)
+                DisabledColor: =RGBA(25, 32, 41, 100)
+                DisabledFill: =RGBA(237, 237, 237, 1)
+                DisplayMode: =DisplayMode.Disabled
+                FocusedBorderThickness: =1
+                Font: =Font.'Segoe UI'
+                Height: =28
+                HoverBorderColor: =RGBA(196, 200, 204, 1)
+                HoverColor: =RGBA(25, 32, 41, 100)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                PressedBorderColor: =RGBA(196, 200, 204, 1)
+                PressedColor: =RGBA(25, 32, 41, 100)
+                PressedFill: =
+                RadiusBottomLeft: =2
+                RadiusBottomRight: =2
+                RadiusTopLeft: =2
+                RadiusTopRight: =2
+                Size: =10.5
+                Width: =272
+                X: =1038
+                Y: =278
+                ZIndex: =59
+
+        Group13 As group:
+            Height: =5
+            Width: =5
+            X: =40
+            Y: =40
+            ZIndex: =61
+
+            Label4_59 As label:
+                Color: =RGBA(25, 32, 41, 100)
+                Font: =Font.'Segoe UI'
+                Size: =10.5
+                Text: ="單位/部門編號"
+                X: =692
+                Y: =149
+                ZIndex: =29
+
+            Dropdown_Mechanism As combobox:
+                BorderColor: =RGBA(196, 200, 204, 1)
+                BorderThickness: =1
+                ChevronBackground: =RGBA(255, 255, 255, 1)
+                ChevronFill: =RGBA(197, 197, 197, 1)
+                ChevronHoverBackground: =
+                ChevronHoverFill: =RGBA(153, 153, 153, 1)
+                DisplayFields: =["field_5"]
+                FocusedBorderThickness: =1
+                Height: =28
+                HoverBorderColor: =RGBA(196, 200, 204, 1)
+                InputTextPlaceholder: ="請選擇機構"
+                Items: =Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="002"||Type_No="0003"&&Code_No1="003").Code_No2
+                NoSelectionText: =
+                PaddingLeft: =12
+                PressedColor: =RGBA(50, 50, 50, 1)
+                PressedFill: =RGBA(0, 0, 0, 1)
+                SearchFields: =["field_5"]
+                SearchItems: =Search(Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="002"||Type_No="0003"&&Code_No1="003").Code_No2,Dropdown_Mechanism.SearchText,"field_5")
+                SelectionColor: =RGBA(73, 77, 82, 1)
+                SelectionFill: =RGBA(0, 0, 0, 0)
+                SelectionTagFill: =
+                SelectMultiple: =false
+                Size: =FountSise
+                Width: =272
+                X: =692
+                Y: =189
+                ZIndex: =32
+
+        Group12 As group:
+            Height: =5
+            Width: =5
+            X: =40
+            Y: =40
+            ZIndex: =61
+
+            Label4_60 As label:
+                Color: =RGBA(25, 32, 41, 100)
+                Font: =Font.'Segoe UI'
+                Size: =10.5
+                Text: ="單位/部門"
+                X: =1038
+                Y: =149
+                ZIndex: =31
+
+            UserTextInput_5 As text:
+                BorderColor: =RGBA(196, 200, 204, 1)
+                BorderThickness: =1
+                Color: =RGBA(25, 32, 41, 100)
+                Default: =LookUp(ConfigurationInfo, Code_No2 = Dropdown_Mechanism.Selected.Code_No2).Value2
+                DisabledBorderColor: =RGBA(196, 200, 204, 1)
+                DisabledColor: =RGBA(25, 32, 41, 100)
+                DisabledFill: =RGBA(237, 237, 237, 1)
+                DisplayMode: =DisplayMode.Disabled
+                FocusedBorderThickness: =1
+                Font: =Font.'Segoe UI'
+                Height: =28
+                HoverBorderColor: =RGBA(196, 200, 204, 1)
+                HoverColor: =RGBA(25, 32, 41, 100)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                PressedBorderColor: =RGBA(196, 200, 204, 1)
+                PressedColor: =RGBA(25, 32, 41, 100)
+                PressedFill: =
+                RadiusBottomLeft: =2
+                RadiusBottomRight: =2
+                RadiusTopLeft: =2
+                RadiusTopRight: =2
+                Size: =10.5
+                Width: =272
+                X: =1038
+                Y: =189
+                ZIndex: =57
+
+    UserDeletShow As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(0, 0, 0, 0.3)
+        Height: =768
+        Visible: =UserDeletShow
+        Width: =1366
+        ZIndex: =7
+
+        Button1_5 As button:
+            BorderStyle: =BorderStyle.None
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =161
+            HoverFill: =RGBA(255, 255, 255, 1)
+            PressedColor: =RGBA(255, 255, 255, 1)
+            PressedFill: =RGBA(255, 255, 255, 1)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: ="按钮"
+            Width: =392
+            X: =535
+            Y: =260
+            ZIndex: =1
+
+        Label32 As label:
+            Color: =RGBA(246, 88, 16, 1)
+            Height: =56
+            Text: ="確認刪除該條數據！"
+            Width: =187
+            X: =683
+            Y: =280
+            ZIndex: =2
+
+        Icon7 As icon.Information:
+            Color: =RGBA(246, 88, 16, 1)
+            Height: =26
+            Icon: =Icon.Information
+            Width: =40
+            X: =643
+            Y: =295
+            ZIndex: =3
+
+        Button2_3 As button:
+            Color: =RGBA(0, 134, 208, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            FontWeight: =FontWeight.Normal
+            Height: =36
+            HoverColor: =RGBA(0, 134, 208, 1)
+            HoverFill: =RGBA(255, 255, 255, 1)
+            OnSelect: |-
+                =UpdateContext({UserDeletShow:false})
+            PressedColor: =RGBA(0, 134, 208, 1)
+            PressedFill: =RGBA(255, 255, 255, 1)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =12
+            Text: ="取消"
+            Width: =120
+            X: =600
+            Y: =355
+            ZIndex: =4
+
+        Button3_2 As button:
+            BorderColor: =RGBA(230, 230, 230, 1)
+            BorderStyle: =BorderStyle.None
+            Fill: =RGBA(0, 134, 208, 1)
+            FontWeight: =FontWeight.Normal
+            Height: =36
+            HoverFill: =RGBA(8, 127, 190, 1)
+            OnSelect: |-
+                =RemoveIf(UserInfo,Title=UserListGallery_1.Selected.Title);Refresh(UserInfo);UpdateContext({UserDeletShow:false})
+            PressedColor: =RGBA(255, 255, 255, 1)
+            PressedFill: =RGBA(255, 255, 255, 1)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =12
+            Text: ="確認"
+            Width: =120
+            X: =745
+            Y: =355
+            ZIndex: =5
+
+    UserEditShow As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(0, 0, 0, 0.3)
+        Height: =768
+        Visible: =UserEditShow
+        Width: =1366
+        ZIndex: =8
+
+        Button4_24 As button:
+            BorderThickness: =0
+            DisplayMode: =DisplayMode.View
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =768
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: =""
+            Width: =734
+            X: =632
+            ZIndex: =2
+
+        UnitTitle_5 As group:
+            Height: =5
+            Width: =5
+            X: =40
+            Y: =40
+            ZIndex: =5
+
+            Rectangle3_11 As rectangle:
+                Fill: =RGBA(242, 244, 245, 1)
+                Height: =2
+                Width: =650
+                X: =668
+                Y: =58
+                ZIndex: =3
+
+            Label3_14 As label:
+                Color: =RGBA(25, 32, 41, 100)
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Semibold
+                Height: =58
+                Size: =TitleSise
+                Text: ="編輯用户"
+                X: =662
+                ZIndex: =4
+
+        SaveBtn_15 As button:
+            BorderThickness: =0
+            DisabledColor: =RGBA(255, 255, 255, 1)
+            Fill: =RGBA(0, 133, 192, 1)
+            FocusedBorderThickness: =0
+            FontWeight: =FontWeight.Normal
+            HoverFill: =ColorFade(RGBA(0, 133, 192, 1), -20%)
+            OnSelect: |
+                =If(
+                    IsBlank(UserTextInput_1.Text) && IsBlank(UsaerEmaiLTextInput_1.Text) && IsBlank(UserTextInput_8.Text) && IsBlank(Dropdown_Mechanism_1.Selected.Code_No2) && IsBlank(UserTextInput_10.Text) && IsBlank(Dropdown_post_1.Selected.PR_Name),
+                    UpdateContext({UserEditShow: true}),
+                    Patch(
+                        UserInfo,
+                        LookUp(
+                            UserInfo,
+                            Title = UserListGallery_1.Selected.Title
+                        ),
+                        {User_Name: UserTextInput_1.Text},
+                        {User_Email: UsaerEmaiLTextInput_1.Text},
+                        {O_Mechanism: UserTextInput_8.Text},
+                        {O_Mechanism_No: Dropdown_Mechanism_1.Selected.Code_No2},
+                        {Post_No: UserTextInput_10.Text},
+                        {Post: Dropdown_post_1.Selected.PR_Name}
+                    );
+                    Notify(
+                        "編輯成功！",
+                        NotificationType.Success
+                    );
+                    UpdateContext({UserEditShow: false});
+                    Refresh(UserInfo)
+                );
+                Concurrent(
+                    Reset(UserTextInput_1),
+                    Reset(UsaerEmaiLTextInput_1),
+                    Reset(UserTextInput_10),
+                    Reset(Dropdown_Mechanism_1),
+                    Reset(UserTextInput_8),
+                    Reset(Dropdown_post_1)
+                );
+            PressedColor: =RGBA(255, 255, 255, 1)
+            PressedFill: =ColorFade(RGBA(0, 133, 192, 1), -20%)
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            Size: =13
+            Text: ="保存"
+            Width: =122
+            X: =1188
+            Y: =705
+            ZIndex: =15
+
+        Group43_4 As group:
+            Height: =5
+            Width: =5
+            X: =40
+            Y: =40
+            ZIndex: =24
+
+            Label4_50 As label:
+                Color: =RGBA(25, 32, 41, 100)
+                Font: =Font.'Segoe UI'
+                Size: =10.5
+                Text: ="職員姓名"
+                X: =692
+                Y: =73
+                ZIndex: =6
+
+            UserTextInput_1 As text:
+                BorderColor: =RGBA(196, 200, 204, 1)
+                BorderThickness: =1
+                Color: =RGBA(25, 32, 41, 100)
+                Default: =UserListGallery_1.Selected.User_Name
+                DisabledBorderColor: =RGBA(196, 200, 204, 1)
+                DisabledColor: =RGBA(25, 32, 41, 100)
+                DisabledFill: =RGBA(0, 0, 0, 0)
+                FocusedBorderThickness: =1
+                Font: =Font.'Segoe UI'
+                Height: =28
+                HoverBorderColor: =RGBA(196, 200, 204, 1)
+                HoverColor: =RGBA(25, 32, 41, 100)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                PressedBorderColor: =RGBA(196, 200, 204, 1)
+                PressedColor: =RGBA(25, 32, 41, 100)
+                PressedFill: =
+                RadiusBottomLeft: =2
+                RadiusBottomRight: =2
+                RadiusTopLeft: =2
+                RadiusTopRight: =2
+                Size: =10.5
+                Width: =272
+                X: =692
+                Y: =113
+                ZIndex: =23
+
+        Group43_5 As group:
+            Height: =5
+            Width: =5
+            X: =-1004
+            Y: =-20
+            ZIndex: =27
+
+            Label4_65 As label:
+                Color: =RGBA(25, 32, 41, 100)
+                Font: =Font.'Segoe UI'
+                Size: =10.5
+                Text: ="職員郵箱"
+                X: =1038
+                Y: =73
+                ZIndex: =25
+
+            UsaerEmaiLTextInput_1 As text:
+                BorderColor: =RGBA(196, 200, 204, 1)
+                BorderThickness: =1
+                Color: =RGBA(25, 32, 41, 100)
+                Default: =UserListGallery_1.Selected.User_Email
+                DisabledBorderColor: =RGBA(196, 200, 204, 1)
+                DisabledColor: =RGBA(25, 32, 41, 100)
+                DisabledFill: =RGBA(0, 0, 0, 0)
+                FocusedBorderThickness: =1
+                Font: =Font.'Segoe UI'
+                Height: =28
+                HoverBorderColor: =RGBA(196, 200, 204, 1)
+                HoverColor: =RGBA(25, 32, 41, 100)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                PressedBorderColor: =RGBA(196, 200, 204, 1)
+                PressedColor: =RGBA(25, 32, 41, 100)
+                PressedFill: =
+                RadiusBottomLeft: =2
+                RadiusBottomRight: =2
+                RadiusTopLeft: =2
+                RadiusTopRight: =2
+                Size: =10.5
+                Width: =272
+                X: =1038
+                Y: =113
+                ZIndex: =26
+
+        Group45_15 As group:
+            Height: =5
+            Width: =5
+            X: =-1030
+            Y: =-417
+            ZIndex: =35
+
+            Label4_76 As label:
+                Color: =RGBA(25, 32, 41, 100)
+                Font: =Font.'Segoe UI'
+                Size: =10.5
+                Text: ="職位"
+                X: =692
+                Y: =250
+                ZIndex: =33
+
+            Dropdown_post_1 As combobox:
+                BorderColor: =RGBA(196, 200, 204, 1)
+                BorderThickness: =1
+                ChevronBackground: =RGBA(255, 255, 255, 1)
+                ChevronFill: =RGBA(197, 197, 197, 1)
+                ChevronHoverBackground: =
+                ChevronHoverFill: =RGBA(153, 153, 153, 1)
+                DefaultSelectedItems: |-
+                    =Table(
+                        {
+                            PR_Name: LookUp(
+                                UserInfo,
+                                Title = UserListGallery_1.Selected.Title
+                            ).Post
+                        }
+                    )
+                DisplayFields: =["PR_Name"]
+                FocusedBorderThickness: =1
+                Height: =28
+                HoverBorderColor: =RGBA(196, 200, 204, 1)
+                InputTextPlaceholder: ="請選擇職位"
+                IsSearchable: =false
+                Items: =Filter(PostRankInfo,PR_Type="職級").PR_Name
+                NoSelectionText: ="請選擇職位"
+                PaddingLeft: =12
+                PressedColor: =RGBA(50, 50, 50, 1)
+                PressedFill: =RGBA(0, 0, 0, 1)
+                SearchFields: =["PR_Name"]
+                SearchItems: =[]
+                SelectionColor: =RGBA(73, 77, 82, 1)
+                SelectionFill: =RGBA(0, 0, 0, 0)
+                SelectionTagFill: =
+                SelectMultiple: =false
+                Size: =FountSise
+                Width: =272
+                X: =692
+                Y: =287
+                ZIndex: =34
+
+        SaveBtn_14 As button:
+            BorderColor: =RGBA(0, 134, 208, 1)
+            BorderThickness: =1
+            Color: =RGBA(0, 134, 208, 1)
+            DisabledColor: =RGBA(255, 255, 255, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            FocusedBorderThickness: =0
+            FontWeight: =FontWeight.Normal
+            HoverBorderColor: =RGBA(0, 134, 208, 1)
+            HoverColor: =RGBA(0, 134, 208, 1)
+            HoverFill: =
+            OnSelect: |
+                =UpdateContext({UserEditShow: false});
+                Concurrent(
+                    Reset(UserTextInput_1),
+                    Reset(UsaerEmaiLTextInput_1),
+                    Reset(UserTextInput_10),
+                    Reset(Dropdown_Mechanism_1),
+                    Reset(UserTextInput_8),
+                    Reset(Dropdown_post_1)
+                );
+            PressedBorderColor: =RGBA(0, 134, 208, 1)
+            PressedColor: =RGBA(0, 134, 208, 1)
+            PressedFill: =
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            Size: =13
+            Text: ="取消"
+            Width: =122
+            X: =1038
+            Y: =705
+            ZIndex: =56
+
+        Group9 As group:
+            Height: =5
+            Width: =5
+            X: =40
+            Y: =40
+            ZIndex: =61
+
+            Label4_75 As label:
+                Color: =RGBA(25, 32, 41, 100)
+                Font: =Font.'Segoe UI'
+                Size: =10.5
+                Text: ="職位編號"
+                X: =1038
+                Y: =245
+                ZIndex: =39
+
+            UserTextInput_10 As text:
+                BorderColor: =RGBA(196, 200, 204, 1)
+                BorderThickness: =1
+                Color: =RGBA(25, 32, 41, 100)
+                Default: =LookUp(PostRankInfo, PR_Name = Dropdown_post_1.Selected.PR_Name).PR_No
+                DisabledBorderColor: =RGBA(196, 200, 204, 1)
+                DisabledColor: =RGBA(25, 32, 41, 100)
+                DisabledFill: =RGBA(237, 237, 237, 0.37)
+                DisplayMode: =DisplayMode.Disabled
+                FocusedBorderThickness: =1
+                Font: =Font.'Segoe UI'
+                Height: =28
+                HoverBorderColor: =RGBA(196, 200, 204, 1)
+                HoverColor: =RGBA(25, 32, 41, 100)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                PressedBorderColor: =RGBA(196, 200, 204, 1)
+                PressedColor: =RGBA(25, 32, 41, 100)
+                PressedFill: =
+                RadiusBottomLeft: =2
+                RadiusBottomRight: =2
+                RadiusTopLeft: =2
+                RadiusTopRight: =2
+                Size: =10.5
+                Width: =272
+                X: =1038
+                Y: =287
+                ZIndex: =59
+
+        Group28 As group:
+            Height: =5
+            Width: =5
+            X: =40
+            Y: =40
+            ZIndex: =61
+
+            Label4_71 As label:
+                Color: =RGBA(25, 32, 41, 100)
+                Font: =Font.'Segoe UI'
+                Size: =10.5
+                Text: ="單位/部門編號"
+                X: =692
+                Y: =166
+                ZIndex: =29
+
+            Dropdown_Mechanism_1 As combobox:
+                BorderColor: =RGBA(196, 200, 204, 1)
+                BorderThickness: =1
+                ChevronBackground: =RGBA(255, 255, 255, 1)
+                ChevronFill: =RGBA(197, 197, 197, 1)
+                ChevronHoverBackground: =
+                ChevronHoverFill: =RGBA(153, 153, 153, 1)
+                DefaultSelectedItems: |-
+                    =Table({Code_No2:UserListGallery_1.Selected.O_Mechanism_No})
+                DisplayFields: =["field_5"]
+                FocusedBorderThickness: =1
+                Height: =28
+                HoverBorderColor: =RGBA(196, 200, 204, 1)
+                InputTextPlaceholder: ="請選擇機構"
+                Items: =Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="003").Code_No2
+                NoSelectionText: ="請選擇機構"
+                PaddingLeft: =12
+                PressedColor: =RGBA(50, 50, 50, 1)
+                PressedFill: =RGBA(0, 0, 0, 1)
+                SearchFields: =["field_5"]
+                SearchItems: =Search(Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="003").Code_No2,Dropdown_Mechanism_1.SearchText,"field_5")
+                SelectionColor: =RGBA(73, 77, 82, 1)
+                SelectionFill: =RGBA(0, 0, 0, 0)
+                SelectionTagFill: =
+                SelectMultiple: =false
+                Size: =FountSise
+                Width: =272
+                X: =692
+                Y: =206
+                ZIndex: =32
+
+        Group24 As group:
+            Height: =5
+            Width: =5
+            X: =40
+            Y: =40
+            ZIndex: =61
+
+            Label4_72 As label:
+                Color: =RGBA(25, 32, 41, 100)
+                Font: =Font.'Segoe UI'
+                Size: =10.5
+                Text: ="單位/部門"
+                X: =1038
+                Y: =166
+                ZIndex: =31
+
+            UserTextInput_8 As text:
+                BorderColor: =RGBA(196, 200, 204, 1)
+                BorderThickness: =1
+                Color: =RGBA(25, 32, 41, 100)
+                Default: =LookUp(ConfigurationInfo, Code_No2 = Dropdown_Mechanism_1.Selected.Code_No2).Value2
+                DisabledBorderColor: =RGBA(196, 200, 204, 1)
+                DisabledColor: =RGBA(25, 32, 41, 100)
+                DisabledFill: =RGBA(237, 237, 237, 0.37)
+                DisplayMode: =DisplayMode.Disabled
+                FocusedBorderThickness: =1
+                Font: =Font.'Segoe UI'
+                Height: =28
+                HoverBorderColor: =RGBA(196, 200, 204, 1)
+                HoverColor: =RGBA(25, 32, 41, 100)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                PressedBorderColor: =RGBA(196, 200, 204, 1)
+                PressedColor: =RGBA(25, 32, 41, 100)
+                PressedFill: =
+                RadiusBottomLeft: =2
+                RadiusBottomRight: =2
+                RadiusTopLeft: =2
+                RadiusTopRight: =2
+                Size: =10.5
+                Width: =272
+                X: =1038
+                Y: =206
+                ZIndex: =57
+
+    GAMask As groupContainer.manualLayoutContainer:
+        ContentLanguage: =
+        Fill: =RGBA(0, 0, 0, 0.3)
+        Height: =768
+        Visible: =GAMask
+        Width: =1366
+        ZIndex: =9
+
+        Button4_26 As button:
+            BorderThickness: =0
+            DisplayMode: =DisplayMode.View
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =768
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: =""
+            Width: =365
+            X: =1001
+            ZIndex: =2
+
+        UnitTitle_7 As group:
+            Height: =5
+            Width: =5
+            X: =40
+            Y: =40
+            ZIndex: =5
+
+            Rectangle3_13 As rectangle:
+                Fill: =RGBA(242, 244, 245, 1)
+                Height: =2
+                Width: =317
+                X: =1001
+                Y: =58
+                ZIndex: =3
+
+            Label3_15 As label:
+                Color: =RGBA(25, 32, 41, 100)
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Semibold
+                Height: =58
+                Size: =TitleSise
+                Text: ="新增權限"
+                Width: =98
+                X: =1013
+                ZIndex: =4
+
+        SaveBtn_19 As button:
+            BorderThickness: =0
+            DisabledColor: =RGBA(255, 255, 255, 1)
+            Fill: =RGBA(0, 133, 192, 1)
+            FocusedBorderThickness: =0
+            FontWeight: =FontWeight.Normal
+            HoverBorderColor: =
+            HoverFill: =RGBA(0, 133, 192, 1)
+            OnSelect: |-
+                =//ClearCollect(MechanismType,Filter(ConfigurationInfo,Type_Name="組織配置"&&(Value1 = "單位信息"||Value1="部門信息")));
+                ClearCollect(RoleType,Filter(ConfigurationInfo,Value1 = "角色類型"));
+                
+                UpdateContext({S_Mechanism_T:LookUp(ConfigurationInfo,Code_No2=DropdownOrganization_Number_3.Selected.Code_No2).Value1});
+                UpdateContext({O_Service:LookUp(ConfigurationInfo,Code_No2=DropdownOrganization_Number_3.Selected.Code_No2).Value3});
+                UpdateContext({Role_No:LookUp(ConfigurationInfo,Value2=Dropdown_OrganizationType_3.Selected.Value2).Code_No2});
+                
+                
+                If(
+                    IsBlank(UserTextInput_3.Text) && IsBlank(Dropdown_Username_4.Selected.User_Email) && IsBlank(Dropdown_OrganizationType_3.Selected.Value2)&& IsBlank(UserTextInput_13.Text) && IsBlank(DropdownOrganization_Number_3.Selected.Code_No2),
+                    UpdateContext({GAMask: true}),
+                     Patch(
+                        SignerInfo,
+                        Defaults(SignerInfo),
+                        {
+                            Title: GUID(),
+                            Signer: UserTextInput_3.Text,
+                            Signer_Email: Dropdown_Username_4.Selected.User_Email,
+                            S_Mechanism_Type:If(S_Mechanism_T="單位信息","單位",If(S_Mechanism_T="部門信息","部門","服務")),
+                            O_Service:O_Service,
+                            Role_No:Role_No,
+                            S_Mechanism: UserTextInput_13.Text,
+                            S_Mechanism_No: DropdownOrganization_Number_3.Selected.Code_No2,
+                            Role: Dropdown_OrganizationType_3.Selected.Value2
+                        }
+                    );
+                    Notify(
+                    "添加成功！",
+                    NotificationType.Success
+                );
+                UpdateContext({GAMask: false});Refresh(SignerInfo)
+                );
+                Concurrent(
+                    Reset(UserTextInput_3),
+                    Reset(Dropdown_Username_4),
+                    Reset(DropdownOrganization_Number_3),
+                    Reset(Dropdown_OrganizationType_3),
+                    Reset(UserTextInput_13)
+                );
+            PressedBorderColor: =
+            PressedColor: =RGBA(255, 255, 255, 1)
+            PressedFill: =RGBA(0, 133, 192, 1)
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            Size: =13
+            Text: ="保存"
+            Width: =122
+            X: =1188
+            Y: =720
+            ZIndex: =15
+
+        Group43_7 As group:
+            Height: =5
+            Width: =5
+            X: =40
+            Y: =40
+            ZIndex: =24
+
+            Label4_52 As label:
+                Color: =RGBA(25, 32, 41, 100)
+                Font: =Font.'Segoe UI'
+                Size: =10.5
+                Text: ="负责人"
+                X: =1038
+                Y: =162
+                ZIndex: =6
+
+            UserTextInput_3 As text:
+                BorderColor: =RGBA(196, 200, 204, 1)
+                BorderThickness: =1
+                Color: =RGBA(25, 32, 41, 100)
+                Default: =LookUp(UserInfo, User_Email = Dropdown_Username_4.Selected.User_Email).User_Name
+                DisabledBorderColor: =RGBA(196, 200, 204, 1)
+                DisabledColor: =RGBA(25, 32, 41, 100)
+                DisabledFill: =RGBA(230, 230, 230, 1)
+                DisplayMode: =DisplayMode.Disabled
+                FocusedBorderThickness: =1
+                Font: =Font.'Segoe UI'
+                Height: =28
+                HintText: =""
+                HoverBorderColor: =RGBA(196, 200, 204, 1)
+                HoverColor: =RGBA(25, 32, 41, 100)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                PressedBorderColor: =RGBA(196, 200, 204, 1)
+                PressedColor: =RGBA(25, 32, 41, 100)
+                PressedFill: =
+                RadiusBottomLeft: =2
+                RadiusBottomRight: =2
+                RadiusTopLeft: =2
+                RadiusTopRight: =2
+                Size: =10.5
+                Width: =272
+                X: =1038
+                Y: =202
+                ZIndex: =23
+
+        Label4_81 As label:
+            Color: =RGBA(25, 32, 41, 100)
+            Font: =Font.'Segoe UI'
+            Size: =10.5
+            Text: ="郵箱"
+            X: =1038
+            Y: =73
+            ZIndex: =25
+
+        Group45_24 As group:
+            Height: =5
+            Width: =5
+            X: =-1030
+            Y: =-263
+            ZIndex: =31
+
+            Label4_84 As label:
+                Color: =RGBA(25, 32, 41, 100)
+                Font: =Font.'Segoe UI'
+                Size: =10.5
+                Text: ="單位/部門編號"
+                X: =1038
+                Y: =355
+                ZIndex: =29
+
+            DropdownOrganization_Number_3 As combobox:
+                BorderColor: =RGBA(196, 200, 204, 1)
+                BorderThickness: =1
+                ChevronBackground: =RGBA(255, 255, 255, 1)
+                ChevronFill: =RGBA(197, 197, 197, 1)
+                ChevronHoverBackground: =
+                ChevronHoverFill: =RGBA(153, 153, 153, 1)
+                DefaultSelectedItems: =
+                DisplayFields: =["field_5"]
+                FocusedBorderThickness: =1
+                Height: =28
+                HoverBorderColor: =RGBA(196, 200, 204, 1)
+                InputTextPlaceholder: ="請選擇機構"
+                IsSearchable: =false
+                Items: =Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="003").Code_No2
+                NoSelectionText: ="請選擇機構"
+                PaddingLeft: =12
+                PressedColor: =RGBA(50, 50, 50, 1)
+                PressedFill: =RGBA(0, 0, 0, 1)
+                SearchFields: =["field_5"]
+                SearchItems: =[]
+                SelectionColor: =RGBA(73, 77, 82, 1)
+                SelectionFill: =RGBA(0, 0, 0, 0)
+                SelectionTagFill: =
+                SelectMultiple: =false
+                Size: =FountSise
+                Width: =272
+                X: =1038
+                Y: =395
+                ZIndex: =30
+
+        SaveBtn_18 As button:
+            BorderColor: =RGBA(0, 134, 208, 1)
+            BorderThickness: =1
+            Color: =RGBA(0, 134, 208, 1)
+            DisabledColor: =RGBA(255, 255, 255, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            FocusedBorderThickness: =0
+            FontWeight: =FontWeight.Normal
+            HoverBorderColor: =
+            HoverColor: =RGBA(0, 134, 208, 1)
+            HoverFill: =
+            OnSelect: |-
+                =UpdateContext({GAMask: false});
+                Concurrent(
+                    Reset(UserTextInput_3),
+                    Reset(Dropdown_Username_4),
+                    Reset(DropdownOrganization_Number_3),
+                    Reset(Dropdown_OrganizationType_3),
+                    Reset(UserTextInput_13)
+                );
+            PressedBorderColor: =
+            PressedColor: =RGBA(0, 134, 208, 1)
+            PressedFill: =
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            Size: =13
+            Text: ="取消"
+            Width: =122
+            X: =1038
+            Y: =720
+            ZIndex: =56
+
+        Dropdown_Username_4 As combobox:
+            BorderColor: =RGBA(196, 200, 204, 1)
+            BorderThickness: =1
+            ChevronBackground: =RGBA(255, 255, 255, 1)
+            ChevronFill: =RGBA(197, 197, 197, 1)
+            ChevronHoverBackground: =
+            ChevronHoverFill: =RGBA(153, 153, 153, 1)
+            DefaultSelectedItems: =
+            DisplayFields: =["field_User_Email"]
+            FocusedBorderThickness: =1
+            Height: =28
+            HoverBorderColor: =RGBA(196, 200, 204, 1)
+            InputTextPlaceholder: ="請選擇郵箱"
+            Items: =UserInfo.User_Email
+            NoSelectionText: =
+            PaddingLeft: =12
+            PressedColor: =RGBA(50, 50, 50, 1)
+            PressedFill: =RGBA(0, 0, 0, 1)
+            SearchFields: =["field_User_Email"]
+            SearchItems: =Search(UserInfo.User_Email,Dropdown_Username_4.SearchText,"field_User_Email")
+            SelectionColor: =RGBA(73, 77, 82, 1)
+            SelectionFill: =RGBA(0, 0, 0, 0)
+            SelectionTagFill: =
+            SelectMultiple: =false
+            Size: =FountSise
+            Width: =272
+            X: =1038
+            Y: =113
+            ZIndex: =58
+
+        Group49_1 As group:
+            Height: =5
+            Width: =5
+            X: =40
+            Y: =40
+            ZIndex: =58
+
+            Label4_56 As label:
+                Color: =RGBA(25, 32, 41, 100)
+                Font: =Font.'Segoe UI'
+                Size: =10.5
+                Text: ="權限"
+                X: =1038
+                Y: =251
+                ZIndex: =21
+
+            Dropdown_OrganizationType_3 As combobox:
+                BorderColor: =RGBA(196, 200, 204, 1)
+                BorderThickness: =1
+                ChevronBackground: =RGBA(255, 255, 255, 1)
+                ChevronFill: =RGBA(197, 197, 197, 1)
+                ChevronHoverBackground: =
+                ChevronHoverFill: =RGBA(153, 153, 153, 1)
+                DefaultSelectedItems: =
+                DisplayFields: =["field_6"]
+                FocusedBorderThickness: =1
+                Font: =Font.'Segoe UI'
+                Height: =28
+                HoverBorderColor: =RGBA(196, 200, 204, 1)
+                InputTextPlaceholder: ="請選擇權限"
+                IsSearchable: =false
+                Items: =Filter(ConfigurationInfo,Type_No="0002"&&Code_No1="001").Value2
+                NoSelectionText: ="請選擇權限"
+                PaddingLeft: =12
+                PressedColor: =RGBA(50, 50, 50, 1)
+                PressedFill: =RGBA(0, 0, 0, 1)
+                SearchFields: =["field_6"]
+                SearchItems: =[]
+                SelectionColor: =RGBA(73, 77, 82, 1)
+                SelectionFill: =RGBA(0, 0, 0, 0)
+                SelectionTagFill: =
+                SelectMultiple: =false
+                Size: =FountSise
+                Width: =272
+                X: =1038
+                Y: =291
+                ZIndex: =57
+
+        Group50 As group:
+            Height: =5
+            Width: =5
+            X: =40
+            Y: =40
+            ZIndex: =60
+
+            Label4_85 As label:
+                Color: =RGBA(25, 32, 41, 100)
+                Font: =Font.'Segoe UI'
+                Size: =10.5
+                Text: ="單位/部門"
+                X: =1038
+                Y: =457
+                ZIndex: =31
+
+            UserTextInput_13 As text:
+                BorderColor: =RGBA(196, 200, 204, 1)
+                BorderThickness: =1
+                Color: =RGBA(25, 32, 41, 100)
+                Default: =LookUp(ConfigurationInfo, Code_No2 = DropdownOrganization_Number_3.Selected.Code_No2).Value2
+                DisabledBorderColor: =RGBA(196, 200, 204, 1)
+                DisabledColor: =RGBA(25, 32, 41, 100)
+                DisabledFill: =RGBA(230, 230, 230, 1)
+                DisplayMode: =DisplayMode.Disabled
+                FocusedBorderThickness: =1
+                Font: =Font.'Segoe UI'
+                Height: =28
+                HintText: =""
+                HoverBorderColor: =RGBA(196, 200, 204, 1)
+                HoverColor: =RGBA(25, 32, 41, 100)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                PressedBorderColor: =RGBA(196, 200, 204, 1)
+                PressedColor: =RGBA(25, 32, 41, 100)
+                PressedFill: =
+                RadiusBottomLeft: =2
+                RadiusBottomRight: =2
+                RadiusTopLeft: =2
+                RadiusTopRight: =2
+                Size: =10.5
+                Width: =272
+                X: =1038
+                Y: =497
+                ZIndex: =59
+
+    EditGAMask As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(0, 0, 0, 0.3)
+        Height: =768
+        Visible: =EditGAMask
+        Width: =1366
+        ZIndex: =10
+
+        Button4_27 As button:
+            BorderThickness: =0
+            DisplayMode: =DisplayMode.View
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =768
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: =""
+            Width: =355
+            X: =1004
+            ZIndex: =2
+
+        UnitTitle_8 As group:
+            Height: =5
+            Width: =5
+            X: =40
+            Y: =40
+            ZIndex: =5
+
+            Rectangle3_14 As rectangle:
+                Fill: =RGBA(242, 244, 245, 1)
+                Height: =2
+                Width: =291
+                X: =1027
+                Y: =58
+                ZIndex: =3
+
+            Label3_16 As label:
+                Color: =RGBA(25, 32, 41, 100)
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Semibold
+                Height: =58
+                Size: =TitleSise
+                Text: ="編輯簽批人"
+                Width: =103
+                X: =1024
+                ZIndex: =4
+
+        SaveBtn_21 As button:
+            BorderThickness: =0
+            DisabledColor: =RGBA(255, 255, 255, 1)
+            Fill: =RGBA(0, 133, 192, 1)
+            FocusedBorderThickness: =0
+            FontWeight: =FontWeight.Normal
+            HoverFill: =ColorFade(RGBA(0, 133, 192, 1), -20%)
+            OnSelect: |
+                =If(
+                    IsBlank(UserTextInput_4.Text) && IsBlank(Dropdown_Username_5.Selected.User_Email) && IsBlank(Dropdown_OrganizationType_5.Selected.Value2) && IsBlank(DropdownOrganization_Number_5.Selected.Code_No2) && IsBlank(UserTextInput_14.Text),
+                    UpdateContext({EditGAMask: true}),
+                    Patch(
+                        SignerInfo,
+                        LookUp(
+                            SignerInfo,
+                            Title = GAListGallery_1.Selected.Title
+                        ),
+                        {Signer: UserTextInput_4.Text},
+                        {Signer_Email: Dropdown_Username_5.Selected.User_Email},
+                        {S_Mechanism: UserTextInput_14.Text},
+                        {S_Mechanism_No:DropdownOrganization_Number_5.Selected.Code_No2},
+                        {Role: Dropdown_OrganizationType_5.Selected.Value2}
+                    );
+                    Notify(
+                        "編輯成功！",
+                        NotificationType.Success
+                    );
+                    UpdateContext({EditGAMask: false});Refresh(SignerInfo);
+                );
+                
+                Concurrent(
+                    Reset(UserTextInput_4),
+                    Reset(Dropdown_Username_5),
+                    Reset(DropdownOrganization_Number_5),
+                    Reset(Dropdown_OrganizationType_5),
+                    Reset(UserTextInput_14)
+                );
+            PressedColor: =RGBA(255, 255, 255, 1)
+            PressedFill: =ColorFade(RGBA(0, 133, 192, 1), -20%)
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            Size: =13
+            Text: ="保存"
+            Width: =122
+            X: =1188
+            Y: =720
+            ZIndex: =15
+
+        Group43_9 As group:
+            Height: =5
+            Width: =5
+            X: =40
+            Y: =40
+            ZIndex: =24
+
+            Label4_86 As label:
+                Color: =RGBA(25, 32, 41, 100)
+                Font: =Font.'Segoe UI'
+                Size: =10.5
+                Text: ="簽批人"
+                X: =1038
+                Y: =165
+                ZIndex: =6
+
+            UserTextInput_4 As text:
+                BorderColor: =RGBA(196, 200, 204, 1)
+                BorderThickness: =1
+                Color: =RGBA(25, 32, 41, 100)
+                Default: =LookUp(UserInfo,User_Email=GAListGallery_1.Selected.Signer_Email).User_Name
+                DisabledBorderColor: =RGBA(196, 200, 204, 1)
+                DisabledColor: =RGBA(25, 32, 41, 100)
+                DisabledFill: =RGBA(237, 237, 237, 1)
+                DisplayMode: =DisplayMode.Disabled
+                FocusedBorderThickness: =1
+                Font: =Font.'Segoe UI'
+                Height: =28
+                HintText: =""
+                HoverBorderColor: =RGBA(196, 200, 204, 1)
+                HoverColor: =RGBA(25, 32, 41, 100)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                PressedBorderColor: =RGBA(196, 200, 204, 1)
+                PressedColor: =RGBA(25, 32, 41, 100)
+                PressedFill: =
+                RadiusBottomLeft: =2
+                RadiusBottomRight: =2
+                RadiusTopLeft: =2
+                RadiusTopRight: =2
+                Size: =10.5
+                Width: =272
+                X: =1038
+                Y: =205
+                ZIndex: =23
+
+        Label4_87 As label:
+            Color: =RGBA(25, 32, 41, 100)
+            Font: =Font.'Segoe UI'
+            Size: =10.5
+            Text: ="郵箱"
+            X: =1038
+            Y: =73
+            ZIndex: =25
+
+        SaveBtn_20 As button:
+            BorderColor: =RGBA(0, 134, 208, 1)
+            BorderThickness: =1
+            Color: =RGBA(0, 134, 208, 1)
+            DisabledColor: =RGBA(255, 255, 255, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            FocusedBorderThickness: =0
+            FontWeight: =FontWeight.Normal
+            HoverBorderColor: =RGBA(0, 134, 208, 1)
+            HoverColor: =RGBA(0, 134, 208, 1)
+            HoverFill: =
+            OnSelect: |-
+                =UpdateContext({EditGAMask: false});
+                Concurrent(
+                    Reset(UserTextInput_4),
+                    Reset(Dropdown_Username_5),
+                    Reset(DropdownOrganization_Number_5),
+                    Reset(Dropdown_OrganizationType_5),
+                    Reset(UserTextInput_14)
+                );
+            PressedBorderColor: =RGBA(0, 134, 208, 1)
+            PressedColor: =RGBA(0, 134, 208, 1)
+            PressedFill: =
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            Size: =13
+            Text: ="取消"
+            Width: =122
+            X: =1038
+            Y: =720
+            ZIndex: =56
+
+        Dropdown_Username_5 As combobox:
+            BorderColor: =RGBA(196, 200, 204, 1)
+            BorderThickness: =1
+            ChevronBackground: =RGBA(255, 255, 255, 1)
+            ChevronFill: =RGBA(197, 197, 197, 1)
+            ChevronHoverBackground: =
+            ChevronHoverFill: =RGBA(153, 153, 153, 1)
+            DefaultSelectedItems: |-
+                =Table({User_Email:GAListGallery_1.Selected.Signer_Email}).User_Email
+            DisplayFields: =["field_User_Email"]
+            FocusedBorderThickness: =1
+            Height: =28
+            HoverBorderColor: =RGBA(196, 200, 204, 1)
+            InputTextPlaceholder: ="請選擇郵箱"
+            Items: =UserInfo.User_Email
+            NoSelectionText: =
+            PaddingLeft: =12
+            PressedColor: =RGBA(50, 50, 50, 1)
+            PressedFill: =RGBA(0, 0, 0, 1)
+            SearchFields: =["field_User_Email"]
+            SearchItems: =Search(UserInfo.User_Email,Dropdown_Username_5.SearchText,"field_User_Email")
+            SelectionColor: =RGBA(73, 77, 82, 1)
+            SelectionFill: =RGBA(0, 0, 0, 0)
+            SelectionTagFill: =
+            SelectMultiple: =false
+            Size: =FountSise
+            Width: =272
+            X: =1038
+            Y: =113
+            ZIndex: =58
+
+        Group49_2 As group:
+            Height: =5
+            Width: =5
+            X: =40
+            Y: =40
+            ZIndex: =58
+
+            Label4_88 As label:
+                Color: =RGBA(25, 32, 41, 100)
+                Font: =Font.'Segoe UI'
+                Size: =10.5
+                Text: ="簽批角色"
+                X: =1038
+                Y: =257
+                ZIndex: =21
+
+            Dropdown_OrganizationType_5 As combobox:
+                BorderColor: =RGBA(196, 200, 204, 1)
+                BorderThickness: =1
+                ChevronBackground: =RGBA(255, 255, 255, 1)
+                ChevronFill: =RGBA(197, 197, 197, 1)
+                ChevronHoverBackground: =
+                ChevronHoverFill: =RGBA(153, 153, 153, 1)
+                DefaultSelectedItems: |-
+                    =Table({Value2:GAListGallery_1.Selected.Role}).Value2
+                DisplayFields: =["field_6"]
+                FocusedBorderThickness: =1
+                Height: =28
+                HoverBorderColor: =RGBA(196, 200, 204, 1)
+                InputTextPlaceholder: ="請選擇簽批角色"
+                IsSearchable: =false
+                Items: =Filter(ConfigurationInfo,Type_No="0002"&&Code_No1="001").Value2
+                NoSelectionText: ="請選擇簽批角色"
+                PaddingLeft: =12
+                PressedColor: =RGBA(50, 50, 50, 1)
+                PressedFill: =RGBA(0, 0, 0, 1)
+                SearchFields: =["field_6"]
+                SearchItems: =[]
+                SelectionColor: =RGBA(73, 77, 82, 1)
+                SelectionFill: =RGBA(0, 0, 0, 0)
+                SelectionTagFill: =
+                SelectMultiple: =false
+                Size: =FountSise
+                Width: =272
+                X: =1038
+                Y: =297
+                ZIndex: =57
+
+        Group45_26 As group:
+            Height: =5
+            Width: =5
+            X: =-998
+            Y: =-389
+            ZIndex: =61
+
+            Label4_90 As label:
+                Color: =RGBA(25, 32, 41, 100)
+                Font: =Font.'Segoe UI'
+                Size: =10.5
+                Text: ="單位/部門"
+                X: =1038
+                Y: =357
+                ZIndex: =59
+
+            DropdownOrganization_Number_5 As combobox:
+                BorderColor: =RGBA(196, 200, 204, 1)
+                BorderThickness: =1
+                ChevronBackground: =RGBA(255, 255, 255, 1)
+                ChevronFill: =RGBA(197, 197, 197, 1)
+                ChevronHoverBackground: =
+                ChevronHoverFill: =RGBA(153, 153, 153, 1)
+                DefaultSelectedItems: |-
+                    =Table({Code_No2:GAListGallery_1.Selected.S_Mechanism_No}).Code_No2
+                DisplayFields: =["field_5"]
+                FocusedBorderThickness: =1
+                Height: =28
+                HoverBorderColor: =RGBA(196, 200, 204, 1)
+                InputTextPlaceholder: ="請選擇機構"
+                Items: =Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="003").Code_No2
+                NoSelectionText: ="請選擇機構"
+                PaddingLeft: =12
+                PressedColor: =RGBA(50, 50, 50, 1)
+                PressedFill: =RGBA(0, 0, 0, 1)
+                SearchFields: =["field_5"]
+                SearchItems: =Search(Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="003").Code_No2,DropdownOrganization_Number_5.SearchText,"field_5")
+                SelectionColor: =RGBA(73, 77, 82, 1)
+                SelectionFill: =RGBA(0, 0, 0, 0)
+                SelectionTagFill: =
+                SelectMultiple: =false
+                Size: =FountSise
+                Template: =ListItemTemplate.Double
+                Width: =272
+                X: =1038
+                Y: =397
+                ZIndex: =60
+
+        Group50_1 As group:
+            Height: =5
+            Width: =5
+            X: =-998
+            Y: =-389
+            ZIndex: =64
+
+            Label4_91 As label:
+                Color: =RGBA(25, 32, 41, 100)
+                Font: =Font.'Segoe UI'
+                Size: =10.5
+                Text: ="單位/部門編號"
+                X: =1038
+                Y: =447
+                ZIndex: =62
+
+            UserTextInput_14 As text:
+                BorderColor: =RGBA(196, 200, 204, 1)
+                BorderThickness: =1
+                Color: =RGBA(25, 32, 41, 100)
+                Default: =LookUp(ConfigurationInfo, Code_No2 = DropdownOrganization_Number_5.Selected.Code_No2).Value2
+                DisabledBorderColor: =RGBA(196, 200, 204, 1)
+                DisabledColor: =RGBA(25, 32, 41, 100)
+                DisabledFill: =RGBA(230, 230, 230, 1)
+                DisplayMode: =DisplayMode.Disabled
+                FocusedBorderThickness: =1
+                Font: =Font.'Segoe UI'
+                Height: =28
+                HintText: =""
+                HoverBorderColor: =RGBA(196, 200, 204, 1)
+                HoverColor: =RGBA(25, 32, 41, 100)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                PressedBorderColor: =RGBA(196, 200, 204, 1)
+                PressedColor: =RGBA(25, 32, 41, 100)
+                PressedFill: =
+                RadiusBottomLeft: =2
+                RadiusBottomRight: =2
+                RadiusTopLeft: =2
+                RadiusTopRight: =2
+                Size: =10.5
+                Width: =272
+                X: =1038
+                Y: =487
+                ZIndex: =63
+
+    DeletGAMask As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(0, 0, 0, 0.3)
+        Height: =768
+        Visible: =DeletGAMask
+        Width: =1366
+        ZIndex: =11
+
+        Button1_6 As button:
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =149
+            HoverFill: =RGBA(255, 255, 255, 1)
+            PressedColor: =RGBA(255, 255, 255, 1)
+            PressedFill: =RGBA(255, 255, 255, 1)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: ="按钮"
+            Width: =451
+            X: =505
+            Y: =260
+            ZIndex: =1
+
+        Button2_4 As button:
+            Color: =RGBA(0, 134, 208, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            HoverColor: =RGBA(0, 134, 208, 1)
+            HoverFill: =RGBA(255, 255, 255, 1)
+            OnSelect: |-
+                =UpdateContext({DeletGAMask:false})
+            PressedColor: =RGBA(0, 134, 208, 1)
+            PressedFill: =RGBA(255, 255, 255, 1)
+            RadiusBottomLeft: =5
+            RadiusBottomRight: =5
+            RadiusTopLeft: =5
+            RadiusTopRight: =5
+            Size: =FountSise
+            Text: ="取消"
+            X: =580
+            Y: =350
+            ZIndex: =4
+
+        Button3_3 As button:
+            BorderColor: =RGBA(230, 230, 230, 1)
+            Fill: =RGBA(0, 134, 208, 1)
+            HoverFill: =RGBA(8, 127, 190, 1)
+            OnSelect: |-
+                =RemoveIf(SignerInfo,Title=GAListGallery_1.Selected.Title);Refresh( SignerInfo );UpdateContext({DeletGAMask:false})
+            PressedColor: =RGBA(255, 255, 255, 1)
+            PressedFill: =RGBA(255, 255, 255, 1)
+            RadiusBottomLeft: =5
+            RadiusBottomRight: =5
+            RadiusTopLeft: =5
+            RadiusTopRight: =5
+            Size: =FountSise
+            Text: ="確認"
+            X: =776
+            Y: =350
+            ZIndex: =5
+
+        Group44 As group:
+            Height: =5
+            Width: =5
+            X: =40
+            Y: =40
+            ZIndex: =6
+
+            Label32_1 As label:
+                Color: =RGBA(255, 0, 0, 1)
+                Font: =Font.'Segoe UI'
+                Height: =41
+                Text: ="確認刪除該條數據！"
+                Width: =248
+                X: =641
+                Y: =271
+                ZIndex: =2
+
+            Icon7_1 As icon.Information:
+                Color: =RGBA(255, 0, 0, 1)
+                Height: =19
+                Icon: =Icon.Information
+                Width: =40
+                X: =601
+                Y: =282
+                ZIndex: =3
+
+    Container1_5 As groupContainer.manualLayoutContainer:
+        Fill: =glbThemePrimaryColor
+        Height: =50
+        Width: =1366
+        ZIndex: =12
+
+        Image1_5 As image:
+            Height: =38
+            Image: =logo
+            OnSelect: |-
+                =If(
+                    visiblecount >= 4,
+                    Set(
+                        visiblecount,
+                        0
+                    ),
+                    Set(
+                        visiblecount,
+                        visiblecount + 1
+                    )
+                )
+            Width: =203
+            X: =15
+            Y: =5
+            ZIndex: =1
+
+        Circle1_5 As circle:
+            BorderColor: =RGBA(255, 255, 255, 1)
+            BorderThickness: =1
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =32
+            Width: =32
+            X: =1318
+            Y: =8
+            ZIndex: =2
+
+        Label1_67 As label:
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =glbThemePrimaryColor
+            Height: =18
+            Size: =9
+            Text: ="基督教香港信義會社會服務部"
+            Width: =186
+            X: =63
+            Y: =5
+            ZIndex: =3
+
+        Label1_68 As label:
+            Align: =Align.Center
+            Color: =RGBA(255, 255, 255, 1)
+            Height: =32
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =9
+            Text: =CurrentUserName
+            Width: =32
+            X: =1318
+            Y: =8
+            ZIndex: =4
+
+        Label1_94 As label:
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =glbThemePrimaryColor
+            FontWeight: =FontWeight.Bold
+            Height: =24
+            Size: =12
+            Text: ="SYSTEM NAME"
+            Width: =186
+            X: =63
+            Y: =22
+            ZIndex: =5
+
+    Container3_5 As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =718
+        Width: =160
+        Y: =50
+        ZIndex: =13
+
+        XITong As groupContainer.manualLayoutContainer:
+            Height: =123
+            Width: =160
+            Y: =155
+            ZIndex: =1
+
+            QuanxianManager As label:
+                Align: =Align.Center
+                OnSelect: |-
+                    =UpdateContext({ToUserInfoManager:"權限管理"})
+                Size: =11
+                Text: ="權限管理"
+                Width: =159
+                Y: =ZuzhiManager.Height+ZuzhiManager.Y
+                ZIndex: =1
+
+            ZuzhiManager As label:
+                Align: =Align.Center
+                OnSelect: |-
+                    =UpdateContext({ToUserInfoManager:"組織機構"})
+                Size: =11
+                Text: ="組織機構"
+                Width: =159
+                Y: =UserManager.Height
+                ZIndex: =2
+
+            UserManager As label:
+                Align: =Align.Center
+                Height: =34
+                OnSelect: |-
+                    =UpdateContext({ToUserInfoManager:"用戶管理"})
+                Size: =11
+                Text: ="用戶管理"
+                Width: =160
+                Y: =
+                ZIndex: =3
+
+        GalleryNav_4 As gallery.galleryVertical:
+            Height: =154
+            Items: |-
+                =Filter(
+                    If(
+                        CurrentRoleFormPermission = "None" || CurrentRoleFormPermission = Blank(),
+                        [
+                            "首頁",
+                            "任務",
+                            If(
+                                CurrentRole,
+                                "統計",
+                                HRAO || SuperUser,
+                                "系統"
+                            ),
+                            If(
+                                If(
+                                    CurrentRole,
+                                    "統計",
+                                    HRAO || SuperUser,
+                                    "系統"
+                                ) = "系統",
+                                Blank(),
+                                HRAO || SuperUser,
+                                "系統"
+                            )
+                        ],
+                        [
+                            "首頁",
+                            "表格",
+                            "任務",
+                            If(
+                                CurrentRole,
+                                "統計",
+                                HRAO || SuperUser,
+                                "系統"
+                            ),
+                            If(
+                                If(
+                                    CurrentRole,
+                                    "統計",
+                                    HRAO || SuperUser,
+                                    "系統"
+                                ) = "系統",
+                                Blank(),
+                                HRAO || SuperUser,
+                                "系統"
+                            )
+                        ]
+                    ),
+                    ThisRecord.Value <> Blank()
+                )
+            Layout: =Layout.Vertical
+            OnSelect: =
+            ShowScrollbar: =false
+            TemplatePadding: =0
+            TemplateSize: =40
+            Width: =160
+            ZIndex: =2
+
+            BtnDefault_18 As button:
+                Align: =Align.Left
+                BorderColor: =Self.Color
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                Color: =If(ThisItem.Value="系統", glbThemePrimaryColor,glbNeutralSecondaryColor)
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =If(ThisItem.Value="系統", ColorFade(Self.Color, 90%),White)
+                FocusedBorderThickness: =1
+                FontWeight: =If(ThisItem.Value="系統", FontWeight.Semibold,Normal)
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =If(ThisItem.Value<>Blank(),ColorFade(glbThemePrimaryColor, 90%))
+                OnSelect: |-
+                    =If(
+                        ThisItem.Value = "首頁",
+                        Navigate(
+                            HomepageScreen,
+                            ScreenTransition.None
+                        ),
+                        ThisItem.Value = "表格",
+                        Navigate(AdminFormListScreen,
+                            ScreenTransition.None
+                        ),
+                        ThisItem.Value = "統計",
+                        Launch("https://apps.powerapps.com/play/c030168f-5133-4c9d-8e17-3c870ba99ab4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=StatisticsScreen"),
+                    
+                        ThisItem.Value = "系統",
+                        Navigate(SystemsScreen,None,{ToUserInfoManager:"權限管理"}),
+                        //Launch("https://apps.powerapps.com/play/c030168f-5133-4c9d-8e17-3c870ba99ab4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=UserScreen"),
+                    
+                        ThisItem.Value = "任務",
+                        Navigate(
+                            GeneralFormListScreen,
+                            ScreenTransition.None
+                        )
+                    )
+                PaddingBottom: =0
+                PaddingLeft: =36
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =12
+                Text: =ThisItem.Value
+                Width: =140
+                X: =10
+                ZIndex: =3
+
+            Icon1_4 As icon.ListScrollWatchlist:
+                Color: =If(ThisItem.Value="系統", glbThemePrimaryColor,glbNeutralSecondaryColor)
+                Height: =20
+                Icon: |
+                    =If(
+                        ThisItem.Value = "首頁",
+                        Icon.Home,
+                        ThisItem.Value = "表格",
+                        Icon.ListScrollWatchlist,
+                        ThisItem.Value = "統計",
+                        Icon.LogJournal,
+                        ThisItem.Value = "系統",
+                        Icon.People,
+                        ThisItem.Value = "任務",
+                        Icon.Lock
+                    )
+                OnSelect: =Select(Parent)
+                Width: =20
+                X: =20
+                Y: =6
+                ZIndex: =5
+
+        GalleryNav_12 As gallery.galleryVertical:
+            Height: =120
+            Items: =["IT服務台","操作手冊","用戶反饋"]
+            Layout: =Layout.Vertical
+            TemplatePadding: =0
+            TemplateSize: =40
+            Width: =160
+            Y: =558
+            ZIndex: =3
+
+            BtnDefault_19 As button:
+                Align: =Align.Left
+                BorderColor: =Self.Color
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                Color: =glbNeutralSecondaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                FontWeight: =Normal
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =ColorFade(glbThemePrimaryColor, 90%)
+                PaddingBottom: =0
+                PaddingLeft: =36
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =12
+                Text: =ThisItem.Value
+                Width: =140
+                X: =10
+                ZIndex: =3
+
+            Icon1_12 As icon.ListScrollWatchlist:
+                Color: =glbNeutralSecondaryColor
+                Height: =20
+                Icon: |
+                    =If(
+                        ThisItem.Value = "IT服務台",
+                        Icon.ComputerDesktop,
+                        ThisItem.Value = "操作手冊",
+                        Icon.Notebook,
+                        ThisItem.Value = "組織機構",
+                        Icon.LogJournal,
+                        ThisItem.Value = "用戶反饋",
+                        Icon.Mail
+                    )
+                    //["IT服務台","操作手冊","用戶反饋"]
+                OnSelect: =Select(Parent)
+                Width: =20
+                X: =20
+                Y: =6
+                ZIndex: =5
+
+        Label8_4 As label:
+            Align: =Align.Center
+            Color: =RGBA(149, 149, 149, 1)
+            Size: =11
+            Text: ="Version 1.0.0"
+            Width: =160
+            Y: =678
+            ZIndex: =4
+
