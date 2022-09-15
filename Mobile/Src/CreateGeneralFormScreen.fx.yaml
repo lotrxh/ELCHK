@@ -2134,7 +2134,7 @@
                         Size: =11
                         Text: |-
                             =If(Lastselect&&TabGallery3_5.Selected.Value="最近",First(Split(CreateApproverCol.AllOwnerName.DisplayName," ").Result).Result&"/"&CreateApproverCol.AllOwnerName.Email,
-                            Departmentselect&&TabGallery3_5.Selected.Value="部門",First(Split(CreateApproverCol.DepartMentEmail1.DisplayName," ").Result).Result&"/"&CreateApproverCol.DepartMentEmail1.Email,
+                            Departmentselect&&TabGallery3_5.Selected.Value="部門",First(Split(CreateApproverCol.DepartMentEmail.DisplayName," ").Result).Result&"/"&CreateApproverCol.DepartMentEmail.Email,
                             !Lastselect&&!Departmentselect,First(Split(CreateApproverCol.DisplayName," ").Result).Result&"/"&CreateApproverCol.Mail)
                         Width: =Parent.Width-Self.X
                         X: =161
