@@ -1,4 +1,4 @@
-Screen1 As screen:
+SystemsScreen As screen:
     OnVisible: |-
         =UpdateContext(
             {
@@ -40,31 +40,13 @@ Screen1 As screen:
         );
         UpdateContext({prelodingvisable:true});
 
-    Bgc_3 As button:
-        BorderThickness: =0
-        Color: =RGBA(0, 0, 0, 1)
-        DisabledBorderColor: =RGBA(0, 0, 0, 0)
-        DisplayMode: =DisplayMode.View
-        Fill: =RGBA(242, 244, 245, 1)
-        Height: =768
-        HoverBorderColor: =
-        HoverFill: =
-        PressedBorderColor: =
-        RadiusBottomLeft: =0
-        RadiusBottomRight: =0
-        RadiusTopLeft: =0
-        RadiusTopRight: =0
-        Text: ="系統頁可管理用戶、檢視組織機構列表, 以及管理用戶權限。請再按「系統」按鈕以顯示選項。"
-        Width: =1366
-        ZIndex: =1
-
     UserManagementContainer As groupContainer.manualLayoutContainer:
         Fill: =RGBA(255, 255, 255, 1)
-        Height: =668
+        Height: =718
         Visible: =If(ToUserInfoManager = "用戶管理", true, false)
-        Width: =1170
-        X: =196
-        Y: =100
+        Width: =1206
+        X: =160
+        Y: =50
         ZIndex: =3
 
         Button9_4 As button:
@@ -100,13 +82,12 @@ Screen1 As screen:
             Items: |-
                 =Search(
                     Filter(
-                        TempAllUserTable,
+                        UserInfo,
                         Dropdown2_22.Selected.Data2 = Blank() || O_Mechanism =Last(Split(Dropdown2_22.Selected.Data2,"-").Result).Result,
                         Dropdown2_23.Selected.PR_Name = Blank() || Post = Dropdown2_23.Selected.PR_Name
                     ),
-                    TextInput4_9.Text,
-                    "User_Name",
-                    "User_Email"
+                    TextInput4_9.Text,"field_User_Name","field_User_Email"
+                    
                 )
             Layout: =Layout.Vertical
             TemplateSize: =50
@@ -456,24 +437,23 @@ Screen1 As screen:
                 ZIndex: =38
 
     AuthorityManagementContainer As groupContainer.manualLayoutContainer:
-        Height: =704
+        Height: =696
         Visible: =If(ToUserInfoManager = "權限管理", true, false)
-        Width: =1170
-        X: =196
-        Y: =64
+        Width: =1206
+        X: =160
+        Y: =72
         ZIndex: =4
 
         RightBg_9 As button:
             DisplayMode: =DisplayMode.View
             Fill: =RGBA(255, 255, 255, 1)
-            Height: =669
+            Height: =696
             RadiusBottomLeft: =4
             RadiusBottomRight: =4
             RadiusTopLeft: =4
             RadiusTopRight: =4
             Text: =
             Width: =1170
-            Y: =35
             ZIndex: =2
 
         Button9_6 As button:
@@ -508,15 +488,16 @@ Screen1 As screen:
             Items: |-
                 =Search(
                     Filter(
-                        User_Management,
+                        SignerInfo,
                         Service_Dropdown_1.Selected.Data2 = Blank() || S_Mechanism = Last(Split(Service_Dropdown_1.Selected.Data2,"-").Result).Result,
                         Service_Dropdown_2.Selected.Value2 = Blank() || Role = Service_Dropdown_2.Selected.Value2
                     ),
                     TextInput3_4.Text,
-                    "S_Mechanism",
+                    "field_S_Mechanism"
+                    /*,
                     "Signer",
-                    "Signer_Email",
-                    "Role"
+                    "field_Signer_Email",
+                    "Role"*/
                 )
             Layout: =Layout.Vertical
             TemplateSize: =40
@@ -808,11 +789,11 @@ Screen1 As screen:
             ZIndex: =22
 
     OrganizationContainer As groupContainer.manualLayoutContainer:
-        Height: =704
+        Height: =696
         Visible: =If(ToUserInfoManager = "組織機構", true, false)
-        Width: =1192
-        X: =174
-        Y: =64
+        Width: =1206
+        X: =160
+        Y: =72
         ZIndex: =5
 
         RightBg_10 As button:
@@ -2992,4 +2973,260 @@ Screen1 As screen:
                 X: =601
                 Y: =282
                 ZIndex: =3
+
+    Container1_5 As groupContainer.manualLayoutContainer:
+        Fill: =glbThemePrimaryColor
+        Height: =50
+        Width: =1366
+        ZIndex: =12
+
+        Image1_5 As image:
+            Height: =38
+            Image: =logo
+            OnSelect: |-
+                =If(
+                    visiblecount >= 4,
+                    Set(
+                        visiblecount,
+                        0
+                    ),
+                    Set(
+                        visiblecount,
+                        visiblecount + 1
+                    )
+                )
+            Width: =203
+            X: =15
+            Y: =5
+            ZIndex: =1
+
+        Circle1_5 As circle:
+            BorderColor: =RGBA(255, 255, 255, 1)
+            BorderThickness: =1
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =32
+            Width: =32
+            X: =1318
+            Y: =8
+            ZIndex: =2
+
+        Label1_67 As label:
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =glbThemePrimaryColor
+            Height: =18
+            Size: =9
+            Text: ="基督教香港信義會社會服務部"
+            Width: =186
+            X: =63
+            Y: =5
+            ZIndex: =3
+
+        Label1_68 As label:
+            Align: =Align.Center
+            Color: =RGBA(255, 255, 255, 1)
+            Height: =32
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =9
+            Text: =CurrentUserName
+            Width: =32
+            X: =1318
+            Y: =8
+            ZIndex: =4
+
+        Label1_94 As label:
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =glbThemePrimaryColor
+            FontWeight: =FontWeight.Bold
+            Height: =24
+            Size: =12
+            Text: ="SYSTEM NAME"
+            Width: =186
+            X: =63
+            Y: =22
+            ZIndex: =5
+
+    Container3_5 As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =718
+        Width: =160
+        Y: =50
+        ZIndex: =13
+
+        GalleryNav_4 As gallery.galleryVertical:
+            Height: =237
+            Items: |
+                =Filter(If(
+                    CurrentRoleFormPermission = "None" || CurrentRoleFormPermission = Blank(),
+                    [
+                        "首頁",
+                        "任務",
+                        If(CurrentRole,"統計",HRAO || SuperUser,"系統"),
+                        If(If(CurrentRole,"統計",HRAO || SuperUser,"系統")="系統",Blank(),HRAO || SuperUser,"系統")
+                        
+                    ],
+                    [
+                        "首頁",
+                        "表格",
+                        "任務",
+                        If(CurrentRole,"統計",HRAO || SuperUser,"系統"),
+                        If(If(CurrentRole,"統計",HRAO || SuperUser,"系統")="系統",Blank(),HRAO || SuperUser,"系統")
+                    ]
+                ),ThisRecord.Value <> Blank())
+            Layout: =Layout.Vertical
+            OnSelect: =
+            TemplatePadding: =0
+            TemplateSize: =40
+            Width: =160
+            ZIndex: =1
+
+            BtnDefault_18 As button:
+                Align: =Align.Left
+                BorderColor: =Self.Color
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                Color: =If(ThisItem.Value="首頁", glbThemePrimaryColor,glbNeutralSecondaryColor)
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =If(ThisItem.Value="首頁", ColorFade(Self.Color, 90%),White)
+                FocusedBorderThickness: =1
+                FontWeight: =If(ThisItem.Value="首頁", FontWeight.Semibold,Normal)
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =If(ThisItem.Value<>Blank(),ColorFade(glbThemePrimaryColor, 90%))
+                OnSelect: |-
+                    =If(
+                        ThisItem.Value = "首頁",
+                        Navigate(
+                            HomepageScreen,
+                            ScreenTransition.None
+                        ),
+                        ThisItem.Value = "表格",
+                        Navigate(AdminFormListScreen,
+                            ScreenTransition.None
+                        ),
+                        ThisItem.Value = "統計",
+                        Launch("https://apps.powerapps.com/play/c030168f-5133-4c9d-8e17-3c870ba99ab4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=StatisticsScreen"),
+                    
+                        ThisItem.Value = "系統",
+                        Navigate(SystemsScreen,None,{ToUserInfoManager:"權限管理"}),
+                        //Launch("https://apps.powerapps.com/play/c030168f-5133-4c9d-8e17-3c870ba99ab4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=UserScreen"),
+                    
+                        ThisItem.Value = "任務",
+                        Navigate(
+                            GeneralFormListScreen,
+                            ScreenTransition.None
+                        )
+                    )
+                PaddingBottom: =0
+                PaddingLeft: =36
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =12
+                Text: =ThisItem.Value
+                Width: =140
+                X: =10
+                ZIndex: =3
+
+            Icon1_4 As icon.ListScrollWatchlist:
+                Color: =If(ThisItem.Value="首頁", glbThemePrimaryColor,glbNeutralSecondaryColor)
+                Height: =20
+                Icon: |
+                    =If(
+                        ThisItem.Value = "首頁",
+                        Icon.Home,
+                        ThisItem.Value = "表格",
+                        Icon.ListScrollWatchlist,
+                        ThisItem.Value = "統計",
+                        Icon.LogJournal,
+                        ThisItem.Value = "系統",
+                        Icon.People,
+                        ThisItem.Value = "任務",
+                        Icon.Lock
+                    )
+                OnSelect: =Select(Parent)
+                Width: =20
+                X: =20
+                Y: =6
+                ZIndex: =5
+
+        GalleryNav_12 As gallery.galleryVertical:
+            Height: =120
+            Items: =["IT服務台","操作手冊","用戶反饋"]
+            Layout: =Layout.Vertical
+            TemplatePadding: =0
+            TemplateSize: =40
+            Width: =160
+            Y: =558
+            ZIndex: =5
+
+            BtnDefault_19 As button:
+                Align: =Align.Left
+                BorderColor: =Self.Color
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                Color: =glbNeutralSecondaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                FontWeight: =Normal
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =ColorFade(glbThemePrimaryColor, 90%)
+                PaddingBottom: =0
+                PaddingLeft: =36
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =12
+                Text: =ThisItem.Value
+                Width: =140
+                X: =10
+                ZIndex: =3
+
+            Icon1_12 As icon.ListScrollWatchlist:
+                Color: =glbNeutralSecondaryColor
+                Height: =20
+                Icon: |
+                    =If(
+                        ThisItem.Value = "IT服務台",
+                        Icon.ComputerDesktop,
+                        ThisItem.Value = "操作手冊",
+                        Icon.Notebook,
+                        ThisItem.Value = "組織機構",
+                        Icon.LogJournal,
+                        ThisItem.Value = "用戶反饋",
+                        Icon.Mail
+                    )
+                    //["IT服務台","操作手冊","用戶反饋"]
+                OnSelect: =Select(Parent)
+                Width: =20
+                X: =20
+                Y: =6
+                ZIndex: =5
+
+        Label8_4 As label:
+            Align: =Align.Center
+            Color: =RGBA(149, 149, 149, 1)
+            Size: =11
+            Text: ="Version 1.0.0"
+            Width: =160
+            Y: =678
+            ZIndex: =6
 
