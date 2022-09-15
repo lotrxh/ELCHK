@@ -490,15 +490,19 @@ SystemsScreen As screen:
                 =Search(
                     Filter(
                         SignerInfo,
-                        Service_Dropdown_1.Selected.Data2 = Blank() || S_Mechanism = Last(Split(Service_Dropdown_1.Selected.Data2,"-").Result).Result,
+                        Service_Dropdown_1.Selected.Data2 = Blank() || S_Mechanism = Last(
+                            Split(
+                                Service_Dropdown_1.Selected.Data2,
+                                "-"
+                            ).Result
+                        ).Result,
                         Service_Dropdown_2.Selected.Value2 = Blank() || Role = Service_Dropdown_2.Selected.Value2
                     ),
                     TextInput3_4.Text,
-                    "field_S_Mechanism"
-                    /*,
-                    "Signer",
+                    "field_Signer",
                     "field_Signer_Email",
-                    "Role"*/
+                    "field_Role",
+                    "field_S_Mechanism"
                 )
             Layout: =Layout.Vertical
             TemplateSize: =40
