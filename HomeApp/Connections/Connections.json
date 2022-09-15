@@ -57,6 +57,13 @@
             "tableName": "018a3224-47b9-49b2-b9b1-923e4094e9cf"
           }
         }
+      },
+      "https://elcss.sharepoint.com/sites/eps-prd": {
+        "dataSources": {
+          "PostRankInfo": {
+            "tableName": "12a36832-fd4f-4c9e-a1b9-0f2621dfceb9"
+          }
+        }
       }
     },
     "dataSources": [
@@ -73,7 +80,8 @@
       "TemplateFileList",
       "GenericFormList",
       "UserInfo",
-      "ConfigurationInfo"
+      "ConfigurationInfo",
+      "PostRankInfo"
     ],
     "dependencies": {},
     "dependents": [
@@ -93,12 +101,18 @@
       "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1534/1.0.1534.2605/logicflows/icon.png",
       "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
       "parameterHints": {
+        "503e0884-9185-4729-976d-0b665e664c01": {
+          "value": "shared_sharepointonline"
+        },
         "workflowEntityId": {},
         "workflowName": {
           "value": "d0c13c3b-816d-466d-b1a0-c4ee922d596a"
         }
       },
       "parameterHintsV2": {
+        "shared_sharepointonline": {
+          "value": "503e0884-9185-4729-976d-0b665e664c01"
+        },
         "workflowEntityId": {},
         "workflowName": {
           "value": "d0c13c3b-816d-466d-b1a0-c4ee922d596a"

@@ -20,7 +20,8 @@ App As appinfo:
         
         //Set(CurrentUser,User().Email);
         //Set(CurrentUser,"eps-vendor@elchk.org.hk");
-        
+        Set(TitleSise,12);Set(FountSise,11);Set(Formheight,32);Set(radiuspx,0);Set(fountcolor,RGBA(50,50,50,100));
+        Clear(SearchDepartment);ForAll(Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="003"),Collect(SearchDepartment,{Data2:Code_No2&"-"&Value2}));
         Set(
             CurrentUser,
             Dropdown1_2.Selected.Value

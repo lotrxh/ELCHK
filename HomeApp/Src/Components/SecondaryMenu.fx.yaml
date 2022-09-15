@@ -1,0 +1,173 @@
+SecondaryMenu As CanvasComponent:
+    curentName: ="首頁"
+    Currentpage: =CurrentName
+    Fill: =RGBA(0, 0, 0, 0)
+    Height: =768
+    InputMenuData: |-
+        =Table(
+            {
+                MenuName: "首頁",
+                MenuImg: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAYAAABV7bNHAAACUklEQVR4nO3csZHiQBCFYVlsDARAGGuxORECxEAgaxMGEYCHg7XWfwbP2LuSmNGoR5rW9ataU93T30pClGroukgkEolEVhtgD5yBK/CkjdyAE7CZONsGOAJ3/R2zawI74LKUQGZOE3A+gO+emsecgz+Bx6yjluVmjANwTx28wwcOFADxHgcygFq/rH5n1CVGGgfeXWLAV/2ZTDL6Jk0ezvfbmrw+rfryAxyA7Zj/WCsZgfORKnQdOPgw0yzmMcNRsaHnnP/7zPlVsDeV56gScxwVXQVQFRwVdg9UDUfFXQNVxVEDt0DVcdTEJdAsOGrkDmg2HDVzBTQrjhq6AZodR01dAC2Co8bNAy2Go+ZNAy2KowU0C7Q4jhbRJFATOFpIc0DN4GgxJkBMed/0d512cLQgK6Dj1EGaw9GirIDuUwZqEkcLqw2UHKwGDq9L/sTrbUj5a2tDoL5LLDlgDRzVPfXUGf/a2hBoM3bQWjiqfeupNf61tRWQamUPXBPHdC5LINXLHbzqDblZINXMQaqGYzpXDSDVLUUy+ShvHki1xyKZPee4AFL9XCTTh0A3QOqRQjJ/QnYFpD5DSFW+PrgDUi+Tb/yZvfwBzZkASiSAEgmgRAIokQBKJIASCaBEAiiRAEokgBIJoEQsgVa1FaHrug7YDsz0LCm2xs0sh4GZriXFVrMdSmfOQWvvy7mk6H6g2BqzL5X3tCWzNJciHAF52tRbkgewKwYSkpdt4WPzAD4n4fxzJq3pcrsw9cwZgGrxpyly8uS15jOlN+RIJBKJRFznD36NlQP2L2oBAAAAAElFTkSuQmCC",
+                JumpScreen: App.ActiveScreen,
+                SubMenu: Table()
+            },
+            {
+                MenuName: "任務",
+                MenuImg: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAYAAABV7bNHAAACz0lEQVR4nO2aMU4jMRiFRyAhZWsoqIErkIoqNZwDuEAuEFCKPUEq2GuwRY5AutRBSrErBaRUafJtMc5qlcXYntjjN9E8CQmRmefvf3H8/4NSFK1atdp3AR3gO/Ab+GV+7+TmkhBwBrzyv16Bs9x8WQVcA++fhLPRO3Cdm7N2AQfAAFh/Ec5Ga3PtQW7uWgQcAy8ewWzrBTjOzZ9UwCUwqxDORjPgMncdSQTcAStHACvPa+5y1xNNlC382WN3vAFd8/Pmcf0zTR8FKFv4xKPYn8DJP/edmL+5NKGpowBlC/9wFLgGHoHDT+4/NK+5Ot0HTRoFKFv4g2dhNx5+N55BP6A+CuDfwifAeYDvOX4fVd1RAP8W/oMKhyvwzdzrkt4oANzi157vI6x177nWbYzadoXtBLyr3Yjrdkm4W2NBVmrhEdfXHQXw7yyPJOwshI0Czo4ZAyhqC4/IlX8UIFELj8iXbxSgCYdikalp4P8ULvOEXQsz5QH4VOu7EVH47/onPnkW9Flg4GGuO9oXQefmoIr5V+knb+GxRNl5XaPArIqxTbW28FjCMQpUMbSpmf+gKv5O/2kDSsBdq9qAHGoDcqgNyCG5gIAjYAjMbZ4VNDeeR7nqihnQMGIw2xrmqitmQDF3zrbmueqKGVBS5aqrDaguozSxxOcJ9UkeUNN95IDUfOSA1HzkgNR85IDUfOSA1HzkgNR85IDUfOSA1HzkgNR85IDUfOSA1HzkgNR85IDUfOSA1HzkgNR85IDUfOSA1HzkgNR85IDUfOSA1HwKYGnxOs0BFMMHOLXYLEN5CmBqMesH+igF1LfYTEN5CmBkMVuZhbx2kkJAlDunj/2rwaNQngLo2aD2UL3ggExI49zkNWhcKRwT0AWwyF1BQi2Ai8oBmZCu2M+QFsDVTuFs7aR9+riN2XXnWILqUXa3KfY5SVFLSuYRVQ/kVq1apdAflKoiLL27Dp0AAAAASUVORK5CYII=",
+                JumpScreen: App.ActiveScreen,
+                SubMenu: Table()
+            },
+            {
+                MenuName: "審批",
+                MenuImg: "data:image/png;base64,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",
+                JumpScreen: App.ActiveScreen,
+                SubMenu: Table()
+            },
+            {
+                MenuName: "系統",
+                MenuImg: "data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAEgAAABICAYAAABV7bNHAAACCElEQVR4nO2cO47CMBBAqaDgBByAY1BxqFyBM3AQ6nRcgYKakibVSkhvixiJlWycz5gZs/MqpDgz4ycnsYzsxcJxHIsAe+AIXICO8jyAM7DW7vtbgC3QfkBIiiuw0vYQBdgBd0U5T05Yk0Q/cizIeWJLErqPVQobkuhfyFbRl0T/tYrxAzTAplDeOiTRf8pjNIXzjkFPEul5TpGR85J3LDqSUtVo5TUnyaCgkylJBgWtTEmyJihcsyPJoqBw3YYkq4JCG31JlgWFdrqSrAsKbfUk1SAotNeRZE2QAFckVya/UBDAuXihYglG5hXiUbxQsQTpvLeShiQL1RJ0cEHv8y6DpCIjSbJQFUFSuKAMLiiDC8rggjK4oAzVC+Lv5/wWfi8F41cvKDYhPAjGr15QbCJ4E4xfvaCq41ffARekHL/6Drgg5fjVd8C0IMqs6YyaTFoXVHJVcNBkck79g5iTgLLryoMmk3PqH8ScBLig7L3+iGXu9Zf0f49ffQdckHL86jvggpTjV9+BbxDkS66Z+L5on4nvf/to4oIyuKAMnxCksqFOAmCTqL2TTKKyJVMC+j21MS6SSVQ29c4hjJwm1BjjKJnM8rbwqezFBAVJrXaPBGlF5QRB1o6mmMod2IoLCpKsHG4ylTuwKyLnRZL28ThTaSk1chKiPn3A0lg6+tqOSL+QHceR4hf/qYYPMxmdaQAAAABJRU5ErkJggg==",
+                JumpScreen: App.ActiveScreen,
+                SubMenu: Table(
+                    {
+                        MenuName: "用戶管理",
+                        JumpScreen: App.ActiveScreen
+                    },
+                     {
+                        MenuName: "組織機構",
+                        JumpScreen: App.ActiveScreen
+                    },
+                     {
+                        MenuName: "權限管理",
+                        JumpScreen: App.ActiveScreen
+                    }
+                )
+            }
+        )
+    sysmenu: =false
+    Width: =150
+    X: =0
+    Y: =0
+    ZIndex: =1
+
+    Rectangle2_4 As rectangle:
+        Fill: =RGBA(0, 76, 151, 1)
+        Height: =768
+        ZIndex: =1
+
+    MainGallery As gallery.galleryVertical:
+        Height: =CountRows(SecondaryMenu.InputMenuData.MenuName)*65
+        Items: =SecondaryMenu.InputMenuData
+        Layout: =Layout.Vertical
+        ShowScrollbar: =false
+        TemplatePadding: =10
+        TemplateSize: =59
+        Width: =150
+        ZIndex: =2
+
+        Image2_2 As image:
+            Height: =22
+            Image: =ThisItem.MenuImg
+            OnSelect: =Select(Parent)
+            Width: =20
+            X: =15
+            Y: =12
+            ZIndex: =2
+
+        Button1_4 As button:
+            Align: =Align.Left
+            AutoDisableOnSelect: =false
+            BorderColor: =
+            BorderThickness: =0
+            Color: =If(ThisItem.MenuName=SecondaryMenu.curentName,RGBA(255, 255, 255, 1),RGBA(255, 255, 255, .5))
+            Fill: =RGBA(0, 0, 0, 0)
+            FocusedBorderThickness: =0
+            Height: =30
+            HoverBorderColor: =
+            HoverFill: =
+            OnSelect: |
+                =If(
+                    ThisItem.MenuName <> "系統",
+                    Set(
+                        DispalyMenu,
+                        false
+                    ); Navigate(
+                        ThisItem.JumpScreen,
+                        Fade
+                    ),
+                    Navigate(
+                        ThisItem.JumpScreen,
+                        Fade
+                    );
+                    Set(CurrentName,"用戶管理");
+                    Set(DispalyMenu,true)
+                );
+                
+                Set(
+                    Datamenu,
+                    Filter(
+                        Last(SecondaryMenu.InputMenuData.SubMenu).SubMenu,
+                        1 = 1
+                    )
+                );
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            PressedColor: =
+            PressedFill: =
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =12
+            Text: =ThisItem.MenuName
+            Width: =90
+            X: =50
+            Y: =9
+            ZIndex: =4
+
+    subGallery As gallery.galleryVertical:
+        Height: =222
+        Items: =Datamenu
+        Layout: =Layout.Vertical
+        ShowScrollbar: =false
+        TemplatePadding: =10
+        TemplateSize: =30
+        Visible: =If(SecondaryMenu.sysmenu=true,true,DispalyMenu)
+        Width: =90
+        X: =60
+        Y: =MainGallery.Y+MainGallery.Height
+        ZIndex: =3
+
+        Button2_2 As button:
+            Align: =Align.Left
+            AutoDisableOnSelect: =false
+            BorderColor: =
+            BorderThickness: =0
+            Fill: =RGBA(0, 0, 0, 0)
+            FocusedBorderThickness: =0
+            Height: =30
+            HoverBorderColor: =
+            HoverFill: =
+            OnSelect: |-
+                =Set(
+                    CurrentName,
+                    ThisItem.MenuName
+                )
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            PressedBorderColor: =
+            PressedColor: =
+            PressedFill: =RGBA(0, 0, 0, 0)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Size: =10
+            Text: =ThisItem.MenuName
+            Width: =94
+            X: =4
+            ZIndex: =2
+
