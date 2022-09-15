@@ -2358,17 +2358,21 @@
                     ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
                     ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
                     Color: =glbNeutralPrimaryColor
-                    DisplayFields: =["Claims"]
+                    DisplayFields: =["DisplayName"]
                     FocusedBorderThickness: =1
                     HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                     HoverColor: =Self.Color
                     HoverFill: =ColorFade(Self.Fill, -5%)
-                    Items: =Choices(MyContacts.AllOwnerName)
+                    Items: |-
+                        =//Choices(MyContacts.AllOwnerName)
+                        Office365用户.SearchUserV2({searchTerm:ComboBox1_5.SearchText,top:10}).value.DisplayName
                     PaddingLeft: =10
                     PressedColor: =Self.Color
                     PressedFill: =ColorFade(Self.Fill, -5%)
-                    SearchFields: =["Claims"]
-                    SearchItems: =Choices(MyContacts.AllOwnerName,ComboBox1_5.SearchText)
+                    SearchFields: =["DisplayName"]
+                    SearchItems: |-
+                        =Search(//Choices(MyContacts.AllOwnerName)
+                        Office365用户.SearchUserV2({searchTerm:ComboBox1_5.SearchText,top:10}).value.DisplayName,ComboBox1_5.SearchText,"DisplayName")
                     SelectionColor: =glbThemePrimaryColor
                     SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                     SelectMultiple: =false
@@ -2381,7 +2385,7 @@
                 TabGallery3_5 As gallery.galleryHorizontal:
                     FillPortions: =0
                     Height: =40
-                    Items: =If(First(EditUserForm).FlowType<>"Simple Flow",["常用","部門"],["部門"])
+                    Items: =If(First(EditUserForm).FlowType<>"部門簡單流程",["最近","部門"],["部門"])
                     LayoutMinHeight: =287
                     LayoutMinWidth: =320
                     ShowScrollbar: =false
@@ -2426,8 +2430,8 @@
                     FillPortions: =0
                     Height: =340
                     Items: |-
-                        =If(
-                            TabGallery3_5.Selected.Value = "常用",
+                        =Filter(If(
+                            TabGallery3_5.Selected.Value = "最近",
                             SortByColumns(
                                 Filter(
                                     MyContacts,
@@ -2437,13 +2441,14 @@
                                 "Created",
                                 Descending
                             )
-                        )
+                        ),AllOwnerName.Email <> Blank())
                     Layout: =Layout.Vertical
                     LayoutMinHeight: =287
                     LayoutMinWidth: =320
                     OnSelect: =//UpdateIf(MyContactsCol,ThisItem.isSelect=true,{})
                     TemplatePadding: =0
                     TemplateSize: =64
+                    Visible: =If(TabGallery3_5.Selected.Value = "最近",true)
                     X: =27
                     Y: =185
                     ZIndex: =4
@@ -2468,7 +2473,9 @@
                         Color: =glbNeutralPrimaryColor
                         Height: =28
                         OnSelect: =Select(Parent)
-                        Text: =ThisItem.AllOwnerName.DisplayName
+                        Text: |-
+                            =ThisItem.AllOwnerName.DisplayName
+                            //If(TabGallery3_5.Selected.Value = "最近",ThisItem.AllOwnerName.DisplayName,ThisItem.DepartMentEmail.DisplayName)
                         Width: =520
                         X: =40
                         Y: =2
@@ -2479,13 +2486,88 @@
                         Height: =28
                         OnSelect: =Select(Parent)
                         Size: =10
-                        Text: =ThisItem.AllOwnerName.Email
+                        Text: |-
+                            =ThisItem.AllOwnerName.Email
+                            //If(TabGallery3_5.Selected.Value = "最近",ThisItem.AllOwnerName.Email,ThisItem.DepartMentEmail)
                         Width: =520
                         X: =40
                         Y: =30
                         ZIndex: =3
 
                     Icon5_2 As icon.CheckBadge:
+                        Color: =RGBA(255, 255, 255, 1)
+                        FocusedBorderThickness: =0
+                        Height: =30
+                        Icon: =Icon.Check
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =6
+                        PaddingTop: =6
+                        Width: =30
+                        X: =2
+                        Y: =15
+                        ZIndex: =4
+
+                Gallery2_3 As gallery.galleryVertical:
+                    FillPortions: =0
+                    Height: =340
+                    Items: |-
+                        =Filter(If(
+                            TabGallery3_5.Selected.Value = "部門",
+                            SortByColumns(FormTableType,"DepartMentEmail",Descending)
+                        ),DepartMentEmail<>Blank())
+                    Layout: =Layout.Vertical
+                    LayoutMinHeight: =287
+                    LayoutMinWidth: =320
+                    OnSelect: =//UpdateIf(MyContactsCol,ThisItem.isSelect=true,{})
+                    TemplatePadding: =0
+                    TemplateSize: =64
+                    Visible: =If(TabGallery3_5.Selected.Value = "部門",true)
+                    X: =27
+                    Y: =185
+                    ZIndex: =5
+
+                    Circle1_5 As circle:
+                        BorderColor: =RGBA(202, 202, 202, 1)
+                        BorderThickness: =1
+                        Fill: |-
+                            =If(
+                                ThisItem.IsSelected,
+                                glbThemePrimaryColor,
+                                White
+                            )
+                        Height: =30
+                        OnSelect: =Select(Parent)
+                        Width: =30
+                        X: =2
+                        Y: =15
+                        ZIndex: =1
+
+                    Label7_6 As label:
+                        Color: =glbNeutralPrimaryColor
+                        Height: =28
+                        OnSelect: =Select(Parent)
+                        Text: |-
+                            =ThisItem.DepartMentName
+                            //If(TabGallery3_5.Selected.Value = "最近",ThisItem.AllOwnerName.DisplayName,ThisItem.DepartMentEmail.DisplayName)
+                        Width: =520
+                        X: =40
+                        Y: =2
+                        ZIndex: =2
+
+                    Label7_7 As label:
+                        Color: =glbNeutralSecondaryColor
+                        Height: =28
+                        OnSelect: =Select(Parent)
+                        Size: =10
+                        Text: |-
+                            =ThisItem.DepartMentEmail
+                            //If(TabGallery3_5.Selected.Value = "最近",ThisItem.AllOwnerName.Email,ThisItem.DepartMentEmail)
+                        Width: =520
+                        X: =40
+                        Y: =30
+                        ZIndex: =3
+
+                    Icon5_3 As icon.CheckBadge:
                         Color: =RGBA(255, 255, 255, 1)
                         FocusedBorderThickness: =0
                         Height: =30
@@ -2510,7 +2592,7 @@
                     PaddingRight: =20
                     Width: =747
                     Y: =498
-                    ZIndex: =5
+                    ZIndex: =6
 
                     BtnPrimaryLg_12 As button:
                         BorderColor: =Self.Fill
