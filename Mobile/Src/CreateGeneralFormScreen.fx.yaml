@@ -401,7 +401,7 @@
                 RadiusTopLeft: =4
                 RadiusTopRight: =4
                 Size: =13
-                Text: ="填写"
+                Text: ="創建"
                 Width: =100
                 X: =983
                 Y: =12
@@ -2879,7 +2879,7 @@
             Y: =313
             ZIndex: =9
 
-        SubmitViewBtn_6 As button:
+        SubmitViewsubmitBtn_6 As button:
             Height: =47
             OnSelect: |-
                 =//右边流程
@@ -2909,7 +2909,7 @@
                         idNumber: If(
                             CountA(ApprovalListCol.ActionName) = 1,
                             1,
-                            CountA(ApprovalListCol.ActionName) + 1
+                            CountA(ApprovalListCol.ActionName)
                         ),
                         ActionName: If(
                             FlowType = "通用流程" && !IsBlank(
@@ -3098,7 +3098,7 @@
                             )
                         );
                     Notify(
-                        "填寫成功！",
+                        "提交成功！",
                         NotificationType.Success,
                         2000
                     );
@@ -3122,7 +3122,7 @@
             Y: =438
             ZIndex: =10
 
-        SubmitViewCancelBtn_6 As button:
+        SubmitViewfillinBtn_6 As button:
             Height: =47
             OnSelect: |-
                 =//右边流程
@@ -3338,7 +3338,7 @@
                     None,
                     {HistoryList: ApprovalIDNumber}
                 );
-            Text: ="填写"
+            Text: ="填寫"
             Visible: |-
                 =Submitview
                 //true

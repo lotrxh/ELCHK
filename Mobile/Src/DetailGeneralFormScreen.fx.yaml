@@ -1504,7 +1504,7 @@
                     TemplatePadding: =0
                     TemplateSize: =180
                     Visible: |-
-                        =FlowType = "通用流程" || FlowType = "預設通用流程" || FlowType = "部門簡單流程"
+                        =If(FlowType = "通用流程" || FlowType = "預設通用流程" || FlowType = "部門簡單流程",true,false)
                         /*&& IsBlank(
                             LookUp(
                                 GenericFormModel,
@@ -1632,7 +1632,7 @@
                     LayoutMinWidth: =250
                     Visible: |-
                         =// flow类型是通用且当前节点不为执行时显示，否则不显示
-                        FlowType = "通用流程" || FlowType = "預設通用流程" || FlowType = "部門簡單流程"
+                        If(FlowType = "通用流程" || FlowType = "預設通用流程" || FlowType = "部門簡單流程",true,false)
                         /*&& IsBlank(
                             LookUp(
                                 GenericFormModel,
