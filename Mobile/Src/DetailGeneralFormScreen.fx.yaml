@@ -30,8 +30,7 @@
         ClearCollect(EditDetailUserForm_2,Filter(GenericFormModel,Title=First(EditDetailUserForm_1).ModelId)); //创建集合EditUserForm收集表格信息,用作带入部门表格类型等数据
         ClearCollect(EditDetailUserAttachment2,Filter(UploadFlowAttachMent,Title=Param("FormId")));
         Set(
-            FlowType,First(EditDetailUserForm_2.FlowType)
-        );
+            FlowType,LookUp(GenericFormModel,Title=First(EditDetailUserForm_1).ModelId).FlowType)
         );//创建集合EditDetailUserAttachment2获得附件信息，用作带入表格附件
         
 
