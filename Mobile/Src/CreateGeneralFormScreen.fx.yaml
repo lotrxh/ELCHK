@@ -162,17 +162,17 @@
                 FocusedBorderThickness: =1
                 Height: =36
                 HoverFill: =ColorFade(Self.Fill, -15%)
-                OnSelect: |+
-                    =
-                        
-                    //左边填写内容上传必選項判斷
+                OnSelect: |-
+                    =//左边填写内容上传必選項判斷
                     If( 
-                        (Attachment_Excel.Visible = true &&Last(Attachment_Excel.Attachments).Name = Blank()) || (Attachment_Zip.Visible = true && Last(Attachment_Zip.Attachments).Name = Blank()) || (Label6.Visible = true && IsBlank(TextInput_FormPWD) && IsBlank(TextInput_FormPWD_1)) || (Label6_1.Visible = true && IsBlank(TextInput_zipPWD)&& IsBlank(TextInput_zipPWD_1)) || (drpFilterDepartment_1.Visible = true && IsEmpty(drpFilterDepartment_1.SelectedItems))
+                        (Attachment_Excel.Visible = true &&Last(Attachment_Excel.Attachments).Name = Blank()) || (Attachment_Zip.Visible = true && Last(Attachment_Zip.Attachments).Name = Blank()) || (Label6.Visible = true && IsBlank(TextInput_FormPWD) && IsBlank(TextInput_FormPWD_1)) || (Label6_1.Visible = true && IsBlank(TextInput_zipPWD)&& IsBlank(TextInput_zipPWD_1)) || (drpFilterDepartment_1.Visible = true && IsEmpty(drpFilterDepartment_1.SelectedItems)) || (FlowType="預設通用流程" && (Dropdown1_9.Selected.Result=Blank() || Label1_155.Text = Blank())) || (FlowType="通用流程" && (Dropdown1_5.Selected.Result=Blank() || Label1_137.Text = Blank())) || (FlowType="部門簡單流程" &&  Label1_153.Text = Blank())
                             ,
                             Notify(
-                                "必選項不能爲空",
+                                "必選項不能爲空，處理行動及處理人不能爲空",
                                 NotificationType.Error
                             ), 
+                            If((FlowType="通用流程" && Dropdown1_5.Selected.Result="提交") 
+                    || (FlowType="預設通用流程" && Dropdown1_9.Selected.Result="提交"),
                         //右边流程
                         Set(
                         ApprovalGuid,
@@ -197,25 +197,22 @@
                                 Dropdown1_5.Selected.Result,
                                 If(FlowType = "預設通用流程",Dropdown1_9.Selected.Result,If(FlowType = "部門簡單流程",Dropdown1_7.Selected.Value))
                             ),
-                            ApprovalEmail: Gallery2_2.Selected.AllOwnerName.Email,
-                            Approver: First(
-                                Split(
-                                    Gallery2_2.Selected.AllOwnerName.DisplayName,
-                                    " "
-                                ).Result
-                            ).Result,
+                            ApprovalEmail: If(FlowType = "通用流程",Last(Split(Label1_137.Text,"/")).Result,If(FlowType = "預設通用流程",Last(Split(Label1_155.Text,"/")).Result,If(FlowType = "部門簡單流程",Last(Split(Label1_153.Text,"/")).Result))),
+                            //Gallery2_2.Selected.AllOwnerName.Email,
+                            Approver: If(FlowType = "通用流程",First(Split(Label1_137.Text,"/")).Result,If(FlowType = "預設通用流程",First(Split(Label1_155.Text,"/")).Result,If(FlowType = "部門簡單流程",First(Split(Label1_153.Text,"/")).Result))),
+                            //First(Split(Gallery2_2.Selected.AllOwnerName.DisplayName," ").Result).Result,
                             IsComplate: false,
                             BCCUser: If(FlowType = "通用流程",Concat(
-                                ComboBox1_11.SelectedItems.Email,
-                                Email,
+                                ComboBox1_11.SelectedItems.Mail,
+                                Mail,
                                 ","
                             ),If(FlowType = "預設通用流程",Concat(
-                                ComboBox1_15.SelectedItems.Email,
-                                Email,
+                                ComboBox1_15.SelectedItems.Mail,
+                                Mail,
                                 ","
                             ),If(FlowType = "部門簡單流程",Concat(
-                                ComboBox1_13.SelectedItems.Email,
-                                Email,
+                                ComboBox1_13.SelectedItems.Mail,
+                                Mail,
                                 ","
                             )))
                             ),
@@ -374,13 +371,25 @@
                                     Title = First(NewUserForm).Title
                                 )
                             );
+                        Notify(
+                            "填寫成功！",
+                            NotificationType.Success,
+                            2000
+                        );
+                        //測試時導航到具體任務頁面，實際使用應該退回到首頁
                     Navigate(
                         DetailGeneralFormScreen,
                         None,
                         {HistoryList: ApprovalIDNumber}
                     );
-                        );
+                    ,
+                    UpdateContext({Submitview:true})
                     
+                    )
+                    
+                        
+                    
+                        );
                 PaddingBottom: =0
                 PaddingLeft: =0
                 PaddingRight: =0
@@ -1525,7 +1534,11 @@
                         PaddingRight: =10
                         PaddingTop: =0
                         Size: =11
-                        Text: =First(Split(CreateApproverCol.AllOwnerName.DisplayName," ").Result).Result&"/"&CreateApproverCol.AllOwnerName.Email
+                        Text: |-
+                            =//First(Split(CreateApproverCol.AllOwnerName.DisplayName," ").Result).Result&"/"&CreateApproverCol.AllOwnerName.Email
+                            If(Lastselect&&TabGallery3_5.Selected.Value="最近",First(Split(CreateApproverCol.AllOwnerName.DisplayName," ").Result).Result&"/"&CreateApproverCol.AllOwnerName.Email,
+                            Departmentselect&&TabGallery3_5.Selected.Value="部門",First(Split(CreateApproverCol.DepartMentEmail.DisplayName," ").Result).Result&"/"&CreateApproverCol.DepartMentEmail.Email,
+                            !Lastselect&&!Departmentselect,First(Split(CreateApproverCol.DisplayName," ").Result).Result&"/"&CreateApproverCol.Mail)
                         Width: =Parent.Width-Self.X
                         X: =161
                         Y: =100
@@ -1581,18 +1594,22 @@
                         ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
                         ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
                         Color: =glbNeutralPrimaryColor
-                        DisplayFields: =["Claims"]
+                        DisplayFields: =["Mail"]
                         FocusedBorderThickness: =1
                         Height: =36
                         HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                         HoverColor: =Self.Color
                         HoverFill: =ColorFade(Self.Fill, -5%)
-                        Items: =Choices(MyContacts.AllOwnerName)
+                        Items: |-
+                            =//Choices(MyContacts.AllOwnerName)
+                            Office365用户.SearchUserV2({searchTerm:ComboBox1_11.SearchText,top:10}).value
                         PaddingLeft: =10
                         PressedColor: =Self.Color
                         PressedFill: =ColorFade(Self.Fill, -5%)
-                        SearchFields: =["Claims"]
-                        SearchItems: =Choices(MyContacts.AllOwnerName,ComboBox1_11.SearchText)
+                        SearchFields: =["Mail"]
+                        SearchItems: |-
+                            =Search(//Choices(MyContacts.AllOwnerName)
+                            Office365用户.SearchUserV2({searchTerm:ComboBox1_11.SearchText,top:10}).value,ComboBox1_11.SearchText,"Mail")
                         SelectionColor: =glbThemePrimaryColor
                         SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                         Size: =12
@@ -1660,6 +1677,7 @@
                         ChevronHoverBackground: =ColorFade(Self.Fill, -5%)
                         ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
                         Color: =glbNeutralPrimaryColor
+                        DisplayMode: =DisplayMode.Disabled
                         FocusedBorderColor: =ColorFade(Self.BorderColor, -20%)
                         FocusedBorderThickness: =1
                         Height: =36
@@ -1721,7 +1739,11 @@
                         PaddingRight: =10
                         PaddingTop: =0
                         Size: =11
-                        Text: =First(Split(CreateApproverCol.AllOwnerName.DisplayName," ").Result).Result&"/"&CreateApproverCol.AllOwnerName.Email
+                        Text: |-
+                            =//First(Split(CreateApproverCol.AllOwnerName.DisplayName," ").Result).Result&"/"&CreateApproverCol.AllOwnerName.Email
+                            If(Lastselect&&TabGallery3_5.Selected.Value="最近",First(Split(CreateApproverCol.AllOwnerName.DisplayName," ").Result).Result&"/"&CreateApproverCol.AllOwnerName.Email,
+                            Departmentselect&&TabGallery3_5.Selected.Value="部門",First(Split(CreateApproverCol.DepartMentEmail.DisplayName," ").Result).Result&"/"&CreateApproverCol.DepartMentEmail.Email,
+                            !Lastselect&&!Departmentselect,First(Split(CreateApproverCol.DisplayName," ").Result).Result&"/"&CreateApproverCol.Mail)
                         Width: =Parent.Width-Self.X
                         X: =161
                         Y: =100
@@ -1777,18 +1799,22 @@
                         ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
                         ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
                         Color: =glbNeutralPrimaryColor
-                        DisplayFields: =["Claims"]
+                        DisplayFields: =["Mail"]
                         FocusedBorderThickness: =1
                         Height: =36
                         HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                         HoverColor: =Self.Color
                         HoverFill: =ColorFade(Self.Fill, -5%)
-                        Items: =Choices(MyContacts.AllOwnerName)
+                        Items: |-
+                            =//Choices(MyContacts.AllOwnerName)
+                            Office365用户.SearchUserV2({searchTerm:ComboBox1_13.SearchText,top:10}).value
                         PaddingLeft: =10
                         PressedColor: =Self.Color
                         PressedFill: =ColorFade(Self.Fill, -5%)
-                        SearchFields: =["Claims"]
-                        SearchItems: =Choices(MyContacts.AllOwnerName,ComboBox1_13.SearchText)
+                        SearchFields: =["Mail"]
+                        SearchItems: |-
+                            =Search(//Choices(MyContacts.AllOwnerName)
+                            Office365用户.SearchUserV2({searchTerm:ComboBox1_13.SearchText,top:10}).value,ComboBox1_13.SearchText,"Mail")
                         SelectionColor: =glbThemePrimaryColor
                         SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                         Size: =12
@@ -2070,12 +2096,13 @@
                         ChevronHoverBackground: =ColorFade(Self.Fill, -5%)
                         ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
                         Color: =glbNeutralPrimaryColor
+                        DisplayMode: =DisplayMode.Disabled
                         FocusedBorderColor: =ColorFade(Self.BorderColor, -20%)
                         FocusedBorderThickness: =1
                         Height: =36
                         HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                         HoverFill: =ColorFade(Self.Fill, -5%)
-                        Items: =DataFlowActionCol.Result
+                        Items: =First(DataFlowActionCol.Result)
                         PaddingBottom: =5
                         PaddingRight: =0
                         PaddingTop: =5
@@ -2422,6 +2449,7 @@
                     SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                     SelectMultiple: =false
                     Template: =ListItemTemplate.Double
+                    Visible: =If(First(EditUserForm).FlowType<>"部門簡單流程",true,false)
                     Width: =615
                     X: =40
                     Y: =62
@@ -2430,7 +2458,9 @@
                 TabGallery3_5 As gallery.galleryHorizontal:
                     FillPortions: =0
                     Height: =40
-                    Items: =If(First(EditUserForm).FlowType<>"部門簡單流程",["最近","部門"],["部門"])
+                    Items: |-
+                        =If(First(EditUserForm).FlowType<>"部門簡單流程",["最近","部門"],["部門"])
+                        //["最近","部門"]
                     LayoutMinHeight: =287
                     LayoutMinWidth: =320
                     ShowScrollbar: =false
@@ -2821,4 +2851,512 @@
                         X: =Parent.Width-Self.Width-1
                         Y: =12
                         ZIndex: =2
+
+    SubmitViewGroup As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =13
+
+        BackgroundRectangle_6 As rectangle:
+            Fill: =RGBA(0, 0, 0, .5)
+            Height: =768
+            Visible: |-
+                =Submitview
+                //true
+            Width: =1366
+            ZIndex: =8
+
+        SubmitViewRectangle_6 As rectangle:
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =220
+            Visible: |-
+                =Submitview
+                //true
+            Width: =605
+            X: =465
+            Y: =313
+            ZIndex: =9
+
+        SubmitViewBtn_6 As button:
+            Height: =47
+            OnSelect: |-
+                =//右边流程
+                Set(
+                    ApprovalGuid,
+                    GUID()
+                );
+                //提交人信息记录
+                Patch(
+                    ApprovalListCol,
+                    Defaults(ApprovalListCol),
+                    {
+                        idNumber: 1,
+                        ActionName: "提交",
+                        Approver: User().FullName,
+                        ApprovalEmail: User().Email,
+                        IsComplate: true,
+                        BCCUser: "",
+                        remark: ""
+                    }
+                );
+                
+                Patch(
+                    ApprovalListCol,
+                    Defaults(ApprovalListCol),
+                    {
+                        idNumber: If(
+                            CountA(ApprovalListCol.ActionName) = 1,
+                            1,
+                            CountA(ApprovalListCol.ActionName) + 1
+                        ),
+                        ActionName: If(
+                            FlowType = "通用流程" && !IsBlank(
+                                LookUp(
+                                    GenericFormModel,
+                                    Title = FormModelId
+                                ).SelectedActions
+                            ),
+                            Dropdown1_5.Selected.Result,
+                            If(FlowType = "預設通用流程",Dropdown1_9.Selected.Result,If(FlowType = "部門簡單流程",Dropdown1_7.Selected.Value))
+                        ),
+                        ApprovalEmail: If(FlowType = "通用流程",Last(Split(Label1_137.Text,"/")).Result,If(FlowType = "預設通用流程",Last(Split(Label1_155.Text,"/")).Result,If(FlowType = "部門簡單流程",Last(Split(Label1_153.Text,"/")).Result))),
+                        //Gallery2_2.Selected.AllOwnerName.Email,
+                        Approver: If(FlowType = "通用流程",First(Split(Label1_137.Text,"/")).Result,If(FlowType = "預設通用流程",First(Split(Label1_155.Text,"/")).Result,If(FlowType = "部門簡單流程",First(Split(Label1_153.Text,"/")).Result))),
+                        //First(Split(Gallery2_2.Selected.AllOwnerName.DisplayName," ").Result).Result,
+                        IsComplate: false,
+                        BCCUser: If(FlowType = "通用流程",Concat(
+                            ComboBox1_11.SelectedItems.Mail,
+                            Mail,
+                            ","
+                        ),If(FlowType = "預設通用流程",Concat(
+                            ComboBox1_15.SelectedItems.Mail,
+                            Mail,
+                            ","
+                        ),If(FlowType = "部門簡單流程",Concat(
+                            ComboBox1_13.SelectedItems.Mail,
+                            Mail,
+                            ","
+                        )))
+                        ),
+                        remark: ""
+                    }
+                );
+                UpdateContext(
+                                    {
+                                        TodayTask2Code: Label1_134.Text & Text(
+                                            Today(),
+                                            "yyyymmdd"
+                                        )
+                                    }
+                                );
+                Set(
+                    ApprovalIDNumber,
+                    Patch(
+                        Approval_Table,
+                        Defaults(Approval_Table),
+                        {
+                            Application_No: Label1_134.Text & Text(
+                                Now(),
+                                "yyyymmdd"
+                            )&Text(
+                                Right(
+                                    Last(
+                                        SortByColumns(
+                                            Filter(
+                                                Approval_Table,
+                                                StartsWith(
+                                                    Application_No,
+                                                    TodayTask2Code)),
+                                                    "field_Application_No",
+                                                    Ascending)
+                                                    ).Application_No,3)+1,"000"
+                                                    )
+                            
+                            ,
+                            Title: ApprovalGuid,
+                            Application_Status: "審批中",
+                            DepartMentName: Label1_130.Text,
+                            FormType: Label1_132.Text,
+                            'Operator ': User().Email,
+                            Task_Name: FormNameLabel_1.Text,
+                            DepartMentUnit:drpFilterDepartment_1.Selected.Result
+                        }
+                    )
+                );
+                ForAll(
+                        ApprovalListCol,
+                        Patch(
+                            ApprovalDetail_Table,
+                            Defaults(ApprovalDetail_Table),
+                            {
+                                Title: GUID(),
+                                Advise: ApprovalListCol[@remark],
+                                Approval_No: ApprovalGuid,
+                                ApprovalBCC: ApprovalListCol[@BCCUser],
+                                Approver: ApprovalListCol[@Approver],
+                                ApproverEmail: ApprovalListCol[@ApprovalEmail],
+                                TaskStatus: If(
+                                    ApprovalListCol[@IsComplate],
+                                    "004",
+                                    "002"
+                                ),
+                                Priortty: ApprovalListCol[@idNumber],
+                                ActionNode: ApprovalListCol[@ActionName]
+                            }
+                        )
+                );
+                
+                
+                
+                //左边填写内容上传
+                        Set(
+                            GenericFormlistGuid,
+                            GUID()
+                        );
+                        ClearCollect(
+                            NewUserForm,
+                            Patch(
+                                GenericFormList,
+                                Defaults(GenericFormList),
+                                {
+                                    Title: GenericFormlistGuid,
+                                    ApprovalId: ApprovalGuid,
+                                    ModelId: First(EditUserForm).Title,
+                                    ModelName: FormNameLabel_1.Text,
+                                    UploadFileId: Last(GenericUploadAttachMentFile).Title,
+                                    //目前取的是最后一个附件的id
+                                    MarkValue: TextInput_FormMark.Text,
+                                    //UploadFilePWD:TextInput_FormPWD.Text,
+                                    //ReferNumber:TextInput_ReferNumber.Text,
+                                    FormType: Label1_132.Text,
+                                    Department: drpFilterDepartment_1.Selected.Result,
+                                    FilterLabel: TextInput_FilterLabel.Text
+                                }
+                            )
+                        );
+                        //創建NewUserForm集合用作後續更新list-GenericUploadAttachMentFile中的FormId
+                UpdateIf(
+                            GenericUploadAttachMentFile,
+                            FormId = First(EditUserForm).Title,
+                            {
+                                FormId: GenericFormlistGuid,
+                                UploadFilePWD: TextInput_FormPWD.Text
+                            }
+                        );
+                        //更新FormId和PWD到GenericUploadAttachMentFile中
+                UpdateIf(
+                            UploadFlowAttachMent,
+                            FlowAttachName = First(AttachmentZipName).Name,
+                            {
+                                Title: GenericFormlistGuid,
+                                ApprovalDetailid: ApprovalGuid,
+                                FlowAttachPWD: TextInput_zipPWD.Text
+                            }
+                        );
+                        //更新FormId和PWD到UploadFlowAttachMent中
+                        Reset(drpFilterDepartment_1);
+                        Reset(Attachment_Excel);
+                        Reset(Attachment_Zip);
+                        Reset(TextInput_FormMark);
+                        Reset(TextInput_FilterLabel);
+                        Reset(TextInput_FormPWD);
+                        Reset(TextInput_zipPWD);
+                        Reset(TextInput_FormPWD_1);
+                        Reset(TextInput_zipPWD_1);
+                        //保存后重置输入内容
+                
+                ClearCollect(
+                            EditDetailUserForm_1,
+                            Filter(
+                                GenericFormList,
+                                Title = First(NewUserForm).Title
+                            )
+                        );
+                        //创建集合EditDetailUserForm收集表格信息，用作待人表格名称等数据
+                ClearCollect(
+                            EditDetailUserForm_2,
+                            Filter(
+                                GenericFormModel,
+                                ModelName = FormNameLabel_1.Text
+                            )
+                        );
+                        //创建集合EditUserForm收集表格信息,用作带入部门表格类型等数据
+                ClearCollect(
+                            EditDetailUserAttachment,
+                            Filter(
+                                GenericUploadAttachMentFile,
+                                FormId = First(NewUserForm).Title
+                            )
+                        );
+                ClearCollect(
+                            EditDetailUserAttachment2,
+                            Filter(
+                                UploadFlowAttachMent,
+                                Title = First(NewUserForm).Title
+                            )
+                        );
+                    Notify(
+                        "填寫成功！",
+                        NotificationType.Success,
+                        2000
+                    );
+                    
+                
+                UpdateContext({Submitview:false});
+                
+                //測試時導航到具體任務頁面，實際使用應該退回到首頁
+                Navigate(
+                    DetailGeneralFormScreen,
+                    None,
+                    {HistoryList: ApprovalIDNumber}
+                );
+            Text: |
+                ="提交"
+            Visible: |-
+                =Submitview
+                //true
+            Width: =174
+            X: =819
+            Y: =438
+            ZIndex: =10
+
+        SubmitViewCancelBtn_6 As button:
+            Height: =47
+            OnSelect: |-
+                =//右边流程
+                Set(
+                    ApprovalGuid,
+                    GUID()
+                );
+                Patch(
+                    ApprovalListCol,
+                    Defaults(ApprovalListCol),
+                    {
+                        idNumber: If(
+                            CountA(ApprovalListCol.ActionName) = 1,
+                            1,
+                            CountA(ApprovalListCol.ActionName) + 1
+                        ),
+                        ActionName: If(
+                            FlowType = "通用流程" && !IsBlank(
+                                LookUp(
+                                    GenericFormModel,
+                                    Title = FormModelId
+                                ).SelectedActions
+                            ),
+                            Dropdown1_5.Selected.Result,
+                            If(FlowType = "預設通用流程",Dropdown1_9.Selected.Result,If(FlowType = "部門簡單流程",Dropdown1_7.Selected.Value))
+                        ),
+                        ApprovalEmail: If(FlowType = "通用流程",Last(Split(Label1_137.Text,"/")).Result,If(FlowType = "預設通用流程",Last(Split(Label1_155.Text,"/")).Result,If(FlowType = "部門簡單流程",Last(Split(Label1_153.Text,"/")).Result))),
+                        //Gallery2_2.Selected.AllOwnerName.Email,
+                        Approver: If(FlowType = "通用流程",First(Split(Label1_137.Text,"/")).Result,If(FlowType = "預設通用流程",First(Split(Label1_155.Text,"/")).Result,If(FlowType = "部門簡單流程",First(Split(Label1_153.Text,"/")).Result))),
+                        //First(Split(Gallery2_2.Selected.AllOwnerName.DisplayName," ").Result).Result,
+                        IsComplate: false,
+                        BCCUser: If(FlowType = "通用流程",Concat(
+                            ComboBox1_11.SelectedItems.Mail,
+                            Mail,
+                            ","
+                        ),If(FlowType = "預設通用流程",Concat(
+                            ComboBox1_15.SelectedItems.Mail,
+                            Mail,
+                            ","
+                        ),If(FlowType = "部門簡單流程",Concat(
+                            ComboBox1_13.SelectedItems.Mail,
+                            Mail,
+                            ","
+                        )))
+                        ),
+                        remark: ""
+                    }
+                );
+                UpdateContext(
+                                    {
+                                        TodayTask2Code: Label1_134.Text & Text(
+                                            Today(),
+                                            "yyyymmdd"
+                                        )
+                                    }
+                                );
+                Set(
+                    ApprovalIDNumber,
+                    Patch(
+                        Approval_Table,
+                        Defaults(Approval_Table),
+                        {
+                            Application_No: Label1_134.Text & Text(
+                                Now(),
+                                "yyyymmdd"
+                            )&Text(
+                                Right(
+                                    Last(
+                                        SortByColumns(
+                                            Filter(
+                                                Approval_Table,
+                                                StartsWith(
+                                                    Application_No,
+                                                    TodayTask2Code)),
+                                                    "field_Application_No",
+                                                    Ascending)
+                                                    ).Application_No,3)+1,"000"
+                                                    )
+                            
+                            ,
+                            Title: ApprovalGuid,
+                            Application_Status: "審批中",
+                            DepartMentName: Label1_130.Text,
+                            FormType: Label1_132.Text,
+                            'Operator ': User().Email,
+                            Task_Name: FormNameLabel_1.Text,
+                            DepartMentUnit:drpFilterDepartment_1.Selected.Result
+                        }
+                    )
+                );
+                ForAll(
+                        ApprovalListCol,
+                        Patch(
+                            ApprovalDetail_Table,
+                            Defaults(ApprovalDetail_Table),
+                            {
+                                Title: GUID(),
+                                Advise: ApprovalListCol[@remark],
+                                Approval_No: ApprovalGuid,
+                                ApprovalBCC: ApprovalListCol[@BCCUser],
+                                Approver: ApprovalListCol[@Approver],
+                                ApproverEmail: ApprovalListCol[@ApprovalEmail],
+                                TaskStatus: If(
+                                    ApprovalListCol[@IsComplate],
+                                    "004",
+                                    "002"
+                                ),
+                                Priortty: ApprovalListCol[@idNumber],
+                                ActionNode: ApprovalListCol[@ActionName]
+                            }
+                        )
+                );
+                    
+                //左边填写内容上传
+                        Set(
+                            GenericFormlistGuid,
+                            GUID()
+                        );
+                        ClearCollect(
+                            NewUserForm,
+                            Patch(
+                                GenericFormList,
+                                Defaults(GenericFormList),
+                                {
+                                    Title: GenericFormlistGuid,
+                                    ApprovalId: ApprovalGuid,
+                                    ModelId: First(EditUserForm).Title,
+                                    ModelName: FormNameLabel_1.Text,
+                                    UploadFileId: Last(GenericUploadAttachMentFile).Title,
+                                    //目前取的是最后一个附件的id
+                                    MarkValue: TextInput_FormMark.Text,
+                                    //UploadFilePWD:TextInput_FormPWD.Text,
+                                    //ReferNumber:TextInput_ReferNumber.Text,
+                                    FormType: Label1_132.Text,
+                                    Department: drpFilterDepartment_1.Selected.Result,
+                                    FilterLabel: TextInput_FilterLabel.Text
+                                }
+                            )
+                        );
+                        //創建NewUserForm集合用作後續更新list-GenericUploadAttachMentFile中的FormId
+                UpdateIf(
+                            GenericUploadAttachMentFile,
+                            FormId = First(EditUserForm).Title,
+                            {
+                                FormId: GenericFormlistGuid,
+                                UploadFilePWD: TextInput_FormPWD.Text
+                            }
+                        );
+                        //更新FormId和PWD到GenericUploadAttachMentFile中
+                UpdateIf(
+                            UploadFlowAttachMent,
+                            FlowAttachName = First(AttachmentZipName).Name,
+                            {
+                                Title: GenericFormlistGuid,
+                                ApprovalDetailid: ApprovalGuid,
+                                FlowAttachPWD: TextInput_zipPWD.Text
+                            }
+                        );
+                        //更新FormId和PWD到UploadFlowAttachMent中
+                        Reset(drpFilterDepartment_1);
+                        Reset(Attachment_Excel);
+                        Reset(Attachment_Zip);
+                        Reset(TextInput_FormMark);
+                        Reset(TextInput_FilterLabel);
+                        Reset(TextInput_FormPWD);
+                        Reset(TextInput_zipPWD);
+                        Reset(TextInput_FormPWD_1);
+                        Reset(TextInput_zipPWD_1);
+                        //保存后重置输入内容
+                
+                ClearCollect(
+                            EditDetailUserForm_1,
+                            Filter(
+                                GenericFormList,
+                                Title = First(NewUserForm).Title
+                            )
+                        );
+                        //创建集合EditDetailUserForm收集表格信息，用作待人表格名称等数据
+                ClearCollect(
+                            EditDetailUserForm_2,
+                            Filter(
+                                GenericFormModel,
+                                ModelName = FormNameLabel_1.Text
+                            )
+                        );
+                        //创建集合EditUserForm收集表格信息,用作带入部门表格类型等数据
+                ClearCollect(
+                            EditDetailUserAttachment,
+                            Filter(
+                                GenericUploadAttachMentFile,
+                                FormId = First(NewUserForm).Title
+                            )
+                        );
+                ClearCollect(
+                            EditDetailUserAttachment2,
+                            Filter(
+                                UploadFlowAttachMent,
+                                Title = First(NewUserForm).Title
+                            )
+                        );
+                    Notify(
+                        "填寫成功！",
+                        NotificationType.Success,
+                        2000
+                    );
+                    
+                
+                UpdateContext({Submitview:false});
+                
+                //測試時導航到具體任務頁面，實際使用應該退回到首頁
+                Navigate(
+                    DetailGeneralFormScreen,
+                    None,
+                    {HistoryList: ApprovalIDNumber}
+                );
+            Text: ="填写"
+            Visible: |-
+                =Submitview
+                //true
+            Width: =174
+            X: =527
+            Y: =438
+            ZIndex: =11
+
+        SubmitViewInfo_6 As label:
+            FontWeight: =FontWeight.Semibold
+            Height: =79
+            Size: =14
+            Text: ="填写还是直接提交？"
+            Visible: |-
+                =Submitview
+                //true
+            Width: =521
+            X: =513
+            Y: =326
+            ZIndex: =12
 
