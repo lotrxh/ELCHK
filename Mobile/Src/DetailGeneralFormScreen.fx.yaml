@@ -1,5 +1,5 @@
 "DetailGeneralFormScreen As screen.'phoneLayout_FluidGridWithHeaderPageLayout_ver3.0'":
-    OnVisible: |-
+    OnVisible: |+
         =UpdateContext(
             {
                 FormId: If(
@@ -28,7 +28,12 @@
         ClearCollect(EditDetailUserForm_1,Filter(GenericFormList,Title=Param("FormId")));//创建集合EditDetailUserForm收集表格信息，用作人表格名称等数据
         ClearCollect(EditDetailUserAttachment,Filter(GenericUploadAttachMentFile,FormId=Param("FormId")));//创建集合EditDetailUserAttachment获得表单信息，用作带入表格附件
         ClearCollect(EditDetailUserForm_2,Filter(GenericFormModel,Title=First(EditDetailUserForm_1).ModelId)); //创建集合EditUserForm收集表格信息,用作带入部门表格类型等数据
-        ClearCollect(EditDetailUserAttachment2,Filter(UploadFlowAttachMent,Title=Param("FormId"))))//创建集合EditDetailUserAttachment2获得附件信息，用作带入表格附件
+        ClearCollect(EditDetailUserAttachment2,Filter(UploadFlowAttachMent,Title=Param("FormId")));
+        Set(
+            FlowType,EditDetailUserForm_2.FlowType
+        );
+        );//创建集合EditDetailUserAttachment2获得附件信息，用作带入表格附件
+        
 
     HeaderContainer_2 As groupContainer.manualLayoutContainer:
         Fill: =glbThemePrimaryColor
