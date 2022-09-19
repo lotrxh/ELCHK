@@ -116,7 +116,7 @@ GeneralFormListScreen As screen:
                     LookUp(
                         GenericFormList,
                         ApprovalId = field_Approval_No
-                    ).'Filter Label'
+                    ).FilterLabel
                 )
             )
         );
@@ -179,7 +179,7 @@ GeneralFormListScreen As screen:
                     LookUp(
                         GenericFormList,
                         ApprovalId = field_Approval_No
-                    ).'Filter Label'
+                    ).FilterLabel
                 )
             )
         );
@@ -244,7 +244,7 @@ GeneralFormListScreen As screen:
                     LookUp(
                         GenericFormList,
                         ApprovalId = field_Approval_No
-                    ).'Filter Label'
+                    ).FilterLabel
                 )
             )
         );

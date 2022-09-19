@@ -181,11 +181,11 @@ AdminFormDetailScreen As screen:
                                     ModelDescription: [@TextInput_FormDescription].Text,
                                     ModelFlowUser: User().Email,
                                     CustomFilter: TextInput_CustomFilter.Text,
-                                    ModelFlowUserType: Radio_attachment.SelectedText.Value,
+                                    ModelAttachMent: Radio_attachment.SelectedText.Value,
                                     FlowType: Radio_flowtype.SelectedText.Value,
                                     SelectedActions: If(
                                         Radio_flowtype.SelectedText.Value = "通用流程",
-                                        "補充資料;提交;檢查;簽批;助理總幹事審批;總幹事審批;跟進;",
+                                        "補充資料;提交;檢查;簽批;助理總幹事審批;總幹事審批;跟進",
                                         If(
                                             Radio_flowtype.SelectedText.Value = "預設通用流程",
                                             "提交;" & If(
@@ -204,8 +204,8 @@ AdminFormDetailScreen As screen:
                                                 Checkbox1_6.Value = true,
                                                 Checkbox1_6.Text & ";",
                                                 ""
-                                            ) & "跟進;",
-                                            ""
+                                            ) & "跟進",
+                                            Radio_flowtype.SelectedText.Value = "部門簡單流程","提交",""
                                         )
                                     ),
                                     IsPassWord: If(
@@ -221,7 +221,7 @@ AdminFormDetailScreen As screen:
                                         Radio_password_1.SelectedText.Value = "有",
                                         1,
                                         If(
-                                            Radio_password_1.SelectedText.Value = "無",
+                                            Radio_password_1.SelectedText.Value = "無" || Radio_attachment.SelectedText.Value = "無",
                                             2,
                                             0
                                         )
@@ -285,11 +285,11 @@ AdminFormDetailScreen As screen:
                                         ModelFlowUser: User().Email,
                                         CustomFilter: TextInput_CustomFilter.Text,
                                         IsEnable: 1,
-                                        ModelFlowUserType: Radio_attachment.SelectedText.Value,
+                                        ModelAttachMent: Radio_attachment.SelectedText.Value,
                                         FlowType: Radio_flowtype.SelectedText.Value,
                                         SelectedActions: If(
                                             Radio_flowtype.SelectedText.Value = "通用流程",
-                                            "補充資料;提交;檢查;簽批;助理總幹事審批;總幹事審批;跟進;",
+                                            "補充資料;提交;檢查;簽批;助理總幹事審批;總幹事審批;跟進",
                                             If(
                                                 Radio_flowtype.SelectedText.Value = "預設通用流程",
                                                 "提交;" & If(
@@ -308,8 +308,8 @@ AdminFormDetailScreen As screen:
                                                     Checkbox1_6.Value = true,
                                                     Checkbox1_6.Text & ";",
                                                     ""
-                                                ) & "跟進;",
-                                                ""
+                                                ) & "跟進",
+                                                Radio_flowtype.SelectedText.Value = "部門簡單流程","提交",""
                                             )
                                         ),
                                         IsPassWord: If(
@@ -325,7 +325,7 @@ AdminFormDetailScreen As screen:
                                             Radio_password_1.SelectedText.Value = "有",
                                             1,
                                             If(
-                                                Radio_password_1.SelectedText.Value = "無",
+                                                Radio_password_1.SelectedText.Value = "無" || Radio_attachment.SelectedText.Value = "無",
                                                 2,
                                                 0
                                             )
@@ -555,7 +555,7 @@ AdminFormDetailScreen As screen:
                 ZIndex: =28
 
                 Radio_attachment As radio:
-                    Default: =First(EditForm).ModelFlowUserType//加载编辑表格的表格名称
+                    Default: =First(EditForm).ModelAttachMent//加载编辑表格的表格名称
                     FocusedBorderThickness: =0
                     Height: =37
                     HoverColor: =RGBA(0, 0, 0, 1)
@@ -1213,7 +1213,7 @@ AdminFormDetailScreen As screen:
                 ZIndex: =67
 
                 Radio_password_1 As radio:
-                    Default: =If(First(EditForm).IsPassWord=1,"有",If(First(EditForm).IsPassWord=2,"無","可選"))//加载编辑表格的表格名称
+                    Default: =If(First(EditForm).IsAttachmentPassWord=1,"有",If(First(EditForm).IsAttachmentPassWord=2,"無","可選"))//加载编辑表格的表格名称
                     FocusedBorderThickness: =0
                     Height: =32
                     HoverColor: =RGBA(0, 0, 0, 1)
@@ -1227,6 +1227,7 @@ AdminFormDetailScreen As screen:
                     RadioSelectionFill: =glbLinkColor
                     RadioSize: =24
                     Size: =11
+                    Visible: =If(Radio_attachment.Selected.Value="有",true,false)
                     Width: =233
                     X: =603
                     Y: =440
@@ -1241,6 +1242,7 @@ AdminFormDetailScreen As screen:
                     PaddingTop: =0
                     Size: =12
                     Text: ="附件密碼"
+                    Visible: =If(Radio_attachment.Selected.Value="有",true,false)
                     Width: =120
                     X: =601
                     Y: =399
