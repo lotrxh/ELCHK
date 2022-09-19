@@ -38,21 +38,14 @@
             ClearCollect(
                 DataFlowActionCol,
                 Split(
-                    Left(
                         LookUp(
                             GenericFormModel,
                             Title = FormModelId
                         ).SelectedActions,
-                        Len(
-                            LookUp(
-                                GenericFormModel,
-                                Title = FormModelId
-                            ).SelectedActions
-                        ) - 1
-                    ),
                     ";"
                 ).Result
             );
+            
         //);
         ClearCollect(
             ApprovalListCol,
@@ -168,7 +161,7 @@
                         (Attachment_Excel.Visible = true &&Last(Attachment_Excel.Attachments).Name = Blank()) || (Attachment_Zip.Visible = true && Last(Attachment_Zip.Attachments).Name = Blank()) || (Label6.Visible = true && IsBlank(TextInput_FormPWD) && IsBlank(TextInput_FormPWD_1)) || (Label6_1.Visible = true && IsBlank(TextInput_zipPWD)&& IsBlank(TextInput_zipPWD_1)) || (drpFilterDepartment_1.Visible = true && IsEmpty(drpFilterDepartment_1.SelectedItems)) || (FlowType="預設通用流程" && (Dropdown1_9.Selected.Result=Blank() || Label1_155.Text = Blank())) || (FlowType="通用流程" && (Dropdown1_5.Selected.Result=Blank() || Label1_137.Text = Blank())) || (FlowType="部門簡單流程" &&  Label1_153.Text = Blank())
                             ,
                             Notify(
-                                "必選項不能爲空，處理行動及處理人不能爲空",
+                                "必需項不能爲空，處理行動及處理人不能爲空",
                                 NotificationType.Error
                             ), 
                             If((FlowType="通用流程" && Dropdown1_5.Selected.Result="提交") 
@@ -401,7 +394,7 @@
                 RadiusTopLeft: =4
                 RadiusTopRight: =4
                 Size: =13
-                Text: ="創建"
+                Text: ="完成"
                 Width: =100
                 X: =983
                 Y: =12
