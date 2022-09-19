@@ -54,6 +54,10 @@
                     Approval_No = FLowId
                 ).ActionNode
             );
+            ClearCollect(DataFlowActionCol4,{
+                Result:"跟進"      
+            }
+            )
         ,
             ClearCollect(
                 EditDetailUserForm_1,
@@ -124,7 +128,10 @@
                     Approval_No = FLowId
                 ).ActionNode
             );
-            
+            ClearCollect(DataFlowActionCol4,{
+                Result:"跟進"      
+            }
+            )
         );
         //创建集合EditDetailUserAttachment2获得附件信息，用作带入表格附件
 
@@ -1812,7 +1819,7 @@
                         Items: |-
                             =If(FlowType = "通用流程",
                                 If("提交" in Filter(ApprovalDetail_Table,Approval_No=FLowId).ActionNode,DataFlowActionCol2.Result,DataFlowActionCol.Result),
-                                FlowType = "預設通用流程",First(DataFlowActionCol3.Result),FlowType = "部門簡單流程",DataFlowActionCol.Result)
+                                FlowType = "預設通用流程",If("跟進" in Filter(ApprovalDetail_Table,Approval_No=FLowId).ActionNode,DataFlowActionCol4.Result,First(DataFlowActionCol3.Result)),FlowType = "部門簡單流程",DataFlowActionCol.Result)
                         PaddingBottom: =5
                         PaddingRight: =0
                         PaddingTop: =5
@@ -2286,6 +2293,10 @@
                                 Approval_No = FLowId
                             ).ActionNode
                         );
+                        ClearCollect(DataFlowActionCol4,{
+                            Result:"跟進"      
+                        }
+                        )
                     )
                 PaddingBottom: =0
                 PaddingLeft: =0
