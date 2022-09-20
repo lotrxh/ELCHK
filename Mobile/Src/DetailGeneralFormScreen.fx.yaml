@@ -2482,10 +2482,10 @@
                                         SortByColumns(
                                             Filter(
                                                 ApprovalDetail_Table,
-                                                TaskStatus = "002",
+                                                //TaskStatus = "002",
                                                 Approval_No = FLowId,
                                                 Priortty = "2"
-                                            ),
+                                                                        ),
                                             "field_Priortty",
                                             Descending
                                         )
