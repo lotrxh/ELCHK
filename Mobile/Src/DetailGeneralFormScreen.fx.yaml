@@ -2256,7 +2256,7 @@
                         If(
                             UEmail = User().Email || 
                             //測試需要，eps-vender都可以同意
-                            UEmail = "eps-vendor@elchk.org.hk",
+                            User().Email = "eps-vendor@elchk.org.hk",
                             DisplayMode.Edit,
                             DisplayMode.Disabled
                         )
