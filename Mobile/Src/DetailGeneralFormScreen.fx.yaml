@@ -691,7 +691,7 @@
                     AlignInContainer: =AlignInContainer.SetByContainer
                     Fill: =RGBA(255, 255, 255, 1)
                     FillPortions: =0
-                    Height: =TextInput2_30.Y+TextInput2_30.Height+200
+                    Height: =TextInput2_30.Y+TextInput2_30.Height+250
                     LayoutDirection: =LayoutDirection.Vertical
                     LayoutGap: =10
                     LayoutMinHeight: =100
@@ -727,6 +727,29 @@
                             Width: =300
                             ZIndex: =1
 
+                    Container9 As groupContainer.horizontalAutoLayoutContainer:
+                        FillPortions: =0
+                        Height: =35
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutMinHeight: =30
+                        LayoutMinWidth: =250
+                        LayoutMode: =LayoutMode.Auto
+                        ZIndex: =2
+
+                        Label12_7 As label:
+                            Color: =glbNeutralSecondaryColor
+                            Height: =32
+                            OnSelect: =
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =11
+                            Text: =Last(EditDetailUserAttachment).'Created By'.DisplayName
+                            Width: =300
+                            X: =1
+                            ZIndex: =1
+
                     Container12_2 As groupContainer.horizontalAutoLayoutContainer:
                         Fill: =RGBA(255, 255, 255, 1)
                         FillPortions: =0
@@ -737,7 +760,7 @@
                         LayoutMinWidth: =250
                         LayoutMode: =LayoutMode.Auto
                         LayoutWrap: =true
-                        ZIndex: =2
+                        ZIndex: =3
 
                         Container13 As groupContainer.manualLayoutContainer:
                             AlignInContainer: =AlignInContainer.Start
@@ -789,6 +812,7 @@
                                 Size: =10
                                 Text: =Last(EditDetailUserAttachment).FormAttachMent
                                 Width: =Parent.Width/2-5
+                                X: =1
                                 Y: =4
                                 ZIndex: =2
 
@@ -830,19 +854,6 @@
                                 X: =TextInput2_32.X+TextInput2_32.Width-Self.Width
                                 Y: =4
                                 ZIndex: =4
-
-                            Label12_7 As label:
-                                Color: =glbNeutralSecondaryColor
-                                Height: =23
-                                OnSelect: =
-                                PaddingBottom: =0
-                                PaddingLeft: =0
-                                PaddingRight: =0
-                                PaddingTop: =0
-                                Size: =11
-                                Text: ="上傳人："
-                                Width: =1
-                                ZIndex: =5
 
                             DownloadIcon_2 As icon.Add:
                                 BorderColor: =glbNeutralQuaternaryColor
@@ -1030,7 +1041,7 @@
                         Width: =
                         X: =20
                         Y: =56
-                        ZIndex: =3
+                        ZIndex: =4
 
                     Container6 As groupContainer.horizontalAutoLayoutContainer:
                         LayoutGap: =5
@@ -1038,7 +1049,7 @@
                         LayoutMinHeight: =40
                         LayoutMinWidth: =250
                         LayoutMode: =LayoutMode.Auto
-                        ZIndex: =4
+                        ZIndex: =5
 
                         Label6_2 As label:
                             AlignInContainer: =AlignInContainer.Start
@@ -1116,7 +1127,7 @@
                         Image: =Last(Attachment_Excel2.Attachments).Value
                         Visible: =false
                         Width: =1
-                        ZIndex: =5
+                        ZIndex: =6
 
                 UploadAttachmentsContainer_1 As groupContainer.verticalAutoLayoutContainer:
                     AlignInContainer: =AlignInContainer.SetByContainer
@@ -2811,7 +2822,7 @@
 
                 UploaderLabel_5 As label:
                     Color: =glbNeutralSecondaryColor
-                    Height: =23
+                    Height: =25
                     OnSelect: =Select(Parent)
                     PaddingBottom: =0
                     PaddingLeft: =0
@@ -2819,6 +2830,8 @@
                     PaddingTop: =0
                     Size: =11
                     Text: =ThisItem.'Created By'.DisplayName
+                    Width: =198
+                    X: =19
                     ZIndex: =6
 
                 DownloadIcon_6 As icon.Add:
