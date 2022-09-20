@@ -2320,9 +2320,10 @@
                             ).ApproverEmail
                         },
                         If(
-                            UEmail = User().Email || 
+                            UEmail = User().Email  
                             //測試需要，eps-vender都可以同意
-                            User().Email = "eps-vendor@elchk.org.hk",
+                            //|| User().Email = "eps-vendor@elchk.org.hk"
+                            ,
                             DisplayMode.Edit,
                             DisplayMode.Disabled
                         )
