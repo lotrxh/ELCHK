@@ -6,11 +6,15 @@
       <string name="ManualTriggerInput_Createitem_FlowAttachName_def" />
       <string name="ManualTriggerInput_Addattachment_FileName_def" />
       <string name="ManualTriggerInput_Addattachment_FileContent_def" />
+      <string name="ManualTriggerInput_Createitem_ApprovalDetailid_def" />
+      <string name="ManualTriggerInput_Createitem_FlowAttachPWD_def" />
       <object name="ManualTriggerInput">
         <property name="Createitem_Title" type="string" />
         <property name="Createitem_FlowAttachName" type="string" />
         <property name="Addattachment_FileName" type="string" />
         <property name="Addattachment_FileContent" type="string" />
+        <property name="Createitem_ApprovalDetailid" type="string" />
+        <property name="Createitem_FlowAttachPWD" type="string" />
       </object>
       <base64Binary name="ResponseActionOutput_1_def" />
       <object name="ResponseActionOutput">
@@ -33,6 +37,8 @@
             <param style="plain" name="Createitem_FlowAttachName" path="/Createitem_FlowAttachName" type="xs:string" required="true" />
             <param style="plain" name="Addattachment_FileName" path="/Addattachment_FileName" type="xs:string" required="true" />
             <param style="plain" name="Addattachment_FileContent" path="/Addattachment_FileContent" type="xs:string" required="true" />
+            <param style="plain" name="Createitem_ApprovalDetailid" path="/Createitem_ApprovalDetailid" type="xs:string" required="true" />
+            <param style="plain" name="Createitem_FlowAttachPWD" path="/Createitem_FlowAttachPWD" type="xs:string" required="true" />
           </representation>
         </request>
         <response>

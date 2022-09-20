@@ -8,6 +8,7 @@
       <string name="ManualTriggerInput_Createitem_FormAttachMent_def" />
       <string name="ManualTriggerInput_Addattachment_FileName_def" />
       <string name="ManualTriggerInput_Addattachment_FileContent_def" />
+      <string name="ManualTriggerInput_Createitem_UploadFilePWD_def" />
       <object name="ManualTriggerInput">
         <property name="Createitem_Title" type="string" />
         <property name="Createitem_FormId" type="string" />
@@ -15,6 +16,7 @@
         <property name="Createitem_FormAttachMent" type="string" />
         <property name="Addattachment_FileName" type="string" />
         <property name="Addattachment_FileContent" type="string" />
+        <property name="Createitem_UploadFilePWD" type="string" />
       </object>
       <base64Binary name="ResponseActionOutput_1_def" />
       <object name="ResponseActionOutput">
@@ -39,6 +41,7 @@
             <param style="plain" name="Createitem_FormAttachMent" path="/Createitem_FormAttachMent" type="xs:string" required="true" />
             <param style="plain" name="Addattachment_FileName" path="/Addattachment_FileName" type="xs:string" required="true" />
             <param style="plain" name="Addattachment_FileContent" path="/Addattachment_FileContent" type="xs:string" required="true" />
+            <param style="plain" name="Createitem_UploadFilePWD" path="/Createitem_UploadFilePWD" type="xs:string" required="true" />
           </representation>
         </request>
         <response>

@@ -2,15 +2,22 @@
     OnVisible: |
         =UpdateContext(
             {
-                FormId: If(
+                /*FormId: If(
                     IsBlank(Param("FormId")),
                     FormId,
                     LookUp(
                         GenericFormList,
-                        ApprovalId = Param("FormId"),
-                        ApprovalId
+                        ApprovalId = Param("FormId"),ApprovalId
+                        //Title = Param("FormId"),Title
                     )
-                ),
+                ),*/
+                FormId: If(
+                    IsBlank(Param("FormId")),
+                    First(EditDetailUserForm_1).Title,
+                    Param("FormId")
+                    ),
+        
+                    
                 FLowId: If(
                     IsBlank(Param("FLowId")),
                     HistoryList.Title,/*/LookUp(Approval_Table,Title=Param("FLowId")).Title*/
@@ -65,24 +72,21 @@
                     GenericFormList,
                     Title = Param("FormId")
                 )
-            );
-            //创建集合EditDetailUserForm收集表格信息，用作人表格名称等数据
+            );//创建集合EditDetailUserForm收集表格信息，用作人表格名称等数据
         ClearCollect(
                 EditDetailUserAttachment,
                 Filter(
                     GenericUploadAttachMentFile,
                     FormId = Param("FormId")
                 )
-            );
-            //创建集合EditDetailUserAttachment获得表单信息，用作带入表格附件
+            );//创建集合EditDetailUserAttachment获得表单信息，用作带入表格附件
         ClearCollect(
                 EditDetailUserForm_2,
                 Filter(
                     GenericFormModel,
                     Title = First(EditDetailUserForm_1).ModelId
                 )
-            );
-            //创建集合EditUserForm收集表格信息,用作带入部门表格类型等数据
+            );//创建集合EditUserForm收集表格信息,用作带入部门表格类型等数据
         ClearCollect(
                 EditDetailUserAttachment2,
                 Filter(
@@ -945,7 +949,7 @@
                         MaxAttachmentsText: ="Max Attachments"
                         NoAttachmentsText: ="No Attachments"
                         OnAddFile: |-
-                            =Set(varAttachmentControl5,JSON(Image2.Image,IncludeBinaryData));
+                            =/*Set(varAttachmentControl5,JSON(Image2.Image,IncludeBinaryData));
                             Set(varBase64Only5,Mid(varAttachmentControl5,Find(",", varAttachmentControl5)+1,Len(varAttachmentControl5)-Find (",", varAttachmentControl5)-1));
                             SendAttachmentToGenericUploadAttachMentFile.Run(GUID(),First(EditDetailUserForm_1).Title,First(EditDetailUserForm_1).FormType,Left(Last(Attachment_Excel2.Attachments).Name,Len(Last(Attachment_Excel2.Attachments).Name)-5)&Text(
                                                     Right(Left(Last(Attachment_Excel2.Attachments).Name,
@@ -989,7 +993,7 @@
                                                     ) + 1,
                                                     "000"
                                                 )&Right(Last(Attachment_Excel2.Attachments).Name,5)
-                            ,varBase64Only5);
+                            ,varBase64Only5,TextInput2_30.Text);
                             //执行flow上传附件到list
                             ClearCollect(AttachmentExcelName,{Name:Left(Last(Attachment_Excel2.Attachments).Name,Len(Last(Attachment_Excel2.Attachments).Name)-5)&Text(
                                                     Right(Left(Last(Attachment_Excel2.Attachments).Name,
@@ -1012,11 +1016,11 @@
                                                     ) + 1,
                                                     "000"
                                                 )&Right(Last(Attachment_Excel2.Attachments).Name,5)
-                            });//收集上传附件的名称
+                            });//收集上传附件的名称*/
                         OnRemoveFile: |-
-                            =Remove(GenericUploadAttachMentFile,First(Filter(GenericUploadAttachMentFile,(FormId=First(EditDetailUserForm_1).Title) && (FormAttachMent=First(AttachmentExcelName).Name))));//删除list中的附件记录
+                            =/*Remove(GenericUploadAttachMentFile,First(Filter(GenericUploadAttachMentFile,(FormId=First(EditDetailUserForm_1).Title) && (FormAttachMent=First(AttachmentExcelName).Name))));//删除list中的附件记录
                             
-                            Reset(Attachment_Excel2)//重置申請表附件控件
+                            Reset(Attachment_Excel2)//重置申請表附件控件*/
                         PaddingLeft: =10
                         PaddingRight: =10
                         PressedColor: =RGBA(0, 121, 187, 1)
@@ -1333,15 +1337,15 @@
                         MaxAttachmentsText: ="Max Attachments"
                         NoAttachmentsText: ="No Attachments"
                         OnAddFile: |-
-                            =Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));
+                            =/*Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));
                             Set(varBase64Only6,Mid(varAttachmentControl6,Find(",", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (",", varAttachmentControl6)-1));
-                            SendAttachmentToUploadFlowAttachMent.Run(First(EditDetailUserForm_1).Title,Last(Attachment_Zip2.Attachments).Name,Last(Attachment_Zip2.Attachments).Name,varBase64Only6);//?附件的表格類型需要確認
+                            SendAttachmentToUploadFlowAttachMent.Run(First(EditDetailUserForm_1).Title,Last(Attachment_Zip2.Attachments).Name,Last(Attachment_Zip2.Attachments).Name,varBase64Only6,"","");//?附件的表格類型需要確認
                             //执行flow上传附件到list
-                            ClearCollect(AttachmentZipName,{Name:Last(Attachment_Zip2.Attachments).Name});//收集上传附件的名称
+                            ClearCollect(AttachmentZipName,{Name:Last(Attachment_Zip2.Attachments).Name});//收集上传附件的名称*/
                         OnRemoveFile: |-
-                            =Remove(UploadFlowAttachMent,First(Filter(UploadFlowAttachMent,(Title=First(EditDetailUserForm_1).Title) && (FlowAttachName=First(AttachmentZipName).Name))));//删除list中的附件记录
+                            =//Remove(UploadFlowAttachMent,First(Filter(UploadFlowAttachMent,(Title=First(EditDetailUserForm_1).Title) && (FlowAttachName=First(AttachmentZipName).Name))));//删除list中的附件记录
                             
-                            Reset(Attachment_Zip2)//重置申請表附件控件
+                            //Reset(Attachment_Zip2)//重置申請表附件控件
                         PaddingLeft: =10
                         PaddingRight: =10
                         PressedColor: =RGBA(0, 121, 187, 1)
@@ -2260,6 +2264,7 @@
                 Fill: =glbThemePrimaryColor
                 FillPortions: =1
                 FocusedBorderThickness: =1
+                FontWeight: =FontWeight.Bold
                 Height: =36
                 HoverFill: =ColorFade(Self.Fill, -15%)
                 LayoutMinWidth: =100
@@ -2271,7 +2276,60 @@
                             "必需項不能爲空，處理行動及處理人不能爲空",
                             NotificationType.Error
                         ),
-                        UpdateIf(
+                    //上傳表格
+                    Set(varAttachmentControl5,JSON(Image2.Image,IncludeBinaryData));
+                    Set(varBase64Only5,Mid(varAttachmentControl5,Find(",", varAttachmentControl5)+1,Len(varAttachmentControl5)-Find (",", varAttachmentControl5)-1));
+                    SendAttachmentToGenericUploadAttachMentFile.Run(GUID(),First(EditDetailUserForm_1).Title,First(EditDetailUserForm_1).FormType,Left(Last(Attachment_Excel2.Attachments).Name,Len(Last(Attachment_Excel2.Attachments).Name)-5)&Text(
+                                            Right(Left(Last(Attachment_Excel2.Attachments).Name,
+                                                Len(
+                                                    Last(
+                                                        SortByColumns(
+                                                            Filter(
+                                                                GenericUploadAttachMentFile,
+                                                                StartsWith(
+                                                                    FormAttachMent,
+                                                                    Last(Attachment_Excel2.Attachments).Name
+                                                                ) && FormId = FormId
+                                                                //FormId=First(EditDetailUserForm_1).Title
+                                                            ),
+                                                            "FormAttachMent",
+                                                            Ascending
+                                                        )
+                                                    ).FormAttachMent
+                                                )-5),
+                                                3
+                                            ) + 1,
+                                            "000"
+                                        )&Right(Last(Attachment_Excel2.Attachments).Name,5)
+                    ,Left(Last(Attachment_Excel2.Attachments).Name,Len(Last(Attachment_Excel2.Attachments).Name)-5)&Text(
+                                            Right(Left(Last(Attachment_Excel2.Attachments).Name,
+                                                Len(
+                                                    Last(
+                                                        SortByColumns(
+                                                            Filter(
+                                                                GenericUploadAttachMentFile,
+                                                                StartsWith(
+                                                                    FormAttachMent,
+                                                                    Last(Attachment_Excel2.Attachments).Name
+                                                                ) && FormId = FormId
+                                                                //FormId=First(EditDetailUserForm_1).Title
+                                                            ),
+                                                            "FormAttachMent",
+                                                            Ascending
+                                                        )
+                                                    ).FormAttachMent
+                                                )-5),
+                                                3
+                                            ) + 1,
+                                            "000"
+                                        )&Right(Last(Attachment_Excel2.Attachments).Name,5)
+                    ,varBase64Only5,TextInput2_30.Text);
+                    //上傳附件
+                    Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));
+                    Set(varBase64Only6,Mid(varAttachmentControl6,Find(",", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (",", varAttachmentControl6)-1));
+                    SendAttachmentToUploadFlowAttachMent.Run(First(EditDetailUserForm_1).Title,Last(Attachment_Zip2.Attachments).Name,Last(Attachment_Zip2.Attachments).Name,varBase64Only6,ApprovalGuid,TextInput2_31.Text);//?附件的表格類型需要確認
+                    
+                    /*    UpdateIf(
                             GenericUploadAttachMentFile,
                             FormId = First(EditDetailUserForm_1).Title && FormAttachMent = First(AttachmentExcelName).Name,
                             {
@@ -2288,14 +2346,15 @@
                                 ApprovalDetailid: ApprovalGuid,
                                 FlowAttachPWD: TextInput2_31.Text
                             }
-                        );
+                        );*/
+                    
                         //更新FormId和PWD到UploadFlowAttachMent中
                         Reset(TextInput2_30);
                         Reset(TextInput2_31);
                         Reset(Attachment_Excel2);
                         Reset(Attachment_Zip2);
-                        Clear(AttachmentExcelName);
-                        Clear(AttachmentZipName);
+                        //Clear(AttachmentExcelName);
+                        //Clear(AttachmentZipName);
                         
                         //更新審批詳情表
                         With(
@@ -2448,7 +2507,61 @@
                             "必需項不能爲空",
                             NotificationType.Error
                         ),
-                        UpdateIf(
+                    
+                        //上傳表格
+                    Set(varAttachmentControl5,JSON(Image2.Image,IncludeBinaryData));
+                    Set(varBase64Only5,Mid(varAttachmentControl5,Find(",", varAttachmentControl5)+1,Len(varAttachmentControl5)-Find (",", varAttachmentControl5)-1));
+                    SendAttachmentToGenericUploadAttachMentFile.Run(GUID(),First(EditDetailUserForm_1).Title,First(EditDetailUserForm_1).FormType,Left(Last(Attachment_Excel2.Attachments).Name,Len(Last(Attachment_Excel2.Attachments).Name)-5)&Text(
+                                            Right(Left(Last(Attachment_Excel2.Attachments).Name,
+                                                Len(
+                                                    Last(
+                                                        SortByColumns(
+                                                            Filter(
+                                                                GenericUploadAttachMentFile,
+                                                                StartsWith(
+                                                                    FormAttachMent,
+                                                                    Last(Attachment_Excel2.Attachments).Name
+                                                                ) && FormId = FormId
+                                                                //FormId=First(EditDetailUserForm_1).Title
+                                                            ),
+                                                            "FormAttachMent",
+                                                            Ascending
+                                                        )
+                                                    ).FormAttachMent
+                                                )-5),
+                                                3
+                                            ) + 1,
+                                            "000"
+                                        )&Right(Last(Attachment_Excel2.Attachments).Name,5)
+                    ,Left(Last(Attachment_Excel2.Attachments).Name,Len(Last(Attachment_Excel2.Attachments).Name)-5)&Text(
+                                            Right(Left(Last(Attachment_Excel2.Attachments).Name,
+                                                Len(
+                                                    Last(
+                                                        SortByColumns(
+                                                            Filter(
+                                                                GenericUploadAttachMentFile,
+                                                                StartsWith(
+                                                                    FormAttachMent,
+                                                                    Last(Attachment_Excel2.Attachments).Name
+                                                                ) && FormId = FormId
+                                                                //FormId=First(EditDetailUserForm_1).Title
+                                                            ),
+                                                            "FormAttachMent",
+                                                            Ascending
+                                                        )
+                                                    ).FormAttachMent
+                                                )-5),
+                                                3
+                                            ) + 1,
+                                            "000"
+                                        )&Right(Last(Attachment_Excel2.Attachments).Name,5)
+                    ,varBase64Only5,TextInput2_30.Text);
+                    //上傳附件
+                    Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));
+                    Set(varBase64Only6,Mid(varAttachmentControl6,Find(",", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (",", varAttachmentControl6)-1));
+                    SendAttachmentToUploadFlowAttachMent.Run(First(EditDetailUserForm_1).Title,Last(Attachment_Zip2.Attachments).Name,Last(Attachment_Zip2.Attachments).Name,varBase64Only6,ApprovalGuid,TextInput2_31.Text);//?附件的表格類型需要確認
+                    
+                       /* UpdateIf(
                             GenericUploadAttachMentFile,
                             FormId = First(EditDetailUserForm_1).Title && FormAttachMent = First(AttachmentExcelName).Name,
                             {
@@ -2465,14 +2578,14 @@
                                 ApprovalDetailid: ApprovalGuid,
                                 FlowAttachPWD: TextInput2_31.Text
                             }
-                        );
+                        );*/
                         //更新FormId和PWD到UploadFlowAttachMent中
                     Reset(TextInput2_30);
                         Reset(TextInput2_31);
                         Reset(Attachment_Excel2);
                         Reset(Attachment_Zip2);
-                        Clear(AttachmentExcelName);
-                        Clear(AttachmentZipName);
+                        //Clear(AttachmentExcelName);
+                        //Clear(AttachmentZipName);
                         
                     // 點执行，就直接就审批完成
                     With(
@@ -2980,8 +3093,8 @@
                     FillPortions: =0
                     Height: =40
                     Items: |-
-                        =If(First(EditUserForm).FlowType<>"部門簡單流程",["最近","部門"],["部門"])
-                        //["最近","部門"]
+                        =//If(First(EditUserForm).FlowType<>"部門簡單流程",["最近","部門"],["部門"])
+                        ["最近","部門"]
                     LayoutMinHeight: =287
                     LayoutMinWidth: =320
                     ShowScrollbar: =false
