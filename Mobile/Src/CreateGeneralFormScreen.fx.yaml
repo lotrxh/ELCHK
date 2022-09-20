@@ -158,7 +158,7 @@
                 OnSelect: |-
                     =//左边填写内容上传必選項判斷
                     If( 
-                        (Attachment_Excel.Visible = true &&Last(Attachment_Excel.Attachments).Name = Blank()) || (Attachment_Zip.Visible = true && Last(Attachment_Zip.Attachments).Name = Blank()) || (Label6.Visible = true && IsBlank(TextInput_FormPWD) && IsBlank(TextInput_FormPWD_1)) || (Label6_1.Visible = true && IsBlank(TextInput_zipPWD)&& IsBlank(TextInput_zipPWD_1)) || (drpFilterDepartment_1.Visible = true && IsEmpty(drpFilterDepartment_1.SelectedItems)) || (FlowType="預設通用流程" && (Dropdown1_9.Selected.Result=Blank() || Label1_155.Text = Blank())) || (FlowType="通用流程" && (Dropdown1_5.Selected.Result=Blank() || Label1_137.Text = Blank())) || (FlowType="部門簡單流程" &&  Label1_153.Text = Blank())
+                        (Attachment_Excel.Visible = true &&Last(Attachment_Excel.Attachments).Name = Blank()) || (Attachment_Zip.Visible = true && Last(Attachment_Zip.Attachments).Name = Blank()) || (Label6.Visible = true && IsBlank(TextInput_FormPWD) && IsBlank(TextInput_FormPWD_1)) || (Label6_1.Visible = true && IsBlank(TextInput_zipPWD)&& IsBlank(TextInput_zipPWD_1)) || IsEmpty(drpFilterDepartment_1.SelectedItems) || (FlowType="預設通用流程" && (Dropdown1_9.Selected.Result=Blank() || Label1_155.Text = Blank())) || (FlowType="通用流程" && (Dropdown1_5.Selected.Result=Blank() || Label1_137.Text = Blank())) || (FlowType="部門簡單流程" &&  Label1_153.Text = Blank())
                             ,
                             Notify(
                                 "必需項不能爲空，處理行動及處理人不能爲空",
@@ -833,6 +833,7 @@
                             ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
                             ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
                             Color: =glbNeutralPrimaryColor
+                            DefaultSelectedItems: =Distinct(EditUserForm,ModelDepartment)//加载编辑表格部门
                             DisplayFields: =["Result"]
                             FocusedBorderThickness: =0
                             Height: =30
@@ -840,14 +841,13 @@
                             HoverColor: =Self.Color
                             HoverFill: =ColorFade(Self.Fill, -5%)
                             InputTextPlaceholder: ="請選擇填申請部門/單位"
-                            IsSearchable: =false
                             Items: =Distinct(Filter(ConfigurationInfo,Type_Name="組織配置"&&(Value1="部門信息"||Value1="單位信息")),Value2)
                             NoSelectionText: ="請選擇填申請部門/單位"
                             PaddingLeft: =10
                             PressedColor: =Self.Color
                             PressedFill: =ColorFade(Self.Fill, -5%)
                             SearchFields: =["Result"]
-                            SearchItems: =[]
+                            SearchItems: =Search(Distinct(Filter(ConfigurationInfo,Type_Name="組織配置"&&(Value1="部門信息"||Value1="單位信息")),Value2),drpFilterDepartment_1.SearchText,"Result")
                             SelectionColor: =glbThemePrimaryColor
                             SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                             SelectMultiple: =false
