@@ -2280,7 +2280,7 @@
                     If(Last(Attachment_Excel2.Attachments).Name <> Blank(),
                     Set(varAttachmentControl5,JSON(Image2.Image,IncludeBinaryData));
                     Set(varBase64Only5,Mid(varAttachmentControl5,Find(",", varAttachmentControl5)+1,Len(varAttachmentControl5)-Find (",", varAttachmentControl5)-1));
-                    SendAttachmentToGenericUploadAttachMentFile.Run(GUID(),First(EditDetailUserForm_1).Title,First(EditDetailUserForm_1).FormType,Left(Last(Attachment_Excel2.Attachments).Name,Len(Last(Attachment_Excel2.Attachments).Name)-5)&Text(
+                    SendAttachmentToGenericUploadAttachMentFile.Run(GUID(),First(EditDetailUserForm_1).Title,First(EditDetailUserForm_1).FormType,Left(Last(Attachment_Excel2.Attachments).Name,Len(Last(Attachment_Excel2.Attachments).Name)-5)&"_"&Text(
                                             Right(Left(Last(Attachment_Excel2.Attachments).Name,
                                                 Len(
                                                     Last(
@@ -2290,8 +2290,9 @@
                                                                 StartsWith(
                                                                     FormAttachMent,
                                                                     Last(Attachment_Excel2.Attachments).Name
-                                                                ) && FormId = FormId
-                                                                //FormId=First(EditDetailUserForm_1).Title
+                                                                ) && 
+                                                                //FormId = FormId
+                                                                FormId=First(EditDetailUserForm_1).Title
                                                             ),
                                                             "FormAttachMent",
                                                             Ascending
@@ -2302,7 +2303,7 @@
                                             ) + 1,
                                             "000"
                                         )&Right(Last(Attachment_Excel2.Attachments).Name,5)
-                    ,Left(Last(Attachment_Excel2.Attachments).Name,Len(Last(Attachment_Excel2.Attachments).Name)-5)&Text(
+                    ,Left(Last(Attachment_Excel2.Attachments).Name,Len(Last(Attachment_Excel2.Attachments).Name)-5)&"_"&Text(
                                             Right(Left(Last(Attachment_Excel2.Attachments).Name,
                                                 Len(
                                                     Last(
@@ -2312,8 +2313,9 @@
                                                                 StartsWith(
                                                                     FormAttachMent,
                                                                     Last(Attachment_Excel2.Attachments).Name
-                                                                ) && FormId = FormId
-                                                                //FormId=First(EditDetailUserForm_1).Title
+                                                                ) && 
+                                                                //FormId = FormId
+                                                                FormId=First(EditDetailUserForm_1).Title
                                                             ),
                                                             "FormAttachMent",
                                                             Ascending
