@@ -2071,7 +2071,49 @@
                             ).ApproverEmail
                         },
                         If(
-                            UEmail = User().Email,
+                            UEmail = User().Email && (
+                                First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                TaskStatus = "002",
+                                                Approval_No = FLowId
+                                            ),
+                                            "field_Priortty",
+                                            Descending
+                                        )
+                                    ).ActionNode = "檢查" || First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                TaskStatus = "002",
+                                                Approval_No = FLowId
+                                            ),
+                                            "field_Priortty",
+                                            Descending
+                                        )
+                                    ).ActionNode = "簽批" || First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                TaskStatus = "002",
+                                                Approval_No = FLowId
+                                            ),
+                                            "field_Priortty",
+                                            Descending
+                                        )
+                                    ).ActionNode = "助理總幹事審批" || First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                TaskStatus = "002",
+                                                Approval_No = FLowId
+                                            ),
+                                            "field_Priortty",
+                                            Descending
+                                        )
+                                    ).ActionNode = "總幹事審批"
+                            ),
                             DisplayMode.Edit,
                             DisplayMode.Disabled
                         )
@@ -2118,7 +2160,50 @@
                             ).ApproverEmail
                         },
                         If(
-                            UEmail = User().Email,
+                            UEmail = User().Email
+                            && (
+                                First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                TaskStatus = "002",
+                                                Approval_No = FLowId
+                                            ),
+                                            "field_Priortty",
+                                            Descending
+                                        )
+                                    ).ActionNode = "檢查" || First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                TaskStatus = "002",
+                                                Approval_No = FLowId
+                                            ),
+                                            "field_Priortty",
+                                            Descending
+                                        )
+                                    ).ActionNode = "簽批" || First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                TaskStatus = "002",
+                                                Approval_No = FLowId
+                                            ),
+                                            "field_Priortty",
+                                            Descending
+                                        )
+                                    ).ActionNode = "助理總幹事審批" || First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                TaskStatus = "002",
+                                                Approval_No = FLowId
+                                            ),
+                                            "field_Priortty",
+                                            Descending
+                                        )
+                                    ).ActionNode = "總幹事審批"
+                            ),
                             DisplayMode.Edit,
                             DisplayMode.Disabled
                         )
@@ -2328,7 +2413,21 @@
                             ).ApproverEmail
                         },
                         If(
-                            UEmail = User().Email && "跟進" in Filter(ApprovalDetail_Table,Approval_No=FLowId).ActionNode,
+                            UEmail = User().Email && (
+                                "跟進" in Filter(ApprovalDetail_Table,Approval_No=FLowId).ActionNode
+                                || (FlowType = "部門簡單流程" && First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                TaskStatus = "002",
+                                                Approval_No = FLowId,
+                                                Priortty = "2"
+                                            ),
+                                            "field_Priortty",
+                                            Descending
+                                        )
+                                    ).ActionNode = "提交")
+                                ),
                             DisplayMode.Edit,
                             DisplayMode.Disabled
                         )
