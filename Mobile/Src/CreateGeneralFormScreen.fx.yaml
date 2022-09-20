@@ -1602,16 +1602,15 @@
                         HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                         HoverColor: =Self.Color
                         HoverFill: =ColorFade(Self.Fill, -5%)
+                        IsSearchable: =false
                         Items: |-
                             =//Choices(MyContacts.AllOwnerName)
-                            Office365用户.SearchUserV2({searchTerm:ComboBox1_11.SearchText,top:10}).value
+                            Office365用户.SearchUserV2({searchTerm:ComboBox1_11.SearchText,top:10}).value.Mail
                         PaddingLeft: =10
                         PressedColor: =Self.Color
                         PressedFill: =ColorFade(Self.Fill, -5%)
                         SearchFields: =["Mail"]
-                        SearchItems: |-
-                            =Search(//Choices(MyContacts.AllOwnerName)
-                            Office365用户.SearchUserV2({searchTerm:ComboBox1_11.SearchText,top:10}).value,ComboBox1_11.SearchText,"Mail")
+                        SearchItems: =[]
                         SelectionColor: =glbThemePrimaryColor
                         SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                         Size: =12

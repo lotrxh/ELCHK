@@ -2023,7 +2023,7 @@
                         ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
                         ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
                         Color: =glbNeutralPrimaryColor
-                        DisplayFields: =["City"]
+                        DisplayFields: =["Mail"]
                         FocusedBorderThickness: =1
                         Height: =36
                         HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
@@ -2031,14 +2031,14 @@
                         HoverFill: =ColorFade(Self.Fill, -5%)
                         Items: |-
                             =//Choices(MyContacts.AllOwnerName)
-                            Office365用户.SearchUserV2({searchTerm:ComboBox1_12.SearchText,top:10}).value
+                            Office365用户.SearchUserV2({searchTerm:ComboBox1_12.SearchText,top:10}).value.Mail
                         PaddingLeft: =10
                         PressedColor: =Self.Color
                         PressedFill: =ColorFade(Self.Fill, -5%)
-                        SearchFields: =["City"]
+                        SearchFields: =["Mail"]
                         SearchItems: |-
                             =Search(//Choices(MyContacts.AllOwnerName)
-                            Office365用户.SearchUserV2({searchTerm:ComboBox1_12.SearchText,top:10}).value,ComboBox1_12.SearchText,"City")
+                            Office365用户.SearchUserV2({searchTerm:ComboBox1_12.SearchText,top:10}).value.Mail,ComboBox1_12.SearchText,"Mail")
                         SelectionColor: =glbThemePrimaryColor
                         SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                         Size: =12
