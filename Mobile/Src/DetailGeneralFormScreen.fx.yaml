@@ -394,17 +394,15 @@
                     Size: =12
                     Text: ="待處理"
                     Visible: |-
-                        =If(First(
-                                            SortByColumns(
+                        =If("執行" in 
+                                            
                                                 Filter(
                                                     ApprovalDetail_Table,
                                                     //TaskStatus = "002",
                                                     Approval_No = FLowId
-                                                ),
-                                                "field_Priortty",
-                                                Descending
-                                            )
-                                        ).ActionNode = "執行",false,true)
+                                                
+                                            
+                                        ).ActionNode ,false,true)
                     Width: =120
                     X: =1245
                     Y: =14
@@ -2530,12 +2528,12 @@
                                     Title = FormListId
                                 )
                             );
-                            Notify(
+                    Notify(
                             "審批成功成功！",
                             NotificationType.Success,
                             2000
                         );
-                            Launch("https://apps.powerapps.com/play/8793c6b3-448b-4c69-90ce-4ae75c7911d0?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=HomepageScreen");
+                    Launch("https://apps.powerapps.com/play/8793c6b3-448b-4c69-90ce-4ae75c7911d0?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=HomepageScreen");
                         
                     )
                 PaddingBottom: =0
