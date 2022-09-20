@@ -303,15 +303,17 @@
                                     }
                                 )
                             );//創建NewUserForm集合用作後續更新list-GenericUploadAttachMentFile中的FormId
-                      //执行flow上传表格到list      
+                      //执行flow上传表格到list
+                      If(Last(Attachment_Excel.Attachments).Name <> Blank(),      
                     Set(varAttachmentControl1,JSON(Image4_2.Image,IncludeBinaryData));
                     Set(varBase64Only1,Mid(varAttachmentControl1,Find(",", varAttachmentControl1)+1,Len(varAttachmentControl1)-Find (",", varAttachmentControl1)-1));
-                    SendAttachmentToGenericUploadAttachMentFile.Run(GUID(),GenericFormlistGuid,First(EditUserForm).ModelType,Last(Attachment_Excel.Attachments).Name,Last(Attachment_Excel.Attachments).Name,varBase64Only1,TextInput_FormPWD.Text);
+                    SendAttachmentToGenericUploadAttachMentFile.Run(GUID(),GenericFormlistGuid,First(EditUserForm).ModelType,Last(Attachment_Excel.Attachments).Name,Last(Attachment_Excel.Attachments).Name,varBase64Only1,TextInput_FormPWD.Text));
                     
                     //执行flow上传附件到list
+                    If(Last(Attachment_Zip.Attachments).Name <> Blank(),
                     Set(varAttachmentControl2,JSON(Image4_1.Image,IncludeBinaryData));
                     Set(varBase64Only2,Mid(varAttachmentControl2,Find(",", varAttachmentControl2)+1,Len(varAttachmentControl2)-Find (",", varAttachmentControl2)-1));
-                    SendAttachmentToUploadFlowAttachMent.Run(GenericFormlistGuid,Last(Attachment_Zip.Attachments).Name,Last(Attachment_Zip.Attachments).Name,varBase64Only2,ApprovalGuid,TextInput_zipPWD.Text);//?附件的表格類型需要確認
+                    SendAttachmentToUploadFlowAttachMent.Run(GenericFormlistGuid,Last(Attachment_Zip.Attachments).Name,Last(Attachment_Zip.Attachments).Name,varBase64Only2,ApprovalGuid,TextInput_zipPWD.Text));//?附件的表格類型需要確認
                     /*UpdateIf(
                                 GenericUploadAttachMentFile,
                                 FormId = First(EditUserForm).Title,
@@ -3040,14 +3042,16 @@
                             )
                         );//創建NewUserForm集合用作後續更新list-GenericUploadAttachMentFile中的FormId
                 //执行flow上传表格到list      
+                If(Last(Attachment_Excel.Attachments).Name <> Blank(),      
                 Set(varAttachmentControl1,JSON(Image4_2.Image,IncludeBinaryData));
                 Set(varBase64Only1,Mid(varAttachmentControl1,Find(",", varAttachmentControl1)+1,Len(varAttachmentControl1)-Find (",", varAttachmentControl1)-1));
-                SendAttachmentToGenericUploadAttachMentFile.Run(GUID(),GenericFormlistGuid,First(EditUserForm).ModelType,Last(Attachment_Excel.Attachments).Name,Last(Attachment_Excel.Attachments).Name,varBase64Only1,TextInput_FormPWD.Text);
+                SendAttachmentToGenericUploadAttachMentFile.Run(GUID(),GenericFormlistGuid,First(EditUserForm).ModelType,Last(Attachment_Excel.Attachments).Name,Last(Attachment_Excel.Attachments).Name,varBase64Only1,TextInput_FormPWD.Text));
                 
                 //执行flow上传附件到list
+                If(Last(Attachment_Zip.Attachments).Name <> Blank(),
                 Set(varAttachmentControl2,JSON(Image4_1.Image,IncludeBinaryData));
                 Set(varBase64Only2,Mid(varAttachmentControl2,Find(",", varAttachmentControl2)+1,Len(varAttachmentControl2)-Find (",", varAttachmentControl2)-1));
-                SendAttachmentToUploadFlowAttachMent.Run(GenericFormlistGuid,Last(Attachment_Zip.Attachments).Name,Last(Attachment_Zip.Attachments).Name,varBase64Only2,ApprovalGuid,TextInput_zipPWD.Text);//?附件的表格類型需要確認
+                SendAttachmentToUploadFlowAttachMent.Run(GenericFormlistGuid,Last(Attachment_Zip.Attachments).Name,Last(Attachment_Zip.Attachments).Name,varBase64Only2,ApprovalGuid,TextInput_zipPWD.Text));//?附件的表格類型需要確認
                 /*UpdateIf(
                             GenericUploadAttachMentFile,
                             FormId = First(EditUserForm).Title,
@@ -3276,14 +3280,16 @@
                         );//創建NewUserForm集合用作後續更新list-GenericUploadAttachMentFile中的FormId
                 
                         //执行flow上传表格到list      
+                If(Last(Attachment_Excel.Attachments).Name <> Blank(),      
                 Set(varAttachmentControl1,JSON(Image4_2.Image,IncludeBinaryData));
                 Set(varBase64Only1,Mid(varAttachmentControl1,Find(",", varAttachmentControl1)+1,Len(varAttachmentControl1)-Find (",", varAttachmentControl1)-1));
-                SendAttachmentToGenericUploadAttachMentFile.Run(GUID(),GenericFormlistGuid,First(EditUserForm).ModelType,Last(Attachment_Excel.Attachments).Name,Last(Attachment_Excel.Attachments).Name,varBase64Only1,TextInput_FormPWD.Text);
+                SendAttachmentToGenericUploadAttachMentFile.Run(GUID(),GenericFormlistGuid,First(EditUserForm).ModelType,Last(Attachment_Excel.Attachments).Name,Last(Attachment_Excel.Attachments).Name,varBase64Only1,TextInput_FormPWD.Text));
                 
                 //执行flow上传附件到list
+                If(Last(Attachment_Zip.Attachments).Name <> Blank(),
                 Set(varAttachmentControl2,JSON(Image4_1.Image,IncludeBinaryData));
                 Set(varBase64Only2,Mid(varAttachmentControl2,Find(",", varAttachmentControl2)+1,Len(varAttachmentControl2)-Find (",", varAttachmentControl2)-1));
-                SendAttachmentToUploadFlowAttachMent.Run(GenericFormlistGuid,Last(Attachment_Zip.Attachments).Name,Last(Attachment_Zip.Attachments).Name,varBase64Only2,ApprovalGuid,TextInput_zipPWD.Text);//?附件的表格類型需要確認
+                SendAttachmentToUploadFlowAttachMent.Run(GenericFormlistGuid,Last(Attachment_Zip.Attachments).Name,Last(Attachment_Zip.Attachments).Name,varBase64Only2,ApprovalGuid,TextInput_zipPWD.Text));//?附件的表格類型需要確認
                 /*UpdateIf(
                             GenericUploadAttachMentFile,
                             FormId = First(EditUserForm).Title,

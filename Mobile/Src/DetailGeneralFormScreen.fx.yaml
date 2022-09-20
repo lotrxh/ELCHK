@@ -2277,6 +2277,7 @@
                             NotificationType.Error
                         ),
                     //上傳表格
+                    If(Last(Attachment_Excel2.Attachments).Name <> Blank(),
                     Set(varAttachmentControl5,JSON(Image2.Image,IncludeBinaryData));
                     Set(varBase64Only5,Mid(varAttachmentControl5,Find(",", varAttachmentControl5)+1,Len(varAttachmentControl5)-Find (",", varAttachmentControl5)-1));
                     SendAttachmentToGenericUploadAttachMentFile.Run(GUID(),First(EditDetailUserForm_1).Title,First(EditDetailUserForm_1).FormType,Left(Last(Attachment_Excel2.Attachments).Name,Len(Last(Attachment_Excel2.Attachments).Name)-5)&Text(
@@ -2323,11 +2324,12 @@
                                             ) + 1,
                                             "000"
                                         )&Right(Last(Attachment_Excel2.Attachments).Name,5)
-                    ,varBase64Only5,TextInput2_30.Text);
+                    ,varBase64Only5,TextInput2_30.Text));
                     //上傳附件
+                    If(Last(Attachment_Zip2.Attachments).Name <> Blank(),
                     Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));
                     Set(varBase64Only6,Mid(varAttachmentControl6,Find(",", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (",", varAttachmentControl6)-1));
-                    SendAttachmentToUploadFlowAttachMent.Run(First(EditDetailUserForm_1).Title,Last(Attachment_Zip2.Attachments).Name,Last(Attachment_Zip2.Attachments).Name,varBase64Only6,ApprovalGuid,TextInput2_31.Text);//?附件的表格類型需要確認
+                    SendAttachmentToUploadFlowAttachMent.Run(First(EditDetailUserForm_1).Title,Last(Attachment_Zip2.Attachments).Name,Last(Attachment_Zip2.Attachments).Name,varBase64Only6,ApprovalGuid,TextInput2_31.Text));//?附件的表格類型需要確認
                     
                     /*    UpdateIf(
                             GenericUploadAttachMentFile,
@@ -2509,6 +2511,7 @@
                         ),
                     
                         //上傳表格
+                        If(Last(Attachment_Excel2.Attachments).Name <> Blank(),
                     Set(varAttachmentControl5,JSON(Image2.Image,IncludeBinaryData));
                     Set(varBase64Only5,Mid(varAttachmentControl5,Find(",", varAttachmentControl5)+1,Len(varAttachmentControl5)-Find (",", varAttachmentControl5)-1));
                     SendAttachmentToGenericUploadAttachMentFile.Run(GUID(),First(EditDetailUserForm_1).Title,First(EditDetailUserForm_1).FormType,Left(Last(Attachment_Excel2.Attachments).Name,Len(Last(Attachment_Excel2.Attachments).Name)-5)&Text(
@@ -2555,11 +2558,12 @@
                                             ) + 1,
                                             "000"
                                         )&Right(Last(Attachment_Excel2.Attachments).Name,5)
-                    ,varBase64Only5,TextInput2_30.Text);
+                    ,varBase64Only5,TextInput2_30.Text));
                     //上傳附件
+                    If(Last(Attachment_Zip2.Attachments).Name <> Blank(),
                     Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));
                     Set(varBase64Only6,Mid(varAttachmentControl6,Find(",", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (",", varAttachmentControl6)-1));
-                    SendAttachmentToUploadFlowAttachMent.Run(First(EditDetailUserForm_1).Title,Last(Attachment_Zip2.Attachments).Name,Last(Attachment_Zip2.Attachments).Name,varBase64Only6,ApprovalGuid,TextInput2_31.Text);//?附件的表格類型需要確認
+                    SendAttachmentToUploadFlowAttachMent.Run(First(EditDetailUserForm_1).Title,Last(Attachment_Zip2.Attachments).Name,Last(Attachment_Zip2.Attachments).Name,varBase64Only6,ApprovalGuid,TextInput2_31.Text));//?附件的表格類型需要確認
                     
                        /* UpdateIf(
                             GenericUploadAttachMentFile,
