@@ -1596,7 +1596,7 @@
                         ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
                         ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
                         Color: =glbNeutralPrimaryColor
-                        DisplayFields: =["Mail"]
+                        DisplayFields: =["Mail","DisplayName"]
                         FocusedBorderThickness: =1
                         Height: =36
                         HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
@@ -1605,7 +1605,7 @@
                         IsSearchable: =false
                         Items: |-
                             =//Choices(MyContacts.AllOwnerName)
-                            Office365用户.SearchUserV2({searchTerm:ComboBox1_11.SearchText,top:10}).value.Mail
+                            Office365用户.SearchUserV2({searchTerm:ComboBox1_11.SearchText,top:10}).value
                         PaddingLeft: =10
                         PressedColor: =Self.Color
                         PressedFill: =ColorFade(Self.Fill, -5%)
@@ -2431,21 +2431,20 @@
                     ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
                     ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
                     Color: =glbNeutralPrimaryColor
-                    DisplayFields: =["DisplayName"]
+                    DisplayFields: =["Mail","DisplayName"]
                     FocusedBorderThickness: =1
                     HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                     HoverColor: =Self.Color
                     HoverFill: =ColorFade(Self.Fill, -5%)
+                    IsSearchable: =false
                     Items: |-
                         =//Choices(MyContacts.AllOwnerName)
                         Office365用户.SearchUserV2({searchTerm:ComboBox1_5.SearchText,top:10}).value
                     PaddingLeft: =10
                     PressedColor: =Self.Color
                     PressedFill: =ColorFade(Self.Fill, -5%)
-                    SearchFields: =["DisplayName"]
-                    SearchItems: |-
-                        =Search(//Choices(MyContacts.AllOwnerName)
-                        Office365用户.SearchUserV2({searchTerm:ComboBox1_5.SearchText,top:10}).value,ComboBox1_5.SearchText,"DisplayName")
+                    SearchFields: =["Mail"]
+                    SearchItems: =[]
                     SelectionColor: =glbThemePrimaryColor
                     SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                     SelectMultiple: =false
