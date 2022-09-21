@@ -320,11 +320,11 @@ HomepageScreen As screen:
 
             TabGallery3_2 As gallery.galleryHorizontal:
                 Height: =39
-                Items: =["常用表格","行政部","財務部","企業傳訊"]
+                Items: =["常用表格","行政部","財務部","企業傳訊","人力資源部"]
                 ShowScrollbar: =false
                 TemplatePadding: =0
                 TemplateSize: =130
-                Width: =532
+                Width: =694
                 X: =20
                 Y: =11
                 ZIndex: =3
@@ -400,7 +400,7 @@ HomepageScreen As screen:
                             "ModelName"
                         ),
                         If(
-                            TabGallery3_2.Selected.Value = "行政部",
+                            TabGallery3_2.Selected.Value = "人力資源部",
                             Search(
                                 ShowColumns(
                                     DataModelName,
