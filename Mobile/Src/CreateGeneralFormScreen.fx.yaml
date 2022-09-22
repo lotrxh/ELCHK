@@ -396,7 +396,7 @@
                         //測試時導航到具體任務頁面，實際使用應該退回到首頁
                     //Navigate(DetailGeneralFormScreen,None,{HistoryList: ApprovalIDNumber});
                     
-                    If(FlowType = "通用流程",Last(Split(Label1_137.Text,"/")).Result,FlowType = "預設通用流程",Last(Split(Label1_155.Text,"/")).Result,FlowType = "部門簡單流程",Last(Split(Label1_153.Text,"/")).Result = User().Email,
+                    If(If(FlowType = "通用流程",Last(Split(Label1_137.Text,"/")).Result,FlowType = "預設通用流程",Last(Split(Label1_155.Text,"/")).Result,FlowType = "部門簡單流程",Last(Split(Label1_153.Text,"/")).Result) = User().Email,
                     //下一节点处理人为当前用户时，跳转到任务详情页面
                     Navigate(DetailGeneralFormScreen,None,{HistoryList: ApprovalIDNumber}),
                     //下一节点处理人不是当前用户时，返回主页
