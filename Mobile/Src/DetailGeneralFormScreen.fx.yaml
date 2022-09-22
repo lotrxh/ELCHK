@@ -2400,6 +2400,13 @@
                                 Advise: TextInput2_34.Text
                             }
                         );
+                        UpdateIf(
+                            Approval_Table,
+                            Title = FLowId,
+                            {
+                                Application_Status:"已拒絕"
+                            }
+                        );
                         Notify(
                             "拒絕成功！",
                             NotificationType.Success,
@@ -2814,10 +2821,10 @@
                             NotificationType.Success,
                             2000
                         );
-                    If(Last(Split(Label1_138.Text,"/")).Result = User().Email,
-                    //下一节点处理人为当前用户时，不跳转用户到首页
-                    "",
-                    Launch("https://apps.powerapps.com/play/8793c6b3-448b-4c69-90ce-4ae75c7911d0?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=HomepageScreen"));
+                    If(Last(Split(Label1_138.Text,"/")).Result <> User().Email,
+                    //下一节点处理人不是当前用户时，跳转用户到首页
+                    Launch("https://apps.powerapps.com/play/8793c6b3-448b-4c69-90ce-4ae75c7911d0?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=HomepageScreen")
+                    );
                         
                     )
                 PaddingBottom: =0
