@@ -967,7 +967,31 @@
                         BorderStyle: =BorderStyle.Dashed
                         BorderThickness: =1
                         Color: =glbLinkColor
-                        DisplayMode: =If("提交" in Filter(ApprovalDetail_Table,Approval_No=FLowId).ActionNode,Disabled,DisplayMode.Edit)
+                        DisplayMode: |-
+                            =If(
+                                (!("提交" in Filter(
+                                    ApprovalDetail_Table,
+                                    Approval_No = FLowId
+                                ).ActionNode) || (CountA(
+                                    Filter(
+                                        ApprovalDetail_Table,
+                                        Approval_No = FLowId,
+                                        ActionNode = "提交"
+                                    ).ActionNode
+                                ) > 1 && First(
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            TaskStatus = "002",
+                                            Approval_No = FLowId
+                                        ),
+                                        "field_Priortty",
+                                        Descending
+                                    )
+                                ).ActionNode = "提交")),
+                                DisplayMode.Edit,
+                                DisplayMode.Disabled
+                            )
                         DropTargetBackgroundColor: =ColorFade(Self.Color, 90%)
                         DropTargetBorderColor: =glbLinkColor
                         DropTargetBorderStyle: =BorderStyle.Dashed
@@ -1096,7 +1120,32 @@
                             BorderThickness: =1
                             Color: =glbNeutralPrimaryColor
                             Default: =""
-                            DisplayMode: =If("提交" in Filter(ApprovalDetail_Table,Approval_No=FLowId).ActionNode,Disabled,DisplayMode.Edit)
+                            DisplayMode: |-
+                                =//If("提交" in Filter(ApprovalDetail_Table,Approval_No=FLowId).ActionNode,Disabled,DisplayMode.Edit)
+                                If(
+                                    (!("提交" in Filter(
+                                        ApprovalDetail_Table,
+                                        Approval_No = FLowId
+                                    ).ActionNode) || (CountA(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            Approval_No = FLowId,
+                                            ActionNode = "提交"
+                                        ).ActionNode
+                                    ) > 1 && First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                TaskStatus = "002",
+                                                Approval_No = FLowId
+                                            ),
+                                            "field_Priortty",
+                                            Descending
+                                        )
+                                    ).ActionNode = "提交")),
+                                    DisplayMode.Edit,
+                                    DisplayMode.Disabled
+                                )
                             FocusedBorderColor: =glbNeutralSecondaryColor
                             FocusedBorderThickness: =1
                             Height: =36
@@ -1127,7 +1176,32 @@
                             BorderThickness: =1
                             Color: =glbNeutralPrimaryColor
                             Default: =""
-                            DisplayMode: =If("提交" in Filter(ApprovalDetail_Table,Approval_No=FLowId).ActionNode,Disabled,DisplayMode.Edit)
+                            DisplayMode: |-
+                                =//If("提交" in Filter(ApprovalDetail_Table,Approval_No=FLowId).ActionNode,Disabled,DisplayMode.Edit)
+                                If(
+                                    (!("提交" in Filter(
+                                        ApprovalDetail_Table,
+                                        Approval_No = FLowId
+                                    ).ActionNode) || (CountA(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            Approval_No = FLowId,
+                                            ActionNode = "提交"
+                                        ).ActionNode
+                                    ) > 1 && First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                TaskStatus = "002",
+                                                Approval_No = FLowId
+                                            ),
+                                            "field_Priortty",
+                                            Descending
+                                        )
+                                    ).ActionNode = "提交")),
+                                    DisplayMode.Edit,
+                                    DisplayMode.Disabled
+                                )
                             FocusedBorderColor: =glbNeutralSecondaryColor
                             FocusedBorderThickness: =1
                             Height: =36
@@ -1358,7 +1432,7 @@
                         BorderThickness: =1
                         Color: =glbLinkColor
                         DisplayMode: |-
-                            =If((("提交" in Filter(ApprovalDetail_Table,Approval_No=FLowId).ActionNode) && !("跟進" in Filter(ApprovalDetail_Table,Approval_No=FLowId).ActionNode))|| First(
+                            =/*If((("提交" in Filter(ApprovalDetail_Table,Approval_No=FLowId).ActionNode) && !("跟進" in Filter(ApprovalDetail_Table,Approval_No=FLowId).ActionNode))|| First(
                                                 SortByColumns(
                                                     Filter(
                                                         ApprovalDetail_Table,
@@ -1368,7 +1442,41 @@
                                                     "field_Priortty",
                                                     Descending
                                                 )
-                                            ).ActionNode = "執行",Disabled,DisplayMode.Edit)
+                                            ).ActionNode = "執行",Disabled,DisplayMode.Edit)*/
+                            If(
+                                !("提交" in Filter(
+                                    ApprovalDetail_Table,
+                                    Approval_No = FLowId
+                                ).ActionNode) || (CountA(
+                                    Filter(
+                                        ApprovalDetail_Table,
+                                        Approval_No = FLowId,
+                                        ActionNode = "提交"
+                                    ).ActionNode
+                                ) > 1 && First(
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            TaskStatus = "002",
+                                            Approval_No = FLowId
+                                        ),
+                                        "field_Priortty",
+                                        Descending
+                                    )
+                                ).ActionNode = "提交") || First(
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            TaskStatus = "002",
+                                            Approval_No = FLowId
+                                        ),
+                                        "field_Priortty",
+                                        Descending
+                                    )
+                                ).ActionNode = "跟進",
+                                DisplayMode.Edit,
+                                DisplayMode.Disabled
+                            )
                         DropTargetBackgroundColor: =ColorFade(Self.Color, 90%)
                         DropTargetBorderColor: =glbLinkColor
                         DropTargetBorderStyle: =BorderStyle.Dashed
@@ -1431,7 +1539,42 @@
                             BorderThickness: =1
                             Color: =glbNeutralPrimaryColor
                             Default: =""
-                            DisplayMode: =If(("提交" in Filter(ApprovalDetail_Table,Approval_No=FLowId).ActionNode) && !("跟進" in Filter(ApprovalDetail_Table,Approval_No=FLowId).ActionNode),Disabled,DisplayMode.Edit)
+                            DisplayMode: |-
+                                =//If(("提交" in Filter(ApprovalDetail_Table,Approval_No=FLowId).ActionNode) && !("跟進" in Filter(ApprovalDetail_Table,Approval_No=FLowId).ActionNode),Disabled,DisplayMode.Edit)
+                                If(
+                                    !("提交" in Filter(
+                                        ApprovalDetail_Table,
+                                        Approval_No = FLowId
+                                    ).ActionNode) || (CountA(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            Approval_No = FLowId,
+                                            ActionNode = "提交"
+                                        ).ActionNode
+                                    ) > 1 && First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                TaskStatus = "002",
+                                                Approval_No = FLowId
+                                            ),
+                                            "field_Priortty",
+                                            Descending
+                                        )
+                                    ).ActionNode = "提交") || First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                TaskStatus = "002",
+                                                Approval_No = FLowId
+                                            ),
+                                            "field_Priortty",
+                                            Descending
+                                        )
+                                    ).ActionNode = "跟進",
+                                    DisplayMode.Edit,
+                                    DisplayMode.Disabled
+                                )
                             FocusedBorderColor: =glbNeutralSecondaryColor
                             FocusedBorderThickness: =1
                             Height: =36
@@ -1461,7 +1604,42 @@
                             BorderThickness: =1
                             Color: =glbNeutralPrimaryColor
                             Default: =""
-                            DisplayMode: =If(("提交" in Filter(ApprovalDetail_Table,Approval_No=FLowId).ActionNode) && !("跟進" in Filter(ApprovalDetail_Table,Approval_No=FLowId).ActionNode),Disabled,DisplayMode.Edit)
+                            DisplayMode: |-
+                                =//If(("提交" in Filter(ApprovalDetail_Table,Approval_No=FLowId).ActionNode) && !("跟進" in Filter(ApprovalDetail_Table,Approval_No=FLowId).ActionNode),Disabled,DisplayMode.Edit)
+                                If(
+                                    !("提交" in Filter(
+                                        ApprovalDetail_Table,
+                                        Approval_No = FLowId
+                                    ).ActionNode) || (CountA(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            Approval_No = FLowId,
+                                            ActionNode = "提交"
+                                        ).ActionNode
+                                    ) > 1 && First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                TaskStatus = "002",
+                                                Approval_No = FLowId
+                                            ),
+                                            "field_Priortty",
+                                            Descending
+                                        )
+                                    ).ActionNode = "提交") || First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                TaskStatus = "002",
+                                                Approval_No = FLowId
+                                            ),
+                                            "field_Priortty",
+                                            Descending
+                                        )
+                                    ).ActionNode = "跟進",
+                                    DisplayMode.Edit,
+                                    DisplayMode.Disabled
+                                )
                             FocusedBorderColor: =glbNeutralSecondaryColor
                             FocusedBorderThickness: =1
                             Height: =36
@@ -2150,7 +2328,8 @@
                                             "field_Priortty",
                                             Descending
                                         )
-                                    ).ActionNode = "檢查" || First(
+                                    ).ActionNode = "檢查" 
+                                    || First(
                                         SortByColumns(
                                             Filter(
                                                 ApprovalDetail_Table,
@@ -2160,7 +2339,8 @@
                                             "field_Priortty",
                                             Descending
                                         )
-                                    ).ActionNode = "簽批" || First(
+                                    ).ActionNode = "簽批" 
+                                    || First(
                                         SortByColumns(
                                             Filter(
                                                 ApprovalDetail_Table,
@@ -2170,7 +2350,8 @@
                                             "field_Priortty",
                                             Descending
                                         )
-                                    ).ActionNode = "助理總幹事審批" || First(
+                                    ).ActionNode = "助理總幹事審批" 
+                                    || First(
                                         SortByColumns(
                                             Filter(
                                                 ApprovalDetail_Table,
@@ -2194,8 +2375,38 @@
                 HoverColor: =ColorFade(Self.Color, -15%)
                 HoverFill: =RGBA(255, 255, 255, 1)
                 LayoutMinWidth: =100
-                OnSelect: |-
-                    =If(IsBlank(TextInput2_34.Text),Notify("請填寫拒絕原因",Warning),UpdateIf(ApprovalDetail_Table,Title=First(SortByColumns(Filter(ApprovalDetail_Table,TaskStatus="002",Approval_No=FLowId),"field_Priortty",Descending)).Title,{TaskStatus:"000",Advise:TextInput2_34.Text}));
+                OnSelect: |
+                    =If(
+                        IsBlank(TextInput2_34.Text),
+                        Notify(
+                            "請填寫拒絕原因",
+                            Warning
+                        ),
+                        UpdateIf(
+                            ApprovalDetail_Table,
+                            Title = First(
+                                SortByColumns(
+                                    Filter(
+                                        ApprovalDetail_Table,
+                                        TaskStatus = "002",
+                                        Approval_No = FLowId
+                                    ),
+                                    "field_Priortty",
+                                    Descending
+                                )
+                            ).Title,
+                            {
+                                TaskStatus: "000",
+                                Advise: TextInput2_34.Text
+                            }
+                        );
+                        Notify(
+                            "拒絕成功！",
+                            NotificationType.Success,
+                            2000
+                        );
+                        Launch("https://apps.powerapps.com/play/8793c6b3-448b-4c69-90ce-4ae75c7911d0?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=HomepageScreen");
+                    );
                 PaddingBottom: =0
                 PaddingLeft: =0
                 PaddingRight: =0
@@ -2240,7 +2451,8 @@
                                             "field_Priortty",
                                             Descending
                                         )
-                                    ).ActionNode = "檢查" || First(
+                                    ).ActionNode = "檢查" 
+                                    || First(
                                         SortByColumns(
                                             Filter(
                                                 ApprovalDetail_Table,
@@ -2250,7 +2462,8 @@
                                             "field_Priortty",
                                             Descending
                                         )
-                                    ).ActionNode = "簽批" || First(
+                                    ).ActionNode = "簽批" 
+                                    || First(
                                         SortByColumns(
                                             Filter(
                                                 ApprovalDetail_Table,
@@ -2260,7 +2473,8 @@
                                             "field_Priortty",
                                             Descending
                                         )
-                                    ).ActionNode = "助理總幹事審批" || First(
+                                    ).ActionNode = "助理總幹事審批" 
+                                    || First(
                                         SortByColumns(
                                             Filter(
                                                 ApprovalDetail_Table,
@@ -2270,7 +2484,18 @@
                                             "field_Priortty",
                                             Descending
                                         )
-                                    ).ActionNode = "總幹事審批"
+                                    ).ActionNode = "總幹事審批" 
+                                    || First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                TaskStatus = "002",
+                                                Approval_No = FLowId
+                                            ),
+                                            "field_Priortty",
+                                            Descending
+                                        )
+                                    ).ActionNode = "跟進"
                             ),
                             DisplayMode.Edit,
                             DisplayMode.Disabled
@@ -2284,9 +2509,65 @@
                 HoverColor: =ColorFade(Self.Color, -15%)
                 HoverFill: =RGBA(255, 255, 255, 1)
                 LayoutMinWidth: =100
-                OnSelect: |
-                    =RemoveIf(ApprovalDetail_Table,TaskStatus="002",Approval_No=FLowId);
-                    UpdateIf(ApprovalDetail_Table,Title=First(SortByColumns(Filter(ApprovalDetail_Table,TaskStatus="004",Approval_No=FLowId),"field_Priortty",Descending)).Title,{TaskStatus:"002",Advise:""});
+                OnSelect: |-
+                    =If(
+                        IsBlank(TextInput2_34.Text),
+                        Notify(
+                            "請填寫退回原因",
+                            Warning
+                        ),
+                    RemoveIf(ApprovalDetail_Table,TaskStatus="002",Approval_No=FLowId);
+                    //UpdateIf(ApprovalDetail_Table,Title=First(SortByColumns(Filter(ApprovalDetail_Table,TaskStatus="004",Approval_No=FLowId),"field_Priortty",Descending)).Title,{TaskStatus:"002",Advise:""});
+                    //更新審批詳情表，新增一條提交申請
+                        With(
+                                {
+                                    Lastsubmit: First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                //TaskStatus = "002",
+                                                Approval_No = FLowId,
+                                                ActionNode = "提交"
+                                    
+                                            ),
+                                            "field_Priortty",
+                                            Descending
+                                        )
+                                    )
+                                },
+                          
+                            Patch(
+                                ApprovalDetail_Table,
+                                Defaults(ApprovalDetail_Table),
+                                {
+                                    Title: GUID(),
+                                    Approval_No: FLowId,
+                                    Advise: TextInput2_34.Text,
+                                    ApprovalBCC: Lastsubmit.ApprovalBCC,
+                                    Approver: Lastsubmit.Approver,
+                                    ApproverEmail: Lastsubmit.ApproverEmail,
+                                    Priortty: First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                Approval_No = FLowId
+                                            ),
+                                            "field_Priortty",
+                                            Descending
+                                        )
+                                    ).Priortty + 1,
+                                    TaskStatus: "002",
+                                    ActionNode: "提交"
+                                }
+                            )
+                              );
+                        Notify(
+                            "退回成功！",
+                            NotificationType.Success,
+                            2000
+                        );
+                        Launch("https://apps.powerapps.com/play/8793c6b3-448b-4c69-90ce-4ae75c7911d0?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=HomepageScreen");
+                    )
                 PaddingBottom: =0
                 PaddingLeft: =0
                 PaddingRight: =0
@@ -2529,11 +2810,14 @@
                                 )
                             );
                     Notify(
-                            "審批成功成功！",
+                            "審批成功！",
                             NotificationType.Success,
                             2000
                         );
-                    Launch("https://apps.powerapps.com/play/8793c6b3-448b-4c69-90ce-4ae75c7911d0?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=HomepageScreen");
+                    If(Last(Split(Label1_138.Text,"/")).Result = User().Email,
+                    //下一节点处理人为当前用户时，不跳转用户到首页
+                    "",
+                    Launch("https://apps.powerapps.com/play/8793c6b3-448b-4c69-90ce-4ae75c7911d0?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=HomepageScreen"));
                         
                     )
                 PaddingBottom: =0
@@ -2566,8 +2850,34 @@
                             ).ApproverEmail
                         },
                         If(
-                            UEmail = User().Email && (
-                                "跟進" in Filter(ApprovalDetail_Table,Approval_No=FLowId).ActionNode
+                            UEmail = User().Email 
+                            && (First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                TaskStatus = "002",
+                                                Approval_No = FLowId
+                                            ),
+                                            "field_Priortty",
+                                            Descending
+                                        )
+                                    ).ActionNode = "跟進" 
+                                //部门简单流程第二次提交后可以执行，第一次提交未选定部门邮箱，不能执行，第二次提交给具体负责人后可以执行
+                                ||(FlowType = "部門簡單流程" && First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                //TaskStatus = "002",
+                                                Approval_No = FLowId,
+                                                Priortty = "2"
+                                                                        ),
+                                            "field_Priortty",
+                                            Descending
+                                        )
+                                    ).ActionNode = "提交") 
+                                /*//退回后不能执行
+                                ("跟進" in Filter(ApprovalDetail_Table,Approval_No=FLowId).ActionNode && CountA(Filter(ApprovalDetail_Table,Approval_No=FLowId,ActionNode="提交").ActionNode)<2)
+                                //部门简单流程第二次提交后可以执行，第一次提交未选定部门邮箱，不能执行，第二次提交给具体负责人后可以执行
                                 || (FlowType = "部門簡單流程" && First(
                                         SortByColumns(
                                             Filter(
@@ -2579,7 +2889,27 @@
                                             "field_Priortty",
                                             Descending
                                         )
-                                    ).ActionNode = "提交")
+                                    ).ActionNode = "提交") 
+                                    //退回后提交未跟进时不能执行，更进后可以执行
+                                    || First(SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                //TaskStatus = "002",
+                                                Approval_No = FLowId,
+                                                ActionNode = "跟進"            
+                                                                        ),
+                                            "field_Priortty",
+                                            Descending
+                                        )).Created > First(SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                //TaskStatus = "002",
+                                                Approval_No = FLowId,
+                                                ActionNode = "提交"
+                                                                        ),
+                                            "field_Priortty",
+                                            Descending
+                                        )).Created*/
                                 ),
                             DisplayMode.Edit,
                             DisplayMode.Disabled
@@ -2769,7 +3099,7 @@
                             );
                             Refresh(ApprovalDetail_Table);
                              Notify(
-                            "執行成功成功！",
+                            "執行成功！",
                             NotificationType.Success,
                             2000
                         );
