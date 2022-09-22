@@ -2772,10 +2772,7 @@
                         Reset(TextInput2_34);
                         Reset(Dropdown1_6);
                         Reset(ComboBox1_12);
-                        Set(
-                            AddApproverCol,
-                            {}
-                        );
+                    
                         //更新行動狀態
                         ClearCollect(
                             DataFlowActionCol2,DataFlowActionCol);
@@ -2827,6 +2824,11 @@
                     //下一节点处理人不是当前用户时，跳转用户到首页
                     Launch("https://apps.powerapps.com/play/8793c6b3-448b-4c69-90ce-4ae75c7911d0?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=HomepageScreen")
                     );
+                    
+                        Set(
+                            AddApproverCol,
+                            {}
+                        );
                         
                     )
                 PaddingBottom: =0
