@@ -158,11 +158,12 @@ AdminFormDetailScreen As screen:
                 DisabledBorderColor: =RGBA(219, 219, 219, 1)
                 Fill: =glbThemePrimaryColor
                 FocusedBorderThickness: =1
+                FontWeight: =FontWeight.Bold
                 Height: =36
                 HoverFill: =ColorFade(Self.Fill, -15%)
                 OnSelect: |
                     =If(
-                        IsEmpty(drpFilter_Department.SelectedItems) || IsEmpty(drpFilter_FormType.SelectedItems) || IsBlank(TextInput_FormName.Text) || IsBlank(TextInput_FormNumber) || Last(Attachment_Form.Attachments).Name = Blank() || Radio_flowtype.SelectedText.Value = Blank() || Radio_password.SelectedText.Value = Blank() || Radio_attachment.SelectedText.Value = Blank(),
+                        IsEmpty(drpFilter_Department.SelectedItems) || IsEmpty(drpFilter_FormType.SelectedItems) || IsBlank(TextInput_FormName.Text) || IsBlank(TextInput_FormNumber) || Last(Attachment_Form.Attachments).Name = Blank() || Radio_flowtype.SelectedText.Value = Blank() || (Radio_password.Visible = true && Radio_password.SelectedText.Value = Blank()) || (Radio_attachment.Visible = true && Radio_attachment.SelectedText.Value = Blank()),
                         Notify(
                             "必选项不能为空",
                             NotificationType.Error
@@ -384,8 +385,8 @@ AdminFormDetailScreen As screen:
                 Text: ="保存"
                 Visible: =ShowSavebutton
                 Width: =100
-                X: =23
-                Y: =611
+                X: =21
+                Y: =594
                 ZIndex: =11
 
             Cancel_button As button:
@@ -436,7 +437,7 @@ AdminFormDetailScreen As screen:
                 Visible: =ShowSavebutton
                 Width: =100
                 X: =155
-                Y: =611
+                Y: =594
                 ZIndex: =12
 
             TextInput_FormDescription As text:
@@ -547,47 +548,6 @@ AdminFormDetailScreen As screen:
                 Y: =48
                 ZIndex: =23
 
-            Group2 As group:
-                Height: =5
-                Width: =5
-                X: =40
-                Y: =40
-                ZIndex: =28
-
-                Radio_attachment As radio:
-                    Default: =First(EditForm).ModelAttachMent//加载编辑表格的表格名称
-                    FocusedBorderThickness: =0
-                    Height: =37
-                    HoverColor: =RGBA(0, 0, 0, 1)
-                    HoverFill: =RGBA(0, 0, 0, 0)
-                    Items: =["有","無"]
-                    Layout: =Layout.Horizontal
-                    PaddingBottom: =0
-                    PaddingTop: =0
-                    PressedColor: =RGBA(0, 0, 0, 1)
-                    RadioBorderColor: =glbNeutralTertiaryColor
-                    RadioSelectionFill: =glbLinkColor
-                    RadioSize: =24
-                    Size: =11
-                    Width: =150
-                    X: =312
-                    Y: =440
-                    ZIndex: =3
-
-                Label1_87 As label:
-                    Color: =glbNeutralSecondaryColor
-                    Height: =28
-                    PaddingBottom: =0
-                    PaddingLeft: =0
-                    PaddingRight: =0
-                    PaddingTop: =0
-                    Size: =12
-                    Text: ="申請附件"
-                    Width: =64
-                    X: =312
-                    Y: =406
-                    ZIndex: =8
-
             Group4 As group:
                 Height: =5
                 Width: =5
@@ -645,8 +605,8 @@ AdminFormDetailScreen As screen:
                     Size: =10
                     Tooltip: =
                     Width: =270
-                    X: =312
-                    Y: =310
+                    X: =313
+                    Y: =391
                     ZIndex: =27
 
                 Label1_90 As label:
@@ -659,8 +619,8 @@ AdminFormDetailScreen As screen:
                     Size: =12
                     Text: ="示範表格"
                     Width: =120
-                    X: =312
-                    Y: =277
+                    X: =313
+                    Y: =358
                     ZIndex: =28
 
                 Image2_1 As image:
@@ -668,8 +628,8 @@ AdminFormDetailScreen As screen:
                     Image: =Last(Attachment_Demonstrationform.Attachments).Value
                     Visible: =false
                     Width: =27
-                    X: =391
-                    Y: =279
+                    X: =392
+                    Y: =360
                     ZIndex: =36
 
             drpFilter_Department As combobox:
@@ -707,91 +667,6 @@ AdminFormDetailScreen As screen:
                 Y: =48
                 ZIndex: =38
 
-            Group6 As group:
-                Height: =5
-                Width: =5
-                X: =40
-                Y: =40
-                ZIndex: =38
-
-                Attachment_Form As attachments:
-                    AddAttachmentText: ="Click or drag the file here to upload"
-                    BorderColor: =glbLinkColor
-                    BorderStyle: =BorderStyle.Dashed
-                    BorderThickness: =1
-                    Color: =glbLinkColor
-                    DisplayMode: =attachment
-                    DropTargetBackgroundColor: =ColorFade(Self.Color, 90%)
-                    DropTargetBorderColor: =glbLinkColor
-                    DropTargetBorderStyle: =BorderStyle.Dashed
-                    DropTargetBorderThickness: =1
-                    DropTargetTextColor: =glbLinkColor
-                    Fill: =ColorFade(glbLinkColor, 95%)
-                    FocusedBorderThickness: =1
-                    Height: =80
-                    HoverColor: =ColorFade(Self.Color, -25%)
-                    HoverFill: =ColorFade(glbLinkColor, 80%)
-                    IsInDataCard: =true
-                    ItemColor: =glbLinkColor
-                    ItemFill: =ColorFade(glbLinkColor, 80%)
-                    ItemHoverColor: =ColorFade(glbLinkColor, -25%)
-                    ItemHoverFill: =ColorFade(glbLinkColor, 80%)
-                    Items: =Last(EditAttachment.TempAttachMent)//加载编辑表格的附件信息
-                    MaxAttachments: =1
-                    MaxAttachmentsText: ="Max Attachments"
-                    NoAttachmentsText: ="No Attachments"
-                    OnAddFile: |-
-                        =Set(varAttachmentControl,JSON(Image4.Image,IncludeBinaryData));
-                        Set(varBase64Only,Mid(varAttachmentControl,Find(",", varAttachmentControl)+1,Len(varAttachmentControl)-Find (",", varAttachmentControl)-1));//设置全局变量保存附件的base64值
-                        SendAttachmentToTemplateFileList.Run(GUID(),
-                        [@TextInput_FormName].Text,
-                            drpFilter_FormType.Selected.Result,
-                            Last(Attachment_Form.Attachments).Name,
-                        Last(Attachment_Form.Attachments).Name,
-                        varBase64Only);//上传附件到sharepoint附件list
-                        ClearCollect(AttachmentFormName,{Name:Last(Attachment_Form.Attachments).Name});//收集上传附件的名称
-                    OnRemoveFile: |-
-                        =Remove(TemplateFileList,First(Filter(TemplateFileList,(TempFileName=TextInput_FormName.Text)&&(TempAttachMent=First(AttachmentFormName).Name))));//删除list中的附件记录
-                        
-                        Reset(Attachment_Form);//重置申請表附件控件
-                        
-                        Clear(EditAttachment)
-                    PaddingLeft: =10
-                    PaddingRight: =10
-                    PaddingTop: =10
-                    PressedColor: =RGBA(0, 121, 187, 1)
-                    PressedFill: =
-                    Size: =10
-                    Tooltip: =
-                    Width: =270
-                    X: =22
-                    Y: =310
-                    ZIndex: =19
-
-                Label1_92 As label:
-                    Color: =glbNeutralSecondaryColor
-                    Height: =28
-                    PaddingBottom: =0
-                    PaddingLeft: =0
-                    PaddingRight: =0
-                    PaddingTop: =0
-                    Size: =12
-                    Text: ="表格附件"
-                    Width: =120
-                    X: =22
-                    Y: =277
-                    ZIndex: =26
-
-                Image4 As image:
-                    Height: =16
-                    Image: =Last(Attachment_Form.Attachments).Value
-                    OnSelect: =
-                    Visible: =false
-                    Width: =14
-                    X: =93
-                    Y: =284
-                    ZIndex: =35
-
             Group5 As group:
                 Height: =5
                 Width: =5
@@ -809,8 +684,8 @@ AdminFormDetailScreen As screen:
                     Size: =12
                     Text: ="填寫指引"
                     Width: =120
-                    X: =602
-                    Y: =277
+                    X: =604
+                    Y: =357
                     ZIndex: =13
 
                 Attachment_FillGuide As attachments:
@@ -864,8 +739,8 @@ AdminFormDetailScreen As screen:
                     Size: =10
                     Tooltip: =
                     Width: =270
-                    X: =602
-                    Y: =310
+                    X: =604
+                    Y: =390
                     ZIndex: =14
 
                 Image3 As image:
@@ -873,8 +748,8 @@ AdminFormDetailScreen As screen:
                     Image: =Last(Attachment_FillGuide.Attachments).Value
                     Visible: =false
                     Width: =12
-                    X: =687
-                    Y: =281
+                    X: =689
+                    Y: =361
                     ZIndex: =37
 
             drpFilter_FormType As combobox:
@@ -954,167 +829,6 @@ AdminFormDetailScreen As screen:
                 Y: =95
                 ZIndex: =42
 
-            Group3_2 As group:
-                Height: =5
-                Width: =5
-                X: =18
-                Y: =-374
-                ZIndex: =45
-
-                Radio_password As radio:
-                    Default: =If(First(EditForm).IsPassWord=1,"有",If(First(EditForm).IsPassWord=2,"無","可選"))//加载编辑表格的表格名称
-                    FocusedBorderThickness: =0
-                    Height: =32
-                    HoverColor: =RGBA(0, 0, 0, 1)
-                    HoverFill: =RGBA(0, 0, 0, 0)
-                    Items: =["可選","有","無"]
-                    Layout: =Layout.Horizontal
-                    PaddingBottom: =0
-                    PaddingTop: =0
-                    PressedColor: =RGBA(0, 0, 0, 1)
-                    RadioBorderColor: =glbNeutralTertiaryColor
-                    RadioSelectionFill: =glbLinkColor
-                    RadioSize: =24
-                    Size: =11
-                    Width: =233
-                    X: =23
-                    Y: =442
-                    ZIndex: =43
-
-                Label1_120 As label:
-                    Color: =glbNeutralSecondaryColor
-                    Height: =35
-                    PaddingBottom: =0
-                    PaddingLeft: =0
-                    PaddingRight: =0
-                    PaddingTop: =0
-                    Size: =12
-                    Text: ="表格密碼"
-                    Width: =120
-                    X: =23
-                    Y: =405
-                    ZIndex: =44
-
-            Group2_4 As group:
-                Height: =5
-                Width: =5
-                X: =18
-                Y: =-374
-                ZIndex: =48
-
-                Radio_flowtype As radio:
-                    Default: =First(EditForm).FlowType//加载编辑表格的表格名称
-                    FocusedBorderThickness: =0
-                    Height: =30
-                    HoverColor: =RGBA(0, 0, 0, 1)
-                    HoverFill: =RGBA(0, 0, 0, 0)
-                    Items: =["通用流程","預設通用流程","部門簡單流程","範本"]
-                    Layout: =Layout.Horizontal
-                    PaddingBottom: =0
-                    PaddingTop: =0
-                    PressedColor: =RGBA(0, 0, 0, 1)
-                    RadioBorderColor: =glbNeutralTertiaryColor
-                    RadioSelectionFill: =glbLinkColor
-                    RadioSize: =24
-                    Size: =11
-                    Width: =504
-                    X: =22
-                    Y: =535
-                    ZIndex: =46
-
-                Label1_121 As label:
-                    Color: =glbNeutralSecondaryColor
-                    Height: =35
-                    PaddingBottom: =0
-                    PaddingLeft: =0
-                    PaddingRight: =0
-                    PaddingTop: =0
-                    Size: =12
-                    Text: ="流程類型"
-                    Width: =182
-                    X: =22
-                    Y: =493
-                    ZIndex: =47
-
-            Group7 As group:
-                Height: =5
-                Width: =5
-                X: =18
-                Y: =-374
-                ZIndex: =58
-
-                Label1_122 As label:
-                    Color: =glbNeutralSecondaryColor
-                    Height: =34
-                    PaddingBottom: =0
-                    PaddingLeft: =0
-                    PaddingRight: =0
-                    PaddingTop: =0
-                    Size: =12
-                    Text: ="預設通用流程選擇行動"
-                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程",true,false)
-                    Width: =175
-                    X: =604
-                    Y: =491
-                    ZIndex: =49
-
-                Checkbox1_4 As checkbox:
-                    CheckboxBorderColor: =glbNeutralTertiaryColor
-                    CheckboxSize: =24
-                    CheckmarkFill: =glbLinkColor
-                    Default: =If(("簽批" in First(EditForm).SelectedActions) && First(EditForm).FlowType="預設通用流程",true,false)
-                    FocusedBorderColor: =RGBA(0, 0, 0, 0)
-                    Height: =29
-                    HoverBorderColor: =RGBA(0, 0, 0, 0)
-                    OnCheck: =
-                    OnUncheck: =
-                    PressedBorderColor: =RGBA(0, 0, 0, 0)
-                    Size: =11
-                    Text: ="簽批"
-                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程",true,false)
-                    Width: =77
-                    X: =702
-                    Y: =529
-                    ZIndex: =53
-
-                Checkbox1_5 As checkbox:
-                    CheckboxBorderColor: =glbNeutralTertiaryColor
-                    CheckboxSize: =24
-                    CheckmarkFill: =glbLinkColor
-                    Default: =If(("助總總幹事審批" in First(EditForm).SelectedActions) && First(EditForm).FlowType="預設通用流程",true,false)
-                    FocusedBorderColor: =RGBA(0, 0, 0, 0)
-                    Height: =29
-                    HoverBorderColor: =RGBA(0, 0, 0, 0)
-                    OnCheck: =
-                    OnUncheck: =
-                    PressedBorderColor: =RGBA(0, 0, 0, 0)
-                    Size: =11
-                    Text: ="助總總幹事審批"
-                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程",true,false)
-                    Width: =151
-                    X: =802
-                    Y: =529
-                    ZIndex: =54
-
-                Checkbox1_6 As checkbox:
-                    CheckboxBorderColor: =glbNeutralTertiaryColor
-                    CheckboxSize: =24
-                    CheckmarkFill: =glbLinkColor
-                    Default: =If(("總幹事審批" in First(EditForm).SelectedActions) && First(EditForm).FlowType="預設通用流程",true,false)
-                    FocusedBorderColor: =RGBA(0, 0, 0, 0)
-                    Height: =29
-                    HoverBorderColor: =RGBA(0, 0, 0, 0)
-                    OnCheck: =
-                    OnUncheck: =
-                    PressedBorderColor: =RGBA(0, 0, 0, 0)
-                    Size: =11
-                    Text: ="總幹事審批"
-                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程",true,false)
-                    Width: =120
-                    X: =967
-                    Y: =529
-                    ZIndex: =55
-
             Label1_124 As label:
                 Color: =glbErrorColor
                 Height: =28
@@ -1145,9 +859,10 @@ AdminFormDetailScreen As screen:
                     PaddingTop: =0
                     Size: =12
                     Text: ="標籤輸入指引"
+                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
                     Width: =120
                     X: =892
-                    Y: =277
+                    Y: =357
                     ZIndex: =58
 
                 TextInput_CustomFilter As text:
@@ -1157,7 +872,7 @@ AdminFormDetailScreen As screen:
                     Default: =First(EditForm).CustomFilter//加载编辑表格的自定義篩選
                     FocusedBorderColor: =glbNeutralSecondaryColor
                     FocusedBorderThickness: =1
-                    Height: =79
+                    Height: =80
                     HintText: ="請輸入篩選提示，如：請輸入……"
                     HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                     HoverFill: =ColorFade(Self.Fill, -5%)
@@ -1172,38 +887,11 @@ AdminFormDetailScreen As screen:
                     RadiusTopLeft: =0
                     RadiusTopRight: =0
                     Size: =12
+                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
                     Width: =270
                     X: =892
-                    Y: =311
+                    Y: =390
                     ZIndex: =59
-
-            Label1_125 As label:
-                Color: =glbErrorColor
-                Height: =28
-                PaddingBottom: =0
-                PaddingLeft: =0
-                PaddingRight: =0
-                PaddingTop: =0
-                Size: =12
-                Text: ="*"
-                Width: =120
-                X: =12
-                Y: =275
-                ZIndex: =64
-
-            Label1_127 As label:
-                Color: =glbErrorColor
-                Height: =28
-                PaddingBottom: =0
-                PaddingLeft: =0
-                PaddingRight: =0
-                PaddingTop: =0
-                Size: =12
-                Text: ="*"
-                Width: =120
-                X: =13
-                Y: =494
-                ZIndex: =67
 
             Group3_3 As group:
                 Height: =5
@@ -1227,13 +915,213 @@ AdminFormDetailScreen As screen:
                     RadioSelectionFill: =glbLinkColor
                     RadioSize: =24
                     Size: =11
-                    Visible: =If(Radio_attachment.Selected.Value="有",true,false)
+                    Visible: =If((Radio_flowtype.Selected.Value="預設通用流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程") && Radio_attachment.Selected.Value="有",true,false)
                     Width: =233
-                    X: =603
-                    Y: =440
+                    X: =605
+                    Y: =521
                     ZIndex: =65
 
                 Label1_126 As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =28
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="附件密碼"
+                    Visible: =If((Radio_flowtype.Selected.Value="預設通用流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程") && Radio_attachment.Selected.Value="有",true,false)
+                    Width: =120
+                    X: =604
+                    Y: =484
+                    ZIndex: =66
+
+            Group14 As group:
+                Height: =5
+                Width: =5
+                X: =40
+                Y: =40
+                ZIndex: =71
+
+                Radio_attachment As radio:
+                    Default: =First(EditForm).ModelAttachMent//加载编辑表格的表格名称
+                    FocusedBorderThickness: =0
+                    Height: =32
+                    HoverColor: =RGBA(0, 0, 0, 1)
+                    HoverFill: =RGBA(0, 0, 0, 0)
+                    Items: =["有","無"]
+                    Layout: =Layout.Horizontal
+                    PaddingBottom: =0
+                    PaddingTop: =0
+                    PressedColor: =RGBA(0, 0, 0, 1)
+                    RadioBorderColor: =glbNeutralTertiaryColor
+                    RadioSelectionFill: =glbLinkColor
+                    RadioSize: =24
+                    Size: =11
+                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
+                    Width: =150
+                    X: =311
+                    Y: =521
+                    ZIndex: =3
+
+                Label1_87 As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =28
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="申請附件"
+                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
+                    Width: =64
+                    X: =311
+                    Y: =487
+                    ZIndex: =8
+
+                Label1_129 As label:
+                    Color: =glbErrorColor
+                    Height: =28
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="*"
+                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
+                    Width: =120
+                    X: =303
+                    Y: =484
+                    ZIndex: =69
+
+            Group15 As group:
+                Height: =5
+                Width: =5
+                X: =40
+                Y: =40
+                ZIndex: =71
+
+                Attachment_Form As attachments:
+                    AddAttachmentText: ="Click or drag the file here to upload"
+                    BorderColor: =glbLinkColor
+                    BorderStyle: =BorderStyle.Dashed
+                    BorderThickness: =1
+                    Color: =glbLinkColor
+                    DisplayMode: =attachment
+                    DropTargetBackgroundColor: =ColorFade(Self.Color, 90%)
+                    DropTargetBorderColor: =glbLinkColor
+                    DropTargetBorderStyle: =BorderStyle.Dashed
+                    DropTargetBorderThickness: =1
+                    DropTargetTextColor: =glbLinkColor
+                    Fill: =ColorFade(glbLinkColor, 95%)
+                    FocusedBorderThickness: =1
+                    Height: =80
+                    HoverColor: =ColorFade(Self.Color, -25%)
+                    HoverFill: =ColorFade(glbLinkColor, 80%)
+                    IsInDataCard: =true
+                    ItemColor: =glbLinkColor
+                    ItemFill: =ColorFade(glbLinkColor, 80%)
+                    ItemHoverColor: =ColorFade(glbLinkColor, -25%)
+                    ItemHoverFill: =ColorFade(glbLinkColor, 80%)
+                    Items: =Last(EditAttachment.TempAttachMent)//加载编辑表格的附件信息
+                    MaxAttachments: =1
+                    MaxAttachmentsText: ="Max Attachments"
+                    NoAttachmentsText: ="No Attachments"
+                    OnAddFile: |-
+                        =Set(varAttachmentControl,JSON(Image4.Image,IncludeBinaryData));
+                        Set(varBase64Only,Mid(varAttachmentControl,Find(",", varAttachmentControl)+1,Len(varAttachmentControl)-Find (",", varAttachmentControl)-1));//设置全局变量保存附件的base64值
+                        SendAttachmentToTemplateFileList.Run(GUID(),
+                        [@TextInput_FormName].Text,
+                            drpFilter_FormType.Selected.Result,
+                            Last(Attachment_Form.Attachments).Name,
+                        Last(Attachment_Form.Attachments).Name,
+                        varBase64Only);//上传附件到sharepoint附件list
+                        ClearCollect(AttachmentFormName,{Name:Last(Attachment_Form.Attachments).Name});//收集上传附件的名称
+                    OnRemoveFile: |-
+                        =Remove(TemplateFileList,First(Filter(TemplateFileList,(TempFileName=TextInput_FormName.Text)&&(TempAttachMent=First(AttachmentFormName).Name))));//删除list中的附件记录
+                        
+                        Reset(Attachment_Form);//重置申請表附件控件
+                        
+                        Clear(EditAttachment)
+                    PaddingLeft: =10
+                    PaddingRight: =10
+                    PaddingTop: =10
+                    PressedColor: =RGBA(0, 121, 187, 1)
+                    PressedFill: =
+                    Size: =10
+                    Tooltip: =
+                    Width: =270
+                    X: =22
+                    Y: =391
+                    ZIndex: =19
+
+                Label1_92 As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =28
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="表格附件"
+                    Width: =120
+                    X: =22
+                    Y: =358
+                    ZIndex: =26
+
+                Image4 As image:
+                    Height: =16
+                    Image: =Last(Attachment_Form.Attachments).Value
+                    OnSelect: =
+                    Visible: =false
+                    Width: =14
+                    X: =93
+                    Y: =365
+                    ZIndex: =35
+
+                Label1_125 As label:
+                    Color: =glbErrorColor
+                    Height: =28
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="*"
+                    Width: =120
+                    X: =12
+                    Y: =356
+                    ZIndex: =64
+
+            Group10 As group:
+                Height: =5
+                Width: =5
+                X: =40
+                Y: =40
+                ZIndex: =71
+
+                Radio_password As radio:
+                    Default: =If(First(EditForm).IsPassWord=1,"有",If(First(EditForm).IsPassWord=2,"無","可選"))//加载编辑表格的表格名称
+                    FocusedBorderThickness: =0
+                    Height: =32
+                    HoverColor: =RGBA(0, 0, 0, 1)
+                    HoverFill: =RGBA(0, 0, 0, 0)
+                    Items: =["可選","有","無"]
+                    Layout: =Layout.Horizontal
+                    PaddingBottom: =0
+                    PaddingTop: =0
+                    PressedColor: =RGBA(0, 0, 0, 1)
+                    RadioBorderColor: =glbNeutralTertiaryColor
+                    RadioSelectionFill: =glbLinkColor
+                    RadioSize: =24
+                    Size: =11
+                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
+                    Width: =233
+                    X: =23
+                    Y: =521
+                    ZIndex: =43
+
+                Label1_120 As label:
                     Color: =glbNeutralSecondaryColor
                     Height: =35
                     PaddingBottom: =0
@@ -1241,59 +1129,180 @@ AdminFormDetailScreen As screen:
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =12
-                    Text: ="附件密碼"
-                    Visible: =If(Radio_attachment.Selected.Value="有",true,false)
+                    Text: ="表格密碼"
+                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
                     Width: =120
-                    X: =601
-                    Y: =399
-                    ZIndex: =66
+                    X: =23
+                    Y: =484
+                    ZIndex: =44
 
-            Label1_128 As label:
-                Color: =glbErrorColor
-                Height: =28
-                PaddingBottom: =0
-                PaddingLeft: =0
-                PaddingRight: =0
-                PaddingTop: =0
-                Size: =12
-                Text: ="*"
-                Width: =120
-                X: =13
-                Y: =405
-                ZIndex: =68
+                Label1_128 As label:
+                    Color: =glbErrorColor
+                    Height: =28
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="*"
+                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
+                    Width: =120
+                    X: =13
+                    Y: =484
+                    ZIndex: =68
 
-            Label1_129 As label:
-                Color: =glbErrorColor
-                Height: =28
-                PaddingBottom: =0
-                PaddingLeft: =0
-                PaddingRight: =0
-                PaddingTop: =0
-                Size: =12
-                Text: ="*"
-                Width: =120
-                X: =304
-                Y: =403
-                ZIndex: =69
+            Group3 As group:
+                Height: =5
+                Width: =5
+                X: =40
+                Y: =40
+                ZIndex: =71
 
-            Checkbox1_3 As checkbox:
-                CheckboxBorderColor: =glbNeutralTertiaryColor
-                CheckboxSize: =24
-                CheckmarkFill: =glbLinkColor
-                Default: =If(("檢查" in First(EditForm).SelectedActions) && First(EditForm).FlowType="預設通用流程",true,false)
-                FocusedBorderColor: =RGBA(0, 0, 0, 0)
-                Height: =30
-                HoverBorderColor: =RGBA(0, 0, 0, 0)
-                OnCheck: =
-                OnUncheck: =
-                PressedBorderColor: =RGBA(0, 0, 0, 0)
-                Size: =11
-                Text: ="檢查"
-                Visible: =If(Radio_flowtype.Selected.Value="預設通用流程",true,false)
-                Width: =83
-                X: =604
-                Y: =528
-                ZIndex: =70
+                Radio_flowtype As radio:
+                    Default: =First(EditForm).FlowType//加载编辑表格的表格名称
+                    FocusedBorderThickness: =0
+                    Height: =32
+                    HoverColor: =RGBA(0, 0, 0, 1)
+                    HoverFill: =RGBA(0, 0, 0, 0)
+                    Items: =["通用流程","預設通用流程","部門簡單流程","範本"]
+                    Layout: =Layout.Horizontal
+                    PaddingBottom: =0
+                    PaddingTop: =0
+                    PressedColor: =RGBA(0, 0, 0, 1)
+                    RadioBorderColor: =glbNeutralTertiaryColor
+                    RadioSelectionFill: =glbLinkColor
+                    RadioSize: =24
+                    Size: =11
+                    Width: =504
+                    X: =21
+                    Y: =312
+                    ZIndex: =46
+
+                Label1_121 As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =35
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="流程類型"
+                    Width: =182
+                    X: =21
+                    Y: =274
+                    ZIndex: =47
+
+                Label1_127 As label:
+                    Color: =glbErrorColor
+                    Height: =28
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="*"
+                    Width: =120
+                    X: =12
+                    Y: =275
+                    ZIndex: =67
+
+            Group16 As group:
+                Height: =5
+                Width: =5
+                X: =40
+                Y: =40
+                ZIndex: =71
+
+                Label1_122 As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =28
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="預設通用流程選擇行動"
+                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程",true,false)
+                    Width: =175
+                    X: =602
+                    Y: =275
+                    ZIndex: =49
+
+                Checkbox1_4 As checkbox:
+                    CheckboxBorderColor: =glbNeutralTertiaryColor
+                    CheckboxSize: =24
+                    CheckmarkFill: =glbLinkColor
+                    Default: =If(("簽批" in First(EditForm).SelectedActions) && First(EditForm).FlowType="預設通用流程",true,false)
+                    FocusedBorderColor: =RGBA(0, 0, 0, 0)
+                    Height: =32
+                    HoverBorderColor: =RGBA(0, 0, 0, 0)
+                    OnCheck: =
+                    OnUncheck: =
+                    PressedBorderColor: =RGBA(0, 0, 0, 0)
+                    Size: =11
+                    Text: ="簽批"
+                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程",true,false)
+                    Width: =77
+                    X: =700
+                    Y: =306
+                    ZIndex: =53
+
+                Checkbox1_5 As checkbox:
+                    CheckboxBorderColor: =glbNeutralTertiaryColor
+                    CheckboxSize: =24
+                    CheckmarkFill: =glbLinkColor
+                    Default: =If(("助總總幹事審批" in First(EditForm).SelectedActions) && First(EditForm).FlowType="預設通用流程",true,false)
+                    FocusedBorderColor: =RGBA(0, 0, 0, 0)
+                    Height: =32
+                    HoverBorderColor: =RGBA(0, 0, 0, 0)
+                    OnCheck: =
+                    OnUncheck: =
+                    PressedBorderColor: =RGBA(0, 0, 0, 0)
+                    Size: =11
+                    Text: ="助總總幹事審批"
+                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程",true,false)
+                    Width: =151
+                    X: =800
+                    Y: =306
+                    ZIndex: =54
+
+                Checkbox1_6 As checkbox:
+                    CheckboxBorderColor: =glbNeutralTertiaryColor
+                    CheckboxSize: =24
+                    CheckmarkFill: =glbLinkColor
+                    Default: =If(("總幹事審批" in First(EditForm).SelectedActions) && First(EditForm).FlowType="預設通用流程",true,false)
+                    FocusedBorderColor: =RGBA(0, 0, 0, 0)
+                    Height: =32
+                    HoverBorderColor: =RGBA(0, 0, 0, 0)
+                    OnCheck: =
+                    OnUncheck: =
+                    PressedBorderColor: =RGBA(0, 0, 0, 0)
+                    Size: =11
+                    Text: ="總幹事審批"
+                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程",true,false)
+                    Width: =120
+                    X: =965
+                    Y: =306
+                    ZIndex: =55
+
+                Checkbox1_3 As checkbox:
+                    CheckboxBorderColor: =glbNeutralTertiaryColor
+                    CheckboxSize: =24
+                    CheckmarkFill: =glbLinkColor
+                    Default: =If(("檢查" in First(EditForm).SelectedActions) && First(EditForm).FlowType="預設通用流程",true,false)
+                    FocusedBorderColor: =RGBA(0, 0, 0, 0)
+                    Height: =32
+                    HoverBorderColor: =RGBA(0, 0, 0, 0)
+                    OnCheck: =
+                    OnUncheck: =
+                    PressedBorderColor: =RGBA(0, 0, 0, 0)
+                    Size: =11
+                    Text: ="檢查"
+                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程",true,false)
+                    Width: =83
+                    X: =599
+                    Y: =306
+                    ZIndex: =70
 
         NewForm_title As group:
             Height: =5
