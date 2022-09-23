@@ -310,8 +310,8 @@
                                         //UploadFilePWD:TextInput_FormPWD.Text,
                                         //ReferNumber:TextInput_ReferNumber.Text,
                                         FormType: Label1_132.Text,
-                                        Department: drpFilterDepartment_1.Selected.Result,
-                                        FilterLabel: TextInput_FilterLabel.Text
+                                        Department: drpFilterDepartment_1.Selected.Result
+                                        //FilterLabel: TextInput_FilterLabel.Text
                                     }
                                 )
                             );//創建NewUserForm集合用作後續更新list-GenericUploadAttachMentFile中的FormId
@@ -1227,7 +1227,7 @@
                     LayoutMode: =LayoutMode.Auto
                     PaddingLeft: =20
                     PaddingRight: =20
-                    Visible: =If(First(EditUserForm).CustomFilter<>Blank(),true,false)
+                    Visible: =false
                     ZIndex: =3
 
                     Label9_23 As label:
