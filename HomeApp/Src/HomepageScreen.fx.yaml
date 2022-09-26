@@ -9,7 +9,14 @@ HomepageScreen As screen:
         
         ClearCollect(DataModelName,{ModelName:"招聘職位申請表",ModelDescription:"招聘表格",ModelFlowNumber:"A103"},{ModelName:"假期批核人資料表",ModelDescription:"假期表格",ModelFlowNumber:"A306"},{ModelName:"任職資源申請",ModelDescription:"IT財務指引表格",ModelFlowNumber:"A111"},{ModelName:"預備合約通知書(新入職)",ModelDescription:"預備合約表格",ModelFlowNumber:"A104"});
         
-        
+        //創建首頁部門集合
+        ClearCollect(FormTable3,FormTableType);
+        Patch(FormTable3,Defaults(FormTable3),{
+        DepartMentName:"常用表格",
+        ID:0
+        });
+        ClearCollect(FormTable2,SortByColumns(FormTable3,"ID",Ascending));
+        ClearCollect(FormTable4,Distinct(FormTable2,DepartMentName));
         
 
     Container1_3 As groupContainer.manualLayoutContainer:
@@ -319,14 +326,15 @@ HomepageScreen As screen:
                 ZIndex: =2
 
             TabGallery3_2 As gallery.galleryHorizontal:
-                Height: =39
-                Items: =["常用表格","行政部","財務部","企業傳訊","人力資源部"]
-                ShowScrollbar: =false
+                Height: =45
+                Items: |-
+                    =FormTable4
+                    //["常用表格","行政部","人力資源部","財務部","傳訊及協作部"]
                 TemplatePadding: =0
                 TemplateSize: =130
-                Width: =694
+                Width: =795
                 X: =20
-                Y: =11
+                Y: =10
                 ZIndex: =3
 
                 Label2_2 As label:
@@ -351,7 +359,7 @@ HomepageScreen As screen:
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =15
-                    Text: =ThisItem.Value
+                    Text: =ThisItem.Result
                     Width: =130
                     ZIndex: =1
 
@@ -379,7 +387,7 @@ HomepageScreen As screen:
                 Height: =450
                 Items: |-
                     =If(
-                        TabGallery3_2.Selected.Value = "常用表格",
+                        TabGallery3_2.Selected.Result = "常用表格",
                         Search(
                             ShowColumns(RenameColumns(
                                 SortByColumns(
@@ -400,7 +408,7 @@ HomepageScreen As screen:
                             "ModelName"
                         ),
                         If(
-                            TabGallery3_2.Selected.Value = "行政部",
+                            TabGallery3_2.Selected.Result = "行政部",
                             Search(
                                 ShowColumns(
                                     DataModelName,
@@ -419,7 +427,7 @@ HomepageScreen As screen:
                                 ShowColumns(
                                     Filter(
                                         GenericFormModel,
-                                        ModelDepartment = TabGallery3_2.Selected.Value,
+                                        ModelDepartment = TabGallery3_2.Selected.Result,
                                         ModelType = TaskTypeNameGallery.Selected.FormType
                                     ),
                                     "ModelName",
@@ -458,7 +466,7 @@ HomepageScreen As screen:
                         =If(
                             ThisItem.ModelName = "招聘職位申請表",
                             If(
-                                TabGallery3_2.Selected.Value = "常用表格",
+                                TabGallery3_2.Selected.Result = "常用表格",
                                 "",
                                 If(
                                     !IsBlank(
@@ -483,7 +491,7 @@ HomepageScreen As screen:
                             Launch("https://apps.powerapps.com/play/abc17763-3a85-47e5-99a2-410af57f1a77?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=JobTitleFormScreen&skipAppMetadata=true"),
                             ThisItem.ModelName = "假期批核人資料表",
                             If(
-                                TabGallery3_2.Selected.Value = "常用表格",
+                                TabGallery3_2.Selected.Result = "常用表格",
                                 "",
                                 If(
                                     !IsBlank(
@@ -508,7 +516,7 @@ HomepageScreen As screen:
                             Launch("https://apps.powerapps.com/play/8bc833a4-5aff-417c-ab44-f513af1f03f0?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=VacationFormScreen&skipAppMetadata=true"),
                             ThisItem.ModelName = "任職資源申請",
                             If(
-                                TabGallery3_2.Selected.Value = "常用表格",
+                                TabGallery3_2.Selected.Result = "常用表格",
                                 "",
                                 If(
                                     !IsBlank(
@@ -533,7 +541,7 @@ HomepageScreen As screen:
                             Launch("https://apps.powerapps.com/play/c030168f-5133-4c9d-8e17-3c870ba99ab4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=EmploymentFormScreen&skipAppMetadata=true"),
                             ThisItem.ModelName = "預備合約通知書(新入職)",
                             If(
-                                TabGallery3_2.Selected.Value = "常用表格",
+                                TabGallery3_2.Selected.Result = "常用表格",
                                 "",
                                 If(
                                     !IsBlank(
@@ -557,7 +565,7 @@ HomepageScreen As screen:
                             );
                             Launch("https://apps.powerapps.com/play/abc17763-3a85-47e5-99a2-410af57f1a77?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=ContractNoticeForm&skipAppMetadata=true"),
                             If(
-                                TabGallery3_2.Selected.Value = "常用表格",
+                                TabGallery3_2.Selected.Result = "常用表格",
                                 "",
                                 If(
                                     !IsBlank(
@@ -626,11 +634,11 @@ HomepageScreen As screen:
                 Height: =40
                 Items: |-
                     =If(
-                        TabGallery3_2.Selected.Value = "常用表格",
+                        TabGallery3_2.Selected.Result = "常用表格",
                         Table({FormType:"全部"}),
                         Filter(
                             FormTableType,
-                            DepartMentName = TabGallery3_2.Selected.Value
+                            DepartMentName = TabGallery3_2.Selected.Result
                         ).FormType
                     )
                 ShowScrollbar: =false
