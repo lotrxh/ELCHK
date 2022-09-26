@@ -653,6 +653,7 @@ AdminFormDetailScreen As screen:
                 IsSearchable: =false
                 Items: =Distinct(Filter(FormTableType,If(CurrentRoleFormPermission="All",DepartMentName<>Blank(),If(CurrentRoleFormPermission="None",DepartMentName=Blank(),DepartMentName=CurrentRoleFormPermission))),DepartMentName)
                 NoSelectionText: ="選擇部門"
+                OnChange: =Reset(drpFilter_FormType)
                 PaddingLeft: =10
                 PressedColor: =Self.Color
                 PressedFill: =ColorFade(Self.Fill, -5%)
