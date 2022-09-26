@@ -140,7 +140,7 @@
                 HoverColor: =ColorFade(Self.Color, -15%)
                 HoverFill: =RGBA(255, 255, 255, 1)
                 OnSelect: |-
-                    =Launch("https://apps.powerapps.com/play/8793c6b3-448b-4c69-90ce-4ae75c7911d0?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=HomepageScreen")
+                    =Launch("https://apps.powerapps.com/play/8793c6b3-448b-4c69-90ce-4ae75c7911d0?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=GeneralFormListScreen")
                 PaddingBottom: =0
                 PaddingLeft: =0
                 PaddingRight: =0
@@ -400,7 +400,7 @@
                     //下一节点处理人为当前用户时，跳转到任务详情页面
                     Navigate(DetailGeneralFormScreen,None,{HistoryList: ApprovalIDNumber}),
                     //下一节点处理人不是当前用户时，返回主页
-                    Launch("https://apps.powerapps.com/play/8793c6b3-448b-4c69-90ce-4ae75c7911d0?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=HomepageScreen"));
+                    Launch("https://apps.powerapps.com/play/8793c6b3-448b-4c69-90ce-4ae75c7911d0?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=GeneralFormListScreen"));
                     ,
                     UpdateContext({Submitview:true})
                     

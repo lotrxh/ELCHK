@@ -2332,57 +2332,52 @@
                         },
                         If(
                             //检查，签批，助理总干事签批，总干事签批时可以拒绝任务
-                            (
-                            UEmail = User().Email && (
-                                First(
-                                        SortByColumns(
-                                            Filter(
-                                                ApprovalDetail_Table,
-                                                TaskStatus = "002",
-                                                Approval_No = FLowId
-                                            ),
-                                            "field_Priortty",
-                                            Descending
-                                        )
-                                    ).ActionNode = "檢查" 
-                                    || First(
-                                        SortByColumns(
-                                            Filter(
-                                                ApprovalDetail_Table,
-                                                TaskStatus = "002",
-                                                Approval_No = FLowId
-                                            ),
-                                            "field_Priortty",
-                                            Descending
-                                        )
-                                    ).ActionNode = "簽批" 
-                                    || First(
-                                        SortByColumns(
-                                            Filter(
-                                                ApprovalDetail_Table,
-                                                TaskStatus = "002",
-                                                Approval_No = FLowId
-                                            ),
-                                            "field_Priortty",
-                                            Descending
-                                        )
-                                    ).ActionNode = "助理總幹事審批" 
-                                    || First(
-                                        SortByColumns(
-                                            Filter(
-                                                ApprovalDetail_Table,
-                                                TaskStatus = "002",
-                                                Approval_No = FLowId
-                                            ),
-                                            "field_Priortty",
-                                            Descending
-                                        )
-                                    ).ActionNode = "總幹事審批"
-                            )
-                            )
+                            (UEmail = User().Email && (First(
+                                SortByColumns(
+                                    Filter(
+                                        ApprovalDetail_Table,
+                                        TaskStatus = "002",
+                                        Approval_No = FLowId
+                                    ),
+                                    "field_Priortty",
+                                    Descending
+                                )
+                            ).ActionNode = "檢查" || First(
+                                SortByColumns(
+                                    Filter(
+                                        ApprovalDetail_Table,
+                                        TaskStatus = "002",
+                                        Approval_No = FLowId
+                                    ),
+                                    "field_Priortty",
+                                    Descending
+                                )
+                            ).ActionNode = "簽批" || First(
+                                SortByColumns(
+                                    Filter(
+                                        ApprovalDetail_Table,
+                                        TaskStatus = "002",
+                                        Approval_No = FLowId
+                                    ),
+                                    "field_Priortty",
+                                    Descending
+                                )
+                            ).ActionNode = "助理總幹事審批" || First(
+                                SortByColumns(
+                                    Filter(
+                                        ApprovalDetail_Table,
+                                        TaskStatus = "002",
+                                        Approval_No = FLowId
+                                    ),
+                                    "field_Priortty",
+                                    Descending
+                                )
+                            ).ActionNode = "總幹事審批")) 
                             //提交经理和表格经理可以拒绝任所属部门下的任何申请
-                            || CurrentRoleTaskPermission = First(EditDetailUserForm_2).ModelDepartment || CurrentRoleTaskPermission = First(EditDetailUserForm_1).Department
-                            ,
+                            || (
+                                (CurrentRoleTaskPermission = First(EditDetailUserForm_2).ModelDepartment || CurrentRoleTaskPermission = First(EditDetailUserForm_1).Department) 
+                                && !("執行" in Filter(ApprovalDetail_Table,Approval_No = FLowId).ActionNode)
+                                ),
                             DisplayMode.Edit,
                             DisplayMode.Disabled
                         )
@@ -2433,7 +2428,7 @@
                             NotificationType.Success,
                             2000
                         );
-                        Launch("https://apps.powerapps.com/play/8793c6b3-448b-4c69-90ce-4ae75c7911d0?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=HomepageScreen");
+                        Launch("https://apps.powerapps.com/play/8793c6b3-448b-4c69-90ce-4ae75c7911d0?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=GeneralFormListScreen");
                     );
                 PaddingBottom: =0
                 PaddingLeft: =0
@@ -2594,7 +2589,7 @@
                             NotificationType.Success,
                             2000
                         );
-                        Launch("https://apps.powerapps.com/play/8793c6b3-448b-4c69-90ce-4ae75c7911d0?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=HomepageScreen");
+                        Launch("https://apps.powerapps.com/play/8793c6b3-448b-4c69-90ce-4ae75c7911d0?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=GeneralFormListScreen");
                     )
                 PaddingBottom: =0
                 PaddingLeft: =0
@@ -2844,7 +2839,7 @@
                         );
                     If(Last(Split(Label1_138.Text,"/")).Result <> User().Email,
                     //下一节点处理人不是当前用户时，跳转用户到首页
-                    Launch("https://apps.powerapps.com/play/8793c6b3-448b-4c69-90ce-4ae75c7911d0?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=HomepageScreen")
+                    Launch("https://apps.powerapps.com/play/8793c6b3-448b-4c69-90ce-4ae75c7911d0?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=GeneralFormListScreen")
                     );
                     
                         Set(
@@ -3147,7 +3142,7 @@
                             NotificationType.Success,
                             2000
                         );
-                            Launch("https://apps.powerapps.com/play/8793c6b3-448b-4c69-90ce-4ae75c7911d0?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=HomepageScreen");
+                            Launch("https://apps.powerapps.com/play/8793c6b3-448b-4c69-90ce-4ae75c7911d0?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=GeneralFormListScreen");
                     );
                 PaddingBottom: =0
                 PaddingLeft: =0
