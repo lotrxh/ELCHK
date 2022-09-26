@@ -504,7 +504,7 @@
                 },
                 "region": {
                   "charLength": 6,
-                  "charOffset": 8022,
+                  "charOffset": 8028,
                   "snippet": {
                     "text": ".Title"
                   }
@@ -544,7 +544,7 @@
                 },
                 "region": {
                   "charLength": 1,
-                  "charOffset": 8002,
+                  "charOffset": 8008,
                   "snippet": {
                     "text": "="
                   }
@@ -584,7 +584,7 @@
                 },
                 "region": {
                   "charLength": 6,
-                  "charOffset": 8504,
+                  "charOffset": 8510,
                   "snippet": {
                     "text": ".Title"
                   }
@@ -624,7 +624,7 @@
                 },
                 "region": {
                   "charLength": 1,
-                  "charOffset": 8484,
+                  "charOffset": 8490,
                   "snippet": {
                     "text": "="
                   }
@@ -664,7 +664,7 @@
                 },
                 "region": {
                   "charLength": 6,
-                  "charOffset": 8696,
+                  "charOffset": 8702,
                   "snippet": {
                     "text": ".Title"
                   }
@@ -704,7 +704,7 @@
                 },
                 "region": {
                   "charLength": 1,
-                  "charOffset": 8676,
+                  "charOffset": 8682,
                   "snippet": {
                     "text": "="
                   }
@@ -1128,6 +1128,36 @@
           },
           "ruleId": "app-SuggestRemoteExecutionHint",
           "ruleIndex": 0
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CompleteScreen.TextInput1.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "CompleteScreen.TextInput1.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "CompleteScreen",
+                "type": "CompleteScreen.TextInput1"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 1
         },
         {
           "locations": [
@@ -3007,36 +3037,6 @@
                 "member": "AccessibleLabel",
                 "module": "Design Guide Screen",
                 "type": "'Design Guide Screen'.canDesignGuide.crdFont.TextInput2_1"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 1
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "CompleteScreen.TextInput1.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "CompleteScreen.TextInput1.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "CompleteScreen",
-                "type": "CompleteScreen.TextInput1"
               }
             }
           ],
