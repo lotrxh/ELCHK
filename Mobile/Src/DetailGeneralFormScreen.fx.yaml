@@ -258,7 +258,7 @@
                     PaddingTop: =0
                     Size: =18
                     Text: =First(EditDetailUserForm_1).ModelName
-                    Width: =
+                    Width: =700
                     X: =58
                     ZIndex: =1
 
@@ -2373,7 +2373,7 @@
                                     Descending
                                 )
                             ).ActionNode = "總幹事審批")) 
-                            //提交经理和表格经理可以拒绝任所属部门下的任何申请
+                            //提交经理和表格经理可以拒绝任所属部门下的任何申请，目前没有对行动和时间做筛选
                             || (
                                 (CurrentRoleTaskPermission = First(EditDetailUserForm_2).ModelDepartment || CurrentRoleTaskPermission = First(EditDetailUserForm_1).Department) 
                                 && !("執行" in Filter(ApprovalDetail_Table,Approval_No = FLowId).ActionNode)
