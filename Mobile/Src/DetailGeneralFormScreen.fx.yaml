@@ -2331,6 +2331,8 @@
                             ).ApproverEmail
                         },
                         If(
+                            //检查，签批，助理总干事签批，总干事签批时可以拒绝任务
+                            (
                             UEmail = User().Email && (
                                 First(
                                         SortByColumns(
@@ -2376,7 +2378,11 @@
                                             Descending
                                         )
                                     ).ActionNode = "總幹事審批"
-                            ),
+                            )
+                            )
+                            //提交经理和表格经理可以拒绝任所属部门下的任何申请
+                            || CurrentRoleTaskPermission = First(EditDetailUserForm_2).ModelDepartment || CurrentRoleTaskPermission = First(EditDetailUserForm_1).Department
+                            ,
                             DisplayMode.Edit,
                             DisplayMode.Disabled
                         )
@@ -2384,6 +2390,7 @@
                 Fill: =White
                 FillPortions: =1
                 FocusedBorderThickness: =1
+                FontWeight: =FontWeight.Bold
                 Height: =36
                 HoverBorderColor: =ColorFade(Self.Color, -15%)
                 HoverColor: =ColorFade(Self.Color, -15%)

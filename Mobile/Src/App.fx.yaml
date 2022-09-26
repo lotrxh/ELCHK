@@ -1,6 +1,6 @@
 App As appinfo:
     BackEnabled: =false
-    OnStart: |
+    OnStart: |-
         =//设置主色
         Set(glbThemePrimaryColor,ColorValue( "#01A8F4" ));
         Set(glbThemeSecondaryColor,ColorValue( "#4E505C" ));
@@ -18,6 +18,18 @@ App As appinfo:
         Set(glbNeutralLightColor,ColorValue( "#EDEBE9" ));
         Set(glbNeutralLighterColor,ColorValue( "#f3f2f1" ));
         Set(FormModelIds,"ab6afc17-4e5c-4506-b597-a7b9a1df0b02");
+        //设置部门经理权限筛选
+        Set(CurrentUser,User().Email);
+        Set(
+            CurrentRoleTaskPermission,
+            If(LookUp(
+                UserInfo,
+                User_Email = CurrentUser
+            ).IsManger="是",LookUp(
+                UserInfo,
+                User_Email = CurrentUser
+            ).O_Mechanism,Blank())
+        );
     StartScreen: |-
         =If(
             Param("Screen") = "CreateGeneralFormScreen",
