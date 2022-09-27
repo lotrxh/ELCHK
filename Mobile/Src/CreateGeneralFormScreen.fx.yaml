@@ -176,13 +176,29 @@
                                 "必需項不能爲空，處理行動及處理人不能爲空",
                                 NotificationType.Error
                             ), 
-                            If((FlowType="通用流程") 
-                    || (FlowType="預設通用流程" /*&& Dropdown1_9.Selected.Result="提交"*/) || FlowType="部門簡單流程",
-                        //右边流程
-                        Set(
+                    Set(
                         ApprovalGuid,
                         GUID()
                     );
+                    
+                    If(Checkbox2_5.Value = true,
+                    //提交人信息记录
+                    Patch(
+                        ApprovalListCol,
+                        Defaults(ApprovalListCol),
+                        {
+                            idNumber: 1,
+                            ActionName: "提交",
+                            Approver: User().FullName,
+                            ApprovalEmail: User().Email,
+                            IsComplate: true,
+                            BCCUser: "",
+                            remark: ""
+                        }
+                    );
+                    );
+                    
+                    
                     Patch(
                         ApprovalListCol,
                         Defaults(ApprovalListCol),
@@ -190,7 +206,7 @@
                             idNumber: If(
                                 CountA(ApprovalListCol.ActionName) = 1,
                                 1,
-                                CountA(ApprovalListCol.ActionName) + 1
+                                CountA(ApprovalListCol.ActionName)
                             ),
                             ActionName: If(
                                 FlowType = "通用流程" && !IsBlank(
@@ -315,8 +331,9 @@
                                     }
                                 )
                             );//創建NewUserForm集合用作後續更新list-GenericUploadAttachMentFile中的FormId
-                      //执行flow上传表格到list
-                      If(Last(Attachment_Excel.Attachments).Name <> Blank(),      
+                    
+                    //执行flow上传表格到list
+                    If(Last(Attachment_Excel.Attachments).Name <> Blank(),      
                     Set(varAttachmentControl1,JSON(Image4_2.Image,IncludeBinaryData));
                     Set(varBase64Only1,Mid(varAttachmentControl1,Find(",", varAttachmentControl1)+1,Len(varAttachmentControl1)-Find (",", varAttachmentControl1)-1));
                     SendAttachmentToGenericUploadAttachMentFile.Run(GUID(),GenericFormlistGuid,First(EditUserForm).ModelType,Last(Attachment_Excel.Attachments).Name,Last(Attachment_Excel.Attachments).Name,varBase64Only1,TextInput_FormPWD.Text));
@@ -388,7 +405,7 @@
                                     Title = First(NewUserForm).Title
                                 )
                             );
-                        Notify(
+                    Notify(
                             "填寫成功！",
                             NotificationType.Success,
                             2000
@@ -399,12 +416,9 @@
                     If(If(FlowType = "通用流程",Last(Split(Label1_137.Text,"/")).Result,FlowType = "預設通用流程",Last(Split(Label1_155.Text,"/")).Result,FlowType = "部門簡單流程",Last(Split(Label1_153.Text,"/")).Result) = User().Email,
                     //下一节点处理人为当前用户时，跳转到任务详情页面
                     Navigate(DetailGeneralFormScreen,None,{HistoryList: ApprovalIDNumber}),
-                    //下一节点处理人不是当前用户时，返回主页
+                    //下一节点处理人不是当前用户时，返回認爲列表
                     Launch("https://apps.powerapps.com/play/8793c6b3-448b-4c69-90ce-4ae75c7911d0?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=GeneralFormListScreen"));
-                    ,
-                    UpdateContext({Submitview:true})
                     
-                    )
                     
                         
                     
@@ -1427,6 +1441,25 @@
                         Y: =22
                         ZIndex: =6
 
+                Checkbox2_5 As checkbox:
+                    CheckboxBorderColor: =glbNeutralTertiaryColor
+                    CheckboxSize: =24
+                    CheckmarkFill: =glbLinkColor
+                    Color: =glbNeutralPrimaryColor
+                    FocusedBorderThickness: =0
+                    Height: =24
+                    HoverBorderColor: =
+                    HoverColor: =glbNeutralPrimaryColor
+                    HoverFill: =RGBA(0, 0, 0, 0)
+                    PressedBorderColor: =
+                    PressedColor: =glbNeutralPrimaryColor
+                    PressedFill: =
+                    Size: =11
+                    Text: ="勾選后代表直接提交，勾選后下一節處理行動為提交后的審批行動"
+                    X: =40
+                    Y: =238
+                    ZIndex: =3
+
                 GeneralFlowContainer As groupContainer.manualLayoutContainer:
                     AlignInContainer: =AlignInContainer.SetByContainer
                     FillPortions: =0
@@ -1444,7 +1477,7 @@
                     Width: =Parent.Width-40
                     X: =20
                     Y: =94
-                    ZIndex: =3
+                    ZIndex: =4
 
                     Label6_17 As label:
                         Height: =28
@@ -1465,6 +1498,7 @@
                         Height: =14
                         OnSelect: =
                         Width: =14
+                        X: =4
                         Y: =7
                         ZIndex: =2
 
@@ -1648,7 +1682,7 @@
                     Width: =Parent.Width-40
                     X: =20
                     Y: =94
-                    ZIndex: =4
+                    ZIndex: =5
 
                     Label6_25 As label:
                         Height: =28
@@ -1853,7 +1887,7 @@
                     Width: =Parent.Width-40
                     X: =20
                     Y: =94
-                    ZIndex: =5
+                    ZIndex: =6
 
                     Label6_30 As label:
                         Height: =28

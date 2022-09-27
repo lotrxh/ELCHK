@@ -504,7 +504,7 @@
                 },
                 "region": {
                   "charLength": 6,
-                  "charOffset": 8028,
+                  "charOffset": 8212,
                   "snippet": {
                     "text": ".Title"
                   }
@@ -544,7 +544,7 @@
                 },
                 "region": {
                   "charLength": 1,
-                  "charOffset": 8008,
+                  "charOffset": 8192,
                   "snippet": {
                     "text": "="
                   }
@@ -584,7 +584,7 @@
                 },
                 "region": {
                   "charLength": 6,
-                  "charOffset": 8510,
+                  "charOffset": 8694,
                   "snippet": {
                     "text": ".Title"
                   }
@@ -624,7 +624,7 @@
                 },
                 "region": {
                   "charLength": 1,
-                  "charOffset": 8490,
+                  "charOffset": 8674,
                   "snippet": {
                     "text": "="
                   }
@@ -664,7 +664,7 @@
                 },
                 "region": {
                   "charLength": 6,
-                  "charOffset": 8702,
+                  "charOffset": 8886,
                   "snippet": {
                     "text": ".Title"
                   }
@@ -704,7 +704,7 @@
                 },
                 "region": {
                   "charLength": 1,
-                  "charOffset": 8682,
+                  "charOffset": 8866,
                   "snippet": {
                     "text": "="
                   }
@@ -1128,36 +1128,6 @@
           },
           "ruleId": "app-SuggestRemoteExecutionHint",
           "ruleIndex": 0
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "CompleteScreen.TextInput1.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "CompleteScreen.TextInput1.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "CompleteScreen",
-                "type": "CompleteScreen.TextInput1"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 1
         },
         {
           "locations": [
@@ -3054,6 +3024,36 @@
             {
               "logicalLocations": [
                 {
+                  "fullyQualifiedName": "CompleteScreen.TextInput1.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "CompleteScreen.TextInput1.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "CompleteScreen",
+                "type": "CompleteScreen.TextInput1"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 1
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
                   "fullyQualifiedName": "DetailGeneralFormScreen.HistoryContainer.Container16_10.Container17_5.BtnSecondIconOnly_26.AccessibleLabel"
                 }
               ],
@@ -4548,6 +4548,36 @@
           },
           "ruleId": "acc-AccessibleLabelNeeded",
           "ruleIndex": 1
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CreateGeneralFormScreen.MainflowContainer.FillInContainer.RightContainer.Checkbox2_5.FocusedBorderThickness"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "CreateGeneralFormScreen.MainflowContainer.FillInContainer.RightContainer.Checkbox2_5.FocusedBorderThickness",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "FocusedBorderThickness",
+                "module": "CreateGeneralFormScreen",
+                "type": "CreateGeneralFormScreen.MainflowContainer.FillInContainer.RightContainer.Checkbox2_5"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-FocusBorderShouldBeVisible",
+          "ruleIndex": 3
         },
         {
           "locations": [
