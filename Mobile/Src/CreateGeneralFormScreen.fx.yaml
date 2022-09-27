@@ -1456,6 +1456,7 @@
                     PressedFill: =
                     Size: =11
                     Text: ="勾選后代表直接提交，勾選后下一節處理行動為提交后的審批行動"
+                    Visible: =If(FlowType="通用流程" || FlowType="預設通用流程",true,false)
                     X: =40
                     Y: =238
                     ZIndex: =3
