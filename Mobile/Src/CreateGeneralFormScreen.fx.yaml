@@ -45,6 +45,7 @@
                     ";"
                 ).Result
             );
+            //收集checkbox選擇后的行動選項内容集合
             ClearCollect(
                 DataFlowActionCol_nonesubmit,
                 DataFlowActionCol
@@ -2169,7 +2170,8 @@
                         Height: =36
                         HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                         HoverFill: =ColorFade(Self.Fill, -5%)
-                        Items: =First(DataFlowActionCol.Result)
+                        Items: |
+                            =If(Checkbox2_5.Value = true,Index(DataFlowActionCol.Result,2),First(DataFlowActionCol.Result))
                         PaddingBottom: =5
                         PaddingRight: =0
                         PaddingTop: =5
