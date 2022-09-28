@@ -24,7 +24,7 @@
                 },
                 "region": {
                   "charLength": 6,
-                  "charOffset": 8202,
+                  "charOffset": 8216,
                   "snippet": {
                     "text": ".Title"
                   }
@@ -64,7 +64,7 @@
                 },
                 "region": {
                   "charLength": 1,
-                  "charOffset": 8182,
+                  "charOffset": 8196,
                   "snippet": {
                     "text": "="
                   }
@@ -104,7 +104,7 @@
                 },
                 "region": {
                   "charLength": 6,
-                  "charOffset": 8684,
+                  "charOffset": 8698,
                   "snippet": {
                     "text": ".Title"
                   }
@@ -144,7 +144,7 @@
                 },
                 "region": {
                   "charLength": 1,
-                  "charOffset": 8664,
+                  "charOffset": 8678,
                   "snippet": {
                     "text": "="
                   }
@@ -184,7 +184,7 @@
                 },
                 "region": {
                   "charLength": 6,
-                  "charOffset": 8876,
+                  "charOffset": 8890,
                   "snippet": {
                     "text": ".Title"
                   }
@@ -224,7 +224,7 @@
                 },
                 "region": {
                   "charLength": 1,
-                  "charOffset": 8856,
+                  "charOffset": 8870,
                   "snippet": {
                     "text": "="
                   }
@@ -3924,19 +3924,19 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "DetailGeneralFormScreen.BottomContainer_2.Container11_2.TextInput_FilterLabel_2.AccessibleLabel"
+                  "fullyQualifiedName": "DetailGeneralFormScreen.Container10_1.FillInContainer_1.RightContainer_1.Checkbox2_6.FocusedBorderThickness"
                 }
               ],
               "physicalLocation": {
                 "address": {
-                  "fullyQualifiedName": "DetailGeneralFormScreen.BottomContainer_2.Container11_2.TextInput_FilterLabel_2.AccessibleLabel",
+                  "fullyQualifiedName": "DetailGeneralFormScreen.Container10_1.FillInContainer_1.RightContainer_1.Checkbox2_6.FocusedBorderThickness",
                   "relativeAddress": 0
                 }
               },
               "properties": {
-                "member": "AccessibleLabel",
+                "member": "FocusedBorderThickness",
                 "module": "DetailGeneralFormScreen",
-                "type": "DetailGeneralFormScreen.BottomContainer_2.Container11_2.TextInput_FilterLabel_2"
+                "type": "DetailGeneralFormScreen.Container10_1.FillInContainer_1.RightContainer_1.Checkbox2_6"
               }
             }
           ],
@@ -3946,8 +3946,8 @@
           "properties": {
             "level": "Medium"
           },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 1
+          "ruleId": "acc-FocusBorderShouldBeVisible",
+          "ruleIndex": 3
         },
         {
           "locations": [
@@ -4014,36 +4014,6 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "DetailGeneralFormScreen.Container10_1.FillInContainer_1.RightContainer_1.Checkbox2_6.FocusedBorderThickness"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "DetailGeneralFormScreen.Container10_1.FillInContainer_1.RightContainer_1.Checkbox2_6.FocusedBorderThickness",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "FocusedBorderThickness",
-                "module": "DetailGeneralFormScreen",
-                "type": "DetailGeneralFormScreen.Container10_1.FillInContainer_1.RightContainer_1.Checkbox2_6"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-FocusBorderShouldBeVisible",
-          "ruleIndex": 3
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
                   "fullyQualifiedName": "DetailGeneralFormScreen.Container10_1.FillInContainer_1.RightContainer_1.NextStepContainer_1.Dropdown1_6.AccessibleLabel"
                 }
               ],
@@ -4087,6 +4057,36 @@
                 "member": "AccessibleLabel",
                 "module": "DetailGeneralFormScreen",
                 "type": "DetailGeneralFormScreen.Container10_1.FillInContainer_1.RightContainer_1.NextStepContainer_1.ComboBox1_12"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 1
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "DetailGeneralFormScreen.BottomContainer_2.Container11_2.TextInput_FilterLabel_2.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "DetailGeneralFormScreen.BottomContainer_2.Container11_2.TextInput_FilterLabel_2.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "DetailGeneralFormScreen",
+                "type": "DetailGeneralFormScreen.BottomContainer_2.Container11_2.TextInput_FilterLabel_2"
               }
             }
           ],
