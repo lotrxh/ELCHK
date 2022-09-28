@@ -188,7 +188,7 @@ AdminFormDetailScreen As screen:
                                         Radio_flowtype.SelectedText.Value = "通用流程",
                                         "補充資料;提交;檢查;簽批;助理總幹事審批;總幹事審批;跟進",
                                         If(
-                                            Radio_flowtype.SelectedText.Value = "預設通用流程",
+                                            Radio_flowtype.SelectedText.Value = "預設流程",
                                             "提交;" & If(
                                                 Checkbox1_3.Value = true,
                                                 Checkbox1_3.Text & ";",
@@ -292,7 +292,7 @@ AdminFormDetailScreen As screen:
                                             Radio_flowtype.SelectedText.Value = "通用流程",
                                             "補充資料;提交;檢查;簽批;助理總幹事審批;總幹事審批;跟進",
                                             If(
-                                                Radio_flowtype.SelectedText.Value = "預設通用流程",
+                                                Radio_flowtype.SelectedText.Value = "預設流程",
                                                 "提交;" & If(
                                                     Checkbox1_3.Value = true,
                                                     Checkbox1_3.Text & ";",
@@ -860,7 +860,7 @@ AdminFormDetailScreen As screen:
                     PaddingTop: =0
                     Size: =12
                     Text: ="標籤輸入指引"
-                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
+                    Visible: =If(Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
                     Width: =120
                     X: =892
                     Y: =357
@@ -888,7 +888,7 @@ AdminFormDetailScreen As screen:
                     RadiusTopLeft: =0
                     RadiusTopRight: =0
                     Size: =12
-                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
+                    Visible: =If(Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
                     Width: =270
                     X: =892
                     Y: =390
@@ -959,7 +959,7 @@ AdminFormDetailScreen As screen:
                     RadioSelectionFill: =glbLinkColor
                     RadioSize: =24
                     Size: =11
-                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
+                    Visible: =If(Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
                     Width: =150
                     X: =311
                     Y: =521
@@ -974,7 +974,7 @@ AdminFormDetailScreen As screen:
                     PaddingTop: =0
                     Size: =12
                     Text: ="申請附件"
-                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
+                    Visible: =If(Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
                     Width: =64
                     X: =311
                     Y: =487
@@ -989,7 +989,7 @@ AdminFormDetailScreen As screen:
                     PaddingTop: =0
                     Size: =12
                     Text: ="*"
-                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
+                    Visible: =If(Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
                     Width: =120
                     X: =303
                     Y: =484
@@ -1116,7 +1116,7 @@ AdminFormDetailScreen As screen:
                     RadioSelectionFill: =glbLinkColor
                     RadioSize: =24
                     Size: =11
-                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
+                    Visible: =If(Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
                     Width: =233
                     X: =23
                     Y: =521
@@ -1131,7 +1131,7 @@ AdminFormDetailScreen As screen:
                     PaddingTop: =0
                     Size: =12
                     Text: ="表格密碼"
-                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
+                    Visible: =If(Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
                     Width: =120
                     X: =23
                     Y: =484
@@ -1146,7 +1146,7 @@ AdminFormDetailScreen As screen:
                     PaddingTop: =0
                     Size: =12
                     Text: ="*"
-                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
+                    Visible: =If(Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
                     Width: =120
                     X: =13
                     Y: =484
@@ -1165,7 +1165,7 @@ AdminFormDetailScreen As screen:
                     Height: =32
                     HoverColor: =RGBA(0, 0, 0, 1)
                     HoverFill: =RGBA(0, 0, 0, 0)
-                    Items: =["通用流程","預設通用流程","部門簡單流程","範本"]
+                    Items: =["通用流程","預設流程","部門簡單流程","範本"]
                     Layout: =Layout.Horizontal
                     PaddingBottom: =0
                     PaddingTop: =0
@@ -1223,7 +1223,7 @@ AdminFormDetailScreen As screen:
                     PaddingTop: =0
                     Size: =12
                     Text: ="預設通用流程選擇行動"
-                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程",true,false)
+                    Visible: =If(Radio_flowtype.Selected.Value="預設流程",true,false)
                     Width: =175
                     X: =602
                     Y: =275
@@ -1233,7 +1233,7 @@ AdminFormDetailScreen As screen:
                     CheckboxBorderColor: =glbNeutralTertiaryColor
                     CheckboxSize: =24
                     CheckmarkFill: =glbLinkColor
-                    Default: =If(("簽批" in First(EditForm).SelectedActions) && First(EditForm).FlowType="預設通用流程",true,false)
+                    Default: =If(("簽批" in First(EditForm).SelectedActions) && First(EditForm).FlowType="預設流程",true,false)
                     FocusedBorderColor: =RGBA(0, 0, 0, 0)
                     Height: =32
                     HoverBorderColor: =RGBA(0, 0, 0, 0)
@@ -1242,7 +1242,7 @@ AdminFormDetailScreen As screen:
                     PressedBorderColor: =RGBA(0, 0, 0, 0)
                     Size: =11
                     Text: ="簽批"
-                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程",true,false)
+                    Visible: =If(Radio_flowtype.Selected.Value="預設流程",true,false)
                     Width: =77
                     X: =700
                     Y: =306
@@ -1252,7 +1252,7 @@ AdminFormDetailScreen As screen:
                     CheckboxBorderColor: =glbNeutralTertiaryColor
                     CheckboxSize: =24
                     CheckmarkFill: =glbLinkColor
-                    Default: =If(("助總總幹事審批" in First(EditForm).SelectedActions) && First(EditForm).FlowType="預設通用流程",true,false)
+                    Default: =If(("助總總幹事審批" in First(EditForm).SelectedActions) && First(EditForm).FlowType="預設流程",true,false)
                     FocusedBorderColor: =RGBA(0, 0, 0, 0)
                     Height: =32
                     HoverBorderColor: =RGBA(0, 0, 0, 0)
@@ -1261,7 +1261,7 @@ AdminFormDetailScreen As screen:
                     PressedBorderColor: =RGBA(0, 0, 0, 0)
                     Size: =11
                     Text: ="助總總幹事審批"
-                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程",true,false)
+                    Visible: =If(Radio_flowtype.Selected.Value="預設流程",true,false)
                     Width: =151
                     X: =800
                     Y: =306
@@ -1271,7 +1271,7 @@ AdminFormDetailScreen As screen:
                     CheckboxBorderColor: =glbNeutralTertiaryColor
                     CheckboxSize: =24
                     CheckmarkFill: =glbLinkColor
-                    Default: =If(("總幹事審批" in First(EditForm).SelectedActions) && First(EditForm).FlowType="預設通用流程",true,false)
+                    Default: =If(("總幹事審批" in First(EditForm).SelectedActions) && First(EditForm).FlowType="預設流程",true,false)
                     FocusedBorderColor: =RGBA(0, 0, 0, 0)
                     Height: =32
                     HoverBorderColor: =RGBA(0, 0, 0, 0)
@@ -1280,7 +1280,7 @@ AdminFormDetailScreen As screen:
                     PressedBorderColor: =RGBA(0, 0, 0, 0)
                     Size: =11
                     Text: ="總幹事審批"
-                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程",true,false)
+                    Visible: =If(Radio_flowtype.Selected.Value="預設流程",true,false)
                     Width: =120
                     X: =965
                     Y: =306
@@ -1290,7 +1290,7 @@ AdminFormDetailScreen As screen:
                     CheckboxBorderColor: =glbNeutralTertiaryColor
                     CheckboxSize: =24
                     CheckmarkFill: =glbLinkColor
-                    Default: =If(("檢查" in First(EditForm).SelectedActions) && First(EditForm).FlowType="預設通用流程",true,false)
+                    Default: =If(("檢查" in First(EditForm).SelectedActions) && First(EditForm).FlowType="預設流程",true,false)
                     FocusedBorderColor: =RGBA(0, 0, 0, 0)
                     Height: =32
                     HoverBorderColor: =RGBA(0, 0, 0, 0)
@@ -1299,7 +1299,7 @@ AdminFormDetailScreen As screen:
                     PressedBorderColor: =RGBA(0, 0, 0, 0)
                     Size: =11
                     Text: ="檢查"
-                    Visible: =If(Radio_flowtype.Selected.Value="預設通用流程",true,false)
+                    Visible: =If(Radio_flowtype.Selected.Value="預設流程",true,false)
                     Width: =83
                     X: =599
                     Y: =306
