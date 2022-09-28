@@ -2788,6 +2788,9 @@
                     RemoveIf(ApprovalDetail_Table,TaskStatus="002",Approval_No=FLowId);
                     //UpdateIf(ApprovalDetail_Table,Title=First(SortByColumns(Filter(ApprovalDetail_Table,TaskStatus="004",Approval_No=FLowId),"field_Priortty",Descending)).Title,{TaskStatus:"002",Advise:""});
                     //更新審批詳情表，新增一條提交申請，如果之前流程中沒有提交則退回到填寫人，即新增一條填寫申請
+                    If("提交" in Filter(
+                                ApprovalDetail_Table,
+                                Approval_No = FLowId).ActionNode,
                         With(
                                 {
                                     Lastsubmit: First(
@@ -2828,8 +2831,50 @@
                                     TaskStatus: "002",
                                     ActionNode: "提交"
                                 }
+                                )
+                            ),
+                            With(
+                                {
+                                    Lastsubmit: First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                //TaskStatus = "002",
+                                                Approval_No = FLowId,
+                                                ActionNode = "填寫"
+                                    
+                                            ),
+                                            "field_Priortty",
+                                            Descending
+                                        )
+                                    )
+                                },
+                            Patch(
+                                ApprovalDetail_Table,
+                                Defaults(ApprovalDetail_Table),
+                                {
+                                    Title: GUID(),
+                                    Approval_No: FLowId,
+                                    Advise: TextInput2_34.Text,
+                                    ApprovalBCC: Lastsubmit.ApprovalBCC,
+                                    Approver: Lastsubmit.Approver,
+                                    ApproverEmail: Lastsubmit.ApproverEmail,
+                                    Priortty: First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                Approval_No = FLowId
+                                            ),
+                                            "field_Priortty",
+                                            Descending
+                                        )
+                                    ).Priortty + 1,
+                                    TaskStatus: "002",
+                                    ActionNode: "填寫"
+                                }
+                                )
                             )
-                              );
+                        );
                         Notify(
                             "退回成功！",
                             NotificationType.Success,
