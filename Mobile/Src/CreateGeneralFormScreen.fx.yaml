@@ -184,7 +184,7 @@
                 OnSelect: |-
                     =//左边填写内容上传必選項判斷及流程必選項
                     If( 
-                        (Attachment_Excel.Visible = true &&Last(Attachment_Excel.Attachments).Name = Blank()) || (Attachment_Zip.Visible = true && Last(Attachment_Zip.Attachments).Name = Blank()) || (Label6.Visible = true && IsBlank(TextInput_FormPWD) && IsBlank(TextInput_FormPWD_1)) || (Label6_1.Visible = true && IsBlank(TextInput_zipPWD)&& IsBlank(TextInput_zipPWD_1)) || IsEmpty(drpFilterDepartment_1.SelectedItems) || (FlowType="預設通用流程" && (Dropdown1_9.Selected.Result=Blank() || Label1_155.Text = Blank())) || (FlowType="通用流程" && (Dropdown1_5.Selected.Result=Blank() || Label1_137.Text = Blank())) || (FlowType="部門簡單流程" &&  Label1_153.Text = "/")
+                        (Attachment_Excel.Visible = true &&Last(Attachment_Excel.Attachments).Name = Blank()) || (Attachment_Zip.Visible = true && Last(Attachment_Zip.Attachments).Name = Blank()) || (Label6.Visible = true && IsBlank(TextInput_FormPWD) && IsBlank(TextInput_FormPWD_1)) || (Label6_1.Visible = true && IsBlank(TextInput_zipPWD)&& IsBlank(TextInput_zipPWD_1)) || IsEmpty(drpFilterDepartment_1.SelectedItems) || (FlowType="預設流程" && (Dropdown1_9.Selected.Result=Blank() || Label1_155.Text = Blank())) || (FlowType="通用流程" && (Dropdown1_5.Selected.Result=Blank() || Label1_137.Text = Blank())) || (FlowType="部門簡單流程" &&  Label1_153.Text = "/")
                             ,
                             Notify(
                                 "必需項不能爲空，處理行動及處理人不能爲空",
@@ -230,18 +230,18 @@
                                     ).SelectedActions
                                 ),
                                 Dropdown1_5.Selected.Result,
-                                If(FlowType = "預設通用流程",Dropdown1_9.Selected.Result,If(FlowType = "部門簡單流程",Dropdown1_7.Selected.Value))
+                                If(FlowType = "預設流程",Dropdown1_9.Selected.Result,If(FlowType = "部門簡單流程",Dropdown1_7.Selected.Value))
                             ),
-                            ApprovalEmail: If(FlowType = "通用流程",Last(Split(Label1_137.Text,"/")).Result,If(FlowType = "預設通用流程",Last(Split(Label1_155.Text,"/")).Result,If(FlowType = "部門簡單流程",Last(Split(Label1_153.Text,"/")).Result))),
+                            ApprovalEmail: If(FlowType = "通用流程",Last(Split(Label1_137.Text,"/")).Result,If(FlowType = "預設流程",Last(Split(Label1_155.Text,"/")).Result,If(FlowType = "部門簡單流程",Last(Split(Label1_153.Text,"/")).Result))),
                             //Gallery2_2.Selected.AllOwnerName.Email,
-                            Approver: If(FlowType = "通用流程",First(Split(Label1_137.Text,"/")).Result,If(FlowType = "預設通用流程",First(Split(Label1_155.Text,"/")).Result,If(FlowType = "部門簡單流程",First(Split(Label1_153.Text,"/")).Result))),
+                            Approver: If(FlowType = "通用流程",First(Split(Label1_137.Text,"/")).Result,If(FlowType = "預設流程",First(Split(Label1_155.Text,"/")).Result,If(FlowType = "部門簡單流程",First(Split(Label1_153.Text,"/")).Result))),
                             //First(Split(Gallery2_2.Selected.AllOwnerName.DisplayName," ").Result).Result,
                             IsComplate: false,
                             BCCUser: If(FlowType = "通用流程",Concat(
                                 ComboBox1_11.SelectedItems.Mail,
                                 Mail,
                                 ","
-                            ),If(FlowType = "預設通用流程",Concat(
+                            ),If(FlowType = "預設流程",Concat(
                                 ComboBox1_15.SelectedItems.Mail,
                                 Mail,
                                 ","
@@ -427,7 +427,7 @@
                         //測試時導航到具體任務頁面，實際使用應該退回到首頁
                     //Navigate(DetailGeneralFormScreen,None,{HistoryList: ApprovalIDNumber});
                     
-                    If(If(FlowType = "通用流程",Last(Split(Label1_137.Text,"/")).Result,FlowType = "預設通用流程",Last(Split(Label1_155.Text,"/")).Result,FlowType = "部門簡單流程",Last(Split(Label1_153.Text,"/")).Result) = User().Email,
+                    If(If(FlowType = "通用流程",Last(Split(Label1_137.Text,"/")).Result,FlowType = "預設流程",Last(Split(Label1_155.Text,"/")).Result,FlowType = "部門簡單流程",Last(Split(Label1_153.Text,"/")).Result) = User().Email,
                     //下一节点处理人为当前用户时，跳转到任务详情页面
                     Navigate(DetailGeneralFormScreen,None,{HistoryList: ApprovalIDNumber}),
                     //下一节点处理人不是当前用户时，返回認爲列表
@@ -1470,7 +1470,7 @@
                     PressedFill: =
                     Size: =11
                     Text: ="勾選后代表直接提交，勾選后下一節處理行動為提交后的審批行動"
-                    Visible: =If(FlowType="通用流程" || FlowType="預設通用流程",true,false)
+                    Visible: =If(FlowType="通用流程" || FlowType="預設流程",true,false)
                     X: =40
                     Y: =238
                     ZIndex: =3
@@ -2105,14 +2105,14 @@
                             true,
                             false
                         )*/
-                        /*FlowType = "預設通用流程" && !IsBlank(
+                        /*FlowType = "預設流程" && !IsBlank(
                             LookUp(
                                 GenericFormModel,
                                 Title = FormModelId
                             ).SelectedActions
                         )*/
                         
-                        If(FlowType="預設通用流程",true,false)
+                        If(FlowType="預設流程",true,false)
                     Width: =Parent.Width-40
                     X: =20
                     Y: =94

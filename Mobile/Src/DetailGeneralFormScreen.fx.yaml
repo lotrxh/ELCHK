@@ -394,7 +394,9 @@
                     Size: =12
                     Text: ="待處理"
                     Visible: |-
-                        =If("執行" in 
+                        =If(
+                            //任務執行完成后不可見
+                            "執行" in 
                                             
                                                 Filter(
                                                     ApprovalDetail_Table,
@@ -402,7 +404,19 @@
                                                     Approval_No = FLowId
                                                 
                                             
-                                        ).ActionNode ,false,true)
+                                        ).ActionNode 
+                                        //任務拒絕后不可見
+                                       || First(
+                                    SortByColumns(
+                                                Filter(
+                                                    ApprovalDetail_Table,
+                                                    Approval_No = FLowId
+                                                                            ),
+                                                "field_Priortty",
+                                                Descending
+                                            )
+                                        ).TaskStatus = "000"
+                                        ,false,true)
                     Width: =120
                     X: =1245
                     Y: =14
@@ -1914,7 +1928,7 @@
                     TemplatePadding: =0
                     TemplateSize: =180
                     Visible: |-
-                        =If(FlowType = "通用流程" || FlowType = "預設通用流程" || FlowType = "部門簡單流程",true,false)
+                        =If(FlowType = "通用流程" || FlowType = "預設流程" || FlowType = "部門簡單流程",true,false)
                         /*&& IsBlank(
                             LookUp(
                                 GenericFormModel,
@@ -2125,7 +2139,7 @@
                     LayoutMinWidth: =250
                     Visible: |-
                         =// flow类型是通用且当前节点不为执行时显示，否则不显示
-                        //If(FlowType = "通用流程" || FlowType = "預設通用流程" || FlowType = "部門簡單流程",true,false)
+                        //If(FlowType = "通用流程" || FlowType = "預設流程" || FlowType = "部門簡單流程",true,false)
                         /*&& IsBlank(
                             LookUp(
                                 GenericFormModel,
@@ -2170,6 +2184,17 @@
                                                 Descending
                                             )
                                         ).ActionNode = "提交") 
+                        //拒絕任務后不可見
+                        || First(
+                                    SortByColumns(
+                                                Filter(
+                                                    ApprovalDetail_Table,
+                                                    Approval_No = FLowId
+                                                                            ),
+                                                "field_Priortty",
+                                                Descending
+                                            )
+                                        ).TaskStatus = "000"
                                         ,false,true)
                     Width: =Parent.Width-40
                     X: =20
@@ -2230,7 +2255,7 @@
                         Items: |-
                             =If(FlowType = "通用流程",
                                 If("提交" in Filter(ApprovalDetail_Table,Approval_No=FLowId).ActionNode,DataFlowActionCol2.Result,DataFlowActionCol.Result),
-                                FlowType = "預設通用流程",If("跟進" in Filter(ApprovalDetail_Table,Approval_No=FLowId).ActionNode,DataFlowActionCol4.Result,First(DataFlowActionCol3.Result)),FlowType = "部門簡單流程",DataFlowActionCol.Result)
+                                FlowType = "預設流程",If("跟進" in Filter(ApprovalDetail_Table,Approval_No=FLowId).ActionNode,DataFlowActionCol4.Result,First(DataFlowActionCol3.Result)),FlowType = "部門簡單流程",DataFlowActionCol.Result)
                         PaddingBottom: =5
                         PaddingRight: =0
                         PaddingTop: =5
