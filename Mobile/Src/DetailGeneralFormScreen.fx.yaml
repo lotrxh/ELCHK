@@ -640,7 +640,7 @@
                         PaddingRight: =0
                         PaddingTop: =0
                         Size: =12
-                        Text: ="發起人："
+                        Text: ="填寫人："
                         Width: =80
                         ZIndex: =1
 
@@ -1682,111 +1682,6 @@
                         Image: =Last(Attachment_Zip2.Attachments).Value
                         ZIndex: =5
 
-                FilterLabelContainer_1 As groupContainer.verticalAutoLayoutContainer:
-                    Fill: =RGBA(255, 255, 255, 1)
-                    FillPortions: =0
-                    Height: =90
-                    LayoutDirection: =LayoutDirection.Vertical
-                    LayoutGap: =6
-                    LayoutMinHeight: =100
-                    LayoutMinWidth: =250
-                    LayoutMode: =LayoutMode.Auto
-                    PaddingLeft: =20
-                    Visible: |-
-                        =With(
-                            {
-                                UEmail: LookUp(
-                                    ApprovalDetail_Table,
-                                    Approval_No = Label5.Text && TaskStatus = "002"
-                                ).ApproverEmail
-                            },
-                        If(First(EditDetailUserForm_2).CustomFilter<>Blank() 
-                        && 
-                        //通用流程和預設流程執行時
-                        (Checkbox2_6.Value = true 
-                           //部门简单流程第二次提交后可以执行，第一次提交未选定部门邮箱，不能执行，第二次提交给具体负责人后,負責人點擊同意即执行，任務完成
-                           ||  UEmail = User().Email 
-                                &&(FlowType = "部門簡單流程" && First(
-                                            SortByColumns(
-                                                Filter(
-                                                    ApprovalDetail_Table,
-                                                    //TaskStatus = "002",
-                                                    Approval_No = FLowId,
-                                                    Priortty = "2"
-                                                                            ),
-                                                "field_Priortty",
-                                                Descending
-                                            )
-                                        ).ActionNode = "提交")),true,false))
-                        //true
-                    ZIndex: =3
-
-                    Label9_28 As label:
-                        Color: =glbNeutralPrimaryColor
-                        FontWeight: =FontWeight.Semibold
-                        Height: =30
-                        PaddingBottom: =0
-                        PaddingLeft: =0
-                        PaddingRight: =0
-                        PaddingTop: =0
-                        Text: ="標籤"
-                        Width: =140
-                        X: =20
-                        Y: =363
-                        ZIndex: =1
-
-                    TextInput_FilterLabel_1 As text:
-                        BorderColor: =glbNeutralTertiaryColor
-                        BorderThickness: =1
-                        Color: =glbNeutralPrimaryColor
-                        Default: =""
-                        FocusedBorderColor: =glbNeutralSecondaryColor
-                        FocusedBorderThickness: =1
-                        Height: =36
-                        HintText: =First(EditDetailUserForm_2).CustomFilter
-                        HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
-                        HoverFill: =ColorFade(Self.Fill, -5%)
-                        PaddingBottom: =0
-                        PaddingLeft: =10
-                        PaddingRight: =0
-                        PaddingTop: =0
-                        PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
-                        RadiusBottomLeft: =0
-                        RadiusBottomRight: =0
-                        RadiusTopLeft: =0
-                        RadiusTopRight: =0
-                        Size: =12
-                        Visible: |-
-                            =With(
-                                {
-                                    UEmail: LookUp(
-                                        ApprovalDetail_Table,
-                                        Approval_No = Label5.Text && TaskStatus = "002"
-                                    ).ApproverEmail
-                                },
-                            If(First(EditDetailUserForm_2).CustomFilter<>Blank() 
-                            && 
-                            //通用流程和預設流程執行時
-                            (Checkbox2_6.Value = true 
-                               //部门简单流程第二次提交后可以执行，第一次提交未选定部门邮箱，不能执行，第二次提交给具体负责人后,負責人點擊同意即执行，任務完成
-                               ||  UEmail = User().Email 
-                                    &&(FlowType = "部門簡單流程" && First(
-                                                SortByColumns(
-                                                    Filter(
-                                                        ApprovalDetail_Table,
-                                                        //TaskStatus = "002",
-                                                        Approval_No = FLowId,
-                                                        Priortty = "2"
-                                                                                ),
-                                                    "field_Priortty",
-                                                    Descending
-                                                )
-                                            ).ActionNode = "提交")),true,false))
-                        Width: =Parent.Width-40
-                        X: =20
-                        Y: =30
-                        ZIndex: =3
-
                 CommentsContainer_1 As groupContainer.verticalAutoLayoutContainer:
                     AlignInContainer: =AlignInContainer.SetByContainer
                     Fill: =RGBA(255, 255, 255, 1)
@@ -2522,6 +2417,21 @@
             X: =(Parent.Width-Self.Width)/2
             ZIndex: =9
 
+            Label9_32 As label:
+                Color: =glbNeutralPrimaryColor
+                FontWeight: =FontWeight.Semibold
+                Height: =36
+                LayoutMinWidth: =80
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: ="審批備注"
+                Width: =70
+                X: =20
+                Y: =363
+                ZIndex: =1
+
             TextInput2_34 As text:
                 BorderColor: =glbNeutralTertiaryColor
                 BorderThickness: =1
@@ -2534,7 +2444,7 @@
                 HintText: ="請輸入審批建議"
                 HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                 HoverFill: =ColorFade(Self.Fill, -5%)
-                LayoutMinWidth: =340
+                LayoutMinWidth: =250
                 Mode: =TextMode.MultiLine
                 PaddingBottom: =10
                 PaddingLeft: =10
@@ -2549,7 +2459,102 @@
                 Width: =1060
                 X: =20
                 Y: =12
-                ZIndex: =1
+                ZIndex: =2
+
+            Label9_35 As label:
+                Color: =glbNeutralPrimaryColor
+                FontWeight: =FontWeight.Semibold
+                Height: =36
+                LayoutMinWidth: =40
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Text: ="標籤"
+                Visible: |
+                    =With(
+                        {
+                            UEmail: LookUp(
+                                ApprovalDetail_Table,
+                                Approval_No = Label5.Text && TaskStatus = "002"
+                            ).ApproverEmail
+                        },
+                    If(First(EditDetailUserForm_2).CustomFilter<>Blank() 
+                    && 
+                    //通用流程和預設流程執行時
+                    (Checkbox2_6.Value = true 
+                       //部门简单流程第二次提交后可以执行，第一次提交未选定部门邮箱，不能执行，第二次提交给具体负责人后,負責人點擊同意即执行，任務完成
+                       ||  UEmail = User().Email 
+                            &&(FlowType = "部門簡單流程" && First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                //TaskStatus = "002",
+                                                Approval_No = FLowId,
+                                                Priortty = "2"
+                                                                        ),
+                                            "field_Priortty",
+                                            Descending
+                                        )
+                                    ).ActionNode = "提交")),true,false))
+                Width: =35
+                X: =20
+                Y: =363
+                ZIndex: =3
+
+            TextInput_FilterLabel_2 As text:
+                BorderColor: =glbNeutralTertiaryColor
+                BorderThickness: =1
+                Color: =glbNeutralPrimaryColor
+                Default: =""
+                FillPortions: =1
+                FocusedBorderColor: =glbNeutralSecondaryColor
+                FocusedBorderThickness: =1
+                Height: =36
+                HintText: =First(EditDetailUserForm_2).CustomFilter
+                HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                HoverFill: =ColorFade(Self.Fill, -5%)
+                Mode: =TextMode.MultiLine
+                PaddingBottom: =0
+                PaddingLeft: =10
+                PaddingRight: =0
+                PaddingTop: =10
+                PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =12
+                Visible: |
+                    =With(
+                        {
+                            UEmail: LookUp(
+                                ApprovalDetail_Table,
+                                Approval_No = Label5.Text && TaskStatus = "002"
+                            ).ApproverEmail
+                        },
+                    If(First(EditDetailUserForm_2).CustomFilter<>Blank() 
+                    && 
+                    //通用流程和預設流程執行時
+                    (Checkbox2_6.Value = true 
+                       //部门简单流程第二次提交后可以执行，第一次提交未选定部门邮箱，不能执行，第二次提交给具体负责人后,負責人點擊同意即执行，任務完成
+                       ||  UEmail = User().Email 
+                            &&(FlowType = "部門簡單流程" && First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                //TaskStatus = "002",
+                                                Approval_No = FLowId,
+                                                Priortty = "2"
+                                                                        ),
+                                            "field_Priortty",
+                                            Descending
+                                        )
+                                    ).ActionNode = "提交")),true,false))
+                Width: =Parent.Width-40
+                X: =20
+                Y: =30
+                ZIndex: =4
 
             BtnDefaultLg_7 As button:
                 BorderColor: =Self.Color
@@ -2692,7 +2697,7 @@
                 Width: =100
                 X: =1219
                 Y: =12
-                ZIndex: =2
+                ZIndex: =5
 
             BtnDefaultLg_8 As button:
                 BorderColor: =Self.Color
@@ -2898,7 +2903,7 @@
                 Width: =100
                 X: =1219
                 Y: =12
-                ZIndex: =3
+                ZIndex: =6
 
             BtnPrimaryLg_8 As button:
                 BorderColor: =Self.Fill
@@ -2931,7 +2936,7 @@
                 OnSelect: |-
                     =//判斷必填字段是否爲空
                     If(
-                        (Label6_2.Visible = true && Last(Attachment_Excel2.Attachments).Name <> Blank() && IsBlank(TextInput2_30) && IsBlank(TextInput2_35)) || (Label6_3.Visible = true && Last(Attachment_Zip2.Attachments).Name <> Blank() && IsBlank(TextInput2_31) && IsBlank(TextInput2_37)) || (Dropdown1_6.Visible = true && Dropdown1_6.Selected.Result = Blank()) || (Label1_138.Visible = true && Label1_138.Text = "/") || (TextInput_FilterLabel_1.Visible = true && IsBlank(TextInput_FilterLabel_1)),
+                        (Label6_2.Visible = true && Last(Attachment_Excel2.Attachments).Name <> Blank() && IsBlank(TextInput2_30) && IsBlank(TextInput2_35)) || (Label6_3.Visible = true && Last(Attachment_Zip2.Attachments).Name <> Blank() && IsBlank(TextInput2_31) && IsBlank(TextInput2_37)) || (Dropdown1_6.Visible = true && Dropdown1_6.Selected.Result = Blank()) || (Label1_138.Visible = true && Label1_138.Text = "/") || (TextInput_FilterLabel_2.Visible = true && IsBlank(TextInput_FilterLabel_2)),
                         Notify(
                             "必需項不能爲空，處理行動及處理人不能爲空",
                             NotificationType.Error
@@ -3053,7 +3058,7 @@
                             GenericFormList,
                             Title = FormListId,
                             {
-                                FilterLabel:TextInput_FilterLabel_1.Text
+                                FilterLabel:TextInput_FilterLabel_2.Text
                             }
                         );
                        // 勾選后直接执行，并且审批完成
@@ -3283,304 +3288,7 @@
                 Width: =100
                 X: =1102
                 Y: =12
-                ZIndex: =4
-
-            BtnPrimaryLg_10 As button:
-                BorderColor: =Self.Fill
-                BorderThickness: =1
-                DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                DisplayMode: |-
-                    =With(
-                        {
-                            UEmail: LookUp(
-                                ApprovalDetail_Table,
-                                Approval_No = Label5.Text && TaskStatus = "002"
-                            ).ApproverEmail
-                        },
-                        If(
-                            UEmail = User().Email 
-                            && (First(
-                                        SortByColumns(
-                                            Filter(
-                                                ApprovalDetail_Table,
-                                                TaskStatus = "002",
-                                                Approval_No = FLowId
-                                            ),
-                                            "field_Priortty",
-                                            Descending
-                                        )
-                                    ).ActionNode = "跟進" 
-                                //部门简单流程第二次提交后可以执行，第一次提交未选定部门邮箱，不能执行，第二次提交给具体负责人后可以执行
-                                ||(FlowType = "部門簡單流程" && First(
-                                        SortByColumns(
-                                            Filter(
-                                                ApprovalDetail_Table,
-                                                //TaskStatus = "002",
-                                                Approval_No = FLowId,
-                                                Priortty = "2"
-                                                                        ),
-                                            "field_Priortty",
-                                            Descending
-                                        )
-                                    ).ActionNode = "提交") 
-                                /*//退回后不能执行
-                                ("跟進" in Filter(ApprovalDetail_Table,Approval_No=FLowId).ActionNode && CountA(Filter(ApprovalDetail_Table,Approval_No=FLowId,ActionNode="提交").ActionNode)<2)
-                                //部门简单流程第二次提交后可以执行，第一次提交未选定部门邮箱，不能执行，第二次提交给具体负责人后可以执行
-                                || (FlowType = "部門簡單流程" && First(
-                                        SortByColumns(
-                                            Filter(
-                                                ApprovalDetail_Table,
-                                                //TaskStatus = "002",
-                                                Approval_No = FLowId,
-                                                Priortty = "2"
-                                                                        ),
-                                            "field_Priortty",
-                                            Descending
-                                        )
-                                    ).ActionNode = "提交") 
-                                    //退回后提交未跟进时不能执行，更进后可以执行
-                                    || First(SortByColumns(
-                                            Filter(
-                                                ApprovalDetail_Table,
-                                                //TaskStatus = "002",
-                                                Approval_No = FLowId,
-                                                ActionNode = "跟進"            
-                                                                        ),
-                                            "field_Priortty",
-                                            Descending
-                                        )).Created > First(SortByColumns(
-                                            Filter(
-                                                ApprovalDetail_Table,
-                                                //TaskStatus = "002",
-                                                Approval_No = FLowId,
-                                                ActionNode = "提交"
-                                                                        ),
-                                            "field_Priortty",
-                                            Descending
-                                        )).Created*/
-                                ),
-                            DisplayMode.Edit,
-                            DisplayMode.Disabled
-                        )
-                    )
-                Fill: =glbThemePrimaryColor
-                FillPortions: =1
-                FocusedBorderThickness: =1
-                Height: =36
-                HoverFill: =ColorFade(Self.Fill, -15%)
-                LayoutMinWidth: =100
-                OnSelect: |
-                    =//判斷必填字段是否爲空
-                    If(
-                        (Label6_2.Visible = true && Last(Attachment_Excel2.Attachments).Name <> Blank() && IsBlank(TextInput2_30) && IsBlank(TextInput2_35)) || (Label6_3.Visible = true && Last(Attachment_Zip2.Attachments).Name <> Blank() && IsBlank(TextInput2_31) && IsBlank(TextInput2_37)) || (TextInput_FilterLabel_1.Visible = true && IsBlank(TextInput_FilterLabel_1)),
-                        Notify(
-                            "必需項不能爲空",
-                            NotificationType.Error
-                        ),
-                    //更新GenericFormList标签
-                    
-                    UpdateIf(
-                            GenericFormList,
-                            Title = FormListId,
-                            {
-                                FilterLabel:TextInput_FilterLabel_1.Text
-                            }
-                        );
-                    
-                        //上傳表格
-                        If(Last(Attachment_Excel2.Attachments).Name <> Blank(),
-                    Set(varAttachmentControl5,JSON(Image2.Image,IncludeBinaryData));
-                    Set(varBase64Only5,Mid(varAttachmentControl5,Find(",", varAttachmentControl5)+1,Len(varAttachmentControl5)-Find (",", varAttachmentControl5)-1));
-                    SendAttachmentToGenericUploadAttachMentFile.Run(GUID(),First(EditDetailUserForm_1).Title,First(EditDetailUserForm_1).FormType,First(Split(AttachmentExcelName,".")).Result&"_"&Text(
-                                            Right(
-                                                    First(Split(
-                                                    Last(
-                                                        SortByColumns(
-                                                            Filter(
-                                                                GenericUploadAttachMentFile,
-                                                                StartsWith(
-                                                                    FormAttachMent,
-                                                                    AttachmentExcelName
-                                                                ) && 
-                                                                FormId = FormListId
-                                                                //FormId=First(EditDetailUserForm_1).Title
-                                                            ),
-                                                            "FormAttachMent",
-                                                            Ascending
-                                                        )
-                                                    ).FormAttachMent,".")).Result
-                                                ,
-                                                3
-                                            ) + 1,
-                                            "000"
-                                        )&Last(Split(AttachmentExcelName,".")).Result
-                    ,First(Split(AttachmentExcelName,".")).Result&"_"&Text(
-                                            Right(
-                                                    First(Split(
-                                                    Last(
-                                                        SortByColumns(
-                                                            Filter(
-                                                                GenericUploadAttachMentFile,
-                                                                StartsWith(
-                                                                    FormAttachMent,
-                                                                    AttachmentExcelName
-                                                                ) && 
-                                                                FormId = FormListId
-                                                                //FormId=First(EditDetailUserForm_1).Title
-                                                            ),
-                                                            "FormAttachMent",
-                                                            Ascending
-                                                        )
-                                                    ).FormAttachMent,".")).Result
-                                                ,
-                                                3
-                                            ) + 1,
-                                            "000"
-                                        )&Last(Split(AttachmentExcelName,".")).Result
-                    ,varBase64Only5,TextInput2_30.Text));
-                    //上傳附件
-                    If(Last(Attachment_Zip2.Attachments).Name <> Blank(),
-                    Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));
-                    Set(varBase64Only6,Mid(varAttachmentControl6,Find(",", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (",", varAttachmentControl6)-1));
-                    SendAttachmentToUploadFlowAttachMent.Run(First(EditDetailUserForm_1).Title,Last(Attachment_Zip2.Attachments).Name,Last(Attachment_Zip2.Attachments).Name,varBase64Only6,ApprovalGuid,TextInput2_31.Text));//?附件的表格類型需要確認
-                    
-                       /* UpdateIf(
-                            GenericUploadAttachMentFile,
-                            FormId = First(EditDetailUserForm_1).Title && FormAttachMent = First(AttachmentExcelName).Name,
-                            {
-                                FormId: First(EditDetailUserForm_1).Title,
-                                UploadFilePWD: TextInput2_30.Text
-                            }
-                        );
-                        //更新FormId和PWD到GenericUploadAttachMentFile中
-                    UpdateIf(
-                            UploadFlowAttachMent,
-                            Title = First(EditDetailUserForm_1).Title && FlowAttachName = First(AttachmentZipName).Name,
-                            {
-                                //Title:First(EditDetailUserForm_1).Title,
-                                ApprovalDetailid: ApprovalGuid,
-                                FlowAttachPWD: TextInput2_31.Text
-                            }
-                        );*/
-                        //更新FormId和PWD到UploadFlowAttachMent中
-                        Reset(TextInput2_30);
-                        Reset(TextInput2_31);
-                        Reset(TextInput2_35);
-                        Reset(TextInput2_37);
-                        Reset(Attachment_Excel2);
-                        Reset(Attachment_Zip2);
-                        //Clear(AttachmentExcelName);
-                        //Clear(AttachmentZipName);
-                        
-                    // 點执行，就直接就审批完成
-                    With(
-                            {
-                                CurrentLastData: First(
-                                    SortByColumns(
-                                        Filter(
-                                            ApprovalDetail_Table,
-                                            TaskStatus = "002",
-                                            Approval_No = FLowId
-                                        ),
-                                        "field_Priortty",
-                                        Descending
-                                    )
-                                )
-                            },
-                            UpdateIf(
-                                ApprovalDetail_Table,
-                                Title = CurrentLastData.Title,
-                                {
-                                    TaskStatus: "004",
-                                    Advise: TextInput2_34.Text
-                                }
-                            )
-                        );
-                        Patch(
-                            ApprovalDetail_Table,
-                            Defaults(ApprovalDetail_Table),
-                            {
-                                Title: GUID(),
-                                Approval_No: FLowId,
-                                Advise: "",
-                                ApprovalBCC: Concat(
-                                    ComboBox1_12.SelectedItems.Mail,
-                                    Mail,
-                                    ","
-                                ),
-                                Approver: User().FullName,
-                                //First(Split(Gallery2_1.Selected.AllOwnerName.DisplayName," ").Result).Result,
-                                ApproverEmail: User().Email,
-                                //Gallery2_1.Selected.AllOwnerName.Email,
-                                Priortty: First(
-                                    SortByColumns(
-                                        Filter(
-                                            ApprovalDetail_Table,
-                                            Approval_No = FLowId
-                                        ),
-                                        "field_Priortty",
-                                        Descending
-                                    )
-                                ).Priortty + 1,
-                                TaskStatus: "006",
-                                ActionNode: "執行"
-                            }
-                        );
-                        UpdateIf(
-                            Approval_Table,
-                            Title = FLowId,
-                            {
-                                Application_Status:"任務完成"
-                            }
-                        );
-                        Reset(TextInput2_34);
-                        Reset(Dropdown1_6);
-                        Reset(ComboBox1_12);
-                        Set(
-                            AddApproverCol,
-                            {}
-                        );
-                        Refresh(GenericUploadAttachMentFile);
-                    Refresh(UploadFlowAttachMent);
-                        ClearCollect(
-                                EditDetailUserAttachment,
-                                Filter(
-                                    GenericUploadAttachMentFile,
-                                    FormId = FormListId
-                                )
-                            );
-                    ClearCollect(
-                                EditDetailUserAttachment2,
-                                Filter(
-                                    UploadFlowAttachMent,
-                                    Title = FormListId
-                                )
-                            );
-                            Refresh(ApprovalDetail_Table);
-                             Notify(
-                            "執行成功！",
-                            NotificationType.Success,
-                            2000
-                        );
-                            Launch("https://apps.powerapps.com/play/8793c6b3-448b-4c69-90ce-4ae75c7911d0?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=GeneralFormListScreen");
-                    );
-                PaddingBottom: =0
-                PaddingLeft: =0
-                PaddingRight: =0
-                PaddingTop: =0
-                PressedColor: =White
-                PressedFill: =ColorFade(Self.Fill, -25%)
-                RadiusBottomLeft: =4
-                RadiusBottomRight: =4
-                RadiusTopLeft: =4
-                RadiusTopRight: =4
-                Size: =13
-                Text: ="執行"
-                Visible: =false
-                Width: =100
-                X: =1102
-                Y: =12
-                ZIndex: =5
+                ZIndex: =7
 
     HistoryContainer As groupContainer.horizontalAutoLayoutContainer:
         Fill: =RGBA(0, 0, 0, 0.7)
