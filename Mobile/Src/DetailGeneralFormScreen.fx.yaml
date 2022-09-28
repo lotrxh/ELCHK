@@ -2787,7 +2787,7 @@
                         ),
                     RemoveIf(ApprovalDetail_Table,TaskStatus="002",Approval_No=FLowId);
                     //UpdateIf(ApprovalDetail_Table,Title=First(SortByColumns(Filter(ApprovalDetail_Table,TaskStatus="004",Approval_No=FLowId),"field_Priortty",Descending)).Title,{TaskStatus:"002",Advise:""});
-                    //更新審批詳情表，新增一條提交申請
+                    //更新審批詳情表，新增一條提交申請，如果之前流程中沒有提交則退回到填寫人，即新增一條填寫申請
                         With(
                                 {
                                     Lastsubmit: First(
