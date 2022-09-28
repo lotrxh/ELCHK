@@ -1894,9 +1894,7 @@
                         Size: =11
                         Text: =ThisItem.Advise
                         VerticalAlign: =VerticalAlign.Top
-                        Visible: |-
-                            =true
-                            //If(ThisItem.remark="",false,true)
+                        Visible: =If(ThisItem.Advise=Blank(),false,true)
                         Width: =Parent.Width-Self.X
                         X: =30
                         Y: =56
@@ -1914,6 +1912,7 @@
                         PaddingTop: =10
                         Size: =11
                         Text: =ThisItem.ApprovalBCC
+                        Visible: =If(ThisItem.ApprovalBCC=Blank(),false,true)
                         Width: =Parent.Width-Self.X
                         X: =30
                         Y: =130
@@ -1939,6 +1938,7 @@
                         PressedBorderColor: =ColorFade(glbThemePrimaryColor, -15%)
                         PressedColor: =glbThemePrimaryColor
                         PressedFill: =RGBA(0, 0, 0, 0)
+                        Visible: =If(ThisItem.ApprovalBCC=Blank(),false,true)
                         Width: =32
                         X: =30
                         Y: =130
@@ -2481,8 +2481,8 @@
                         },
                     If(First(EditDetailUserForm_2).CustomFilter<>Blank() 
                     && 
-                    //通用流程和預設流程執行時
-                    (Checkbox2_6.Value = true 
+                    //通用流程和預設流程可執行時
+                    (Checkbox2_6.Visible = true 
                        //部门简单流程第二次提交后可以执行，第一次提交未选定部门邮箱，不能执行，第二次提交给具体负责人后,負責人點擊同意即执行，任務完成
                        ||  UEmail = User().Email 
                             &&(FlowType = "部門簡單流程" && First(
@@ -2535,8 +2535,8 @@
                         },
                     If(First(EditDetailUserForm_2).CustomFilter<>Blank() 
                     && 
-                    //通用流程和預設流程執行時
-                    (Checkbox2_6.Value = true 
+                    //通用流程和預設流程可執行時
+                    (Checkbox2_6.Visible = true 
                        //部门简单流程第二次提交后可以执行，第一次提交未选定部门邮箱，不能执行，第二次提交给具体负责人后,負責人點擊同意即执行，任務完成
                        ||  UEmail = User().Email 
                             &&(FlowType = "部門簡單流程" && First(
@@ -3028,6 +3028,14 @@
                         //Clear(AttachmentExcelName);
                         //Clear(AttachmentZipName);
                     
+                    //更新GenericFormList标签
+                    UpdateIf(
+                            GenericFormList,
+                            Title = FormListId,
+                            {
+                                FilterLabel:TextInput_FilterLabel_2.Text
+                            }
+                        );
                     
                        With(
                         {
@@ -3052,15 +3060,6 @@
                                         )
                                     ).ActionNode = "提交"),
                     
-                    //更新GenericFormList标签
-                    
-                    UpdateIf(
-                            GenericFormList,
-                            Title = FormListId,
-                            {
-                                FilterLabel:TextInput_FilterLabel_2.Text
-                            }
-                        );
                        // 勾選后直接执行，并且审批完成
                         With(
                             {
