@@ -454,7 +454,7 @@
                     Height: =28
                     LayoutMinHeight: =100
                     LayoutMinWidth: =250
-                    Width: =200
+                    Width: =250
                     ZIndex: =1
 
                     Label1_139 As label:
@@ -489,7 +489,7 @@
                     Height: =28
                     LayoutMinHeight: =100
                     LayoutMinWidth: =250
-                    Width: =200
+                    Width: =300
                     ZIndex: =2
 
                     Label1_141 As label:
@@ -524,7 +524,7 @@
                     Height: =28
                     LayoutMinHeight: =100
                     LayoutMinWidth: =250
-                    Width: =200
+                    Width: =250
                     ZIndex: =3
 
                     Label1_143 As label:
@@ -549,7 +549,7 @@
                         Size: =12
                         Text: =First(EditDetailUserForm_2).ModelFlowNumber
                         Width: =120
-                        X: =77
+                        X: =76
                         ZIndex: =2
 
                 Container13_15 As groupContainer.manualLayoutContainer:
@@ -559,7 +559,7 @@
                     Height: =28
                     LayoutMinHeight: =100
                     LayoutMinWidth: =250
-                    Width: =200
+                    Width: =250
                     ZIndex: =4
 
                     Label1_145 As label:
@@ -584,7 +584,7 @@
                         Size: =12
                         Text: =First(EditDetailUserForm_2).ModelVersion
                         Width: =120
-                        X: =80
+                        X: =76
                         ZIndex: =2
 
                 Container13_16 As groupContainer.manualLayoutContainer:
@@ -594,7 +594,7 @@
                     Height: =28
                     LayoutMinHeight: =100
                     LayoutMinWidth: =250
-                    Width: =200
+                    Width: =250
                     ZIndex: =5
 
                     Label1_147 As label:
@@ -618,8 +618,7 @@
                         PaddingTop: =0
                         Size: =12
                         Text: =First(EditDetailUserForm_1).FormOrder
-                        Width: =120
-                        X: =80
+                        X: =76
                         ZIndex: =2
 
                 Container13_17 As groupContainer.manualLayoutContainer:
@@ -654,7 +653,7 @@
                         Size: =12
                         Text: =First(EditDetailUserForm_1).'Created By'.DisplayName
                         Width: =219
-                        X: =80
+                        X: =76
                         ZIndex: =2
 
                 Container13_18 As groupContainer.manualLayoutContainer:
@@ -664,7 +663,7 @@
                     Height: =28
                     LayoutMinHeight: =100
                     LayoutMinWidth: =250
-                    Width: =200
+                    Width: =250
                     ZIndex: =7
 
                     Label1_151 As label:
@@ -687,9 +686,10 @@
                         PaddingRight: =0
                         PaddingTop: =0
                         Size: =11
-                        Text: =First(EditDetailUserForm_1).Created
+                        Text: |-
+                            =Text(First(EditDetailUserForm_1).Created,"dd/mm/yyyy hh:mm" )
                         Width: =120
-                        X: =80
+                        X: =76
                         ZIndex: =2
 
         FillInContainer_1 As groupContainer.horizontalAutoLayoutContainer:
@@ -733,7 +733,7 @@
                     AlignInContainer: =AlignInContainer.SetByContainer
                     Fill: =RGBA(255, 255, 255, 1)
                     FillPortions: =0
-                    Height: =TextInput2_30.Y+TextInput2_30.Height+250
+                    Height: =TextInput2_30.Y+TextInput2_30.Height+300
                     LayoutDirection: =LayoutDirection.Vertical
                     LayoutGap: =10
                     LayoutMinHeight: =100
@@ -743,6 +743,45 @@
                     PaddingRight: =20
                     PaddingTop: =20
                     ZIndex: =1
+
+                    Container8_1 As groupContainer.horizontalAutoLayoutContainer:
+                        LayoutMinHeight: =40
+                        LayoutMinWidth: =250
+                        LayoutMode: =LayoutMode.Auto
+                        Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
+                        ZIndex: =1
+
+                        Label9_36 As label:
+                            AlignInContainer: =AlignInContainer.Center
+                            Color: =glbNeutralPrimaryColor
+                            FontWeight: =FontWeight.Semibold
+                            Height: =30
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Text: ="申請部門/單位"
+                            Width: =140
+                            X: =20
+                            Y: =363
+                            ZIndex: =2
+
+                        Label9_37 As label:
+                            AlignInContainer: =AlignInContainer.Stretch
+                            Color: =glbNeutralPrimaryColor
+                            Height: =36
+                            LayoutMinHeight: =30
+                            LineHeight: =1.5
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =12
+                            Text: =First(EditDetailUserForm_1).Department
+                            Width: =300
+                            X: =20
+                            Y: =448
+                            ZIndex: =4
 
                     Container12 As groupContainer.horizontalAutoLayoutContainer:
                         Fill: =RGBA(255, 255, 255, 1)
@@ -755,7 +794,7 @@
                         LayoutWrap: =true
                         PaddingRight: =1
                         PaddingTop: =1
-                        ZIndex: =1
+                        ZIndex: =2
 
                         Label9_26 As label:
                             Color: =glbNeutralPrimaryColor
@@ -776,7 +815,7 @@
                         LayoutMinHeight: =30
                         LayoutMinWidth: =250
                         LayoutMode: =LayoutMode.Auto
-                        ZIndex: =2
+                        ZIndex: =3
 
                         Label12_7 As label:
                             Color: =glbNeutralSecondaryColor
@@ -802,7 +841,7 @@
                         LayoutMinWidth: =250
                         LayoutMode: =LayoutMode.Auto
                         LayoutWrap: =true
-                        ZIndex: =3
+                        ZIndex: =4
 
                         Container13 As groupContainer.manualLayoutContainer:
                             AlignInContainer: =AlignInContainer.Start
@@ -1109,7 +1148,7 @@
                         Width: =
                         X: =20
                         Y: =56
-                        ZIndex: =4
+                        ZIndex: =5
 
                     Container6 As groupContainer.horizontalAutoLayoutContainer:
                         LayoutGap: =5
@@ -1117,7 +1156,7 @@
                         LayoutMinHeight: =40
                         LayoutMinWidth: =250
                         LayoutMode: =LayoutMode.Auto
-                        ZIndex: =5
+                        ZIndex: =6
 
                         Label6_2 As label:
                             AlignInContainer: =AlignInContainer.Start
@@ -1245,7 +1284,7 @@
                         Image: =Last(Attachment_Excel2.Attachments).Value
                         Visible: =false
                         Width: =1
-                        ZIndex: =6
+                        ZIndex: =7
 
                 UploadAttachmentsContainer_1 As groupContainer.verticalAutoLayoutContainer:
                     AlignInContainer: =AlignInContainer.SetByContainer
@@ -1842,7 +1881,7 @@
                         Size: =12
                         Text: |-
                             =//Switch(ThisItem.ActionNode,"0","填写","1","提交","2","檢查","3","簽批","4","審批","5","執行")
-                            ThisItem.ActionNode
+                            If(ThisItem.TaskStatus = "005",ThisItem.ActionNode&"(退回)",ThisItem.TaskStatus = "000",ThisItem.ActionNode&"(拒絕)",ThisItem.ActionNode)
                         Width: =250
                         X: =30
                         ZIndex: =2
@@ -1864,7 +1903,7 @@
 
                     Circle2_11 As circle:
                         DisplayMode: =DisplayMode.View
-                        Fill: =If(ThisItem.TaskStatus="004" || ThisItem.TaskStatus="006",glbThemePrimaryColor,glbErrorColor)
+                        Fill: =If(ThisItem.TaskStatus="004" || ThisItem.TaskStatus="006",glbThemePrimaryColor,ThisItem.TaskStatus="005" || ThisItem.TaskStatus="000",glbWarningColor,glbErrorColor)
                         Height: =14
                         OnSelect: =
                         Width: =14
@@ -1872,10 +1911,10 @@
                         ZIndex: =4
 
                     Rectangle5_6 As rectangle:
-                        Fill: =If(ThisItem.TaskStatus="004" || ThisItem.TaskStatus="006",glbThemePrimaryColor,glbErrorColor)
+                        Fill: =If(ThisItem.TaskStatus="004" || ThisItem.TaskStatus="006",glbThemePrimaryColor,ThisItem.TaskStatus="005" || ThisItem.TaskStatus="000",glbWarningColor,glbErrorColor)
                         Height: =153
                         OnSelect: =
-                        Visible: =If(ThisItem.TaskStatus="006",false,true)
+                        Visible: =If(ThisItem.TaskStatus="006" || ThisItem.TaskStatus="000",false,true)
                         Width: =2
                         X: =6
                         Y: =27
@@ -2790,8 +2829,34 @@
                             "請填寫退回原因",
                             Warning
                         ),
-                    RemoveIf(ApprovalDetail_Table,TaskStatus="002",Approval_No=FLowId);
+                    //更新退回当前的审批行动状态为005，表示退回
+                       With(
+                                {
+                                    CurrentLastData: First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                TaskStatus = "002",
+                                                Approval_No = FLowId
+                                            ),
+                                            "field_Priortty",
+                                            Descending
+                                        )
+                                    )
+                                },
+                                UpdateIf(
+                                    ApprovalDetail_Table,
+                                    Title = CurrentLastData.Title,
+                                    {
+                                        TaskStatus: "005",
+                                        Advise: TextInput2_34.Text
+                                    }
+                                )
+                            );
+                    
+                    //RemoveIf(ApprovalDetail_Table,TaskStatus="002",Approval_No=FLowId);
                     //UpdateIf(ApprovalDetail_Table,Title=First(SortByColumns(Filter(ApprovalDetail_Table,TaskStatus="004",Approval_No=FLowId),"field_Priortty",Descending)).Title,{TaskStatus:"002",Advise:""});
+                    
                     //更新審批詳情表，新增一條提交申請，如果之前流程中沒有提交則退回到填寫人，即新增一條填寫申請
                     If("提交" in Filter(
                                 ApprovalDetail_Table,
@@ -2802,7 +2867,6 @@
                                         SortByColumns(
                                             Filter(
                                                 ApprovalDetail_Table,
-                                                //TaskStatus = "002",
                                                 Approval_No = FLowId,
                                                 ActionNode = "提交"
                                     
