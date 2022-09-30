@@ -891,13 +891,14 @@
                             HoverColor: =Self.Color
                             HoverFill: =ColorFade(Self.Fill, -5%)
                             InputTextPlaceholder: ="請選擇填申請部門/單位"
+                            IsSearchable: =false
                             Items: =Distinct(Filter(ConfigurationInfo,Type_Name="組織配置"&&(Value1="部門信息"||Value1="單位信息")),Value2)
                             NoSelectionText: ="請選擇填申請部門/單位"
                             PaddingLeft: =10
                             PressedColor: =Self.Color
                             PressedFill: =ColorFade(Self.Fill, -5%)
                             SearchFields: =["Result"]
-                            SearchItems: =Search(Distinct(Filter(ConfigurationInfo,Type_Name="組織配置"&&(Value1="部門信息"||Value1="單位信息")),Value2),drpFilterDepartment_1.SearchText,"Result")
+                            SearchItems: =[]
                             SelectionColor: =glbThemePrimaryColor
                             SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                             SelectMultiple: =false
@@ -2081,12 +2082,13 @@
                         HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                         HoverColor: =Self.Color
                         HoverFill: =ColorFade(Self.Fill, -5%)
+                        IsSearchable: =false
                         Items: =Choices(MyContacts.AllOwnerName)
                         PaddingLeft: =10
                         PressedColor: =Self.Color
                         PressedFill: =ColorFade(Self.Fill, -5%)
                         SearchFields: =["Claims"]
-                        SearchItems: =Choices(MyContacts.AllOwnerName,ComboBox1_14.SearchText)
+                        SearchItems: =[]
                         SelectionColor: =glbThemePrimaryColor
                         SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                         Size: =12
