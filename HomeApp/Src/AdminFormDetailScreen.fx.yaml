@@ -161,22 +161,28 @@ AdminFormDetailScreen As screen:
                 FontWeight: =FontWeight.Bold
                 Height: =36
                 HoverFill: =ColorFade(Self.Fill, -15%)
-                OnSelect: |
+                OnSelect: |-
                     =If(
                         IsEmpty(drpFilter_Department.SelectedItems) || IsEmpty(drpFilter_FormType.SelectedItems) || IsBlank(TextInput_FormName.Text) || IsBlank(TextInput_FormNumber) || Last(Attachment_Form.Attachments).Name = Blank() || Radio_flowtype.SelectedText.Value = Blank() || (Radio_password.Visible = true && Radio_password.SelectedText.Value = Blank()) || (Radio_attachment.Visible = true && Radio_attachment.SelectedText.Value = Blank()),
                         Notify(
                             "必选项不能为空",
                             NotificationType.Error
                         ),
-                        //編輯表單模板，表格標號為不可更改項
+                        //編輯表單模板，部門，類型，表格標號為不可更改項
                         If(
                             TextInput_FormNumber.Text in GenericFormModel.ModelFlowNumber,
-                            (UpdateIf(
+                            //判斷版本號是否修改
+                            If(TextInput_FormVersion.Text = First(EditForm).ModelVersion,
+                            Notify(
+                            "與歷史版本相同，請修改版本號",
+                            NotificationType.Error
+                        ),
+                            UpdateIf(
                                 GenericFormModel,
                                 ModelFlowNumber = TextInput_FormNumber.Text,
                                 {
-                                    ModelDepartment: drpFilter_Department.Selected.Result,
-                                    ModelType: drpFilter_FormType.Selected.Result,
+                                    //ModelDepartment: drpFilter_Department.Selected.Result,
+                                    //ModelType: drpFilter_FormType.Selected.Result,
                                     ModelName: TextInput_FormName.Text,
                                     ModelVersion: TextInput_FormVersion.Text,
                                     ModelDescription: [@TextInput_FormDescription].Text,
@@ -228,7 +234,7 @@ AdminFormDetailScreen As screen:
                                         )
                                     )//默认为0，即可有可无
                                 }
-                            ));
+                            );
                             UpdateIf(
                                 TemplateFileList,
                                 TempFileName = TextInput_FormName.Text,
@@ -268,6 +274,7 @@ AdminFormDetailScreen As screen:
                             Navigate(
                                 AdminFormListScreen,
                                 ScreenTransition.Fade
+                            )
                             ),
                             //新建表單模板
                             ClearCollect(
@@ -334,7 +341,7 @@ AdminFormDetailScreen As screen:
                                     }
                                 )
                             )
-                        );
+                        ;
                         UpdateIf(
                             TemplateFileList,
                             TempFileName = TextInput_FormName.Text,
@@ -371,6 +378,7 @@ AdminFormDetailScreen As screen:
                             ScreenTransition.Fade
                         )
                     );
+                    )
                 PaddingBottom: =0
                 PaddingLeft: =0
                 PaddingRight: =0
@@ -525,7 +533,7 @@ AdminFormDetailScreen As screen:
                 BorderThickness: =1
                 Color: =glbNeutralPrimaryColor
                 Default: =First(EditForm).ModelFlowNumber//加载编辑表格的表格编号
-                DisplayMode: =Formnumber
+                DisplayMode: =NoEdit
                 FocusedBorderColor: =glbNeutralSecondaryColor
                 FocusedBorderThickness: =1
                 Height: =32
@@ -644,6 +652,7 @@ AdminFormDetailScreen As screen:
                 Color: =glbNeutralPrimaryColor
                 DefaultSelectedItems: =Distinct(EditForm,ModelDepartment)//加载编辑表格部门
                 DisplayFields: =["Result"]
+                DisplayMode: =NoEdit
                 FocusedBorderThickness: =0
                 Height: =32
                 HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
@@ -765,6 +774,7 @@ AdminFormDetailScreen As screen:
                 Color: =glbNeutralPrimaryColor
                 DefaultSelectedItems: =Distinct(EditForm,ModelType)//加载编辑表类型
                 DisplayFields: =["Result"]
+                DisplayMode: =NoEdit
                 FocusedBorderThickness: =0
                 Height: =32
                 HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
