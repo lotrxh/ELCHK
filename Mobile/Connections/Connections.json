@@ -1,84 +1,4 @@
 {
-  "a8533cc4-ffce-457e-bb55-36cb04d5b45e": {
-    "connectionParameters": {
-      "workFlowCallbackUri": "https://prod-27.southeastasia.logic.azure.com:443/workflows/561669a65331404eb2b2f78532551773/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=fKwP87pxi8_s8oM5PtQ0wMjIL1NaBwdyoLiI7cFVBK8",
-      "workflowEndpoint": "/subscriptions/427976e2-4271-4308-afb8-d28d53a6ad06/resourceGroups/b7a4bbdd6e9c4929b5a46550feead77c-bb393a2aea9e4d14be3c170ddaa16e7a/providers/Microsoft.Logic/workflows/f3b366c9-ae33-4e98-8f4c-db28ef3d9a2c",
-      "workflowName": "f3b366c9-ae33-4e98-8f4c-db28ef3d9a2c",
-      "workflowPath": "/subscriptions/427976e2-4271-4308-afb8-d28d53a6ad06/resourceGroups/b7a4bbdd6e9c4929b5a46550feead77c-bb393a2aea9e4d14be3c170ddaa16e7a/providers/Microsoft.Logic/workflows/f3b366c9-ae33-4e98-8f4c-db28ef3d9a2c"
-    },
-    "connectionRef": {
-      "displayName": "Logic flows",
-      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1534/1.0.1534.2605/logicflows/icon.png",
-      "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
-      "parameterHints": {
-        "ed5c50bd-bb07-4f5f-ad98-bbe63b910f77": {
-          "value": "shared_sharepointonline"
-        },
-        "workflowEntityId": {},
-        "workflowName": {
-          "value": "f3b366c9-ae33-4e98-8f4c-db28ef3d9a2c"
-        }
-      },
-      "parameterHintsV2": {
-        "shared_sharepointonline": {
-          "value": "ed5c50bd-bb07-4f5f-ad98-bbe63b910f77"
-        },
-        "workflowEntityId": {},
-        "workflowName": {
-          "value": "f3b366c9-ae33-4e98-8f4c-db28ef3d9a2c"
-        }
-      }
-    },
-    "datasets": {},
-    "dataSources": [
-      "SendAttachmentToUploadFlowAttachMent"
-    ],
-    "dependencies": {
-      "shared_sharepointonline": "ed5c50bd-bb07-4f5f-ad98-bbe63b910f77"
-    },
-    "dependents": [],
-    "id": "a8533cc4-ffce-457e-bb55-36cb04d5b45e"
-  },
-  "b0c44b9f-1553-4993-b73f-7463ecb07cb0": {
-    "connectionParameters": {
-      "workFlowCallbackUri": "https://prod-24.southeastasia.logic.azure.com:443/workflows/d927702d24c642c28b2a583c4b7686e7/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=lk79U5L2kFHTZAuTnJNHDqXBSrPQ15ThOsSFddIFawg",
-      "workflowEndpoint": "/subscriptions/427976e2-4271-4308-afb8-d28d53a6ad06/resourceGroups/b7a4bbdd6e9c4929b5a46550feead77c-bb393a2aea9e4d14be3c170ddaa16e7a/providers/Microsoft.Logic/workflows/5b299dd2-1406-477d-b12f-e23343be43f3",
-      "workflowName": "5b299dd2-1406-477d-b12f-e23343be43f3",
-      "workflowPath": "/subscriptions/427976e2-4271-4308-afb8-d28d53a6ad06/resourceGroups/b7a4bbdd6e9c4929b5a46550feead77c-bb393a2aea9e4d14be3c170ddaa16e7a/providers/Microsoft.Logic/workflows/5b299dd2-1406-477d-b12f-e23343be43f3"
-    },
-    "connectionRef": {
-      "displayName": "Logic flows",
-      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1534/1.0.1534.2605/logicflows/icon.png",
-      "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
-      "parameterHints": {
-        "ed5c50bd-bb07-4f5f-ad98-bbe63b910f77": {
-          "value": "shared_sharepointonline"
-        },
-        "workflowEntityId": {},
-        "workflowName": {
-          "value": "5b299dd2-1406-477d-b12f-e23343be43f3"
-        }
-      },
-      "parameterHintsV2": {
-        "shared_sharepointonline": {
-          "value": "ed5c50bd-bb07-4f5f-ad98-bbe63b910f77"
-        },
-        "workflowEntityId": {},
-        "workflowName": {
-          "value": "5b299dd2-1406-477d-b12f-e23343be43f3"
-        }
-      }
-    },
-    "datasets": {},
-    "dataSources": [
-      "SendAttachmentToGenericUploadAttachMentFile"
-    ],
-    "dependencies": {
-      "shared_sharepointonline": "ed5c50bd-bb07-4f5f-ad98-bbe63b910f77"
-    },
-    "dependents": [],
-    "id": "b0c44b9f-1553-4993-b73f-7463ecb07cb0"
-  },
   "c63818b0-6a22-4c7d-8e8a-4c662dfaa20f": {
     "connectionParameters": {
       "sku": "Enterprise"
@@ -109,55 +29,63 @@
       "parameterHintsV2": {}
     },
     "datasets": {
-      "https://elcss.sharepoint.com/sites/eps": {
+      "https://elcss.sharepoint.com/sites/eps-uat-2": {
         "dataSources": {
           "Approval_Table": {
-            "tableName": "4e523e7a-3bc0-4bae-b740-83df745e2e1c"
+            "tableName": "8bac6401-1216-4bac-91b0-ac4af91123f5"
           },
           "ApprovalDetail_Table": {
-            "tableName": "d8014db3-f22d-438b-8826-a0d37f61045b"
+            "tableName": "e15e0a1c-ef67-41ed-afd7-08cc39d00d91"
           },
           "ConfigurationInfo": {
-            "tableName": "07bf06aa-70ef-430c-a80f-808cb02127c1"
+            "tableName": "0e28b495-f326-4747-bbf9-848592d1d26d"
+          },
+          "ContractNotice": {
+            "tableName": "60d82d1a-5b69-41e4-aef3-a6561d2b9a4f"
           },
           "FormTableType": {
-            "tableName": "e0304dda-fd50-44a0-b7fb-5d3d85533ab9"
+            "tableName": "cf1c3cc7-48eb-4c6b-9f1b-85f103af684b"
           },
           "GenericFormList": {
-            "tableName": "8f08e74d-7359-48e9-a0db-67d6bd09b21b"
+            "tableName": "ea4771f2-8c83-48a5-877b-c95a6b6def87"
           },
           "GenericFormModel": {
-            "tableName": "da2d1d79-1baf-4196-a59c-ee01535f736b"
+            "tableName": "1e4831e0-de28-4391-9d3a-55ea19ffca6e"
           },
           "GenericUploadAttachMentFile": {
-            "tableName": "c663866c-a2b1-4200-9f80-3553c976e0c0"
+            "tableName": "04c464d2-ad6d-409a-a793-a7c243c5eac7"
           },
           "MyContacts": {
-            "tableName": "b58472f5-b47d-495c-9d65-35de88cd02ac"
+            "tableName": "03acdf16-65dd-42b4-b35b-f751da047ceb"
+          },
+          "SignerInfo": {
+            "tableName": "1f74b66d-7a62-4fa1-87b2-1198238206ed"
           },
           "TemplateFileList": {
-            "tableName": "8ff9ff19-c6d3-4e22-a92d-17cb681902a7"
+            "tableName": "3b48be6e-d672-4f70-8ef1-563ee936ae97"
           },
           "UploadFlowAttachMent": {
-            "tableName": "3324ed39-beac-4873-ba0e-4d26d543d0f0"
+            "tableName": "9d27576b-c3be-4fe0-b367-149bee9728db"
           },
           "UserInfo": {
-            "tableName": "031b020b-8dbd-410c-a169-042069a3271e"
+            "tableName": "76f2cc88-0ec4-42af-946b-7b3c9520f7f2"
           }
         }
       }
     },
     "dataSources": [
-      "MyContacts",
-      "ApprovalDetail_Table",
       "Approval_Table",
+      "ApprovalDetail_Table",
+      "ConfigurationInfo",
+      "ContractNotice",
+      "FormTableType",
       "GenericFormList",
       "GenericFormModel",
+      "GenericUploadAttachMentFile",
+      "MyContacts",
+      "SignerInfo",
       "TemplateFileList",
       "UploadFlowAttachMent",
-      "GenericUploadAttachMentFile",
-      "FormTableType",
-      "ConfigurationInfo",
       "UserInfo"
     ],
     "dependencies": {},
