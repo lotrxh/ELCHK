@@ -876,7 +876,7 @@ GeneralFormListScreen As screen:
                         ThisItem.FlowTaskName = "任職資源申請",
                         Launch(
                             "https://apps.powerapps.com/play/8bc833a4-5aff-417c-ab44-f513af1f03f0?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=EmploymentFormDetail&taskNum=" & LookUp(
-                                EmploymentRresource,
+                                EmploymentResource,
                                 ApprovalId = TaskListGallery.Selected.Title
                             ).Title & "&approvalNum=" & TaskListGallery.Selected.Title & "&resubmit=false"
                         ),
@@ -887,7 +887,7 @@ GeneralFormListScreen As screen:
                                     ApprovalId = ThisItem.Approval_No
                                 ).标题
                             },
-                            Launch("https://apps.powerapps.com/play/b0fe476b-44c4-4c9c-9c05-4608369b9f9f?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & TaskListGallery.Selected.Approval_No
+                            Launch("https://apps.powerapps.com/play/967cb530-7ce2-49f0-b7a9-a300d8010bd1?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & TaskListGallery.Selected.Approval_No
                             ,{},LaunchTarget.Replace)
                         )
                     )
