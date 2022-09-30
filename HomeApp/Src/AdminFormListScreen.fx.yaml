@@ -770,7 +770,7 @@ AdminFormListScreen As screen:
                     OnSelect: |
                         =Set(ShowSavebutton,true);
                         Set(attachment,DisplayMode.Edit);
-                        Set(Formnumber,DisplayMode.Disabled);//設置編輯模式下，表單名稱不可編輯
+                        Set(NoEdit,DisplayMode.Disabled);//設置編輯模式下，不可編輯部門類型編號
                         Navigate(AdminFormDetailScreen,ScreenTransition.Fade);
                         ClearCollect(EditForm,ThisItem);
                         //ClearCollect(EditAttachment,Filter(TemplateFileList,GenericFormId=ThisItem.Title&&TempType=ThisItem.ModelType));//編輯表格類型后不可用，下面方法替換
@@ -840,7 +840,7 @@ AdminFormListScreen As screen:
                 OnSelect: |-
                     =Set(ShowSavebutton,true);//設置保存按鈕可見
                     Set(attachment,DisplayMode.Edit);//設置附件可編輯
-                    Set(Formnumber,DisplayMode.Edit);//設置表單名字可編輯
+                    Set(NoEdit,DisplayMode.Edit);//設置編輯模式下，不可編輯部門類型編號
                     Navigate(AdminFormDetailScreen,ScreenTransition.Fade);
                     Clear(EditForm);
                     Clear(EditAttachment);
@@ -890,7 +890,7 @@ AdminFormListScreen As screen:
                 OnSelect: |-
                     =Set(ShowSavebutton,true);//設置保存按鈕可見
                     Set(attachment,DisplayMode.Edit);//設置附件可編輯
-                    Set(Formnumber,DisplayMode.Edit);//設置表單名字可編輯
+                    Set(NoEdit,DisplayMode.Edit);//設置編輯模式下，不可編輯部門類型編號
                     Navigate(AdminFormDetailScreen,ScreenTransition.Fade);
                     Clear(EditForm);
                     Clear(EditAttachment);
