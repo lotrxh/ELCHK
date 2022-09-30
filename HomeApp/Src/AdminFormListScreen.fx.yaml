@@ -801,8 +801,7 @@ AdminFormListScreen As screen:
                         ClearCollect(FilterForm,GenericFormModel))
                         
                     Size: =12
-                    Text: |
-                        =If(ThisItem.IsSelected,If(Isenable=0,"启用","停用"),If(ThisItem.IsEnable=0,"启用","停用"))
+                    Text: =If(ThisItem.IsSelected,If(Isenable=0,"启用","停用"),If(ThisItem.IsEnable="0","启用","停用"))
                     Width: =56
                     X: =999
                     Y: =7
