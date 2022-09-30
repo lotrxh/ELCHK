@@ -57,6 +57,12 @@
                         DataFlowActionCol_nonesubmit,
                         Result = "提交"
                     )
+                ),
+                First(
+                    Filter(
+                        DataFlowActionCol_nonesubmit,
+                        Result = "補充資料"
+                    )
                 )
             );
             
@@ -403,7 +409,7 @@
                                 EditDetailUserForm_2,
                                 Filter(
                                     GenericFormModel,
-                                    ModelName = FormNameLabel_1.Text
+                                    ModelFlowNumber = Label1_134.Text
                                 )
                             );
                             //创建集合EditUserForm收集表格信息,用作带入部门表格类型等数据
@@ -433,7 +439,7 @@
                     //下一节点处理人为当前用户时，跳转到任务详情页面
                     Navigate(DetailGeneralFormScreen,None,{HistoryList: ApprovalIDNumber}),
                     //下一节点处理人不是当前用户时，返回認爲列表
-                    Launch("https://apps.powerapps.com/play/8793c6b3-448b-4c69-90ce-4ae75c7911d0?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=GeneralFormListScreen"));
+                    Launch("https://apps.powerapps.com/play/8793c6b3-448b-4c69-90ce-4ae75c7911d0?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=GeneralFormListScreen",{},LaunchTarget.Replace));
                     
                     
                         
@@ -2325,6 +2331,8 @@
             Color: =RGBA(255, 255, 255, 1)
             Height: =60
             Icon: =Icon.Home
+            OnSelect: |-
+                =Launch("https://apps.powerapps.com/play/8793c6b3-448b-4c69-90ce-4ae75c7911d0?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=HomepageScreen",{},LaunchTarget.Replace);
             PaddingBottom: =14
             PaddingTop: =14
             Width: =60
