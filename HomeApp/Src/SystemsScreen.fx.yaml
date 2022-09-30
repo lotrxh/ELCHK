@@ -700,13 +700,14 @@ SystemsScreen As screen:
                 Height: =32
                 HoverBorderColor: =RGBA(196, 200, 204, 1)
                 InputTextPlaceholder: ="權限"
+                IsSearchable: =false
                 Items: =Filter(ConfigurationInfo,Type_No="0002"&&Code_No1="001").Value2
                 NoSelectionText: ="權限"
                 PaddingLeft: =12
                 PressedColor: =RGBA(50, 50, 50, 1)
                 PressedFill: =RGBA(0, 0, 0, 1)
                 SearchFields: =["field_6"]
-                SearchItems: =Search(Filter(ConfigurationInfo,Type_No="0002"&&Code_No1="001").Value2,Service_Dropdown_2.SearchText,"field_6")
+                SearchItems: =[]
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =
@@ -1328,7 +1329,7 @@ SystemsScreen As screen:
                         UserInfo,
                         Defaults(UserInfo),
                         {
-                            Title: GUID(),
+                            标题: GUID(),
                             User_Name: UserTextInput.Text,
                             User_Email: UsaerEmaiLTextInput.Text,
                             O_Mechanism_No:Dropdown_Mechanism.Selected.Code_No2,
@@ -1612,13 +1613,14 @@ SystemsScreen As screen:
                 Height: =28
                 HoverBorderColor: =RGBA(196, 200, 204, 1)
                 InputTextPlaceholder: ="請選擇機構"
+                IsSearchable: =false
                 Items: =Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="002"||Type_No="0003"&&Code_No1="003").Code_No2
                 NoSelectionText: =
                 PaddingLeft: =12
                 PressedColor: =RGBA(50, 50, 50, 1)
                 PressedFill: =RGBA(0, 0, 0, 1)
                 SearchFields: =["field_5"]
-                SearchItems: =Search(Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="002"||Type_No="0003"&&Code_No1="003").Code_No2,Dropdown_Mechanism.SearchText,"field_5")
+                SearchItems: =[]
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =
@@ -1745,7 +1747,7 @@ SystemsScreen As screen:
             Height: =36
             HoverFill: =RGBA(8, 127, 190, 1)
             OnSelect: |-
-                =RemoveIf(UserInfo,Title=UserListGallery_1.Selected.Title);Refresh(UserInfo);UpdateContext({UserDeletShow:false})
+                =RemoveIf(UserInfo,标题=UserListGallery_1.Selected.标题);Refresh(UserInfo);UpdateContext({UserDeletShow:false})
             PressedColor: =RGBA(255, 255, 255, 1)
             PressedFill: =RGBA(255, 255, 255, 1)
             RadiusBottomLeft: =0
@@ -1820,7 +1822,7 @@ SystemsScreen As screen:
                         UserInfo,
                         LookUp(
                             UserInfo,
-                            Title = UserListGallery_1.Selected.Title
+                            标题 = UserListGallery_1.Selected.标题
                         ),
                         {User_Name: UserTextInput_1.Text},
                         {User_Email: UsaerEmaiLTextInput_1.Text},
@@ -1971,7 +1973,7 @@ SystemsScreen As screen:
                         {
                             PR_Name: LookUp(
                                 UserInfo,
-                                Title = UserListGallery_1.Selected.Title
+                                标题 = UserListGallery_1.Selected.标题
                             ).Post
                         }
                     )
@@ -2107,13 +2109,14 @@ SystemsScreen As screen:
                 Height: =28
                 HoverBorderColor: =RGBA(196, 200, 204, 1)
                 InputTextPlaceholder: ="請選擇機構"
+                IsSearchable: =false
                 Items: =Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="003").Code_No2
                 NoSelectionText: ="請選擇機構"
                 PaddingLeft: =12
                 PressedColor: =RGBA(50, 50, 50, 1)
                 PressedFill: =RGBA(0, 0, 0, 1)
                 SearchFields: =["field_5"]
-                SearchItems: =Search(Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="003").Code_No2,Dropdown_Mechanism_1.SearchText,"field_5")
+                SearchItems: =[]
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =
@@ -2240,7 +2243,7 @@ SystemsScreen As screen:
                         SignerInfo,
                         Defaults(SignerInfo),
                         {
-                            Title: GUID(),
+                            标题: GUID(),
                             Signer: UserTextInput_3.Text,
                             Signer_Email: Dropdown_Username_4.Selected.User_Email,
                             S_Mechanism_Type:If(S_Mechanism_T="單位信息","單位",If(S_Mechanism_T="部門信息","部門","服務")),
@@ -2426,13 +2429,14 @@ SystemsScreen As screen:
             Height: =28
             HoverBorderColor: =RGBA(196, 200, 204, 1)
             InputTextPlaceholder: ="請選擇郵箱"
+            IsSearchable: =false
             Items: =UserInfo.User_Email
             NoSelectionText: =
             PaddingLeft: =12
             PressedColor: =RGBA(50, 50, 50, 1)
             PressedFill: =RGBA(0, 0, 0, 1)
             SearchFields: =["field_User_Email"]
-            SearchItems: =Search(UserInfo.User_Email,Dropdown_Username_4.SearchText,"field_User_Email")
+            SearchItems: =[]
             SelectionColor: =RGBA(73, 77, 82, 1)
             SelectionFill: =RGBA(0, 0, 0, 0)
             SelectionTagFill: =
@@ -2598,7 +2602,7 @@ SystemsScreen As screen:
                         SignerInfo,
                         LookUp(
                             SignerInfo,
-                            Title = GAListGallery_1.Selected.Title
+                            标题 = GAListGallery_1.Selected.标题
                         ),
                         {Signer: UserTextInput_4.Text},
                         {Signer_Email: Dropdown_Username_5.Selected.User_Email},
@@ -2735,13 +2739,14 @@ SystemsScreen As screen:
             Height: =28
             HoverBorderColor: =RGBA(196, 200, 204, 1)
             InputTextPlaceholder: ="請選擇郵箱"
+            IsSearchable: =false
             Items: =UserInfo.User_Email
             NoSelectionText: =
             PaddingLeft: =12
             PressedColor: =RGBA(50, 50, 50, 1)
             PressedFill: =RGBA(0, 0, 0, 1)
             SearchFields: =["field_User_Email"]
-            SearchItems: =Search(UserInfo.User_Email,Dropdown_Username_5.SearchText,"field_User_Email")
+            SearchItems: =[]
             SelectionColor: =RGBA(73, 77, 82, 1)
             SelectionFill: =RGBA(0, 0, 0, 0)
             SelectionTagFill: =
@@ -2830,13 +2835,14 @@ SystemsScreen As screen:
                 Height: =28
                 HoverBorderColor: =RGBA(196, 200, 204, 1)
                 InputTextPlaceholder: ="請選擇機構"
+                IsSearchable: =false
                 Items: =Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="003").Code_No2
                 NoSelectionText: ="請選擇機構"
                 PaddingLeft: =12
                 PressedColor: =RGBA(50, 50, 50, 1)
                 PressedFill: =RGBA(0, 0, 0, 1)
                 SearchFields: =["field_5"]
-                SearchItems: =Search(Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="003").Code_No2,DropdownOrganization_Number_5.SearchText,"field_5")
+                SearchItems: =[]
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =
@@ -2940,7 +2946,7 @@ SystemsScreen As screen:
             Fill: =RGBA(0, 134, 208, 1)
             HoverFill: =RGBA(8, 127, 190, 1)
             OnSelect: |-
-                =RemoveIf(SignerInfo,Title=GAListGallery_1.Selected.Title);Refresh( SignerInfo );UpdateContext({DeletGAMask:false})
+                =RemoveIf(SignerInfo,标题=GAListGallery_1.Selected.标题);Refresh( SignerInfo );UpdateContext({DeletGAMask:false})
             PressedColor: =RGBA(255, 255, 255, 1)
             PressedFill: =RGBA(255, 255, 255, 1)
             RadiusBottomLeft: =5

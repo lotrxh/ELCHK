@@ -12,14 +12,14 @@ GeneralFormListScreen As screen:
                 ShowColumns(
                     ApprovalDetail_Table,
                     "Title",
-                    "field_Approval_No",
-                    "field_Approver",
-                    "field_ApproverEmail",
-                    "field_Priortty",
-                    "field_TaskStatus",
-                    "field_AgentUserEmail"
+                    "Approval_No",
+                    "Approver",
+                    "ApproverEmail",
+                    "Priortty",
+                    "TaskStatus",
+                    "AgentUserEmail"
                 ),
-                field_TaskStatus = "001" || field_TaskStatus = "002"
+                TaskStatus = "001" || TaskStatus = "002"
             )
         );
         //生成已处理集合
@@ -29,15 +29,15 @@ GeneralFormListScreen As screen:
                 ShowColumns(
                     ApprovalDetail_Table,
                     "Title",
-                    "field_Approval_No",
-                    "field_Approver",
-                    "field_ApproverEmail",
-                    "field_Priortty",
-                    "field_TaskStatus",
+                    "Approval_No",
+                    "Approver",
+                    "ApproverEmail",
+                    "Priortty",
+                    "TaskStatus",
                     "Editor",
-                    "field_AgentUserEmail"
+                    "AgentUserEmail"
                 ),
-                field_TaskStatus = "004" || field_TaskStatus = "006" || field_TaskStatus = "000"
+                TaskStatus = "004" || TaskStatus = "006" || TaskStatus = "000"
             )
         );
         //全部集合
@@ -47,36 +47,36 @@ GeneralFormListScreen As screen:
                 ShowColumns(
                     ApprovalDetail_Table,
                     "Title",
-                    "field_Approval_No",
-                    "field_Approver",
-                    "field_ApproverEmail",
-                    "field_Priortty",
-                    "field_TaskStatus",
+                    "Approval_No",
+                    "Approver",
+                    "ApproverEmail",
+                    "Priortty",
+                    "TaskStatus",
                     "Editor",
-                    "field_AgentUserEmail"
+                    "AgentUserEmail"
                 ),
-                field_TaskStatus = "000" || field_TaskStatus = "001" || field_TaskStatus = "004" || field_TaskStatus = "006" || field_TaskStatus = "002"
+                TaskStatus = "000" || TaskStatus = "001" || TaskStatus = "004" || TaskStatus = "006" || TaskStatus = "002"
             )
         );
         //生成带部门字段的ApprovalDetail_Table待理任务
         ClearCollect(ApprovalDetailColwithdepartment,AddColumns(ApprovalDetailCol,"DepartMentName",
                     LookUp(
                         approvalCol,
-                        Title = field_Approval_No
+                        Title = Approval_No
                     ).DepartMentUnit,
                     "FormDepartMentName",
                     LookUp(
                         approvalCol,
-                        Title = field_Approval_No
+                        Title = Approval_No
                     ).DepartMentName));
         //生成待处理集合，新增Ismanger判断
         With(
             {
                 SearchPendingData: If(CurrentRoleTaskPermission=Blank(),Filter(
                     ApprovalDetailCol,
-                    (CurrentUser in field_ApproverEmail || CurrentUser <> Blank() && CurrentUser in field_AgentUserEmail)),Filter(
+                    (CurrentUser in ApproverEmail || CurrentUser <> Blank() && CurrentUser in AgentUserEmail)),Filter(
                     ApprovalDetailColwithdepartment,
-                    (CurrentUser in field_ApproverEmail || CurrentUser <> Blank() && CurrentUser in field_AgentUserEmail) || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermission in FormDepartMentName))
+                    (CurrentUser in ApproverEmail || CurrentUser <> Blank() && CurrentUser in AgentUserEmail) || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermission in FormDepartMentName))
             },
             ClearCollect(
                 FilterPendingDataCol,
@@ -85,37 +85,37 @@ GeneralFormListScreen As screen:
                     "FlowTaskName",
                     LookUp(
                         approvalCol,
-                        Title = field_Approval_No
+                        Title = Approval_No
                     ).Task_Name,
                     "FlowOrder",
                     LookUp(
                         approvalCol,
-                        Title = field_Approval_No
+                        Title = Approval_No
                     ).Application_No,
                     "FlowCreateDate",
                     LookUp(
                         approvalCol,
-                        Title = field_Approval_No
+                        Title = Approval_No
                     ).Created,
                     "DepartMentName",
                     LookUp(
                         approvalCol,
-                        Title = field_Approval_No
+                        Title = Approval_No
                     ).DepartMentUnit,
                     "FormType",
                     LookUp(
                         approvalCol,
-                        Title = field_Approval_No
+                        Title = Approval_No
                     ).FormType,
                     "Application_Status",
                     LookUp(
                         approvalCol,
-                        Title = field_Approval_No
+                        Title = Approval_No
                     ).Application_Status,
                     "CustomerSearch",
                     LookUp(
                         GenericFormList,
-                        ApprovalId = field_Approval_No
+                        ApprovalId = Approval_No
                     ).FilterLabel
                 )
             )
@@ -124,22 +124,22 @@ GeneralFormListScreen As screen:
         ClearCollect(ProcessedDetailColwithdepartment,AddColumns(ProcessedDetailCol,"DepartMentName",
                     LookUp(
                         approvalCol,
-                        Title = field_Approval_No
+                        Title = Approval_No
                     ).DepartMentUnit,
                     "FormDepartMentName",
                     LookUp(
                         approvalCol,
-                        Title = field_Approval_No
+                        Title = Approval_No
                     ).DepartMentName));
         ///生成已处理集合，新增Ismanger判断
         With(
             {
                 ProcessedListCol: If(CurrentRoleTaskPermission=Blank(),Filter(
                     ProcessedDetailCol,
-                    (CurrentUser in field_ApproverEmail || CurrentUser <> Blank() && CurrentUser in field_AgentUserEmail)
+                    (CurrentUser in ApproverEmail || CurrentUser <> Blank() && CurrentUser in AgentUserEmail)
                 ),Filter(
                     ProcessedDetailColwithdepartment,
-                    (CurrentUser in field_ApproverEmail || CurrentUser <> Blank() && CurrentUser in field_AgentUserEmail) || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermission in FormDepartMentName))
+                    (CurrentUser in ApproverEmail || CurrentUser <> Blank() && CurrentUser in AgentUserEmail) || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermission in FormDepartMentName))
             },
             ClearCollect(
                 inprogressData,
@@ -148,37 +148,37 @@ GeneralFormListScreen As screen:
                     "FlowTaskName",
                     LookUp(
                         approvalCol,
-                        Title = field_Approval_No
+                        Title = Approval_No
                     ).Task_Name,
                     "FlowOrder",
                     LookUp(
                         approvalCol,
-                        Title = field_Approval_No
+                        Title = Approval_No
                     ).Application_No,
                     "FlowCreateDate",
                     LookUp(
                         approvalCol,
-                        Title = field_Approval_No
+                        Title = Approval_No
                     ).Created,
                     "DepartMentName",
                     LookUp(
                         approvalCol,
-                        Title = field_Approval_No
+                        Title = Approval_No
                     ).DepartMentUnit,
                     "FormType",
                     LookUp(
                         approvalCol,
-                        Title = field_Approval_No
+                        Title = Approval_No
                     ).FormType,
                     "Application_Status",
                     LookUp(
                         approvalCol,
-                        Title = field_Approval_No
+                        Title = Approval_No
                     ).Application_Status,
                     "CustomerSearch",
                     LookUp(
                         GenericFormList,
-                        ApprovalId = field_Approval_No
+                        ApprovalId = Approval_No
                     ).FilterLabel
                 )
             )
@@ -187,12 +187,12 @@ GeneralFormListScreen As screen:
         ClearCollect(ComplatelDetailColwithdepartment,AddColumns(ComplatelDetailCol,"DepartMentName",
                     LookUp(
                         approvalCol,
-                        Title = field_Approval_No
+                        Title = Approval_No
                     ).DepartMentUnit,
                     "FormDepartMentName",
                     LookUp(
                         approvalCol,
-                        Title = field_Approval_No
+                        Title = Approval_No
                     ).DepartMentName));
         
         
@@ -201,10 +201,10 @@ GeneralFormListScreen As screen:
             {
                 AllApprovalList: If(CurrentRoleTaskPermission=Blank(),Filter(
                     ComplatelDetailCol,
-                    (CurrentUser in field_ApproverEmail || CurrentUser <> Blank() && CurrentUser in field_AgentUserEmail) && field_TaskStatus <> Blank()
+                    (CurrentUser in ApproverEmail || CurrentUser <> Blank() && CurrentUser in AgentUserEmail) && TaskStatus <> Blank()
                 ),Filter(
                     ComplatelDetailColwithdepartment,
-                    ((CurrentUser in field_ApproverEmail || CurrentUser <> Blank() && CurrentUser in field_AgentUserEmail) && field_TaskStatus <> Blank()) || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermission in FormDepartMentName))
+                    ((CurrentUser in ApproverEmail || CurrentUser <> Blank() && CurrentUser in AgentUserEmail) && TaskStatus <> Blank()) || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermission in FormDepartMentName))
             },
             ClearCollect(
                 AllApprovalListDataCol,
@@ -213,37 +213,37 @@ GeneralFormListScreen As screen:
                     "FlowTaskName",
                     LookUp(
                         approvalCol,
-                        Title = field_Approval_No
+                        Title = Approval_No
                     ).Task_Name,
                     "FlowOrder",
                     LookUp(
                         approvalCol,
-                        Title = field_Approval_No
+                        Title = Approval_No
                     ).Application_No,
                     "FlowCreateDate",
                     LookUp(
                         approvalCol,
-                        Title = field_Approval_No
+                        Title = Approval_No
                     ).Created,
                     "DepartMentName",
                     LookUp(
                         approvalCol,
-                        Title = field_Approval_No
+                        Title = Approval_No
                     ).DepartMentUnit,
                     "FormType",
                     LookUp(
                         approvalCol,
-                        Title = field_Approval_No
+                        Title = Approval_No
                     ).FormType,
                     "Application_Status",
                     LookUp(
                         approvalCol,
-                        Title = field_Approval_No
+                        Title = Approval_No
                     ).Application_Status,
                     "CustomerSearch",
                     LookUp(
                         GenericFormList,
-                        ApprovalId = field_Approval_No
+                        ApprovalId = Approval_No
                     ).FilterLabel
                 )
             )
@@ -885,7 +885,7 @@ GeneralFormListScreen As screen:
                                 FormId: LookUp(
                                     GenericFormList,
                                     ApprovalId = ThisItem.Approval_No
-                                ).Title
+                                ).标题
                             },
                             Launch("https://apps.powerapps.com/play/b0fe476b-44c4-4c9c-9c05-4608369b9f9f?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & TaskListGallery.Selected.Approval_No
                             ,{},LaunchTarget.Replace)

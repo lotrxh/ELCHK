@@ -15,14 +15,14 @@ AdminFormListScreen As screen:
                 ShowColumns(
                     ApprovalDetail_Table,
                     "Title",
-                    "field_Approval_No",
-                    "field_Approver",
-                    "field_ApproverEmail",
-                    "field_Priortty",
-                    "field_TaskStatus",
-                    "field_AgentUserEmail"
+                    "Approval_No",
+                    "Approver",
+                    "ApproverEmail",
+                    "Priortty",
+                    "TaskStatus",
+                    "AgentUserEmail"
                 ),
-                field_TaskStatus = "001" || field_TaskStatus = "002"
+                TaskStatus = "001" || TaskStatus = "002"
             )
         );
         
@@ -30,7 +30,7 @@ AdminFormListScreen As screen:
         ClearCollect(ApprovalDetailColwithFormName1,AddColumns(ApprovalDetailCol,"FormName",
                     LookUp(
                         approvalCol1,
-                        Title = field_Approval_No
+                        Title = Approval_No
                     ).Task_Name
                     ));
         
@@ -256,7 +256,7 @@ AdminFormListScreen As screen:
                             FilterForm,
                             Filter(
                                 GenericFormModel,
-                                (Modified >= TemplateStartDate_3.SelectedDate && Modified <= TemplateEndDate_3.SelectedDate) || (DateDiff(TemplateStartDate_3.SelectedDate,Modified,Minutes)>=0 && DateDiff(TemplateStartDate_3.SelectedDate,Modified,Minutes)<=1440) || (DateDiff(TemplateEndDate_3.SelectedDate,Modified,Minutes)>=0 && DateDiff(TemplateEndDate_3.SelectedDate,Modified,Minutes)<=1440)
+                                (修改时间 >= TemplateStartDate_3.SelectedDate && 修改时间 <= TemplateEndDate_3.SelectedDate) || (DateDiff(TemplateStartDate_3.SelectedDate,修改时间,Minutes)>=0 && DateDiff(TemplateStartDate_3.SelectedDate,修改时间,Minutes)<=1440) || (DateDiff(TemplateEndDate_3.SelectedDate,修改时间,Minutes)>=0 && DateDiff(TemplateEndDate_3.SelectedDate,修改时间,Minutes)<=1440)
                             )
                         )
                     );
@@ -292,7 +292,7 @@ AdminFormListScreen As screen:
                             Filter(
                                 GenericFormModel,
                                 'TextInput_name&number'.Text in ModelName || 'TextInput_name&number'.Text in ModelFlowNumber,
-                                (Modified >= TemplateStartDate_3.SelectedDate && Modified <= TemplateEndDate_3.SelectedDate) || (DateDiff(TemplateStartDate_3.SelectedDate,Modified,Minutes)>=0 && DateDiff(TemplateStartDate_3.SelectedDate,Modified,Minutes)<=1440) || (DateDiff(TemplateEndDate_3.SelectedDate,Modified,Minutes)>=0 && DateDiff(TemplateEndDate_3.SelectedDate,Modified,Minutes)<=1440)
+                                (修改时间 >= TemplateStartDate_3.SelectedDate && 修改时间 <= TemplateEndDate_3.SelectedDate) || (DateDiff(TemplateStartDate_3.SelectedDate,修改时间,Minutes)>=0 && DateDiff(TemplateStartDate_3.SelectedDate,修改时间,Minutes)<=1440) || (DateDiff(TemplateEndDate_3.SelectedDate,修改时间,Minutes)>=0 && DateDiff(TemplateEndDate_3.SelectedDate,修改时间,Minutes)<=1440)
                             )
                         )
                     );
@@ -316,7 +316,7 @@ AdminFormListScreen As screen:
                             Filter(
                                 GenericFormModel,
                                 ModelDepartment in drpFilterDepartment.SelectedItems,
-                                (Modified >= TemplateStartDate_3.SelectedDate && Modified <= TemplateEndDate_3.SelectedDate) || (DateDiff(TemplateStartDate_3.SelectedDate,Modified,Minutes)>=0 && DateDiff(TemplateStartDate_3.SelectedDate,Modified,Minutes)<=1440) || (DateDiff(TemplateEndDate_3.SelectedDate,Modified,Minutes)>=0 && DateDiff(TemplateEndDate_3.SelectedDate,Modified,Minutes)<=1440)
+                                (修改时间 >= TemplateStartDate_3.SelectedDate && 修改时间 <= TemplateEndDate_3.SelectedDate) || (DateDiff(TemplateStartDate_3.SelectedDate,修改时间,Minutes)>=0 && DateDiff(TemplateStartDate_3.SelectedDate,修改时间,Minutes)<=1440) || (DateDiff(TemplateEndDate_3.SelectedDate,修改时间,Minutes)>=0 && DateDiff(TemplateEndDate_3.SelectedDate,修改时间,Minutes)<=1440)
                             )
                         )
                     );
@@ -328,7 +328,7 @@ AdminFormListScreen As screen:
                             Filter(
                                 GenericFormModel,
                                 ModelType in ComboBox1_formtype.SelectedItems,
-                                (Modified >= TemplateStartDate_3.SelectedDate && Modified <= TemplateEndDate_3.SelectedDate) || (DateDiff(TemplateStartDate_3.SelectedDate,Modified,Minutes)>=0 && DateDiff(TemplateStartDate_3.SelectedDate,Modified,Minutes)<=1440) || (DateDiff(TemplateEndDate_3.SelectedDate,Modified,Minutes)>=0 && DateDiff(TemplateEndDate_3.SelectedDate,Modified,Minutes)<=1440)
+                                (修改时间 >= TemplateStartDate_3.SelectedDate && 修改时间 <= TemplateEndDate_3.SelectedDate) || (DateDiff(TemplateStartDate_3.SelectedDate,修改时间,Minutes)>=0 && DateDiff(TemplateStartDate_3.SelectedDate,修改时间,Minutes)<=1440) || (DateDiff(TemplateEndDate_3.SelectedDate,修改时间,Minutes)>=0 && DateDiff(TemplateEndDate_3.SelectedDate,修改时间,Minutes)<=1440)
                             )
                         )
                     );
@@ -352,7 +352,7 @@ AdminFormListScreen As screen:
                             FilterForm,
                             Filter(
                                 GenericFormModel,
-                                (Modified >= TemplateStartDate_3.SelectedDate && Modified <= TemplateEndDate_3.SelectedDate) || (DateDiff(TemplateStartDate_3.SelectedDate,Modified,Minutes)>=0 && DateDiff(TemplateStartDate_3.SelectedDate,Modified,Minutes)<=1440) || (DateDiff(TemplateEndDate_3.SelectedDate,Modified,Minutes)>=0 && DateDiff(TemplateEndDate_3.SelectedDate,Modified,Minutes)<=1440),
+                                (修改时间 >= TemplateStartDate_3.SelectedDate && 修改时间 <= TemplateEndDate_3.SelectedDate) || (DateDiff(TemplateStartDate_3.SelectedDate,修改时间,Minutes)>=0 && DateDiff(TemplateStartDate_3.SelectedDate,修改时间,Minutes)<=1440) || (DateDiff(TemplateEndDate_3.SelectedDate,修改时间,Minutes)>=0 && DateDiff(TemplateEndDate_3.SelectedDate,修改时间,Minutes)<=1440),
                                 'TextInput_name&number'.Text in ModelName || 'TextInput_name&number'.Text in ModelFlowNumber,
                                 ModelDepartment in drpFilterDepartment.SelectedItems
                             )
@@ -365,7 +365,7 @@ AdminFormListScreen As screen:
                             FilterForm,
                             Filter(
                                 GenericFormModel,
-                                (Modified >= TemplateStartDate_3.SelectedDate && Modified <= TemplateEndDate_3.SelectedDate) || (DateDiff(TemplateStartDate_3.SelectedDate,Modified,Minutes)>=0 && DateDiff(TemplateStartDate_3.SelectedDate,Modified,Minutes)<=1440) || (DateDiff(TemplateEndDate_3.SelectedDate,Modified,Minutes)>=0 && DateDiff(TemplateEndDate_3.SelectedDate,Modified,Minutes)<=1440),
+                                (修改时间 >= TemplateStartDate_3.SelectedDate && 修改时间 <= TemplateEndDate_3.SelectedDate) || (DateDiff(TemplateStartDate_3.SelectedDate,修改时间,Minutes)>=0 && DateDiff(TemplateStartDate_3.SelectedDate,修改时间,Minutes)<=1440) || (DateDiff(TemplateEndDate_3.SelectedDate,修改时间,Minutes)>=0 && DateDiff(TemplateEndDate_3.SelectedDate,修改时间,Minutes)<=1440),
                                 'TextInput_name&number'.Text in ModelName || 'TextInput_name&number'.Text in ModelFlowNumber,
                                 ModelType in ComboBox1_formtype.SelectedItems
                             )
@@ -378,7 +378,7 @@ AdminFormListScreen As screen:
                             FilterForm,
                             Filter(
                                 GenericFormModel,
-                                (Modified >= TemplateStartDate_3.SelectedDate && Modified <= TemplateEndDate_3.SelectedDate) || (DateDiff(TemplateStartDate_3.SelectedDate,Modified,Minutes)>=0 && DateDiff(TemplateStartDate_3.SelectedDate,Modified,Minutes)<=1440) || (DateDiff(TemplateEndDate_3.SelectedDate,Modified,Minutes)>=0 && DateDiff(TemplateEndDate_3.SelectedDate,Modified,Minutes)<=1440),
+                                (修改时间 >= TemplateStartDate_3.SelectedDate && 修改时间 <= TemplateEndDate_3.SelectedDate) || (DateDiff(TemplateStartDate_3.SelectedDate,修改时间,Minutes)>=0 && DateDiff(TemplateStartDate_3.SelectedDate,修改时间,Minutes)<=1440) || (DateDiff(TemplateEndDate_3.SelectedDate,修改时间,Minutes)>=0 && DateDiff(TemplateEndDate_3.SelectedDate,修改时间,Minutes)<=1440),
                                 ModelDepartment in drpFilterDepartment.SelectedItems,
                                 ModelType in ComboBox1_formtype.SelectedItems
                             )
@@ -392,7 +392,7 @@ AdminFormListScreen As screen:
                             Filter(
                                 GenericFormModel,
                                 'TextInput_name&number'.Text in ModelName || 'TextInput_name&number'.Text in ModelFlowNumber,
-                                (Modified >= TemplateStartDate_3.SelectedDate && Modified <= TemplateEndDate_3.SelectedDate) || (DateDiff(TemplateStartDate_3.SelectedDate,Modified,Minutes)>=0 && DateDiff(TemplateStartDate_3.SelectedDate,Modified,Minutes)<=1440) || (DateDiff(TemplateEndDate_3.SelectedDate,Modified,Minutes)>=0 && DateDiff(TemplateEndDate_3.SelectedDate,Modified,Minutes)<=1440),
+                                (修改时间 >= TemplateStartDate_3.SelectedDate && 修改时间 <= TemplateEndDate_3.SelectedDate) || (DateDiff(TemplateStartDate_3.SelectedDate,修改时间,Minutes)>=0 && DateDiff(TemplateStartDate_3.SelectedDate,修改时间,Minutes)<=1440) || (DateDiff(TemplateEndDate_3.SelectedDate,修改时间,Minutes)>=0 && DateDiff(TemplateEndDate_3.SelectedDate,修改时间,Minutes)<=1440),
                                 ModelDepartment in drpFilterDepartment.SelectedItems,
                                 ModelType in ComboBox1_formtype.SelectedItems
                             )
@@ -630,7 +630,7 @@ AdminFormListScreen As screen:
             "Gallery_Form As gallery.'BrowseLayout_Vertical_ThreeTextVariant_ver4.0'":
                 Fill: =RGBA(255, 255, 255, 1)
                 Height: =500
-                Items: =Sort(FilterFormDepartment,Modified,Descending)
+                Items: =Sort(FilterFormDepartment,修改时间,Descending)
                 Layout: =Layout.Vertical
                 OnSelect: |+
                     =Set(ShowSavebutton,false);
@@ -639,9 +639,9 @@ AdminFormListScreen As screen:
                     
                     Navigate(AdminFormDetailScreen,ScreenTransition.Fade);
                     ClearCollect(EditForm,ThisItem);
-                    ClearCollect(EditAttachment,Filter(TemplateFileList,GenericFormId=ThisItem.Title&&TempType=ThisItem.ModelType));
-                    ClearCollect(EditAttachment2,Filter(TemplateFileList,GenericFormId=ThisItem.Title&&TempType="示範表格"));
-                    ClearCollect(EditAttachment3,Filter(TemplateFileList,GenericFormId=ThisItem.Title&&TempType="填寫指引"));
+                    ClearCollect(EditAttachment,Filter(TemplateFileList,GenericFormId=ThisItem.标题&&TempType=ThisItem.ModelType));
+                    ClearCollect(EditAttachment2,Filter(TemplateFileList,GenericFormId=ThisItem.标题&&TempType="示範表格"));
+                    ClearCollect(EditAttachment3,Filter(TemplateFileList,GenericFormId=ThisItem.标题&&TempType="填寫指引"));
                     ClearCollect(CreateNewForm,{name:"查看表格"&"-"&ThisItem.ModelName});//創建集合變更編輯表格頁標題
                     
                 TemplatePadding: =0
@@ -702,7 +702,7 @@ AdminFormListScreen As screen:
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =12
-                    Text: =ThisItem.Modified
+                    Text: =ThisItem.修改时间
                     VerticalAlign: =VerticalAlign.Top
                     Width: =152
                     X: =750
@@ -721,7 +721,7 @@ AdminFormListScreen As screen:
                     Size: =12
                     Text: |-
                         =//ThisItem.'Modified By'.DisplayName & Char(13) & ThisItem.Modified;
-                        ThisItem.'Modified By'.DisplayName
+                        ThisItem.修改者.DisplayName
                     VerticalAlign: =VerticalAlign.Top
                     Width: =252
                     X: =458
@@ -774,9 +774,9 @@ AdminFormListScreen As screen:
                         Navigate(AdminFormDetailScreen,ScreenTransition.Fade);
                         ClearCollect(EditForm,ThisItem);
                         //ClearCollect(EditAttachment,Filter(TemplateFileList,GenericFormId=ThisItem.Title&&TempType=ThisItem.ModelType));//編輯表格類型后不可用，下面方法替換
-                        ClearCollect(EditAttachment,Filter(TemplateFileList,GenericFormId=ThisItem.Title&&TempType=ThisItem.ModelType));
-                        ClearCollect(EditAttachment2,Filter(TemplateFileList,GenericFormId=ThisItem.Title&&TempType="示範表格"));
-                        ClearCollect(EditAttachment3,Filter(TemplateFileList,GenericFormId=ThisItem.Title&&TempType="填寫指引"));
+                        ClearCollect(EditAttachment,Filter(TemplateFileList,GenericFormId=ThisItem.标题&&TempType=ThisItem.ModelType));
+                        ClearCollect(EditAttachment2,Filter(TemplateFileList,GenericFormId=ThisItem.标题&&TempType="示範表格"));
+                        ClearCollect(EditAttachment3,Filter(TemplateFileList,GenericFormId=ThisItem.标题&&TempType="填寫指引"));
                         ClearCollect(CreateNewForm,{name:"編輯表格"&"-"&ThisItem.ModelName});//創建集合變更編輯表格頁標題
                     Size: =12
                     Text: ="編輯"

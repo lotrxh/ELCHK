@@ -462,7 +462,7 @@
         Items: |-
             =Filter(
                 ApprovalDetailCol,
-                field_ApproverEmail = CurrentUser,
+                ApproverEmail = CurrentUser,
                 field_TaskStatus = "002"
             )
         Layout: =Layout.Vertical
@@ -501,7 +501,7 @@
             PaddingLeft: =0
             PaddingRight: =0
             PaddingTop: =0
-            Text: =ThisItem.field_Approver
+            Text: =ThisItem.Approver
             VerticalAlign: =VerticalAlign.Top
             Width: =Title1.Width
             X: =Title1.X
