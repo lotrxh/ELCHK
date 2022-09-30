@@ -812,6 +812,7 @@ GeneralFormListScreen As screen:
                 Items: |-
                     =If(
                         TabGallery3_4.Selected.Value = "全部",
+                        //Distinct(AllApprovalData,FlowOrder),
                         AllApprovalData,
                         //SortByColumns(AllApprovalListDataCol,"FlowCreateDate",Descending),
                         TabGallery3_4.Selected.Value = "待處理",
@@ -886,7 +887,8 @@ GeneralFormListScreen As screen:
                                     ApprovalId = ThisItem.Approval_No
                                 ).Title
                             },
-                            Launch("https://apps.powerapps.com/play/b0fe476b-44c4-4c9c-9c05-4608369b9f9f?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & TaskListGallery.Selected.Approval_No)
+                            Launch("https://apps.powerapps.com/play/b0fe476b-44c4-4c9c-9c05-4608369b9f9f?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & TaskListGallery.Selected.Approval_No
+                            ,{},LaunchTarget.Replace)
                         )
                     )
                 TemplatePadding: =0

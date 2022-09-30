@@ -596,7 +596,7 @@ HomepageScreen As screen:
                                         ModelName = ThisItem.ModelName
                                     ).Title
                                 },
-                                Launch("https://apps.powerapps.com/play/b0fe476b-44c4-4c9c-9c05-4608369b9f9f?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=CreateGeneralFormScreen&FormModelId=" & FormModelId)
+                                Launch("https://apps.powerapps.com/play/b0fe476b-44c4-4c9c-9c05-4608369b9f9f?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=CreateGeneralFormScreen&FormModelId=" & FormModelId,{},LaunchTarget.Replace)
                             )
                         )
                     PaddingBottom: =0
