@@ -39,7 +39,7 @@
         UpdateContext({ShowFormHistory: false});
         If(
             IsBlank(Param("FormId")),
-            //移動端單獨測試用，客戶端跳轉不需要
+            //DataFlowActionCol2,通用流程提交后無提交和補充資料
         ClearCollect(
                 DataFlowActionCol2,DataFlowActionCol);
                 
@@ -52,8 +52,15 @@
                         DataFlowActionCol2,
                         Result = "提交"
                     )
+                ),
+                First(
+                    Filter(
+                        DataFlowActionCol2,
+                        Result = "補充資料"
+                    )
                 )
             );
+            
             RemoveIf(
                 DataFlowActionCol3,
                 Result in Filter(

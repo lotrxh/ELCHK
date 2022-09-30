@@ -57,6 +57,12 @@
                         DataFlowActionCol_nonesubmit,
                         Result = "提交"
                     )
+                ),
+                First(
+                    Filter(
+                        DataFlowActionCol_nonesubmit,
+                        Result = "補充資料"
+                    )
                 )
             );
             
@@ -403,7 +409,7 @@
                                 EditDetailUserForm_2,
                                 Filter(
                                     GenericFormModel,
-                                    ModelName = FormNameLabel_1.Text
+                                    ModelFlowNumber = Label1_134.Text
                                 )
                             );
                             //创建集合EditUserForm收集表格信息,用作带入部门表格类型等数据
