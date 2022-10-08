@@ -291,7 +291,7 @@
                     HoverFill: =RGBA(255, 255, 255, 1)
                     OnSelect: |-
                         =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=Label1_142.Text)).附件).AbsoluteUri)
-                        Launch("https://elcss.sharepoint.com/sites/eps/Lists/TemplateFileList/Attachments/" & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=Label1_142.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=Label1_142.Text)).附件).DisplayName & "?web=1")
+                        Launch("https://elcss.sharepoint.com/sites/eps/Lists/TemplateFileList/Attachments/" & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=Label1_142.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=Label1_142.Text)).Attachments).DisplayName & "?web=1")
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
@@ -324,7 +324,7 @@
                     HoverFill: =RGBA(255, 255, 255, 1)
                     OnSelect: |-
                         =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=BtnDefault_21.Text)).附件).AbsoluteUri)
-                        Launch("https://elcss.sharepoint.com/sites/eps/Lists/TemplateFileList/Attachments/" & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=BtnDefault_21.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=BtnDefault_21.Text)).附件).DisplayName & "?web=1")
+                        Launch("https://elcss.sharepoint.com/sites/eps/Lists/TemplateFileList/Attachments/" & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=BtnDefault_21.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=BtnDefault_21.Text)).Attachments).DisplayName & "?web=1")
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
@@ -357,7 +357,7 @@
                     HoverFill: =RGBA(255, 255, 255, 1)
                     OnSelect: |-
                         =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=BtnDefault_22.Text)).附件).AbsoluteUri)
-                        Launch("https://elcss.sharepoint.com/sites/eps/Lists/TemplateFileList/Attachments/" & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=BtnDefault_22.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=BtnDefault_22.Text)).附件).DisplayName & "?web=1")
+                        Launch("https://elcss.sharepoint.com/sites/eps/Lists/TemplateFileList/Attachments/" & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=BtnDefault_22.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=BtnDefault_22.Text)).Attachments).DisplayName & "?web=1")
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
@@ -660,7 +660,7 @@
                         PaddingRight: =0
                         PaddingTop: =0
                         Size: =12
-                        Text: =First(EditDetailUserForm_1).创建者.DisplayName
+                        Text: =First(EditDetailUserForm_1).'Created By'.DisplayName
                         Width: =219
                         X: =76
                         ZIndex: =2
@@ -835,7 +835,7 @@
                             PaddingRight: =0
                             PaddingTop: =0
                             Size: =11
-                            Text: =Last(EditDetailUserAttachment).创建者.DisplayName
+                            Text: =Last(EditDetailUserAttachment).'Created By'.DisplayName
                             Width: =300
                             X: =1
                             ZIndex: =1
@@ -959,7 +959,7 @@
                                 HoverColor: =glbThemePrimaryColor
                                 HoverFill: =RGBA(0, 0, 0, 0)
                                 Icon: =Icon.Download
-                                OnSelect: =Launch(First(Last(Filter(GenericUploadAttachMentFile,FormId=First(EditDetailUserForm_1).Title)).附件).AbsoluteUri)
+                                OnSelect: =Launch(First(Last(Filter(GenericUploadAttachMentFile,FormId=First(EditDetailUserForm_1).Title)).Attachments).AbsoluteUri)
                                 PaddingBottom: =7
                                 PaddingTop: =7
                                 PressedBorderColor: =ColorFade(glbThemePrimaryColor, -15%)
@@ -1377,7 +1377,7 @@
                             PaddingRight: =0
                             PaddingTop: =0
                             Size: =11
-                            Text: =ThisItem.创建者.DisplayName
+                            Text: =ThisItem.'Created By'.DisplayName
                             Width: =278
                             ZIndex: =6
 
@@ -1395,7 +1395,7 @@
                             HoverColor: =glbThemePrimaryColor
                             HoverFill: =RGBA(0, 0, 0, 0)
                             Icon: =Icon.Download
-                            OnSelect: =Launch(First(ThisItem.附件).AbsoluteUri)
+                            OnSelect: =Launch(First(ThisItem.Attachments).AbsoluteUri)
                             PaddingBottom: =7
                             PaddingTop: =7
                             PressedBorderColor: =ColorFade(glbThemePrimaryColor, -15%)
@@ -3108,7 +3108,7 @@
                             GenericFormList,
                             Title = FormListId,
                             {
-                                FilterLabel:TextInput_FilterLabel_2.Text
+                                'Filter Label':TextInput_FilterLabel_2.Text
                             }
                         );
                     
@@ -3505,7 +3505,7 @@
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =11
-                    Text: =ThisItem.创建者.DisplayName
+                    Text: =ThisItem.'Created By'.DisplayName
                     Width: =198
                     X: =19
                     ZIndex: =6
@@ -3525,7 +3525,7 @@
                     HoverFill: =RGBA(0, 0, 0, 0)
                     Icon: =Icon.Download
                     OnSelect: |+
-                        =Launch(First(ThisItem.附件).AbsoluteUri);
+                        =Launch(First(ThisItem.Attachments).AbsoluteUri);
                         
                     PaddingBottom: =7
                     PaddingTop: =7
