@@ -238,7 +238,7 @@ AdminFormDetailScreen As screen:
                             UpdateIf(
                                 TemplateFileList,
                                 TempFileName = TextInput_FormName.Text,
-                                {GenericFormId: First(EditForm).标题}
+                                {GenericFormId: First(EditForm).Title}
                             );
                             UpdateIf(
                                 TemplateFileList,
@@ -283,7 +283,7 @@ AdminFormDetailScreen As screen:
                                     GenericFormModel,
                                     Defaults(GenericFormModel),
                                     {
-                                        标题: GUID(),
+                                        Title: GUID(),
                                         ModelDepartment: drpFilter_Department.Selected.Result,
                                         ModelType: drpFilter_FormType.Selected.Result,
                                         ModelFlowNumber: TextInput_FormNumber.Text,
@@ -345,7 +345,7 @@ AdminFormDetailScreen As screen:
                         UpdateIf(
                             TemplateFileList,
                             TempFileName = TextInput_FormName.Text,
-                            {GenericFormId: First(NewForm).标题}
+                            {GenericFormId: First(NewForm).Title}
                         );
                         Notify(
                             "保存成功！",
