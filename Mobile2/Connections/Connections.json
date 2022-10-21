@@ -1,0 +1,141 @@
+{
+  "c199c7e7-fb7f-476b-9d8c-7de3472b5fdc": {
+    "connectionParameters": {
+      "workFlowCallbackUri": "https://prod-12.southeastasia.logic.azure.com:443/workflows/b53fc178287f402fa82d2b65074ddd81/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=aBu0It1_bMn0XSgCHQGpZJ8FFEUGcPEWQLjRy_v4HxQ",
+      "workflowEndpoint": "/subscriptions/427976e2-4271-4308-afb8-d28d53a6ad06/resourceGroups/b7a4bbdd6e9c4929b5a46550feead77c-e6499d5988674a80a809c89ca6efe348/providers/Microsoft.Logic/workflows/eba333d5-7069-410d-bc84-1d5d079b9494",
+      "workflowName": "eba333d5-7069-410d-bc84-1d5d079b9494",
+      "workflowPath": "/subscriptions/427976e2-4271-4308-afb8-d28d53a6ad06/resourceGroups/b7a4bbdd6e9c4929b5a46550feead77c-e6499d5988674a80a809c89ca6efe348/providers/Microsoft.Logic/workflows/eba333d5-7069-410d-bc84-1d5d079b9494"
+    },
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "逻辑流",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1534/1.0.1534.2605/logicflows/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
+      "parameterHints": {
+        "ed5c50bd-bb07-4f5f-ad98-bbe63b910f77": {
+          "value": "shared_sharepointonline"
+        },
+        "workflowEntityId": {},
+        "workflowName": {
+          "value": "eba333d5-7069-410d-bc84-1d5d079b9494"
+        }
+      },
+      "parameterHintsV2": {
+        "shared_sharepointonline": {
+          "value": "ed5c50bd-bb07-4f5f-ad98-bbe63b910f77"
+        },
+        "workflowEntityId": {},
+        "workflowName": {
+          "value": "eba333d5-7069-410d-bc84-1d5d079b9494"
+        }
+      }
+    },
+    "datasets": {},
+    "dataSources": [
+      "UploadFiletoSharepoint"
+    ],
+    "dependencies": {
+      "shared_sharepointonline": "ed5c50bd-bb07-4f5f-ad98-bbe63b910f77"
+    },
+    "dependents": [],
+    "id": "c199c7e7-fb7f-476b-9d8c-7de3472b5fdc"
+  },
+  "c63818b0-6a22-4c7d-8e8a-4c662dfaa20f": {
+    "connectionParameters": {
+      "sku": "Enterprise"
+    },
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "Office 365 用户",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1593/1.0.1593.2980/office365users/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_office365users",
+      "parameterHints": {},
+      "parameterHintsV2": {}
+    },
+    "datasets": {},
+    "dataSources": [
+      "Office365用户"
+    ],
+    "dependencies": {},
+    "dependents": [],
+    "id": "c63818b0-6a22-4c7d-8e8a-4c662dfaa20f"
+  },
+  "ed5c50bd-bb07-4f5f-ad98-bbe63b910f77": {
+    "connectionParameters": {
+      "sku": "Enterprise"
+    },
+    "connectionRef": {
+      "apiTier": "Standard",
+      "displayName": "SharePoint",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1607/1.0.1607.3068/sharepointonline/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_sharepointonline",
+      "parameterHints": {},
+      "parameterHintsV2": {}
+    },
+    "datasets": {
+      "https://elcss.sharepoint.com/sites/eps-uat-2": {
+        "dataSources": {
+          "Approval_Table": {
+            "tableName": "8bac6401-1216-4bac-91b0-ac4af91123f5"
+          },
+          "ApprovalDetail_Table": {
+            "tableName": "e15e0a1c-ef67-41ed-afd7-08cc39d00d91"
+          },
+          "ConfigurationInfo": {
+            "tableName": "0e28b495-f326-4747-bbf9-848592d1d26d"
+          },
+          "ContractNotice": {
+            "tableName": "60d82d1a-5b69-41e4-aef3-a6561d2b9a4f"
+          },
+          "FormTableType": {
+            "tableName": "cf1c3cc7-48eb-4c6b-9f1b-85f103af684b"
+          },
+          "GenericFormList": {
+            "tableName": "ea4771f2-8c83-48a5-877b-c95a6b6def87"
+          },
+          "GenericFormModel": {
+            "tableName": "1e4831e0-de28-4391-9d3a-55ea19ffca6e"
+          },
+          "GenericUploadAttachMentFile": {
+            "tableName": "04c464d2-ad6d-409a-a793-a7c243c5eac7"
+          },
+          "MyContacts": {
+            "tableName": "03acdf16-65dd-42b4-b35b-f751da047ceb"
+          },
+          "SignerInfo": {
+            "tableName": "1f74b66d-7a62-4fa1-87b2-1198238206ed"
+          },
+          "TemplateFileList": {
+            "tableName": "3b48be6e-d672-4f70-8ef1-563ee936ae97"
+          },
+          "UploadFlowAttachMent": {
+            "tableName": "9d27576b-c3be-4fe0-b367-149bee9728db"
+          },
+          "UserInfo": {
+            "tableName": "76f2cc88-0ec4-42af-946b-7b3c9520f7f2"
+          }
+        }
+      }
+    },
+    "dataSources": [
+      "Approval_Table",
+      "ApprovalDetail_Table",
+      "ConfigurationInfo",
+      "ContractNotice",
+      "FormTableType",
+      "GenericFormList",
+      "GenericFormModel",
+      "GenericUploadAttachMentFile",
+      "MyContacts",
+      "SignerInfo",
+      "TemplateFileList",
+      "UploadFlowAttachMent",
+      "UserInfo"
+    ],
+    "dependencies": {},
+    "dependents": [
+      "c199c7e7-fb7f-476b-9d8c-7de3472b5fdc"
+    ],
+    "id": "ed5c50bd-bb07-4f5f-ad98-bbe63b910f77"
+  }
+}

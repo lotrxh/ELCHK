@@ -1,0 +1,43 @@
+Screen1 As screen:
+
+    Gallery2 As gallery.variableTemplateHeightGallery:
+        Items: =CustomGallerySample
+        Layout: =Layout.Vertical
+        TemplateSize: =375
+        X: =415
+        Y: =90
+        ZIndex: =1
+
+        Rectangle8 As rectangle:
+            OnSelect: =Select(Parent)
+            Width: =10
+            X: =20
+            Y: =15
+            ZIndex: =1
+
+        Label8 As label:
+            OnSelect: =Select(Parent)
+            Text: =ThisItem.SampleHeading
+            X: =61
+            Y: =15
+            ZIndex: =2
+
+        Label8_1 As label:
+            OnSelect: =Select(Parent)
+            Text: =ThisItem.SampleHeading
+            X: =61
+            Y: =55
+            ZIndex: =3
+
+        Label8_2 As label:
+            OnSelect: =Select(Parent)
+            Text: =ThisItem.SampleHeading
+            X: =61
+            Y: =335
+            ZIndex: =4
+
+    Rectangle7 As rectangle:
+        X: =40
+        Y: =40
+        ZIndex: =2
+

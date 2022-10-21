@@ -1,0 +1,3182 @@
+"CreateGeneralFormScreen As screen.'phoneLayout_FluidGridWithHeaderPageLayout_ver3.0'":
+    OnHidden: =
+    OnVisible: |-
+        =UpdateContext(
+            {
+                FormModelId: If(
+                    IsBlank(Param("FormModelId")),
+                    FormModelIds,
+                    LookUp(
+                        GenericFormModel,
+                        标题 = Param("FormModelId"),
+                        标题
+                    )
+                )
+            }
+        );
+        Set(
+            FlowType,
+            LookUp(
+                GenericFormModel,
+                标题 = FormModelId
+            ).FlowType
+        );
+        /*If(
+            IsBlank(
+                LookUp(
+                    GenericFormModel,
+                    Title = FormModelId
+                ).SelectedActions
+            ),
+            ClearCollect(
+                DataFlowActionCol,
+                Split(
+                    "補充資料;提交;檢查;簽批;助理總幹事審批;總幹事審批;跟進",
+                    ";"
+                ).Result
+            ),*/
+            ClearCollect(
+                DataFlowActionCol,
+                Split(
+                        LookUp(
+                            GenericFormModel,
+                            标题 = FormModelId
+                        ).SelectedActions,
+                    ";"
+                ).Result
+            );
+            //收集checkbox選擇后的行動選項内容集合
+            ClearCollect(
+                DataFlowActionCol_nonesubmit,
+                DataFlowActionCol
+            );
+            Remove(
+                DataFlowActionCol_nonesubmit,
+                First(
+                    Filter(
+                        DataFlowActionCol_nonesubmit,
+                        Result = "提交"
+                    )
+                ),
+                First(
+                    Filter(
+                        DataFlowActionCol_nonesubmit,
+                        Result = "補充資料"
+                    )
+                )
+            );
+            
+        //);
+        ClearCollect(
+            ApprovalListCol,
+            {
+                idNumber: 0,
+                ActionName: "填寫",
+                Approver: User().FullName,
+                ApprovalEmail: User().Email,
+                IsComplate: true,
+                BCCUser: "",
+                remark: ""
+            }
+        );
+        //创建集合EditUserForm收集表格信息
+        ClearCollect(
+            EditUserForm,
+            Filter(
+                GenericFormModel,
+                标题 = FormModelId
+                //Title = Param("FormModelId")
+            )
+        );
+        
+        //创建集合EditUserAttachment获得附件信息
+        ClearCollect(
+            EditUserAttachment,
+            Filter(
+                TemplateFileList,
+                标题 = FormModelId
+                //GenericFormId = Param("FormModelId")
+            )
+        );
+        
+        
+        //部门默认选项空集合
+        ClearCollect(
+            DepartmentForm,
+            {
+                Department:""
+            }
+        );
+        Clear(DepartmentForm);
+        
+        
+        Set(Departmentselect,false);
+        Set(Lastselect,false)
+
+    BottomContainer As groupContainer.manualLayoutContainer:
+        Fill: =White
+        Height: =60
+        Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
+        Width: =Parent.Width
+        Y: =Parent.Height-Self.Height
+        ZIndex: =2
+
+        LineRectangle_5 As rectangle:
+            Fill: =RGBA(202, 202, 202, 1)
+            Height: =1
+            Width: =Parent.Width
+            ZIndex: =7
+
+        Container11_1 As groupContainer.horizontalAutoLayoutContainer:
+            Height: =60
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutGap: =20
+            LayoutJustifyContent: =LayoutJustifyContent.End
+            LayoutMode: =LayoutMode.Auto
+            PaddingRight: =1
+            Width: |
+                =Switch(
+                        CreateGeneralFormScreen.Size,
+                        ScreenSize.Small,
+                       Parent.Width-40,
+                        ScreenSize.Medium,
+                       Parent.Width-40,
+                       ScreenSize.Large,
+                       Parent.Width-40,
+                       1200-40
+                  )
+            X: =(Parent.Width-Self.Width)/2
+            ZIndex: =9
+
+            BtnDefaultLg_6 As button:
+                BorderColor: =Self.Color
+                BorderThickness: =1
+                Color: =glbThemePrimaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                Height: =36
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =RGBA(255, 255, 255, 1)
+                OnSelect: =Launch(JumpUrlClientAPP&"&Screen=HomepageScreen",{},LaunchTarget.Replace);
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =11
+                Text: ="取消"
+                Width: =100
+                X: =Parent.Width-Self.Width-1
+                Y: =12
+                ZIndex: =1
+
+            BtnPrimaryLg_7 As button:
+                BorderColor: =Self.Fill
+                BorderThickness: =1
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =glbThemePrimaryColor
+                FocusedBorderThickness: =1
+                Height: =36
+                HoverFill: =ColorFade(Self.Fill, -15%)
+                OnSelect: |
+                    =//左边填写内容上传必選項判斷及流程必選項
+                    If(
+                        (Attachment_Excel.Visible = true && Last(Attachment_Excel.Attachments).Name = Blank()) || (Attachment_Zip.Visible = true && Last(Attachment_Zip.Attachments).Name = Blank()) || (Label6.Visible = true && IsBlank(TextInput_FormPWD) && IsBlank(TextInput_FormPWD_1)) || (Label6_1.Visible = true && IsBlank(TextInput_zipPWD) && IsBlank(TextInput_zipPWD_1)) || IsEmpty(drpFilterDepartment_1.SelectedItems) || (FlowType = "預設流程" && (Dropdown1_9.Selected.Result = Blank() || Label1_155.Text = "/")) || (FlowType = "通用流程" && (Dropdown1_5.Selected.Result = Blank() || Label1_137.Text = "/")) || (FlowType = "部門簡單流程" && Label1_153.Text = "/"),
+                        Notify(
+                            "必需項不能爲空，處理行動及處理人不能爲空",
+                            NotificationType.Error
+                        ),
+                        Set(
+                            ApprovalGuid,
+                            GUID()
+                        );
+                        If(
+                            Checkbox2_5.Value = true,
+                    //提交人信息记录
+                            Patch(
+                                ApprovalListCol,
+                                Defaults(ApprovalListCol),
+                                {
+                                    idNumber: 1,
+                                    ActionName: "提交",
+                                    Approver: User().FullName,
+                                    ApprovalEmail: User().Email,
+                                    IsComplate: true,
+                                    BCCUser: "",
+                                    remark: ""
+                                }
+                            );
+                        );
+                        Patch(
+                            ApprovalListCol,
+                            Defaults(ApprovalListCol),
+                            {
+                                idNumber: If(
+                                    CountA(ApprovalListCol.ActionName) = 1,
+                                    1,
+                                    CountA(ApprovalListCol.ActionName)
+                                ),
+                                ActionName: If(
+                                    FlowType = "通用流程" && !IsBlank(
+                                        LookUp(
+                                            GenericFormModel,
+                                            标题 = FormModelId
+                                        ).SelectedActions
+                                    ),
+                                    Dropdown1_5.Selected.Result,
+                                    If(
+                                        FlowType = "預設流程",
+                                        Dropdown1_9.Selected.Result,
+                                        If(
+                                            FlowType = "部門簡單流程",
+                                            Dropdown1_7.Selected.Value
+                                        )
+                                    )
+                                ),
+                                ApprovalEmail: If(
+                                    FlowType = "通用流程",
+                                    Last(
+                                        Split(
+                                            Label1_137.Text,
+                                            "/"
+                                        )
+                                    ).Result,
+                                    If(
+                                        FlowType = "預設流程",
+                                        Last(
+                                            Split(
+                                                Label1_155.Text,
+                                                "/"
+                                            )
+                                        ).Result,
+                                        If(
+                                            FlowType = "部門簡單流程",
+                                            Last(
+                                                Split(
+                                                    Label1_153.Text,
+                                                    "/"
+                                                )
+                                            ).Result
+                                        )
+                                    )
+                                ),
+                                //Gallery2_2.Selected.AllOwnerName.Email,
+                                Approver: If(
+                                    FlowType = "通用流程",
+                                    First(
+                                        Split(
+                                            Label1_137.Text,
+                                            "/"
+                                        )
+                                    ).Result,
+                                    If(
+                                        FlowType = "預設流程",
+                                        First(
+                                            Split(
+                                                Label1_155.Text,
+                                                "/"
+                                            )
+                                        ).Result,
+                                        If(
+                                            FlowType = "部門簡單流程",
+                                            First(
+                                                Split(
+                                                    Label1_153.Text,
+                                                    "/"
+                                                )
+                                            ).Result
+                                        )
+                                    )
+                                ),
+                                //First(Split(Gallery2_2.Selected.AllOwnerName.DisplayName," ").Result).Result,
+                                IsComplate: false,
+                                BCCUser: If(
+                                    FlowType = "通用流程",
+                                    Concat(
+                                        ComboBox1_11.SelectedItems.Mail,
+                                        Mail,
+                                        ","
+                                    ),
+                                    If(
+                                        FlowType = "預設流程",
+                                        Concat(
+                                            ComboBox1_15.SelectedItems.Mail,
+                                            Mail,
+                                            ","
+                                        ),
+                                        If(
+                                            FlowType = "部門簡單流程",
+                                            Concat(
+                                                ComboBox1_13.SelectedItems.Mail,
+                                                Mail,
+                                                ","
+                                            )
+                                        )
+                                    )
+                                ),
+                                remark: ""
+                            }
+                        );
+                        UpdateContext(
+                            {
+                                TodayTask2Code: Label1_134.Text & Text(
+                                    Today(),
+                                    "yyyymmdd"
+                                )
+                            }
+                        );
+                        
+                    //需要收集app_no
+                    Set(
+                            ApprovalIDNumber,
+                            Patch(
+                                Approval_Table,
+                                Defaults(Approval_Table),
+                                {
+                                    Application_No: Label1_134.Text & Text(
+                                        Now(),
+                                        "yyyymmdd"
+                                    ) & Text(
+                                        Right(
+                                            Last(
+                                                SortByColumns(
+                                                    Filter(
+                                                        Approval_Table,
+                                                        StartsWith(
+                                                            Application_No,
+                                                            TodayTask2Code
+                                                        )
+                                                    ),
+                                                    "Application_No",
+                                                    Ascending
+                                                )
+                                            ).Application_No,
+                                            3
+                                        ) + 1,
+                                        "000"
+                                    ),
+                                    标题: ApprovalGuid,
+                                    Application_Status: "審批中",
+                                    DepartMentName: Label1_130.Text,
+                                    FormType: Label1_132.Text,
+                                    'Operator ': User().Email,
+                                    Task_Name: FormNameLabel_1.Text,
+                                    DepartMentUnit: drpFilterDepartment_1.Selected.Result
+                                }
+                            )
+                        );
+                        ForAll(
+                            ApprovalListCol,
+                            Patch(
+                                ApprovalDetail_Table,
+                                Defaults(ApprovalDetail_Table),
+                                {
+                                    标题: GUID(),
+                                    Advise: ApprovalListCol[@remark],
+                                    Approval_No: ApprovalGuid,
+                                    ApprovalBCC: ApprovalListCol[@BCCUser],
+                                    Approver: ApprovalListCol[@Approver],
+                                    ApproverEmail: ApprovalListCol[@ApprovalEmail],
+                                    TaskStatus: If(
+                                        ApprovalListCol[@IsComplate],
+                                        "004",
+                                        "002"
+                                    ),
+                                    Priortty: ApprovalListCol[@idNumber],
+                                    ActionNode: ApprovalListCol[@ActionName]
+                                }
+                            )
+                        );
+                        
+                    //左边填写内容上传
+                    Set(
+                            GenericFormlistGuid,
+                            GUID()
+                        );
+                        ClearCollect(
+                            NewUserForm,
+                            Patch(
+                                GenericFormList,
+                                Defaults(GenericFormList),
+                                {
+                                    标题: GenericFormlistGuid,
+                                    ApprovalId: ApprovalGuid,
+                                    ModelId: First(EditUserForm).标题,
+                                    ModelName: FormNameLabel_1.Text,
+                                    UploadFileId: Last(GenericUploadAttachMentFile).标题,
+                                    //目前取的是最后一个附件的id
+                                    MarkValue: TextInput_FormMark.Text,
+                                    //UploadFilePWD:TextInput_FormPWD.Text,
+                                        //ReferNumber:TextInput_ReferNumber.Text,
+                    FormType: Label1_132.Text,
+                                    Department: drpFilterDepartment_1.Selected.Result,
+                                    FormOrder: ApprovalIDNumber.Application_No,
+                                    FlowType: First(EditUserForm).FlowType,
+                                    SelectedActions: First(EditUserForm).SelectedActions
+                                        //FilterLabel: TextInput_FilterLabel.Text
+                                }
+                            )
+                        );
+                        //創建NewUserForm集合用作後續更新list-GenericUploadAttachMentFile中的FormId
+                    //执行flow上传表格到list
+                    If(
+                            Last(Attachment_Excel.Attachments).Name <> Blank(),
+                            Set(
+                                varAttachmentControl1,
+                                JSON(
+                                    Image4_2.Image,
+                                    IncludeBinaryData
+                                )
+                            );
+                            Set(
+                                varBase64Only1,
+                                Mid(
+                                    varAttachmentControl1,
+                                    Find(
+                                        ",",
+                                        varAttachmentControl1
+                                    ) + 1,
+                                    Len(varAttachmentControl1) - Find (
+                                        ",",
+                                        varAttachmentControl1
+                                    ) - 1
+                                )
+                            );
+                            UploadFiletoSharepoint.Run(
+                                "GenericUploadAttachMentFile",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                GUID(),
+                                GenericFormlistGuid,
+                                First(EditUserForm).ModelType,
+                                Last(Attachment_Excel.Attachments).Name,
+                                TextInput_FormPWD.Text,
+                                Last(Attachment_Excel.Attachments).Name,
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                varBase64Only1,
+                                "",
+                                "",
+                                "",
+                                ""
+                            )
+                        );
+                        
+                    //执行flow上传附件到list
+                    If(
+                            Last(Attachment_Zip.Attachments).Name <> Blank(),
+                            Set(
+                                varAttachmentControl2,
+                                JSON(
+                                    Image4_1.Image,
+                                    IncludeBinaryData
+                                )
+                            );
+                            Set(
+                                varBase64Only2,
+                                Mid(
+                                    varAttachmentControl2,
+                                    Find(
+                                        ",",
+                                        varAttachmentControl2
+                                    ) + 1,
+                                    Len(varAttachmentControl2) - Find (
+                                        ",",
+                                        varAttachmentControl2
+                                    ) - 1
+                                )
+                            );
+                            UploadFiletoSharepoint.Run(
+                                "UploadFlowAttachMent",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                GenericFormlistGuid,
+                                ApprovalGuid,
+                                TextInput_zipPWD.Text,
+                                Last(Attachment_Zip.Attachments).Name,
+                                Last(Attachment_Zip.Attachments).Name,
+                                varBase64Only2,
+                                "",
+                                "",
+                                "",
+                                "",
+                                ""
+                            )
+                        );
+                        //收集当前用户的申请部门信息用作下一次创建任务时主动带入
+                        If(
+                        CountA(
+                            Filter(
+                                MyContacts,
+                                UserEmail = User().Email,
+                                ContatsType = "部門"
+                                //ApplyDepartment = drpFilterDepartment_1.Selected.Result
+                            ).标题
+                        ) <= 0,
+                        Patch(
+                            MyContacts,
+                            Defaults(MyContacts),
+                            {
+                                标题: GUID(),
+                                UserEmail: User().Email,
+                                ContatsType: "部門",
+                                ApplyDepartment: drpFilterDepartment_1.Selected.Result
+                            }
+                        ),
+                        UpdateIf(
+                                MyContacts,
+                                (UserEmail = User().Email) && (ContatsType = "部門"),
+                                {ApplyDepartment: drpFilterDepartment_1.Selected.Result}
+                            )
+                        );
+                        //保存后重置输入内容
+                        Reset(drpFilterDepartment_1);
+                        Reset(Attachment_Excel);
+                        Reset(Attachment_Zip);
+                        Reset(TextInput_FormMark);
+                        Reset(TextInput_FormPWD);
+                        Reset(TextInput_zipPWD);
+                        Reset(TextInput_FormPWD_1);
+                        Reset(TextInput_zipPWD_1);
+                        //下一節點操作人為當前填用戶時，帶入信息到任務詳情頁面    
+                        With(
+                            {FormModelTitle:First(NewUserForm).标题},
+                        //创建集合EditDetailUserForm_1收集表格信息，用作帶入表格名称、流程等数据
+                        ClearCollect(
+                            EditDetailUserForm_1,
+                            Filter(
+                                GenericFormList,
+                                标题 = FormModelTitle
+                                )
+                            );
+                            
+                        //创建集合EditDetailUserForm_2,用作带入部门表格类型等数据
+                        ClearCollect(
+                            EditDetailUserForm_2,
+                            Filter(
+                                GenericFormModel,
+                                ModelFlowNumber = Label1_134.Text
+                                )
+                            );
+                        //创建集合EditDetailUserAttachment, 帶入表格   
+                        ClearCollect(
+                            EditDetailUserAttachment,
+                            Filter(
+                                GenericUploadAttachMentFile,
+                                FormId = FormModelTitle
+                                )
+                            );
+                        //创建集合EditDetailUserAttachment2, 帶入附件
+                        ClearCollect(
+                            EditDetailUserAttachment2,
+                            Filter(
+                                UploadFlowAttachMent,
+                                标题 = FormModelTitle
+                                )
+                            )
+                        );
+                        Notify(
+                            "填寫成功！",
+                            NotificationType.Success,
+                            2000
+                        );
+                        //測試時導航到具體任務頁面，實際使用應該退回到首頁
+                    //Navigate(DetailGeneralFormScreen,None,{HistoryList: ApprovalIDNumber});
+                    If(
+                            If(
+                                FlowType = "通用流程",
+                                Last(
+                                    Split(
+                                        Label1_137.Text,
+                                        "/"
+                                    )
+                                ).Result,
+                                FlowType = "預設流程",
+                                Last(
+                                    Split(
+                                        Label1_155.Text,
+                                        "/"
+                                    )
+                                ).Result,
+                                FlowType = "部門簡單流程",
+                                Last(
+                                    Split(
+                                        Label1_153.Text,
+                                        "/"
+                                    )
+                                ).Result
+                            ) = User().Email,
+                    //下一节点处理人为当前用户时，跳转到任务详情页面
+                            Navigate(
+                                DetailGeneralFormScreen,
+                                None,
+                                {HistoryList: ApprovalIDNumber}
+                            ),
+                    //下一节点处理人不是当前用户时，返回認爲列表
+                            Launch(
+                                JumpUrlClientAPP&"&Screen=GeneralFormListScreen",
+                                {},
+                                LaunchTarget.Replace
+                            )
+                        );
+                        
+                    );
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedColor: =White
+                PressedFill: =ColorFade(Self.Fill, -25%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =11
+                Text: ="完成"
+                Width: =100
+                X: =983
+                Y: =12
+                ZIndex: =2
+
+    MainflowContainer As groupContainer.verticalAutoLayoutContainer:
+        Fill: =RGBA(242, 242, 242, 1)
+        Height: =Parent.Height - 120
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutGap: =10
+        LayoutMode: =LayoutMode.Auto
+        LayoutOverflowY: =LayoutOverflow.Scroll
+        Width: =Parent.Width
+        Y: =60
+        ZIndex: =5
+
+        InfoContainer As groupContainer.horizontalAutoLayoutContainer:
+            AlignInContainer: =AlignInContainer.SetByContainer
+            Fill: =RGBA(255, 255, 255, 1)
+            FillPortions: =0
+            Height: =InfoContainer12_2.Y+InfoContainer12_2.Height+20
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            Width: =Parent.Width
+            ZIndex: =1
+
+            FormNameContainer As groupContainer.horizontalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.SetByContainer
+                Fill: =RGBA(255, 255, 255, 1)
+                FillPortions: =0
+                Height: =BtnDefault_25.Y+BtnDefault_25.Height+10
+                LayoutGap: =5
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                LayoutWrap: =true
+                PaddingLeft: =1
+                PaddingRight: =1
+                PaddingTop: =20
+                Width: |
+                    =Switch(
+                            CreateGeneralFormScreen.Size,
+                            ScreenSize.Small,
+                           Parent.Width-40,
+                            ScreenSize.Medium,
+                           Parent.Width-40,
+                           ScreenSize.Large,
+                           Parent.Width-40,
+                           1200
+                      )
+                ZIndex: =1
+
+                FormNameLabel_1 As label:
+                    AutoHeight: =true
+                    Color: =glbNeutralPrimaryColor
+                    Fill: =RGBA(255, 255, 255, 1)
+                    FillPortions: =1
+                    FontWeight: =FontWeight.Semibold
+                    Height: =30
+                    LayoutMinWidth: =360
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =16
+                    Text: =First(EditUserForm).ModelName
+                    Width: =Parent.Width-330
+                    X: =58
+                    ZIndex: =1
+
+                BtnDefault_23 As button:
+                    BorderColor: =Self.Color
+                    BorderThickness: =1
+                    Color: =glbThemePrimaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    Fill: =White
+                    FocusedBorderThickness: =1
+                    FontWeight: =FontWeight.Normal
+                    Height: =28
+                    HoverBorderColor: =ColorFade(Self.Color, -15%)
+                    HoverColor: =ColorFade(Self.Color, -15%)
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    OnSelect: |
+                        =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).附件).AbsoluteUri)
+                        Launch("https://elcss.sharepoint.com/sites/eps-uat-2/Lists/TemplateFileList/Attachments/" & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).附件).DisplayName & "?web=1")
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =ColorFade(Self.Color, -25%)
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    PressedFill: =ColorFade(Self.Color, 95%)
+                    RadiusBottomLeft: =2
+                    RadiusBottomRight: =2
+                    RadiusTopLeft: =2
+                    RadiusTopRight: =2
+                    Size: =9
+                    Text: ="模板下載"
+                    Width: =100
+                    X: =Parent.Width-Self.Width-1
+                    Y: =1
+                    ZIndex: =2
+
+                BtnDefault_24 As button:
+                    BorderColor: =Self.Color
+                    BorderThickness: =1
+                    Color: =glbThemePrimaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    Fill: =White
+                    FocusedBorderThickness: =1
+                    FontWeight: =FontWeight.Normal
+                    Height: =28
+                    HoverBorderColor: =ColorFade(Self.Color, -15%)
+                    HoverColor: =ColorFade(Self.Color, -15%)
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    OnSelect: |-
+                        =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text)).附件).AbsoluteUri)
+                        Launch("https://elcss.sharepoint.com/sites/eps-uat-2/Lists/TemplateFileList/Attachments/" & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text)).附件).DisplayName & "?web=1")
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =ColorFade(Self.Color, -25%)
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    PressedFill: =ColorFade(Self.Color, 95%)
+                    RadiusBottomLeft: =2
+                    RadiusBottomRight: =2
+                    RadiusTopLeft: =2
+                    RadiusTopRight: =2
+                    Size: =9
+                    Text: ="填寫指引"
+                    Width: =100
+                    X: =Parent.Width-Self.Width-1
+                    Y: =1
+                    ZIndex: =3
+
+                BtnDefault_25 As button:
+                    BorderColor: =Self.Color
+                    BorderThickness: =1
+                    Color: =glbThemePrimaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    Fill: =White
+                    FocusedBorderThickness: =1
+                    FontWeight: =FontWeight.Normal
+                    Height: =28
+                    HoverBorderColor: =ColorFade(Self.Color, -15%)
+                    HoverColor: =ColorFade(Self.Color, -15%)
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    OnSelect: |-
+                        =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text)).附件).AbsoluteUri)
+                        Launch("https://elcss.sharepoint.com/sites/eps-uat-2/Lists/TemplateFileList/Attachments/" & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text)).附件).DisplayName & "?web=1")
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =ColorFade(Self.Color, -25%)
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    PressedFill: =ColorFade(Self.Color, 95%)
+                    RadiusBottomLeft: =2
+                    RadiusBottomRight: =2
+                    RadiusTopLeft: =2
+                    RadiusTopRight: =2
+                    Size: =9
+                    Text: ="示範表格"
+                    Width: =100
+                    X: =Parent.Width-Self.Width-1
+                    Y: =1
+                    ZIndex: =4
+
+            InfoContainer12_2 As groupContainer.horizontalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.SetByContainer
+                Fill: =RGBA(255, 255, 255, 1)
+                FillPortions: =0
+                Height: =Container13_11.Y+Container13_11.Height
+                LayoutGap: =10
+                LayoutMinHeight: =40
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                LayoutWrap: =true
+                Width: |
+                    =Switch(
+                            CreateGeneralFormScreen.Size,
+                            ScreenSize.Small,
+                           Parent.Width-40,
+                            ScreenSize.Medium,
+                           Parent.Width-40,
+                           ScreenSize.Large,
+                           Parent.Width-40,
+                           1200
+                      )
+                X: =20
+                Y: =60
+                ZIndex: =2
+
+                Container13_8 As groupContainer.manualLayoutContainer:
+                    AlignInContainer: =AlignInContainer.SetByContainer
+                    Fill: =RGBA(255, 255, 255, 1)
+                    FillPortions: =0
+                    Height: =28
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    Width: =300
+                    ZIndex: =1
+
+                    Label1_129 As label:
+                        Color: =glbNeutralSecondaryColor
+                        Height: =28
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =10
+                        Text: ="表格部門/服務："
+                        Width: =126
+                        ZIndex: =1
+
+                    Label1_130 As label:
+                        Color: =glbNeutralPrimaryColor
+                        Height: =28
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =10
+                        Text: =First(EditUserForm).ModelDepartment
+                        Width: =174
+                        X: =126
+                        ZIndex: =2
+
+                Container13_9 As groupContainer.manualLayoutContainer:
+                    AlignInContainer: =AlignInContainer.SetByContainer
+                    Fill: =RGBA(255, 255, 255, 1)
+                    FillPortions: =0
+                    Height: =28
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    Width: =300
+                    ZIndex: =2
+
+                    Label1_131 As label:
+                        Color: =glbNeutralSecondaryColor
+                        Height: =28
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =10
+                        Text: ="表格類型/單位："
+                        Width: =128
+                        ZIndex: =1
+
+                    Label1_132 As label:
+                        Color: =glbNeutralPrimaryColor
+                        Height: =28
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =10
+                        Text: =First(EditUserForm).ModelType
+                        Width: =170
+                        X: =128
+                        ZIndex: =2
+
+                Container13_10 As groupContainer.manualLayoutContainer:
+                    AlignInContainer: =AlignInContainer.SetByContainer
+                    Fill: =RGBA(255, 255, 255, 1)
+                    FillPortions: =0
+                    Height: =28
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    Width: =250
+                    ZIndex: =3
+
+                    Label1_133 As label:
+                        Color: =glbNeutralSecondaryColor
+                        Height: =28
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =10
+                        Text: ="表格編號："
+                        Width: =92
+                        ZIndex: =1
+
+                    Label1_134 As label:
+                        Color: =glbNeutralPrimaryColor
+                        Height: =28
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =10
+                        Text: =First(EditUserForm).ModelFlowNumber
+                        Width: =158
+                        X: =92
+                        ZIndex: =2
+
+                Container13_11 As groupContainer.manualLayoutContainer:
+                    AlignInContainer: =AlignInContainer.SetByContainer
+                    Fill: =RGBA(255, 255, 255, 1)
+                    FillPortions: =0
+                    Height: =28
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    Width: =250
+                    ZIndex: =4
+
+                    Label1_135 As label:
+                        Color: =glbNeutralSecondaryColor
+                        Height: =28
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =10
+                        Text: ="表格版本："
+                        Width: =94
+                        ZIndex: =1
+
+                    Label1_136 As label:
+                        Color: =glbNeutralPrimaryColor
+                        Height: =28
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =10
+                        Text: =First(EditUserForm).ModelVersion
+                        Width: =156
+                        X: =94
+                        ZIndex: =2
+
+        FillInContainer As groupContainer.horizontalAutoLayoutContainer:
+            AlignInContainer: =AlignInContainer.Center
+            Fill: =RGBA(242, 242, 242, 1)
+            FillPortions: =0
+            Height: =Max(LeftContainer12.Y+LeftContainer12.Height+40,RightContainer.Y+RightContainer.Height+40)
+            LayoutGap: =10
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            LayoutWrap: =true
+            Width: |
+                =Switch(
+                        CreateGeneralFormScreen.Size,
+                        ScreenSize.Small,
+                       Parent.Width,
+                        ScreenSize.Medium,
+                       Parent.Width-40,
+                       ScreenSize.Large,
+                       Parent.Width-40,
+                       1200
+                  )
+            X: =(Parent.Width-Self.Width)/2
+            Y: =InfoContainer.Y+InfoContainer.Height+10
+            ZIndex: =2
+
+            LeftContainer12 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.SetByContainer
+                Fill: =RGBA(255, 255, 255, 1)
+                FillPortions: =1.3
+                Height: =CommentsContainer.Y+CommentsContainer.Height+20
+                LayoutAlignItems: =LayoutAlignItems.Stretch
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
+                ZIndex: =1
+
+                UploadTemplateContainer As groupContainer.verticalAutoLayoutContainer:
+                    AlignInContainer: =AlignInContainer.SetByContainer
+                    Fill: =RGBA(255, 255, 255, 1)
+                    FillPortions: =0
+                    Height: =Rectangle5.Y+Rectangle5.Height
+                    LayoutDirection: =LayoutDirection.Vertical
+                    LayoutGap: =10
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    LayoutMode: =LayoutMode.Auto
+                    PaddingLeft: =20
+                    PaddingRight: =20
+                    PaddingTop: =20
+                    Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
+                    ZIndex: =1
+
+                    Container8 As groupContainer.horizontalAutoLayoutContainer:
+                        FillPortions: =0
+                        Height: =30
+                        LayoutMinHeight: =40
+                        LayoutMinWidth: =250
+                        LayoutMode: =LayoutMode.Auto
+                        Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
+                        ZIndex: =1
+
+                        Label6_4 As label:
+                            AlignInContainer: =AlignInContainer.Start
+                            Color: =glbErrorColor
+                            Height: =30
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =10
+                            Text: ="*"
+                            Width: =15
+                            ZIndex: =1
+
+                        Label9_34 As label:
+                            AlignInContainer: =AlignInContainer.Center
+                            Color: =glbNeutralPrimaryColor
+                            FontWeight: =FontWeight.Semibold
+                            Height: =30
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =11
+                            Text: ="申請部門/單位"
+                            Width: =140
+                            X: =20
+                            Y: =363
+                            ZIndex: =2
+
+                    drpFilterDepartment_1 As combobox:
+                        AlignInContainer: =AlignInContainer.Stretch
+                        BorderColor: =glbNeutralTertiaryColor
+                        BorderThickness: =1
+                        ChevronBackground: =RGBA(255, 255, 255, 1)
+                        ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
+                        ChevronDisabledFill: =RGBA(202, 202, 202, 1)
+                        ChevronFill: =glbNeutralTertiaryColor
+                        ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
+                        ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
+                        Color: =glbNeutralPrimaryColor
+                        DefaultSelectedItems: |-
+                            =//Distinct(DepartmentForm,Department)//加载编辑表格部门
+                            Distinct(Filter(
+                                MyContacts,
+                                    UserEmail = User().Email,
+                                        ContatsType = "部門"
+                                    ),ApplyDepartment)
+                        DisplayFields: =["Result"]
+                        FocusedBorderThickness: =0
+                        Height: =36
+                        HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                        HoverColor: =Self.Color
+                        HoverFill: =ColorFade(Self.Fill, -5%)
+                        InputTextPlaceholder: ="請選擇填申請部門/單位"
+                        Items: =Sort(Distinct(Filter(ConfigurationInfo,Type_Name="組織配置"&&(Value1="部門信息"||Value1="單位信息")),Code_No2&"-"&Value2),Result)
+                        NoSelectionText: ="請選擇填申請部門/單位"
+                        PaddingLeft: =10
+                        PressedColor: =Self.Color
+                        PressedFill: =ColorFade(Self.Fill, -5%)
+                        SearchFields: =["Result"]
+                        SearchItems: =Search(Sort(Distinct(Filter(ConfigurationInfo,Type_Name="組織配置"&&(Value1="部門信息"||Value1="單位信息")),Code_No2&"-"&Value2),Result),drpFilterDepartment_1.SearchText,"Result")
+                        SelectionColor: =glbThemePrimaryColor
+                        SelectionFill: =ColorFade(Self.SelectionColor, 90%)
+                        SelectMultiple: =false
+                        Size: =9
+                        Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
+                        Width: =300
+                        X: =90
+                        Y: =3
+                        ZIndex: =2
+
+                    Container12_3 As groupContainer.horizontalAutoLayoutContainer:
+                        Fill: =RGBA(255, 255, 255, 1)
+                        FillPortions: =0
+                        Height: =30
+                        LayoutMinHeight: =100
+                        LayoutMinWidth: =250
+                        LayoutMode: =LayoutMode.Auto
+                        LayoutWrap: =true
+                        PaddingRight: =1
+                        PaddingTop: =1
+                        ZIndex: =3
+
+                        Label6_5 As label:
+                            AlignInContainer: =AlignInContainer.Start
+                            Color: =glbErrorColor
+                            Height: =30
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =10
+                            Text: ="*"
+                            Width: =15
+                            ZIndex: =1
+
+                        Label9_33 As label:
+                            Color: =glbNeutralPrimaryColor
+                            FontWeight: =FontWeight.Semibold
+                            Height: =30
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =11
+                            Text: ="上傳申請表"
+                            Width: =300
+                            ZIndex: =2
+
+                        Image4_2 As image:
+                            Height: =10
+                            Image: =Last(Attachment_Excel.Attachments).Value
+                            Visible: =false
+                            Width: =10
+                            ZIndex: =3
+
+                    Attachment_Excel As attachments:
+                        AddAttachmentText: ="點擊或拖拽上傳附件"
+                        AlignInContainer: =AlignInContainer.Stretch
+                        BorderColor: =glbLinkColor
+                        BorderStyle: =BorderStyle.Dashed
+                        BorderThickness: =1
+                        Color: =glbLinkColor
+                        DropTargetBackgroundColor: =ColorFade(Self.Color, 90%)
+                        DropTargetBorderColor: =glbLinkColor
+                        DropTargetBorderStyle: =BorderStyle.Dashed
+                        DropTargetBorderThickness: =1
+                        DropTargetTextColor: =glbLinkColor
+                        Fill: =ColorFade(glbLinkColor, 95%)
+                        FocusedBorderThickness: =1
+                        Height: =70
+                        HoverColor: =ColorFade(Self.Color, -25%)
+                        HoverFill: =ColorFade(glbLinkColor, 80%)
+                        IsInDataCard: =true
+                        ItemColor: =glbLinkColor
+                        ItemFill: =ColorFade(glbLinkColor, 80%)
+                        ItemHoverColor: =ColorFade(glbLinkColor, -25%)
+                        ItemHoverFill: =ColorFade(glbLinkColor, 80%)
+                        Items: =//Parent.Default
+                        MaxAttachments: =1
+                        MaxAttachmentsText: ="最大附件"
+                        NoAttachmentsText: ="無附件"
+                        OnAddFile: |-
+                            =/*Set(varAttachmentControl1,JSON(Image4_2.Image,IncludeBinaryData));
+                            Set(varBase64Only1,Mid(varAttachmentControl1,Find(",", varAttachmentControl1)+1,Len(varAttachmentControl1)-Find (",", varAttachmentControl1)-1));
+                            SendAttachmentToGenericUploadAttachMentFile.Run(GUID(),First(EditUserForm).Title,First(EditUserForm).ModelType,Last(Attachment_Excel.Attachments).Name,Last(Attachment_Excel.Attachments).Name,varBase64Only1);
+                            //执行flow上传附件到list
+                            ClearCollect(AttachmentExcelName,{Name:Last(Attachment_Excel.Attachments).Name});//收集上传附件的名称*/
+                        OnRemoveFile: |-
+                            =//Remove(GenericUploadAttachMentFile,First(Filter(GenericUploadAttachMentFile,(FormId=First(EditUserForm).Title) && (FormAttachMent=First(AttachmentExcelName).Name))));//删除list中的附件记录
+                            
+                            //Reset(Attachment_Excel)//重置申請表附件控件
+                        PaddingLeft: =10
+                        PaddingRight: =10
+                        PressedColor: =RGBA(0, 121, 187, 1)
+                        PressedFill: =
+                        Size: =8
+                        Tooltip: =
+                        Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
+                        Width: =Parent.Width-40
+                        X: =20
+                        Y: =56
+                        ZIndex: =4
+
+                    Container1 As groupContainer.horizontalAutoLayoutContainer:
+                        LayoutJustifyContent: =LayoutJustifyContent.Center
+                        LayoutMinHeight: =50
+                        LayoutMinWidth: =250
+                        LayoutMode: =LayoutMode.Auto
+                        Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
+                        ZIndex: =5
+
+                        Label6 As label:
+                            AlignInContainer: =AlignInContainer.Stretch
+                            Color: =glbErrorColor
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =10
+                            Text: ="*"
+                            Visible: |
+                                =If(First(EditUserForm).IsPassWord="1",true,false)
+                            Width: =15
+                            ZIndex: =1
+
+                        Container10 As groupContainer.horizontalAutoLayoutContainer:
+                            AlignInContainer: =AlignInContainer.Start
+                            Height: =50
+                            LayoutGap: =10
+                            LayoutMinHeight: =50
+                            LayoutMinWidth: =50
+                            LayoutMode: =LayoutMode.Auto
+                            PaddingLeft: =1
+                            PaddingRight: =1
+                            ZIndex: =4
+
+                            TextInput_FormPWD As text:
+                                AlignInContainer: =AlignInContainer.Center
+                                BorderColor: =glbNeutralTertiaryColor
+                                BorderThickness: =1
+                                Color: =glbNeutralPrimaryColor
+                                Default: =""
+                                FillPortions: =1
+                                FocusedBorderColor: =glbNeutralSecondaryColor
+                                FocusedBorderThickness: =1
+                                Height: =36
+                                HintText: ="請輸入附件密碼"
+                                HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                                HoverFill: =ColorFade(Self.Fill, -5%)
+                                LayoutMinWidth: =120
+                                Mode: =TextMode.Password
+                                PaddingBottom: =0
+                                PaddingLeft: =10
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                                RadiusBottomLeft: =0
+                                RadiusBottomRight: =0
+                                RadiusTopLeft: =0
+                                RadiusTopRight: =0
+                                Size: =10
+                                Visible: =If(First(EditUserForm).IsPassWord="0"||First(EditUserForm).IsPassWord="1"||IsBlank(First(EditUserForm).IsPassWord),true,false)
+                                Width: =Parent.Width-335
+                                X: =20
+                                Y: =82
+                                ZIndex: =1
+
+                            TextInput_FormPWD_1 As text:
+                                AlignInContainer: =AlignInContainer.Center
+                                BorderColor: =glbNeutralTertiaryColor
+                                BorderThickness: =1
+                                Color: =glbNeutralPrimaryColor
+                                Default: =""
+                                FillPortions: =1
+                                FocusedBorderColor: =glbNeutralSecondaryColor
+                                FocusedBorderThickness: =1
+                                Height: =36
+                                HintText: ="請再次輸入附件密碼"
+                                HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                                HoverFill: =ColorFade(Self.Fill, -5%)
+                                LayoutMinWidth: =120
+                                Mode: =TextMode.Password
+                                OnChange: =If(TextInput_FormPWD_1.Text<>TextInput_FormPWD.Text,Notify("密碼輸入不一致，請重新輸入",Warning),TextInput_FormPWD_1.Text=TextInput_FormPWD.Text,Notify("密碼輸入一致",Success,4000))
+                                PaddingBottom: =0
+                                PaddingLeft: =10
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                                RadiusBottomLeft: =0
+                                RadiusBottomRight: =0
+                                RadiusTopLeft: =0
+                                RadiusTopRight: =0
+                                Size: =10
+                                Visible: =If(First(EditUserForm).IsPassWord="0"||First(EditUserForm).IsPassWord="1"||IsBlank(First(EditUserForm).IsPassWord),true,false)
+                                Width: =Parent.Width-335
+                                X: =20
+                                Y: =82
+                                ZIndex: =2
+
+                    Rectangle5 As rectangle:
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =5
+                        ZIndex: =6
+
+                UploadAttachmentsContainer As groupContainer.verticalAutoLayoutContainer:
+                    AlignInContainer: =AlignInContainer.SetByContainer
+                    Fill: =RGBA(255, 255, 255, 1)
+                    FillPortions: =0
+                    Height: =Rectangle5_1.Y+Rectangle5_1.Height
+                    LayoutDirection: =LayoutDirection.Vertical
+                    LayoutGap: =10
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    LayoutMode: =LayoutMode.Auto
+                    PaddingLeft: =20
+                    PaddingRight: =20
+                    Visible: |-
+                        =If(First(EditUserForm).ModelAttachMent="有"&&First(EditUserForm).FlowType<>"範本",true,false)
+                        //true
+                    ZIndex: =2
+
+                    Container5 As groupContainer.horizontalAutoLayoutContainer:
+                        FillPortions: =0
+                        Height: =30
+                        LayoutMinHeight: =30
+                        LayoutMinWidth: =250
+                        LayoutMode: =LayoutMode.Auto
+                        ZIndex: =1
+
+                        Label6_6 As label:
+                            Color: =glbErrorColor
+                            Height: =30
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =10
+                            Text: ="*"
+                            Width: =15
+                            ZIndex: =2
+
+                        Label9_22 As label:
+                            Color: =glbNeutralPrimaryColor
+                            FontWeight: =FontWeight.Semibold
+                            Height: =30
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =11
+                            Text: ="上傳附件"
+                            Width: =100
+                            X: =20
+                            Y: =192
+                            ZIndex: =3
+
+                    Attachment_Zip As attachments:
+                        AddAttachmentText: ="點擊或拖拽上傳附件"
+                        BorderColor: =glbLinkColor
+                        BorderStyle: =BorderStyle.Dashed
+                        BorderThickness: =1
+                        Color: =glbLinkColor
+                        DropTargetBackgroundColor: =ColorFade(Self.Color, 90%)
+                        DropTargetBorderColor: =glbLinkColor
+                        DropTargetBorderStyle: =BorderStyle.Dashed
+                        DropTargetBorderThickness: =1
+                        DropTargetTextColor: =glbLinkColor
+                        Fill: =ColorFade(glbLinkColor, 95%)
+                        FocusedBorderThickness: =1
+                        Height: =70
+                        HoverColor: =ColorFade(Self.Color, -25%)
+                        HoverFill: =ColorFade(glbLinkColor, 80%)
+                        IsInDataCard: =true
+                        ItemColor: =glbLinkColor
+                        ItemFill: =ColorFade(glbLinkColor, 80%)
+                        ItemHoverColor: =ColorFade(glbLinkColor, -25%)
+                        ItemHoverFill: =ColorFade(glbLinkColor, 80%)
+                        Items: =//Parent.Default
+                        MaxAttachments: =1
+                        MaxAttachmentsText: ="最大附件"
+                        NoAttachmentsText: ="無附件"
+                        OnAddFile: |-
+                            =/*Set(varAttachmentControl2,JSON(Image4_1.Image,IncludeBinaryData));
+                            Set(varBase64Only2,Mid(varAttachmentControl2,Find(",", varAttachmentControl2)+1,Len(varAttachmentControl2)-Find (",", varAttachmentControl2)-1));
+                            SendAttachmentToUploadFlowAttachMent.Run(First(EditUserForm).Title,Last(Attachment_Zip.Attachments).Name,Last(Attachment_Zip.Attachments).Name,varBase64Only2);//?附件的表格類型需要確認
+                            //执行flow上传附件到list
+                            ClearCollect(AttachmentZipName,{Name:Last(Attachment_Zip.Attachments).Name});//收集上传附件的名称*/
+                        OnRemoveFile: |-
+                            =//Remove(UploadFlowAttachMent,First(Filter(UploadFlowAttachMent,(Title=First(EditUserForm).Title) && (FlowAttachName=First(AttachmentZipName).Name))));//删除list中的附件记录
+                            
+                            //Reset(Attachment_Zip)//重置申請表附件控件
+                        PaddingLeft: =10
+                        PaddingRight: =10
+                        PressedColor: =RGBA(0, 121, 187, 1)
+                        PressedFill: =
+                        Size: =8
+                        Tooltip: =
+                        Visible: =If(First(EditUserForm).ModelAttachMent="有"&&First(EditUserForm).FlowType<>"範本",true,false)
+                        Width: =Parent.Width-40
+                        X: =20
+                        Y: =35
+                        ZIndex: =3
+
+                    Image4_1 As image:
+                        Height: =10
+                        Image: =Last(Attachment_Zip.Attachments).Value
+                        Visible: =false
+                        Width: =10
+                        ZIndex: =4
+
+                    Container3 As groupContainer.horizontalAutoLayoutContainer:
+                        LayoutJustifyContent: =LayoutJustifyContent.Center
+                        LayoutMinHeight: =50
+                        LayoutMinWidth: =250
+                        LayoutMode: =LayoutMode.Auto
+                        Width: =633
+                        ZIndex: =5
+
+                        Label6_1 As label:
+                            Color: =glbErrorColor
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =10
+                            Text: ="*"
+                            Visible: =If(First(EditUserForm).IsAttachmentPassWord="1",true,false)
+                            Width: =15
+                            ZIndex: =1
+
+                        Container11 As groupContainer.horizontalAutoLayoutContainer:
+                            AlignInContainer: =AlignInContainer.Center
+                            Height: =50
+                            LayoutGap: =10
+                            LayoutMinHeight: =40
+                            LayoutMinWidth: =250
+                            LayoutMode: =LayoutMode.Auto
+                            PaddingLeft: =1
+                            PaddingRight: =1
+                            ZIndex: =4
+
+                            TextInput_zipPWD As text:
+                                AlignInContainer: =AlignInContainer.Center
+                                BorderColor: =glbNeutralTertiaryColor
+                                BorderThickness: =1
+                                Color: =glbNeutralPrimaryColor
+                                Default: =""
+                                FillPortions: =1
+                                FocusedBorderColor: =glbNeutralSecondaryColor
+                                FocusedBorderThickness: =1
+                                Height: =36
+                                HintText: ="請輸入附件密碼"
+                                HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                                HoverFill: =ColorFade(Self.Fill, -5%)
+                                LayoutMinWidth: =120
+                                Mode: =TextMode.Password
+                                PaddingBottom: =0
+                                PaddingLeft: =10
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                                RadiusBottomLeft: =0
+                                RadiusBottomRight: =0
+                                RadiusTopLeft: =0
+                                RadiusTopRight: =0
+                                Size: =10
+                                Visible: =If(First(EditUserForm).IsAttachmentPassWord="0"||First(EditUserForm).IsAttachmentPassWord="1"||IsBlank(First(EditUserForm).IsAttachmentPassWord),true,false)
+                                Width: =Parent.Width-335
+                                X: =20
+                                Y: =117
+                                ZIndex: =1
+
+                            TextInput_zipPWD_1 As text:
+                                AlignInContainer: =AlignInContainer.Center
+                                BorderColor: =glbNeutralTertiaryColor
+                                BorderThickness: =1
+                                Color: =glbNeutralPrimaryColor
+                                Default: =""
+                                FillPortions: =1
+                                FocusedBorderColor: =glbNeutralSecondaryColor
+                                FocusedBorderThickness: =1
+                                Height: =36
+                                HintText: ="請再次輸入附件密碼"
+                                HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                                HoverFill: =ColorFade(Self.Fill, -5%)
+                                LayoutMinWidth: =120
+                                Mode: =TextMode.Password
+                                OnChange: =If(TextInput_zipPWD_1.Text<>TextInput_zipPWD.Text,Notify("密碼輸入不一致，請重新輸入",Warning),TextInput_zipPWD_1.Text=TextInput_zipPWD.Text,Notify("密碼輸入一致",Success,4000))
+                                PaddingBottom: =0
+                                PaddingLeft: =10
+                                PaddingRight: =0
+                                PaddingTop: =0
+                                PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                                RadiusBottomLeft: =0
+                                RadiusBottomRight: =0
+                                RadiusTopLeft: =0
+                                RadiusTopRight: =0
+                                Size: =10
+                                Visible: =If(First(EditUserForm).IsAttachmentPassWord="0"||First(EditUserForm).IsAttachmentPassWord="1"||IsBlank(First(EditUserForm).IsAttachmentPassWord),true,false)
+                                Width: =Parent.Width-335
+                                X: =20
+                                Y: =117
+                                ZIndex: =2
+
+                    Rectangle5_1 As rectangle:
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =5
+                        ZIndex: =6
+
+                CommentsContainer As groupContainer.verticalAutoLayoutContainer:
+                    AlignInContainer: =AlignInContainer.SetByContainer
+                    Fill: =RGBA(255, 255, 255, 1)
+                    FillPortions: =0
+                    Height: =120
+                    LayoutDirection: =LayoutDirection.Vertical
+                    LayoutGap: =6
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    LayoutMode: =LayoutMode.Auto
+                    PaddingLeft: =20
+                    PaddingRight: =20
+                    Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
+                    ZIndex: =4
+
+                    Label9_24 As label:
+                        AlignInContainer: =AlignInContainer.Stretch
+                        Color: =glbNeutralPrimaryColor
+                        FontWeight: =FontWeight.Semibold
+                        Height: =30
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =11
+                        Text: ="備註信息"
+                        Width: =140
+                        X: =20
+                        Y: =448
+                        ZIndex: =1
+
+                    TextInput_FormMark As text:
+                        AlignInContainer: =AlignInContainer.Stretch
+                        BorderColor: =glbNeutralTertiaryColor
+                        BorderThickness: =1
+                        Color: =glbNeutralPrimaryColor
+                        Default: =""
+                        FocusedBorderColor: =glbNeutralSecondaryColor
+                        FocusedBorderThickness: =1
+                        Height: =64
+                        HintText: =""
+                        HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                        HoverFill: =ColorFade(Self.Fill, -5%)
+                        Mode: =TextMode.MultiLine
+                        PaddingBottom: =10
+                        PaddingLeft: =10
+                        PaddingRight: =10
+                        PaddingTop: =10
+                        PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Size: =10
+                        Width: =Parent.Width-40
+                        X: =20
+                        Y: =34
+                        ZIndex: =2
+
+            RightContainer As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.SetByContainer
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: |-
+                    =/*If(
+                        FlowType = "通用流程" && IsBlank(
+                            LookUp(
+                                GenericFormModel,
+                                Title = FormModelId
+                            ).SelectedActions
+                        ),
+                         GeneralFlowContainer.Y+GeneralFlowContainer.Height+20,
+                        PredefinedFlowContainer.Y+PredefinedFlowContainer.Height+20
+                    )*/
+                    
+                    CommentsContainer.Y+CommentsContainer.Height+20
+                LayoutAlignItems: =LayoutAlignItems.Stretch
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =20
+                PaddingRight: =20
+                PaddingTop: =20
+                Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
+                ZIndex: =2
+
+                Label9_25 As label:
+                    Color: =glbNeutralPrimaryColor
+                    FontWeight: =FontWeight.Semibold
+                    PaddingBottom: =10
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="審批流程"
+                    Width: =351
+                    X: =20
+                    Y: =20
+                    ZIndex: =1
+
+                StartFlowContainer As groupContainer.manualLayoutContainer:
+                    AlignInContainer: =AlignInContainer.SetByContainer
+                    FillPortions: =0
+                    Height: =75
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    Width: =Parent.Width-40
+                    X: =20
+                    Y: =24
+                    ZIndex: =2
+
+                    Label6_20 As label:
+                        Height: =28
+                        OnSelect: =
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =10
+                        Text: =First(ApprovalListCol).ActionName
+                        Width: =70
+                        X: =30
+                        ZIndex: =3
+
+                    Label6_21 As label:
+                        Color: =glbNeutralSecondaryColor
+                        Height: =24
+                        OnSelect: =
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =9
+                        Text: =First(ApprovalListCol).Approver&"/"&First(ApprovalListCol).ApprovalEmail
+                        Width: =447
+                        X: =30
+                        Y: =28
+                        ZIndex: =4
+
+                    Circle2_8 As circle:
+                        DisplayMode: =DisplayMode.View
+                        Fill: =glbThemePrimaryColor
+                        Height: =14
+                        OnSelect: =
+                        Width: =14
+                        X: =4
+                        Y: =7
+                        ZIndex: =5
+
+                    Rectangle5_4 As rectangle:
+                        Fill: =glbThemePrimaryColor
+                        Height: =65
+                        OnSelect: =
+                        Width: =2
+                        X: =10
+                        Y: =22
+                        ZIndex: =6
+
+                Checkbox2_5 As checkbox:
+                    CheckboxBorderColor: =glbNeutralTertiaryColor
+                    CheckboxSize: =24
+                    CheckmarkFill: =glbLinkColor
+                    Color: =glbNeutralPrimaryColor
+                    FocusedBorderThickness: =0
+                    Height: =24
+                    HoverBorderColor: =
+                    HoverColor: =glbNeutralPrimaryColor
+                    HoverFill: =RGBA(0, 0, 0, 0)
+                    PressedBorderColor: =
+                    PressedColor: =glbNeutralPrimaryColor
+                    PressedFill: =
+                    Size: =10
+                    Text: ="以當前賬戶提交申請"
+                    Visible: =If(FlowType="通用流程" || FlowType="預設流程",true,false)
+                    X: =40
+                    Y: =238
+                    ZIndex: =3
+
+                GeneralFlowContainer As groupContainer.manualLayoutContainer:
+                    AlignInContainer: =AlignInContainer.SetByContainer
+                    FillPortions: =0
+                    Height: =240
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    Visible: |-
+                        =/*FlowType = "通用流程" && IsBlank(
+                            LookUp(
+                                GenericFormModel,
+                                Title = FormModelId
+                            ).SelectedActions
+                        )*/
+                        If(FlowType="通用流程",true,false)
+                    Width: =Parent.Width-40
+                    X: =20
+                    Y: =94
+                    ZIndex: =4
+
+                    Label6_17 As label:
+                        Height: =28
+                        OnSelect: =
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =10
+                        Text: ="下一節處理行動"
+                        Width: =116
+                        X: =30
+                        ZIndex: =1
+
+                    Circle2_7 As circle:
+                        DisplayMode: =DisplayMode.View
+                        Fill: =glbNeutralQuaternaryColor
+                        Height: =14
+                        OnSelect: =
+                        Width: =14
+                        X: =4
+                        Y: =7
+                        ZIndex: =2
+
+                    Label6_18 As label:
+                        Height: =28
+                        OnSelect: =
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =10
+                        Text: ="下一節處理人"
+                        Width: =147
+                        X: =30
+                        Y: =72
+                        ZIndex: =3
+
+                    Dropdown1_5 As dropdown:
+                        BorderColor: =glbNeutralTertiaryColor
+                        BorderThickness: =1
+                        ChevronBackground: =RGBA(0, 0, 0, 0)
+                        ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
+                        ChevronDisabledFill: =RGBA(202, 202, 202, 1)
+                        ChevronFill: =glbNeutralTertiaryColor
+                        ChevronHoverBackground: =ColorFade(Self.Fill, -5%)
+                        ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
+                        Color: =glbNeutralPrimaryColor
+                        FocusedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                        FocusedBorderThickness: =1
+                        Height: =36
+                        HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                        HoverFill: =ColorFade(Self.Fill, -5%)
+                        Items: =If(Checkbox2_5.Value = true,DataFlowActionCol_nonesubmit,DataFlowActionCol.Result)
+                        PaddingBottom: =5
+                        PaddingRight: =0
+                        PaddingTop: =5
+                        PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                        PressedColor: =Self.Color
+                        PressedFill: =ColorFade(Self.Fill, -5%)
+                        SelectionFill: =glbThemePrimaryColor
+                        Size: =10
+                        Width: =120
+                        X: =30
+                        Y: =28
+                        ZIndex: =4
+
+                    BtnDefault_17 As button:
+                        BorderColor: =Self.Color
+                        BorderThickness: =1
+                        Color: =glbThemePrimaryColor
+                        DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                        Fill: =White
+                        FocusedBorderThickness: =1
+                        Height: =36
+                        HoverBorderColor: =ColorFade(Self.Color, -15%)
+                        HoverColor: =ColorFade(Self.Color, -15%)
+                        HoverFill: =RGBA(255, 255, 255, 1)
+                        OnSelect: |-
+                            =UpdateContext({SelectUservisiable:true});
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        PressedBorderColor: =ColorFade(Self.Color, -25%)
+                        PressedColor: =ColorFade(Self.Color, -25%)
+                        PressedFill: =ColorFade(Self.Color, 95%)
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Size: =11
+                        Text: ="選擇"
+                        Width: =120
+                        X: =30
+                        Y: =100
+                        ZIndex: =5
+
+                    Label1_137 As label:
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =1
+                        Color: =glbNeutralSecondaryColor
+                        Fill: =RGBA(245, 245, 245, 1)
+                        Height: =36
+                        PaddingBottom: =0
+                        PaddingLeft: =28
+                        PaddingRight: =10
+                        PaddingTop: =0
+                        Size: =9
+                        Text: |-
+                            =//First(Split(CreateApproverCol.AllOwnerName.DisplayName," ").Result).Result&"/"&CreateApproverCol.AllOwnerName.Email
+                            If(Lastselect&&TabGallery3_5.Selected.Value="最近",First(Split(CreateApproverCol.AllOwnerName.DisplayName," ").Result).Result&"/"&CreateApproverCol.AllOwnerName.Email,
+                            Departmentselect&&TabGallery3_5.Selected.Value="部門",First(Split(CreateApproverCol.DepartMentEmail.DisplayName," ").Result).Result&"/"&CreateApproverCol.DepartMentEmail.Email,
+                            !Lastselect&&!Departmentselect,First(Split(CreateApproverCol.DisplayName," ").Result).Result&"/"&CreateApproverCol.Mail)
+                        Width: =Parent.Width-Self.X
+                        X: =161
+                        Y: =100
+                        ZIndex: =6
+
+                    BtnSecondIconOnly_17 As icon.Add:
+                        BorderColor: =glbNeutralQuaternaryColor
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =1
+                        Color: =glbNeutralSecondaryColor
+                        DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                        DisabledColor: =RGBA(149, 149, 149, 1)
+                        DisabledFill: =RGBA(0, 0, 0, 0)
+                        DisplayMode: =DisplayMode.View
+                        FocusedBorderThickness: =1
+                        Height: =32
+                        HoverBorderColor: =glbThemePrimaryColor
+                        HoverColor: =glbThemePrimaryColor
+                        HoverFill: =RGBA(0, 0, 0, 0)
+                        Icon: =Icon.Person
+                        OnSelect: =
+                        PaddingBottom: =6
+                        PaddingTop: =6
+                        PressedBorderColor: =ColorFade(glbThemePrimaryColor, -15%)
+                        PressedColor: =glbThemePrimaryColor
+                        PressedFill: =RGBA(0, 0, 0, 0)
+                        Width: =28
+                        X: =161
+                        Y: =102
+                        ZIndex: =10
+
+                    Label6_19 As label:
+                        Height: =28
+                        OnSelect: =
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =10
+                        Text: ="抄送人"
+                        Width: =147
+                        X: =30
+                        Y: =145
+                        ZIndex: =11
+
+                    ComboBox1_11 As combobox:
+                        BorderColor: =glbNeutralTertiaryColor
+                        BorderThickness: =1
+                        ChevronBackground: =RGBA(255, 255, 255, 1)
+                        ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
+                        ChevronDisabledFill: =RGBA(202, 202, 202, 1)
+                        ChevronFill: =glbNeutralTertiaryColor
+                        ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
+                        ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
+                        Color: =glbNeutralPrimaryColor
+                        DisplayFields: =["Mail","DisplayName"]
+                        FocusedBorderThickness: =1
+                        Height: =36
+                        HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                        HoverColor: =Self.Color
+                        HoverFill: =ColorFade(Self.Fill, -5%)
+                        Items: |-
+                            =//Choices(MyContacts.AllOwnerName)
+                            Office365用户.SearchUserV2({searchTerm:ComboBox1_11.SearchText,top:10}).value
+                        PaddingLeft: =10
+                        PressedColor: =Self.Color
+                        PressedFill: =ColorFade(Self.Fill, -5%)
+                        SearchFields: =["Mail"]
+                        SearchItems: |-
+                            =Search(//Choices(MyContacts.AllOwnerName)
+                            Office365用户.SearchUserV2({searchTerm:ComboBox1_11.SearchText,top:10}).value,ComboBox1_11.SearchText,"Mail")
+                        SelectionColor: =glbThemePrimaryColor
+                        SelectionFill: =ColorFade(Self.SelectionColor, 90%)
+                        Size: =10
+                        Template: =ListItemTemplate.Double
+                        Width: =Parent.Width-Self.X-1
+                        X: =30
+                        Y: =173
+                        ZIndex: =12
+
+                SampleFlowContainer As groupContainer.manualLayoutContainer:
+                    AlignInContainer: =AlignInContainer.SetByContainer
+                    FillPortions: =0
+                    Height: =240
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    Visible: =If(FlowType="部門簡單流程",true,false)
+                    Width: =Parent.Width-40
+                    X: =20
+                    Y: =94
+                    ZIndex: =5
+
+                    Label6_25 As label:
+                        Height: =28
+                        OnSelect: =
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: ="下一節處理行動"
+                        Width: =116
+                        X: =30
+                        ZIndex: =1
+
+                    Circle2_10 As circle:
+                        DisplayMode: =DisplayMode.View
+                        Fill: =glbNeutralQuaternaryColor
+                        Height: =14
+                        OnSelect: =
+                        Width: =14
+                        X: =4
+                        Y: =7
+                        ZIndex: =2
+
+                    Label6_26 As label:
+                        Height: =28
+                        OnSelect: =
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: ="下一節處理人"
+                        Width: =147
+                        X: =30
+                        Y: =72
+                        ZIndex: =3
+
+                    Dropdown1_7 As dropdown:
+                        BorderColor: =glbNeutralTertiaryColor
+                        BorderThickness: =1
+                        ChevronBackground: =RGBA(0, 0, 0, 0)
+                        ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
+                        ChevronDisabledFill: =RGBA(202, 202, 202, 1)
+                        ChevronFill: =glbNeutralTertiaryColor
+                        ChevronHoverBackground: =ColorFade(Self.Fill, -5%)
+                        ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
+                        Color: =glbNeutralPrimaryColor
+                        DisplayMode: =DisplayMode.Disabled
+                        FocusedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                        FocusedBorderThickness: =1
+                        Height: =36
+                        HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                        HoverFill: =ColorFade(Self.Fill, -5%)
+                        Items: =["跟進"]
+                        PaddingBottom: =5
+                        PaddingRight: =0
+                        PaddingTop: =5
+                        PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                        PressedColor: =Self.Color
+                        PressedFill: =ColorFade(Self.Fill, -5%)
+                        SelectionFill: =glbThemePrimaryColor
+                        Size: =12
+                        Width: =120
+                        X: =30
+                        Y: =28
+                        ZIndex: =4
+
+                    BtnDefault_18 As button:
+                        BorderColor: =Self.Color
+                        BorderThickness: =1
+                        Color: =glbThemePrimaryColor
+                        DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                        Fill: =White
+                        FocusedBorderThickness: =1
+                        Height: =36
+                        HoverBorderColor: =ColorFade(Self.Color, -15%)
+                        HoverColor: =ColorFade(Self.Color, -15%)
+                        HoverFill: =RGBA(255, 255, 255, 1)
+                        OnSelect: |-
+                            =UpdateContext({SelectUservisiable:true});
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        PressedBorderColor: =ColorFade(Self.Color, -25%)
+                        PressedColor: =ColorFade(Self.Color, -25%)
+                        PressedFill: =ColorFade(Self.Color, 95%)
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Size: =11
+                        Text: ="選擇"
+                        Width: =120
+                        X: =30
+                        Y: =100
+                        ZIndex: =5
+
+                    Label1_153 As label:
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =1
+                        Color: =glbNeutralSecondaryColor
+                        Fill: =RGBA(245, 245, 245, 1)
+                        Height: =36
+                        PaddingBottom: =0
+                        PaddingLeft: =28
+                        PaddingRight: =10
+                        PaddingTop: =0
+                        Size: =11
+                        Text: |-
+                            =//First(Split(CreateApproverCol.AllOwnerName.DisplayName," ").Result).Result&"/"&CreateApproverCol.AllOwnerName.Email
+                            If(Lastselect&&TabGallery3_5.Selected.Value="最近",First(Split(CreateApproverCol.AllOwnerName.DisplayName," ").Result).Result&"/"&CreateApproverCol.AllOwnerName.Email,
+                            Departmentselect&&TabGallery3_5.Selected.Value="部門",First(Split(CreateApproverCol.DepartMentEmail.DisplayName," ").Result).Result&"/"&CreateApproverCol.DepartMentEmail.Email,
+                            !Lastselect&&!Departmentselect&&FlowType<>"部門簡單流程",First(Split(CreateApproverCol.DisplayName," ").Result).Result&"/"&CreateApproverCol.Mail,
+                            First(Split(First(Filter(FormTableType,
+                            DepartMentName = Label1_130.Text)).DepartMentEmail.DisplayName," ").Result).Result&"/"&First(Filter(FormTableType,
+                            DepartMentName = Label1_130.Text)).DepartMentEmail.Email)
+                        Width: =Parent.Width-Self.X
+                        X: =161
+                        Y: =100
+                        ZIndex: =6
+
+                    BtnSecondIconOnly_19 As icon.Add:
+                        BorderColor: =glbNeutralQuaternaryColor
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =1
+                        Color: =glbNeutralSecondaryColor
+                        DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                        DisabledColor: =RGBA(149, 149, 149, 1)
+                        DisabledFill: =RGBA(0, 0, 0, 0)
+                        DisplayMode: =DisplayMode.View
+                        FocusedBorderThickness: =1
+                        Height: =32
+                        HoverBorderColor: =glbThemePrimaryColor
+                        HoverColor: =glbThemePrimaryColor
+                        HoverFill: =RGBA(0, 0, 0, 0)
+                        Icon: =Icon.Person
+                        OnSelect: =
+                        PaddingBottom: =6
+                        PaddingTop: =6
+                        PressedBorderColor: =ColorFade(glbThemePrimaryColor, -15%)
+                        PressedColor: =glbThemePrimaryColor
+                        PressedFill: =RGBA(0, 0, 0, 0)
+                        Width: =28
+                        X: =161
+                        Y: =102
+                        ZIndex: =10
+
+                    Label6_29 As label:
+                        Height: =28
+                        OnSelect: =
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: ="抄送人"
+                        Width: =147
+                        X: =30
+                        Y: =145
+                        ZIndex: =11
+
+                    ComboBox1_13 As combobox:
+                        BorderColor: =glbNeutralTertiaryColor
+                        BorderThickness: =1
+                        ChevronBackground: =RGBA(255, 255, 255, 1)
+                        ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
+                        ChevronDisabledFill: =RGBA(202, 202, 202, 1)
+                        ChevronFill: =glbNeutralTertiaryColor
+                        ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
+                        ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
+                        Color: =glbNeutralPrimaryColor
+                        DisplayFields: =["Mail"]
+                        FocusedBorderThickness: =1
+                        Height: =36
+                        HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                        HoverColor: =Self.Color
+                        HoverFill: =ColorFade(Self.Fill, -5%)
+                        Items: |-
+                            =//Choices(MyContacts.AllOwnerName)
+                            Office365用户.SearchUserV2({searchTerm:ComboBox1_13.SearchText,top:10}).value
+                        PaddingLeft: =10
+                        PressedColor: =Self.Color
+                        PressedFill: =ColorFade(Self.Fill, -5%)
+                        SearchFields: =["Mail"]
+                        SearchItems: |-
+                            =Search(//Choices(MyContacts.AllOwnerName)
+                            Office365用户.SearchUserV2({searchTerm:ComboBox1_13.SearchText,top:10}).value,ComboBox1_13.SearchText,"Mail")
+                        SelectionColor: =glbThemePrimaryColor
+                        SelectionFill: =ColorFade(Self.SelectionColor, 90%)
+                        Size: =12
+                        Template: =ListItemTemplate.Double
+                        Width: =Parent.Width-Self.X-1
+                        X: =30
+                        Y: =173
+                        ZIndex: =12
+
+                TemplateContainer As groupContainer.manualLayoutContainer:
+                    AlignInContainer: =AlignInContainer.SetByContainer
+                    FillPortions: =0
+                    Height: =240
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    Visible: =If(FlowType="範本",true,false)
+                    Width: =Parent.Width-40
+                    X: =20
+                    Y: =94
+                    ZIndex: =6
+
+                    Label6_30 As label:
+                        Height: =28
+                        OnSelect: =
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: ="下一節處理行動"
+                        Width: =116
+                        X: =30
+                        ZIndex: =1
+
+                    Circle2_12 As circle:
+                        DisplayMode: =DisplayMode.View
+                        Fill: =glbNeutralQuaternaryColor
+                        Height: =14
+                        OnSelect: =
+                        Width: =14
+                        Y: =7
+                        ZIndex: =2
+
+                    Label6_31 As label:
+                        Height: =28
+                        OnSelect: =
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: ="下一節處理人"
+                        Width: =147
+                        X: =30
+                        Y: =72
+                        ZIndex: =3
+
+                    Dropdown1_8 As dropdown:
+                        BorderColor: =glbNeutralTertiaryColor
+                        BorderThickness: =1
+                        ChevronBackground: =RGBA(0, 0, 0, 0)
+                        ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
+                        ChevronDisabledFill: =RGBA(202, 202, 202, 1)
+                        ChevronFill: =glbNeutralTertiaryColor
+                        ChevronHoverBackground: =ColorFade(Self.Fill, -5%)
+                        ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
+                        Color: =glbNeutralPrimaryColor
+                        FocusedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                        FocusedBorderThickness: =1
+                        Height: =36
+                        HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                        HoverFill: =ColorFade(Self.Fill, -5%)
+                        Items: =["提交","檢查","簽批","審批","執行"]
+                        PaddingBottom: =5
+                        PaddingRight: =0
+                        PaddingTop: =5
+                        PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                        PressedColor: =Self.Color
+                        PressedFill: =ColorFade(Self.Fill, -5%)
+                        SelectionFill: =glbThemePrimaryColor
+                        Size: =12
+                        Width: =120
+                        X: =30
+                        Y: =28
+                        ZIndex: =4
+
+                    BtnDefault_26 As button:
+                        BorderColor: =Self.Color
+                        BorderThickness: =1
+                        Color: =glbThemePrimaryColor
+                        DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                        Fill: =White
+                        FocusedBorderThickness: =1
+                        Height: =36
+                        HoverBorderColor: =ColorFade(Self.Color, -15%)
+                        HoverColor: =ColorFade(Self.Color, -15%)
+                        HoverFill: =RGBA(255, 255, 255, 1)
+                        OnSelect: |-
+                            =UpdateContext({SelectUservisiable:true});
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        PressedBorderColor: =ColorFade(Self.Color, -25%)
+                        PressedColor: =ColorFade(Self.Color, -25%)
+                        PressedFill: =ColorFade(Self.Color, 95%)
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Size: =11
+                        Text: ="選擇"
+                        Width: =120
+                        X: =30
+                        Y: =100
+                        ZIndex: =5
+
+                    Label1_154 As label:
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =1
+                        Color: =glbNeutralSecondaryColor
+                        Fill: =RGBA(245, 245, 245, 1)
+                        Height: =36
+                        PaddingBottom: =0
+                        PaddingLeft: =28
+                        PaddingRight: =10
+                        PaddingTop: =0
+                        Size: =11
+                        Text: =First(Split(CreateApproverCol.AllOwnerName.DisplayName," ").Result).Result&"/"&CreateApproverCol.AllOwnerName.Email
+                        Width: =Parent.Width-Self.X
+                        X: =161
+                        Y: =100
+                        ZIndex: =6
+
+                    BtnSecondIconOnly_22 As icon.Add:
+                        BorderColor: =glbNeutralQuaternaryColor
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =1
+                        Color: =glbNeutralSecondaryColor
+                        DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                        DisabledColor: =RGBA(149, 149, 149, 1)
+                        DisabledFill: =RGBA(0, 0, 0, 0)
+                        DisplayMode: =DisplayMode.View
+                        FocusedBorderThickness: =1
+                        Height: =32
+                        HoverBorderColor: =glbThemePrimaryColor
+                        HoverColor: =glbThemePrimaryColor
+                        HoverFill: =RGBA(0, 0, 0, 0)
+                        Icon: =Icon.Person
+                        OnSelect: =
+                        PaddingBottom: =6
+                        PaddingTop: =6
+                        PressedBorderColor: =ColorFade(glbThemePrimaryColor, -15%)
+                        PressedColor: =glbThemePrimaryColor
+                        PressedFill: =RGBA(0, 0, 0, 0)
+                        Width: =28
+                        X: =161
+                        Y: =102
+                        ZIndex: =10
+
+                    Label6_32 As label:
+                        Height: =28
+                        OnSelect: =
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: ="抄送人"
+                        Width: =147
+                        X: =30
+                        Y: =145
+                        ZIndex: =11
+
+                    ComboBox1_14 As combobox:
+                        BorderColor: =glbNeutralTertiaryColor
+                        BorderThickness: =1
+                        ChevronBackground: =RGBA(255, 255, 255, 1)
+                        ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
+                        ChevronDisabledFill: =RGBA(202, 202, 202, 1)
+                        ChevronFill: =glbNeutralTertiaryColor
+                        ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
+                        ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
+                        Color: =glbNeutralPrimaryColor
+                        DisplayFields: =["Claims"]
+                        FocusedBorderThickness: =1
+                        Height: =36
+                        HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                        HoverColor: =Self.Color
+                        HoverFill: =ColorFade(Self.Fill, -5%)
+                        IsSearchable: =false
+                        Items: =Choices(MyContacts.AllOwnerName)
+                        PaddingLeft: =10
+                        PressedColor: =Self.Color
+                        PressedFill: =ColorFade(Self.Fill, -5%)
+                        SearchFields: =["Claims"]
+                        SearchItems: =[]
+                        SelectionColor: =glbThemePrimaryColor
+                        SelectionFill: =ColorFade(Self.SelectionColor, 90%)
+                        Size: =12
+                        Template: =ListItemTemplate.Double
+                        Width: =Parent.Width-Self.X-1
+                        X: =30
+                        Y: =173
+                        ZIndex: =12
+
+                PredefinedFlowContainer As groupContainer.manualLayoutContainer:
+                    AlignInContainer: =AlignInContainer.SetByContainer
+                    FillPortions: =0
+                    Height: =240
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    Visible: |
+                        =/*If(
+                            FlowType = "Generic Flow" && !IsBlank(
+                                LookUp(
+                                    GenericFormModel,
+                                    Title = asid
+                                ).SelectedActions
+                            ),
+                            true,
+                            false
+                        )*/
+                        /*FlowType = "預設流程" && !IsBlank(
+                            LookUp(
+                                GenericFormModel,
+                                Title = FormModelId
+                            ).SelectedActions
+                        )*/
+                        
+                        If(FlowType="預設流程",true,false)
+                    Width: =Parent.Width-40
+                    X: =20
+                    Y: =94
+                    ZIndex: =7
+
+                    Label6_33 As label:
+                        Height: =28
+                        OnSelect: =
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: ="下一節處理行動"
+                        Width: =116
+                        X: =30
+                        ZIndex: =1
+
+                    Circle2_13 As circle:
+                        DisplayMode: =DisplayMode.View
+                        Fill: =glbNeutralQuaternaryColor
+                        Height: =14
+                        OnSelect: =
+                        Width: =14
+                        X: =4
+                        Y: =7
+                        ZIndex: =2
+
+                    Label6_35 As label:
+                        Height: =28
+                        OnSelect: =
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: ="下一節處理人"
+                        Width: =147
+                        X: =30
+                        Y: =72
+                        ZIndex: =3
+
+                    Dropdown1_9 As dropdown:
+                        BorderColor: =glbNeutralTertiaryColor
+                        BorderThickness: =1
+                        ChevronBackground: =RGBA(0, 0, 0, 0)
+                        ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
+                        ChevronDisabledFill: =RGBA(202, 202, 202, 1)
+                        ChevronFill: =glbNeutralTertiaryColor
+                        ChevronHoverBackground: =ColorFade(Self.Fill, -5%)
+                        ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
+                        Color: =glbNeutralPrimaryColor
+                        DisplayMode: =DisplayMode.Disabled
+                        FocusedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                        FocusedBorderThickness: =1
+                        Height: =36
+                        HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                        HoverFill: =ColorFade(Self.Fill, -5%)
+                        Items: |
+                            =If(Checkbox2_5.Value = true,Index(DataFlowActionCol.Result,2),First(DataFlowActionCol.Result))
+                        PaddingBottom: =5
+                        PaddingRight: =0
+                        PaddingTop: =5
+                        PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                        PressedColor: =Self.Color
+                        PressedFill: =ColorFade(Self.Fill, -5%)
+                        SelectionFill: =glbThemePrimaryColor
+                        Size: =12
+                        Width: =120
+                        X: =30
+                        Y: =28
+                        ZIndex: =4
+
+                    BtnDefault_27 As button:
+                        BorderColor: =Self.Color
+                        BorderThickness: =1
+                        Color: =glbThemePrimaryColor
+                        DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                        Fill: =White
+                        FocusedBorderThickness: =1
+                        Height: =36
+                        HoverBorderColor: =ColorFade(Self.Color, -15%)
+                        HoverColor: =ColorFade(Self.Color, -15%)
+                        HoverFill: =RGBA(255, 255, 255, 1)
+                        OnSelect: |-
+                            =UpdateContext({SelectUservisiable:true});
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        PressedBorderColor: =ColorFade(Self.Color, -25%)
+                        PressedColor: =ColorFade(Self.Color, -25%)
+                        PressedFill: =ColorFade(Self.Color, 95%)
+                        RadiusBottomLeft: =0
+                        RadiusBottomRight: =0
+                        RadiusTopLeft: =0
+                        RadiusTopRight: =0
+                        Size: =11
+                        Text: ="選擇"
+                        Width: =120
+                        X: =30
+                        Y: =100
+                        ZIndex: =5
+
+                    Label1_155 As label:
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =1
+                        Color: =glbNeutralSecondaryColor
+                        Fill: =RGBA(245, 245, 245, 1)
+                        FontWeight: =FontWeight.Lighter
+                        Height: =36
+                        PaddingBottom: =0
+                        PaddingLeft: =28
+                        PaddingRight: =10
+                        PaddingTop: =0
+                        Size: =11
+                        Text: |-
+                            =If(Lastselect&&TabGallery3_5.Selected.Value="最近",First(Split(CreateApproverCol.AllOwnerName.DisplayName," ").Result).Result&"/"&CreateApproverCol.AllOwnerName.Email,
+                            Departmentselect&&TabGallery3_5.Selected.Value="部門",First(Split(CreateApproverCol.DepartMentEmail.DisplayName," ").Result).Result&"/"&CreateApproverCol.DepartMentEmail.Email,
+                            !Lastselect&&!Departmentselect,First(Split(CreateApproverCol.DisplayName," ").Result).Result&"/"&CreateApproverCol.Mail)
+                        Width: =Parent.Width-Self.X
+                        X: =161
+                        Y: =100
+                        ZIndex: =6
+
+                    BtnSecondIconOnly_25 As icon.Add:
+                        BorderColor: =glbNeutralQuaternaryColor
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =1
+                        Color: =glbNeutralSecondaryColor
+                        DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                        DisabledColor: =RGBA(149, 149, 149, 1)
+                        DisabledFill: =RGBA(0, 0, 0, 0)
+                        DisplayMode: =DisplayMode.View
+                        FocusedBorderThickness: =1
+                        Height: =32
+                        HoverBorderColor: =glbThemePrimaryColor
+                        HoverColor: =glbThemePrimaryColor
+                        HoverFill: =RGBA(0, 0, 0, 0)
+                        Icon: =Icon.Person
+                        OnSelect: =
+                        PaddingBottom: =6
+                        PaddingTop: =6
+                        PressedBorderColor: =ColorFade(glbThemePrimaryColor, -15%)
+                        PressedColor: =glbThemePrimaryColor
+                        PressedFill: =RGBA(0, 0, 0, 0)
+                        Width: =28
+                        X: =161
+                        Y: =102
+                        ZIndex: =10
+
+                    Label6_39 As label:
+                        Height: =28
+                        OnSelect: =
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =12
+                        Text: ="抄送人"
+                        Width: =147
+                        X: =30
+                        Y: =145
+                        ZIndex: =11
+
+                    ComboBox1_15 As combobox:
+                        BorderColor: =glbNeutralTertiaryColor
+                        BorderThickness: =1
+                        ChevronBackground: =RGBA(255, 255, 255, 1)
+                        ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
+                        ChevronDisabledFill: =RGBA(202, 202, 202, 1)
+                        ChevronFill: =glbNeutralTertiaryColor
+                        ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
+                        ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
+                        Color: =glbNeutralPrimaryColor
+                        DisplayFields: =["Mail"]
+                        FocusedBorderThickness: =1
+                        Height: =36
+                        HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                        HoverColor: =Self.Color
+                        HoverFill: =ColorFade(Self.Fill, -5%)
+                        Items: |-
+                            =//Choices(MyContacts.AllOwnerName).Email
+                            Office365用户.SearchUserV2({searchTerm:ComboBox1_15.SearchText,top:10}).value
+                        PaddingLeft: =10
+                        PressedColor: =Self.Color
+                        PressedFill: =ColorFade(Self.Fill, -5%)
+                        SearchFields: =["Mail"]
+                        SearchItems: |-
+                            =Search(//Choices(MyContacts.AllOwnerName).Email
+                            Office365用户.SearchUserV2({searchTerm:ComboBox1_15.SearchText,top:10}).value,ComboBox1_15.SearchText,"Mail")
+                        SelectionColor: =glbThemePrimaryColor
+                        SelectionFill: =ColorFade(Self.SelectionColor, 90%)
+                        Size: =12
+                        Template: =ListItemTemplate.Double
+                        Width: =Parent.Width-Self.X-1
+                        X: =30
+                        Y: =173
+                        ZIndex: =12
+
+    HeaderContainer_4 As groupContainer.manualLayoutContainer:
+        Fill: =glbThemePrimaryColor
+        Height: =60
+        Width: =Parent.Width
+        ZIndex: =6
+
+        Icon2_6 As icon.Home:
+            Color: =RGBA(255, 255, 255, 1)
+            Height: =60
+            Icon: =Icon.Home
+            OnSelect: =Launch(JumpUrlClientAPP&"&Screen=HomepageScreen",{},LaunchTarget.Replace);
+            PaddingBottom: =14
+            PaddingTop: =14
+            Width: =60
+            X: =20
+            ZIndex: =6
+
+        Image1_1 As image:
+            Height: =60
+            Image: =logo_单图标
+            Width: =40
+            X: =84
+            ZIndex: =7
+
+        Label1_74 As label:
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =glbThemePrimaryColor
+            FontWeight: =FontWeight.Bold
+            Height: =44
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =12
+            Text: |-
+                =If(App.ActiveScreen.Width<600,"eProcessing System",
+                "基督教香港信義會社會服務部 | eProcessing System")
+            Width: =509
+            X: =132
+            Y: =8
+            ZIndex: =8
+
+    SelectUserContainer_2 As groupContainer.horizontalAutoLayoutContainer:
+        Fill: =RGBA(0, 0, 0, 0.7)
+        Height: =Parent.Height
+        LayoutAlignItems: =LayoutAlignItems.Center
+        LayoutDirection: =LayoutDirection.Vertical
+        LayoutMode: =LayoutMode.Auto
+        PaddingTop: =40
+        Visible: =SelectUservisiable
+        Width: =Parent.Width
+        ZIndex: =7
+
+        Container16_4 As groupContainer.verticalAutoLayoutContainer:
+            AlignInContainer: =AlignInContainer.SetByContainer
+            Fill: =RGBA(253, 222, 207, 1)
+            FillPortions: =0
+            Height: =500
+            LayoutAlignItems: =LayoutAlignItems.Center
+            LayoutDirection: =LayoutDirection.Vertical
+            LayoutJustifyContent: =LayoutJustifyContent.Center
+            LayoutMinHeight: =100
+            LayoutMinWidth: =250
+            LayoutMode: =LayoutMode.Auto
+            Width: |
+                =Switch(
+                        CreateGeneralFormScreen.Size,
+                        ScreenSize.Small,
+                       Parent.Width-40,
+                        ScreenSize.Medium,
+                       Parent.Width-40,
+                       ScreenSize.Large,
+                       Parent.Width-40,
+                       600
+                  )
+            ZIndex: =1
+
+            Container16_5 As groupContainer.verticalAutoLayoutContainer:
+                Fill: =RGBA(255, 255, 255, 1)
+                FillPortions: =0
+                Height: =500
+                LayoutAlignItems: =LayoutAlignItems.Center
+                LayoutDirection: =LayoutDirection.Vertical
+                LayoutGap: =10
+                LayoutMinHeight: =100
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                PaddingLeft: =20
+                PaddingRight: =20
+                Width: =
+                ZIndex: =1
+
+                Container17_2 As groupContainer.horizontalAutoLayoutContainer:
+                    FillPortions: =0
+                    Height: =60
+                    LayoutJustifyContent: =LayoutJustifyContent.SpaceBetween
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    LayoutMode: =LayoutMode.Auto
+                    ZIndex: =1
+
+                    FormNameLabel_5 As label:
+                        AlignInContainer: =AlignInContainer.Center
+                        Color: =glbNeutralPrimaryColor
+                        FontWeight: =FontWeight.Semibold
+                        Height: =32
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =14
+                        Text: ="選擇處理人"
+                        Width: =120
+                        X: =40
+                        Y: =15
+                        ZIndex: =1
+
+                    CountLast As label:
+                        AlignInContainer: =AlignInContainer.Center
+                        Color: =glbNeutralPrimaryColor
+                        FontWeight: =FontWeight.Semibold
+                        Height: =32
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =14
+                        Text: =CountRows(Filter(Gallery2_2.AllItems, Checkbox2_1.Value))
+                        Visible: =false
+                        Width: =120
+                        X: =40
+                        Y: =15
+                        ZIndex: =2
+
+                    CountDepartment As label:
+                        AlignInContainer: =AlignInContainer.Center
+                        Color: =glbNeutralPrimaryColor
+                        FontWeight: =FontWeight.Semibold
+                        Height: =32
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =14
+                        Text: =CountRows(Filter(Gallery2_3.AllItems, Checkbox2_2.Value))
+                        Visible: =false
+                        Width: =120
+                        X: =40
+                        Y: =15
+                        ZIndex: =3
+
+                    BtnSecondIconOnly_21 As icon.Add:
+                        AlignInContainer: =AlignInContainer.Center
+                        BorderColor: =glbNeutralQuaternaryColor
+                        BorderStyle: =BorderStyle.None
+                        BorderThickness: =1
+                        Color: =glbNeutralSecondaryColor
+                        DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                        DisabledColor: =RGBA(149, 149, 149, 1)
+                        DisabledFill: =RGBA(0, 0, 0, 0)
+                        FocusedBorderThickness: =1
+                        Height: =32
+                        HoverBorderColor: =glbThemePrimaryColor
+                        HoverColor: =glbThemePrimaryColor
+                        HoverFill: =RGBA(0, 0, 0, 0)
+                        Icon: =Icon.Cancel
+                        OnSelect: |-
+                            =UpdateContext({SelectUservisiable:false});
+                            Reset(ComboBox1_5)
+                        PaddingBottom: =2
+                        PaddingTop: =2
+                        PressedBorderColor: =ColorFade(glbThemePrimaryColor, -15%)
+                        PressedColor: =glbThemePrimaryColor
+                        PressedFill: =RGBA(0, 0, 0, 0)
+                        Width: =32
+                        X: =161
+                        Y: =102
+                        ZIndex: =4
+
+                ComboBox1_5 As combobox:
+                    AlignInContainer: =AlignInContainer.Stretch
+                    BorderColor: =glbNeutralTertiaryColor
+                    BorderThickness: =1
+                    ChevronBackground: =RGBA(255, 255, 255, 1)
+                    ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
+                    ChevronDisabledFill: =RGBA(202, 202, 202, 1)
+                    ChevronFill: =glbNeutralTertiaryColor
+                    ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
+                    ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
+                    Color: =glbNeutralPrimaryColor
+                    DisplayFields: =["Mail","DisplayName"]
+                    FocusedBorderThickness: =1
+                    HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                    HoverColor: =Self.Color
+                    HoverFill: =ColorFade(Self.Fill, -5%)
+                    Items: |-
+                        =//Choices(MyContacts.AllOwnerName)
+                        Office365用户.SearchUserV2({searchTerm:ComboBox1_5.SearchText,top:10}).value
+                    OnSelect: |-
+                        =Set(Lastselect,false);
+                        Set(Departmentselect,false)
+                    PaddingLeft: =10
+                    PressedColor: =Self.Color
+                    PressedFill: =ColorFade(Self.Fill, -5%)
+                    SearchFields: =["Mail"]
+                    SearchItems: |-
+                        =Search(//Choices(MyContacts.AllOwnerName)
+                        Office365用户.SearchUserV2({searchTerm:ComboBox1_5.SearchText,top:10}).value,ComboBox1_5.SearchText,"Mail")
+                    SelectionColor: =glbThemePrimaryColor
+                    SelectionFill: =ColorFade(Self.SelectionColor, 90%)
+                    SelectMultiple: =false
+                    Size: =11
+                    Template: =ListItemTemplate.Double
+                    Visible: =If(First(EditUserForm).FlowType<>"部門簡單流程",true,false)
+                    Width: =615
+                    X: =40
+                    Y: =62
+                    ZIndex: =2
+
+                TabGallery3_5 As gallery.galleryHorizontal:
+                    FillPortions: =0
+                    Height: =40
+                    Items: |-
+                        =If(First(EditUserForm).FlowType<>"部門簡單流程",["最近","部門"],["部門"])
+                        //["最近","部門"]
+                    LayoutMinHeight: =287
+                    LayoutMinWidth: =320
+                    ShowScrollbar: =false
+                    TemplatePadding: =0
+                    TemplateSize: =130
+                    Width: =548
+                    X: =40
+                    Y: =121
+                    ZIndex: =3
+
+                    Label2_5 As label:
+                        Align: =Align.Center
+                        Color: |-
+                            =If(
+                                ThisItem.IsSelected,
+                                glbThemePrimaryColor,
+                                glbNeutralSecondaryColor
+                            )
+                        FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold,FontWeight.Normal)
+                        Height: =32
+                        HoverColor: =glbThemePrimaryColor
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Text: =ThisItem.Value
+                        Width: =130
+                        ZIndex: =1
+
+                    Rectangle2_5 As rectangle:
+                        Fill: =glbThemePrimaryColor
+                        Height: =3
+                        OnSelect: =Select(Parent)
+                        Visible: =If(ThisItem.IsSelected, true, false)
+                        Width: =130
+                        Y: =37
+                        ZIndex: =2
+
+                Gallery2_2 As gallery.galleryVertical:
+                    FillPortions: =0
+                    Height: =260
+                    Items: |-
+                        =FirstN(Filter(If(
+                            TabGallery3_5.Selected.Value = "最近",
+                            SortByColumns(
+                                Filter(
+                                    MyContacts,
+                                    UserEmail = User().Email,
+                                    ContatsType = "個人"
+                                ),
+                                "Modified",
+                                Descending
+                            ))
+                        ,AllOwnerName.Email <> Blank()),10)
+                        //Filter(SortByColumns(FormTableType,"Created",Descending),DepartMentEmail.Email<>Blank())
+                    Layout: =Layout.Vertical
+                    LayoutMinHeight: =287
+                    LayoutMinWidth: =320
+                    OnSelect: =//UpdateIf(MyContactsCol,ThisItem.isSelect=true,{})
+                    TemplatePadding: =0
+                    TemplateSize: =64
+                    Visible: =If(TabGallery3_5.Selected.Value = "最近",true)
+                    X: =27
+                    Y: =185
+                    ZIndex: =4
+
+                    Circle1_4 As circle:
+                        BorderColor: =RGBA(202, 202, 202, 1)
+                        BorderThickness: =1
+                        Fill: |-
+                            =If(
+                                ThisItem.IsSelected,
+                                glbThemePrimaryColor,
+                                White
+                            )
+                        Height: =30
+                        OnSelect: =Select(Parent)
+                        Visible: =false
+                        Width: =30
+                        X: =285
+                        Y: =10
+                        ZIndex: =1
+
+                    Label7_4 As label:
+                        Color: =glbNeutralPrimaryColor
+                        Height: =28
+                        OnSelect: =Select(Parent)
+                        Size: =11
+                        Text: |-
+                            =//ThisItem.Result.DisplayName
+                            ThisItem.AllOwnerName.DisplayName
+                            //If(TabGallery3_5.Selected.Value = "最近",ThisItem.AllOwnerName.DisplayName,ThisItem.DepartMentEmail.DisplayName)
+                        Width: =520
+                        X: =40
+                        Y: =2
+                        ZIndex: =2
+
+                    Label7_5 As label:
+                        Color: =glbNeutralSecondaryColor
+                        Height: =28
+                        OnSelect: =Select(Parent)
+                        Size: =8
+                        Text: |-
+                            =//ThisItem.Result.Email
+                            ThisItem.AllOwnerName.Email
+                            //If(TabGallery3_5.Selected.Value = "最近",ThisItem.AllOwnerName.Email,ThisItem.DepartMentEmail)
+                        Width: =520
+                        X: =40
+                        Y: =30
+                        ZIndex: =3
+
+                    Icon5_2 As icon.CheckBadge:
+                        Color: =RGBA(255, 255, 255, 1)
+                        FocusedBorderThickness: =0
+                        Height: =30
+                        Icon: =Icon.Check
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =6
+                        PaddingTop: =6
+                        Visible: =false
+                        Width: =30
+                        X: =285
+                        Y: =10
+                        ZIndex: =4
+
+                    Checkbox2_1 As checkbox:
+                        CheckboxBorderColor: =glbNeutralTertiaryColor
+                        CheckboxSize: =24
+                        CheckmarkFill: =glbLinkColor
+                        Color: =glbNeutralPrimaryColor
+                        Default: =//If(ComboBox1_5.Selected.Mail = ThisItem.AllOwnerName.Email,true,false)
+                        DisplayMode: =If(Self.Value || (Value(CountLast.Text)=0), DisplayMode.Edit, Disabled)
+                        FocusedBorderThickness: =0
+                        Height: =27
+                        HoverBorderColor: =
+                        HoverColor: =glbNeutralPrimaryColor
+                        HoverFill: =RGBA(0, 0, 0, 0)
+                        OnCheck: =Set(Lastselect,true)
+                        OnUncheck: =Set(Lastselect,false)
+                        PressedBorderColor: =
+                        PressedColor: =glbNeutralPrimaryColor
+                        PressedFill: =
+                        Size: =9
+                        Text: =""
+                        Width: =32
+                        X: =8
+                        Y: =13
+                        ZIndex: =5
+
+                Gallery2_3 As gallery.galleryVertical:
+                    Default: =First(Filter(FormTableType,DepartMentName=Label1_130.Text))
+                    FillPortions: =0
+                    Height: =260
+                    Items: |-
+                        =Filter(If(
+                            TabGallery3_5.Selected.Value = "部門",SortByColumns(FormTableType,"Created",Descending)),DepartMentEmail.Email<>Blank())
+                    Layout: =Layout.Vertical
+                    LayoutMinHeight: =287
+                    LayoutMinWidth: =320
+                    OnSelect: =//UpdateIf(MyContactsCol,ThisItem.isSelect=true,{})
+                    TemplatePadding: =0
+                    TemplateSize: =64
+                    Visible: =If(TabGallery3_5.Selected.Value = "部門",true)
+                    X: =27
+                    Y: =185
+                    ZIndex: =5
+
+                    Circle1_5 As circle:
+                        BorderColor: =RGBA(202, 202, 202, 1)
+                        BorderThickness: =1
+                        Fill: |-
+                            =If(
+                                ThisItem.IsSelected,
+                                glbThemePrimaryColor,
+                                White
+                            )
+                        Height: =30
+                        OnSelect: =Select(Parent)
+                        Visible: =false
+                        Width: =30
+                        X: =285
+                        Y: =10
+                        ZIndex: =1
+
+                    Label7_6 As label:
+                        Color: =glbNeutralPrimaryColor
+                        Height: =28
+                        OnSelect: =Select(Parent)
+                        Size: =11
+                        Text: |-
+                            =//ThisItem.Result.DisplayName
+                            ThisItem.DepartMentEmail.DisplayName
+                            //If(TabGallery3_5.Selected.Value = "最近",ThisItem.AllOwnerName.DisplayName,ThisItem.DepartMentEmail.DisplayName)
+                        Width: =520
+                        X: =40
+                        Y: =2
+                        ZIndex: =2
+
+                    Label7_7 As label:
+                        Color: =glbNeutralSecondaryColor
+                        Height: =28
+                        OnSelect: =Select(Parent)
+                        Size: =8
+                        Text: |-
+                            =//ThisItem.Result.Email
+                            ThisItem.DepartMentEmail.Email
+                            //If(TabGallery3_5.Selected.Value = "最近",ThisItem.AllOwnerName.Email,ThisItem.DepartMentEmail)
+                        Width: =520
+                        X: =40
+                        Y: =30
+                        ZIndex: =3
+
+                    Icon5_3 As icon.CheckBadge:
+                        Color: =RGBA(255, 255, 255, 1)
+                        FocusedBorderThickness: =0
+                        Height: =30
+                        Icon: =Icon.Check
+                        OnSelect: =Select(Parent)
+                        PaddingBottom: =6
+                        PaddingTop: =6
+                        Visible: =false
+                        Width: =30
+                        X: =285
+                        Y: =10
+                        ZIndex: =4
+
+                    Checkbox2_2 As checkbox:
+                        CheckboxBorderColor: =glbNeutralTertiaryColor
+                        CheckboxSize: =24
+                        CheckmarkFill: =glbLinkColor
+                        Color: =glbNeutralPrimaryColor
+                        Default: |-
+                            =//If(ComboBox1_5.Selected.Mail = ThisItem.DepartMentEmail.Email,true,false)
+                            If(
+                                FlowType = "部門簡單流程" && 
+                                Label1_130.Text = ThisItem.DepartMentName,true,false)
+                        DisplayMode: =If(Self.Value || (Value(CountDepartment.Text)=0), DisplayMode.Edit, Disabled)
+                        FocusedBorderThickness: =0
+                        Height: =27
+                        HoverBorderColor: =
+                        HoverColor: =glbNeutralPrimaryColor
+                        HoverFill: =RGBA(0, 0, 0, 0)
+                        OnCheck: =Set(Departmentselect,true)
+                        OnUncheck: =Set(Departmentselect,false)
+                        PressedBorderColor: =
+                        PressedColor: =glbNeutralPrimaryColor
+                        PressedFill: =
+                        Size: =9
+                        Text: =""
+                        Width: =32
+                        X: =8
+                        Y: =13
+                        ZIndex: =5
+
+                Container11_5 As groupContainer.horizontalAutoLayoutContainer:
+                    FillPortions: =0
+                    Height: =60
+                    LayoutAlignItems: =LayoutAlignItems.Center
+                    LayoutGap: =20
+                    LayoutJustifyContent: =LayoutJustifyContent.End
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    LayoutMode: =LayoutMode.Auto
+                    PaddingRight: =20
+                    Width: =747
+                    Y: =498
+                    ZIndex: =6
+
+                    BtnPrimaryLg_12 As button:
+                        BorderColor: =Self.Fill
+                        BorderThickness: =1
+                        DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                        Fill: =glbThemePrimaryColor
+                        FocusedBorderThickness: =1
+                        Height: =36
+                        HoverFill: =ColorFade(Self.Fill, -15%)
+                        OnSelect: |
+                            =If(
+                                CountA(
+                                    Filter(
+                                        MyContacts,
+                                        UserEmail = User().Email,
+                                        ContatsType = "個人",
+                                        AllOwnerName.Email = ComboBox1_5.Selected.Mail
+                                    ).标题
+                                ) <= 0 && !Checkbox2_1.Value && !Checkbox2_2.Value && FlowType<>"部門簡單流程",
+                                Patch(
+                                    MyContacts,
+                                    Defaults(MyContacts),
+                                    {
+                                        标题: GUID(),
+                                        UserEmail: User().Email,
+                                        AllOwnerName: {
+                                            Claims: "i:0#.f|membership|" & ComboBox1_5.Selected.Mail,
+                                            Department: "",
+                                            DisplayName: ComboBox1_5.Selected.DisplayName,
+                                            Email: ComboBox1_5.Selected.Mail,
+                                            JobTitle: "",
+                                            Picture: ""
+                                        },
+                                        ContatsType: "個人"
+                                    }
+                                );
+                                Set(
+                                    CreateApproverCol,
+                                    ComboBox1_5.Selected
+                                ),
+                                If(
+                                    CountA(
+                                        Filter(
+                                            MyContacts,
+                                            UserEmail = User().Email,
+                                            ContatsType = "個人",
+                                            AllOwnerName.Email = ComboBox1_5.Selected.Mail
+                                        ).标题
+                                    ) > 0 && !Checkbox2_1.Value && !Checkbox2_2.Value && FlowType<>"部門簡單流程",
+                                    UpdateIf(
+                                        MyContacts,
+                                        (UserEmail = User().Email) && (ContatsType = "個人") && (AllOwnerName.Email = ComboBox1_5.Selected.Mail),
+                                        {UserEmail: User().Email}
+                                    );
+                                    Set(
+                                        CreateApproverCol,
+                                        ComboBox1_5.Selected
+                                    ),
+                                    If(
+                                        Checkbox2_1.Value = true,
+                                        Set(
+                                            CreateApproverCol,
+                                            Gallery2_2.Selected
+                                        );
+                                        UpdateIf(
+                                            MyContacts,
+                                            (UserEmail = User().Email) && (ContatsType = "個人") && (AllOwnerName.Email = Gallery2_2.Selected.AllOwnerName.Email),
+                                            {标题:GUID()}
+                                            //{UserEmail: User().Email}
+                                        ),
+                                        Checkbox2_2.Value = true //|| (FlowType = "部門簡單流程"&& Departmentselect<>true)
+                                        ,
+                                        Set(
+                                            CreateApproverCol,
+                                            Gallery2_3.Selected
+                                        ),
+                                        //部門簡單流程使用默認值時
+                                        FlowType = "部門簡單流程"&& Departmentselect<>true,
+                                        Set(
+                                            CreateApproverCol,
+                                            Gallery2_3.Selected
+                                        )
+                                    )
+                                )
+                            );
+                            UpdateContext({SelectUservisiable: false});
+                            Reset(ComboBox1_5);
+                            
+                            //部門簡單流程使用默認推薦郵箱時，需要設定Departmentselect值為true
+                            If(FlowType = "部門簡單流程" && Departmentselect<>true,Set(Departmentselect,true));
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        PressedColor: =White
+                        PressedFill: =ColorFade(Self.Fill, -25%)
+                        RadiusBottomLeft: =4
+                        RadiusBottomRight: =4
+                        RadiusTopLeft: =4
+                        RadiusTopRight: =4
+                        Size: =11
+                        Text: ="確認"
+                        Width: =100
+                        X: =983
+                        Y: =12
+                        ZIndex: =1
+
+                    BtnDefaultLg_12 As button:
+                        BorderColor: =Self.Color
+                        BorderThickness: =1
+                        Color: =glbThemePrimaryColor
+                        DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                        Fill: =White
+                        FocusedBorderThickness: =1
+                        Height: =36
+                        HoverBorderColor: =ColorFade(Self.Color, -15%)
+                        HoverColor: =ColorFade(Self.Color, -15%)
+                        HoverFill: =RGBA(255, 255, 255, 1)
+                        OnSelect: |-
+                            =UpdateContext({SelectUservisiable:false});
+                            Reset(ComboBox1_5)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        PressedBorderColor: =ColorFade(Self.Color, -25%)
+                        PressedColor: =ColorFade(Self.Color, -25%)
+                        PressedFill: =ColorFade(Self.Color, 95%)
+                        RadiusBottomLeft: =4
+                        RadiusBottomRight: =4
+                        RadiusTopLeft: =4
+                        RadiusTopRight: =4
+                        Size: =11
+                        Text: ="取消"
+                        Width: =100
+                        X: =Parent.Width-Self.Width-1
+                        Y: =12
+                        ZIndex: =2
+
