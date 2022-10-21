@@ -1,0 +1,129 @@
+App As appinfo:
+    BackEnabled: =false
+    OnStart: |-
+        =//设置主色
+        Set(glbThemePrimaryColor,ColorValue( "#01A8F4" ));
+        Set(glbThemeSecondaryColor,ColorValue( "#4E505C" ));
+        Set(glbThemeTertiaryColor,ColorValue( "#66B6E3" ));
+        //设置功能色
+        Set(glbErrorColor,ColorValue( "#E62D36" ));
+        Set(glbSuccessColor,ColorValue( "#009639" ));
+        Set(glbWarningColor,ColorValue( "#F5913B" ));
+        Set(glbLinkColor,ColorValue( "#0086D0" ));
+        //设置中性色
+        Set(glbNeutralPrimaryColor,ColorValue( "#323130" ));
+        Set(glbNeutralSecondaryColor,ColorValue( "#605E5C" ));
+        Set(glbNeutralTertiaryColor,ColorValue( "#A19F9D" ));
+        Set(glbNeutralQuaternaryColor,ColorValue( "#D2D0CE" ));
+        Set(glbNeutralLightColor,ColorValue( "#EDEBE9" ));
+        Set(glbNeutralLighterColor,ColorValue( "#f3f2f1" ));
+        
+        //Set(CurrentUser,User().Email);
+        //Set(CurrentUser,"eps-vendor@elchk.org.hk");
+        Set(TitleSise,12);Set(FountSise,11);Set(Formheight,32);Set(radiuspx,0);Set(fountcolor,RGBA(50,50,50,100));
+        Clear(SearchDepartment);ForAll(Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="003"),Collect(SearchDepartment,{Data2:Code_No2&"-"&Value2}));
+        Set(CurrentUser,Dropdown1_2.Selected.Value);
+        
+        Set(
+            CurrentUserName,
+        First(
+            Split(
+                CurrentUser,
+                "@"
+            ).Result
+        ).Result);
+        Set(
+            CurrentRole,
+            CurrentUser in Filter(
+                SignerInfo,
+                S_Mechanism_No = "HO-ADM"
+            ).Signer_Email
+        );
+        Set(
+            CurrentRoleName,
+             LookUp(
+                SignerInfo,
+                Signer_Email = CurrentUser
+            ).Role
+        );
+        //二期權限測試添加
+        //-----------
+        /*
+        Set(
+            CurrentRoleFormPermission,
+             If(LookUp(
+                UserInfo,
+                User_Email = CurrentUser
+            ).FormPermission = LookUp(
+                UserInfo,
+                User_Email = CurrentUser
+            ).O_Mechanism_No,LookUp(
+                UserInfo,
+                User_Email = CurrentUser
+            ).O_Mechanism,If(LookUp(
+                UserInfo,
+                User_Email = CurrentUser
+            ).FormPermission = "全部表單","All","None")
+        ));
+        */
+        //新增多部門及表格類型表單權限過濾測試代碼
+        Set(
+            CurrentRoleFormModelPermssion,
+            If(
+                LookUp(
+                    UserInfo,
+                    User_Email = CurrentUser).FormPermission = "全部表單","All",LookUp(
+                    UserInfo,
+                    User_Email = CurrentUser).FormPermission = Blank(),"None",LookUp(
+                    UserInfo,
+                    User_Email = CurrentUser).FormPermission
+            )
+        );
+        Set(
+            CurrentRoleFormModelPermssion_sub,
+            LookUp(
+                    UserInfo,
+                    User_Email = CurrentUser).FormPermission_Sub
+        );
+        
+        Set(
+            CurrentRoleTaskPermission,
+            If(LookUp(
+                UserInfo,
+                User_Email = CurrentUser
+            ).IsManger="是",LookUp(
+                UserInfo,
+                User_Email = CurrentUser
+            ).O_Mechanism,Blank())
+        );
+        Set(
+            HRAO,
+            CurrentUser in Filter(
+                UserInfo,
+                O_Mechanism = "人力資源部" && Post_No = "ADMO"
+            ).User_Email
+        );
+        Set(
+            SuperUser,
+            CurrentUser in Filter(
+                UserInfo,
+                IsSuperUser = "是"
+            ).User_Email
+        );
+        Set(JumpUrl,"https://apps.powerapps.com/play/fe87a3b4-dff2-47f1-af5c-8443d36348e4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c");
+        Set(JumpUrlA306A111,"https://apps.powerapps.com/play/e78a1ab3-7aca-47d0-9de7-cfe82901de3a?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c");
+        Set(JumpUrlMobileApp,"https://apps.powerapps.com/play/967cb530-7ce2-49f0-b7a9-a300d8010bd1?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c")
+        //------------
+        //Select(uploadButton)
+    StartScreen: |-
+        =If(
+            Param("Screen") = "HomepageScreen",
+            HomepageScreen,
+            Param("Screen") = "GeneralFormListScreen",
+            GeneralFormListScreen,
+            Param("Screen") = "AdminFormListScree",
+            AdminFormListScreen,
+            Param("Screen") = "AdminFormDetailScreen",
+            AdminFormDetailScreen
+        )
+

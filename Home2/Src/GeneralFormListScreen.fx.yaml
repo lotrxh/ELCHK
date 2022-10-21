@@ -1,0 +1,1381 @@
+GeneralFormListScreen As screen:
+    Fill: =RGBA(243, 243, 243, 1)
+    OnVisible: |
+        =ClearCollect(
+            approvalCol,
+            Approval_Table
+        );
+        //生成待处理集合
+        ClearCollect(
+            ApprovalDetailCol,
+            Filter(
+                ShowColumns(
+                    ApprovalDetail_Table,
+                    "Title",
+                    "Approval_No",
+                    "Approver",
+                    "ApproverEmail",
+                    "Priortty",
+                    "TaskStatus",
+                    "AgentUserEmail",
+                    "ActionNode"
+                ),
+                TaskStatus = "001" || TaskStatus = "002"
+            )
+        );
+        //生成已处理集合
+        ClearCollect(
+            ProcessedDetailCol,
+            Filter(
+                ShowColumns(
+                    ApprovalDetail_Table,
+                    "Title",
+                    "Approval_No",
+                    "Approver",
+                    "ApproverEmail",
+                    "Priortty",
+                    "TaskStatus",
+                    "Editor",
+                    "AgentUserEmail",
+                    "ActionNode"
+                ),
+                TaskStatus = "004" || TaskStatus = "006" || TaskStatus = "000"
+            )
+        );
+        //全部集合
+        ClearCollect(
+            ComplatelDetailCol,
+            Filter(
+                ShowColumns(
+                    ApprovalDetail_Table,
+                    "Title",
+                    "Approval_No",
+                    "Approver",
+                    "ApproverEmail",
+                    "Priortty",
+                    "TaskStatus",
+                    "Editor",
+                    "AgentUserEmail",
+                    "ActionNode"
+                ),
+                TaskStatus = "000" || TaskStatus = "001" || TaskStatus = "004" || TaskStatus = "006" || TaskStatus = "002" || TaskStatus = "005"
+            )
+        );
+        //生成带部门字段的ApprovalDetail_Table待理任务
+        ClearCollect(ApprovalDetailColwithdepartment,AddColumns(ApprovalDetailCol,"DepartMentName",
+                    LookUp(
+                        approvalCol,
+                        标题 = Approval_No
+                    ).DepartMentUnit,
+                    "FormDepartMentName",
+                    LookUp(
+                        approvalCol,
+                        标题 = Approval_No
+                    ).DepartMentName));
+        //生成待处理集合，新增Ismanger判断
+        With(
+            {
+                SearchPendingData: If(CurrentRoleTaskPermission=Blank(),Filter(
+                    ApprovalDetailCol,
+                    (CurrentUser in ApproverEmail || CurrentUser <> Blank() && CurrentUser in AgentUserEmail)),Filter(
+                    ApprovalDetailColwithdepartment,
+                    (CurrentUser in ApproverEmail || CurrentUser <> Blank() && CurrentUser in AgentUserEmail) || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermission in FormDepartMentName))
+            },
+            ClearCollect(
+                FilterPendingDataCol,
+                AddColumns(
+                    SearchPendingData,
+                    "FlowTaskName",
+                    LookUp(
+                        approvalCol,
+                        标题 = Approval_No
+                    ).Task_Name,
+                    "FlowOrder",
+                    LookUp(
+                        approvalCol,
+                        标题 = Approval_No
+                    ).Application_No,
+                    "FlowCreateDate",
+                    LookUp(
+                        approvalCol,
+                        标题 = Approval_No
+                    ).创建时间,
+                    "DepartMentName",
+                    LookUp(
+                        approvalCol,
+                        标题 = Approval_No
+                    ).DepartMentUnit,
+                    "FormType",
+                    LookUp(
+                        approvalCol,
+                        标题 = Approval_No
+                    ).FormType,
+                    "Application_Status",
+                    LookUp(
+                        approvalCol,
+                        标题 = Approval_No
+                    ).Application_Status,
+                    "CustomerSearch",
+                    LookUp(
+                        GenericFormList,
+                        ApprovalId = Approval_No
+                    ).FilterLabel
+                )
+            )
+        );
+        //生成带部门字段的ApprovalDetail_Table已处理任务
+        ClearCollect(ProcessedDetailColwithdepartment,AddColumns(ProcessedDetailCol,"DepartMentName",
+                    LookUp(
+                        approvalCol,
+                        标题 = Approval_No
+                    ).DepartMentUnit,
+                    "FormDepartMentName",
+                    LookUp(
+                        approvalCol,
+                        标题 = Approval_No
+                    ).DepartMentName));
+        ///生成已处理集合，新增Ismanger判断
+        With(
+            {
+                ProcessedListCol: If(CurrentRoleTaskPermission=Blank(),Filter(
+                    ProcessedDetailCol,
+                    (CurrentUser in ApproverEmail || CurrentUser <> Blank() && CurrentUser in AgentUserEmail)
+                ),Filter(
+                    ProcessedDetailColwithdepartment,
+                    (CurrentUser in ApproverEmail || CurrentUser <> Blank() && CurrentUser in AgentUserEmail) || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermission in FormDepartMentName))
+            },
+            ClearCollect(
+                inprogressData,
+                AddColumns(
+                    ProcessedListCol,
+                    "FlowTaskName",
+                    LookUp(
+                        approvalCol,
+                        标题 = Approval_No
+                    ).Task_Name,
+                    "FlowOrder",
+                    LookUp(
+                        approvalCol,
+                        标题 = Approval_No
+                    ).Application_No,
+                    "FlowCreateDate",
+                    LookUp(
+                        approvalCol,
+                        标题 = Approval_No
+                    ).创建时间,
+                    "DepartMentName",
+                    LookUp(
+                        approvalCol,
+                        标题 = Approval_No
+                    ).DepartMentUnit,
+                    "FormType",
+                    LookUp(
+                        approvalCol,
+                        标题 = Approval_No
+                    ).FormType,
+                    "Application_Status",
+                    LookUp(
+                        approvalCol,
+                        标题 = Approval_No
+                    ).Application_Status,
+                    "CustomerSearch",
+                    LookUp(
+                        GenericFormList,
+                        ApprovalId = Approval_No
+                    ).FilterLabel
+                )
+            )
+        );
+        //生成带部门字段的ApprovalDetail_Table全部任务
+        ClearCollect(ComplatelDetailColwithdepartment,AddColumns(ComplatelDetailCol,"DepartMentName",
+                    LookUp(
+                        approvalCol,
+                        标题 = Approval_No
+                    ).DepartMentUnit,
+                    "FormDepartMentName",
+                    LookUp(
+                        approvalCol,
+                        标题 = Approval_No
+                    ).DepartMentName));
+        
+        
+        // 生成所有集合，新增Ismanger判断
+        With(
+            {
+                AllApprovalList: If(CurrentRoleTaskPermission=Blank(),Filter(
+                    ComplatelDetailCol,
+                    (CurrentUser in ApproverEmail || CurrentUser <> Blank() && CurrentUser in AgentUserEmail) && TaskStatus <> Blank()
+                ),Filter(
+                    ComplatelDetailColwithdepartment,
+                    ((CurrentUser in ApproverEmail || CurrentUser <> Blank() && CurrentUser in AgentUserEmail) && TaskStatus <> Blank()) || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermission in FormDepartMentName))
+            },
+            ClearCollect(
+                AllApprovalListDataCol,
+                AddColumns(
+                    AllApprovalList,
+                    "FlowTaskName",
+                    LookUp(
+                        approvalCol,
+                        标题 = Approval_No
+                    ).Task_Name,
+                    "FlowOrder",
+                    LookUp(
+                        approvalCol,
+                        标题 = Approval_No
+                    ).Application_No,
+                    "FlowCreateDate",
+                    LookUp(
+                        approvalCol,
+                        标题 = Approval_No
+                    ).创建时间,
+                    "DepartMentName",
+                    LookUp(
+                        approvalCol,
+                        标题 = Approval_No
+                    ).DepartMentUnit,
+                    "FormType",
+                    LookUp(
+                        approvalCol,
+                        标题 = Approval_No
+                    ).FormType,
+                    "Application_Status",
+                    LookUp(
+                        approvalCol,
+                        标题 = Approval_No
+                    ).Application_Status,
+                    "CustomerSearch",
+                    LookUp(
+                        GenericFormList,
+                        ApprovalId = Approval_No
+                    ).FilterLabel
+                )
+            )
+        );
+        Select(BtnLgIconOnly_4);
+
+    ContainerTitle As groupContainer.manualLayoutContainer:
+        Fill: =glbThemePrimaryColor
+        Height: =50
+        Width: =1366
+        ZIndex: =1
+
+        Image1_2 As image:
+            Height: =38
+            Image: =logo
+            Width: =203
+            X: =15
+            Y: =5
+            ZIndex: =1
+
+        Label1_74 As label:
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =glbThemePrimaryColor
+            Height: =18
+            Size: =9
+            Text: ="基督教香港信義會社會服務部"
+            Width: =186
+            X: =63
+            Y: =5
+            ZIndex: =3
+
+        Label1_76 As label:
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =glbThemePrimaryColor
+            FontWeight: =FontWeight.Bold
+            Height: =21
+            Size: =12
+            Text: ="eProcessing System 2.0"
+            Width: =198
+            X: =63
+            Y: =22
+            ZIndex: =5
+
+        Image7_1 As image:
+            Height: =40
+            Image: =User().Image
+            RadiusBottomLeft: =10
+            RadiusBottomRight: =10
+            RadiusTopLeft: =10
+            RadiusTopRight: =10
+            Width: =40
+            X: =1310
+            Y: =5
+            ZIndex: =6
+
+    ContainerMain As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(247, 247, 247, 1)
+        Height: =718
+        Width: =1206
+        X: =160
+        Y: =50
+        ZIndex: =3
+
+        Container5_2 As groupContainer.manualLayoutContainer:
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =130
+            Width: =1182
+            X: =12
+            Y: =16
+            ZIndex: =4
+
+            ComboBox1_5 As combobox:
+                BorderColor: =glbNeutralTertiaryColor
+                BorderThickness: =1
+                ChevronBackground: =RGBA(255, 255, 255, 1)
+                ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
+                ChevronDisabledFill: =RGBA(202, 202, 202, 1)
+                ChevronFill: =glbNeutralTertiaryColor
+                ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
+                ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
+                Color: =glbNeutralPrimaryColor
+                DisplayFields: =["Result"]
+                FocusedBorderThickness: =0
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                HoverColor: =Self.Color
+                HoverFill: =ColorFade(Self.Fill, -5%)
+                InputTextPlaceholder: ="選擇部門"
+                Items: |-
+                    =//["行政部","財務部",""]
+                    Sort(Distinct(Filter(ConfigurationInfo,Type_Name="組織配置"&&(Value1="部門信息"||Value1="單位信息")),Code_No2&"-"&Value2),Result)
+                PaddingLeft: =10
+                PressedColor: =Self.Color
+                PressedFill: =ColorFade(Self.Fill, -5%)
+                SearchFields: =["Result"]
+                SearchItems: |-
+                    =Search(//["行政部","財務部",""]
+                    Sort(Distinct(Filter(ConfigurationInfo,Type_Name="組織配置"&&(Value1="部門信息"||Value1="單位信息")),Code_No2&"-"&Value2),Result),ComboBox1_5.SearchText,"Result")
+                SelectionColor: =glbThemePrimaryColor
+                SelectionFill: =ColorFade(Self.SelectionColor, 90%)
+                Size: =11
+                Width: =180
+                X: =290
+                Y: =80
+                ZIndex: =1
+
+            ComboBox1_6 As combobox:
+                BorderColor: =glbNeutralTertiaryColor
+                BorderThickness: =1
+                ChevronBackground: =RGBA(255, 255, 255, 1)
+                ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
+                ChevronDisabledFill: =RGBA(202, 202, 202, 1)
+                ChevronFill: =glbNeutralTertiaryColor
+                ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
+                ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
+                Color: =glbNeutralPrimaryColor
+                DisplayFields: =["Result"]
+                FocusedBorderThickness: =0
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                HoverColor: =Self.Color
+                HoverFill: =ColorFade(Self.Fill, -5%)
+                InputTextPlaceholder: ="表格類型"
+                Items: =Distinct(FormTableType,FormType)
+                PaddingLeft: =10
+                PressedColor: =Self.Color
+                PressedFill: =ColorFade(Self.Fill, -5%)
+                SearchFields: =["Result"]
+                SearchItems: =Search(Distinct(FormTableType,FormType),ComboBox1_6.SearchText,"Result")
+                SelectionColor: =glbThemePrimaryColor
+                SelectionFill: =ColorFade(Self.SelectionColor, 90%)
+                Size: =11
+                Width: =180
+                X: =480
+                Y: =80
+                ZIndex: =3
+
+            BtnLgIconOnly_4 As icon.Add:
+                BorderColor: =Self.Fill
+                BorderThickness: =1
+                Color: =RGBA(255, 255, 255, 1)
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                DisabledColor: =RGBA(149, 149, 149, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =glbThemePrimaryColor
+                Height: =32
+                HoverFill: =ColorFade(Self.Fill, -15%)
+                Icon: =Icon.Search
+                OnSelect: |-
+                    =If(
+                        TabGallery3_4.Selected.Value = "全部",
+                        ClearCollect(
+                            AllApprovalData,
+                            Search(
+                                Filter(
+                                    SortByColumns(
+                                        AllApprovalListDataCol,
+                                        "FlowCreateDate",
+                                        Descending
+                                    ),
+                                    IsBlank(ComboBox1_5.Selected.Result) || DepartMentName in ComboBox1_5.SelectedItems,
+                                    IsBlank(ComboBox1_6.Selected.Result) || FormType in ComboBox1_6.SelectedItems,
+                                    (DateValue(Text(FlowCreateDate)) >= DateValue(Text(TemplateStartDate_2.SelectedDate)) && DateValue(Text(FlowCreateDate)) <= DateValue(Text(TemplateEndDate_2.SelectedDate)))
+                                ),
+                                TextInput2_13.Text,
+                                "FlowOrder",
+                                "FlowTaskName",
+                                "CustomerSearch"
+                            )
+                        ),
+                        TabGallery3_4.Selected.Value = "待處理",
+                        ClearCollect(
+                            AllPendingApprovalData,
+                            Search(
+                                Filter(
+                                    SortByColumns(
+                                        FilterPendingDataCol,
+                                        "FlowCreateDate",
+                                        Descending
+                                    ),
+                                    IsBlank(ComboBox1_5.Selected.Result) || DepartMentName in ComboBox1_5.SelectedItems,
+                                    IsBlank(ComboBox1_6.Selected.Result) || FormType in ComboBox1_6.SelectedItems,
+                                    (DateValue(Text(FlowCreateDate)) >= DateValue(Text(TemplateStartDate_2.SelectedDate)) && DateValue(Text(FlowCreateDate)) <= DateValue(Text(TemplateEndDate_2.SelectedDate)))
+                                ),
+                                TextInput2_13.Text,
+                                "FlowOrder",
+                                "FlowTaskName",
+                                "CustomerSearch"
+                            )
+                        ),
+                        TabGallery3_4.Selected.Value = "已處理",
+                        ClearCollect(
+                            AllinprogressApprovalData,
+                            Search(
+                                Filter(
+                                    SortByColumns(
+                                        inprogressData,
+                                        "FlowCreateDate",
+                                        Descending
+                                    ),
+                                    IsBlank(ComboBox1_5.Selected.Result) || DepartMentName in ComboBox1_5.SelectedItems,
+                                    IsBlank(ComboBox1_6.Selected.Result) || FormType in ComboBox1_6.SelectedItems,
+                                    (DateValue(Text(FlowCreateDate)) >= DateValue(Text(TemplateStartDate_2.SelectedDate)) && DateValue(Text(FlowCreateDate)) <= DateValue(Text(TemplateEndDate_2.SelectedDate)))
+                                ),
+                                TextInput2_13.Text,
+                                "FlowOrder",
+                                "FlowTaskName",
+                                "CustomerSearch"
+                            )
+                        )
+                    )
+                PaddingBottom: =8
+                PaddingTop: =8
+                PressedColor: =White
+                PressedFill: =ColorFade(Self.Fill, -25%)
+                Width: =32
+                X: =947
+                Y: =80
+                ZIndex: =5
+
+            BtnSecondIconOnly_4 As icon.Add:
+                BorderColor: =glbNeutralQuaternaryColor
+                BorderThickness: =1
+                Color: =glbNeutralPrimaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                DisabledColor: =RGBA(149, 149, 149, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                Height: =32
+                HoverBorderColor: =glbThemePrimaryColor
+                HoverColor: =glbThemePrimaryColor
+                HoverFill: =White
+                Icon: =Icon.Erase
+                OnSelect: |-
+                    =Reset(TextInput2_13);
+                    Reset(ComboBox1_5);
+                    Reset(ComboBox1_6);
+                    Reset(TemplateStartDate_2);
+                    Reset(TemplateEndDate_2);
+                    Select(BtnLgIconOnly_4);
+                PaddingBottom: =8
+                PaddingTop: =8
+                PressedBorderColor: =ColorFade(glbThemePrimaryColor, -15%)
+                PressedColor: =ColorFade(glbThemePrimaryColor, -15%)
+                PressedFill: =ColorFade(glbThemePrimaryColor, 95%)
+                Width: =32
+                X: =989
+                Y: =80
+                ZIndex: =6
+
+            LineRectangle_1 As rectangle:
+                Fill: =RGBA(219, 219, 219, 1)
+                Height: =1
+                Width: =1142
+                X: =20
+                Y: =54
+                ZIndex: =7
+
+            TabGallery3_4 As gallery.galleryHorizontal:
+                Default: |-
+                    =If(ListID=2,{Value:"待處理"})
+                Height: =40
+                Items: =["全部","待處理","已處理"]
+                OnSelect: |
+                    =//Select(BtnLgIconOnly_4);
+                TemplatePadding: =0
+                TemplateSize: =147
+                Width: =996
+                X: =20
+                Y: =15
+                ZIndex: =8
+
+                Label2_3 As label:
+                    Align: =Align.Center
+                    Color: |-
+                        =If(
+                            ThisItem.IsSelected,
+                            glbThemePrimaryColor,
+                            glbNeutralSecondaryColor
+                        )
+                    FontWeight: |-
+                        =If(
+                            ThisItem.IsSelected,
+                            FontWeight.Bold,
+                            FontWeight.Normal
+                        )
+                    Height: =32
+                    HoverColor: =glbThemePrimaryColor
+                    OnSelect: |-
+                        =//Select(BtnLgIconOnly_4);
+                        Select(BtnSecondIconOnly_4)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =15
+                    Text: =ThisItem.Value
+                    Width: =100
+                    X: =24
+                    ZIndex: =1
+
+                Rectangle2_3 As rectangle:
+                    Fill: =glbThemePrimaryColor
+                    Height: =3
+                    OnSelect: =Select(Parent)
+                    Visible: =If(ThisItem.IsSelected, true, false)
+                    Width: =100
+                    X: =24
+                    Y: =37
+                    ZIndex: =2
+
+            TextInput2_13 As text:
+                BorderColor: =glbNeutralTertiaryColor
+                BorderThickness: =1
+                Color: =glbNeutralPrimaryColor
+                Default: =""
+                FocusedBorderColor: =glbNeutralSecondaryColor
+                FocusedBorderThickness: =1
+                Height: =32
+                HintText: ="按表格名稱或編號搜索"
+                HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                HoverFill: =ColorFade(Self.Fill, -5%)
+                PaddingBottom: =0
+                PaddingLeft: =10
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =11
+                Width: =260
+                X: =20
+                Y: =80
+                ZIndex: =9
+
+            Group1_1 As group:
+                Height: =5
+                Width: =5
+                X: =-983
+                Y: =-190
+                ZIndex: =14
+
+                DateBackground_3 As text:
+                    BorderColor: =
+                    BorderThickness: =1
+                    Color: =
+                    Default: =""
+                    DisabledFill: =RGBA(255, 255, 255, 1)
+                    DisplayMode: =DisplayMode.Disabled
+                    FocusedBorderColor: =
+                    FocusedBorderThickness: =1
+                    Font: =Font.Arial
+                    Height: =32
+                    HintText: =""
+                    HoverBorderColor: =
+                    HoverFill: =
+                    PaddingBottom: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =11
+                    Width: =263
+                    X: =670
+                    Y: =80
+                    ZIndex: =10
+
+                TemplateEndDate_2 As datepicker:
+                    BorderColor: =
+                    BorderStyle: =BorderStyle.None
+                    BorderThickness: =0
+                    Color: =RGBA(96, 94, 92, 1)
+                    Fill: =RGBA(0, 0, 0, 0)
+                    FocusedBorderThickness: =1
+                    Font: =Font.Arial
+                    Format: ="dd/mm/yyyy"
+                    Height: =30
+                    IconBackground: =RGBA(0, 0, 0, 0)
+                    IconFill: =glbNeutralSecondaryColor
+                    InputTextPlaceholder: =//If(IsBlank(Self.SelectedDate), Text(Date(2001,12,31), Self.Format, Self.Language))
+                    OnChange: |-
+                        =/*If(
+                            IsBlank(StartDate.SelectedDate) || IsBlank(EndDate.SelectedDate),
+                            UpdateContext({DateErrorMessage: false}),
+                            If(
+                            EndDate.SelectedDate < StartDate.SelectedDate,
+                            UpdateContext({DateErrorMessage: true})
+                        ));*/
+                        If(TemplateEndDate_2.SelectedDate < TemplateStartDate_2.SelectedDate,Notify("The end time must be greater than the start time");Reset(TemplateEndDate_2))
+                    OnSelect: =
+                    PaddingBottom: =0
+                    PaddingRight: =0
+                    Size: =11
+                    Width: =120
+                    X: =813
+                    Y: =80
+                    ZIndex: =11
+
+                TemplateStartDate_2 As datepicker:
+                    BorderColor: =
+                    BorderStyle: =BorderStyle.None
+                    BorderThickness: =0
+                    Color: =RGBA(96, 94, 92, 1)
+                    DefaultDate: =Today()-30
+                    Fill: =RGBA(0, 0, 0, 0)
+                    FocusedBorderColor: =White
+                    FocusedBorderThickness: =0
+                    Font: =Font.Arial
+                    Format: ="dd/mm/yyyy"
+                    Height: =30
+                    IconBackground: =RGBA(0, 0, 0, 0)
+                    IconFill: =glbNeutralSecondaryColor
+                    InputTextPlaceholder: =
+                    PaddingBottom: =0
+                    PaddingRight: =0
+                    Size: =11
+                    Width: =120
+                    X: =671
+                    Y: =80
+                    ZIndex: =12
+
+                DateLineLabel1_40 As label:
+                    Align: =Align.Center
+                    Color: =RGBA(149, 149, 149, 1)
+                    Font: =Font.Arial
+                    Height: =20
+                    PaddingLeft: =0
+                    Size: =10
+                    Text: ="—"
+                    Width: =16
+                    X: =794
+                    Y: =84
+                    ZIndex: =13
+
+        Container5_3 As groupContainer.manualLayoutContainer:
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =559
+            Width: =1182
+            X: =12
+            Y: =146
+            ZIndex: =5
+
+            Container2_2 As groupContainer.manualLayoutContainer:
+                Fill: =RGBA(247, 247, 247, 1)
+                Height: =40
+                Width: =1142
+                X: =20
+                ZIndex: =1
+
+                Label4_6 As label:
+                    Align: =Center
+                    Color: =glbNeutralPrimaryColor
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="申請編號"
+                    Width: =165
+                    ZIndex: =1
+
+                Label4_7 As label:
+                    Align: =Center
+                    Color: =glbNeutralPrimaryColor
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="表格名稱"
+                    Width: =200
+                    X: =165
+                    ZIndex: =2
+
+                Label4_8 As label:
+                    Align: =Align.Center
+                    Color: =glbNeutralPrimaryColor
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="表格類型/"&Char(13)&"單位"
+                    Width: =98
+                    X: =470
+                    ZIndex: =3
+
+                Label4_9 As label:
+                    Align: =Center
+                    Color: =glbNeutralPrimaryColor
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="表格部門/"&Char(13)&"服務"
+                    Width: =100
+                    X: =370
+                    ZIndex: =4
+
+                Label4_10 As label:
+                    Align: =Center
+                    Color: =glbNeutralPrimaryColor
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="申請人"
+                    Width: =94
+                    X: =580
+                    ZIndex: =5
+
+                Label4_11 As label:
+                    Align: =Center
+                    Color: =glbNeutralPrimaryColor
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="申請日期"
+                    Width: =141
+                    X: =674
+                    ZIndex: =6
+
+                Label4_12 As label:
+                    Align: =Align.Center
+                    Color: =glbNeutralPrimaryColor
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="狀態"
+                    Width: =74
+                    X: =938
+                    ZIndex: =7
+
+                Label4_13 As label:
+                    Align: =Align.Center
+                    Color: =glbNeutralPrimaryColor
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="標籤"
+                    Width: =111
+                    X: =815
+                    ZIndex: =8
+
+            TaskListGallery As gallery.galleryVertical:
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =504
+                Items: |-
+                    =If(
+                        TabGallery3_4.Selected.Value = "全部",
+                        //Distinct(AllApprovalData,FlowOrder),
+                        AllApprovalData,
+                        //SortByColumns(AllApprovalListDataCol,"FlowCreateDate",Descending),
+                        TabGallery3_4.Selected.Value = "待處理",
+                        AllPendingApprovalData,
+                        //SortByColumns(FilterPendingDataCol,"FlowCreateDate",Descending),
+                        TabGallery3_4.Selected.Value = "已處理",
+                        AllinprogressApprovalData
+                        //SortByColumns(inprogressData,"FlowCreateDate",Descending)
+                    )
+                Layout: =Layout.Vertical
+                OnSelect: |-
+                    =If(
+                        ThisItem.FlowTaskName = "招聘職位申請表",
+                        If(
+                            ThisItem.TaskStatus = "001",
+                            Launch(
+                                JumpUrl&"&Screen=JobTitleFormScreen&AppIds=" & LookUp(
+                                    ApplitionJobPosition,
+                                    ApprovalId = TaskListGallery.Selected.标题
+                                ).标题 & "&MasterflowId=" & TaskListGallery.Selected.标题 & "&resubmit=true"
+                            ),
+                            Launch(
+                                JumpUrl&"&Screen=JobTitleFormDetailScreen&AppIds=" & LookUp(
+                                    ApplitionJobPosition,
+                                    ApprovalId = TaskListGallery.Selected.标题
+                                ).标题 & "&MasterflowId=" & TaskListGallery.Selected.标题 & "&resubmit=false"
+                            )
+                        ),
+                        ThisItem.FlowTaskName = "假期批核人資料表",
+                        If(
+                            ThisItem.TaskStatus = "001",
+                            Launch(
+                                JumpUrlA306A111&"&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
+                                    VacationApprovalForm,
+                                    Applicant_No = TaskListGallery.Selected.标题
+                                ).标题 & "&approvalNum=" & TaskListGallery.Selected.标题 & "&resubmit=true"
+                            ),
+                            Launch(
+                                JumpUrlA306A111&"&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
+                                    VacationApprovalForm,
+                                    Applicant_No = TaskListGallery.Selected.标题
+                                ).标题 & "&approvalNum=" & TaskListGallery.Selected.标题 & "&resubmit=false"
+                            )
+                        ),
+                        ThisItem.FlowTaskName = "預備合約通知書(新入職)",
+                        If(
+                            ThisItem.TaskStatus = "001",
+                            Launch(
+                                JumpUrl&"&Screen=ContractNoticeForm&taskNum=" & LookUp(
+                                    ContractNotice,
+                                    ApprovalId = TaskListGallery.Selected.标题
+                                ).标题 & "&approvalNum=" & TaskListGallery.Selected.标题 & "&resubmit=true"
+                            ),
+                            Launch(
+                                JumpUrl&"&Screen=ContractNoticeFormDetail&taskNum=" & LookUp(
+                                    ContractNotice,
+                                    ApprovalId = TaskListGallery.Selected.标题
+                                ).标题 & "&approvalNum=" & TaskListGallery.Selected.标题 & "&resubmit=false"
+                            )
+                        ),
+                        ThisItem.FlowTaskName = "任職資源申請",
+                        Launch(
+                            JumpUrlA306A111&"&Screen=EmploymentFormDetail&taskNum=" & LookUp(
+                                EmploymentResource,
+                                ApprovalId = TaskListGallery.Selected.标题
+                            ).标题 & "&approvalNum=" & TaskListGallery.Selected.标题 & "&resubmit=false"
+                        ),
+                        With(
+                            {
+                                FormId: LookUp(
+                                    GenericFormList,
+                                    ApprovalId = ThisItem.Approval_No
+                                ).标题
+                            },
+                            Launch(JumpUrlMobileApp&"&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & TaskListGallery.Selected.Approval_No
+                            ,{},LaunchTarget.Replace)
+                        )
+                    )
+                TemplatePadding: =0
+                TemplateSize: =48
+                Width: =1142
+                X: =20
+                Y: =40
+                ZIndex: =2
+
+                Label3_6 As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =48
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: =ThisItem.FlowOrder
+                    Width: =155
+                    X: =10
+                    ZIndex: =1
+
+                Rectangle3_3 As rectangle:
+                    Fill: =glbNeutralLightColor
+                    Height: =1
+                    OnSelect: =Select(Parent)
+                    Width: =Parent.TemplateWidth
+                    Y: =47
+                    ZIndex: =2
+
+                Label3_7 As label:
+                    Align: =Center
+                    Color: =glbNeutralSecondaryColor
+                    Height: =48
+                    HoverColor: =glbThemePrimaryColor
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: =ThisItem.FlowTaskName
+                    Width: =200
+                    X: =170
+                    ZIndex: =9
+
+                lblTag_7 As label:
+                    Align: =Align.Center
+                    BorderColor: =RGBA(255, 255, 255, 1)
+                    BorderStyle: =BorderStyle.None
+                    BorderThickness: =1
+                    Color: |-
+                        =If(
+                            lblTag_7.Text = "處理完成",
+                            glbSuccessColor,
+                            lblTag_7.Text = "準備中",//"Success",
+                            glbThemeSecondaryColor,
+                            lblTag_7.Text = "處理中",//"Processing",
+                            glbLinkColor,
+                            lblTag_7.Text = "審核中",
+                            glbWarningColor,
+                            lblTag_7.Text = "已拒絕",
+                            glbErrorColor
+                        )
+                    Fill: =ColorFade(Self.Color, 90%)
+                    FocusedBorderThickness: =2
+                    Height: =28
+                    OnSelect: =
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =11.5
+                    Text: |-
+                        =//ThisItem.Application_Status
+                        
+                        If(
+                            !("提交" in Filter(ComplatelDetailCol,
+                            Approval_No = ThisItem.Approval_No).ActionNode)&&!("006" in Filter(ComplatelDetailCol,
+                            Approval_No = ThisItem.Approval_No).TaskStatus),"準備中",
+                            First(
+                                SortByColumns(
+                                    Filter(
+                                        ComplatelDetailCol,
+                                        Approval_No = ThisItem.Approval_No
+                                    ),
+                                    "Priortty",
+                                    Descending
+                                )
+                            ).ActionNode = "跟進" || Index(
+                                SortByColumns(
+                                    Filter(
+                                        ComplatelDetailCol,
+                                        Approval_No = ThisItem.Approval_No
+                                    ),
+                                    "Priortty",
+                                    Descending
+                                ),2).TaskStatus = "005","處理中",
+                                First(
+                                SortByColumns(
+                                    Filter(
+                                        ComplatelDetailCol,
+                                        Approval_No = ThisItem.Approval_No
+                                    ),
+                                    "Priortty",
+                                    Descending
+                                )
+                            ).TaskStatus = "000" ||  First(
+                                SortByColumns(
+                                    Filter(
+                                        ComplatelDetailCol,
+                                        Approval_No = ThisItem.Approval_No
+                                    ),
+                                    "Priortty",
+                                    Descending
+                                )
+                            ).TaskStatus = "006","處理完成",
+                            "審核中"
+                        )
+                            
+                          
+                    Width: =72
+                    X: =938
+                    Y: =10
+                    ZIndex: =10
+
+                BtnDefaultIconOnly_5 As icon.Add:
+                    BorderColor: =Self.Color
+                    BorderStyle: =BorderStyle.None
+                    BorderThickness: =1
+                    Color: =glbThemePrimaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    Fill: =White
+                    FocusedBorderThickness: =1
+                    Height: =24
+                    HoverBorderColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverColor: =ColorFade(Self.BorderColor, -25%)
+                    Icon: =Icon.Copy
+                    OnSelect: |-
+                        =If(
+                            ThisItem.FlowTaskName = "招聘職位申請表",
+                            Launch(
+                                JumpUrl & "&Screen=JobTitleCopyFormScreen&AppIds=" & LookUp(
+                                    ApplitionJobPosition,
+                                    ApprovalId = TaskListGallery.Selected.Approval_No
+                                ).标题 & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmits=true&newApplicationGuid=" & GUID() & "&flowguid=" & GUID()&"&bustype=Edit",{},LaunchTarget.Replace
+                            ),
+                            ThisItem.FlowTaskName = "假期批核人資料表",
+                            Launch(
+                                JumpUrl & "&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
+                                    VacationApprovalForm,
+                                    Applicant_No = TaskListGallery.Selected.Approval_No
+                                ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&isCopy=true",{},LaunchTarget.Replace
+                            ),
+                            ThisItem.FlowTaskName = "預備合約通知書(新入職)",
+                            Launch(
+                                JumpUrl & "&Screen=ContractNoticeCopyForm&taskNum=" & LookUp(
+                                    ContractNotice,
+                                    ApprovalId = TaskListGallery.Selected.Approval_No
+                                ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmits=true&newApplicationGuid=" & GUID() & "&flowguid=" & GUID()&"&bustype=Edit",{},LaunchTarget.Replace
+                            )
+                        )
+                    PaddingBottom: =4
+                    PaddingTop: =4
+                    PressedBorderColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedFill: =ColorFade(Self.Color, 95%)
+                    Visible: =If(ThisItem.FlowTaskName="任職資源申請",false,true)
+                    Width: =24
+                    X: =1067
+                    Y: =12
+                    ZIndex: =11
+
+                BtnDefaultIconOnly_6 As icon.Add:
+                    BorderColor: =Self.Color
+                    BorderStyle: =BorderStyle.None
+                    BorderThickness: =1
+                    Color: =glbErrorColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    Fill: =White
+                    FocusedBorderThickness: =1
+                    Height: =24
+                    HoverBorderColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverColor: =ColorFade(Self.BorderColor, -25%)
+                    Icon: =Icon.Trash
+                    OnSelect: =
+                    PaddingBottom: =4
+                    PaddingTop: =4
+                    PressedBorderColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedFill: =ColorFade(Self.Color, 95%)
+                    Visible: =If(ThisItem.TaskStatus="001",true,false)
+                    Width: =24
+                    X: =1103
+                    Y: =12
+                    ZIndex: =12
+
+                Label3_8 As label:
+                    Align: =Center
+                    Color: =glbNeutralSecondaryColor
+                    Height: =48
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: =ThisItem.DepartMentName
+                    Width: =100
+                    X: =370
+                    ZIndex: =13
+
+                Label3_9 As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =48
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: =ThisItem.FormType
+                    Width: =100
+                    X: =482
+                    ZIndex: =14
+
+                Label3_10 As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =48
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: =ThisItem.Approver
+                    Width: =80
+                    X: =590
+                    ZIndex: =15
+
+                Label3_11 As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =48
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =11
+                    Text: |-
+                        =Text(ThisItem.FlowCreateDate,"dd/mm/yyyy HH:mm")
+                    Width: =129
+                    X: =690
+                    ZIndex: =16
+
+                Label3_12 As label:
+                    Align: =Align.Center
+                    Color: =glbNeutralSecondaryColor
+                    Height: =48
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: |-
+                        =ThisItem.CustomerSearch
+                        
+                        /*
+                        Switch(
+                                ThisItem.TaskStatus,
+                                "001",
+                                "準備中",
+                                "002",
+                                "待批准",
+                                "003",
+                                "待執行",
+                                "004",
+                                "進行中",
+                                "006",
+                                "任務完成",
+                                "000",
+                                "已拒絕",
+                                "進行中"
+                            )
+                        */
+                    Tooltip: =ThisItem.CustomerSearch
+                    Width: =74
+                    Wrap: =false
+                    X: =840
+                    ZIndex: =17
+
+    ContainerMenu As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =718
+        Width: =160
+        Y: =50
+        ZIndex: =4
+
+        GalleryNav_6 As gallery.galleryVertical:
+            Height: =237
+            Items: |
+                =Filter(If(
+                    CurrentRoleFormModelPermssion = "None"
+                    ,
+                    [
+                        "首頁",
+                        "申請列表",
+                        If(CurrentRole,"統計",HRAO || SuperUser,"系統設定"),
+                        If(If(CurrentRole,"統計",HRAO || SuperUser,"系統設定")="系統設定",Blank(),HRAO || SuperUser,"系統設定")
+                        
+                    ],
+                    [
+                        "首頁",
+                        "表格列表",
+                        "申請列表",
+                        If(CurrentRole,"統計",HRAO || SuperUser,"系統設定"),
+                        If(If(CurrentRole,"統計",HRAO || SuperUser,"系統設定")="系統設定",Blank(),HRAO || SuperUser,"系統設定")
+                    ]
+                ),ThisRecord.Value <> Blank())
+            Layout: =Layout.Vertical
+            TemplatePadding: =0
+            TemplateSize: =40
+            Width: =160
+            ZIndex: =1
+
+            BtnDefault_12 As button:
+                Align: =Align.Left
+                BorderColor: =Self.Color
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                Color: =If(ThisItem.Value="申請列表", glbThemePrimaryColor,glbNeutralSecondaryColor)
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =If(ThisItem.Value="申請列表", ColorFade(Self.Color, 90%),White)
+                FocusedBorderThickness: =1
+                FontWeight: =If(ThisItem.Value="申請列表", FontWeight.Semibold,Normal)
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =If(ThisItem.Value<>Blank(),ColorFade(glbThemePrimaryColor, 90%))
+                OnSelect: |-
+                    =If(
+                        ThisItem.Value = "首頁",
+                        Navigate(
+                            HomepageScreen,
+                            ScreenTransition.None
+                        ),
+                        ThisItem.Value = "表格列表",
+                        Navigate(AdminFormListScreen,
+                            ScreenTransition.None
+                        ),
+                        ThisItem.Value = "統計",
+                        Navigate(StatisticsScreen,
+                            ScreenTransition.None
+                        //Launch("https://apps.powerapps.com/play/c030168f-5133-4c9d-8e17-3c870ba99ab4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=StatisticsScreen"
+                        ),
+                    
+                        ThisItem.Value = "系統設定",
+                        Navigate(SystemsScreen,None,{ToUserInfoManager:"用戶管理"}),
+                        //Launch("https://apps.powerapps.com/play/c030168f-5133-4c9d-8e17-3c870ba99ab4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=UserScreen"),
+                    
+                        ThisItem.Value = "申請列表",
+                        Navigate(
+                            GeneralFormListScreen,
+                            ScreenTransition.None,{ListID:1}
+                        )
+                    )
+                PaddingBottom: =0
+                PaddingLeft: =36
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =12
+                Text: =ThisItem.Value
+                Width: =140
+                X: =10
+                ZIndex: =3
+
+            Icon1_6 As icon.ListScrollWatchlist:
+                Color: =If(ThisItem.Value="任務管理", glbThemePrimaryColor,glbNeutralSecondaryColor)
+                Height: =20
+                Icon: |
+                    =If(
+                        ThisItem.Value = "首頁",
+                        Icon.Home,
+                        ThisItem.Value = "表格列表",
+                        Icon.ListScrollWatchlist,
+                        ThisItem.Value = "統計",
+                        Icon.LogJournal,
+                        ThisItem.Value = "系統設定",
+                        Icon.People,
+                        ThisItem.Value = "申請列表",
+                        Icon.Lock
+                    )
+                OnSelect: =Select(Parent)
+                Width: =20
+                X: =20
+                Y: =6
+                ZIndex: =5
+
+        GalleryNav_7 As gallery.galleryVertical:
+            Height: =120
+            Items: =["IT服務台","用戶手冊","意見箱"]
+            Layout: =Layout.Vertical
+            TemplatePadding: =0
+            TemplateSize: =40
+            Width: =160
+            Y: =558
+            ZIndex: =5
+
+            BtnDefault_14 As button:
+                Align: =Align.Left
+                BorderColor: =Self.Color
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                Color: =glbNeutralSecondaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                FontWeight: =Normal
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =ColorFade(glbThemePrimaryColor, 90%)
+                OnSelect: |-
+                    =If(
+                        ThisItem.Value = "意見箱",
+                        Launch("https://forms.office.com/Pages/ResponsePage.aspx?id=3bukt5xuKUm1pGVQ_urXfI59VMuh5BdPgBsZQOZA1aFUNVFDTEVCTkU1OTZEWE1HUUExTkNEVlJBNSQlQCN0PWcu"),
+                        ThisItem.Value = "IT服務台",
+                        Launch("https://elcss-14cebfd770be55.sharepoint.com/sites/elcssbriefcase/HelpDeskPlus/Pages/Default.aspx?SPHostUrl=https%3A%2F%2Felcss%2Esharepoint%2Ecom%2Fsites%2Felcssbriefcase&SPLanguage=en%2DUS&SPClientTag=1&SPProductNumber=16%2E0%2E22112%2E12002&SPAppWebUrl=https%3A%2F%2Felcss%2D14cebfd770be55%2Esharepoint%2Ecom%2Fsites%2Felcssbriefcase%2FHelpDeskPlus"),
+                        ThisItem.Value = "用戶手冊",
+                        Download("https://elcss.sharepoint.com/:w:/r/sites/eps-prd/_layouts/15/download.aspx?SourceUrl=/sites/eps-prd/TempExcel/ePS%E7%B3%BB%E7%B5%B1-%E7%94%A8%E6%88%B6%E6%89%8B%E5%86%8A%20V1.3.4.pdf")
+                    )
+                PaddingBottom: =0
+                PaddingLeft: =36
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =12
+                Text: =ThisItem.Value
+                Width: =140
+                X: =10
+                ZIndex: =3
+
+            Icon1_7 As icon.ListScrollWatchlist:
+                Color: =glbNeutralSecondaryColor
+                Height: =20
+                Icon: |
+                    =If(
+                        ThisItem.Value = "IT服務台",
+                        Icon.ComputerDesktop,
+                        ThisItem.Value = "用戶手冊",
+                        Icon.Notebook,
+                        ThisItem.Value = "組織機構",
+                        Icon.LogJournal,
+                        ThisItem.Value = "意見箱",
+                        Icon.Mail
+                    )
+                    //["IT服務台","操作手冊","用戶反饋"]
+                OnSelect: =Select(Parent)
+                Width: =20
+                X: =20
+                Y: =6
+                ZIndex: =5
+
+        Label8_1 As label:
+            Align: =Align.Center
+            Color: =RGBA(149, 149, 149, 1)
+            Size: =11
+            Text: ="Version 1.0.0"
+            Width: =160
+            Y: =678
+            ZIndex: =6
+

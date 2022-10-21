@@ -1,0 +1,2051 @@
+AdminFormDetailScreen As screen:
+    OnVisible: |-
+        =UpdateContext({attachmentchange1:false});
+        UpdateContext({attachmentchange2:false});
+        UpdateContext({attachmentchange3:false});
+
+    Container_title As groupContainer.manualLayoutContainer:
+        Fill: =glbThemePrimaryColor
+        Height: =50
+        Width: =1366
+        ZIndex: =1
+
+        Image1 As image:
+            Height: =38
+            Image: =logo
+            Width: =203
+            X: =15
+            Y: =5
+            ZIndex: =1
+
+        Label1 As label:
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =glbThemePrimaryColor
+            Height: =18
+            Size: =9
+            Text: ="基督教香港信義會社會服務部"
+            Width: =186
+            X: =63
+            Y: =5
+            ZIndex: =3
+
+        Label1_58 As label:
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =glbThemePrimaryColor
+            FontWeight: =FontWeight.Bold
+            Height: =21
+            Size: =12
+            Text: ="eProcessing System 2.0"
+            Width: =199
+            X: =63
+            Y: =22
+            ZIndex: =5
+
+        Image7_3 As image:
+            Height: =40
+            Image: =User().Image
+            RadiusBottomLeft: =10
+            RadiusBottomRight: =10
+            RadiusTopLeft: =10
+            RadiusTopRight: =10
+            Width: =40
+            X: =1310
+            Y: =5
+            ZIndex: =8
+
+    Container_Form As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(247, 247, 247, 1)
+        Height: =718
+        Width: =1206
+        X: =160
+        Y: =50
+        ZIndex: =2
+
+        Container_formdetail As groupContainer.manualLayoutContainer:
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =658
+            Width: =1182
+            X: =12
+            Y: =50
+            ZIndex: =1
+
+            Label1_83 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =28
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =12
+                Text: ="表格名稱"
+                Width: =120
+                X: =22
+                Y: =95
+                ZIndex: =4
+
+            Label1_84 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =28
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =12
+                Text: ="表格編號"
+                Width: =120
+                X: =602
+                Y: =20
+                ZIndex: =5
+
+            Label1_85 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =28
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =12
+                Text: ="表格版本"
+                Width: =120
+                X: =892
+                Y: =20
+                ZIndex: =6
+
+            Label1_86 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =28
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =12
+                Text: ="表格簡述"
+                Width: =120
+                X: =22
+                Y: =171
+                ZIndex: =7
+
+            Save_button As button:
+                BorderColor: =Self.Fill
+                BorderThickness: =1
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =glbThemePrimaryColor
+                FocusedBorderThickness: =1
+                FontWeight: =FontWeight.Bold
+                Height: =36
+                HoverFill: =ColorFade(Self.Fill, -15%)
+                OnSelect: |-
+                    =If(
+                        IsEmpty(drpFilter_Department.SelectedItems) || IsEmpty(drpFilter_FormType.SelectedItems) || IsBlank(TextInput_FormName.Text)  || IsBlank(TextInput_FormNumber) || Last(Attachment_Form.Attachments).Name = Blank() || Radio_flowtype.SelectedText.Value = Blank() || (Radio_password.Visible = true && Radio_password.SelectedText.Value = Blank()) || (Radio_attachment.Visible = true && Radio_attachment.SelectedText.Value = Blank()),
+                        Notify(
+                            "必选项不能为空",
+                            NotificationType.Error,3000
+                        ),
+                        !IsMatch(TextInput_FormName.Text,MultipleNonSpaces),
+                        Notify(
+                            "表格名稱格式有誤，請刪除空格",
+                            NotificationType.Error,3000
+                        ),
+                        //編輯表單模板，部門，類型，表格標號為不可更改項
+                        If(
+                            TextInput_FormNumber.Text in GenericFormModel.ModelFlowNumber && Label_newform.Text <> "新增表格",
+                            //判斷版本號是否修改
+                            If(
+                                TextInput_FormVersion.Text = First(EditForm).ModelVersion,
+                                Notify(
+                                    "與歷史版本相同，請修改版本號",
+                                    NotificationType.Error,3000
+                                ),
+                                UpdateIf(
+                                    GenericFormModel,
+                                    ModelFlowNumber = TextInput_FormNumber.Text,
+                                    {
+                                        //ModelDepartment: drpFilter_Department.Selected.Result,
+                                    //ModelType: drpFilter_FormType.Selected.Result,
+                    ModelName: TextInput_FormName.Text,
+                                        ModelVersion: TextInput_FormVersion.Text,
+                                        ModelDescription: [@TextInput_FormDescription].Text,
+                                        ModelFlowUser: User().Email,
+                                        CustomFilter: TextInput_CustomFilter.Text,
+                                        ModelAttachMent: Radio_attachment.SelectedText.Value,
+                                        FlowType: Radio_flowtype.SelectedText.Value,
+                                        SelectedActions: If(
+                                            Radio_flowtype.SelectedText.Value = "通用流程",
+                                            "補充資料;提交;檢查;簽批;助理總幹事審批;總幹事審批;跟進",
+                                            If(
+                                                Radio_flowtype.SelectedText.Value = "預設流程",
+                                                "提交;" & If(
+                                                    Checkbox1_3.Value = true,
+                                                    Checkbox1_3.Text & ";",
+                                                    ""
+                                                ) & If(
+                                                    Checkbox1_4.Value = true,
+                                                    Checkbox1_4.Text & ";",
+                                                    ""
+                                                ) & If(
+                                                    Checkbox1_5.Value = true,
+                                                    Checkbox1_5.Text & ";",
+                                                    ""
+                                                ) & If(
+                                                    Checkbox1_6.Value = true,
+                                                    Checkbox1_6.Text & ";",
+                                                    ""
+                                                ) & "跟進",
+                                                Radio_flowtype.SelectedText.Value = "部門簡單流程",
+                                                "跟進",
+                                                ""
+                                            )
+                                        ),
+                                        IsPassWord: If(
+                                            Radio_password.SelectedText.Value = "有",
+                                            1,
+                                            If(
+                                                Radio_password.SelectedText.Value = "無",
+                                                2,
+                                                0
+                                            )
+                                        ),
+                                        IsAttachmentPassWord: If(
+                                            Radio_password_1.SelectedText.Value = "有",
+                                            1,
+                                            If(
+                                                Radio_password_1.SelectedText.Value = "無" || Radio_attachment.SelectedText.Value = "無",
+                                                2,
+                                                0
+                                            )
+                                        )//默认为0，即可有可无
+                                    }
+                                );
+                            //如果表格名稱修改，同步附件的TempFileName
+                    UpdateIf(
+                                    TemplateFileList,
+                                    GenericFormId = First(EditForm).标题,
+                                    {TempFileName: TextInput_FormName.Text}
+                                );
+                            //如果附件修改，上傳新的申請表格
+                    If(
+                                    Last(Attachment_Form.Attachments).Name <> Blank() && attachmentchange1,
+                                    Set(
+                                        varAttachmentControl,
+                                        JSON(
+                                            Image4.Image,
+                                            IncludeBinaryData
+                                        )
+                                    );
+                                    Set(
+                                        varBase64Only,
+                                        Mid(
+                                            varAttachmentControl,
+                                            Find(
+                                                ",",
+                                                varAttachmentControl
+                                            ) + 1,
+                                            Len(varAttachmentControl) - Find (
+                                                ",",
+                                                varAttachmentControl
+                                            ) - 1
+                                        )
+                                    );
+                                    //设置全局变量保存附件的base64值
+                    UploadFiletoSharepoint.Run(
+                                        "TemplateFileList",
+                                        GUID(),
+                                        drpFilter_FormType.Selected.Result,
+                                        [@TextInput_FormName].Text,
+                                        Last(Attachment_Form.Attachments).Name,
+                                        Last(Attachment_Form.Attachments).Name,
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        varBase64Only,
+                                        "",
+                                        "",
+                                        First(EditForm).标题
+                                    )
+                                );
+                        //如果附件修改，上傳示範表格
+                    If(
+                                    Last(Attachment_Demonstrationform.Attachments).Name <> Blank() && attachmentchange2,
+                                    Set(
+                                        varAttachmentControl3,
+                                        JSON(
+                                            Image2_1.Image,
+                                            IncludeBinaryData
+                                        )
+                                    );
+                                    Set(
+                                        varBase64Only3,
+                                        Mid(
+                                            varAttachmentControl3,
+                                            Find(
+                                                ",",
+                                                varAttachmentControl3
+                                            ) + 1,
+                                            Len(varAttachmentControl3) - Find (
+                                                ",",
+                                                varAttachmentControl3
+                                            ) - 1
+                                        )
+                                    );
+                                    //设置全局变量保存附件的base64值
+                    UploadFiletoSharepoint.Run(
+                                        "TemplateFileList",
+                                        GUID(),
+                                        "示範表格",
+                                        [@TextInput_FormName].Text,
+                                        Last(Attachment_Demonstrationform.Attachments).Name,
+                                        Last(Attachment_Demonstrationform.Attachments).Name,
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        varBase64Only3,
+                                        "",
+                                        "",
+                                        First(EditForm).标题
+                                    )
+                                );
+                        //如果附件修改，上傳填寫指引
+                    If(
+                                    Last(Attachment_FillGuide.Attachments).Name <> Blank() && attachmentchange3,
+                                    Set(
+                                        varAttachmentControl4,
+                                        JSON(
+                                            Image3.Image,
+                                            IncludeBinaryData
+                                        )
+                                    );
+                                    Set(
+                                        varBase64Only4,
+                                        Mid(
+                                            varAttachmentControl4,
+                                            Find(
+                                                ",",
+                                                varAttachmentControl4
+                                            ) + 1,
+                                            Len(varAttachmentControl4) - Find (
+                                                ",",
+                                                varAttachmentControl4
+                                            ) - 1
+                                        )
+                                    );
+                                    //设置全局变量保存附件的base64值
+                    UploadFiletoSharepoint.Run(
+                                        "TemplateFileList",
+                                        GUID(),
+                                        "填寫指引",
+                                        [@TextInput_FormName].Text,
+                                        Last(Attachment_FillGuide.Attachments).Name,
+                                        Last(Attachment_FillGuide.Attachments).Name,
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        varBase64Only4,
+                                        "",
+                                        "",
+                                        First(EditForm).标题
+                                    )
+                                );
+                        //更新MyContacts的TaskFormName
+                    UpdateIf(
+                                    MyContacts,
+                                    UserEmail = User().Email && TaskFormName = First(EditForm).ModelName,
+                                    {TaskFormName: TextInput_FormName.Text}
+                                );
+                                Notify(
+                                    "編輯成功！",
+                                    NotificationType.Success,
+                                    3000
+                                );
+                                Clear(EditForm);
+                                Clear(EditAttachment);
+                                Clear(EditAttachment2);
+                                Clear(EditAttachment3);
+                                Reset(Attachment_Form);
+                                Reset(drpFilter_Department);
+                                Reset(drpFilter_FormType);
+                                Reset(TextInput_FormVersion);
+                                Reset(TextInput_FormName);
+                                Reset(TextInput_FormDescription);
+                                Reset(TextInput_FormNumber);
+                                Reset(TextInput_CustomFilter);
+                                Reset(Attachment_Demonstrationform);
+                                Reset(Attachment_FillGuide);
+                                Reset(Radio_attachment);
+                                Reset(Radio_password);
+                                Reset(Radio_password_1);
+                                Reset(Radio_flowtype);
+                                Reset(Checkbox1_3);
+                                Reset(Checkbox1_4);
+                                Reset(Checkbox1_5);
+                                Reset(Checkbox1_6);
+                                Navigate(
+                                    AdminFormListScreen,
+                                    ScreenTransition.Fade
+                                )
+                            ),
+                            //新建表單模板
+                            If(
+                                TextInput_FormNumber in GenericFormModel.ModelFlowNumber || TextInput_FormNumber.Text = "A103" || TextInput_FormNumber.Text = "A104" || TextInput_FormNumber.Text = "A111" || TextInput_FormNumber.Text = "A306",
+                                Notify(
+                                    "該表格編號已經存在，請更換！",
+                                    Warning,3000
+                                ),
+                                If(IsMatch(TextInput_FormNumber.Text,Letter&Digit&Digit&Digit),
+                                Set(
+                                    GenericFormModeGuid,
+                                    GUID()
+                                );
+                                ClearCollect(
+                                    NewForm,
+                                    Patch(
+                                        GenericFormModel,
+                                        Defaults(GenericFormModel),
+                                        {
+                                            标题: GenericFormModeGuid,
+                                            ModelDepartment: drpFilter_Department.Selected.Result,
+                                            ModelType: drpFilter_FormType.Selected.Result,
+                                            ModelFlowNumber: TextInput_FormNumber.Text,
+                                            ModelVersion: TextInput_FormVersion.Text,
+                                            ModelName: [@TextInput_FormName].Text,
+                                            ModelDescription: [@TextInput_FormDescription].Text,
+                                            ModelFlowUser: User().Email,
+                                            CustomFilter: TextInput_CustomFilter.Text,
+                                            IsEnable: 1,
+                                            ModelAttachMent: Radio_attachment.SelectedText.Value,
+                                            FlowType: Radio_flowtype.SelectedText.Value,
+                                            SelectedActions: If(
+                                                Radio_flowtype.SelectedText.Value = "通用流程",
+                                                "補充資料;提交;檢查;簽批;助理總幹事審批;總幹事審批;跟進",
+                                                If(
+                                                    Radio_flowtype.SelectedText.Value = "預設流程",
+                                                    "提交;" & If(
+                                                        Checkbox1_3.Value = true,
+                                                        Checkbox1_3.Text & ";",
+                                                        ""
+                                                    ) & If(
+                                                        Checkbox1_4.Value = true,
+                                                        Checkbox1_4.Text & ";",
+                                                        ""
+                                                    ) & If(
+                                                        Checkbox1_5.Value = true,
+                                                        Checkbox1_5.Text & ";",
+                                                        ""
+                                                    ) & If(
+                                                        Checkbox1_6.Value = true,
+                                                        Checkbox1_6.Text & ";",
+                                                        ""
+                                                    ) & "跟進",
+                                                    Radio_flowtype.SelectedText.Value = "部門簡單流程",
+                                                    "跟進",
+                                                    ""
+                                                )
+                                            ),
+                                            IsPassWord: If(
+                                                Radio_password.SelectedText.Value = "有",
+                                                1,
+                                                If(
+                                                    Radio_password.SelectedText.Value = "無",
+                                                    2,
+                                                    0
+                                                )
+                                            ),
+                                            IsAttachmentPassWord: If(
+                                                Radio_password_1.SelectedText.Value = "有",
+                                                1,
+                                                If(
+                                                    Radio_password_1.SelectedText.Value = "無" || Radio_attachment.SelectedText.Value = "無",
+                                                    2,
+                                                    0
+                                                )
+                                            )//默认为0，即可有可无
+                                        }
+                                    )
+                                );
+                        //上傳申請表格
+                    If(
+                                    Last(Attachment_Form.Attachments).Name <> Blank(),
+                                    Set(
+                                        varAttachmentControl,
+                                        JSON(
+                                            Image4.Image,
+                                            IncludeBinaryData
+                                        )
+                                    );
+                                    Set(
+                                        varBase64Only,
+                                        Mid(
+                                            varAttachmentControl,
+                                            Find(
+                                                ",",
+                                                varAttachmentControl
+                                            ) + 1,
+                                            Len(varAttachmentControl) - Find (
+                                                ",",
+                                                varAttachmentControl
+                                            ) - 1
+                                        )
+                                    );
+                                    //设置全局变量保存附件的base64值
+                    UploadFiletoSharepoint.Run(
+                                        "TemplateFileList",
+                                        GUID(),
+                                        drpFilter_FormType.Selected.Result,
+                                        [@TextInput_FormName].Text,
+                                        Last(Attachment_Form.Attachments).Name,
+                                        Last(Attachment_Form.Attachments).Name,
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        varBase64Only,
+                                        "",
+                                        "",
+                                        GenericFormModeGuid
+                                    )
+                                );
+                        //上傳示範表格
+                    If(
+                                    Last(Attachment_Demonstrationform.Attachments).Name <> Blank(),
+                                    Set(
+                                        varAttachmentControl3,
+                                        JSON(
+                                            Image2_1.Image,
+                                            IncludeBinaryData
+                                        )
+                                    );
+                    
+                                    //设置全局变量保存附件的base64值
+                                    Set(
+                                        varBase64Only3,
+                                        Mid(
+                                            varAttachmentControl3,
+                                            Find(
+                                                ",",
+                                                varAttachmentControl3
+                                            ) + 1,
+                                            Len(varAttachmentControl3) - Find (
+                                                ",",
+                                                varAttachmentControl3
+                                            ) - 1
+                                        )
+                                    );
+                                    
+                    UploadFiletoSharepoint.Run(
+                                        "TemplateFileList",
+                                        GUID(),
+                                        "示範表格",
+                                        [@TextInput_FormName].Text,
+                                        Last(Attachment_Demonstrationform.Attachments).Name,
+                                        Last(Attachment_Demonstrationform.Attachments).Name,
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        varBase64Only3,
+                                        "",
+                                        "",
+                                        GenericFormModeGuid
+                                    )
+                                );
+                        //上傳填寫指引
+                    If(
+                                    Last(Attachment_FillGuide.Attachments).Name <> Blank(),
+                                    //设置全局变量保存附件的base64值
+                                    Set(
+                                        varAttachmentControl4,
+                                        JSON(
+                                            Image3.Image,
+                                            IncludeBinaryData
+                                        )
+                                    );
+                                    Set(
+                                        varBase64Only4,
+                                        Mid(
+                                            varAttachmentControl4,
+                                            Find(
+                                                ",",
+                                                varAttachmentControl4
+                                            ) + 1,
+                                            Len(varAttachmentControl4) - Find (
+                                                ",",
+                                                varAttachmentControl4
+                                            ) - 1
+                                        )
+                                    );
+                                    
+                    UploadFiletoSharepoint.Run(
+                                        "TemplateFileList",
+                                        GUID(),
+                                        "填寫指引",
+                                        [@TextInput_FormName].Text,
+                                        Last(Attachment_FillGuide.Attachments).Name,
+                                        Last(Attachment_FillGuide.Attachments).Name,
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        varBase64Only4,
+                                        "",
+                                        "",
+                                        GenericFormModeGuid
+                                    )
+                                );
+                        /*UpdateIf(
+                            TemplateFileList,
+                            TempFileName = TextInput_FormName.Text,
+                            {GenericFormId: First(NewForm).标题}
+                        );*/
+                    Notify(
+                                    "保存成功！",
+                                    NotificationType.Success,
+                                    3000
+                                );
+                                Clear(EditForm);
+                                Clear(EditAttachment);
+                                Clear(EditAttachment2);
+                                Clear(EditAttachment3);
+                                Reset(Attachment_Form);
+                                Reset(drpFilter_Department);
+                                Reset(drpFilter_FormType);
+                                Reset(TextInput_FormVersion);
+                                Reset(TextInput_FormName);
+                                Reset(TextInput_FormDescription);
+                                Reset(TextInput_FormNumber);
+                                Reset(TextInput_CustomFilter);
+                                Reset(Attachment_Demonstrationform);
+                                Reset(Attachment_FillGuide);
+                                Reset(Radio_attachment);
+                                Reset(Radio_password);
+                                Reset(Radio_password_1);
+                                Reset(Radio_flowtype);
+                                Reset(Checkbox1_3);
+                                Reset(Checkbox1_4);
+                                Reset(Checkbox1_5);
+                                Reset(Checkbox1_6);
+                                Navigate(
+                                    AdminFormListScreen,
+                                    ScreenTransition.Fade
+                                );
+                                ,
+                                Notify("表格編號格式錯誤，請輸入字母+3個數字",Warning,3000))
+                            )
+                        )
+                    )
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedColor: =White
+                PressedFill: =ColorFade(Self.Fill, -25%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =13
+                Text: ="保存"
+                Visible: =ShowSavebutton
+                Width: =100
+                X: =21
+                Y: =578
+                ZIndex: =11
+
+            Cancel_button As button:
+                BorderColor: =Self.Color
+                BorderThickness: =1
+                Color: =glbThemePrimaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                Height: =36
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =RGBA(255, 255, 255, 1)
+                OnSelect: |-
+                    =/*Clear(EditForm);
+                    Reset(drpFilter_Department);
+                    Reset(drpFilter_FormType);
+                    Reset(Attachment_Form);
+                    Reset(TextInput_FormVersion);
+                    Reset(TextInput_FormName);
+                    Reset(TextInput_FormNumber);
+                    Reset(TextInput_FormDescription);
+                    Reset(TextInput_CustomFilter);
+                    Reset(Attachment_Demonstrationform);
+                    Reset(Attachment_FillGuide);
+                    Reset(Radio_attachment);
+                    Reset(Radio_password);
+                    Reset(Radio_password_1);
+                    Reset(Radio_flowtype);
+                    Reset(Checkbox1_3);
+                    Reset(Checkbox1_4);
+                    Reset(Checkbox1_5);
+                    Reset(Checkbox1_6);*/
+                    Navigate(AdminFormListScreen,ScreenTransition.Fade);
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =13
+                Text: ="取消"
+                Visible: =ShowSavebutton
+                Width: =100
+                X: =155
+                Y: =578
+                ZIndex: =12
+
+            TextInput_FormDescription As text:
+                BorderColor: =glbNeutralTertiaryColor
+                BorderThickness: =1
+                Color: =glbNeutralPrimaryColor
+                Default: =First(EditForm).ModelDescription//加载编辑表格的表格描述
+                FocusedBorderColor: =glbNeutralSecondaryColor
+                FocusedBorderThickness: =1
+                Height: =64
+                HintText: ="請輸入表格描述"
+                HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                HoverFill: =ColorFade(Self.Fill, -5%)
+                MaxLength: =255
+                Mode: =TextMode.MultiLine
+                PaddingBottom: =10
+                PaddingLeft: =10
+                PaddingRight: =10
+                PaddingTop: =10
+                PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =12
+                Width: =1140
+                X: =22
+                Y: =199
+                ZIndex: =20
+
+            TextInput_FormName As text:
+                BorderColor: =glbNeutralTertiaryColor
+                BorderThickness: =1
+                Color: =glbNeutralPrimaryColor
+                Default: =First(EditForm).ModelName//加载编辑表格的表格名称
+                FocusedBorderColor: =glbNeutralSecondaryColor
+                FocusedBorderThickness: =1
+                Height: =32
+                HintText: ="請輸入表格名稱"
+                HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                HoverFill: =ColorFade(Self.Fill, -5%)
+                OnChange: =If(TextInput_FormName in GenericFormModel.ModelName,Notify("該表格名稱已經存在，繼續創建將會覆蓋原有記錄",NotificationType.Warning,3000))
+                PaddingBottom: =0
+                PaddingLeft: =10
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =12
+                Width: =1140
+                X: =22
+                Y: =123
+                ZIndex: =21
+
+            TextInput_FormVersion As text:
+                BorderColor: =glbNeutralTertiaryColor
+                BorderThickness: =1
+                Color: =glbNeutralPrimaryColor
+                Default: =First(EditForm).ModelVersion//加载编辑表格的表格版本
+                FocusedBorderColor: =glbNeutralSecondaryColor
+                FocusedBorderThickness: =1
+                Height: =32
+                HintText: ="例子：v1.0"
+                HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                HoverFill: =ColorFade(Self.Fill, -5%)
+                PaddingBottom: =0
+                PaddingLeft: =10
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =12
+                Width: =270
+                X: =892
+                Y: =48
+                ZIndex: =22
+
+            TextInput_FormNumber As text:
+                BorderColor: =glbNeutralTertiaryColor
+                BorderThickness: =1
+                Color: =glbNeutralPrimaryColor
+                Default: =First(EditForm).ModelFlowNumber//加载编辑表格的表格编号
+                DisplayMode: =NoEdit
+                FocusedBorderColor: =glbNeutralSecondaryColor
+                FocusedBorderThickness: =1
+                Height: =32
+                HintText: ="例子：A111"
+                HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                HoverFill: =ColorFade(Self.Fill, -5%)
+                OnChange: =If(IsMatch(TextInput_FormNumber.Text,Letter&Digit&Digit&Digit),If(TextInput_FormNumber in GenericFormModel.ModelFlowNumber||TextInput_FormNumber.Text="A103"||TextInput_FormNumber.Text="A104"||TextInput_FormNumber.Text="A111"||TextInput_FormNumber.Text="A306",Notify("該表格編號已經存在，保存會覆蓋原有表格",Warning,3000),Notify("格式正確",Success,3000)),Notify("格式錯誤，請輸入字母+3個數字",Warning,3000))
+                PaddingBottom: =0
+                PaddingLeft: =10
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =12
+                Width: =270
+                X: =602
+                Y: =48
+                ZIndex: =23
+
+            Group4 As group:
+                Height: =5
+                Width: =5
+                X: =60
+                Y: =60
+                ZIndex: =37
+
+                Attachment_Demonstrationform As attachments:
+                    AddAttachmentText: ="點擊或拖拽上傳附件"
+                    BorderColor: =glbLinkColor
+                    BorderStyle: =BorderStyle.Dashed
+                    BorderThickness: =1
+                    Color: =glbLinkColor
+                    DisplayMode: =attachment
+                    DropTargetBackgroundColor: =ColorFade(Self.Color, 90%)
+                    DropTargetBorderColor: =glbLinkColor
+                    DropTargetBorderStyle: =BorderStyle.Dashed
+                    DropTargetBorderThickness: =1
+                    DropTargetTextColor: =glbLinkColor
+                    Fill: =ColorFade(glbLinkColor, 95%)
+                    FocusedBorderThickness: =1
+                    Height: =80
+                    HoverColor: =ColorFade(Self.Color, -25%)
+                    HoverFill: =ColorFade(glbLinkColor, 80%)
+                    IsInDataCard: =true
+                    ItemColor: =glbLinkColor
+                    ItemFill: =ColorFade(glbLinkColor, 80%)
+                    ItemHoverColor: =ColorFade(glbLinkColor, -25%)
+                    ItemHoverFill: =ColorFade(glbLinkColor, 80%)
+                    Items: =Last(EditAttachment2.TempAttachMent)//加载编辑表格的附件信息
+                    MaxAttachments: =1
+                    MaxAttachmentsText: ="最大附件"
+                    NoAttachmentsText: ="無附件"
+                    OnAddFile: |-
+                        =/*
+                        Set(varAttachmentControl3,JSON(Image2_1.Image,IncludeBinaryData));
+                        Set(varBase64Only3,Mid(varAttachmentControl3,Find(",", varAttachmentControl3)+1,Len(varAttachmentControl3)-Find (",", varAttachmentControl3)-1));//设置全局变量保存附件的base64值
+                        UploadFiletoSharepoint.Run(
+                            "TemplateFileList",
+                            GUID(),
+                            "示範表格",
+                            [@TextInput_FormName].Text,
+                            Last(Attachment_Demonstrationform.Attachments).Name,
+                            Last(Attachment_Demonstrationform.Attachments).Name,
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            varBase64Only3,
+                            "",
+                            "",
+                            "");//上传附件到sharepoint附件list
+                        ClearCollect(AttachmentDemonstrationformName,{Name:Last(Attachment_Demonstrationform.Attachments).Name});//收集上传附件的名称
+                        */
+                        UpdateContext({attachmentchange2:true});
+                    OnRemoveFile: |-
+                        =/*
+                        Remove(TemplateFileList,First(Filter(TemplateFileList,(TempFileName=TextInput_FormName.Text)&&(TempAttachMent=First(AttachmentDemonstrationformName).Name))));//删除list中的附件记录
+                        
+                        Reset(Attachment_Demonstrationform);//重置申請表附件控件
+                        
+                        Clear(EditAttachment2)
+                        */
+                        With(
+                            {FormmodelID: First(EditForm).标题},
+                            If(
+                                Label_newform.Text <> "新增表格",
+                                Remove(
+                                    TemplateFileList,
+                                    First(
+                                        Filter(
+                                            SortByColumns(
+                                                TemplateFileList,
+                                                "Modified",
+                                                Descending
+                                            ),
+                                            TempType = "示範表格",
+                                            GenericFormId = FormmodelID
+                                        )
+                                    )
+                                );
+                            )
+                        )
+                    PaddingLeft: =10
+                    PaddingRight: =10
+                    PaddingTop: =10
+                    PressedColor: =RGBA(0, 121, 187, 1)
+                    PressedFill: =
+                    Size: =10
+                    Tooltip: =
+                    Width: =270
+                    X: =313
+                    Y: =391
+                    ZIndex: =27
+
+                Label1_90 As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =28
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="示範表格"
+                    Width: =120
+                    X: =313
+                    Y: =358
+                    ZIndex: =28
+
+                Image2_1 As image:
+                    Height: =26
+                    Image: =Last(Attachment_Demonstrationform.Attachments).Value
+                    Visible: =false
+                    Width: =27
+                    X: =392
+                    Y: =360
+                    ZIndex: =36
+
+            drpFilter_Department As combobox:
+                BorderColor: =glbNeutralTertiaryColor
+                BorderThickness: =1
+                ChevronBackground: =RGBA(255, 255, 255, 1)
+                ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
+                ChevronDisabledFill: =RGBA(202, 202, 202, 1)
+                ChevronFill: =glbNeutralTertiaryColor
+                ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
+                ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
+                Color: =glbNeutralPrimaryColor
+                DefaultSelectedItems: =Distinct(EditForm,ModelDepartment)//加载编辑表格部门
+                DisplayFields: =["Result"]
+                DisplayMode: =NoEdit
+                FocusedBorderThickness: =1
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                HoverColor: =Self.Color
+                HoverFill: =ColorFade(Self.Fill, -5%)
+                InputTextPlaceholder: ="選擇部門"
+                Items: |-
+                    =//Distinct(Filter(FormTableType,If(CurrentRoleFormPermission="All",DepartMentName<>Blank(),If(CurrentRoleFormPermission="None",DepartMentName=Blank(),DepartMentName=CurrentRoleFormPermission))),DepartMentName)
+                    //Distinct(If(CurrentRoleFormModelPermssion="All",FormTableType,CurrentRoleFormModelPermssion="None",Filter(FormTableType,DepartMentName=Blank()),Filter(FormTableType,DepartMentName=CurrentRoleFormModelPermssion)),DepartMentName)
+                    Distinct(FilterDepartment,DepartMentName)
+                NoSelectionText: ="選擇部門"
+                OnChange: =Reset(drpFilter_FormType)
+                PaddingLeft: =10
+                PressedColor: =Self.Color
+                PressedFill: =ColorFade(Self.Fill, -5%)
+                SearchFields: =["Result"]
+                SearchItems: |-
+                    =Search(//Distinct(Filter(FormTableType,If(CurrentRoleFormPermission="All",DepartMentName<>Blank(),If(CurrentRoleFormPermission="None",DepartMentName=Blank(),DepartMentName=CurrentRoleFormPermission))),DepartMentName)
+                    //Distinct(If(CurrentRoleFormModelPermssion="All",FormTableType,CurrentRoleFormModelPermssion="None",Filter(FormTableType,DepartMentName=Blank()),Filter(FormTableType,DepartMentName=CurrentRoleFormModelPermssion)),DepartMentName)
+                    Distinct(FilterDepartment,DepartMentName),drpFilter_Department.SearchText,"Result")
+                SelectionColor: =glbThemePrimaryColor
+                SelectionFill: =ColorFade(Self.SelectionColor, 90%)
+                SelectMultiple: =false
+                Size: =11
+                Width: =270
+                X: =22
+                Y: =48
+                ZIndex: =38
+
+            Group5 As group:
+                Height: =5
+                Width: =5
+                X: =60
+                Y: =60
+                ZIndex: =38
+
+                Label1_91 As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =28
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="填寫指引"
+                    Width: =120
+                    X: =604
+                    Y: =357
+                    ZIndex: =13
+
+                Attachment_FillGuide As attachments:
+                    AddAttachmentText: ="點擊或拖拽上傳附件"
+                    BorderColor: =glbLinkColor
+                    BorderStyle: =BorderStyle.Dashed
+                    BorderThickness: =1
+                    Color: =glbLinkColor
+                    DisplayMode: =attachment
+                    DropTargetBackgroundColor: =ColorFade(Self.Color, 90%)
+                    DropTargetBorderColor: =glbLinkColor
+                    DropTargetBorderStyle: =BorderStyle.Dashed
+                    DropTargetBorderThickness: =1
+                    DropTargetTextColor: =glbLinkColor
+                    Fill: =ColorFade(glbLinkColor, 95%)
+                    FocusedBorderThickness: =1
+                    Height: =80
+                    HoverColor: =ColorFade(Self.Color, -25%)
+                    HoverFill: =ColorFade(glbLinkColor, 80%)
+                    IsInDataCard: =true
+                    ItemColor: =glbLinkColor
+                    ItemFill: =ColorFade(glbLinkColor, 80%)
+                    ItemHoverColor: =ColorFade(glbLinkColor, -25%)
+                    ItemHoverFill: =ColorFade(glbLinkColor, 80%)
+                    Items: |
+                        =Last(EditAttachment3.TempAttachMent)//加载编辑表格的附件信息
+                    MaxAttachments: =1
+                    MaxAttachmentsText: ="最大附件"
+                    NoAttachmentsText: ="無附件"
+                    OnAddFile: |-
+                        =/*
+                        Set(varAttachmentControl4,JSON(Image3.Image,IncludeBinaryData));
+                        Set(varBase64Only4,Mid(varAttachmentControl4,Find(",", varAttachmentControl4)+1,Len(varAttachmentControl4)-Find (",", varAttachmentControl4)-1));//设置全局变量保存附件的base64值
+                        UploadFiletoSharepoint.Run(
+                            "TemplateFileList",
+                            GUID(),
+                            "填寫指引",
+                            [@TextInput_FormName].Text,
+                            Last(Attachment_FillGuide.Attachments).Name,
+                            Last(Attachment_FillGuide.Attachments).Name,
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            varBase64Only4,
+                            "",
+                            "",
+                            "");//上传附件到sharepoint附件list
+                        ClearCollect(AttachmentFillGuideName,{Name:Last(Attachment_FillGuide.Attachments).Name});//收集上传附件的名称
+                        */
+                        UpdateContext({attachmentchange3:true});
+                    OnRemoveFile: |-
+                        =/*
+                        Remove(TemplateFileList,First(Filter(TemplateFileList,(TempFileName=TextInput_FormName.Text)&&(TempAttachMent=First(AttachmentFillGuideName).Name))));//删除list中的附件记录
+                        
+                        Reset(Attachment_FillGuide);//重置申請表附件控件
+                        
+                        Clear(EditAttachment3)
+                        */
+                        
+                        With(
+                            {FormmodelID: First(EditForm).标题},
+                            If(
+                                Label_newform.Text <> "新增表格",
+                                Remove(
+                                    TemplateFileList,
+                                    First(
+                                        Filter(
+                                            SortByColumns(
+                                                TemplateFileList,
+                                                "Modified",
+                                                Descending
+                                            ),
+                                            TempType = "填寫指引",
+                                            GenericFormId = FormmodelID
+                                        )
+                                    )
+                                );
+                            )
+                        )
+                    PaddingLeft: =10
+                    PaddingRight: =10
+                    PaddingTop: =10
+                    PressedColor: =RGBA(0, 121, 187, 1)
+                    PressedFill: =
+                    Size: =10
+                    Tooltip: =
+                    Width: =270
+                    X: =604
+                    Y: =390
+                    ZIndex: =14
+
+                Image3 As image:
+                    Height: =21
+                    Image: =Last(Attachment_FillGuide.Attachments).Value
+                    Visible: =false
+                    Width: =12
+                    X: =689
+                    Y: =361
+                    ZIndex: =37
+
+            drpFilter_FormType As combobox:
+                BorderColor: =glbNeutralTertiaryColor
+                BorderThickness: =1
+                ChevronBackground: =RGBA(255, 255, 255, 1)
+                ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
+                ChevronDisabledFill: =RGBA(202, 202, 202, 1)
+                ChevronFill: =glbNeutralTertiaryColor
+                ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
+                ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
+                Color: =glbNeutralPrimaryColor
+                DefaultSelectedItems: =Distinct(EditForm,ModelType)//加载编辑表类型
+                DisplayFields: =["Result"]
+                DisplayMode: =NoEdit
+                FocusedBorderThickness: =1
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                HoverColor: =Self.Color
+                HoverFill: =ColorFade(Self.Fill, -5%)
+                InputTextPlaceholder: ="選擇表格類型"
+                Items: =Distinct(Filter(FilterFormType,DepartMentName=drpFilter_Department.Selected.Result),FormType)
+                NoSelectionText: ="選擇表格類型"
+                PaddingLeft: =10
+                PressedColor: =Self.Color
+                PressedFill: =ColorFade(Self.Fill, -5%)
+                SearchFields: =["Result"]
+                SearchItems: =Search(Distinct(Filter(FilterFormType,DepartMentName=drpFilter_Department.Selected.Result),FormType),drpFilter_FormType.SearchText,"Result")
+                SelectionColor: =glbThemePrimaryColor
+                SelectionFill: =ColorFade(Self.SelectionColor, 90%)
+                SelectMultiple: =false
+                Size: =11
+                Width: =270
+                X: =312
+                Y: =48
+                ZIndex: =39
+
+            Label1_119 As label:
+                Color: =glbErrorColor
+                Height: =28
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =12
+                Text: ="*"
+                Width: =120
+                X: =13
+                Y: =95
+                ZIndex: =42
+
+            Label1_124 As label:
+                Color: =glbErrorColor
+                Height: =28
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =12
+                Text: ="*"
+                Width: =120
+                X: =593
+                Y: =20
+                ZIndex: =63
+
+            Group8 As group:
+                Height: =5
+                Width: =5
+                X: =60
+                Y: =60
+                ZIndex: =63
+
+                Label1_93 As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =28
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="標籤輸入指引"
+                    Visible: =If(Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
+                    Width: =120
+                    X: =892
+                    Y: =357
+                    ZIndex: =58
+
+                TextInput_CustomFilter As text:
+                    BorderColor: =glbNeutralTertiaryColor
+                    BorderThickness: =1
+                    Color: =glbNeutralPrimaryColor
+                    Default: =First(EditForm).CustomFilter//加载编辑表格的自定義篩選
+                    FocusedBorderColor: =glbNeutralSecondaryColor
+                    FocusedBorderThickness: =1
+                    Height: =80
+                    HintText: |-
+                        ="輸入標籤提示, 如: 請輸入正在申請的職位
+                        "
+                    HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                    HoverFill: =ColorFade(Self.Fill, -5%)
+                    Mode: =TextMode.MultiLine
+                    PaddingBottom: =10
+                    PaddingLeft: =10
+                    PaddingRight: =10
+                    PaddingTop: =10
+                    PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =12
+                    Visible: =If(Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
+                    Width: =270
+                    X: =892
+                    Y: =390
+                    ZIndex: =59
+
+            Group3_3 As group:
+                Height: =5
+                Width: =5
+                X: =-272
+                Y: =-372
+                ZIndex: =67
+
+                Radio_password_1 As radio:
+                    Default: =If(First(EditForm).IsAttachmentPassWord="1","有",If(First(EditForm).IsAttachmentPassWord="2","無","可選"))//加载编辑表格的表格名称
+                    FocusedBorderThickness: =0
+                    Height: =32
+                    HoverColor: =RGBA(0, 0, 0, 1)
+                    HoverFill: =RGBA(0, 0, 0, 0)
+                    Items: =["可選","有","無"]
+                    Layout: =Layout.Horizontal
+                    PaddingBottom: =0
+                    PaddingTop: =0
+                    PressedColor: =RGBA(0, 0, 0, 1)
+                    RadioBorderColor: =glbNeutralTertiaryColor
+                    RadioSelectionFill: =glbLinkColor
+                    RadioSize: =24
+                    Size: =11
+                    Visible: =If((Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程") && Radio_attachment.Selected.Value="有",true,false)
+                    Width: =233
+                    X: =605
+                    Y: =521
+                    ZIndex: =65
+
+                Label1_126 As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =28
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="附件密碼"
+                    Visible: =If((Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程") && Radio_attachment.Selected.Value="有",true,false)
+                    Width: =120
+                    X: =604
+                    Y: =484
+                    ZIndex: =66
+
+            Group14 As group:
+                Height: =5
+                Width: =5
+                X: =40
+                Y: =40
+                ZIndex: =71
+
+                Radio_attachment As radio:
+                    Default: =First(EditForm).ModelAttachMent//加载编辑表格的表格名称
+                    FocusedBorderThickness: =0
+                    Height: =32
+                    HoverColor: =RGBA(0, 0, 0, 1)
+                    HoverFill: =RGBA(0, 0, 0, 0)
+                    Items: =["有","無"]
+                    Layout: =Layout.Horizontal
+                    PaddingBottom: =0
+                    PaddingTop: =0
+                    PressedColor: =RGBA(0, 0, 0, 1)
+                    RadioBorderColor: =glbNeutralTertiaryColor
+                    RadioSelectionFill: =glbLinkColor
+                    RadioSize: =24
+                    Size: =11
+                    Visible: =If(Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
+                    Width: =150
+                    X: =311
+                    Y: =521
+                    ZIndex: =3
+
+                Label1_87 As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =25
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="申請表附件"
+                    Visible: =If(Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
+                    Width: =81
+                    X: =311
+                    Y: =487
+                    ZIndex: =8
+
+                Label1_129 As label:
+                    Color: =glbErrorColor
+                    Height: =28
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="*"
+                    Visible: =If(Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
+                    Width: =10
+                    X: =303
+                    Y: =484
+                    ZIndex: =69
+
+            Group15 As group:
+                Height: =5
+                Width: =5
+                X: =40
+                Y: =40
+                ZIndex: =71
+
+                Attachment_Form As attachments:
+                    AddAttachmentText: ="點擊或拖拽上傳附件"
+                    BorderColor: =glbLinkColor
+                    BorderStyle: =BorderStyle.Dashed
+                    BorderThickness: =1
+                    Color: =glbLinkColor
+                    DisplayMode: =attachment
+                    DropTargetBackgroundColor: =ColorFade(Self.Color, 90%)
+                    DropTargetBorderColor: =glbLinkColor
+                    DropTargetBorderStyle: =BorderStyle.Dashed
+                    DropTargetBorderThickness: =1
+                    DropTargetTextColor: =glbLinkColor
+                    Fill: =ColorFade(glbLinkColor, 95%)
+                    FocusedBorderThickness: =1
+                    Height: =80
+                    HoverColor: =ColorFade(Self.Color, -25%)
+                    HoverFill: =ColorFade(glbLinkColor, 80%)
+                    IsInDataCard: =true
+                    ItemColor: =glbLinkColor
+                    ItemFill: =ColorFade(glbLinkColor, 80%)
+                    ItemHoverColor: =ColorFade(glbLinkColor, -25%)
+                    ItemHoverFill: =ColorFade(glbLinkColor, 80%)
+                    Items: =Last(EditAttachment.TempAttachMent)//加载编辑表格的附件信息
+                    MaxAttachments: =1
+                    MaxAttachmentsText: ="最大附件"
+                    NoAttachmentsText: ="無附件"
+                    OnAddFile: |-
+                        =/*
+                        Set(varAttachmentControl,JSON(Image4.Image,IncludeBinaryData));
+                        Set(varBase64Only,Mid(varAttachmentControl,Find(",", varAttachmentControl)+1,Len(varAttachmentControl)-Find (",", varAttachmentControl)-1));//设置全局变量保存附件的base64值
+                        UploadFiletoSharepoint.Run(
+                            "TemplateFileList",
+                            GUID(),
+                            drpFilter_FormType.Selected.Result,
+                            [@TextInput_FormName].Text,
+                            Last(Attachment_Form.Attachments).Name,
+                            Last(Attachment_Form.Attachments).Name,
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            varBase64Only,
+                            "",
+                            "",
+                            "");//上传附件到sharepoint附件list
+                        ClearCollect(AttachmentFormName,{Name:Last(Attachment_Form.Attachments).Name});//收集上传附件的名称
+                        */
+                        UpdateContext({attachmentchange1:true});
+                    OnRemoveFile: |
+                        =//删除list中的附件记录
+                        With(
+                            {FormmodelID: First(EditForm).标题},
+                            If(
+                                Label_newform.Text <> "新增表格",
+                                Remove(
+                                    TemplateFileList,
+                                    First(
+                                        Filter(
+                                            SortByColumns(
+                                                TemplateFileList,
+                                                "Modified",
+                                                Descending
+                                            ),
+                                            TempType = drpFilter_FormType.Selected.Result,
+                                            GenericFormId = FormmodelID
+                                        )
+                                    )
+                                );
+                            )
+                        )
+                        //Reset(Attachment_Form);//重置申請表附件控件
+                        //Clear(EditAttachment)
+                    PaddingLeft: =10
+                    PaddingRight: =10
+                    PaddingTop: =10
+                    PressedColor: =RGBA(0, 121, 187, 1)
+                    PressedFill: =
+                    Size: =10
+                    Tooltip: =
+                    Width: =270
+                    X: =22
+                    Y: =391
+                    ZIndex: =19
+
+                Label1_92 As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =28
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="申請表格"
+                    Width: =120
+                    X: =22
+                    Y: =358
+                    ZIndex: =26
+
+                Image4 As image:
+                    Height: =16
+                    Image: =Last(Attachment_Form.Attachments).Value
+                    OnSelect: =
+                    Visible: =false
+                    Width: =14
+                    X: =93
+                    Y: =365
+                    ZIndex: =35
+
+                Label1_125 As label:
+                    Color: =glbErrorColor
+                    Height: =28
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="*"
+                    Width: =10
+                    X: =12
+                    Y: =356
+                    ZIndex: =64
+
+            Group10 As group:
+                Height: =5
+                Width: =5
+                X: =40
+                Y: =40
+                ZIndex: =71
+
+                Radio_password As radio:
+                    Default: =If(First(EditForm).IsPassWord="1","有",If(First(EditForm).IsPassWord="2","無","可選"))//加载编辑表格的表格名称
+                    FocusedBorderThickness: =0
+                    Height: =32
+                    HoverColor: =RGBA(0, 0, 0, 1)
+                    HoverFill: =RGBA(0, 0, 0, 0)
+                    Items: =["可選","有","無"]
+                    Layout: =Layout.Horizontal
+                    PaddingBottom: =0
+                    PaddingTop: =0
+                    PressedColor: =RGBA(0, 0, 0, 1)
+                    RadioBorderColor: =glbNeutralTertiaryColor
+                    RadioSelectionFill: =glbLinkColor
+                    RadioSize: =24
+                    Size: =11
+                    Visible: =If(Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
+                    Width: =233
+                    X: =23
+                    Y: =521
+                    ZIndex: =43
+
+                Label1_120 As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =35
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="申請表密碼"
+                    Visible: =If(Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
+                    Width: =120
+                    X: =23
+                    Y: =484
+                    ZIndex: =44
+
+                Label1_128 As label:
+                    Color: =glbErrorColor
+                    Height: =28
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="*"
+                    Visible: =If(Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
+                    Width: =10
+                    X: =13
+                    Y: =484
+                    ZIndex: =68
+
+            Group3 As group:
+                Height: =5
+                Width: =5
+                X: =40
+                Y: =40
+                ZIndex: =71
+
+                Radio_flowtype As radio:
+                    Default: =First(EditForm).FlowType//加载编辑表格的表格名称
+                    FocusedBorderThickness: =0
+                    Height: =32
+                    HoverColor: =RGBA(0, 0, 0, 1)
+                    HoverFill: =RGBA(0, 0, 0, 0)
+                    Items: =["通用流程","預設流程","部門簡單流程","範本"]
+                    Layout: =Layout.Horizontal
+                    PaddingBottom: =0
+                    PaddingTop: =0
+                    PressedColor: =RGBA(0, 0, 0, 1)
+                    RadioBorderColor: =glbNeutralTertiaryColor
+                    RadioSelectionFill: =glbLinkColor
+                    RadioSize: =24
+                    Size: =11
+                    Width: =504
+                    X: =21
+                    Y: =312
+                    ZIndex: =46
+
+                Label1_121 As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =28
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="流程類型"
+                    Width: =182
+                    X: =21
+                    Y: =275
+                    ZIndex: =47
+
+                Label1_127 As label:
+                    Color: =glbErrorColor
+                    Height: =28
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="*"
+                    Width: =120
+                    X: =12
+                    Y: =275
+                    ZIndex: =67
+
+            Group16 As group:
+                Height: =5
+                Width: =5
+                X: =40
+                Y: =40
+                ZIndex: =71
+
+                Label1_122 As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =28
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="預設流程選擇行動"
+                    Visible: =If(Radio_flowtype.Selected.Value="預設流程",true,false)
+                    Width: =175
+                    X: =602
+                    Y: =275
+                    ZIndex: =49
+
+                Checkbox1_4 As checkbox:
+                    CheckboxBorderColor: =glbNeutralTertiaryColor
+                    CheckboxSize: =24
+                    CheckmarkFill: =glbLinkColor
+                    Default: =If(("簽批" in First(EditForm).SelectedActions) && First(EditForm).FlowType="預設流程",true,false)
+                    FocusedBorderColor: =RGBA(0, 0, 0, 0)
+                    Height: =32
+                    HoverBorderColor: =RGBA(0, 0, 0, 0)
+                    OnCheck: =
+                    OnUncheck: =
+                    PressedBorderColor: =RGBA(0, 0, 0, 0)
+                    Size: =11
+                    Text: ="簽批"
+                    Visible: =If(Radio_flowtype.Selected.Value="預設流程",true,false)
+                    Width: =77
+                    X: =700
+                    Y: =306
+                    ZIndex: =53
+
+                Checkbox1_5 As checkbox:
+                    CheckboxBorderColor: =glbNeutralTertiaryColor
+                    CheckboxSize: =24
+                    CheckmarkFill: =glbLinkColor
+                    Default: =If(("助總總幹事審批" in First(EditForm).SelectedActions) && First(EditForm).FlowType="預設流程",true,false)
+                    FocusedBorderColor: =RGBA(0, 0, 0, 0)
+                    Height: =32
+                    HoverBorderColor: =RGBA(0, 0, 0, 0)
+                    OnCheck: =
+                    OnUncheck: =
+                    PressedBorderColor: =RGBA(0, 0, 0, 0)
+                    Size: =11
+                    Text: ="助總總幹事審批"
+                    Visible: =If(Radio_flowtype.Selected.Value="預設流程",true,false)
+                    Width: =151
+                    X: =800
+                    Y: =306
+                    ZIndex: =54
+
+                Checkbox1_6 As checkbox:
+                    CheckboxBorderColor: =glbNeutralTertiaryColor
+                    CheckboxSize: =24
+                    CheckmarkFill: =glbLinkColor
+                    Default: =If(("總幹事審批" in First(EditForm).SelectedActions) && First(EditForm).FlowType="預設流程",true,false)
+                    FocusedBorderColor: =RGBA(0, 0, 0, 0)
+                    Height: =32
+                    HoverBorderColor: =RGBA(0, 0, 0, 0)
+                    OnCheck: =
+                    OnUncheck: =
+                    PressedBorderColor: =RGBA(0, 0, 0, 0)
+                    Size: =11
+                    Text: ="總幹事審批"
+                    Visible: =If(Radio_flowtype.Selected.Value="預設流程",true,false)
+                    Width: =120
+                    X: =965
+                    Y: =306
+                    ZIndex: =55
+
+                Checkbox1_3 As checkbox:
+                    CheckboxBorderColor: =glbNeutralTertiaryColor
+                    CheckboxSize: =24
+                    CheckmarkFill: =glbLinkColor
+                    Default: =If(("檢查" in First(EditForm).SelectedActions) && First(EditForm).FlowType="預設流程",true,false)
+                    FocusedBorderColor: =RGBA(0, 0, 0, 0)
+                    Height: =32
+                    HoverBorderColor: =RGBA(0, 0, 0, 0)
+                    OnCheck: =
+                    OnUncheck: =
+                    PressedBorderColor: =RGBA(0, 0, 0, 0)
+                    Size: =11
+                    Text: ="檢查"
+                    Visible: =If(Radio_flowtype.Selected.Value="預設流程",true,false)
+                    Width: =83
+                    X: =599
+                    Y: =306
+                    ZIndex: =70
+
+            Group2 As group:
+                Height: =5
+                Width: =5
+                X: =40
+                Y: =40
+                ZIndex: =71
+
+                Label1_79 As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =28
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="表格部門/服務"
+                    Width: =120
+                    X: =22
+                    Y: =20
+                    ZIndex: =1
+
+                Label1_117 As label:
+                    Color: =glbErrorColor
+                    Height: =28
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="*"
+                    Width: =10
+                    X: =13
+                    Y: =20
+                    ZIndex: =40
+
+            Group6 As group:
+                Height: =5
+                Width: =5
+                X: =40
+                Y: =40
+                ZIndex: =71
+
+                Label1_80 As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =28
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="表格類型/單位"
+                    Width: =148
+                    X: =313
+                    Y: =20
+                    ZIndex: =2
+
+                Label1_118 As label:
+                    Color: =glbErrorColor
+                    Height: =28
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="*"
+                    Width: =11
+                    X: =303
+                    Y: =20
+                    ZIndex: =41
+
+        NewForm_title As group:
+            Height: =5
+            Width: =5
+            X: =40
+            Y: =40
+            ZIndex: =4
+
+            Icon2_1 As icon.ChevronLeft:
+                Color: =RGBA(116, 116, 116, 1)
+                Height: =50
+                Icon: =Icon.ChevronLeft
+                OnSelect: |-
+                    =Navigate(AdminFormListScreen,ScreenTransition.Fade);
+                    /*Clear(EditForm);
+                    Clear(EditAttachment);
+                    Clear(EditAttachment2);
+                    Clear(EditAttachment3);
+                    Reset(Attachment_Form);
+                    Reset(drpFilter_Department);
+                    Reset(drpFilter_FormType);
+                    Reset(TextInput_FormVersion);
+                    Reset(TextInput_FormNumber);
+                    Reset(TextInput_FormName);
+                    Reset(TextInput_FormDescription);
+                    Reset(TextInput_CustomFilter);
+                    Reset(Attachment_Demonstrationform);
+                    Reset(Attachment_FillGuide);
+                    Reset(Radio_attachment);
+                    Reset(Radio_password);
+                    Reset(Radio_password_1);
+                    Reset(Radio_flowtype);
+                    Reset(Checkbox1_3);
+                    Reset(Checkbox1_4);
+                    Reset(Checkbox1_5);
+                    Reset(Checkbox1_6);*/
+                PaddingBottom: =16
+                PaddingTop: =16
+                Width: =30
+                X: =12
+                ZIndex: =2
+
+            Label_newform As label:
+                Color: =glbNeutralPrimaryColor
+                Height: =50
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =15
+                Text: =First(CreateNewForm).name
+                Width: =569
+                X: =42
+                ZIndex: =3
+
+    Container_sidebar As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =718
+        Width: =160
+        Y: =50
+        ZIndex: =3
+
+        GalleryNav_10 As gallery.galleryVertical:
+            Height: =120
+            Items: =["IT服務台","用戶手冊","意見箱"]
+            Layout: =Layout.Vertical
+            TemplatePadding: =0
+            TemplateSize: =40
+            Width: =160
+            Y: =558
+            ZIndex: =5
+
+            BtnDefault_17 As button:
+                Align: =Align.Left
+                BorderColor: =Self.Color
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                Color: =glbNeutralSecondaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                FontWeight: =Normal
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =ColorFade(glbThemePrimaryColor, 90%)
+                OnSelect: |-
+                    =If(
+                        ThisItem.Value = "意見箱",
+                        Launch("https://forms.office.com/Pages/ResponsePage.aspx?id=3bukt5xuKUm1pGVQ_urXfI59VMuh5BdPgBsZQOZA1aFUNVFDTEVCTkU1OTZEWE1HUUExTkNEVlJBNSQlQCN0PWcu"),
+                        ThisItem.Value = "IT服務台",
+                        Launch("https://elcss-14cebfd770be55.sharepoint.com/sites/elcssbriefcase/HelpDeskPlus/Pages/Default.aspx?SPHostUrl=https%3A%2F%2Felcss%2Esharepoint%2Ecom%2Fsites%2Felcssbriefcase&SPLanguage=en%2DUS&SPClientTag=1&SPProductNumber=16%2E0%2E22112%2E12002&SPAppWebUrl=https%3A%2F%2Felcss%2D14cebfd770be55%2Esharepoint%2Ecom%2Fsites%2Felcssbriefcase%2FHelpDeskPlus"),
+                        ThisItem.Value = "用戶手冊",
+                        Download("https://elcss.sharepoint.com/:w:/r/sites/eps-prd/_layouts/15/download.aspx?SourceUrl=/sites/eps-prd/TempExcel/ePS%E7%B3%BB%E7%B5%B1-%E7%94%A8%E6%88%B6%E6%89%8B%E5%86%8A%20V1.3.4.pdf")
+                    )
+                PaddingBottom: =0
+                PaddingLeft: =36
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =12
+                Text: =ThisItem.Value
+                Width: =140
+                X: =10
+                ZIndex: =3
+
+            Icon1_10 As icon.ListScrollWatchlist:
+                Color: =glbNeutralSecondaryColor
+                Height: =20
+                Icon: |
+                    =If(
+                        ThisItem.Value = "IT服務台",
+                        Icon.ComputerDesktop,
+                        ThisItem.Value = "用戶手冊",
+                        Icon.Notebook,
+                        ThisItem.Value = "組織機構",
+                        Icon.LogJournal,
+                        ThisItem.Value = "意見箱",
+                        Icon.Mail
+                    )
+                    //["IT服務台","操作手冊","用戶反饋"]
+                OnSelect: =Select(Parent)
+                Width: =20
+                X: =20
+                Y: =6
+                ZIndex: =5
+
+        Label8_3 As label:
+            Align: =Align.Center
+            Color: =RGBA(149, 149, 149, 1)
+            Size: =11
+            Text: ="Version 1.0.0"
+            Width: =160
+            Y: =678
+            ZIndex: =6
+
+        GalleryNav_9 As gallery.galleryVertical:
+            Height: =237
+            Items: |
+                =Filter(If(
+                    CurrentRoleFormModelPermssion = "None"
+                    ,
+                    [
+                        "首頁",
+                        "申請列表",
+                        If(CurrentRole,"統計",HRAO || SuperUser,"系統設定"),
+                        If(If(CurrentRole,"統計",HRAO || SuperUser,"系統設定")="系統設定",Blank(),HRAO || SuperUser,"系統設定")
+                        
+                    ],
+                    [
+                        "首頁",
+                        "表格列表",
+                        "申請列表",
+                        If(CurrentRole,"統計",HRAO || SuperUser,"系統設定"),
+                        If(If(CurrentRole,"統計",HRAO || SuperUser,"系統設定")="系統設定",Blank(),HRAO || SuperUser,"系統設定")
+                    ]
+                ),ThisRecord.Value <> Blank())
+            Layout: =Layout.Vertical
+            TemplatePadding: =0
+            TemplateSize: =40
+            Width: =160
+            ZIndex: =7
+
+            BtnDefault_16 As button:
+                Align: =Align.Left
+                BorderColor: =Self.Color
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                Color: =If(ThisItem.Value="表格列表", glbThemePrimaryColor,glbNeutralSecondaryColor)
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =If(ThisItem.Value="表格列表", ColorFade(Self.Color, 90%),White)
+                FocusedBorderThickness: =1
+                FontWeight: =If(ThisItem.Value="表格列表", FontWeight.Semibold,Normal)
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: |-
+                    =//If(ThisItem.Value<>Blank(),ColorFade(glbThemePrimaryColor, 90%))
+                    ColorFade(Self.Color, -15%)
+                HoverFill: =ColorFade(glbThemePrimaryColor, 90%)
+                OnSelect: |-
+                    =If(
+                        ThisItem.Value = "首頁",
+                        Navigate(
+                            HomepageScreen,
+                            ScreenTransition.None
+                        ),
+                        ThisItem.Value = "表格列表",
+                        Navigate(AdminFormListScreen,
+                            ScreenTransition.None
+                        ),
+                        ThisItem.Value = "統計",
+                        Navigate(StatisticsScreen,
+                            ScreenTransition.None
+                        //Launch("https://apps.powerapps.com/play/c030168f-5133-4c9d-8e17-3c870ba99ab4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=StatisticsScreen"
+                        ),
+                    
+                        ThisItem.Value = "系統設定",
+                        Navigate(SystemsScreen,None,{ToUserInfoManager:"用戶管理"}),
+                        //Launch("https://apps.powerapps.com/play/c030168f-5133-4c9d-8e17-3c870ba99ab4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=UserScreen"),
+                    
+                        ThisItem.Value = "申請列表",
+                        Navigate(
+                            GeneralFormListScreen,
+                            ScreenTransition.None,{ListID:1}
+                        )
+                    )
+                PaddingBottom: =0
+                PaddingLeft: =36
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =12
+                Text: =ThisItem.Value
+                Width: =140
+                X: =10
+                ZIndex: =3
+
+            Icon1_9 As icon.ListScrollWatchlist:
+                Color: =If(ThisItem.Value="任務管理", glbThemePrimaryColor,glbNeutralSecondaryColor)
+                Height: =20
+                Icon: |
+                    =If(
+                        ThisItem.Value = "首頁",
+                        Icon.Home,
+                        ThisItem.Value = "表格列表",
+                        Icon.ListScrollWatchlist,
+                        ThisItem.Value = "統計",
+                        Icon.LogJournal,
+                        ThisItem.Value = "系統設定",
+                        Icon.People,
+                        ThisItem.Value = "申請列表",
+                        Icon.Lock
+                    )
+                OnSelect: =Select(Parent)
+                Width: =20
+                X: =20
+                Y: =6
+                ZIndex: =5
+

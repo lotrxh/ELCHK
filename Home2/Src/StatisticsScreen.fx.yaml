@@ -1,0 +1,810 @@
+StatisticsScreen As screen:
+    Fill: =RGBA(230, 230, 230, 1)
+    OnVisible: |-
+        =Clear(FilterQuery);
+        Collect(FilterQuery,RemoveIf(Distinct(Approval_Table,DepartMentUnit),Result=Blank()),{Result:"全部"});
+        Concurrent(Reset(DatePicker1_4),Reset(DatePicker1_5),Reset(drpFilterPedningDepartment_1),Reset(drpFilterPedningDepartment_2),Reset(drpFilterPedningDepartment_3))
+
+    Siteinfo_4 As group:
+        Height: =5
+        Width: =5
+        X: =40
+        Y: =40
+        ZIndex: =8
+
+        Button11_27 As button:
+            BorderThickness: =0
+            Fill: =RGBA(0, 0, 0, 0)
+            FontWeight: =FontWeight.Normal
+            Height: =33
+            HoverFill: =
+            OnSelect: |
+                =Download("https://elcss.sharepoint.com/:w:/r/sites/eps-prd/_layouts/15/download.aspx?SourceUrl=/sites/eps-prd/TempExcel/ePS%E7%B3%BB%E7%B5%B1-%E7%94%A8%E6%88%B6%E6%89%8B%E5%86%8A%20V1.3.4.pdf")
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            PressedColor: =Self.Color
+            PressedFill: =
+            Size: =11
+            Text: |
+                ="操作手冊"
+            Width: =150
+            X: =20
+            Y: =675
+            ZIndex: =3
+
+        Button11_28 As button:
+            BorderThickness: =0
+            Fill: =RGBA(0, 0, 0, 0)
+            FontWeight: =FontWeight.Normal
+            Height: =33
+            HoverFill: =
+            OnSelect: |+
+                =Launch("https://forms.office.com/Pages/ResponsePage.aspx?id=3bukt5xuKUm1pGVQ_urXfI59VMuh5BdPgBsZQOZA1aFUNVFDTEVCTkU1OTZEWE1HUUExTkNEVlJBNSQlQCN0PWcu")
+                
+                
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            PressedColor: =Self.Color
+            PressedFill: =
+            Size: =11
+            Text: ="用戶反饋"
+            Width: =150
+            X: =20
+            Y: =702
+            ZIndex: =4
+
+        Button11_29 As button:
+            BorderThickness: =0
+            Fill: =RGBA(0, 0, 0, 0)
+            FontWeight: =FontWeight.Normal
+            Height: =33
+            HoverFill: =
+            OnSelect: |-
+                =Launch("https://elcss-14cebfd770be55.sharepoint.com/sites/elcssbriefcase/HelpDeskPlus/Pages/Default.aspx?SPHostUrl=https%3A%2F%2Felcss%2Esharepoint%2Ecom%2Fsites%2Felcssbriefcase&SPLanguage=en%2DUS&SPClientTag=1&SPProductNumber=16%2E0%2E22112%2E12002&SPAppWebUrl=https%3A%2F%2Felcss%2D14cebfd770be55%2Esharepoint%2Ecom%2Fsites%2Felcssbriefcase%2FHelpDeskPlus")
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            PressedColor: =Self.Color
+            PressedFill: =
+            Size: =11
+            Text: ="IT 服務台"
+            Width: =150
+            X: =20
+            Y: =645
+            ZIndex: =6
+
+    Container3 As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =146
+        Width: =1176
+        X: =170
+        Y: =61
+        ZIndex: =9
+
+        DatePicker1_4 As datepicker:
+            BorderColor: =RGBA(196, 200, 204, 1)
+            BorderThickness: =1
+            Color: =RGBA(50, 50, 50, 100)
+            DefaultDate: =Today()-31
+            FocusedBorderThickness: =1
+            Font: =Font.'Segoe UI'
+            Format: ="dd/mm/yyyy"
+            Height: =34
+            IconBackground: =White
+            IconFill: =Gray
+            InputTextPlaceholder: =If(IsBlank(Self.SelectedDate),Text(DateAdd(Now(),-12,Months),DateTimeFormat.ShortDate))
+            IsEditable: =true
+            PaddingTop: =5
+            Size: =FountSise
+            Width: =150
+            X: =9
+            Y: =99
+            ZIndex: =1
+
+        Label30_16 As label:
+            Align: =Align.Center
+            Color: =RGBA(50, 50, 50, 100)
+            Font: =Font.'Segoe UI'
+            Height: =34
+            Size: =FountSise
+            Text: ="至"
+            Width: =33
+            X: =159
+            Y: =99
+            ZIndex: =2
+
+        DatePicker1_5 As datepicker:
+            BorderColor: =RGBA(196, 200, 204, 1)
+            BorderThickness: =1
+            Color: =RGBA(50, 50, 50, 100)
+            DefaultDate: =Today()+1
+            FocusedBorderThickness: =1
+            Font: =Font.'Segoe UI'
+            Format: ="dd/mm/yyyy"
+            Height: =34
+            IconBackground: =White
+            IconFill: =Gray
+            IsEditable: =true
+            PaddingTop: =5
+            Size: =FountSise
+            Width: =150
+            X: =192
+            Y: =99
+            ZIndex: =3
+
+        drpFilterPedningDepartment_1 As combobox:
+            BorderColor: =RGBA(196, 200, 204, 1)
+            BorderThickness: =1
+            ChevronBackground: =RGBA(255, 255, 255, 1)
+            ChevronFill: =RGBA(197, 197, 197, 1)
+            ChevronHoverBackground: =
+            ChevronHoverFill: =RGBA(153, 153, 153, 1)
+            DisplayFields: =["Result"]
+            FocusedBorderThickness: =1
+            Height: =34
+            HoverBorderColor: =RGBA(196, 200, 204, 1)
+            InputTextPlaceholder: ="請輸入電郵"
+            IsSearchable: =false
+            Items: =Distinct(Approval_Table,'Operator ')
+            NoSelectionText: =
+            OnSelect: =
+            PaddingLeft: =12
+            PressedColor: =RGBA(50, 50, 50, 1)
+            PressedFill: =RGBA(0, 0, 0, 0)
+            SearchFields: =["Result"]
+            SearchItems: =[]
+            SelectionColor: =RGBA(73, 77, 82, 1)
+            SelectionFill: =RGBA(0, 0, 0, 0)
+            SelectionTagFill: =
+            SelectMultiple: =false
+            Size: =10.5
+            Width: =200
+            X: =368
+            Y: =99
+            ZIndex: =4
+
+        Label30_18 As label:
+            Color: =RGBA(50, 50, 50, 100)
+            Font: =Font.'Segoe UI'
+            Height: =24
+            PaddingLeft: =0
+            Size: =FountSise
+            Text: ="時間範圍"
+            Width: =126
+            X: =9
+            Y: =72
+            ZIndex: =6
+
+        Label30_19 As label:
+            Color: =RGBA(50, 50, 50, 100)
+            Font: =Font.'Segoe UI'
+            Height: =24
+            PaddingLeft: =0
+            Size: =FountSise
+            Text: ="任務填寫/提交人員"
+            Width: =200
+            X: =368
+            Y: =72
+            ZIndex: =7
+
+        Label28_2 As label:
+            Color: =RGBA(51, 51, 51, 1)
+            FontWeight: =FontWeight.Bold
+            Height: =50
+            Text: ="統計顯示板"
+            X: =9
+            Y: =8
+            ZIndex: =8
+
+    Container3_1 As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =536
+        Width: =582
+        X: =171
+        Y: =220
+        ZIndex: =10
+
+        drpFilterPedningDepartment_2 As combobox:
+            BorderColor: =RGBA(196, 200, 204, 1)
+            BorderThickness: =1
+            ChevronBackground: =RGBA(255, 255, 255, 1)
+            ChevronFill: =RGBA(197, 197, 197, 1)
+            ChevronHoverBackground: =
+            ChevronHoverFill: =RGBA(153, 153, 153, 1)
+            DefaultSelectedItems: |-
+                ={Value:"全部"}
+            DisplayFields: =["Value"]
+            FocusedBorderThickness: =1
+            Font: =Font.'Segoe UI'
+            Height: =34
+            HoverBorderColor: =RGBA(196, 200, 204, 1)
+            InputTextPlaceholder: ="請選擇"
+            Items: =["全部","A103","A104","A111","A306"]
+            NoSelectionText: =
+            OnSelect: =
+            PaddingLeft: =12
+            PressedColor: =RGBA(50, 50, 50, 1)
+            PressedFill: =RGBA(0, 0, 0, 0)
+            SearchFields: =["Value"]
+            SearchItems: =Search(["全部","A103","A104","A111","A306"],drpFilterPedningDepartment_2.SearchText,"Value")
+            SelectionColor: =RGBA(73, 77, 82, 1)
+            SelectionFill: =RGBA(0, 0, 0, 0)
+            SelectionTagFill: =
+            SelectMultiple: =false
+            Size: =10.5
+            Width: =240
+            X: =16
+            Y: =38
+            ZIndex: =1
+
+        Label30_20 As label:
+            Color: =RGBA(50, 50, 50, 100)
+            Font: =Font.'Segoe UI'
+            Height: =24
+            PaddingLeft: =0
+            Size: =FountSise
+            Text: ="按表格篩選"
+            Width: =200
+            X: =16
+            Y: =10
+            ZIndex: =2
+
+        Label30_21 As label:
+            Align: =Align.Right
+            Color: =RGBA(50, 50, 50, 100)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Bold
+            Height: =46
+            PaddingLeft: =0
+            Size: =22
+            Text: =Sum(Filter(TaskFormGallery.AllItems,1=1).Count,Count)
+            Width: =200
+            X: =366
+            Y: =32
+            ZIndex: =3
+
+        TaskFormGallery As gallery.galleryVertical:
+            Height: =441
+            Items: |-
+                =With(
+                    {
+                        DepartData: AddColumns(
+                            GroupBy(
+                                Filter(
+                                    Approval_Table,
+                                    If(
+                                        drpFilterPedningDepartment_2.Selected.Value = "全部",
+                                        true,
+                                        false
+                                    ) || StartsWith(
+                                        Application_No,
+                                        drpFilterPedningDepartment_2.Selected.Value
+                                    ),
+                                    IsBlank(drpFilterPedningDepartment_1.Selected.Result) || 'Operator ' = drpFilterPedningDepartment_1.Selected.Result,
+                                    创建时间 >= DatePicker1_4.SelectedDate && 创建时间 <= DatePicker1_5.SelectedDate
+                                ),
+                                "DepartMentUnit",
+                                "DepartMentUnitData"
+                            ),
+                            "Count",
+                            CountRows(DepartMentUnitData)
+                        )
+                    },
+                    DepartData
+                )
+            Layout: =Layout.Vertical
+            TemplatePadding: =0
+            TemplateSize: =48
+            Width: =550
+            X: =16
+            Y: =89
+            ZIndex: =4
+
+            Label30_22 As label:
+                Color: =RGBA(50, 50, 50, 100)
+                Font: =Font.'Segoe UI'
+                Height: =48
+                Size: =11
+                Text: =ThisItem.DepartMentUnit
+                Width: =200
+                ZIndex: =2
+
+            Label30_23 As label:
+                Align: =Align.Right
+                Color: =RGBA(50, 50, 50, 100)
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Semibold
+                Height: =48
+                PaddingLeft: =0
+                Text: =ThisItem.Count
+                Width: =200
+                X: =327
+                ZIndex: =3
+
+            Rectangle8 As rectangle:
+                Fill: =RGBA(219, 219, 219, 1)
+                Height: =1
+                OnSelect: =Select(Parent)
+                Width: =550
+                ZIndex: =4
+
+    Container3_2 As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =536
+        Width: =582
+        X: =764
+        Y: =220
+        ZIndex: =11
+
+        drpFilterPedningDepartment_3 As combobox:
+            BorderColor: =RGBA(196, 200, 204, 1)
+            BorderThickness: =1
+            ChevronBackground: =RGBA(255, 255, 255, 1)
+            ChevronFill: =RGBA(197, 197, 197, 1)
+            ChevronHoverBackground: =
+            ChevronHoverFill: =RGBA(153, 153, 153, 1)
+            DefaultSelectedItems: |-
+                ={Result:"全部"}
+            DisplayFields: =["Result"]
+            FocusedBorderThickness: =1
+            Height: =34
+            HoverBorderColor: =RGBA(196, 200, 204, 1)
+            InputTextPlaceholder: ="請選擇"
+            IsSearchable: =false
+            Items: =FilterQuery
+            NoSelectionText: =
+            OnSelect: =
+            PaddingLeft: =12
+            PressedColor: =RGBA(50, 50, 50, 1)
+            PressedFill: =RGBA(0, 0, 0, 0)
+            SearchFields: =["Result"]
+            SearchItems: =[]
+            SelectionColor: =RGBA(73, 77, 82, 1)
+            SelectionFill: =RGBA(0, 0, 0, 0)
+            SelectionTagFill: =
+            SelectMultiple: =false
+            Size: =10.5
+            Width: =240
+            X: =16
+            Y: =38
+            ZIndex: =1
+
+        Label30_24 As label:
+            Color: =RGBA(50, 50, 50, 100)
+            Font: =Font.'Segoe UI'
+            Height: =24
+            PaddingLeft: =0
+            Size: =FountSise
+            Text: ="按單位/部門篩選"
+            Width: =200
+            X: =16
+            Y: =10
+            ZIndex: =2
+
+        Label30_25 As label:
+            Align: =Align.Right
+            Color: =RGBA(50, 50, 50, 100)
+            Font: =Font.'Segoe UI'
+            FontWeight: =FontWeight.Bold
+            Height: =46
+            PaddingLeft: =0
+            Size: =22
+            Text: =Sum(Filter(DepartMentGallery.AllItems,1=1).Count,Count)
+            Width: =200
+            X: =366
+            Y: =32
+            ZIndex: =3
+
+        DepartMentGallery As gallery.galleryVertical:
+            Height: =441
+            Items: |-
+                =With(
+                    {
+                        TaskData: AddColumns(
+                            GroupBy(
+                                Filter(
+                                    Approval_Table,
+                                    IsBlank(drpFilterPedningDepartment_1.Selected.Result) || 'Operator ' = drpFilterPedningDepartment_1.Selected.Result,
+                                    If(
+                                        drpFilterPedningDepartment_3.Selected.Result = "全部",
+                                        true,
+                                        false
+                                    ) || DepartMentUnit = drpFilterPedningDepartment_3.Selected.Result,
+                                    创建时间 >= DatePicker1_4.SelectedDate && 创建时间 <= DatePicker1_5.SelectedDate
+                                ),
+                                "Task_Name",
+                                "TaskN"
+                            ),
+                            "Count",
+                            CountRows(TaskN)
+                        )
+                    },
+                    TaskData
+                )
+            Layout: =Layout.Vertical
+            TemplatePadding: =0
+            TemplateSize: =48
+            Width: =550
+            X: =16
+            Y: =89
+            ZIndex: =4
+
+            Label30_27 As label:
+                Color: =RGBA(50, 50, 50, 100)
+                Font: =Font.'Segoe UI'
+                Height: =48
+                Size: =11
+                Text: =ThisItem.Task_Name
+                Width: =384
+                ZIndex: =2
+
+            Label30_26 As label:
+                Align: =Align.Right
+                Color: =RGBA(50, 50, 50, 100)
+                Font: =Font.'Segoe UI'
+                FontWeight: =FontWeight.Semibold
+                Height: =48
+                PaddingLeft: =0
+                Text: =ThisItem.Count
+                Width: =146
+                X: =384
+                ZIndex: =3
+
+            Rectangle8_1 As rectangle:
+                Fill: =RGBA(219, 219, 219, 1)
+                Height: =1
+                OnSelect: =Select(Parent)
+                Width: =550
+                ZIndex: =4
+
+    Container1_6 As groupContainer.manualLayoutContainer:
+        Fill: =glbThemePrimaryColor
+        Height: =50
+        Width: =1366
+        ZIndex: =12
+
+        Image1_8 As image:
+            Height: =38
+            Image: =logo
+            OnSelect: |-
+                =If(
+                    visiblecount >= 4,
+                    Set(
+                        visiblecount,
+                        0
+                    ),
+                    Set(
+                        visiblecount,
+                        visiblecount + 1
+                    )
+                )
+            Width: =203
+            X: =15
+            Y: =5
+            ZIndex: =1
+
+        Label1_69 As label:
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =glbThemePrimaryColor
+            Height: =18
+            Size: =9
+            Text: ="基督教香港信義會社會服務部"
+            Width: =186
+            X: =63
+            Y: =5
+            ZIndex: =3
+
+        Label1_95 As label:
+            Color: =RGBA(255, 255, 255, 1)
+            Fill: =glbThemePrimaryColor
+            FontWeight: =FontWeight.Bold
+            Height: =21
+            Size: =12
+            Text: ="eProcessing System 2.0"
+            Width: =206
+            X: =63
+            Y: =22
+            ZIndex: =5
+
+        Image7_5 As image:
+            Height: =40
+            Image: =User().Image
+            RadiusBottomLeft: =10
+            RadiusBottomRight: =10
+            RadiusTopLeft: =10
+            RadiusTopRight: =10
+            Width: =40
+            X: =1310
+            Y: =5
+            ZIndex: =6
+
+    Container3_6 As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =718
+        Width: =160
+        Y: =50
+        ZIndex: =13
+
+        XITong_1 As groupContainer.manualLayoutContainer:
+            Height: =123
+            Visible: =false
+            Width: =160
+            Y: =155
+            ZIndex: =1
+
+            QuanxianManager_1 As label:
+                Align: =Align.Center
+                OnSelect: |-
+                    =UpdateContext({ToUserInfoManager:"權限管理"})
+                Size: =11
+                Text: ="權限管理"
+                Visible: =If((SuperUser&&!CurrentRole) || (HRAO&&!CurrentRole),false,true)//增加二期權限判斷，SuperUser和HRAO只能查看用戶管理頁面
+                Width: =159
+                Y: =ZuzhiManager_1.Height+ZuzhiManager_1.Y
+                ZIndex: =1
+
+            ZuzhiManager_1 As label:
+                Align: =Align.Center
+                OnSelect: |-
+                    =UpdateContext({ToUserInfoManager:"組織機構"})
+                Size: =11
+                Text: ="組織機構"
+                Visible: =If((SuperUser&&!CurrentRole) || (HRAO&&!CurrentRole),false,true)//增加二期權限判斷，SuperUser和HRAO只能查看用戶管理頁面
+                Width: =159
+                Y: =UserManager_1.Height
+                ZIndex: =2
+
+            UserManager_1 As label:
+                Align: =Align.Center
+                Height: =34
+                OnSelect: |-
+                    =UpdateContext({ToUserInfoManager:"用戶管理"})
+                Size: =11
+                Text: ="用戶管理"
+                Width: =160
+                Y: =
+                ZIndex: =3
+
+        GalleryNav_13 As gallery.galleryVertical:
+            Height: =204
+            Items: |
+                =Filter(If(
+                    CurrentRoleFormModelPermssion = "None"
+                    ,
+                    [
+                        "首頁",
+                        "申請列表",
+                        If(CurrentRole,"統計",HRAO || SuperUser,"系統設定"),
+                        If(If(CurrentRole,"統計",HRAO || SuperUser,"系統設定")="系統設定",Blank(),HRAO || SuperUser,"系統設定")
+                        
+                    ],
+                    [
+                        "首頁",
+                        "表格列表",
+                        "申請列表",
+                        If(CurrentRole,"統計",HRAO || SuperUser,"系統設定"),
+                        If(If(CurrentRole,"統計",HRAO || SuperUser,"系統設定")="系統設定",Blank(),HRAO || SuperUser,"系統設定")
+                    ]
+                ),ThisRecord.Value <> Blank())
+            Layout: =Layout.Vertical
+            OnSelect: =
+            ShowScrollbar: =false
+            TemplatePadding: =0
+            TemplateSize: =40
+            Width: =160
+            ZIndex: =2
+
+            BtnDefault_20 As button:
+                Align: =Align.Left
+                BorderColor: =Self.Color
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                Color: =If(ThisItem.Value="系統", glbThemePrimaryColor,glbNeutralSecondaryColor)
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =If(ThisItem.Value="系統", ColorFade(Self.Color, 90%),White)
+                FocusedBorderThickness: =1
+                FontWeight: =If(ThisItem.Value="系統", FontWeight.Semibold,Normal)
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =If(ThisItem.Value<>Blank(),ColorFade(glbThemePrimaryColor, 90%))
+                OnSelect: |-
+                    =If(
+                        ThisItem.Value = "首頁",
+                        Navigate(
+                            HomepageScreen,
+                            ScreenTransition.None
+                        ),
+                        ThisItem.Value = "表格列表",
+                        Navigate(AdminFormListScreen,
+                            ScreenTransition.None
+                        ),
+                        ThisItem.Value = "統計",
+                        Navigate(StatisticsScreen,
+                            ScreenTransition.None
+                        //Launch("https://apps.powerapps.com/play/c030168f-5133-4c9d-8e17-3c870ba99ab4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=StatisticsScreen"
+                        ),
+                    
+                        ThisItem.Value = "系統設定",
+                        Navigate(SystemsScreen,None,{ToUserInfoManager:"用戶管理"}),
+                        //Launch("https://apps.powerapps.com/play/c030168f-5133-4c9d-8e17-3c870ba99ab4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=UserScreen"),
+                    
+                        ThisItem.Value = "申請列表",
+                        Navigate(
+                            GeneralFormListScreen,
+                            ScreenTransition.None,{ListID:1}
+                        )
+                    )
+                PaddingBottom: =0
+                PaddingLeft: =36
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =12
+                Text: =ThisItem.Value
+                Width: =140
+                X: =10
+                ZIndex: =3
+
+            Icon1_13 As icon.ListScrollWatchlist:
+                Color: =If(ThisItem.Value="系統", glbThemePrimaryColor,glbNeutralSecondaryColor)
+                Height: =20
+                Icon: |
+                    =If(
+                        ThisItem.Value = "首頁",
+                        Icon.Home,
+                        ThisItem.Value = "表格列表",
+                        Icon.ListScrollWatchlist,
+                        ThisItem.Value = "統計",
+                        Icon.LogJournal,
+                        ThisItem.Value = "系統設定",
+                        Icon.People,
+                        ThisItem.Value = "申請列表",
+                        Icon.Lock
+                    )
+                OnSelect: =Select(Parent)
+                Width: =20
+                X: =20
+                Y: =6
+                ZIndex: =5
+
+        GalleryNav_14 As gallery.galleryVertical:
+            Height: =120
+            Items: =["IT服務台","用戶手冊","意見箱"]
+            Layout: =Layout.Vertical
+            TemplatePadding: =0
+            TemplateSize: =40
+            Width: =160
+            Y: =558
+            ZIndex: =3
+
+            BtnDefault_21 As button:
+                Align: =Align.Left
+                BorderColor: =Self.Color
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                Color: =glbNeutralSecondaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                FontWeight: =Normal
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =ColorFade(glbThemePrimaryColor, 90%)
+                OnSelect: |-
+                    =If(
+                        ThisItem.Value = "意見箱",
+                        Launch("https://forms.office.com/Pages/ResponsePage.aspx?id=3bukt5xuKUm1pGVQ_urXfI59VMuh5BdPgBsZQOZA1aFUNVFDTEVCTkU1OTZEWE1HUUExTkNEVlJBNSQlQCN0PWcu"),
+                        ThisItem.Value = "IT服務台",
+                        Launch("https://elcss-14cebfd770be55.sharepoint.com/sites/elcssbriefcase/HelpDeskPlus/Pages/Default.aspx?SPHostUrl=https%3A%2F%2Felcss%2Esharepoint%2Ecom%2Fsites%2Felcssbriefcase&SPLanguage=en%2DUS&SPClientTag=1&SPProductNumber=16%2E0%2E22112%2E12002&SPAppWebUrl=https%3A%2F%2Felcss%2D14cebfd770be55%2Esharepoint%2Ecom%2Fsites%2Felcssbriefcase%2FHelpDeskPlus"),
+                        ThisItem.Value = "用戶手冊",
+                        Download("https://elcss.sharepoint.com/:w:/r/sites/eps-prd/_layouts/15/download.aspx?SourceUrl=/sites/eps-prd/TempExcel/ePS%E7%B3%BB%E7%B5%B1-%E7%94%A8%E6%88%B6%E6%89%8B%E5%86%8A%20V1.3.4.pdf")
+                    )
+                PaddingBottom: =0
+                PaddingLeft: =36
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =12
+                Text: =ThisItem.Value
+                Width: =140
+                X: =10
+                ZIndex: =3
+
+            Icon1_14 As icon.ListScrollWatchlist:
+                Color: =glbNeutralSecondaryColor
+                Height: =20
+                Icon: |
+                    =If(
+                        ThisItem.Value = "IT服務台",
+                        Icon.ComputerDesktop,
+                        ThisItem.Value = "用戶手冊",
+                        Icon.Notebook,
+                        ThisItem.Value = "組織機構",
+                        Icon.LogJournal,
+                        ThisItem.Value = "意見箱",
+                        Icon.Mail
+                    )
+                    //["IT服務台","操作手冊","用戶反饋"]
+                OnSelect: =Select(Parent)
+                Width: =20
+                X: =20
+                Y: =6
+                ZIndex: =5
+
+        Label8_5 As label:
+            Align: =Align.Center
+            Color: =RGBA(149, 149, 149, 1)
+            Size: =11
+            Text: ="Version 1.0.0"
+            Width: =160
+            Y: =678
+            ZIndex: =4
+
+    ExportContainer As groupContainer.manualLayoutContainer:
+        Height: =86
+        X: =815
+        Y: =105
+        ZIndex: =14
+
+        Dropdown2 As dropdown:
+            Default: =Last(Split(Text(Today(),"yyyy-mm"),"-")).Result-1
+            Items: =Sequence(Last(Split(Text(Today(),"yyyy-mm"),"-")).Result-1,1,1)
+            Width: =106
+            X: =81
+            Y: =25
+            ZIndex: =1
+
+        Label20 As label:
+            Size: =FountSise
+            Text: ="月份："
+            Width: =54
+            X: =27
+            Y: =25
+            ZIndex: =2
+
+        Dropdown2_1 As dropdown:
+            Items: =[1,2]
+            Width: =106
+            X: =275
+            Y: =25
+            ZIndex: =3
+
+        Label20_3 As label:
+            Size: =FountSise
+            Text: |-
+                ="报表类型:"
+            Width: =79
+            X: =192
+            Y: =25
+            ZIndex: =4
+
+        Button6 As button:
+            Height: =37
+            OnSelect: |-
+                =DashboardExportToEmail.Run(Dropdown2.Selected.Value,CurrentUser,Dropdown2_1.Selected.Value);
+                Notify("電郵已成功匯出！",NotificationType.Success)
+            Text: ="導出"
+            Width: =95
+            X: =396
+            Y: =26
+            ZIndex: =5
+

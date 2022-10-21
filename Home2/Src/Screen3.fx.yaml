@@ -1,0 +1,533 @@
+"Screen3 As screen.'phoneLayout_FluidGridWithHeaderPageLayout_ver3.0'":
+
+    RectQuickActionBar1 As rectangle:
+        Height: =88
+        Width: =Parent.Width
+        ZIndex: =1
+
+    LblAppName1 As label:
+        Align: =Align.Center
+        Height: =88
+        Text: ="[Title]"
+        Width: =Parent.Width
+        ZIndex: =2
+
+    Canvas1 As fluidGrid.fluidGridWithBlankCard:
+        BorderThickness: =0
+        Height: =Parent.Height - Self.Y
+        Width: =1206
+        X: =160
+        Y: =RectQuickActionBar1.Y + RectQuickActionBar1.Height
+        ZIndex: =3
+
+        DataCard1 As dataCard:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderStyle: =BorderStyle.Solid
+            BorderThickness: =0
+            DisplayMode: =DisplayMode.Edit
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =392
+            Width: =1206
+            X: =0
+            Y: =0
+            ZIndex: =1
+
+            TextInput2_2 As text:
+                BorderColor: =glbNeutralTertiaryColor
+                BorderThickness: =1
+                Color: =glbNeutralPrimaryColor
+                Default: =""
+                FocusedBorderColor: =glbNeutralSecondaryColor
+                FocusedBorderThickness: =1
+                Height: =32
+                HintText: ="e.g name"
+                HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                HoverFill: =ColorFade(Self.Fill, -5%)
+                PaddingBottom: =0
+                PaddingLeft: =10
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =11
+                Width: =280
+                X: =28
+                Y: =44
+                ZIndex: =1
+
+            ComboBox1_3 As combobox:
+                BorderColor: =glbNeutralTertiaryColor
+                BorderThickness: =1
+                ChevronBackground: =RGBA(255, 255, 255, 1)
+                ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
+                ChevronDisabledFill: =RGBA(202, 202, 202, 1)
+                ChevronFill: =glbNeutralTertiaryColor
+                ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
+                ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
+                Color: =glbNeutralPrimaryColor
+                FocusedBorderThickness: =1
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                HoverColor: =Self.Color
+                HoverFill: =ColorFade(Self.Fill, -5%)
+                Items: =ComboBoxSample
+                PaddingLeft: =10
+                PressedColor: =Self.Color
+                PressedFill: =ColorFade(Self.Fill, -5%)
+                SearchItems: =Search(ComboBoxSample,ComboBox1_3.SearchText,"Value1")
+                SelectionColor: =glbThemePrimaryColor
+                SelectionFill: =ColorFade(Self.SelectionColor, 90%)
+                Size: =11
+                Width: =280
+                X: =395
+                Y: =44
+                ZIndex: =2
+
+            Label1_59 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =28
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="TextInput"
+                Width: =120
+                X: =28
+                Y: =16
+                ZIndex: =3
+
+            Label1_60 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =28
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="ComboBox"
+                Width: =132
+                X: =395
+                Y: =16
+                ZIndex: =4
+
+            Radio1_1 As radio:
+                Default: =""
+                FocusedBorderThickness: =0
+                Height: =24
+                HoverColor: =RGBA(0, 0, 0, 1)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                Items: =RadioSample
+                Layout: =Layout.Horizontal
+                PaddingBottom: =0
+                PaddingTop: =0
+                PressedColor: =RGBA(0, 0, 0, 1)
+                RadioBorderColor: =glbNeutralTertiaryColor
+                RadioSelectionFill: =glbLinkColor
+                RadioSize: =24
+                Size: =11
+                Width: =279
+                X: =29
+                Y: =336
+                ZIndex: =5
+
+            DataCardValue2_1 As attachments:
+                AddAttachmentText: ="Click or drag the file here to upload"
+                BorderColor: =glbLinkColor
+                BorderStyle: =BorderStyle.Dashed
+                BorderThickness: =1
+                Color: =glbLinkColor
+                DropTargetBackgroundColor: =ColorFade(Self.Color, 90%)
+                DropTargetBorderColor: =glbLinkColor
+                DropTargetBorderStyle: =BorderStyle.Dashed
+                DropTargetBorderThickness: =1
+                DropTargetTextColor: =glbLinkColor
+                Fill: =ColorFade(glbLinkColor, 95%)
+                FocusedBorderThickness: =1
+                Height: =80
+                HoverColor: =ColorFade(Self.Color, -25%)
+                HoverFill: =ColorFade(glbLinkColor, 80%)
+                IsInDataCard: =true
+                ItemColor: =glbLinkColor
+                ItemFill: =ColorFade(glbLinkColor, 80%)
+                ItemHoverColor: =ColorFade(glbLinkColor, -25%)
+                ItemHoverFill: =ColorFade(glbLinkColor, 80%)
+                Items: =//Parent.Default
+                MaxAttachments: =4
+                MaxAttachmentsText: ="Max Attachments"
+                NoAttachmentsText: ="No Attachments"
+                PaddingLeft: =10
+                PaddingRight: =10
+                PaddingTop: =10
+                PressedColor: =RGBA(0, 121, 187, 1)
+                PressedFill: =
+                Size: =10
+                Tooltip: =
+                Width: =344
+                X: =28
+                Y: =221
+                ZIndex: =6
+
+            Gallery3 As gallery.galleryVertical:
+                Height: =303
+                Items: =CustomGallerySample
+                Layout: =Layout.Vertical
+                ShowScrollbar: =false
+                TemplatePadding: =0
+                TemplateSize: =70
+                Width: =528
+                X: =678
+                Y: =33
+                ZIndex: =7
+
+                Label6 As label:
+                    Height: =28
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Text: ="發起"
+                    Width: =70
+                    X: =36
+                    ZIndex: =1
+
+                Label6_1 As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =28
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =11
+                    Text: ="張三/zhangsan@elchk.com"
+                    Width: =240
+                    X: =36
+                    Y: =28
+                    ZIndex: =2
+
+                Label6_2 As label:
+                    Align: =Align.Right
+                    Color: =glbNeutralTertiaryColor
+                    Height: =28
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =11
+                    Text: |-
+                        ="2022-05-29 17:44"
+                    Width: =147
+                    X: =381
+                    Y: =28
+                    ZIndex: =3
+
+                Circle2 As circle:
+                    DisplayMode: =DisplayMode.View
+                    Fill: =glbThemePrimaryColor
+                    Height: =14
+                    OnSelect: =Select(Parent)
+                    Width: =14
+                    Y: =7
+                    ZIndex: =4
+
+                Rectangle5 As rectangle:
+                    Fill: =glbThemePrimaryColor
+                    Height: =43
+                    OnSelect: =Select(Parent)
+                    Width: =2
+                    X: =6
+                    Y: =27
+                    ZIndex: =5
+
+        DataCard2 As dataCard.blankCard:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderStyle: =BorderStyle.Solid
+            DisplayMode: =DisplayMode.Edit
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =760
+            Width: =1206
+            X: =0
+            Y: =1
+            ZIndex: =2
+
+            Gallery1 As gallery.galleryVertical:
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =142*4
+                Items: =["发起","提交", "签批","审批"]
+                Layout: =Layout.Vertical
+                TemplatePadding: =0
+                TemplateSize: =142
+                Width: =481
+                X: =372
+                Y: =16
+                ZIndex: =1
+
+                Button3_1 As button:
+                    Align: =Align.Left
+                    BorderThickness: =1
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    DisabledColor: =RGBA(128, 128, 128, 1)
+                    DisplayMode: =DisplayMode.Disabled
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =20
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    RadiusBottomLeft: =6
+                    RadiusBottomRight: =6
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =10
+                    Text: ="李超"
+                    Width: =240
+                    Y: =30
+                    ZIndex: =1
+
+                Button3 As button:
+                    Align: =Align.Left
+                    BorderThickness: =1
+                    DisabledBorderColor: =Self.DisabledFill
+                    DisabledColor: =RGBA(255, 255, 255, 1)
+                    DisabledFill: |-
+                        =//["发起","提交", "签批","审批"]
+                        If(
+                            ThisItem.Value = "发起",
+                            DeepSkyBlue,
+                            ThisItem.Value = "提交",
+                            CornflowerBlue,
+                            ThisItem.Value = "签批",
+                            CadetBlue,
+                            ThisItem.Value = "审批",
+                            BlueViolet
+                        )
+                    DisplayMode: =DisplayMode.Disabled
+                    Height: =30
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =20
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =6
+                    RadiusTopRight: =6
+                    Size: =11
+                    Text: =ThisItem.Value
+                    Width: =240
+                    ZIndex: =2
+
+                Image1_4 As image:
+                    Height: =70
+                    Image: |-
+                        ="data:image/svg+xml;utf8, "&EncodeUrl("
+                        <svg width='15px' height='71px' viewBox='0 0 15 71' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+                            <title>arrow</title>
+                            <g id='页面-1' stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'>
+                                <g id='新增表格' transform='translate(-701.000000, -671.000000)' fill='#C7C7C7' fill-rule='nonzero'>
+                                    <path id='arrow' d='M709.49278,671.492832 L709.499974,672.492806 L709.899,727.993 L715.899102,727.950004 L709,742 L701.899464,728.050721 L707.899,728.007 L707.500026,672.507194 L707.492832,671.50722 L709.49278,671.492832 Z'></path>
+                                </g>
+                            </g>
+                        </svg>
+                        ")
+                    Width: =42
+                    X: =99
+                    Y: =70
+                    ZIndex: =3
+
+                Circle1_1 As circle:
+                    DisplayMode: =DisplayMode.View
+                    Fill: =RGBA(40, 171, 247, 1)
+                    Height: =30
+                    Width: =30
+                    X: =105
+                    Y: =83
+                    ZIndex: =4
+
+                Icon4 As icon.Add:
+                    Color: =RGBA(255, 255, 255, 1)
+                    Height: =30
+                    Icon: =Icon.Add
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =5
+                    PaddingTop: =5
+                    Width: =30
+                    X: =105
+                    Y: =83
+                    ZIndex: =5
+
+                Icon4_1 As icon.Add:
+                    Color: =RGBA(255, 255, 255, 1)
+                    Height: =30
+                    Icon: =Icon.Cancel
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =7
+                    PaddingTop: =7
+                    Width: =30
+                    X: =210
+                    ZIndex: =6
+
+                RejectContainer1 As groupContainer.manualLayoutContainer:
+                    Height: =40
+                    Visible: =If(ThisItem.Value="发起"||ThisItem.Value="审批",false,true)
+                    Width: =213
+                    X: =240
+                    Y: =30
+                    ZIndex: =10
+
+                    Image1_7 As image:
+                        Height: =33
+                        Image: |-
+                            ="data:image/svg+xml;utf8, "&EncodeUrl("
+                            <svg width='90px' height='15px' viewBox='0 0 90 15' version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink'>
+                              
+                                <g  stroke='none' stroke-width='1' fill='none' fill-rule='evenodd'>
+                                    <g  transform='translate(-993.000000, -692.000000)' fill='#FFB2B2' fill-rule='nonzero'>
+                                        <path id='right' d='M1069.03977,692.921017 L1083,700 L1068.96068,706.920794 L1068.994,700.92 L994.49435,700.499984 L993.494366,700.494334 L993.505666,698.494366 L994.50565,698.500016 L1069.005,698.92 L1069.03977,692.921017 Z'></path>
+                                    </g>
+                                </g>
+                            </svg>
+                            ")
+                        Width: =89
+                        Y: =5
+                        ZIndex: =1
+
+                    Dropdown1_1 As dropdown:
+                        BorderColor: =glbNeutralTertiaryColor
+                        BorderThickness: =1
+                        ChevronBackground: =RGBA(0, 0, 0, 0)
+                        ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
+                        ChevronDisabledFill: =RGBA(202, 202, 202, 1)
+                        ChevronFill: =glbNeutralTertiaryColor
+                        ChevronHoverBackground: =ColorFade(Self.Fill, -5%)
+                        ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
+                        Color: =glbNeutralPrimaryColor
+                        FocusedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                        FocusedBorderThickness: =1
+                        Height: =30
+                        HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                        HoverFill: =ColorFade(Self.Fill, -5%)
+                        Items: =["上一步","第一步","结束"]
+                        PaddingBottom: =5
+                        PaddingRight: =5
+                        PaddingTop: =5
+                        PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                        PressedColor: =Self.Color
+                        PressedFill: =ColorFade(Self.Fill, -5%)
+                        SelectionFill: =glbThemePrimaryColor
+                        Size: =11
+                        Width: =97
+                        X: =94
+                        Y: =6
+                        ZIndex: =2
+
+                    Label5 As label:
+                        Align: =Align.Center
+                        Color: =RGBA(184, 0, 0, 1)
+                        Fill: =RGBA(252, 222, 222, 1)
+                        Height: =20
+                        OnSelect: =
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =9
+                        Text: ="拒绝"
+                        Width: =40
+                        X: =22
+                        Y: =12
+                        ZIndex: =3
+
+    Button1 As button:
+        OnSelect: |-
+            =Set(varAttachmentControl,JSON(Image4.Image,IncludeBinaryData));
+            Set(varBase64Only,Mid(varAttachmentControl,Find(",", varAttachmentControl)+1,Len(varAttachmentControl)-Find (",", varAttachmentControl)-1));
+            SendAttachmentToTemplateFileList.Run(GUID(),
+            [@TextInput_FormName].Text,
+                TextInput_FormType.Text,
+                Last(Attachment_Form.Attachments).Name,
+            Last(Attachment_Form.Attachments).Name,
+            varBase64Only)
+        Text: ="按钮"
+        X: =30
+        Y: =290
+        ZIndex: =4
+
+    "Gallery2 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
+        Items: |-
+            =Filter(
+                ApprovalDetailCol,
+                ApproverEmail = CurrentUser,
+                field_TaskStatus = "002"
+            )
+        Layout: =Layout.Vertical
+        TemplatePadding: =0
+        TemplateSize: =Min(160, Self.Height - 60)
+        X: =30
+        Y: =102
+        ZIndex: =5
+
+        Image2 As image:
+            Height: =128
+            OnSelect: =Select(Parent)
+            Width: =128
+            X: =16
+            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+            ZIndex: =1
+
+        Title1 As label:
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Text: =ThisItem.field_AgentUserEmail
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Parent.TemplateWidth - Image2.Width - 104
+            X: =Image2.X + Image2.Width + 24
+            Y: =44
+            ZIndex: =2
+
+        Subtitle1 As label:
+            Height: =Self.Size * 1.8
+            OnSelect: =Select(Parent)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Text: =ThisItem.Approver
+            VerticalAlign: =VerticalAlign.Top
+            Width: =Title1.Width
+            X: =Title1.X
+            Y: =Title1.Y + Title1.Height + 4
+            ZIndex: =3
+
+        NextArrow1 As icon.ChevronRight:
+            AccessibleLabel: =Self.Tooltip
+            Height: =60
+            Icon: =Icon.ChevronRight
+            OnSelect: =Select(Parent)
+            PaddingBottom: =10
+            PaddingLeft: =10
+            PaddingRight: =10
+            PaddingTop: =10
+            TabIndex: =0
+            Tooltip: ="查看项详细信息"
+            Width: =60
+            X: =Parent.TemplateWidth - Self.Width - 5
+            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
+            ZIndex: =4
+
+        Separator1 As rectangle:
+            Height: =1
+            OnSelect: =Select(Parent)
+            Width: =Parent.TemplateWidth
+            Y: =Parent.TemplateHeight - 1
+            ZIndex: =5
+

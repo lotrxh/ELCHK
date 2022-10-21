@@ -1,0 +1,4903 @@
+"'Design Guide Screen' As screen":
+
+    canDesignGuide As fluidGrid.fluidGridWithBlankCard:
+        BorderThickness: =0
+        Height: =Parent.Height
+        Width: =1366
+        X: =(Parent.Width-crdColor.Width)/2
+        Y: =
+        ZIndex: =1
+
+        crdColor As dataCard:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderStyle: =BorderStyle.Solid
+            BorderThickness: =0
+            DisplayMode: =DisplayMode.Edit
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =1099
+            Width: |
+                =Parent.Width
+            X: =0
+            Y: =0
+            ZIndex: =1
+
+            shpColor_15 As rectangle:
+                Fill: =glbThemePrimaryColor
+                Height: =60
+                Width: =360
+                X: =40
+                Y: =516
+                ZIndex: =1
+
+            "'Design elements' As label":
+                FontWeight: =FontWeight.Bold
+                Height: =47
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =28
+                Text: ="Design Guide"
+                Width: =400
+                X: =40
+                Y: =27
+                ZIndex: =2
+
+            Label1_1 As label:
+                Color: =glbNeutralPrimaryColor
+                FontWeight: =FontWeight.Bold
+                Height: =30
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =14
+                Text: ="Theme Colors"
+                Width: =300
+                X: =40
+                Y: =467
+                ZIndex: =3
+
+            Label1_2 As label:
+                Color: =glbNeutralPrimaryColor
+                FontWeight: =FontWeight.Bold
+                Height: =30
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =14
+                Text: ="Neutral Colors"
+                Width: =300
+                X: =891
+                Y: =464
+                ZIndex: =6
+
+            Label1_41 As label:
+                Color: =glbNeutralPrimaryColor
+                FontWeight: =FontWeight.Bold
+                Height: =30
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =14
+                Text: ="Functional Color"
+                Width: =300
+                X: =464
+                Y: =467
+                ZIndex: =21
+
+            Label1_25 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =59
+                LineHeight: =1.8
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: |-
+                    ="通过全局代码的方式实现颜色的统一控制，在给元素上色的时候赋予相应的全局代码即可
+                    —举例：红色色值的文字"
+                VerticalAlign: =VerticalAlign.Top
+                Width: =646
+                X: =620
+                Y: =289
+                ZIndex: =22
+
+            Label1_26 As label:
+                Color: =glbNeutralPrimaryColor
+                FontWeight: =FontWeight.Semibold
+                Height: =24
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="使用方法"
+                Width: =300
+                X: =617
+                Y: =261
+                ZIndex: =23
+
+            Label1_33 As label:
+                Color: =glbErrorColor
+                FontWeight: =FontWeight.Semibold
+                Height: =24
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="示例：红色属性"
+                Width: =160
+                X: =620
+                Y: =363
+                ZIndex: =24
+
+            Label1_34 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =75
+                LineHeight: =1.8
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: |-
+                    ="为了保证用户界面的规范及统一性，我们根据用户界面设计的规律，预设好了常用的组件供开发者使用。
+                    在开发之前请与设计师确认符合客户设计要求的最新文件，将【屏幕的内容】以及【全局代码】都复制到你的Power App文件上。"
+                VerticalAlign: =VerticalAlign.Top
+                Width: =1259
+                X: =40
+                Y: =108
+                ZIndex: =25
+
+            Label1_35 As label:
+                Color: =glbNeutralPrimaryColor
+                FontWeight: =FontWeight.Bold
+                Height: =30
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =20
+                Text: ="Color"
+                Width: =300
+                X: =40
+                Y: =217
+                ZIndex: =26
+
+            Label1_36 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =166
+                LineHeight: =1.8
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: |-
+                    ="Theme Colors ：主题色是体现产品特性和传播理念最直观的视觉元素之一。
+                    Functional Color：功能色代表了明确的信息以及状态，比如成功、出错、失败、提醒、链接等。
+                    Neutral colors：中性色主要被大量的应用在界面的文字部分，此外背景、边框、分割线等场景中也非常常见。"
+                VerticalAlign: =VerticalAlign.Top
+                Width: =530
+                X: =40
+                Y: =285
+                ZIndex: =27
+
+            Label1_37 As label:
+                Color: =glbNeutralPrimaryColor
+                FontWeight: =FontWeight.Semibold
+                Height: =24
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="色板说明"
+                Width: =300
+                X: =40
+                Y: =261
+                ZIndex: =28
+
+            Label1_38 As label:
+                Color: =ColorFade(glbErrorColor, -50%)
+                FontWeight: =FontWeight.Semibold
+                Height: =24
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="更亮示例"
+                Width: =160
+                X: =775
+                Y: =363
+                ZIndex: =29
+
+            Label1_39 As label:
+                Color: =glbLinkColor
+                Height: =24
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =9
+                Text: ="Color=glbErrorColor"
+                Width: =160
+                X: =620
+                Y: =391
+                ZIndex: =30
+
+            Label1_40 As label:
+                Color: =ColorFade(glbErrorColor, 50%)
+                FontWeight: =FontWeight.Semibold
+                Height: =24
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="更浅示例"
+                Width: =160
+                X: =1004
+                Y: =363
+                ZIndex: =31
+
+            Label1_42 As label:
+                Color: =glbLinkColor
+                Height: =24
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =9
+                Text: ="Color=ColorFade(glbErrorColor, -50%)"
+                Width: =226
+                X: =774
+                Y: =391
+                ZIndex: =32
+
+            Label1_43 As label:
+                Color: =glbLinkColor
+                Height: =24
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =9
+                Text: ="Color=ColorFade(glbErrorColor, 50%)"
+                Width: =226
+                X: =1004
+                Y: =391
+                ZIndex: =33
+
+            Rectangle1_2 As rectangle:
+                Fill: =RGBA(202, 202, 202, 1)
+                Height: =1
+                Width: =1287
+                X: =40
+                Y: =192
+                ZIndex: =34
+
+            Label1_44 As label:
+                Align: =Align.Right
+                Color: =glbNeutralSecondaryColor
+                Height: =24
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="更新日期：2022.2.21"
+                Width: =300
+                X: =1027
+                Y: =38
+                ZIndex: =35
+
+            Rectangle1_3 As rectangle:
+                Fill: =RGBA(202, 202, 202, 1)
+                Height: =1
+                Width: =1287
+                X: =40
+                Y: =84
+                ZIndex: =36
+
+            labColorCode As label:
+                Color: =White
+                Height: =20
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="glbThemePrimaryColor"
+                Width: =205
+                X: =52
+                Y: =549
+                ZIndex: =37
+
+            labColorName_1 As label:
+                Color: =White
+                FontWeight: =FontWeight.Bold
+                Height: =24
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="Theme Primary"
+                Width: =205
+                X: =52
+                Y: =524
+                ZIndex: =38
+
+            shpColor_1 As rectangle:
+                Fill: =glbThemeSecondaryColor
+                Height: =60
+                Width: =360
+                X: =40
+                Y: =583
+                ZIndex: =39
+
+            labColorCode_1 As label:
+                Color: =White
+                Height: =20
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="glbThemeSecondaryColor"
+                Width: =205
+                X: =52
+                Y: =617
+                ZIndex: =40
+
+            labColorName_2 As label:
+                Color: =White
+                FontWeight: =FontWeight.Bold
+                Height: =24
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="Theme Secondary"
+                Width: =205
+                X: =52
+                Y: =592
+                ZIndex: =41
+
+            shpColor_3 As rectangle:
+                Fill: =glbThemeTertiaryColor
+                Height: =60
+                Width: =360
+                X: =40
+                Y: =650
+                ZIndex: =42
+
+            labColorCode_2 As label:
+                Color: =White
+                Height: =20
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="glbThemeTertiaryColor"
+                Width: =205
+                X: =52
+                Y: =682
+                ZIndex: =43
+
+            labColorName_3 As label:
+                Color: =White
+                FontWeight: =FontWeight.Bold
+                Height: =24
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="Theme Tertiary"
+                Width: =205
+                X: =52
+                Y: =657
+                ZIndex: =44
+
+            shpColor_2 As rectangle:
+                Fill: =glbErrorColor
+                Height: =60
+                Width: =360
+                X: =464
+                Y: =516
+                ZIndex: =45
+
+            labColorCode_3 As label:
+                Color: =White
+                Height: =20
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="glbErrorColor"
+                Width: =205
+                X: =476
+                Y: =549
+                ZIndex: =46
+
+            labColorName_4 As label:
+                Color: =White
+                FontWeight: =FontWeight.Bold
+                Height: =24
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="Error"
+                Width: =205
+                X: =476
+                Y: =524
+                ZIndex: =47
+
+            shpColor_4 As rectangle:
+                Fill: =glbSuccessColor
+                Height: =60
+                Width: =360
+                X: =464
+                Y: =583
+                ZIndex: =48
+
+            labColorCode_4 As label:
+                Color: =White
+                Height: =20
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="glbSuccessColor"
+                Width: =205
+                X: =476
+                Y: =617
+                ZIndex: =49
+
+            labColorName_5 As label:
+                Color: =White
+                FontWeight: =FontWeight.Bold
+                Height: =24
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="Success"
+                Width: =205
+                X: =476
+                Y: =592
+                ZIndex: =50
+
+            shpColor_5 As rectangle:
+                Fill: =glbWarningColor
+                Height: =60
+                Width: =360
+                X: =464
+                Y: =650
+                ZIndex: =51
+
+            labColorCode_5 As label:
+                Color: =White
+                Height: =20
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="glbWarningColor"
+                Width: =205
+                X: =476
+                Y: =682
+                ZIndex: =52
+
+            labColorName_6 As label:
+                Color: =White
+                FontWeight: =FontWeight.Bold
+                Height: =24
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="Warning"
+                Width: =205
+                X: =476
+                Y: =657
+                ZIndex: =53
+
+            shpColor_6 As rectangle:
+                Fill: =glbLinkColor
+                Height: =60
+                Width: =360
+                X: =464
+                Y: =717
+                ZIndex: =54
+
+            labColorCode_6 As label:
+                Color: =White
+                Height: =20
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="glbLinkColor"
+                Width: =205
+                X: =476
+                Y: =749
+                ZIndex: =55
+
+            labColorName_7 As label:
+                Color: =White
+                FontWeight: =FontWeight.Bold
+                Height: =24
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="Link"
+                Width: =205
+                X: =476
+                Y: =724
+                ZIndex: =56
+
+            shpColor_7 As rectangle:
+                Fill: =Black
+                Height: =60
+                Width: =360
+                X: =891
+                Y: =516
+                ZIndex: =57
+
+            labColorCode_7 As label:
+                Color: =White
+                Height: =20
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: |-
+                    ="Black
+                    "
+                Width: =205
+                X: =903
+                Y: =549
+                ZIndex: =58
+
+            labColorName_8 As label:
+                Color: =White
+                FontWeight: =FontWeight.Bold
+                Height: =24
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="Black"
+                Width: =205
+                X: =903
+                Y: =524
+                ZIndex: =59
+
+            shpColor_8 As rectangle:
+                Fill: =glbNeutralPrimaryColor
+                Height: =60
+                Width: =360
+                X: =891
+                Y: =583
+                ZIndex: =60
+
+            labColorCode_8 As label:
+                Color: =White
+                Height: =20
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="glbNeutralPrimaryColor"
+                Width: =205
+                X: =903
+                Y: =617
+                ZIndex: =61
+
+            labColorName_9 As label:
+                Color: =White
+                FontWeight: =FontWeight.Bold
+                Height: =24
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="Neutral Primary"
+                Width: =205
+                X: =903
+                Y: =592
+                ZIndex: =62
+
+            shpColor_9 As rectangle:
+                Fill: =glbNeutralSecondaryColor
+                Height: =60
+                Width: =360
+                X: =891
+                Y: =650
+                ZIndex: =63
+
+            labColorCode_9 As label:
+                Color: =White
+                Height: =20
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="glbNeutralSecondaryColor"
+                Width: =205
+                X: =903
+                Y: =682
+                ZIndex: =64
+
+            labColorName_10 As label:
+                Color: =White
+                FontWeight: =FontWeight.Bold
+                Height: =24
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="Neutral Secondary"
+                Width: =205
+                X: =903
+                Y: =657
+                ZIndex: =65
+
+            shpColor_10 As rectangle:
+                Fill: =glbNeutralTertiaryColor
+                Height: =60
+                Width: =360
+                X: =891
+                Y: =717
+                ZIndex: =66
+
+            labColorCode_10 As label:
+                Color: =White
+                Height: =20
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="glbNeutralTertiaryColor"
+                Width: =205
+                X: =903
+                Y: =749
+                ZIndex: =67
+
+            labColorName_11 As label:
+                Color: =White
+                FontWeight: =FontWeight.Bold
+                Height: =24
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="Neutral Tertiary"
+                Width: =205
+                X: =903
+                Y: =724
+                ZIndex: =68
+
+            shpColor_11 As rectangle:
+                Fill: =glbNeutralQuaternaryColor
+                Height: =60
+                Width: =360
+                X: =891
+                Y: =784
+                ZIndex: =69
+
+            labColorCode_11 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =20
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="glbNeutralQuaternaryColor"
+                Width: =205
+                X: =903
+                Y: =817
+                ZIndex: =70
+
+            labColorName_12 As label:
+                Color: =glbNeutralSecondaryColor
+                FontWeight: =FontWeight.Bold
+                Height: =24
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="Neutral Quaternary"
+                Width: =205
+                X: =903
+                Y: =792
+                ZIndex: =71
+
+            shpColor_12 As rectangle:
+                Fill: =glbNeutralLightColor
+                Height: =60
+                Width: =360
+                X: =891
+                Y: =851
+                ZIndex: =72
+
+            labColorCode_12 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =20
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="glbNeutralLightColor"
+                Width: =205
+                X: =903
+                Y: =885
+                ZIndex: =73
+
+            labColorName_13 As label:
+                Color: =glbNeutralSecondaryColor
+                FontWeight: =FontWeight.Bold
+                Height: =24
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="Neutral Light"
+                Width: =205
+                X: =903
+                Y: =860
+                ZIndex: =74
+
+            shpColor_13 As rectangle:
+                Fill: =glbNeutralLighterColor
+                Height: =60
+                Width: =360
+                X: =891
+                Y: =918
+                ZIndex: =75
+
+            labColorCode_13 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =20
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="glbNeutralLighterColor"
+                Width: =205
+                X: =903
+                Y: =950
+                ZIndex: =76
+
+            labColorName_14 As label:
+                Color: =glbNeutralSecondaryColor
+                FontWeight: =FontWeight.Bold
+                Height: =24
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="Neutral Lighter"
+                Width: =205
+                X: =903
+                Y: =925
+                ZIndex: =77
+
+            shpColor_14 As rectangle:
+                BorderColor: =RGBA(219, 219, 219, 1)
+                BorderThickness: =1
+                Fill: =White
+                Height: =60
+                Width: =360
+                X: =891
+                Y: =988
+                ZIndex: =78
+
+            labColorCode_14 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =20
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="White"
+                Width: =205
+                X: =903
+                Y: =1022
+                ZIndex: =79
+
+            labColorName_15 As label:
+                Color: =glbNeutralSecondaryColor
+                FontWeight: =FontWeight.Bold
+                Height: =24
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="White"
+                Width: =205
+                X: =903
+                Y: =997
+                ZIndex: =80
+
+        crdButton As dataCard.blankCard:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderStyle: =BorderStyle.Solid
+            DisplayMode: =DisplayMode.Edit
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =898
+            Width: =1366
+            X: =0
+            Y: =1
+            ZIndex: =2
+
+            Label1_3 As label:
+                Color: =glbNeutralPrimaryColor
+                FontWeight: =FontWeight.Bold
+                Height: =30
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =20
+                Text: ="Button"
+                Width: =300
+                X: =40
+                Y: =25
+                ZIndex: =1
+
+            BtnPrimaryLg As button:
+                BorderColor: =Self.Fill
+                BorderThickness: =1
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =glbThemePrimaryColor
+                FocusedBorderThickness: =1
+                HoverFill: =ColorFade(Self.Fill, -15%)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedColor: =White
+                PressedFill: =ColorFade(Self.Fill, -25%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =12
+                Text: ="Button"
+                Width: =100
+                X: =121
+                Y: =315
+                ZIndex: =2
+
+            BtnPrimary As button:
+                BorderColor: =Self.Fill
+                BorderThickness: =1
+                Color: =White
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =glbThemePrimaryColor
+                FocusedBorderThickness: =1
+                Height: =32
+                HoverFill: =ColorFade(Self.Fill, -15%)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedColor: =White
+                PressedFill: =ColorFade(Self.Fill, -25%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =11
+                Text: ="Button"
+                Width: =80
+                X: =121
+                Y: =461
+                ZIndex: =3
+
+            Label1_4 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =28
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="Large"
+                Width: =80
+                X: =44
+                Y: =319
+                ZIndex: =4
+
+            Label1_5 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =28
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="Normal"
+                Width: =80
+                X: =44
+                Y: =459
+                ZIndex: =5
+
+            Label1_6 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =28
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="Small"
+                Width: =80
+                X: =44
+                Y: =576
+                ZIndex: =6
+
+            BtnDefaultLg As button:
+                BorderColor: =Self.Color
+                BorderThickness: =1
+                Color: =glbThemePrimaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =RGBA(255, 255, 255, 1)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =12
+                Text: ="Button"
+                Width: =100
+                X: =433
+                Y: =316
+                ZIndex: =7
+
+            BtnDefault As button:
+                BorderColor: =Self.Color
+                BorderThickness: =1
+                Color: =glbThemePrimaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =RGBA(255, 255, 255, 1)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =11
+                Text: ="Button"
+                Width: =80
+                X: =433
+                Y: =461
+                ZIndex: =8
+
+            BtnSecond As button:
+                BorderColor: =glbNeutralQuaternaryColor
+                BorderThickness: =1
+                Color: =glbNeutralPrimaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                Height: =32
+                HoverBorderColor: =glbThemePrimaryColor
+                HoverColor: =glbThemePrimaryColor
+                HoverFill: =RGBA(255, 255, 255, 1)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =glbThemePrimaryColor
+                PressedColor: =glbThemePrimaryColor
+                PressedFill: =ColorFade(glbThemePrimaryColor, 95%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =11
+                Text: ="Button"
+                Width: =80
+                X: =433
+                Y: =511
+                ZIndex: =10
+
+            Label1_13 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =28
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="Primary Button"
+                Width: =120
+                X: =125
+                Y: =284
+                ZIndex: =11
+
+            Label1_14 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =28
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="Secondary Button"
+                Width: =200
+                X: =433
+                Y: =284
+                ZIndex: =12
+
+            BtnLgIcon As group:
+                Height: =5
+                Width: =5
+                X: =60
+                Y: =60
+                ZIndex: =15
+
+                BtnPrimary_1 As button:
+                    BorderColor: =Self.Fill
+                    BorderThickness: =1
+                    Color: =White
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    Fill: =glbThemePrimaryColor
+                    FocusedBorderThickness: =1
+                    Height: =32
+                    HoverFill: =ColorFade(Self.Fill, -15%)
+                    PaddingBottom: =0
+                    PaddingLeft: =20
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedColor: =White
+                    PressedFill: =ColorFade(Self.Fill, -25%)
+                    RadiusBottomLeft: =4
+                    RadiusBottomRight: =4
+                    RadiusTopLeft: =4
+                    RadiusTopRight: =4
+                    Size: =11
+                    Text: ="Button"
+                    Width: =90
+                    X: =221
+                    Y: =461
+                    ZIndex: =13
+
+                Icon4_6 As icon.Add:
+                    Color: =RGBA(255, 255, 255, 1)
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    Height: =16
+                    Icon: =Icon.Search
+                    OnSelect: =
+                    PressedColor: =White
+                    Width: =16
+                    X: =231
+                    Y: =469
+                    ZIndex: =14
+
+            BtnLgIconOnly As icon.Add:
+                BorderColor: =Self.Fill
+                BorderThickness: =1
+                Color: =RGBA(255, 255, 255, 1)
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                DisabledColor: =RGBA(149, 149, 149, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =glbThemePrimaryColor
+                Height: =32
+                HoverFill: =ColorFade(Self.Fill, -15%)
+                Icon: =Icon.Search
+                OnSelect: =
+                PaddingBottom: =8
+                PaddingTop: =8
+                PressedColor: =White
+                PressedFill: =ColorFade(Self.Fill, -25%)
+                Width: =32
+                X: =329
+                Y: =461
+                ZIndex: =16
+
+            BtnDefaultIconOnly As icon.Add:
+                BorderColor: =Self.Color
+                BorderThickness: =1
+                Color: =glbThemePrimaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                DisabledColor: =RGBA(149, 149, 149, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.BorderColor, -25%)
+                HoverColor: =ColorFade(Self.BorderColor, -25%)
+                Icon: =Icon.Search
+                OnSelect: =
+                PaddingBottom: =8
+                PaddingTop: =8
+                PressedBorderColor: =ColorFade(Self.BorderColor, -15%)
+                PressedColor: =ColorFade(Self.BorderColor, -15%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                Width: =32
+                X: =639
+                Y: =461
+                ZIndex: =19
+
+            Button_large_10 As button:
+                BorderColor: =glbNeutralQuaternaryColor
+                BorderThickness: =1
+                Color: =glbNeutralPrimaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                HoverBorderColor: =glbThemePrimaryColor
+                HoverColor: =glbThemePrimaryColor
+                HoverFill: =RGBA(255, 255, 255, 1)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =glbThemePrimaryColor
+                PressedColor: =glbThemePrimaryColor
+                PressedFill: =ColorFade(glbThemePrimaryColor, 95%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =12
+                Text: ="Button"
+                Width: =100
+                X: =433
+                Y: =377
+                ZIndex: =20
+
+            BtnSecondIconOnly As icon.Add:
+                BorderColor: =glbNeutralQuaternaryColor
+                BorderThickness: =1
+                Color: =glbNeutralPrimaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                DisabledColor: =RGBA(149, 149, 149, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                Height: =32
+                HoverBorderColor: =glbThemePrimaryColor
+                HoverColor: =glbThemePrimaryColor
+                HoverFill: =White
+                Icon: =Icon.Search
+                OnSelect: =
+                PaddingBottom: =8
+                PaddingTop: =8
+                PressedBorderColor: =ColorFade(glbThemePrimaryColor, -15%)
+                PressedColor: =ColorFade(glbThemePrimaryColor, -15%)
+                PressedFill: =ColorFade(glbThemePrimaryColor, 95%)
+                Width: =32
+                X: =639
+                Y: =511
+                ZIndex: =23
+
+            BtnText As button:
+                BorderColor: =
+                BorderThickness: =0
+                Color: =glbNeutralPrimaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =RGBA(0, 0, 0, 0)
+                FocusedBorderThickness: =0
+                FontWeight: =FontWeight.Normal
+                Height: =32
+                HoverBorderColor: =
+                HoverColor: =glbThemePrimaryColor
+                HoverFill: =RGBA(0, 0, 0, 0)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =
+                PressedColor: =ColorFade(glbThemePrimaryColor, -20%)
+                PressedFill: =RGBA(0, 0, 0, 0)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =11
+                Text: ="Button"
+                Width: =80
+                X: =1077
+                Y: =457
+                ZIndex: =24
+
+            BtnDefaultIcon As group:
+                Height: =5
+                Width: =5
+                X: =40
+                Y: =40
+                ZIndex: =24
+
+                BtnDefault_2 As button:
+                    BorderColor: =Self.Color
+                    BorderThickness: =1
+                    Color: =glbThemePrimaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    Fill: =White
+                    FocusedBorderThickness: =1
+                    Height: =32
+                    HoverBorderColor: =ColorFade(Self.Color, -15%)
+                    HoverColor: =ColorFade(Self.Color, -15%)
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    PaddingBottom: =0
+                    PaddingLeft: =20
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =ColorFade(Self.Color, -25%)
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    PressedFill: =ColorFade(Self.Color, 95%)
+                    RadiusBottomLeft: =4
+                    RadiusBottomRight: =4
+                    RadiusTopLeft: =4
+                    RadiusTopRight: =4
+                    Size: =11
+                    Text: ="Button"
+                    Width: =90
+                    X: =533
+                    Y: =461
+                    ZIndex: =17
+
+                Icon4_8 As icon.Add:
+                    Color: =BtnDefault_2.Color
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    Height: =16
+                    HoverColor: =ColorFade(Self.Color, -15%)
+                    Icon: =Icon.Add
+                    OnSelect: =
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    Width: =16
+                    X: =543
+                    Y: =469
+                    ZIndex: =18
+
+            BtnSecondIcon As group:
+                Height: =5
+                Width: =5
+                X: =40
+                Y: =40
+                ZIndex: =24
+
+                BtnSecond_2 As button:
+                    BorderColor: =glbNeutralQuaternaryColor
+                    BorderThickness: =1
+                    Color: =glbNeutralPrimaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    Fill: =White
+                    FocusedBorderThickness: =1
+                    Height: =32
+                    HoverBorderColor: =glbThemePrimaryColor
+                    HoverColor: =glbThemePrimaryColor
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    PaddingBottom: =0
+                    PaddingLeft: =20
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =glbThemePrimaryColor
+                    PressedColor: =glbThemePrimaryColor
+                    PressedFill: =ColorFade(glbThemePrimaryColor, 95%)
+                    RadiusBottomLeft: =4
+                    RadiusBottomRight: =4
+                    RadiusTopLeft: =4
+                    RadiusTopRight: =4
+                    Size: =11
+                    Text: ="Button"
+                    Width: =90
+                    X: =533
+                    Y: =511
+                    ZIndex: =21
+
+                Icon4_10 As icon.Add:
+                    Color: =glbNeutralPrimaryColor
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    Height: =16
+                    HoverColor: =glbThemePrimaryColor
+                    Icon: =Icon.Search
+                    OnSelect: =
+                    PressedBorderColor: =ColorFade(Self.Color, 95%)
+                    PressedColor: =glbThemePrimaryColor
+                    Width: =16
+                    X: =543
+                    Y: =519
+                    ZIndex: =22
+
+            BtnLink As button:
+                BorderColor: =
+                BorderThickness: =0
+                Color: =glbLinkColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =RGBA(0, 0, 0, 0)
+                FocusedBorderThickness: =0
+                FontWeight: =FontWeight.Normal
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =RGBA(0, 0, 0, 0)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =11
+                Text: ="Button"
+                Width: =80
+                X: =1197
+                Y: =457
+                ZIndex: =25
+
+            BtnDashed As button:
+                BorderColor: =Self.Color
+                BorderStyle: =BorderStyle.Dashed
+                BorderThickness: =1
+                Color: =glbThemePrimaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =RGBA(255, 255, 255, 1)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =11
+                Text: ="Button"
+                Width: =80
+                X: =753
+                Y: =461
+                ZIndex: =26
+
+            BtnDashedIconOnly As icon.Add:
+                BorderColor: =Self.Color
+                BorderStyle: =BorderStyle.Dashed
+                BorderThickness: =1
+                Color: =glbThemePrimaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                DisabledColor: =RGBA(149, 149, 149, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.BorderColor, -25%)
+                HoverColor: =ColorFade(Self.BorderColor, -25%)
+                Icon: =Icon.Search
+                OnSelect: =
+                PaddingBottom: =8
+                PaddingTop: =8
+                PressedBorderColor: =ColorFade(Self.BorderColor, -15%)
+                PressedColor: =ColorFade(Self.BorderColor, -15%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                Width: =32
+                X: =959
+                Y: =461
+                ZIndex: =29
+
+            BtnDashed_3 As button:
+                BorderColor: =glbNeutralQuaternaryColor
+                BorderStyle: =BorderStyle.Dashed
+                BorderThickness: =1
+                Color: =glbNeutralPrimaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                Height: =32
+                HoverBorderColor: =glbThemePrimaryColor
+                HoverColor: =glbThemePrimaryColor
+                HoverFill: =RGBA(255, 255, 255, 1)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =glbThemePrimaryColor
+                PressedColor: =glbThemePrimaryColor
+                PressedFill: =ColorFade(glbThemePrimaryColor, 95%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =11
+                Text: ="Button"
+                Width: =80
+                X: =753
+                Y: =513
+                ZIndex: =30
+
+            BtnDashedIcon As group:
+                Height: =5
+                Width: =5
+                X: =-379
+                Y: =-153
+                ZIndex: =30
+
+                BtnDashed_5 As button:
+                    BorderColor: =Self.Color
+                    BorderStyle: =BorderStyle.Dashed
+                    BorderThickness: =1
+                    Color: =glbThemePrimaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    Fill: =White
+                    FocusedBorderThickness: =1
+                    Height: =32
+                    HoverBorderColor: =ColorFade(Self.Color, -15%)
+                    HoverColor: =ColorFade(Self.Color, -15%)
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    PaddingBottom: =0
+                    PaddingLeft: =20
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =ColorFade(Self.Color, -25%)
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    PressedFill: =ColorFade(Self.Color, 95%)
+                    RadiusBottomLeft: =4
+                    RadiusBottomRight: =4
+                    RadiusTopLeft: =4
+                    RadiusTopRight: =4
+                    Size: =11
+                    Text: ="Button"
+                    Width: =90
+                    X: =850
+                    Y: =461
+                    ZIndex: =27
+
+                Icon4_13 As icon.Add:
+                    Color: =BtnDashed_5.Color
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    Height: =16
+                    HoverColor: =ColorFade(Self.Color, -15%)
+                    Icon: =Icon.Add
+                    OnSelect: =
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    Width: =16
+                    X: =860
+                    Y: =469
+                    ZIndex: =28
+
+            BtnDashedIconOnly_2 As icon.Add:
+                BorderColor: =glbNeutralQuaternaryColor
+                BorderStyle: =BorderStyle.Dashed
+                BorderThickness: =1
+                Color: =glbNeutralPrimaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                DisabledColor: =RGBA(149, 149, 149, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                Height: =32
+                HoverBorderColor: =glbThemePrimaryColor
+                HoverColor: =glbThemePrimaryColor
+                HoverFill: =White
+                Icon: =Icon.Search
+                OnSelect: =
+                PaddingBottom: =8
+                PaddingTop: =8
+                PressedBorderColor: =ColorFade(glbThemePrimaryColor, -15%)
+                PressedColor: =ColorFade(glbThemePrimaryColor, -15%)
+                PressedFill: =ColorFade(glbThemePrimaryColor, 95%)
+                Width: =32
+                X: =959
+                Y: =513
+                ZIndex: =33
+
+            BtnDashedIcon_2 As group:
+                Height: =5
+                Width: =5
+                X: =-669
+                Y: =-153
+                ZIndex: =34
+
+                Button_large_16 As button:
+                    BorderColor: =glbNeutralQuaternaryColor
+                    BorderStyle: =BorderStyle.Dashed
+                    BorderThickness: =1
+                    Color: =glbNeutralPrimaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    Fill: =White
+                    FocusedBorderThickness: =1
+                    Height: =32
+                    HoverBorderColor: =glbThemePrimaryColor
+                    HoverColor: =glbThemePrimaryColor
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    PaddingBottom: =0
+                    PaddingLeft: =20
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =glbThemePrimaryColor
+                    PressedColor: =glbThemePrimaryColor
+                    PressedFill: =ColorFade(glbThemePrimaryColor, 95%)
+                    RadiusBottomLeft: =4
+                    RadiusBottomRight: =4
+                    RadiusTopLeft: =4
+                    RadiusTopRight: =4
+                    Size: =11
+                    Text: ="Button"
+                    Width: =90
+                    X: =850
+                    Y: =513
+                    ZIndex: =31
+
+                Icon4_15 As icon.Add:
+                    Color: =glbNeutralPrimaryColor
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    Height: =16
+                    HoverColor: =glbThemePrimaryColor
+                    Icon: =Icon.Search
+                    OnSelect: =
+                    PressedColor: =glbThemePrimaryColor
+                    Width: =16
+                    X: =860
+                    Y: =521
+                    ZIndex: =32
+
+            BtnPrimaryLgIconOnly As icon.Add:
+                BorderColor: =Self.Fill
+                BorderThickness: =1
+                Color: =RGBA(255, 255, 255, 1)
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                DisabledColor: =RGBA(149, 149, 149, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =glbThemePrimaryColor
+                Height: =40
+                HoverFill: =ColorFade(Self.Fill, -15%)
+                Icon: =Icon.Search
+                OnSelect: =
+                PaddingBottom: =10
+                PaddingTop: =10
+                PressedColor: =White
+                PressedFill: =ColorFade(Self.Fill, -25%)
+                Width: =40
+                X: =352
+                Y: =316
+                ZIndex: =36
+
+            BtnPrimaryLgIcon As group:
+                Height: =5
+                Width: =5
+                X: =-152
+                Y: =-157
+                ZIndex: =36
+
+                BtnPrimaryLg_1 As button:
+                    BorderColor: =Self.Fill
+                    BorderThickness: =1
+                    Color: =White
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    Fill: =glbThemePrimaryColor
+                    FocusedBorderThickness: =1
+                    HoverFill: =ColorFade(Self.Fill, -15%)
+                    PaddingBottom: =0
+                    PaddingLeft: =20
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedColor: =White
+                    PressedFill: =ColorFade(Self.Fill, -25%)
+                    RadiusBottomLeft: =4
+                    RadiusBottomRight: =4
+                    RadiusTopLeft: =4
+                    RadiusTopRight: =4
+                    Size: =12
+                    Text: ="Button"
+                    Width: =100
+                    X: =239
+                    Y: =316
+                    ZIndex: =34
+
+                Icon4_16 As icon.Add:
+                    Color: =RGBA(255, 255, 255, 1)
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    Height: =20
+                    Icon: =Icon.Search
+                    OnSelect: =
+                    PressedColor: =White
+                    Width: =20
+                    X: =249
+                    Y: =326
+                    ZIndex: =35
+
+            Icon4_17 As icon.Add:
+                BorderColor: =Self.Color
+                BorderThickness: =1
+                Color: =glbThemePrimaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                DisabledColor: =RGBA(149, 149, 149, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                Height: =40
+                HoverBorderColor: =ColorFade(Self.BorderColor, -25%)
+                HoverColor: =ColorFade(Self.BorderColor, -25%)
+                Icon: =Icon.Search
+                OnSelect: =
+                PaddingBottom: =10
+                PaddingTop: =10
+                PressedBorderColor: =ColorFade(Self.BorderColor, -15%)
+                PressedColor: =ColorFade(Self.BorderColor, -15%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                Width: =40
+                X: =666
+                Y: =316
+                ZIndex: =42
+
+            BtnDashedLg_1 As button:
+                BorderColor: =Self.Color
+                BorderStyle: =BorderStyle.Dashed
+                BorderThickness: =1
+                Color: =glbThemePrimaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =RGBA(255, 255, 255, 1)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =12
+                Text: ="Button"
+                Width: =100
+                X: =753
+                Y: =315
+                ZIndex: =43
+
+            Group2_2 As group:
+                Height: =5
+                Width: =5
+                X: =-478
+                Y: =-153
+                ZIndex: =43
+
+                Button_large_17 As button:
+                    BorderColor: =Self.Color
+                    BorderThickness: =1
+                    Color: =glbThemePrimaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    Fill: =White
+                    FocusedBorderThickness: =1
+                    HoverBorderColor: =ColorFade(Self.Color, -15%)
+                    HoverColor: =ColorFade(Self.Color, -15%)
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    PaddingBottom: =0
+                    PaddingLeft: =20
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =ColorFade(Self.Color, -15%)
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    PressedFill: =ColorFade(Self.Color, 95%)
+                    RadiusBottomLeft: =4
+                    RadiusBottomRight: =4
+                    RadiusTopLeft: =4
+                    RadiusTopRight: =4
+                    Size: =12
+                    Text: ="Button"
+                    Width: =100
+                    X: =550
+                    Y: =316
+                    ZIndex: =40
+
+                Icon4_18 As icon.Add:
+                    Color: =Button_large_17.Color
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    Height: =20
+                    HoverColor: =ColorFade(Self.Color, -15%)
+                    Icon: =Icon.Add
+                    OnSelect: =
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    Width: =20
+                    X: =560
+                    Y: =326
+                    ZIndex: =41
+
+            BtnDashedLgIconOnly As icon.Add:
+                BorderColor: =Self.Color
+                BorderStyle: =BorderStyle.Dashed
+                BorderThickness: =1
+                Color: =glbThemePrimaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                DisabledColor: =RGBA(149, 149, 149, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                Height: =40
+                HoverBorderColor: =ColorFade(Self.BorderColor, -25%)
+                HoverColor: =ColorFade(Self.BorderColor, -25%)
+                Icon: =Icon.Search
+                OnSelect: =
+                PaddingBottom: =10
+                PaddingTop: =10
+                PressedBorderColor: =ColorFade(Self.BorderColor, -15%)
+                PressedColor: =ColorFade(Self.BorderColor, -15%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                Width: =40
+                X: =991
+                Y: =315
+                ZIndex: =46
+
+            Group2_3 As group:
+                Height: =5
+                Width: =5
+                X: =-379
+                Y: =-52
+                ZIndex: =47
+
+                BtnDashedLg_2 As button:
+                    BorderColor: =Self.Color
+                    BorderStyle: =BorderStyle.Dashed
+                    BorderThickness: =1
+                    Color: =glbThemePrimaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    Fill: =White
+                    FocusedBorderThickness: =1
+                    HoverBorderColor: =ColorFade(Self.Color, -15%)
+                    HoverColor: =ColorFade(Self.Color, -15%)
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    PaddingBottom: =0
+                    PaddingLeft: =20
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =ColorFade(Self.Color, -25%)
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    PressedFill: =ColorFade(Self.Color, 95%)
+                    RadiusBottomLeft: =4
+                    RadiusBottomRight: =4
+                    RadiusTopLeft: =4
+                    RadiusTopRight: =4
+                    Size: =12
+                    Text: ="Button"
+                    Width: =100
+                    X: =870
+                    Y: =315
+                    ZIndex: =44
+
+                Icon4_20 As icon.Add:
+                    Color: =BtnDashedLg_2.Color
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    Height: =20
+                    HoverColor: =ColorFade(Self.Color, -15%)
+                    Icon: =Icon.Search
+                    OnSelect: =
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    Width: =20
+                    X: =880
+                    Y: =325
+                    ZIndex: =45
+
+            BtnSecondIconOnly_1 As icon.Add:
+                BorderColor: =glbNeutralQuaternaryColor
+                BorderThickness: =1
+                Color: =glbNeutralPrimaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                DisabledColor: =RGBA(149, 149, 149, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                Height: =40
+                HoverBorderColor: =glbThemePrimaryColor
+                HoverColor: =glbThemePrimaryColor
+                HoverFill: =White
+                Icon: =Icon.Search
+                OnSelect: =
+                PaddingBottom: =10
+                PaddingTop: =10
+                PressedBorderColor: =ColorFade(glbThemePrimaryColor, -15%)
+                PressedColor: =ColorFade(glbThemePrimaryColor, -15%)
+                PressedFill: =ColorFade(glbThemePrimaryColor, 95%)
+                Width: =40
+                X: =666
+                Y: =377
+                ZIndex: =49
+
+            BtnSecondIcon_1 As group:
+                Height: =5
+                Width: =5
+                X: =-669
+                Y: =-193
+                ZIndex: =50
+
+                BtnSecond_3 As button:
+                    BorderColor: =glbNeutralQuaternaryColor
+                    BorderThickness: =1
+                    Color: =glbNeutralPrimaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    Fill: =White
+                    FocusedBorderThickness: =1
+                    HoverBorderColor: =glbThemePrimaryColor
+                    HoverColor: =glbThemePrimaryColor
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    PaddingBottom: =0
+                    PaddingLeft: =20
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =glbThemePrimaryColor
+                    PressedColor: =glbThemePrimaryColor
+                    PressedFill: =ColorFade(glbThemePrimaryColor, 95%)
+                    RadiusBottomLeft: =4
+                    RadiusBottomRight: =4
+                    RadiusTopLeft: =4
+                    RadiusTopRight: =4
+                    Size: =12
+                    Text: ="Button"
+                    Width: =100
+                    X: =550
+                    Y: =377
+                    ZIndex: =47
+
+                Icon4_11 As icon.Add:
+                    Color: =glbNeutralPrimaryColor
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    Height: =20
+                    HoverColor: =glbThemePrimaryColor
+                    Icon: =Icon.Search
+                    OnSelect: =
+                    PressedColor: =Self.Color
+                    Width: =20
+                    X: =560
+                    Y: =387
+                    ZIndex: =48
+
+            BtnDashed_4 As button:
+                BorderColor: =glbNeutralQuaternaryColor
+                BorderStyle: =BorderStyle.Dashed
+                BorderThickness: =1
+                Color: =glbNeutralPrimaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                HoverBorderColor: =glbThemePrimaryColor
+                HoverColor: =glbThemePrimaryColor
+                HoverFill: =RGBA(255, 255, 255, 1)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =glbThemePrimaryColor
+                PressedColor: =glbThemePrimaryColor
+                PressedFill: =ColorFade(glbThemePrimaryColor, 95%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =12
+                Text: ="Button"
+                Width: =100
+                X: =753
+                Y: =377
+                ZIndex: =51
+
+            BtnDashedIconOnly_3 As icon.Add:
+                BorderColor: =glbNeutralQuaternaryColor
+                BorderStyle: =BorderStyle.Dashed
+                BorderThickness: =1
+                Color: =glbNeutralPrimaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                DisabledColor: =RGBA(149, 149, 149, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                Height: =40
+                HoverBorderColor: =glbThemePrimaryColor
+                HoverColor: =glbThemePrimaryColor
+                HoverFill: =White
+                Icon: =Icon.Search
+                OnSelect: =
+                PaddingBottom: =10
+                PaddingTop: =10
+                PressedBorderColor: =ColorFade(glbThemePrimaryColor, -15%)
+                PressedColor: =ColorFade(glbThemePrimaryColor, -15%)
+                PressedFill: =ColorFade(glbThemePrimaryColor, 95%)
+                Width: =40
+                X: =991
+                Y: =377
+                ZIndex: =54
+
+            BtnTextLg As button:
+                BorderColor: =
+                BorderThickness: =0
+                Color: =glbNeutralPrimaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =RGBA(0, 0, 0, 0)
+                FocusedBorderThickness: =0
+                FontWeight: =FontWeight.Normal
+                Height: =32
+                HoverBorderColor: =
+                HoverColor: =glbThemePrimaryColor
+                HoverFill: =RGBA(0, 0, 0, 0)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =
+                PressedColor: =ColorFade(glbThemePrimaryColor, -20%)
+                PressedFill: =RGBA(0, 0, 0, 0)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =12
+                Text: ="Button"
+                Width: =80
+                X: =1077
+                Y: =319
+                ZIndex: =55
+
+            BtnDashedIcon_3 As group:
+                Height: =5
+                Width: =5
+                X: =-669
+                Y: =-193
+                ZIndex: =55
+
+                Button_large_18 As button:
+                    BorderColor: =glbNeutralQuaternaryColor
+                    BorderStyle: =BorderStyle.Dashed
+                    BorderThickness: =1
+                    Color: =glbNeutralPrimaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    Fill: =White
+                    FocusedBorderThickness: =1
+                    HoverBorderColor: =glbThemePrimaryColor
+                    HoverColor: =glbThemePrimaryColor
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    PaddingBottom: =0
+                    PaddingLeft: =20
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =glbThemePrimaryColor
+                    PressedColor: =glbThemePrimaryColor
+                    PressedFill: =ColorFade(glbThemePrimaryColor, 95%)
+                    RadiusBottomLeft: =4
+                    RadiusBottomRight: =4
+                    RadiusTopLeft: =4
+                    RadiusTopRight: =4
+                    Size: =12
+                    Text: ="Button"
+                    Width: =100
+                    X: =870
+                    Y: =377
+                    ZIndex: =52
+
+                Icon4_19 As icon.Add:
+                    Color: =glbNeutralPrimaryColor
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    Height: =20
+                    HoverColor: =glbThemePrimaryColor
+                    Icon: =Icon.Search
+                    OnSelect: =
+                    PressedBorderColor: =glbThemePrimaryColor
+                    PressedColor: =glbThemePrimaryColor
+                    Width: =20
+                    X: =880
+                    Y: =387
+                    ZIndex: =53
+
+            BtnLinkLg As button:
+                BorderColor: =
+                BorderThickness: =0
+                Color: =glbLinkColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =RGBA(0, 0, 0, 0)
+                FocusedBorderThickness: =0
+                FontWeight: =FontWeight.Normal
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =RGBA(0, 0, 0, 0)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =12
+                Text: ="Button"
+                Width: =80
+                X: =1197
+                Y: =319
+                ZIndex: =56
+
+            Label1_18 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =28
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="Dashed Button"
+                Width: =200
+                X: =753
+                Y: =284
+                ZIndex: =57
+
+            Label1_19 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =28
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="Text Button"
+                Width: =120
+                X: =1087
+                Y: =284
+                ZIndex: =58
+
+            Label1_20 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =28
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="Link Button"
+                Width: =120
+                X: =1207
+                Y: =284
+                ZIndex: =59
+
+            BtnPrimarySmall_2 As button:
+                BorderColor: =Self.Fill
+                BorderThickness: =1
+                Color: =White
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =glbThemePrimaryColor
+                FocusedBorderThickness: =1
+                Height: =24
+                HoverFill: =ColorFade(Self.Fill, -15%)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedColor: =White
+                PressedFill: =ColorFade(Self.Fill, -25%)
+                RadiusBottomLeft: =2
+                RadiusBottomRight: =2
+                RadiusTopLeft: =2
+                RadiusTopRight: =2
+                Size: =10
+                Text: ="Button"
+                Width: =60
+                X: =121
+                Y: =580
+                ZIndex: =60
+
+            BtnDefault_1 As button:
+                BorderColor: =Self.Color
+                BorderThickness: =1
+                Color: =glbThemePrimaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                Height: =24
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =RGBA(255, 255, 255, 1)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                RadiusBottomLeft: =2
+                RadiusBottomRight: =2
+                RadiusTopLeft: =2
+                RadiusTopRight: =2
+                Size: =10
+                Text: ="Button"
+                Width: =60
+                X: =433
+                Y: =580
+                ZIndex: =61
+
+            BtnSecond_1 As button:
+                BorderColor: =glbNeutralQuaternaryColor
+                BorderThickness: =1
+                Color: =glbNeutralPrimaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                Height: =24
+                HoverBorderColor: =glbThemePrimaryColor
+                HoverColor: =glbThemePrimaryColor
+                HoverFill: =RGBA(255, 255, 255, 1)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =glbThemePrimaryColor
+                PressedColor: =glbThemePrimaryColor
+                PressedFill: =ColorFade(glbThemePrimaryColor, 95%)
+                RadiusBottomLeft: =2
+                RadiusBottomRight: =2
+                RadiusTopLeft: =2
+                RadiusTopRight: =2
+                Size: =10
+                Text: ="Button"
+                Width: =60
+                X: =433
+                Y: =630
+                ZIndex: =62
+
+            BtnLgIcon_1 As group:
+                Height: =5
+                Width: =5
+                X: =-57
+                Y: =-173
+                ZIndex: =65
+
+                BtnPrimary_3 As button:
+                    BorderColor: =Self.Fill
+                    BorderThickness: =1
+                    Color: =White
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    Fill: =glbThemePrimaryColor
+                    FocusedBorderThickness: =1
+                    Height: =24
+                    HoverFill: =ColorFade(Self.Fill, -15%)
+                    PaddingBottom: =0
+                    PaddingLeft: =20
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedColor: =White
+                    PressedFill: =ColorFade(Self.Fill, -25%)
+                    RadiusBottomLeft: =2
+                    RadiusBottomRight: =2
+                    RadiusTopLeft: =2
+                    RadiusTopRight: =2
+                    Size: =10
+                    Text: ="Button"
+                    Width: =80
+                    X: =201
+                    Y: =580
+                    ZIndex: =63
+
+                Icon4_7 As icon.Add:
+                    Color: =RGBA(255, 255, 255, 1)
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    Height: =16
+                    Icon: =Icon.Search
+                    OnSelect: =
+                    PressedColor: =White
+                    Width: =16
+                    X: =209
+                    Y: =584
+                    ZIndex: =64
+
+            BtnLgIconOnly_1 As icon.Add:
+                BorderColor: =Self.Fill
+                BorderThickness: =1
+                Color: =RGBA(255, 255, 255, 1)
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                DisabledColor: =RGBA(149, 149, 149, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =glbThemePrimaryColor
+                Height: =24
+                HoverFill: =ColorFade(Self.Fill, -15%)
+                Icon: =Icon.Search
+                OnSelect: =
+                PaddingBottom: =4
+                PaddingTop: =4
+                PressedColor: =White
+                PressedFill: =ColorFade(Self.Fill, -25%)
+                Width: =24
+                X: =299
+                Y: =580
+                ZIndex: =66
+
+            BtnDefaultIconOnly_1 As icon.Add:
+                BorderColor: =Self.Color
+                BorderThickness: =1
+                Color: =glbThemePrimaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                DisabledColor: =RGBA(149, 149, 149, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                Height: =24
+                HoverBorderColor: =ColorFade(Self.BorderColor, -25%)
+                HoverColor: =ColorFade(Self.BorderColor, -25%)
+                Icon: =Icon.Search
+                OnSelect: =
+                PaddingBottom: =4
+                PaddingTop: =4
+                PressedBorderColor: =ColorFade(Self.BorderColor, -15%)
+                PressedColor: =ColorFade(Self.BorderColor, -15%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                Width: =24
+                X: =604
+                Y: =580
+                ZIndex: =69
+
+            BtnSecondIconOnly_2 As icon.Add:
+                BorderColor: =glbNeutralQuaternaryColor
+                BorderThickness: =1
+                Color: =glbNeutralPrimaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                DisabledColor: =RGBA(149, 149, 149, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                Height: =24
+                HoverBorderColor: =glbThemePrimaryColor
+                HoverColor: =glbThemePrimaryColor
+                HoverFill: =White
+                Icon: =Icon.Search
+                OnSelect: =
+                PaddingBottom: =4
+                PaddingTop: =4
+                PressedBorderColor: =ColorFade(glbThemePrimaryColor, -15%)
+                PressedColor: =ColorFade(glbThemePrimaryColor, -15%)
+                PressedFill: =ColorFade(glbThemePrimaryColor, 95%)
+                Width: =24
+                X: =604
+                Y: =630
+                ZIndex: =72
+
+            BtnText_1 As button:
+                BorderColor: =
+                BorderThickness: =0
+                Color: =glbNeutralPrimaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =RGBA(0, 0, 0, 0)
+                FocusedBorderThickness: =0
+                FontWeight: =FontWeight.Normal
+                Height: =24
+                HoverBorderColor: =
+                HoverColor: =glbThemePrimaryColor
+                HoverFill: =RGBA(0, 0, 0, 0)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =
+                PressedColor: =ColorFade(glbThemePrimaryColor, -20%)
+                PressedFill: =RGBA(0, 0, 0, 0)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =10
+                Text: ="Button"
+                Width: =60
+                X: =1087
+                Y: =576
+                ZIndex: =73
+
+            BtnDefaultIcon_1 As group:
+                Height: =5
+                Width: =5
+                X: =-57
+                Y: =-173
+                ZIndex: =74
+
+                BtnDefault_3 As button:
+                    BorderColor: =Self.Color
+                    BorderThickness: =1
+                    Color: =glbThemePrimaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    Fill: =White
+                    FocusedBorderThickness: =1
+                    Height: =24
+                    HoverBorderColor: =ColorFade(Self.Color, -15%)
+                    HoverColor: =ColorFade(Self.Color, -15%)
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    PaddingBottom: =0
+                    PaddingLeft: =20
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =ColorFade(Self.Color, -25%)
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    PressedFill: =RGBA(255, 255, 255, 1)
+                    RadiusBottomLeft: =2
+                    RadiusBottomRight: =2
+                    RadiusTopLeft: =2
+                    RadiusTopRight: =2
+                    Size: =10
+                    Text: ="Button"
+                    Width: =80
+                    X: =508
+                    Y: =580
+                    ZIndex: =67
+
+                Icon4_9 As icon.Add:
+                    Color: =glbThemePrimaryColor
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    Height: =16
+                    HoverColor: =ColorFade(Self.Color, -15%)
+                    Icon: =Icon.Add
+                    OnSelect: =
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    Width: =16
+                    X: =518
+                    Y: =584
+                    ZIndex: =68
+
+            BtnSecondIcon_2 As group:
+                Height: =5
+                Width: =5
+                X: =-57
+                Y: =-173
+                ZIndex: =75
+
+                BtnSecond_4 As button:
+                    BorderColor: =glbNeutralQuaternaryColor
+                    BorderThickness: =1
+                    Color: =glbNeutralPrimaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    Fill: =White
+                    FocusedBorderThickness: =1
+                    Height: =24
+                    HoverBorderColor: =glbThemePrimaryColor
+                    HoverColor: =glbThemePrimaryColor
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    PaddingBottom: =0
+                    PaddingLeft: =20
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =glbThemePrimaryColor
+                    PressedColor: =glbThemePrimaryColor
+                    PressedFill: =ColorFade(glbThemePrimaryColor, 95%)
+                    RadiusBottomLeft: =2
+                    RadiusBottomRight: =2
+                    RadiusTopLeft: =2
+                    RadiusTopRight: =2
+                    Size: =10
+                    Text: ="Button"
+                    Width: =80
+                    X: =508
+                    Y: =630
+                    ZIndex: =70
+
+                Icon4_12 As icon.Add:
+                    Color: =glbNeutralPrimaryColor
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    Height: =16
+                    HoverColor: =glbThemePrimaryColor
+                    Icon: =Icon.Search
+                    OnSelect: =
+                    PressedBorderColor: =glbThemePrimaryColor
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    Width: =16
+                    X: =518
+                    Y: =634
+                    ZIndex: =71
+
+            BtnLink_1 As button:
+                BorderColor: =
+                BorderThickness: =0
+                Color: =glbLinkColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =RGBA(0, 0, 0, 0)
+                FocusedBorderThickness: =0
+                FontWeight: =FontWeight.Normal
+                Height: =24
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =RGBA(0, 0, 0, 0)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =10
+                Text: ="Button"
+                Width: =60
+                X: =1207
+                Y: =576
+                ZIndex: =76
+
+            BtnDashed_1 As button:
+                BorderColor: =Self.Color
+                BorderStyle: =BorderStyle.Dashed
+                BorderThickness: =1
+                Color: =glbThemePrimaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                Height: =24
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =RGBA(255, 255, 255, 1)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                RadiusBottomLeft: =2
+                RadiusBottomRight: =2
+                RadiusTopLeft: =2
+                RadiusTopRight: =2
+                Size: =10
+                Text: ="Button"
+                Width: =60
+                X: =753
+                Y: =580
+                ZIndex: =77
+
+            BtnDashedIconOnly_1 As icon.Add:
+                BorderColor: =Self.Color
+                BorderStyle: =BorderStyle.Dashed
+                BorderThickness: =1
+                Color: =glbThemePrimaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                DisabledColor: =RGBA(149, 149, 149, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                Height: =24
+                HoverBorderColor: =ColorFade(Self.BorderColor, -25%)
+                HoverColor: =ColorFade(Self.BorderColor, -25%)
+                Icon: =Icon.Search
+                OnSelect: =
+                PaddingBottom: =4
+                PaddingTop: =4
+                PressedBorderColor: =ColorFade(Self.BorderColor, -15%)
+                PressedColor: =ColorFade(Self.BorderColor, -15%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                Width: =24
+                X: =959
+                Y: =580
+                ZIndex: =80
+
+            BtnDashed_6 As button:
+                BorderColor: =glbNeutralQuaternaryColor
+                BorderStyle: =BorderStyle.Dashed
+                BorderThickness: =1
+                Color: =glbNeutralPrimaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                Height: =24
+                HoverBorderColor: =glbThemePrimaryColor
+                HoverColor: =glbThemePrimaryColor
+                HoverFill: =RGBA(255, 255, 255, 1)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =glbThemePrimaryColor
+                PressedColor: =glbThemePrimaryColor
+                PressedFill: =ColorFade(glbThemePrimaryColor, 95%)
+                RadiusBottomLeft: =2
+                RadiusBottomRight: =2
+                RadiusTopLeft: =2
+                RadiusTopRight: =2
+                Size: =10
+                Text: ="Button"
+                Width: =60
+                X: =753
+                Y: =632
+                ZIndex: =81
+
+            BtnDashedIcon_1 As group:
+                Height: =5
+                Width: =5
+                X: =-57
+                Y: =-173
+                ZIndex: =82
+
+                BtnDashed_7 As button:
+                    BorderColor: =Self.Color
+                    BorderStyle: =BorderStyle.Dashed
+                    BorderThickness: =1
+                    Color: =glbThemePrimaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    Fill: =White
+                    FocusedBorderThickness: =1
+                    Height: =24
+                    HoverBorderColor: =ColorFade(Self.Color, -15%)
+                    HoverColor: =ColorFade(Self.Color, -15%)
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    PaddingBottom: =0
+                    PaddingLeft: =20
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =ColorFade(Self.Color, -25%)
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    PressedFill: =ColorFade(Self.Color, 95%)
+                    RadiusBottomLeft: =2
+                    RadiusBottomRight: =2
+                    RadiusTopLeft: =2
+                    RadiusTopRight: =2
+                    Size: =10
+                    Text: ="Button"
+                    Width: =80
+                    X: =850
+                    Y: =580
+                    ZIndex: =78
+
+                Icon4_14 As icon.Add:
+                    Color: =BtnDashed_7.Color
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    Height: =16
+                    HoverColor: =ColorFade(Self.Color, -15%)
+                    Icon: =Icon.Add
+                    OnSelect: =
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    Width: =16
+                    X: =860
+                    Y: =584
+                    ZIndex: =79
+
+            BtnDashedIconOnly_4 As icon.Add:
+                BorderColor: =glbNeutralQuaternaryColor
+                BorderStyle: =BorderStyle.Dashed
+                BorderThickness: =1
+                Color: =glbNeutralPrimaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                DisabledColor: =RGBA(149, 149, 149, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                Height: =24
+                HoverBorderColor: =glbThemePrimaryColor
+                HoverColor: =glbThemePrimaryColor
+                HoverFill: =White
+                Icon: =Icon.Search
+                OnSelect: =
+                PaddingBottom: =4
+                PaddingTop: =4
+                PressedBorderColor: =ColorFade(glbThemePrimaryColor, -15%)
+                PressedColor: =ColorFade(glbThemePrimaryColor, -15%)
+                PressedFill: =ColorFade(glbThemePrimaryColor, 95%)
+                Width: =24
+                X: =959
+                Y: =632
+                ZIndex: =85
+
+            Label1_15 As label:
+                Color: =glbNeutralSecondaryColor
+                FontWeight: =FontWeight.Semibold
+                Height: =27
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =12
+                Text: |-
+                    ="特殊按钮设置方法：
+                    "
+                VerticalAlign: =VerticalAlign.Top
+                Width: =1238
+                X: =44
+                Y: =709
+                ZIndex: =86
+
+            BtnDashedIcon_4 As group:
+                Height: =5
+                Width: =5
+                X: =-57
+                Y: =-173
+                ZIndex: =86
+
+                Button_large_19 As button:
+                    BorderColor: =glbNeutralQuaternaryColor
+                    BorderStyle: =BorderStyle.Dashed
+                    BorderThickness: =1
+                    Color: =glbNeutralPrimaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    Fill: =White
+                    FocusedBorderThickness: =1
+                    Height: =24
+                    HoverBorderColor: =glbThemePrimaryColor
+                    HoverColor: =glbThemePrimaryColor
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    PaddingBottom: =0
+                    PaddingLeft: =20
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =glbThemePrimaryColor
+                    PressedColor: =glbThemePrimaryColor
+                    PressedFill: =ColorFade(glbThemePrimaryColor, 95%)
+                    RadiusBottomLeft: =2
+                    RadiusBottomRight: =2
+                    RadiusTopLeft: =2
+                    RadiusTopRight: =2
+                    Size: =10
+                    Text: ="Button"
+                    Width: =80
+                    X: =850
+                    Y: =632
+                    ZIndex: =83
+
+                Icon4_21 As icon.Add:
+                    Color: =glbNeutralPrimaryColor
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    Height: =16
+                    HoverColor: =glbThemePrimaryColor
+                    Icon: =Icon.Search
+                    OnSelect: =
+                    PressedColor: =glbThemePrimaryColor
+                    Width: =16
+                    X: =860
+                    Y: =636
+                    ZIndex: =84
+
+            Label1_16 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =57
+                LineHeight: =1.8
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: |-
+                    ="但需要一些特殊颜色按钮时，需复制按钮，Primary Button重设按钮Fill属性即可，Secondary Button & Dashed Button重设按钮Color属性即可。
+                    —举例：危险按钮的设置"
+                VerticalAlign: =VerticalAlign.Top
+                Width: =1283
+                X: =44
+                Y: =736
+                ZIndex: =87
+
+            Label1_17 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =28
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="Danger"
+                Width: =80
+                X: =44
+                Y: =825
+                ZIndex: =104
+
+            Label1_21 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =166
+                LineHeight: =1.8
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: |-
+                    ="我们提供了五种按钮，按钮有大、中、小三种尺寸。
+                    主按钮：用于主行动点，一个操作区域只能有一个主按钮。
+                    次要按钮：用于没有主次之分的一组行动点。
+                    虚线按钮：常用于添加操作。
+                    文本按钮：用于最次级的行动点。
+                    链接按钮：一般用于链接，即导航至某位置。
+                    "
+                VerticalAlign: =VerticalAlign.Top
+                Width: =426
+                X: =40
+                Y: =92
+                ZIndex: =105
+
+            Label1_22 As label:
+                BorderColor: =RGBA(202, 202, 202, 1)
+                Color: =glbNeutralSecondaryColor
+                Height: =166
+                LineHeight: =1.8
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: |-
+                    ="选择合适的按钮类型将其复制到要放的位置即可。
+                    "
+                VerticalAlign: =VerticalAlign.Top
+                Width: =426
+                X: =577
+                Y: =92
+                ZIndex: =106
+
+            Label1_23 As label:
+                Color: =glbNeutralPrimaryColor
+                FontWeight: =FontWeight.Semibold
+                Height: =24
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="按钮类型"
+                Width: =300
+                X: =40
+                Y: =68
+                ZIndex: =107
+
+            Label1_24 As label:
+                Color: =glbNeutralPrimaryColor
+                FontWeight: =FontWeight.Semibold
+                Height: =24
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="使用方法"
+                Width: =300
+                X: =580
+                Y: =68
+                ZIndex: =108
+
+            Rectangle1_1 As rectangle:
+                Fill: =RGBA(202, 202, 202, 1)
+                Height: =1
+                Width: =1287
+                X: =44
+                Y: =680
+                ZIndex: =110
+
+            Rectangle1_4 As rectangle:
+                Fill: =RGBA(202, 202, 202, 1)
+                Height: =1
+                Width: =1287
+                X: =40
+                ZIndex: =111
+
+            BtnPrimary_2 As button:
+                BorderColor: =Self.Fill
+                BorderThickness: =1
+                Color: =White
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =glbErrorColor
+                FocusedBorderThickness: =1
+                Height: =32
+                HoverFill: =ColorFade(Self.Fill, -15%)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedColor: =White
+                PressedFill: =ColorFade(Self.Fill, -25%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =11
+                Text: ="Button"
+                Width: =80
+                X: =121
+                Y: =825
+                ZIndex: =112
+
+            BtnDefault_4 As button:
+                BorderColor: =Self.Color
+                BorderThickness: =1
+                Color: =glbErrorColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =RGBA(255, 255, 255, 1)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =11
+                Text: ="Button"
+                Width: =80
+                X: =433
+                Y: =825
+                ZIndex: =113
+
+            BtnLgIcon_2 As group:
+                Height: =5
+                Width: =5
+                X: =-61
+                Y: =-397
+                ZIndex: =116
+
+                BtnPrimary_4 As button:
+                    BorderColor: =Self.Fill
+                    BorderThickness: =1
+                    Color: =White
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    Fill: =glbErrorColor
+                    FocusedBorderThickness: =1
+                    Height: =32
+                    HoverFill: =ColorFade(Self.Fill, -15%)
+                    PaddingBottom: =0
+                    PaddingLeft: =20
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedColor: =White
+                    PressedFill: =ColorFade(Self.Fill, -25%)
+                    RadiusBottomLeft: =4
+                    RadiusBottomRight: =4
+                    RadiusTopLeft: =4
+                    RadiusTopRight: =4
+                    Size: =11
+                    Text: ="Button"
+                    Width: =90
+                    X: =221
+                    Y: =825
+                    ZIndex: =114
+
+                Icon4_22 As icon.Add:
+                    Color: =RGBA(255, 255, 255, 1)
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    Height: =16
+                    Icon: =Icon.Search
+                    OnSelect: =
+                    PressedColor: =White
+                    Width: =16
+                    X: =231
+                    Y: =833
+                    ZIndex: =115
+
+            BtnLgIconOnly_2 As icon.Add:
+                BorderColor: =Self.Fill
+                BorderThickness: =1
+                Color: =RGBA(255, 255, 255, 1)
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                DisabledColor: =RGBA(149, 149, 149, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =glbErrorColor
+                Height: =32
+                HoverFill: =ColorFade(Self.Fill, -15%)
+                Icon: =Icon.Search
+                OnSelect: =
+                PaddingBottom: =8
+                PaddingTop: =8
+                PressedColor: =White
+                PressedFill: =ColorFade(Self.Fill, -25%)
+                Width: =32
+                X: =329
+                Y: =825
+                ZIndex: =117
+
+            BtnDefaultIconOnly_2 As icon.Add:
+                BorderColor: =Self.Color
+                BorderThickness: =1
+                Color: =glbErrorColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                DisabledColor: =RGBA(149, 149, 149, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.BorderColor, -25%)
+                HoverColor: =ColorFade(Self.BorderColor, -25%)
+                Icon: =Icon.Search
+                OnSelect: =
+                PaddingBottom: =8
+                PaddingTop: =8
+                PressedBorderColor: =ColorFade(Self.BorderColor, -15%)
+                PressedColor: =ColorFade(Self.BorderColor, -15%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                Width: =32
+                X: =639
+                Y: =825
+                ZIndex: =120
+
+            BtnDefaultIcon_2 As group:
+                Height: =5
+                Width: =5
+                X: =-61
+                Y: =-397
+                ZIndex: =122
+
+                BtnDefault_5 As button:
+                    BorderColor: =Self.Color
+                    BorderThickness: =1
+                    Color: =glbErrorColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    Fill: =White
+                    FocusedBorderThickness: =1
+                    Height: =32
+                    HoverBorderColor: =ColorFade(Self.Color, -15%)
+                    HoverColor: =ColorFade(Self.Color, -15%)
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    PaddingBottom: =0
+                    PaddingLeft: =20
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =ColorFade(Self.Color, -25%)
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    PressedFill: =ColorFade(Self.Color, 95%)
+                    RadiusBottomLeft: =4
+                    RadiusBottomRight: =4
+                    RadiusTopLeft: =4
+                    RadiusTopRight: =4
+                    Size: =11
+                    Text: ="Button"
+                    Width: =90
+                    X: =533
+                    Y: =825
+                    ZIndex: =118
+
+                Icon4_23 As icon.Add:
+                    Color: =BtnDefault_5.Color
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    Height: =16
+                    HoverColor: =ColorFade(Self.Color, -15%)
+                    Icon: =Icon.Add
+                    OnSelect: =
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    Width: =16
+                    X: =543
+                    Y: =833
+                    ZIndex: =119
+
+            BtnLink_2 As button:
+                BorderColor: =
+                BorderThickness: =0
+                Color: =glbErrorColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =RGBA(0, 0, 0, 0)
+                FocusedBorderThickness: =0
+                FontWeight: =FontWeight.Normal
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =RGBA(0, 0, 0, 0)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =11
+                Text: ="Button"
+                Width: =80
+                X: =1197
+                Y: =821
+                ZIndex: =123
+
+            BtnDashed_2 As button:
+                BorderColor: =Self.Color
+                BorderStyle: =BorderStyle.Dashed
+                BorderThickness: =1
+                Color: =glbErrorColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =RGBA(255, 255, 255, 1)
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =11
+                Text: ="Button"
+                Width: =80
+                X: =753
+                Y: =825
+                ZIndex: =124
+
+            BtnDashedIconOnly_5 As icon.Add:
+                BorderColor: =Self.Color
+                BorderStyle: =BorderStyle.Dashed
+                BorderThickness: =1
+                Color: =glbErrorColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                DisabledColor: =RGBA(149, 149, 149, 1)
+                DisabledFill: =RGBA(244, 244, 244, 1)
+                Fill: =White
+                FocusedBorderThickness: =1
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.BorderColor, -25%)
+                HoverColor: =ColorFade(Self.BorderColor, -25%)
+                Icon: =Icon.Search
+                OnSelect: =
+                PaddingBottom: =8
+                PaddingTop: =8
+                PressedBorderColor: =ColorFade(Self.BorderColor, -15%)
+                PressedColor: =ColorFade(Self.BorderColor, -15%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                Width: =32
+                X: =959
+                Y: =825
+                ZIndex: =127
+
+            BtnDashedIcon_5 As group:
+                Height: =5
+                Width: =5
+                X: =-61
+                Y: =-397
+                ZIndex: =128
+
+                BtnDashed_8 As button:
+                    BorderColor: =Self.Color
+                    BorderStyle: =BorderStyle.Dashed
+                    BorderThickness: =1
+                    Color: =glbErrorColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    Fill: =White
+                    FocusedBorderThickness: =1
+                    Height: =32
+                    HoverBorderColor: =ColorFade(Self.Color, -15%)
+                    HoverColor: =ColorFade(Self.Color, -15%)
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    PaddingBottom: =0
+                    PaddingLeft: =20
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =ColorFade(Self.Color, -25%)
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    PressedFill: =ColorFade(Self.Color, 95%)
+                    RadiusBottomLeft: =4
+                    RadiusBottomRight: =4
+                    RadiusTopLeft: =4
+                    RadiusTopRight: =4
+                    Size: =11
+                    Text: ="Button"
+                    Width: =90
+                    X: =850
+                    Y: =825
+                    ZIndex: =125
+
+                Icon4_24 As icon.Add:
+                    Color: =BtnDashed_8.Color
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    Height: =16
+                    HoverColor: =ColorFade(Self.Color, -15%)
+                    Icon: =Icon.Add
+                    OnSelect: =
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    Width: =16
+                    X: =860
+                    Y: =833
+                    ZIndex: =126
+
+        crdComponent As dataCard.blankCard:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderStyle: =BorderStyle.Solid
+            DisplayMode: =DisplayMode.Edit
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =1290
+            Width: =1366
+            X: =0
+            Y: =2
+            ZIndex: =3
+
+            TextInput2 As text:
+                BorderColor: =glbNeutralTertiaryColor
+                BorderThickness: =1
+                Color: =glbNeutralPrimaryColor
+                Default: =""
+                FocusedBorderColor: =glbNeutralSecondaryColor
+                FocusedBorderThickness: =1
+                Height: =32
+                HintText: ="e.g name"
+                HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                HoverFill: =ColorFade(Self.Fill, -5%)
+                PaddingBottom: =0
+                PaddingLeft: =10
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =11
+                Width: =280
+                X: =40
+                Y: =126
+                ZIndex: =1
+
+            Dropdown1 As dropdown:
+                BorderColor: =glbNeutralTertiaryColor
+                BorderThickness: =1
+                ChevronBackground: =RGBA(0, 0, 0, 0)
+                ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
+                ChevronDisabledFill: =RGBA(202, 202, 202, 1)
+                ChevronFill: =glbNeutralTertiaryColor
+                ChevronHoverBackground: =ColorFade(Self.Fill, -5%)
+                ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
+                Color: =glbNeutralPrimaryColor
+                FocusedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                FocusedBorderThickness: =1
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                HoverFill: =ColorFade(Self.Fill, -5%)
+                Items: =DropDownSample
+                PaddingBottom: =5
+                PaddingRight: =0
+                PaddingTop: =5
+                PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                PressedColor: =Self.Color
+                PressedFill: =ColorFade(Self.Fill, -5%)
+                SelectionFill: =glbThemePrimaryColor
+                Size: =11
+                Width: =280
+                X: =367
+                Y: =126
+                ZIndex: =2
+
+            ComboBox1 As combobox:
+                BorderColor: =glbNeutralTertiaryColor
+                BorderThickness: =1
+                ChevronBackground: =RGBA(255, 255, 255, 1)
+                ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
+                ChevronDisabledFill: =RGBA(202, 202, 202, 1)
+                ChevronFill: =glbNeutralTertiaryColor
+                ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
+                ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
+                Color: =glbNeutralPrimaryColor
+                FocusedBorderThickness: =1
+                Height: =32
+                HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                HoverColor: =Self.Color
+                HoverFill: =ColorFade(Self.Fill, -5%)
+                Items: =ComboBoxSample
+                PaddingLeft: =10
+                PressedColor: =Self.Color
+                PressedFill: =ColorFade(Self.Fill, -5%)
+                SearchItems: =Search(ComboBoxSample,ComboBox1.SearchText,"Value1")
+                SelectionColor: =glbThemePrimaryColor
+                SelectionFill: =ColorFade(Self.SelectionColor, 90%)
+                Size: =11
+                Width: =280
+                X: =694
+                Y: =126
+                ZIndex: =3
+
+            DatePicker1 As datepicker:
+                BorderColor: =glbNeutralTertiaryColor
+                BorderThickness: =1
+                Color: =glbNeutralPrimaryColor
+                FocusedBorderThickness: =1
+                Height: =32
+                IconBackground: =RGBA(0, 0, 0, 0)
+                IconFill: =glbNeutralSecondaryColor
+                PaddingBottom: =0
+                PaddingRight: =0
+                Size: =11
+                Width: =280
+                X: =1023
+                Y: =126
+                ZIndex: =4
+
+            Checkbox2 As checkbox:
+                CheckboxBorderColor: =glbNeutralTertiaryColor
+                CheckboxSize: =24
+                CheckmarkFill: =glbLinkColor
+                Color: =glbNeutralPrimaryColor
+                FocusedBorderThickness: =0
+                Height: =24
+                HoverBorderColor: =
+                HoverColor: =glbNeutralPrimaryColor
+                HoverFill: =RGBA(0, 0, 0, 0)
+                PressedBorderColor: =
+                PressedColor: =glbNeutralPrimaryColor
+                PressedFill: =
+                Size: =11
+                Text: ="Checkbox"
+                X: =40
+                Y: =238
+                ZIndex: =5
+
+            Radio1 As radio:
+                Default: =""
+                FocusedBorderThickness: =0
+                Height: =24
+                HoverColor: =RGBA(0, 0, 0, 1)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                Items: =RadioSample
+                Layout: =Layout.Horizontal
+                PaddingBottom: =0
+                PaddingTop: =0
+                PressedColor: =RGBA(0, 0, 0, 1)
+                RadioBorderColor: =glbNeutralTertiaryColor
+                RadioSelectionFill: =glbLinkColor
+                RadioSize: =24
+                Size: =11
+                Width: =279
+                X: =368
+                Y: =238
+                ZIndex: =6
+
+            Label1_7 As label:
+                Color: =glbNeutralPrimaryColor
+                FontWeight: =FontWeight.Bold
+                Height: =30
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =20
+                Text: ="Other Components"
+                Width: =300
+                X: =40
+                Y: =28
+                ZIndex: =7
+
+            Label1_8 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =20
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="TextInput"
+                Width: =120
+                X: =40
+                Y: =99
+                ZIndex: =8
+
+            Label1_9 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =20
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="Dropdown"
+                Width: =132
+                X: =367
+                Y: =99
+                ZIndex: =9
+
+            Label1_10 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =20
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="ComboBox"
+                Width: =132
+                X: =694
+                Y: =99
+                ZIndex: =10
+
+            Label1_11 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =20
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="DatePicker"
+                Width: =132
+                X: =1023
+                Y: =99
+                ZIndex: =11
+
+            Toggle1 As toggleSwitch:
+                DisabledBorderColor: =RGBA(0, 13, 75, 1)
+                FalseFill: =RGBA(202, 202, 202, 1)
+                FocusedBorderThickness: =0
+                Height: =22
+                ShowLabel: =false
+                TrueFill: =glbLinkColor
+                Width: =48
+                X: =694
+                Y: =232
+                ZIndex: =12
+
+            Label1_12 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =20
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="DatePicker"
+                Width: =132
+                X: =1023
+                Y: =202
+                ZIndex: =13
+
+            DataCardValue2 As attachments:
+                AddAttachmentText: ="Click or drag the file here to upload"
+                BorderColor: =glbLinkColor
+                BorderStyle: =BorderStyle.Dashed
+                BorderThickness: =1
+                Color: =glbLinkColor
+                DropTargetBackgroundColor: =ColorFade(Self.Color, 90%)
+                DropTargetBorderColor: =glbLinkColor
+                DropTargetBorderStyle: =BorderStyle.Dashed
+                DropTargetBorderThickness: =1
+                DropTargetTextColor: =glbLinkColor
+                Fill: =ColorFade(glbLinkColor, 95%)
+                FocusedBorderThickness: =1
+                Height: =129
+                HoverColor: =ColorFade(Self.Color, -25%)
+                HoverFill: =ColorFade(glbLinkColor, 80%)
+                IsInDataCard: =true
+                ItemColor: =glbLinkColor
+                ItemFill: =ColorFade(glbLinkColor, 80%)
+                ItemHoverColor: =ColorFade(glbLinkColor, -25%)
+                ItemHoverFill: =ColorFade(glbLinkColor, 80%)
+                Items: =//Parent.Default
+                MaxAttachments: =4
+                MaxAttachmentsText: ="Max Attachments"
+                NoAttachmentsText: ="No Attachments"
+                PaddingLeft: =10
+                PaddingRight: =10
+                PaddingTop: =10
+                PressedColor: =RGBA(0, 121, 187, 1)
+                PressedFill: =
+                Size: =10
+                Tooltip: =
+                Width: =607
+                X: =40
+                Y: =336
+                ZIndex: =18
+
+            Label1_27 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =20
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="Checkbox"
+                Width: =120
+                X: =40
+                Y: =205
+                ZIndex: =22
+
+            Group1 As group:
+                Height: =5
+                Width: =5
+                X: =60
+                Y: =60
+                ZIndex: =22
+
+                DateBackground_2 As text:
+                    BorderColor: =
+                    BorderThickness: =1
+                    Color: =
+                    Default: =""
+                    DisabledFill: =RGBA(255, 255, 255, 1)
+                    DisplayMode: =DisplayMode.Disabled
+                    FocusedBorderColor: =
+                    FocusedBorderThickness: =1
+                    Font: =Font.Arial
+                    Height: =32
+                    HintText: =""
+                    HoverBorderColor: =
+                    HoverFill: =
+                    PaddingBottom: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =11
+                    Width: =263
+                    X: =1023
+                    Y: =230
+                    ZIndex: =14
+
+                TemplateEndDate_1 As datepicker:
+                    BorderColor: =
+                    BorderStyle: =BorderStyle.None
+                    BorderThickness: =0
+                    Color: =RGBA(96, 94, 92, 1)
+                    DefaultDate: =
+                    Fill: =RGBA(0, 0, 0, 0)
+                    FocusedBorderThickness: =1
+                    Font: =Font.Arial
+                    Height: =30
+                    IconBackground: =RGBA(0, 0, 0, 0)
+                    IconFill: =glbNeutralSecondaryColor
+                    InputTextPlaceholder: =//If(IsBlank(Self.SelectedDate), Text(Date(2001,12,31), Self.Format, Self.Language))
+                    OnChange: |-
+                        =/*If(
+                            IsBlank(StartDate.SelectedDate) || IsBlank(EndDate.SelectedDate),
+                            UpdateContext({DateErrorMessage: false}),
+                            If(
+                            EndDate.SelectedDate < StartDate.SelectedDate,
+                            UpdateContext({DateErrorMessage: true})
+                        ));*/
+                        If(TemplateEndDate_1.SelectedDate < TemplateStartDate_1.SelectedDate,Notify("The end time must be greater than the start time");Reset(TemplateEndDate_1))
+                    OnSelect: =
+                    PaddingBottom: =0
+                    PaddingRight: =0
+                    Size: =11
+                    Width: =120
+                    X: =1166
+                    Y: =230
+                    ZIndex: =15
+
+                TemplateStartDate_1 As datepicker:
+                    BorderColor: =
+                    BorderStyle: =BorderStyle.None
+                    BorderThickness: =1
+                    Color: =RGBA(96, 94, 92, 1)
+                    DefaultDate: =
+                    Fill: =RGBA(0, 0, 0, 0)
+                    FocusedBorderThickness: =1
+                    Font: =Font.Arial
+                    Height: =30
+                    IconBackground: =RGBA(0, 0, 0, 0)
+                    IconFill: =glbNeutralSecondaryColor
+                    InputTextPlaceholder: =
+                    PaddingBottom: =0
+                    PaddingRight: =0
+                    Size: =11
+                    Width: =120
+                    X: =1024
+                    Y: =230
+                    ZIndex: =16
+
+                DateLineLabel1_39 As label:
+                    Align: =Align.Center
+                    Color: =RGBA(149, 149, 149, 1)
+                    Font: =Font.Arial
+                    Height: =20
+                    PaddingLeft: =0
+                    Size: =10
+                    Text: ="—"
+                    Width: =16
+                    X: =1147
+                    Y: =234
+                    ZIndex: =17
+
+            Label1_28 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =20
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="Radio"
+                Width: =120
+                X: =367
+                Y: =205
+                ZIndex: =23
+
+            Label1_29 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =20
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="Switch"
+                Width: =120
+                X: =693
+                Y: =205
+                ZIndex: =24
+
+            Label1_30 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =20
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="Add Attachment"
+                Width: =120
+                X: =40
+                Y: =310
+                ZIndex: =26
+
+            Label1_31 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =20
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="Tab"
+                Width: =120
+                X: =700
+                Y: =310
+                ZIndex: =27
+
+            TabGallery3 As gallery.galleryHorizontal:
+                Height: =40
+                Items: =["Button 1","Button 2","Button 3","Button 4"]
+                TemplatePadding: =0
+                TemplateSize: =130
+                Width: =548
+                X: =700
+                Y: =337
+                ZIndex: =28
+
+                Label2 As label:
+                    Align: =Align.Center
+                    Color: |-
+                        =If(
+                            ThisItem.IsSelected,
+                            glbThemePrimaryColor,
+                            glbNeutralSecondaryColor
+                        )
+                    FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold,FontWeight.Normal)
+                    Height: =32
+                    HoverColor: =glbThemePrimaryColor
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =15
+                    Text: =ThisItem.Value
+                    Width: =130
+                    ZIndex: =1
+
+                Rectangle2 As rectangle:
+                    Fill: =glbThemePrimaryColor
+                    Height: =3
+                    OnSelect: =Select(Parent)
+                    Visible: =If(ThisItem.IsSelected, true, false)
+                    Width: =130
+                    Y: =37
+                    ZIndex: =2
+
+            Label1_32 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =20
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="Tag"
+                Width: =120
+                X: =40
+                Y: =501
+                ZIndex: =30
+
+            lblTag As label:
+                Align: =Align.Center
+                BorderColor: =RGBA(255, 255, 255, 1)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                Color: |-
+                    =//gray_secondary
+                    If(lblTag.Text="Default",glbNeutralSecondaryColor,
+                    lblTag.Text="Success",glbSuccessColor,
+                    lblTag.Text="Processing",glbLinkColor,
+                    lblTag.Text="Warning",glbWarningColor,
+                    lblTag.Text="Error",glbErrorColor
+                    
+                    )
+                Fill: =ColorFade(Self.Color, 90%)
+                FocusedBorderThickness: =2
+                Height: =24
+                OnSelect: =
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="Default"
+                Width: =72
+                X: =40
+                Y: =533
+                ZIndex: =31
+
+            Rectangle1 As rectangle:
+                Fill: =RGBA(202, 202, 202, 1)
+                Height: =1
+                Width: =1287
+                X: =40
+                ZIndex: =32
+
+            Gallery4 As gallery.galleryVertical:
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =208
+                Items: =CustomGallerySample
+                Layout: =Layout.Vertical
+                TemplatePadding: =0
+                TemplateSize: =42
+                Width: =1100
+                X: =40
+                Y: =669
+                ZIndex: =33
+
+                Label3 As label:
+                    Color: =glbNeutralPrimaryColor
+                    Height: =42
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =10
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =10
+                    Text: =ThisItem.SampleHeading
+                    ZIndex: =1
+
+                Rectangle3 As rectangle:
+                    Fill: =glbNeutralLightColor
+                    Height: =1
+                    OnSelect: =Select(Parent)
+                    Width: =Parent.TemplateWidth
+                    Y: =41
+                    ZIndex: =2
+
+                BtnLink_3 As button:
+                    BorderColor: =
+                    BorderThickness: =0
+                    Color: =glbLinkColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    Fill: =White
+                    FocusedBorderThickness: =0
+                    FontWeight: =FontWeight.Normal
+                    Height: =24
+                    HoverBorderColor: =ColorFade(Self.Color, -15%)
+                    HoverColor: =ColorFade(Self.Color, -15%)
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =ColorFade(Self.Color, -25%)
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    PressedFill: =RGBA(255, 255, 255, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =10
+                    Text: ="View"
+                    Width: =60
+                    X: =977
+                    Y: =9
+                    ZIndex: =7
+
+                BtnLink_4 As button:
+                    BorderColor: =
+                    BorderThickness: =0
+                    Color: =glbErrorColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    Fill: =White
+                    FocusedBorderThickness: =0
+                    FontWeight: =FontWeight.Normal
+                    Height: =24
+                    HoverBorderColor: =ColorFade(Self.Color, -15%)
+                    HoverColor: =ColorFade(Self.Color, -15%)
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =ColorFade(Self.Color, -25%)
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    PressedFill: =RGBA(255, 255, 255, 1)
+                    RadiusBottomLeft: =0
+                    RadiusBottomRight: =0
+                    RadiusTopLeft: =0
+                    RadiusTopRight: =0
+                    Size: =10
+                    Text: ="Delete"
+                    Width: =60
+                    X: =1040
+                    Y: =9
+                    ZIndex: =8
+
+                Label3_1 As label:
+                    Color: =glbNeutralPrimaryColor
+                    Height: =42
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =10
+                    Text: =ThisItem.SampleHeading
+                    Width: =162
+                    X: =293
+                    ZIndex: =9
+
+                lblTag_1 As label:
+                    Align: =Align.Center
+                    BorderColor: =RGBA(255, 255, 255, 1)
+                    BorderStyle: =BorderStyle.None
+                    BorderThickness: =1
+                    Color: |-
+                        =//gray_secondary
+                        If(lblTag_1.Text="Default",glbNeutralSecondaryColor,
+                        lblTag_1.Text="Success",glbSuccessColor,
+                        lblTag_1.Text="Processing",glbLinkColor,
+                        lblTag_1.Text="Warning",glbWarningColor,
+                        lblTag_1.Text="Error",glbErrorColor
+                        
+                        )
+                    Fill: =ColorFade(Self.Color, 90%)
+                    FocusedBorderThickness: =2
+                    Height: =24
+                    OnSelect: =
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =10
+                    Text: ="Success"
+                    Width: =72
+                    X: =658
+                    Y: =9
+                    ZIndex: =10
+
+            Container2 As groupContainer.manualLayoutContainer:
+                Fill: =glbNeutralLighterColor
+                Height: =40
+                Width: =1100
+                X: =40
+                Y: =629
+                ZIndex: =34
+
+                Label4 As label:
+                    Color: =glbNeutralPrimaryColor
+                    FontWeight: =FontWeight.Semibold
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =10
+                    Text: ="Name"
+                    X: =10
+                    ZIndex: =1
+
+                Label4_1 As label:
+                    Color: =glbNeutralPrimaryColor
+                    FontWeight: =FontWeight.Semibold
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =10
+                    Text: ="Time"
+                    X: =293
+                    ZIndex: =2
+
+                Label4_2 As label:
+                    Color: =glbNeutralPrimaryColor
+                    FontWeight: =FontWeight.Semibold
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =10
+                    Text: ="Status"
+                    X: =658
+                    ZIndex: =3
+
+            Label1_45 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =20
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="Table"
+                Width: =120
+                X: =40
+                Y: =593
+                ZIndex: =35
+
+            TabGallery3_1 As gallery.galleryHorizontal:
+                Height: =32
+                Items: =["Button 1","Button 2","Button 3","Button 4"]
+                TemplatePadding: =0
+                TemplateSize: =90
+                Width: =548
+                X: =700
+                Y: =407
+                ZIndex: =36
+
+                Label2_1 As label:
+                    Align: =Align.Center
+                    Color: =If(ThisItem.IsSelected, glbThemePrimaryColor,glbNeutralSecondaryColor)
+                    FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold,FontWeight.Normal)
+                    Height: =32
+                    HoverColor: =glbThemePrimaryColor
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =11
+                    Text: =ThisItem.Value
+                    Width: =90
+                    ZIndex: =1
+
+                Rectangle2_1 As rectangle:
+                    Fill: =glbThemePrimaryColor
+                    Height: =3
+                    OnSelect: =Select(Parent)
+                    Visible: =If(ThisItem.IsSelected, true, false)
+                    Width: =90
+                    Y: =29
+                    ZIndex: =2
+
+            AlertSuccessContainer As groupContainer.manualLayoutContainer:
+                BorderColor: =ColorFade(iconSuccess, 50%)
+                BorderThickness: =1
+                Fill: =ColorFade(iconSuccess, 95%)
+                Height: =90
+                Width: =600
+                X: =40
+                Y: =965
+                ZIndex: =37
+
+                iconSuccess As icon.Add:
+                    BorderColor: =Self.Color
+                    Color: =glbSuccessColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    DisplayMode: =DisplayMode.View
+                    FocusedBorderThickness: =1
+                    Height: =24
+                    HoverBorderColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverFill: =
+                    Icon: =Icon.CheckBadge
+                    OnSelect: =
+                    PressedBorderColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedFill: =RGBA(0, 0, 0, 0)
+                    Width: =24
+                    X: =24
+                    Y: =20
+                    ZIndex: =1
+
+                Label10 As label:
+                    Color: =glbNeutralPrimaryColor
+                    FontWeight: =FontWeight.Semibold
+                    Height: =24
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="Success Tips"
+                    Width: =300
+                    X: =64
+                    Y: =20
+                    ZIndex: =2
+
+                Label10_1 As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =24
+                    LineHeight: =1.5
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =10.5
+                    Text: ="Detailed description and advice about successful copywriting."
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =520
+                    X: =64
+                    Y: =49
+                    ZIndex: =3
+
+                Icon4_30 As icon.Add:
+                    BorderColor: =Self.Color
+                    Color: =glbNeutralTertiaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    FocusedBorderThickness: =1
+                    Height: =40
+                    HoverBorderColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverFill: =
+                    Icon: =Icon.Cancel
+                    OnSelect: =
+                    PaddingBottom: =12
+                    PaddingTop: =12
+                    PressedBorderColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedFill: =RGBA(0, 0, 0, 0)
+                    Width: =40
+                    X: =560
+                    ZIndex: =4
+
+            AlertSuccessContainerSmall As groupContainer.manualLayoutContainer:
+                BorderColor: =ColorFade(iconSuccess4, 50%)
+                BorderThickness: =1
+                Fill: =ColorFade(iconSuccess4, 95%)
+                Height: =40
+                Width: =600
+                X: =40
+                Y: =912
+                ZIndex: =38
+
+                iconSuccess4 As icon.Add:
+                    BorderColor: =Self.Color
+                    Color: =glbSuccessColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    DisplayMode: =DisplayMode.View
+                    FocusedBorderThickness: =1
+                    Height: =20
+                    HoverBorderColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverFill: =
+                    Icon: =Icon.CheckBadge
+                    OnSelect: =
+                    PressedBorderColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedFill: =RGBA(0, 0, 0, 0)
+                    Width: =20
+                    X: =17
+                    Y: =10
+                    ZIndex: =1
+
+                Label10_2 As label:
+                    Color: =glbNeutralPrimaryColor
+                    Height: =24
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =10.5
+                    Text: ="Success Tips"
+                    Width: =500
+                    X: =47
+                    Y: =8
+                    ZIndex: =2
+
+                Icon4_32 As icon.Add:
+                    BorderColor: =Self.Color
+                    Color: =glbNeutralTertiaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    FocusedBorderThickness: =1
+                    Height: =40
+                    HoverBorderColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverFill: =
+                    Icon: =Icon.Cancel
+                    OnSelect: =
+                    PaddingBottom: =12
+                    PaddingTop: =12
+                    PressedBorderColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedFill: =RGBA(0, 0, 0, 0)
+                    Width: =40
+                    X: =560
+                    ZIndex: =4
+
+            Label1_51 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =20
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="Alert"
+                Width: =120
+                X: =43
+                Y: =877
+                ZIndex: =41
+
+            lblTag_2 As label:
+                Align: =Align.Center
+                BorderColor: =RGBA(255, 255, 255, 1)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                Color: |-
+                    =//gray_secondary
+                    If(lblTag_2.Text="Default",glbNeutralSecondaryColor,
+                    lblTag_2.Text="Success",glbSuccessColor,
+                    lblTag_2.Text="Processing",glbLinkColor,
+                    lblTag_2.Text="Warning",glbWarningColor,
+                    lblTag_2.Text="Error",glbErrorColor
+                    
+                    )
+                Fill: =ColorFade(Self.Color, 90%)
+                FocusedBorderThickness: =2
+                Height: =24
+                OnSelect: =
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="Success"
+                Width: =72
+                X: =129
+                Y: =533
+                ZIndex: =42
+
+            lblTag_3 As label:
+                Align: =Align.Center
+                BorderColor: =RGBA(255, 255, 255, 1)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                Color: |-
+                    =//gray_secondary
+                    If(lblTag_3.Text="Default",glbNeutralSecondaryColor,
+                    lblTag_3.Text="Success",glbSuccessColor,
+                    lblTag_3.Text="Processing",glbLinkColor,
+                    lblTag_3.Text="Warning",glbWarningColor,
+                    lblTag_3.Text="Error",glbErrorColor
+                    
+                    )
+                Fill: =ColorFade(Self.Color, 90%)
+                FocusedBorderThickness: =2
+                Height: =24
+                OnSelect: =
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="Warning"
+                Width: =72
+                X: =218
+                Y: =533
+                ZIndex: =43
+
+            lblTag_4 As label:
+                Align: =Align.Center
+                BorderColor: =RGBA(255, 255, 255, 1)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                Color: |-
+                    =//gray_secondary
+                    If(lblTag_4.Text="Default",glbNeutralSecondaryColor,
+                    lblTag_4.Text="Success",glbSuccessColor,
+                    lblTag_4.Text="Processing",glbLinkColor,
+                    lblTag_4.Text="Warning",glbWarningColor,
+                    lblTag_4.Text="Error",glbErrorColor
+                    
+                    )
+                Fill: =ColorFade(Self.Color, 90%)
+                FocusedBorderThickness: =2
+                Height: =24
+                OnSelect: =
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="Processing"
+                Width: =80
+                X: =307
+                Y: =533
+                ZIndex: =44
+
+            lblTag_5 As label:
+                Align: =Align.Center
+                BorderColor: =RGBA(255, 255, 255, 1)
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                Color: |-
+                    =//gray_secondary
+                    If(lblTag_5.Text="Default",glbNeutralSecondaryColor,
+                    lblTag_5.Text="Success",glbSuccessColor,
+                    lblTag_5.Text="Processing",glbLinkColor,
+                    lblTag_5.Text="Warning",glbWarningColor,
+                    lblTag_5.Text="Error",glbErrorColor
+                    
+                    )
+                Fill: =ColorFade(Self.Color, 90%)
+                FocusedBorderThickness: =2
+                Height: =24
+                OnSelect: =
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="Error"
+                Width: =72
+                X: =405
+                Y: =533
+                ZIndex: =45
+
+            AlertInfoContainer As groupContainer.manualLayoutContainer:
+                BorderColor: =ColorFade(iconSuccess_1, 50%)
+                BorderThickness: =1
+                Fill: =ColorFade(iconSuccess_1, 95%)
+                Height: =90
+                Width: =600
+                X: =686
+                Y: =965
+                ZIndex: =46
+
+                iconSuccess_1 As icon.Add:
+                    BorderColor: =Self.Color
+                    Color: =glbLinkColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    DisplayMode: =DisplayMode.View
+                    FocusedBorderThickness: =1
+                    Height: =24
+                    HoverBorderColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverFill: =
+                    Icon: =Icon.Information
+                    OnSelect: =
+                    PressedBorderColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedFill: =RGBA(0, 0, 0, 0)
+                    Width: =24
+                    X: =24
+                    Y: =20
+                    ZIndex: =1
+
+                Label10_3 As label:
+                    Color: =glbNeutralPrimaryColor
+                    FontWeight: =FontWeight.Semibold
+                    Height: =24
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="Informational Notes"
+                    Width: =300
+                    X: =64
+                    Y: =20
+                    ZIndex: =2
+
+                Label10_4 As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =24
+                    LineHeight: =1.5
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =10.5
+                    Text: ="Additional description and information about copywriting."
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =520
+                    X: =64
+                    Y: =49
+                    ZIndex: =3
+
+                Icon4_31 As icon.Add:
+                    BorderColor: =Self.Color
+                    Color: =glbNeutralTertiaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    FocusedBorderThickness: =1
+                    Height: =40
+                    HoverBorderColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverFill: =
+                    Icon: =Icon.Cancel
+                    OnSelect: =
+                    PaddingBottom: =12
+                    PaddingTop: =12
+                    PressedBorderColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedFill: =RGBA(0, 0, 0, 0)
+                    Width: =40
+                    X: =560
+                    ZIndex: =4
+
+            AlertInfoContainerSmall As groupContainer.manualLayoutContainer:
+                BorderColor: =ColorFade(iconSuccess4_1, 50%)
+                BorderThickness: =1
+                Fill: =ColorFade(iconSuccess4_1, 95%)
+                Height: =40
+                Width: =600
+                X: =686
+                Y: =912
+                ZIndex: =47
+
+                iconSuccess4_1 As icon.Add:
+                    BorderColor: =Self.Color
+                    Color: =glbLinkColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    DisplayMode: =DisplayMode.View
+                    FocusedBorderThickness: =1
+                    Height: =20
+                    HoverBorderColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverFill: =
+                    Icon: =Icon.Information
+                    OnSelect: =
+                    PressedBorderColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedFill: =RGBA(0, 0, 0, 0)
+                    Width: =20
+                    X: =17
+                    Y: =10
+                    ZIndex: =1
+
+                Label10_5 As label:
+                    Color: =glbNeutralPrimaryColor
+                    Height: =24
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =10.5
+                    Text: ="Informational Notes"
+                    Width: =500
+                    X: =47
+                    Y: =8
+                    ZIndex: =2
+
+                Icon4_33 As icon.Add:
+                    BorderColor: =Self.Color
+                    Color: =glbNeutralTertiaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    FocusedBorderThickness: =1
+                    Height: =40
+                    HoverBorderColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverFill: =
+                    Icon: =Icon.Cancel
+                    OnSelect: =
+                    PaddingBottom: =12
+                    PaddingTop: =12
+                    PressedBorderColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedFill: =RGBA(0, 0, 0, 0)
+                    Width: =40
+                    X: =560
+                    ZIndex: =4
+
+            AlertSuccessContainer_1 As groupContainer.manualLayoutContainer:
+                BorderColor: =ColorFade(iconSuccess_2, 50%)
+                BorderThickness: =1
+                Fill: =ColorFade(iconSuccess_2, 95%)
+                Height: =90
+                Width: =600
+                X: =40
+                Y: =1138
+                ZIndex: =48
+
+                iconSuccess_2 As icon.Add:
+                    BorderColor: =Self.Color
+                    Color: =glbWarningColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    DisplayMode: =DisplayMode.View
+                    FocusedBorderThickness: =1
+                    Height: =24
+                    HoverBorderColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverFill: =
+                    Icon: =Icon.Error
+                    OnSelect: =
+                    PressedBorderColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedFill: =RGBA(0, 0, 0, 0)
+                    Width: =24
+                    X: =24
+                    Y: =20
+                    ZIndex: =1
+
+                Label10_6 As label:
+                    Color: =glbNeutralPrimaryColor
+                    FontWeight: =FontWeight.Semibold
+                    Height: =24
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="Warning"
+                    Width: =300
+                    X: =64
+                    Y: =20
+                    ZIndex: =2
+
+                Label10_7 As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =24
+                    LineHeight: =1.5
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =10.5
+                    Text: ="This is a warning notice about copywriting."
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =520
+                    X: =64
+                    Y: =49
+                    ZIndex: =3
+
+                Icon4_34 As icon.Add:
+                    BorderColor: =Self.Color
+                    Color: =glbNeutralTertiaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    FocusedBorderThickness: =1
+                    Height: =40
+                    HoverBorderColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverFill: =
+                    Icon: =Icon.Cancel
+                    OnSelect: =
+                    PaddingBottom: =12
+                    PaddingTop: =12
+                    PressedBorderColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedFill: =RGBA(0, 0, 0, 0)
+                    Width: =40
+                    X: =560
+                    ZIndex: =4
+
+            AlertSuccessContainerSmall_1 As groupContainer.manualLayoutContainer:
+                BorderColor: =ColorFade(iconSuccess4_2, 50%)
+                BorderThickness: =1
+                Fill: =ColorFade(iconSuccess4_2, 95%)
+                Height: =40
+                Width: =600
+                X: =40
+                Y: =1085
+                ZIndex: =49
+
+                iconSuccess4_2 As icon.Add:
+                    BorderColor: =Self.Color
+                    Color: =glbWarningColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    DisplayMode: =DisplayMode.View
+                    FocusedBorderThickness: =1
+                    Height: =20
+                    HoverBorderColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverFill: =
+                    Icon: =Icon.Error
+                    OnSelect: =
+                    PressedBorderColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedFill: =RGBA(0, 0, 0, 0)
+                    Width: =20
+                    X: =17
+                    Y: =10
+                    ZIndex: =1
+
+                Label10_8 As label:
+                    Color: =glbNeutralPrimaryColor
+                    Height: =24
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =10.5
+                    Text: ="Warning"
+                    Width: =500
+                    X: =47
+                    Y: =8
+                    ZIndex: =2
+
+                Icon4_35 As icon.Add:
+                    BorderColor: =Self.Color
+                    Color: =glbNeutralTertiaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    FocusedBorderThickness: =1
+                    Height: =40
+                    HoverBorderColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverFill: =
+                    Icon: =Icon.Cancel
+                    OnSelect: =
+                    PaddingBottom: =12
+                    PaddingTop: =12
+                    PressedBorderColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedFill: =RGBA(0, 0, 0, 0)
+                    Width: =40
+                    X: =560
+                    ZIndex: =4
+
+            AlertInfoContainer_1 As groupContainer.manualLayoutContainer:
+                BorderColor: =ColorFade(iconSuccess_3, 50%)
+                BorderThickness: =1
+                Fill: =ColorFade(iconSuccess_3, 95%)
+                Height: =90
+                Width: =600
+                X: =686
+                Y: =1138
+                ZIndex: =50
+
+                iconSuccess_3 As icon.Add:
+                    BorderColor: =Self.Color
+                    Color: =glbErrorColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    DisplayMode: =DisplayMode.View
+                    FocusedBorderThickness: =1
+                    Height: =24
+                    HoverBorderColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverFill: =
+                    Icon: =Icon.CancelBadge
+                    OnSelect: =
+                    PressedBorderColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedFill: =RGBA(0, 0, 0, 0)
+                    Width: =24
+                    X: =24
+                    Y: =20
+                    ZIndex: =1
+
+                Label10_9 As label:
+                    Color: =glbNeutralPrimaryColor
+                    FontWeight: =FontWeight.Semibold
+                    Height: =24
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =12
+                    Text: ="Error"
+                    Width: =300
+                    X: =64
+                    Y: =20
+                    ZIndex: =2
+
+                Label10_10 As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =24
+                    LineHeight: =1.5
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =10.5
+                    Text: ="This is an error message about copywriting."
+                    VerticalAlign: =VerticalAlign.Top
+                    Width: =520
+                    X: =64
+                    Y: =49
+                    ZIndex: =3
+
+                Icon4_36 As icon.Add:
+                    BorderColor: =Self.Color
+                    Color: =glbNeutralTertiaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    FocusedBorderThickness: =1
+                    Height: =40
+                    HoverBorderColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverFill: =
+                    Icon: =Icon.Cancel
+                    OnSelect: =
+                    PaddingBottom: =12
+                    PaddingTop: =12
+                    PressedBorderColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedFill: =RGBA(0, 0, 0, 0)
+                    Width: =40
+                    X: =560
+                    ZIndex: =4
+
+            AlertInfoContainerSmall_1 As groupContainer.manualLayoutContainer:
+                BorderColor: =ColorFade(iconSuccess4_3, 50%)
+                BorderThickness: =1
+                Fill: =ColorFade(iconSuccess4_3, 95%)
+                Height: =40
+                Width: =600
+                X: =686
+                Y: =1085
+                ZIndex: =51
+
+                iconSuccess4_3 As icon.Add:
+                    BorderColor: =Self.Color
+                    Color: =glbErrorColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    DisplayMode: =DisplayMode.View
+                    FocusedBorderThickness: =1
+                    Height: =20
+                    HoverBorderColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverFill: =
+                    Icon: =Icon.CancelBadge
+                    OnSelect: =
+                    PressedBorderColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedFill: =RGBA(0, 0, 0, 0)
+                    Width: =20
+                    X: =17
+                    Y: =10
+                    ZIndex: =1
+
+                Label10_11 As label:
+                    Color: =glbNeutralPrimaryColor
+                    Height: =24
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =10.5
+                    Text: ="Error"
+                    Width: =500
+                    X: =47
+                    Y: =8
+                    ZIndex: =2
+
+                Icon4_37 As icon.Add:
+                    BorderColor: =Self.Color
+                    Color: =glbNeutralTertiaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    FocusedBorderThickness: =1
+                    Height: =40
+                    HoverBorderColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverColor: =ColorFade(Self.BorderColor, -25%)
+                    HoverFill: =
+                    Icon: =Icon.Cancel
+                    OnSelect: =
+                    PaddingBottom: =12
+                    PaddingTop: =12
+                    PressedBorderColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedColor: =ColorFade(Self.BorderColor, -15%)
+                    PressedFill: =RGBA(0, 0, 0, 0)
+                    Width: =40
+                    X: =560
+                    ZIndex: =4
+
+            Label1_54 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =20
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="修改icon的Color属性即可"
+                Width: =200
+                X: =40
+                Y: =1245
+                ZIndex: =52
+
+        crdFont As dataCard.blankCard:
+            BorderColor: =RGBA(0, 0, 0, 1)
+            BorderStyle: =BorderStyle.Solid
+            DisplayMode: =DisplayMode.Edit
+            Fill: =RGBA(0, 0, 0, 0)
+            Height: =620
+            Width: =1366
+            X: =0
+            Y: =3
+            ZIndex: =4
+
+            Label1_46 As label:
+                Color: =glbNeutralSecondaryColor
+                FontWeight: =FontWeight.Bold
+                Height: =30
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =20
+                Text: ="Font Size"
+                Width: =300
+                X: =40
+                Y: =40
+                ZIndex: =1
+
+            Label1_47 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =32
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="在PP文件中的字号与设计图中的字号存在差异，因此需使用一下公式换算"
+                VerticalAlign: =VerticalAlign.Top
+                Width: =508
+                X: =40
+                Y: =93
+                ZIndex: =2
+
+            Label1_48 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =19
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="设计图标注字号*3/4=PP文件中的字号"
+                VerticalAlign: =VerticalAlign.Top
+                Width: =273
+                X: =40
+                Y: =182
+                ZIndex: =4
+
+            TextInput2_1 As text:
+                BorderColor: =glbNeutralTertiaryColor
+                BorderThickness: =1
+                Color: =glbNeutralPrimaryColor
+                Default: =""
+                FocusedBorderColor: =glbNeutralSecondaryColor
+                FocusedBorderThickness: =1
+                Height: =32
+                HintText: ="输入设计图字号"
+                HoverBorderColor: =glbNeutralSecondaryColor
+                HoverFill: =glbNeutralLighterColor
+                PaddingBottom: =0
+                PaddingLeft: =10
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =glbNeutralSecondaryColor
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =11
+                Width: =180
+                X: =40
+                Y: =128
+                ZIndex: =5
+
+            Label1_52 As label:
+                Color: =glbNeutralPrimaryColor
+                Height: =20
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =11
+                Text: ="* 3/4 ="
+                Width: =60
+                X: =230
+                Y: =134
+                ZIndex: =9
+
+            Label1_53 As label:
+                Color: =glbNeutralPrimaryColor
+                FontWeight: =FontWeight.Bold
+                Height: =20
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =14
+                Text: =TextInput2_1.Text*3/4
+                Width: =40
+                X: =286
+                Y: =134
+                ZIndex: =10
+
+            Gallery4_1 As gallery.galleryVertical:
+                BorderColor: =glbNeutralLightColor
+                BorderThickness: =1
+                Fill: =RGBA(255, 255, 255, 1)
+                Height: =230
+                Items: =FontSize
+                Layout: =Layout.Vertical
+                TemplatePadding: =0
+                TemplateSize: =32
+                Width: =400
+                X: =672
+                Y: =125
+                ZIndex: =11
+
+                Label3_2 As label:
+                    Color: =glbNeutralPrimaryColor
+                    Height: =32
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =10
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =10
+                    Text: =ThisItem.PP字号
+                    X: =250
+                    ZIndex: =1
+
+                Rectangle3_1 As rectangle:
+                    Fill: =glbNeutralLightColor
+                    Height: =1
+                    OnSelect: =Select(Parent)
+                    Width: =Parent.TemplateWidth
+                    Y: =31
+                    ZIndex: =2
+
+                Label3_3 As label:
+                    Color: =glbNeutralPrimaryColor
+                    Height: =32
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =10
+                    Text: =ThisItem.设计稿字号
+                    Width: =162
+                    X: =21
+                    ZIndex: =9
+
+            Rectangle4 As rectangle:
+                Fill: =glbNeutralLighterColor
+                Height: =32
+                Width: =400
+                X: =672
+                Y: =93
+                ZIndex: =12
+
+            Label1_49 As label:
+                Color: =glbLinkColor
+                Height: =19
+                OnSelect: |
+                    =ClearCollect(FontSize,
+                    {设计稿字号:"12",PP字号:"9"},
+                    {设计稿字号:"13",PP字号:"10"},
+                    {设计稿字号:"14",PP字号:"10.5"},
+                    {设计稿字号:"15",PP字号:"11"},
+                    {设计稿字号:"16",PP字号:"12"},
+                    {设计稿字号:"17",PP字号:"13"},
+                    {设计稿字号:"18",PP字号:"13.5"},
+                    {设计稿字号:"19",PP字号:"14"},
+                    {设计稿字号:"20",PP字号:"15"}
+                    )
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="设计图字号"
+                VerticalAlign: =VerticalAlign.Top
+                Width: =80
+                X: =690
+                Y: =99
+                ZIndex: =13
+
+            Label1_50 As label:
+                Color: =glbNeutralSecondaryColor
+                Height: =19
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =10
+                Text: ="PP字号"
+                VerticalAlign: =VerticalAlign.Top
+                Width: =80
+                X: =931
+                Y: =99
+                ZIndex: =14
+
+            Rectangle1_5 As rectangle:
+                Fill: =RGBA(202, 202, 202, 1)
+                Height: =1
+                Width: =1287
+                X: =40
+                ZIndex: =15
+
