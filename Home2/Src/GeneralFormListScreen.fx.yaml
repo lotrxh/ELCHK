@@ -1024,6 +1024,7 @@ GeneralFormListScreen As screen:
                     DisabledBorderColor: =RGBA(219, 219, 219, 1)
                     DisabledColor: =RGBA(149, 149, 149, 1)
                     DisabledFill: =RGBA(244, 244, 244, 1)
+                    DisplayMode: =If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","自助假期批核資料表"],DisplayMode.Edit,DisplayMode.Disabled)
                     Fill: =White
                     FocusedBorderThickness: =1
                     Height: =24
@@ -1060,8 +1061,8 @@ GeneralFormListScreen As screen:
                     PressedColor: =ColorFade(Self.BorderColor, -15%)
                     PressedFill: =ColorFade(Self.Color, 95%)
                     Visible: |-
-                        =
-                        If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","自助假期批核資料表"],true,false)
+                        =true
+                        //If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","自助假期批核資料表"],true,false)
                     Width: =24
                     X: =1067
                     Y: =12
