@@ -458,14 +458,8 @@ HomepageScreen As screen:
                                 )
                             );
                             Launch(
-                                JumpUrl,
-                                {
-                                    Navigate: "JobTitleFormScreen",
-                                    ModelFlowNumber: TaskNameGallery.Selected.ModelFlowNumber,
-                                    newApplicationGuid: GUID(),
-                                    flowguid: GUID(),
-                                    bustype: "New"
-                                },
+                                JumpUrl & "&Screen=JobTitleFormScreen&newApplicationGuid=" & GUID() & "&flowguid=" & GUID() & "&bustype=New",
+                                {},
                                 LaunchTarget.Replace
                             ),
                             ThisItem.ModelName = "假期批核人資料表",
@@ -494,14 +488,8 @@ HomepageScreen As screen:
                                 )
                             );
                             Launch(
-                                JumpUrlA306A111,
-                                {
-                                    Navigate: "VacationFormScreen",
-                                    ModelFlowNumber: TaskNameGallery.Selected.ModelFlowNumber,
-                                    newApplicationGuid: GUID(),
-                                    flowguid: GUID(),
-                                    bustype: "New"
-                                },
+                                JumpUrlA306A111 & "&Screen=VacationFormScreen&newApplicationGuid=" & GUID() & "&flowguid=" & GUID() & "&bustype=New",
+                                {},
                                 LaunchTarget.Replace
                             ),
                             ThisItem.ModelName = "任職資源申請",
@@ -530,14 +518,8 @@ HomepageScreen As screen:
                                 )
                             );
                             Launch(
-                                JumpUrlA306A111,
-                                {
-                                    Navigate: "EmploymentFormScreen",
-                                    ModelFlowNumber: TaskNameGallery.Selected.ModelFlowNumber,
-                                    newApplicationGuid: GUID(),
-                                    flowguid: GUID(),
-                                    bustype: "New"
-                                },
+                                JumpUrlA306A111 & "&Screen=EmploymentFormScreen&newApplicationGuid=" & GUID() & "&flowguid=" & GUID() & "&bustype=New",
+                                {},
                                 LaunchTarget.Replace
                             ),
                             ThisItem.ModelName = "預備合約通知書(新入職)",
@@ -566,14 +548,8 @@ HomepageScreen As screen:
                                 )
                             );
                             Launch(
-                                JumpUrl,
-                                {
-                                    Navigate: "ContractNoticeForm",
-                                    ModelFlowNumber: TaskNameGallery.Selected.ModelFlowNumber,
-                                    newApplicationGuid: GUID(),
-                                    flowguid: GUID(),
-                                    bustype: "New"
-                                },
+                                JumpUrl & "&Screen=ContractNoticeForm&newApplicationGuid=" & GUID() & "&flowguid=" & GUID() & "&bustype=New",
+                                {},
                                 LaunchTarget.Replace
                             ),
                             If(
@@ -609,11 +585,8 @@ HomepageScreen As screen:
                                     ).标题
                                 },
                                 Launch(
-                                    JumpUrlMobileApp,
-                                    {
-                                        Navigate: "CreateGeneralFormScreen",
-                                        FormModelId: FormModelId
-                                    },
+                                    JumpUrlMobileApp&"&Screen=CreateGeneralFormScreen&FormModelId="&FormModelId,
+                                    {},
                                     LaunchTarget.Replace
                                 )
                             )
