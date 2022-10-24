@@ -452,12 +452,20 @@ HomepageScreen As screen:
                                             标题: GUID(),
                                             UserEmail: User().Email,
                                             ContatsType: "",
-                                            ModelFlowNumber:"A103"
+                                            ModelFlowNumber: "A103"
                                         }
                                     )
                                 )
                             );
-                            Launch(JumpUrl&"&Screen=JobTitleFormScreen&skipAppMetadata=true&ModelFlowNumber="&TaskNameGallery.Selected.ModelFlowNumber,{},LaunchTarget.Replace),
+                            Launch(
+                                JumpUrl & "&Screen=JobTitleFormScreen&skipAppMetadata=true&ModelFlowNumber=" & TaskNameGallery.Selected.ModelFlowNumber,
+                                {
+                                    newApplicationGuid: GUID(),
+                                    flowguid: GUID(),
+                                    bustype: "New"
+                                },
+                                LaunchTarget.Replace
+                            ),
                             ThisItem.ModelName = "假期批核人資料表",
                             If(
                                 TabGallery3_2.Selected.Result = "常用表格",
@@ -478,12 +486,20 @@ HomepageScreen As screen:
                                             标题: GUID(),
                                             UserEmail: User().Email,
                                             ContatsType: "",
-                                            ModelFlowNumber:"A306"
+                                            ModelFlowNumber: "A306"
                                         }
                                     )
                                 )
                             );
-                            Launch(JumpUrlA306A111&"&Screen=VacationFormScreen&skipAppMetadata=true&ModelFlowNumber="&TaskNameGallery.Selected.ModelFlowNumber,{},LaunchTarget.Replace),
+                            Launch(
+                                JumpUrlA306A111 & "&Screen=VacationFormScreen&skipAppMetadata=true&ModelFlowNumber=" & TaskNameGallery.Selected.ModelFlowNumber,
+                                {
+                                    newApplicationGuid: GUID(),
+                                    flowguid: GUID(),
+                                    bustype: "New"
+                                },
+                                LaunchTarget.Replace
+                            ),
                             ThisItem.ModelName = "任職資源申請",
                             If(
                                 TabGallery3_2.Selected.Result = "常用表格",
@@ -504,12 +520,20 @@ HomepageScreen As screen:
                                             标题: GUID(),
                                             UserEmail: User().Email,
                                             ContatsType: "",
-                                            ModelFlowNumber:"A111"
+                                            ModelFlowNumber: "A111"
                                         }
                                     )
                                 )
                             );
-                            Launch(JumpUrlA306A111&"&Screen=EmploymentFormScreen&skipAppMetadata=true&ModelFlowNumber="&TaskNameGallery.Selected.ModelFlowNumber,{},LaunchTarget.Replace),
+                            Launch(
+                                JumpUrlA306A111 & "&Screen=EmploymentFormScreen&skipAppMetadata=true&ModelFlowNumber=" & TaskNameGallery.Selected.ModelFlowNumber,
+                                {
+                                    newApplicationGuid: GUID(),
+                                    flowguid: GUID(),
+                                    bustype: "New"
+                                },
+                                LaunchTarget.Replace
+                            ),
                             ThisItem.ModelName = "預備合約通知書(新入職)",
                             If(
                                 TabGallery3_2.Selected.Result = "常用表格",
@@ -530,12 +554,20 @@ HomepageScreen As screen:
                                             标题: GUID(),
                                             UserEmail: User().Email,
                                             ContatsType: "",
-                                            ModelFlowNumber:"A104"
+                                            ModelFlowNumber: "A104"
                                         }
                                     )
                                 )
                             );
-                            Launch(JumpUrl&"&Screen=JobTitleFormScreen&Screen=ContractNoticeForm&skipAppMetadata=true&ModelFlowNumber="&TaskNameGallery.Selected.ModelFlowNumber,{},LaunchTarget.Replace),
+                            Launch(
+                                JumpUrl & "&Screen=JobTitleFormScreen&Screen=ContractNoticeForm&skipAppMetadata=true&ModelFlowNumber=" & TaskNameGallery.Selected.ModelFlowNumber,
+                                {
+                                    newApplicationGuid: GUID(),
+                                    flowguid: GUID(),
+                                    bustype: "New"
+                                },
+                                LaunchTarget.Replace
+                            ),
                             If(
                                 TabGallery3_2.Selected.Result = "常用表格",
                                 "",
@@ -556,7 +588,7 @@ HomepageScreen As screen:
                                             UserEmail: User().Email,
                                             ContatsType: "",
                                             TaskFormDescription: ThisItem.ModelDescription,
-                                            ModelFlowNumber:ThisItem.ModelFlowNumber
+                                            ModelFlowNumber: ThisItem.ModelFlowNumber
                                         }
                                     )
                                 )
@@ -568,7 +600,11 @@ HomepageScreen As screen:
                                         ModelFlowNumber = ThisItem.ModelFlowNumber
                                     ).标题
                                 },
-                                Launch(JumpUrlMobileApp&"&Screen=CreateGeneralFormScreen&FormModelId=" & FormModelId,{},LaunchTarget.Replace)
+                                Launch(
+                                    JumpUrlMobileApp & "&Screen=CreateGeneralFormScreen&FormModelId=" & FormModelId,
+                                    {},
+                                    LaunchTarget.Replace
+                                )
                             )
                         )
                     PaddingBottom: =0
