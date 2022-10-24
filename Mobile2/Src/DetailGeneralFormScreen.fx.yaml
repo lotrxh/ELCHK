@@ -2896,7 +2896,8 @@
                 PaddingLeft: =1
                 PaddingRight: =1
                 Visible: |
-                    =With(
+                    =
+                    With(
                         {
                             UEmail: LookUp(
                                 ApprovalDetail_Table,
@@ -2921,7 +2922,7 @@
                                         )
                                     ).ActionNode = "跟進" )),true,false))
                     
-                                   // true
+                    // true
                 ZIndex: =2
 
                 TextInput_FilterLabel_2 As text:
@@ -2945,9 +2946,10 @@
                     RadiusBottomRight: =4
                     RadiusTopLeft: =4
                     RadiusTopRight: =4
-                    Size: =11
+                    Size: =10
                     Visible: |
-                        =With(
+                        =
+                        With(
                             {
                                 UEmail: LookUp(
                                     ApprovalDetail_Table,
@@ -2972,7 +2974,7 @@
                                             )
                                         ).ActionNode = "跟進" )),true,false))
                         
-                                       // true
+                        // true
                     Width: =Parent.Width-50
                     X: =46
                     Y: =7
