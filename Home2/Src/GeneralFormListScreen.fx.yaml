@@ -1059,7 +1059,9 @@ GeneralFormListScreen As screen:
                     PressedBorderColor: =ColorFade(Self.BorderColor, -15%)
                     PressedColor: =ColorFade(Self.BorderColor, -15%)
                     PressedFill: =ColorFade(Self.Color, 95%)
-                    Visible: =If(ThisItem.FlowTaskName="任職資源申請",false,true)
+                    Visible: |-
+                        =
+                        If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","自助假期批核資料表"],true,false)
                     Width: =24
                     X: =1067
                     Y: =12
