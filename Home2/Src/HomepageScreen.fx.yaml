@@ -460,7 +460,7 @@ HomepageScreen As screen:
                             Launch(
                                 JumpUrl,
                                 {
-                                    Screen: "JobTitleFormScreen",
+                                    Navigate: "JobTitleFormScreen",
                                     ModelFlowNumber: TaskNameGallery.Selected.ModelFlowNumber,
                                     newApplicationGuid: GUID(),
                                     flowguid: GUID(),
@@ -496,7 +496,7 @@ HomepageScreen As screen:
                             Launch(
                                 JumpUrlA306A111,
                                 {
-                                    Screen: "VacationFormScreen",
+                                    Navigate: "VacationFormScreen",
                                     ModelFlowNumber: TaskNameGallery.Selected.ModelFlowNumber,
                                     newApplicationGuid: GUID(),
                                     flowguid: GUID(),
@@ -532,7 +532,7 @@ HomepageScreen As screen:
                             Launch(
                                 JumpUrlA306A111,
                                 {
-                                    Screen: "EmploymentFormScreen",
+                                    Navigate: "EmploymentFormScreen",
                                     ModelFlowNumber: TaskNameGallery.Selected.ModelFlowNumber,
                                     newApplicationGuid: GUID(),
                                     flowguid: GUID(),
@@ -568,7 +568,7 @@ HomepageScreen As screen:
                             Launch(
                                 JumpUrl,
                                 {
-                                    Screen: "ContractNoticeForm",
+                                    Navigate: "ContractNoticeForm",
                                     ModelFlowNumber: TaskNameGallery.Selected.ModelFlowNumber,
                                     newApplicationGuid: GUID(),
                                     flowguid: GUID(),
@@ -611,7 +611,7 @@ HomepageScreen As screen:
                                 Launch(
                                     JumpUrlMobileApp,
                                     {
-                                        Screen: "CreateGeneralFormScreen",
+                                        Navigate: "CreateGeneralFormScreen",
                                         FormModelId: FormModelId
                                     },
                                     LaunchTarget.Replace
