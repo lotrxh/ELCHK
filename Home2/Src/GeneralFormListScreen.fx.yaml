@@ -996,7 +996,8 @@ GeneralFormListScreen As screen:
                                     "Priortty",
                                     Descending
                                 )
-                            ).TaskStatus = "000" ||  First(
+                            ).TaskStatus = "000","已拒絕",
+                                First(
                                 SortByColumns(
                                     Filter(
                                         ComplatelDetailCol,
