@@ -458,8 +458,10 @@ HomepageScreen As screen:
                                 )
                             );
                             Launch(
-                                JumpUrl & "&Screen=JobTitleFormScreen&skipAppMetadata=true&ModelFlowNumber=" & TaskNameGallery.Selected.ModelFlowNumber,
+                                JumpUrl,
                                 {
+                                    Screen: "JobTitleFormScreen",
+                                    ModelFlowNumber: TaskNameGallery.Selected.ModelFlowNumber,
                                     newApplicationGuid: GUID(),
                                     flowguid: GUID(),
                                     bustype: "New"
@@ -492,8 +494,10 @@ HomepageScreen As screen:
                                 )
                             );
                             Launch(
-                                JumpUrlA306A111 & "&Screen=VacationFormScreen&skipAppMetadata=true&ModelFlowNumber=" & TaskNameGallery.Selected.ModelFlowNumber,
+                                JumpUrlA306A111,
                                 {
+                                    Screen: "VacationFormScreen",
+                                    ModelFlowNumber: TaskNameGallery.Selected.ModelFlowNumber,
                                     newApplicationGuid: GUID(),
                                     flowguid: GUID(),
                                     bustype: "New"
@@ -526,8 +530,10 @@ HomepageScreen As screen:
                                 )
                             );
                             Launch(
-                                JumpUrlA306A111 & "&Screen=EmploymentFormScreen&skipAppMetadata=true&ModelFlowNumber=" & TaskNameGallery.Selected.ModelFlowNumber,
+                                JumpUrlA306A111,
                                 {
+                                    Screen: "EmploymentFormScreen",
+                                    ModelFlowNumber: TaskNameGallery.Selected.ModelFlowNumber,
                                     newApplicationGuid: GUID(),
                                     flowguid: GUID(),
                                     bustype: "New"
@@ -560,8 +566,10 @@ HomepageScreen As screen:
                                 )
                             );
                             Launch(
-                                JumpUrl & "&Screen=JobTitleFormScreen&Screen=ContractNoticeForm&skipAppMetadata=true&ModelFlowNumber=" & TaskNameGallery.Selected.ModelFlowNumber,
+                                JumpUrl,
                                 {
+                                    Screen: "ContractNoticeForm",
+                                    ModelFlowNumber: TaskNameGallery.Selected.ModelFlowNumber,
                                     newApplicationGuid: GUID(),
                                     flowguid: GUID(),
                                     bustype: "New"
@@ -601,8 +609,11 @@ HomepageScreen As screen:
                                     ).标题
                                 },
                                 Launch(
-                                    JumpUrlMobileApp & "&Screen=CreateGeneralFormScreen&FormModelId=" & FormModelId,
-                                    {},
+                                    JumpUrlMobileApp,
+                                    {
+                                        Screen: "CreateGeneralFormScreen",
+                                        FormModelId: FormModelId
+                                    },
                                     LaunchTarget.Replace
                                 )
                             )
