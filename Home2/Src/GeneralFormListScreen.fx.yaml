@@ -98,6 +98,11 @@ GeneralFormListScreen As screen:
                         "Approval_No",
                         "Data1"
                     ),
+                    "TaskStatus",
+                    LookUp(
+                        SearchPendingData,
+                        Approval_No = Approval_No
+                    ).TaskStatus,
                     "FlowTaskName",
                     LookUp(
                         Approval_Table,
@@ -182,6 +187,11 @@ GeneralFormListScreen As screen:
                         "Approval_No",
                         "Data"
                     ),
+                    "TaskStatus",
+                    LookUp(
+                        ProcessedListCol,
+                        Approval_No = Approval_No
+                    ).TaskStatus,
                     "FlowTaskName",
                     LookUp(
                         Approval_Table,
@@ -267,6 +277,11 @@ GeneralFormListScreen As screen:
                         "Approval_No",
                         "Data"
                     ),
+                    "TaskStatus",
+                    LookUp(
+                        AllApprovalList,
+                        Approval_No = Approval_No
+                    ).TaskStatus,
                     "FlowTaskName",
                     LookUp(
                         Approval_Table,
@@ -881,14 +896,14 @@ GeneralFormListScreen As screen:
                             Launch(
                                 JumpUrl&"&Screen=JobTitleFormScreen&AppIds=" & LookUp(
                                     ApplitionJobPosition,
-                                    ApprovalId = TaskListGallery.Selected.标题
-                                ).标题 & "&MasterflowId=" & TaskListGallery.Selected.标题 & "&resubmit=true"
+                                    ApprovalId = TaskListGallery.Selected.Approval_No
+                                ).标题 & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=true"
                             ),
                             Launch(
                                 JumpUrl&"&Screen=JobTitleFormDetailScreen&AppIds=" & LookUp(
                                     ApplitionJobPosition,
-                                    ApprovalId = TaskListGallery.Selected.标题
-                                ).标题 & "&MasterflowId=" & TaskListGallery.Selected.标题 & "&resubmit=false"
+                                    ApprovalId = TaskListGallery.Selected.Approval_No
+                                ).标题 & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
                             )
                         ),
                         ThisItem.FlowTaskName = "假期批核人資料表",
@@ -897,14 +912,14 @@ GeneralFormListScreen As screen:
                             Launch(
                                 JumpUrlA306A111&"&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
                                     VacationApprovalForm,
-                                    Applicant_No = TaskListGallery.Selected.标题
-                                ).标题 & "&approvalNum=" & TaskListGallery.Selected.标题 & "&resubmit=true"
+                                    Applicant_No = TaskListGallery.Selected.Approval_No
+                                ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true"
                             ),
                             Launch(
                                 JumpUrlA306A111&"&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
                                     VacationApprovalForm,
-                                    Applicant_No = TaskListGallery.Selected.标题
-                                ).标题 & "&approvalNum=" & TaskListGallery.Selected.标题 & "&resubmit=false"
+                                    Applicant_No = TaskListGallery.Selected.Approval_No
+                                ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
                             )
                         ),
                         ThisItem.FlowTaskName = "預備合約通知書(新入職)",
@@ -913,22 +928,22 @@ GeneralFormListScreen As screen:
                             Launch(
                                 JumpUrl&"&Screen=ContractNoticeForm&taskNum=" & LookUp(
                                     ContractNotice,
-                                    ApprovalId = TaskListGallery.Selected.标题
-                                ).标题 & "&approvalNum=" & TaskListGallery.Selected.标题 & "&resubmit=true"
+                                    ApprovalId = TaskListGallery.Selected.Approval_No
+                                ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true"
                             ),
                             Launch(
                                 JumpUrl&"&Screen=ContractNoticeFormDetail&taskNum=" & LookUp(
                                     ContractNotice,
-                                    ApprovalId = TaskListGallery.Selected.标题
-                                ).标题 & "&approvalNum=" & TaskListGallery.Selected.标题 & "&resubmit=false"
+                                    ApprovalId = TaskListGallery.Selected.Approval_No
+                                ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
                             )
                         ),
                         ThisItem.FlowTaskName = "任職資源申請",
                         Launch(
                             JumpUrlA306A111&"&Screen=EmploymentFormDetail&taskNum=" & LookUp(
                                 EmploymentResource,
-                                ApprovalId = TaskListGallery.Selected.标题
-                            ).标题 & "&approvalNum=" & TaskListGallery.Selected.标题 & "&resubmit=false"
+                                ApprovalId = TaskListGallery.Selected.Approval_No
+                            ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
                         ),
                         With(
                             {
