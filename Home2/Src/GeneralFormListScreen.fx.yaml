@@ -1162,10 +1162,7 @@ GeneralFormListScreen As screen:
                     PressedFill: =ColorFade(Self.Color, 95%)
                     Visible: |-
                         =If(
-                            LookUp(
-                                ComplatelDetailCol,
-                                Approval_No = ThisItem.Approval_No
-                            ).TaskStatus = "001",
+                            ThisItem.TaskStatus = "001",
                             true,
                             false
                         )
