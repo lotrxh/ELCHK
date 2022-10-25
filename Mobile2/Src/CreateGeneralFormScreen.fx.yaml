@@ -2568,6 +2568,7 @@
         Image1_1 As image:
             Height: =60
             Image: =logo_单图标
+            OnSelect: =Launch(JumpUrlClientAPP&"&Screen=HomepageScreen",{},LaunchTarget.Replace);
             Width: =40
             X: =84
             ZIndex: =7
@@ -2577,6 +2578,7 @@
             Fill: =glbThemePrimaryColor
             FontWeight: =FontWeight.Bold
             Height: =44
+            OnSelect: =Launch(JumpUrlClientAPP&"&Screen=HomepageScreen",{},LaunchTarget.Replace);
             PaddingBottom: =0
             PaddingLeft: =0
             PaddingRight: =0
