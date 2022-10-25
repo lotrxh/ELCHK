@@ -445,89 +445,16 @@
 
     Button1 As button:
         OnSelect: |-
-            =Set(varAttachmentControl,JSON(Image4.Image,IncludeBinaryData));
+            =/*Set(varAttachmentControl,JSON(Image4.Image,IncludeBinaryData));
             Set(varBase64Only,Mid(varAttachmentControl,Find(",", varAttachmentControl)+1,Len(varAttachmentControl)-Find (",", varAttachmentControl)-1));
             SendAttachmentToTemplateFileList.Run(GUID(),
             [@TextInput_FormName].Text,
                 TextInput_FormType.Text,
                 Last(Attachment_Form.Attachments).Name,
             Last(Attachment_Form.Attachments).Name,
-            varBase64Only)
+            varBase64Only)*/
         Text: ="按钮"
         X: =30
         Y: =290
         ZIndex: =4
-
-    "Gallery2 As gallery.'BrowseLayout_Vertical_TwoTextOneImageVariant_ver4.0'":
-        Items: |-
-            =Filter(
-                ApprovalDetailCol,
-                ApproverEmail = CurrentUser,
-                field_TaskStatus = "002"
-            )
-        Layout: =Layout.Vertical
-        TemplatePadding: =0
-        TemplateSize: =Min(160, Self.Height - 60)
-        X: =30
-        Y: =102
-        ZIndex: =5
-
-        Image2 As image:
-            Height: =128
-            OnSelect: =Select(Parent)
-            Width: =128
-            X: =16
-            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
-            ZIndex: =1
-
-        Title1 As label:
-            Height: =Self.Size * 1.8
-            OnSelect: =Select(Parent)
-            PaddingBottom: =0
-            PaddingLeft: =0
-            PaddingRight: =0
-            PaddingTop: =0
-            Text: =ThisItem.field_AgentUserEmail
-            VerticalAlign: =VerticalAlign.Top
-            Width: =Parent.TemplateWidth - Image2.Width - 104
-            X: =Image2.X + Image2.Width + 24
-            Y: =44
-            ZIndex: =2
-
-        Subtitle1 As label:
-            Height: =Self.Size * 1.8
-            OnSelect: =Select(Parent)
-            PaddingBottom: =0
-            PaddingLeft: =0
-            PaddingRight: =0
-            PaddingTop: =0
-            Text: =ThisItem.Approver
-            VerticalAlign: =VerticalAlign.Top
-            Width: =Title1.Width
-            X: =Title1.X
-            Y: =Title1.Y + Title1.Height + 4
-            ZIndex: =3
-
-        NextArrow1 As icon.ChevronRight:
-            AccessibleLabel: =Self.Tooltip
-            Height: =60
-            Icon: =Icon.ChevronRight
-            OnSelect: =Select(Parent)
-            PaddingBottom: =10
-            PaddingLeft: =10
-            PaddingRight: =10
-            PaddingTop: =10
-            TabIndex: =0
-            Tooltip: ="查看项详细信息"
-            Width: =60
-            X: =Parent.TemplateWidth - Self.Width - 5
-            Y: =(Parent.TemplateHeight / 2) - (Self.Height / 2)
-            ZIndex: =4
-
-        Separator1 As rectangle:
-            Height: =1
-            OnSelect: =Select(Parent)
-            Width: =Parent.TemplateWidth
-            Y: =Parent.TemplateHeight - 1
-            ZIndex: =5
 
