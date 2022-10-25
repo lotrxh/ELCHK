@@ -108,6 +108,11 @@ GeneralFormListScreen As screen:
                         Approval_Table,
                         标题 = Approval_No
                     ).Application_No,
+                    "SubmitApprover",
+                    LookUp(
+                        Approval_Table,
+                        标题 = Approval_No
+                    ).'Operator ',
                     "FlowCreateDate",
                     LookUp(
                         Approval_Table,
@@ -187,6 +192,11 @@ GeneralFormListScreen As screen:
                         Approval_Table,
                         标题 = Approval_No
                     ).Application_No,
+                    "SubmitApprover",
+                    LookUp(
+                        Approval_Table,
+                        标题 = Approval_No
+                    ).'Operator ',
                     "FlowCreateDate",
                     LookUp(
                         Approval_Table,
@@ -272,6 +282,11 @@ GeneralFormListScreen As screen:
                         Approval_Table,
                         标题 = Approval_No
                     ).创建时间,
+                    "SubmitApprover",
+                    LookUp(
+                        Approval_Table,
+                        标题 = Approval_No
+                    ).'Operator ',
                     "DepartMentName",
                     LookUp(
                         Approval_Table,
@@ -999,12 +1014,15 @@ GeneralFormListScreen As screen:
                     PaddingTop: =0
                     Size: =11.5
                     Text: |-
-                        =//ThisItem.Application_Status
-                        
-                        If(
-                            !("提交" in Filter(ComplatelDetailCol,
-                            Approval_No = ThisItem.Approval_No).ActionNode)&&!("006" in Filter(ComplatelDetailCol,
-                            Approval_No = ThisItem.Approval_No).TaskStatus),"準備中",
+                        =If(
+                            !("提交" in Filter(
+                                ComplatelDetailCol,
+                                Approval_No = ThisItem.Approval_No
+                            ).ActionNode) && !("006" in Filter(
+                                ComplatelDetailCol,
+                                Approval_No = ThisItem.Approval_No
+                            ).TaskStatus),
+                            "準備中",
                             First(
                                 SortByColumns(
                                     Filter(
@@ -1022,8 +1040,11 @@ GeneralFormListScreen As screen:
                                     ),
                                     "Priortty",
                                     Descending
-                                ),2).TaskStatus = "005","處理中",
-                                First(
+                                ),
+                                2
+                            ).TaskStatus = "005",
+                            "處理中",
+                            First(
                                 SortByColumns(
                                     Filter(
                                         ComplatelDetailCol,
@@ -1032,8 +1053,9 @@ GeneralFormListScreen As screen:
                                     "Priortty",
                                     Descending
                                 )
-                            ).TaskStatus = "000","已拒絕",
-                                First(
+                            ).TaskStatus = "000",
+                            "已拒絕",
+                            First(
                                 SortByColumns(
                                     Filter(
                                         ComplatelDetailCol,
@@ -1042,11 +1064,10 @@ GeneralFormListScreen As screen:
                                     "Priortty",
                                     Descending
                                 )
-                            ).TaskStatus = "006","處理完成",
+                            ).TaskStatus = "006",
+                            "處理完成",
                             "審核中"
                         )
-                            
-                          
                     Width: =72
                     X: =938
                     Y: =10
@@ -1125,8 +1146,14 @@ GeneralFormListScreen As screen:
                     PressedColor: =ColorFade(Self.BorderColor, -15%)
                     PressedFill: =ColorFade(Self.Color, 95%)
                     Visible: |-
-                        =false
-                        /*If(ThisItem.TaskStatus="001",true,false)*/
+                        =If(
+                            LookUp(
+                                ComplatelDetailCol,
+                                Approval_No = ThisItem.Approval_No
+                            ).TaskStatus = "001",
+                            true,
+                            false
+                        )
                     Width: =24
                     X: =1103
                     Y: =12
@@ -1170,9 +1197,9 @@ GeneralFormListScreen As screen:
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =12
-                    Text: =//ThisItem.Approver
-                    Width: =80
-                    X: =590
+                    Text: =First(Split(ThisItem.SubmitApprover,"@")).Result
+                    Width: =108
+                    X: =582
                     ZIndex: =15
 
                 Label3_11 As label:
