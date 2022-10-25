@@ -17,7 +17,7 @@ GeneralFormListScreen As screen:
                     "AgentUserEmail",
                     "ActionNode"
                 ),
-                TaskStatus = "001" || TaskStatus = "002"
+                CurrentUser in ApproverEmail && (TaskStatus = "001" || TaskStatus = "002")
             )
         );
         //生成已处理集合
@@ -36,7 +36,7 @@ GeneralFormListScreen As screen:
                     "AgentUserEmail",
                     "ActionNode"
                 ),
-                TaskStatus = "004" || TaskStatus = "006" || TaskStatus = "000"
+                CurrentUser in ApproverEmail && (TaskStatus = "004" || TaskStatus = "006" || TaskStatus = "000")
             )
         );
         //全部集合
@@ -55,7 +55,7 @@ GeneralFormListScreen As screen:
                     "AgentUserEmail",
                     "ActionNode"
                 ),
-                TaskStatus = "000" || TaskStatus = "001" || TaskStatus = "004" || TaskStatus = "006" || TaskStatus = "002" || TaskStatus = "005"
+                CurrentUser in ApproverEmail && (TaskStatus = "000" || TaskStatus = "001" || TaskStatus = "004" || TaskStatus = "006" || TaskStatus = "002" || TaskStatus = "005")
             )
         );
         //生成带部门字段的ApprovalDetail_Table待理任务
@@ -82,18 +82,22 @@ GeneralFormListScreen As screen:
                     CurrentRoleTaskPermission = Blank(),
                     Filter(
                         ApprovalDetailCol,
-                        (CurrentUser in ApproverEmail || CurrentUser <> Blank() && CurrentUser in AgentUserEmail)
+                        1 = 1
                     ),
                     Filter(
                         ApprovalDetailColwithdepartment,
-                        (CurrentUser in ApproverEmail || CurrentUser <> Blank() && CurrentUser in AgentUserEmail) || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermission in FormDepartMentName
+                        CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermission in FormDepartMentName
                     )
                 )
             },
             ClearCollect(
                 FilterPendingDataCol,
                 AddColumns(
-                    SearchPendingData,
+                    GroupBy(
+                        SearchPendingData,
+                        "Approval_No",
+                        "Data1"
+                    ),
                     "FlowTaskName",
                     LookUp(
                         Approval_Table,
@@ -156,18 +160,23 @@ GeneralFormListScreen As screen:
                     CurrentRoleTaskPermission = Blank(),
                     Filter(
                         ProcessedDetailCol,
-                        (CurrentUser in ApproverEmail || CurrentUser <> Blank() && CurrentUser in AgentUserEmail)
+                        1 = 1
+                        //CurrentUser in ApproverEmail  CurrentUser <> Blank() && CurrentUser in AgentUserEmail)
                     ),
                     Filter(
                         ProcessedDetailColwithdepartment,
-                        (CurrentUser in ApproverEmail || CurrentUser <> Blank() && CurrentUser in AgentUserEmail) || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermission in FormDepartMentName
+                        CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermission in FormDepartMentName
                     )
                 )
             },
             ClearCollect(
                 inprogressData,
                 AddColumns(
-                    ProcessedListCol,
+                    GroupBy(
+                        ProcessedListCol,
+                        "Approval_No",
+                        "Data"
+                    ),
                     "FlowTaskName",
                     LookUp(
                         Approval_Table,
@@ -230,18 +239,24 @@ GeneralFormListScreen As screen:
                     CurrentRoleTaskPermission = Blank(),
                     Filter(
                         ComplatelDetailCol,
-                        (CurrentUser in ApproverEmail || CurrentUser <> Blank() && CurrentUser in AgentUserEmail) && TaskStatus <> Blank()
+                        TaskStatus <> Blank()
+                        //CurrentUser in ApproverEmail /*|| CurrentUser <> Blank() && CurrentUser in AgentUserEmail)*/ || TaskStatus <> Blank()
                     ),
                     Filter(
                         ComplatelDetailColwithdepartment,
-                        ((CurrentUser in ApproverEmail || CurrentUser <> Blank() && CurrentUser in AgentUserEmail) && TaskStatus <> Blank()) || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermission in FormDepartMentName
+                        /*CurrentUser in ApproverEmail || CurrentUser <> Blank() /*&& CurrentUser in AgentUserEmail) ||*/
+                        TaskStatus <> Blank() || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermission in FormDepartMentName
                     )
                 )
             },
             ClearCollect(
                 AllApprovalListDataCol,
                 AddColumns(
-                    AllApprovalList,
+                    GroupBy(
+                        AllApprovalList,
+                        "Approval_No",
+                        "Data"
+                    ),
                     "FlowTaskName",
                     LookUp(
                         Approval_Table,
@@ -424,7 +439,7 @@ GeneralFormListScreen As screen:
                     =If(
                         TabGallery3_4.Selected.Value = "全部",
                         ClearCollect(
-                            AllApprovalData,
+                            AllApprovalListDataCol,
                             Search(
                                 Filter(
                                     SortByColumns(
@@ -836,7 +851,7 @@ GeneralFormListScreen As screen:
                 Items: |-
                     =If(
                         TabGallery3_4.Selected.Value = "全部",
-                        AllApprovalData,
+                        AllApprovalListDataCol,
                         TabGallery3_4.Selected.Value = "待處理",
                         AllPendingApprovalData,
                         TabGallery3_4.Selected.Value = "已處理",
@@ -1109,7 +1124,9 @@ GeneralFormListScreen As screen:
                     PressedBorderColor: =ColorFade(Self.BorderColor, -15%)
                     PressedColor: =ColorFade(Self.BorderColor, -15%)
                     PressedFill: =ColorFade(Self.Color, 95%)
-                    Visible: =If(ThisItem.TaskStatus="001",true,false)
+                    Visible: |-
+                        =false
+                        /*If(ThisItem.TaskStatus="001",true,false)*/
                     Width: =24
                     X: =1103
                     Y: =12
@@ -1153,7 +1170,7 @@ GeneralFormListScreen As screen:
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =12
-                    Text: =ThisItem.Approver
+                    Text: =//ThisItem.Approver
                     Width: =80
                     X: =590
                     ZIndex: =15
