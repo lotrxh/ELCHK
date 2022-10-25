@@ -198,9 +198,10 @@
                             ApprovalGuid,
                             GUID()
                         );
+                    //填寫人是否直接提交
                         If(
                             Checkbox2_5.Value = true,
-                    //提交人信息记录
+                    //記錄提交人信息记录
                             Patch(
                                 ApprovalListCol,
                                 Defaults(ApprovalListCol),
@@ -210,10 +211,63 @@
                                     Approver: User().FullName,
                                     ApprovalEmail: User().Email,
                                     IsComplate: true,
-                                    BCCUser: "",
+                                    BCCUser: If(
+                                    FlowType = "通用流程",
+                                    Concat(
+                                        ComboBox1_11.SelectedItems.Mail,
+                                        Mail,
+                                        ","
+                                    ),
+                                    If(
+                                        FlowType = "預設流程",
+                                        Concat(
+                                            ComboBox1_15.SelectedItems.Mail,
+                                            Mail,
+                                            ","
+                                        ),
+                                        If(
+                                            FlowType = "部門簡單流程",
+                                            Concat(
+                                                ComboBox1_13.SelectedItems.Mail,
+                                                Mail,
+                                                ","
+                                            )
+                                        )
+                                    )
+                                ),
                                     remark: ""
                                 }
-                            );
+                            ),
+                            //不直接提交時，cc記錄到填寫行動的cc中
+                            UpdateIf(ApprovalListCol,
+                            ActionName = "填寫",
+                            {
+                                BCCUser: If(
+                                    FlowType = "通用流程",
+                                    Concat(
+                                        ComboBox1_11.SelectedItems.Mail,
+                                        Mail,
+                                        ","
+                                    ),
+                                    If(
+                                        FlowType = "預設流程",
+                                        Concat(
+                                            ComboBox1_15.SelectedItems.Mail,
+                                            Mail,
+                                            ","
+                                        ),
+                                        If(
+                                            FlowType = "部門簡單流程",
+                                            Concat(
+                                                ComboBox1_13.SelectedItems.Mail,
+                                                Mail,
+                                                ","
+                                            )
+                                        )
+                                    )
+                                )  
+                            }
+                            )
                         );
                         Patch(
                             ApprovalListCol,
@@ -298,30 +352,7 @@
                                 ),
                                 //First(Split(Gallery2_2.Selected.AllOwnerName.DisplayName," ").Result).Result,
                                 IsComplate: false,
-                                BCCUser: If(
-                                    FlowType = "通用流程",
-                                    Concat(
-                                        ComboBox1_11.SelectedItems.Mail,
-                                        Mail,
-                                        ","
-                                    ),
-                                    If(
-                                        FlowType = "預設流程",
-                                        Concat(
-                                            ComboBox1_15.SelectedItems.Mail,
-                                            Mail,
-                                            ","
-                                        ),
-                                        If(
-                                            FlowType = "部門簡單流程",
-                                            Concat(
-                                                ComboBox1_13.SelectedItems.Mail,
-                                                Mail,
-                                                ","
-                                            )
-                                        )
-                                    )
-                                ),
+                                BCCUser:"",
                                 remark: ""
                             }
                         );

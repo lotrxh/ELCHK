@@ -2232,7 +2232,7 @@
                                 Title = FormModelIds
                             ).SelectedActions
                         )*/
-                    ZIndex: =4
+                    ZIndex: =3
 
                     Label6_27 As label:
                         Height: =28
@@ -2428,12 +2428,12 @@
                         )
                     X: =40
                     Y: =238
-                    ZIndex: =5
+                    ZIndex: =4
 
                 NextStepContainer_1 As groupContainer.manualLayoutContainer:
                     AlignInContainer: =AlignInContainer.SetByContainer
                     FillPortions: =0
-                    Height: =240
+                    Height: =150
                     LayoutMinHeight: =100
                     LayoutMinWidth: =250
                     Visible: |-
@@ -2498,7 +2498,7 @@
                     Width: =Parent.Width-40
                     X: =20
                     Y: =ActionFlowGallery.Y+ActionFlowGallery.Height
-                    ZIndex: =6
+                    ZIndex: =5
 
                     Label6_22 As label:
                         Height: =28
@@ -2738,54 +2738,54 @@
                         Y: =102
                         ZIndex: =10
 
-                    Label6_24 As label:
-                        Height: =28
-                        OnSelect: =
-                        PaddingBottom: =0
-                        PaddingLeft: =0
-                        PaddingRight: =0
-                        PaddingTop: =0
-                        Size: =10
-                        Text: ="抄送人"
-                        Width: =147
-                        X: =30
-                        Y: =145
-                        ZIndex: =11
+                Label6_24 As label:
+                    Height: =28
+                    OnSelect: =
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =10
+                    Text: ="抄送人"
+                    Width: =147
+                    X: =30
+                    Y: =145
+                    ZIndex: =6
 
-                    ComboBox1_12 As combobox:
-                        BorderColor: =glbNeutralTertiaryColor
-                        BorderThickness: =1
-                        ChevronBackground: =RGBA(255, 255, 255, 1)
-                        ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
-                        ChevronDisabledFill: =RGBA(202, 202, 202, 1)
-                        ChevronFill: =glbNeutralTertiaryColor
-                        ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
-                        ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
-                        Color: =glbNeutralPrimaryColor
-                        DisplayFields: =["Mail","DisplayName"]
-                        FocusedBorderThickness: =1
-                        Height: =36
-                        HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
-                        HoverColor: =Self.Color
-                        HoverFill: =ColorFade(Self.Fill, -5%)
-                        Items: |-
-                            =//Choices(MyContacts.AllOwnerName)
-                            Office365用户.SearchUserV2({searchTerm:ComboBox1_12.SearchText,top:10}).value
-                        PaddingLeft: =10
-                        PressedColor: =Self.Color
-                        PressedFill: =ColorFade(Self.Fill, -5%)
-                        SearchFields: =["Mail"]
-                        SearchItems: |-
-                            =Search(//Choices(MyContacts.AllOwnerName)
-                            Office365用户.SearchUserV2({searchTerm:ComboBox1_12.SearchText,top:10}).value,ComboBox1_12.SearchText,"Mail")
-                        SelectionColor: =glbThemePrimaryColor
-                        SelectionFill: =ColorFade(Self.SelectionColor, 90%)
-                        Size: =10
-                        Template: =ListItemTemplate.Double
-                        Width: =Parent.Width-Self.X-1
-                        X: =30
-                        Y: =173
-                        ZIndex: =12
+                ComboBox1_12 As combobox:
+                    BorderColor: =glbNeutralTertiaryColor
+                    BorderThickness: =1
+                    ChevronBackground: =RGBA(255, 255, 255, 1)
+                    ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
+                    ChevronDisabledFill: =RGBA(202, 202, 202, 1)
+                    ChevronFill: =glbNeutralTertiaryColor
+                    ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
+                    ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
+                    Color: =glbNeutralPrimaryColor
+                    DisplayFields: =["Mail","DisplayName"]
+                    FocusedBorderThickness: =1
+                    Height: =36
+                    HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                    HoverColor: =Self.Color
+                    HoverFill: =ColorFade(Self.Fill, -5%)
+                    Items: |-
+                        =//Choices(MyContacts.AllOwnerName)
+                        Office365用户.SearchUserV2({searchTerm:ComboBox1_12.SearchText,top:10}).value
+                    PaddingLeft: =10
+                    PressedColor: =Self.Color
+                    PressedFill: =ColorFade(Self.Fill, -5%)
+                    SearchFields: =["Mail"]
+                    SearchItems: |-
+                        =Search(//Choices(MyContacts.AllOwnerName)
+                        Office365用户.SearchUserV2({searchTerm:ComboBox1_12.SearchText,top:10}).value,ComboBox1_12.SearchText,"Mail")
+                    SelectionColor: =glbThemePrimaryColor
+                    SelectionFill: =ColorFade(Self.SelectionColor, 90%)
+                    Size: =10
+                    Template: =ListItemTemplate.Double
+                    Width: =Parent.Width-Self.X-1
+                    X: =30
+                    Y: =173
+                    ZIndex: =7
 
                 FlowActionStepContainer As groupContainer.manualLayoutContainer:
                     LayoutMinHeight: =100
@@ -2797,13 +2797,13 @@
                                 标题 = FormModelIds
                             ).SelectedActions
                         )
-                    ZIndex: =7
+                    ZIndex: =8
 
                 Rectangle6_1 As rectangle:
                     BorderColor: =RGBA(0, 0, 0, 0)
                     Fill: =RGBA(0, 0, 0, 0)
                     Height: =5
-                    ZIndex: =8
+                    ZIndex: =9
 
     BottomContainer_2 As groupContainer.manualLayoutContainer:
         Fill: =White
@@ -3652,7 +3652,7 @@
                                 {
                                     标题: GUID(),
                                     Approval_No: FLowId,
-                                    Advise: "",
+                                    Advise: TextInput2_34.Text,
                                     ApprovalBCC: Concat(
                                         ComboBox1_12.SelectedItems.Mail,
                                         Mail,
@@ -3758,6 +3758,11 @@
                                         标题 = CurrentLastData.标题,
                                         {
                                             TaskStatus: "004",
+                                            ApprovalBCC: Concat(
+                                            ComboBox1_12.SelectedItems.Mail,
+                                            Mail,
+                                            ","
+                                            ),
                                             Advise: TextInput2_34.Text
                                         }
                                     )
@@ -3769,11 +3774,7 @@
                                         标题: GUID(),
                                         Approval_No: FLowId,
                                         Advise: "",
-                                        ApprovalBCC: Concat(
-                                            ComboBox1_12.SelectedItems.Mail,
-                                            Mail,
-                                            ","
-                                        ),
+                                        ApprovalBCC: "",
                                         Approver: First(Split(Label1_138.Text,"/")).Result,
                                         //First(Split(Gallery2_1.Selected.AllOwnerName.DisplayName," ").Result).Result,
                                         ApproverEmail: Last(Split(Label1_138.Text,"/")).Result,
