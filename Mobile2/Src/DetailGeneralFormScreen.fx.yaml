@@ -3230,7 +3230,12 @@
                                 ).标题,
                                 {
                                     TaskStatus: "000",
-                                    Advise: TextInput2_34.Text
+                                    Advise: TextInput2_34.Text,
+                                    ApprovalBCC: Concat(
+                                        ComboBox1_12.SelectedItems.Mail,
+                                        Mail,
+                                        ","
+                                    )
                                 }
                             );
                             UpdateIf(
@@ -3378,7 +3383,12 @@
                                         标题 = CurrentLastData.标题,
                                         {
                                             TaskStatus: "005",
-                                            Advise: TextInput2_34.Text
+                                            Advise: TextInput2_34.Text,
+                                            ApprovalBCC: Concat(
+                                        ComboBox1_12.SelectedItems.Mail,
+                                        Mail,
+                                        ","
+                                    )
                                         }
                                     )
                                 );
