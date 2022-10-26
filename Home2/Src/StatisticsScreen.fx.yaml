@@ -789,7 +789,7 @@ StatisticsScreen As screen:
             DisabledBorderColor: =RGBA(219, 219, 219, 1)
             Fill: =glbThemePrimaryColor
             FocusedBorderThickness: =1
-            Height: =36
+            Height: =34
             HoverFill: =ColorFade(Self.Fill, -15%)
             OnSelect: |-
                 =DashboardExportToEmail.Run(Dropdown1_3.Selected.Value,CurrentUser,Dropdown1_4.Selected.Value);
@@ -807,8 +807,8 @@ StatisticsScreen As screen:
             Size: =11
             Text: ="導出"
             Width: =100
-            X: =386
-            Y: =27
+            X: =387
+            Y: =25
             ZIndex: =5
 
         Dropdown1_3 As dropdown:
@@ -824,6 +824,7 @@ StatisticsScreen As screen:
             Default: =Last(Split(Text(Today(),"yyyy-mm"),"-")).Result-1
             FocusedBorderColor: =ColorFade(Self.BorderColor, -20%)
             FocusedBorderThickness: =1
+            Height: =34
             HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
             HoverFill: =ColorFade(Self.Fill, -5%)
             Items: =Sequence(Last(Split(Text(Today(),"yyyy-mm"),"-")).Result-1,1,1)
@@ -852,7 +853,7 @@ StatisticsScreen As screen:
             Color: =glbNeutralPrimaryColor
             FocusedBorderColor: =ColorFade(Self.BorderColor, -20%)
             FocusedBorderThickness: =1
-            Height: =41
+            Height: =34
             HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
             HoverFill: =ColorFade(Self.Fill, -5%)
             Items: =[1,2]
