@@ -760,18 +760,11 @@ StatisticsScreen As screen:
             ZIndex: =4
 
     ExportContainer As groupContainer.manualLayoutContainer:
-        Height: =86
+        Height: =71
+        Width: =516
         X: =815
-        Y: =105
+        Y: =135
         ZIndex: =14
-
-        Dropdown2 As dropdown:
-            Default: =Last(Split(Text(Today(),"yyyy-mm"),"-")).Result-1
-            Items: =Sequence(Last(Split(Text(Today(),"yyyy-mm"),"-")).Result-1,1,1)
-            Width: =106
-            X: =81
-            Y: =25
-            ZIndex: =1
 
         Label20 As label:
             Size: =FountSise
@@ -780,13 +773,6 @@ StatisticsScreen As screen:
             X: =27
             Y: =25
             ZIndex: =2
-
-        Dropdown2_1 As dropdown:
-            Items: =[1,2]
-            Width: =106
-            X: =275
-            Y: =25
-            ZIndex: =3
 
         Label20_3 As label:
             Size: =FountSise
@@ -797,14 +783,89 @@ StatisticsScreen As screen:
             Y: =25
             ZIndex: =4
 
-        Button6 As button:
-            Height: =37
+        BtnPrimaryLg_7 As button:
+            BorderColor: =Self.Fill
+            BorderThickness: =1
+            DisabledBorderColor: =RGBA(219, 219, 219, 1)
+            Fill: =glbThemePrimaryColor
+            FocusedBorderThickness: =1
+            Height: =36
+            HoverFill: =ColorFade(Self.Fill, -15%)
             OnSelect: |-
-                =DashboardExportToEmail.Run(Dropdown2.Selected.Value,CurrentUser,Dropdown2_1.Selected.Value);
+                =DashboardExportToEmail.Run(Dropdown1_3.Selected.Value,CurrentUser,Dropdown1_4.Selected.Value);
                 Notify("電郵已成功匯出！",NotificationType.Success)
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            PressedColor: =White
+            PressedFill: =ColorFade(Self.Fill, -25%)
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
+            Size: =11
             Text: ="導出"
-            Width: =95
-            X: =396
-            Y: =26
+            Width: =100
+            X: =386
+            Y: =27
             ZIndex: =5
+
+        Dropdown1_3 As dropdown:
+            BorderColor: =glbNeutralTertiaryColor
+            BorderThickness: =1
+            ChevronBackground: =RGBA(0, 0, 0, 0)
+            ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
+            ChevronDisabledFill: =RGBA(202, 202, 202, 1)
+            ChevronFill: =glbNeutralTertiaryColor
+            ChevronHoverBackground: =ColorFade(Self.Fill, -5%)
+            ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
+            Color: =glbNeutralPrimaryColor
+            Default: =Last(Split(Text(Today(),"yyyy-mm"),"-")).Result-1
+            FocusedBorderColor: =ColorFade(Self.BorderColor, -20%)
+            FocusedBorderThickness: =1
+            HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+            HoverFill: =ColorFade(Self.Fill, -5%)
+            Items: =Sequence(Last(Split(Text(Today(),"yyyy-mm"),"-")).Result-1,1,1)
+            PaddingBottom: =5
+            PaddingRight: =0
+            PaddingTop: =5
+            PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
+            PressedColor: =Self.Color
+            PressedFill: =ColorFade(Self.Fill, -5%)
+            SelectionFill: =glbThemePrimaryColor
+            Size: =11
+            Width: =107
+            X: =81
+            Y: =25
+            ZIndex: =6
+
+        Dropdown1_4 As dropdown:
+            BorderColor: =glbNeutralTertiaryColor
+            BorderThickness: =1
+            ChevronBackground: =RGBA(0, 0, 0, 0)
+            ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
+            ChevronDisabledFill: =RGBA(202, 202, 202, 1)
+            ChevronFill: =glbNeutralTertiaryColor
+            ChevronHoverBackground: =ColorFade(Self.Fill, -5%)
+            ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
+            Color: =glbNeutralPrimaryColor
+            FocusedBorderColor: =ColorFade(Self.BorderColor, -20%)
+            FocusedBorderThickness: =1
+            Height: =41
+            HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+            HoverFill: =ColorFade(Self.Fill, -5%)
+            Items: =[1,2]
+            PaddingBottom: =5
+            PaddingRight: =0
+            PaddingTop: =5
+            PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
+            PressedColor: =Self.Color
+            PressedFill: =ColorFade(Self.Fill, -5%)
+            SelectionFill: =glbThemePrimaryColor
+            Size: =11
+            Width: =97
+            X: =265
+            Y: =25
+            ZIndex: =7
 
