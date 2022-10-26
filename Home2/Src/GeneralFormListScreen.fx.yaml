@@ -17,7 +17,7 @@ GeneralFormListScreen As screen:
                     "AgentUserEmail",
                     "ActionNode"
                 ),
-                CurrentUser in ApproverEmail && (TaskStatus = "001" || TaskStatus = "002")
+                CurrentUser in ApproverEmail && TaskStatus = "001" || TaskStatus = "002"
             )
         );
         //生成已处理集合
@@ -36,7 +36,7 @@ GeneralFormListScreen As screen:
                     "AgentUserEmail",
                     "ActionNode"
                 ),
-                CurrentUser in ApproverEmail && (TaskStatus = "004" || TaskStatus = "006" || TaskStatus = "000")
+                CurrentUser in ApproverEmail && TaskStatus = "004" || TaskStatus = "006" || TaskStatus = "000"
             )
         );
         //全部集合
@@ -171,7 +171,6 @@ GeneralFormListScreen As screen:
                     Filter(
                         ProcessedDetailCol,
                         1 = 1
-                        //CurrentUser in ApproverEmail  CurrentUser <> Blank() && CurrentUser in AgentUserEmail)
                     ),
                     Filter(
                         ProcessedDetailColwithdepartment,
@@ -885,6 +884,7 @@ GeneralFormListScreen As screen:
                         TabGallery3_4.Selected.Value = "待處理",
                         AllPendingApprovalData,
                         TabGallery3_4.Selected.Value = "已處理",
+                        
                         AllinprogressApprovalData
                     )
                 Layout: =Layout.Vertical
