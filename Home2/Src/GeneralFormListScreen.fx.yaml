@@ -55,7 +55,7 @@ GeneralFormListScreen As screen:
                     "AgentUserEmail",
                     "ActionNode"
                 ),
-                CurrentUser in ApproverEmail && (TaskStatus = "000" || TaskStatus = "001" || TaskStatus = "004" || TaskStatus = "006" || TaskStatus = "002" || TaskStatus = "005")
+                CurrentUser in ApproverEmail && TaskStatus = "000" || TaskStatus = "001" || TaskStatus = "004" || TaskStatus = "006" || TaskStatus = "002" || TaskStatus = "005"
             )
         );
         //生成带部门字段的ApprovalDetail_Table待理任务
@@ -259,11 +259,9 @@ GeneralFormListScreen As screen:
                     Filter(
                         ComplatelDetailCol,
                         TaskStatus <> Blank()
-                        //CurrentUser in ApproverEmail /*|| CurrentUser <> Blank() && CurrentUser in AgentUserEmail)*/ || TaskStatus <> Blank()
                     ),
                     Filter(
                         ComplatelDetailColwithdepartment,
-                        /*CurrentUser in ApproverEmail || CurrentUser <> Blank() /*&& CurrentUser in AgentUserEmail) ||*/
                         TaskStatus <> Blank() || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermission in FormDepartMentName
                     )
                 )
@@ -884,7 +882,6 @@ GeneralFormListScreen As screen:
                         TabGallery3_4.Selected.Value = "待處理",
                         AllPendingApprovalData,
                         TabGallery3_4.Selected.Value = "已處理",
-                        
                         AllinprogressApprovalData
                     )
                 Layout: =Layout.Vertical
