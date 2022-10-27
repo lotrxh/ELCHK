@@ -163,21 +163,7 @@ GeneralFormListScreen As screen:
         ClearCollect(
             ProcessedDetailColwithdepartment,
             AddColumns(
-                Filter(
-                ShowColumns(
-                    ApprovalDetail_Table,
-                    "Title",
-                    "Approval_No",
-                    "Approver",
-                    "ApproverEmail",
-                    "Priortty",
-                    "TaskStatus",
-                    "Editor",
-                    "AgentUserEmail",
-                    "ActionNode"
-                ),
-                TaskStatus = "004" || TaskStatus = "006" || TaskStatus = "000"
-            ),
+                ProcessedDetailCol,
                 "DepartMentName",
                 LookUp(
                     Approval_Table,
