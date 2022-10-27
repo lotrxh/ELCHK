@@ -17,7 +17,7 @@ GeneralFormListScreen As screen:
                     "AgentUserEmail",
                     "ActionNode"
                 ),
-                CurrentUser in ApproverEmail && TaskStatus = "001" || TaskStatus = "002"
+                CurrentUser in ApproverEmail && (TaskStatus = "001" || TaskStatus = "002")
             )
         );
         //生成已处理集合
@@ -36,7 +36,7 @@ GeneralFormListScreen As screen:
                     "AgentUserEmail",
                     "ActionNode"
                 ),
-                CurrentUser in ApproverEmail && TaskStatus = "004" || TaskStatus = "006" || TaskStatus = "000"
+                CurrentUser in ApproverEmail && (TaskStatus = "004" || TaskStatus = "006" || TaskStatus = "000")
             )
         );
         //全部集合
@@ -55,14 +55,27 @@ GeneralFormListScreen As screen:
                     "AgentUserEmail",
                     "ActionNode"
                 ),
-                CurrentUser in ApproverEmail && TaskStatus = "000" || TaskStatus = "001" || TaskStatus = "004" || TaskStatus = "006" || TaskStatus = "002" || TaskStatus = "005"
+                CurrentUser in ApproverEmail && (TaskStatus = "000" || TaskStatus = "001" || TaskStatus = "004" || TaskStatus = "006" || TaskStatus = "002" || TaskStatus = "005")
             )
         );
         //生成带部门字段的ApprovalDetail_Table待理任务
         ClearCollect(
             ApprovalDetailColwithdepartment,
             AddColumns(
-                ApprovalDetailCol,
+                Filter(
+                ShowColumns(
+                    ApprovalDetail_Table,
+                    "Title",
+                    "Approval_No",
+                    "Approver",
+                    "ApproverEmail",
+                    "Priortty",
+                    "TaskStatus",
+                    "AgentUserEmail",
+                    "ActionNode"
+                ),
+                TaskStatus = "001" || TaskStatus = "002"
+            ),
                 "DepartMentName",
                 LookUp(
                     Approval_Table,
@@ -79,7 +92,7 @@ GeneralFormListScreen As screen:
         With(
             {
                 SearchPendingData: If(
-                    CurrentRoleTaskPermission = Blank(),
+                    CurrentRoleTaskPermission = "NoManger",
                     Filter(
                         ApprovalDetailCol,
                         1 = 1
@@ -150,7 +163,21 @@ GeneralFormListScreen As screen:
         ClearCollect(
             ProcessedDetailColwithdepartment,
             AddColumns(
-                ProcessedDetailCol,
+                Filter(
+                ShowColumns(
+                    ApprovalDetail_Table,
+                    "Title",
+                    "Approval_No",
+                    "Approver",
+                    "ApproverEmail",
+                    "Priortty",
+                    "TaskStatus",
+                    "Editor",
+                    "AgentUserEmail",
+                    "ActionNode"
+                ),
+                TaskStatus = "004" || TaskStatus = "006" || TaskStatus = "000"
+            ),
                 "DepartMentName",
                 LookUp(
                     Approval_Table,
@@ -167,7 +194,7 @@ GeneralFormListScreen As screen:
         With(
             {
                 ProcessedListCol: If(
-                    CurrentRoleTaskPermission = Blank(),
+                    CurrentRoleTaskPermission = "NoManger",
                     Filter(
                         ProcessedDetailCol,
                         1 = 1
@@ -238,7 +265,21 @@ GeneralFormListScreen As screen:
         ClearCollect(
             ComplatelDetailColwithdepartment,
             AddColumns(
-                ComplatelDetailCol,
+                Filter(
+                ShowColumns(
+                    ApprovalDetail_Table,
+                    "Title",
+                    "Approval_No",
+                    "Approver",
+                    "ApproverEmail",
+                    "Priortty",
+                    "TaskStatus",
+                    "Editor",
+                    "AgentUserEmail",
+                    "ActionNode"
+                ),
+                TaskStatus = "000" || TaskStatus = "001" || TaskStatus = "004" || TaskStatus = "006" || TaskStatus = "002" || TaskStatus = "005"
+            ),
                 "DepartMentName",
                 LookUp(
                     Approval_Table,
@@ -255,14 +296,14 @@ GeneralFormListScreen As screen:
         With(
             {
                 AllApprovalList: If(
-                    CurrentRoleTaskPermission = Blank(),
+                    CurrentRoleTaskPermission = "NoManger",
                     Filter(
                         ComplatelDetailCol,
                         TaskStatus <> Blank()
                     ),
                     Filter(
                         ComplatelDetailColwithdepartment,
-                        TaskStatus <> Blank() || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermission in FormDepartMentName
+                        TaskStatus <> Blank() && (CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermission in FormDepartMentName)
                     )
                 )
             },

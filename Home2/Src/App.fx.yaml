@@ -94,7 +94,10 @@ App As appinfo:
             ).IsManger="是",LookUp(
                 UserInfo,
                 User_Email = CurrentUser
-            ).O_Mechanism,Blank())
+            ).O_Mechanism_No&"-"&LookUp(
+                UserInfo,
+                User_Email = CurrentUser
+            ).O_Mechanism,"NoManger")
         );
         Set(
             HRAO,

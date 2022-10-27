@@ -867,7 +867,7 @@ HomepageScreen As screen:
 
     Dropdown1_2 As dropdown:
         Default: =""
-        Items: =["eps-vendor2@elchk.org.hk","eps-vendor@elchk.org.hk","eps-tester1@elchk.org.hk","e@test.com","e1@test.com","b@test.com","b1@test.com","f@test.com","f1@test.com","c@test.com","c1@test.com","d@test.com","d1@test.com","raymondwong@elchk.org.hk","eps-tester4@elchk.org.hk","eps-tester2@elchk.org.hk","eps-tester3@elchk.org.hk","testaaa@eps.com"]
+        Items: =["eps-vendor2@elchk.org.hk","eps-vendor@elchk.org.hk","eps-tester1@elchk.org.hk","e@test.com","e1@test.com","b@test.com","b1@test.com","f@test.com","f1@test.com","c@test.com","c1@test.com","d@test.com","d1@test.com","raymondwong@elchk.org.hk","eps-tester4@elchk.org.hk","eps-tester2@elchk.org.hk","eps-tester3@elchk.org.hk","testaaa@eps.com","shuencheng@elchk.org.hk"]
         OnChange: |-
             =Set(
                 CurrentUser,
@@ -932,7 +932,6 @@ HomepageScreen As screen:
                         UserInfo,
                         User_Email = CurrentUser).FormPermission_Sub
             );
-            
             Set(
                 CurrentRoleTaskPermission,
                 If(LookUp(
@@ -941,7 +940,10 @@ HomepageScreen As screen:
                 ).IsManger="是",LookUp(
                     UserInfo,
                     User_Email = CurrentUser
-                ).O_Mechanism,Blank())
+                ).O_Mechanism_No&"-"&LookUp(
+                    UserInfo,
+                    User_Email = CurrentUser
+                ).O_Mechanism,"NoManger")
             );
             Set(
                 HRAO,
