@@ -99,7 +99,7 @@ GeneralFormListScreen As screen:
                     ),
                     Filter(
                         ApprovalDetailColwithdepartment,
-                        CurrentUser in ApproverEmail || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermission in FormDepartMentName
+                        CurrentUser in ApproverEmail || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermissionForm in FormDepartMentName
                     )
                 )
             },
@@ -201,7 +201,7 @@ GeneralFormListScreen As screen:
                     ),
                     Filter(
                         ProcessedDetailColwithdepartment,
-                        CurrentUser in ApproverEmail || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermission in FormDepartMentName
+                        CurrentUser in ApproverEmail || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermissionForm in FormDepartMentName
                     )
                 )
             },
@@ -303,7 +303,7 @@ GeneralFormListScreen As screen:
                     ),
                     Filter(
                         ComplatelDetailColwithdepartment,
-                        TaskStatus <> Blank() && (CurrentUser in ApproverEmail || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermission in FormDepartMentName)
+                        TaskStatus <> Blank() && (CurrentUser in ApproverEmail || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermissionForm in FormDepartMentName)
                     )
                 )
             },

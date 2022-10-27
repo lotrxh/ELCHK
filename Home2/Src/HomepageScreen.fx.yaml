@@ -946,6 +946,16 @@ HomepageScreen As screen:
                 ).O_Mechanism,"NoManger")
             );
             Set(
+                CurrentRoleTaskPermissionForm,
+                If(LookUp(
+                    UserInfo,
+                    User_Email = CurrentUser
+                ).IsManger="是",LookUp(
+                    UserInfo,
+                    User_Email = CurrentUser
+                ).O_Mechanism,"NoManger")
+            );
+            Set(
                 HRAO,
                 CurrentUser in Filter(
                     UserInfo,
