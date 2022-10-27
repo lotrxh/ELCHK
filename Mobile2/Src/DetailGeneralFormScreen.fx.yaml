@@ -3153,6 +3153,36 @@
                                 "請填寫拒絕原因",
                                 Warning
                             ),
+                            //上傳附件
+                            If(Last(Attachment_Zip2.Attachments).Name <> Blank(),
+                                Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));
+                                Set(varBase64Only6,Mid(varAttachmentControl6,Find(",", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (",", varAttachmentControl6)-1));
+                            UploadFiletoSharepoint.Run(
+                            "UploadFlowAttachMent",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            First(EditDetailUserForm_1).标题,
+                            ApprovalGuid,
+                            TextInput2_31.Text,
+                            Last(Attachment_Zip2.Attachments).Name,
+                            Last(Attachment_Zip2.Attachments).Name,
+                            varBase64Only6,
+                            "",
+                            "",
+                            "",
+                            "",
+                            ""
+                                )
+                            );
                             UpdateIf(
                                 ApprovalDetail_Table,
                                 标题 = First(
@@ -3330,6 +3360,37 @@
                                         }
                                     )
                                 );
+                        
+                            //上傳附件
+                        If(Last(Attachment_Zip2.Attachments).Name <> Blank(),
+                        Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));
+                        Set(varBase64Only6,Mid(varAttachmentControl6,Find(",", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (",", varAttachmentControl6)-1));
+                        UploadFiletoSharepoint.Run(
+                            "UploadFlowAttachMent",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            First(EditDetailUserForm_1).标题,
+                            ApprovalGuid,
+                            TextInput2_31.Text,
+                            Last(Attachment_Zip2.Attachments).Name,
+                            Last(Attachment_Zip2.Attachments).Name,
+                            varBase64Only6,
+                            "",
+                            "",
+                            "",
+                            "",
+                            ""
+                            )
+                        );
                         
                         //RemoveIf(ApprovalDetail_Table,TaskStatus="002",Approval_No=FLowId);
                         //UpdateIf(ApprovalDetail_Table,Title=First(SortByColumns(Filter(ApprovalDetail_Table,TaskStatus="004",Approval_No=FLowId),"Priortty",Descending)).Title,{TaskStatus:"002",Advise:""});
