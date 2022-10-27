@@ -186,8 +186,10 @@ GeneralFormListScreen As screen:
                         1 = 1
                     ),
                     Filter(
-                        ProcessedDetailColwithdepartment,
-                        CurrentUser in ApproverEmail || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermissionForm in FormDepartMentName
+                        ProcessedDetailCol,
+                        1 = 1
+                        //ProcessedDetailColwithdepartment,
+                        //CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermissionForm in FormDepartMentName
                     )
                 )
             },
