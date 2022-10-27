@@ -1069,17 +1069,18 @@ GeneralFormListScreen As screen:
                     Text: |-
                         =If(
                             !("提交" in Filter(
-                                ComplatelDetailCol,
-                                Approval_No = ThisItem.Approval_No
+                                ApprovalDetail_Table,
+                                Approval_No = ThisItem.Approval_No,
+                                TaskStatus = "004"
                             ).ActionNode) && !("006" in Filter(
-                                ComplatelDetailCol,
+                                ApprovalDetail_Table,
                                 Approval_No = ThisItem.Approval_No
                             ).TaskStatus),
                             "準備中",
                             First(
                                 SortByColumns(
                                     Filter(
-                                        ComplatelDetailCol,
+                                        ApprovalDetail_Table,
                                         Approval_No = ThisItem.Approval_No
                                     ),
                                     "Priortty",
@@ -1088,7 +1089,7 @@ GeneralFormListScreen As screen:
                             ).ActionNode = "跟進" || Index(
                                 SortByColumns(
                                     Filter(
-                                        ComplatelDetailCol,
+                                        ApprovalDetail_Table,
                                         Approval_No = ThisItem.Approval_No
                                     ),
                                     "Priortty",
@@ -1100,7 +1101,7 @@ GeneralFormListScreen As screen:
                             First(
                                 SortByColumns(
                                     Filter(
-                                        ComplatelDetailCol,
+                                        ApprovalDetail_Table,
                                         Approval_No = ThisItem.Approval_No
                                     ),
                                     "Priortty",
@@ -1111,7 +1112,7 @@ GeneralFormListScreen As screen:
                             First(
                                 SortByColumns(
                                     Filter(
-                                        ComplatelDetailCol,
+                                        ApprovalDetail_Table,
                                         Approval_No = ThisItem.Approval_No
                                     ),
                                     "Priortty",
