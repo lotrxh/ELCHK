@@ -1261,9 +1261,9 @@
                             
                             Set(AttachmentExcelName,Last(Attachment_Excel2.Attachments).Name)
                         OnRemoveFile: |-
-                            =/*Remove(GenericUploadAttachMentFile,First(Filter(GenericUploadAttachMentFile,(FormId=First(EditDetailUserForm_1).Title) && (FormAttachMent=First(AttachmentExcelName).Name))));//删除list中的附件记录
+                            =//Remove(GenericUploadAttachMentFile,First(Filter(GenericUploadAttachMentFile,(FormId=First(EditDetailUserForm_1).Title) && (FormAttachMent=First(AttachmentExcelName).Name))));//删除list中的附件记录
                             
-                            Reset(Attachment_Excel2)//重置申請表附件控件*/
+                            Reset(Attachment_Excel2)//重置申請表附件控件
                         PaddingLeft: =10
                         PaddingRight: =10
                         PressedColor: =RGBA(0, 121, 187, 1)
@@ -1794,7 +1794,7 @@
                         OnRemoveFile: |-
                             =//Remove(UploadFlowAttachMent,First(Filter(UploadFlowAttachMent,(Title=First(EditDetailUserForm_1).Title) && (FlowAttachName=First(AttachmentZipName).Name))));//删除list中的附件记录
                             
-                            //Reset(Attachment_Zip2)//重置申請表附件控件
+                            Reset(Attachment_Zip2)//重置申請表附件控件
                         PaddingLeft: =10
                         PaddingRight: =10
                         PressedColor: =RGBA(0, 121, 187, 1)
@@ -3213,6 +3213,12 @@
                                     Application_Status:"已拒絕"
                                 }
                             );
+                            Reset(TextInput2_30);
+                            Reset(TextInput2_31);
+                            Reset(TextInput2_35);
+                            Reset(TextInput2_37);
+                            Reset(Attachment_Excel2);
+                            Reset(Attachment_Zip2);
                             Notify(
                                 "拒絕成功！",
                                 NotificationType.Success,
@@ -3511,6 +3517,12 @@
                                     TaskStatus = "005")).Priortty)
                                 ).ActionNode
                             );
+                            Reset(TextInput2_30);
+                            Reset(TextInput2_31);
+                            Reset(TextInput2_35);
+                            Reset(TextInput2_37);
+                            Reset(Attachment_Excel2);
+                            Reset(Attachment_Zip2);
                             Notify(
                                 "退回成功！",
                                 NotificationType.Success,
