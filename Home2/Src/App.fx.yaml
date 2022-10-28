@@ -123,9 +123,19 @@ App As appinfo:
                 IsSuperUser = "是"
             ).User_Email
         );
+        If(
+            Last(
+            Split(
+                CurrentUser,
+                "@"
+            ).Result
+        ).Result = "chinasofti.com",
+        Set(JumpUrlMobileApp,"https://apps.powerapps.com/play/c6567b74-5830-4ae0-a2c7-9f36f51e4174?tenantId=c3dcdfe3-b2ca-40ea-bd83-1e6b704f5108");//中软环境
+        ,
         Set(JumpUrl,"https://apps.powerapps.com/play/fe87a3b4-dff2-47f1-af5c-8443d36348e4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c");
         Set(JumpUrlA306A111,"https://apps.powerapps.com/play/e78a1ab3-7aca-47d0-9de7-cfe82901de3a?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c");
-        Set(JumpUrlMobileApp,"https://apps.powerapps.com/play/967cb530-7ce2-49f0-b7a9-a300d8010bd1?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c")
+        Set(JumpUrlMobileApp,"https://apps.powerapps.com/play/967cb530-7ce2-49f0-b7a9-a300d8010bd1?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c");//客户环境
+        );
         //------------
         //Select(uploadButton)
     StartScreen: |-
