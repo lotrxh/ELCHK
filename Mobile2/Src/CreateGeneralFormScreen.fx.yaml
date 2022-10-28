@@ -1239,7 +1239,7 @@
                         OnRemoveFile: |-
                             =//Remove(GenericUploadAttachMentFile,First(Filter(GenericUploadAttachMentFile,(FormId=First(EditUserForm).Title) && (FormAttachMent=First(AttachmentExcelName).Name))));//删除list中的附件记录
                             
-                            //Reset(Attachment_Excel)//重置申請表附件控件
+                            Reset(Attachment_Excel)//重置申請表附件控件
                         PaddingLeft: =10
                         PaddingRight: =10
                         PressedColor: =RGBA(0, 121, 187, 1)
