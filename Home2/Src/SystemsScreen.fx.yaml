@@ -428,13 +428,14 @@ SystemsScreen As screen:
                 Height: =32
                 HoverBorderColor: =RGBA(196, 200, 204, 1)
                 InputTextPlaceholder: ="職位"
+                IsSearchable: =false
                 Items: =Filter(PostRankInfo,PR_Type="職位").PR_Name
                 NoSelectionText: ="職位"
                 PaddingLeft: =12
                 PressedColor: =RGBA(50, 50, 50, 1)
                 PressedFill: =RGBA(0, 0, 0, 1)
                 SearchFields: =["field_3"]
-                SearchItems: =Search(Filter(PostRankInfo,PR_Type="職位").PR_Name,Dropdown2_23.SearchText,"field_3")
+                SearchItems: =[]
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =
@@ -706,13 +707,14 @@ SystemsScreen As screen:
                 Height: =32
                 HoverBorderColor: =RGBA(196, 200, 204, 1)
                 InputTextPlaceholder: ="權限"
+                IsSearchable: =false
                 Items: =Filter(ConfigurationInfo,Type_No="0002"&&Code_No1="001").Value2
                 NoSelectionText: ="權限"
                 PaddingLeft: =12
                 PressedColor: =RGBA(50, 50, 50, 1)
                 PressedFill: =RGBA(0, 0, 0, 1)
                 SearchFields: =["Value2"]
-                SearchItems: =Search(Filter(ConfigurationInfo,Type_No="0002"&&Code_No1="001").Value2,Service_Dropdown_2.SearchText,"Value2")
+                SearchItems: =[]
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =
@@ -1051,13 +1053,14 @@ SystemsScreen As screen:
                 Height: =32
                 HoverBorderColor: =RGBA(196, 200, 204, 1)
                 InputTextPlaceholder: ="服務"
+                IsSearchable: =false
                 Items: =Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="002").Value2
                 NoSelectionText: ="服務"
                 PaddingLeft: =12
                 PressedColor: =RGBA(50, 50, 50, 1)
                 PressedFill: =RGBA(0, 0, 0, 1)
                 SearchFields: =["Value2"]
-                SearchItems: =Search(Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="002").Value2,Dropdown2_26.SearchText,"Value2")
+                SearchItems: =[]
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =
@@ -1099,13 +1102,14 @@ SystemsScreen As screen:
                 Height: =32
                 HoverBorderColor: =RGBA(196, 200, 204, 1)
                 InputTextPlaceholder: ="服務"
+                IsSearchable: =false
                 Items: =Filter(ConfigurationInfo, Value1 = "服務信息").Value2
                 NoSelectionText: ="服務"
                 PaddingLeft: =12
                 PressedColor: =RGBA(50, 50, 50, 1)
                 PressedFill: =RGBA(0, 0, 0, 1)
                 SearchFields: =["Value2"]
-                SearchItems: =Search(Filter(ConfigurationInfo, Value1 = "服務信息").Value2,Dropdown2_29.SearchText,"Value2")
+                SearchItems: =[]
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =
@@ -1498,13 +1502,14 @@ SystemsScreen As screen:
                 Height: =28
                 HoverBorderColor: =RGBA(196, 200, 204, 1)
                 InputTextPlaceholder: ="請選擇職位"
+                IsSearchable: =false
                 Items: =Filter(PostRankInfo,PR_Type="職位").PR_Name
                 NoSelectionText: =
                 PaddingLeft: =12
                 PressedColor: =RGBA(50, 50, 50, 1)
                 PressedFill: =RGBA(0, 0, 0, 1)
                 SearchFields: =["field_3"]
-                SearchItems: =Search(Filter(PostRankInfo,PR_Type="職位").PR_Name,Dropdown_Post.SearchText,"field_3")
+                SearchItems: =[]
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =
@@ -1778,6 +1783,7 @@ SystemsScreen As screen:
                 Height: =28
                 HoverBorderColor: =RGBA(196, 200, 204, 1)
                 InputTextPlaceholder: ="請選擇機構"
+                IsSearchable: =false
                 Items: =Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="002"||Type_No="0003"&&Code_No1="003").Code_No2
                 NoSelectionText: =
                 OnChange: =Reset(Dropdown_FormPermission);
@@ -1785,7 +1791,7 @@ SystemsScreen As screen:
                 PressedColor: =RGBA(50, 50, 50, 1)
                 PressedFill: =RGBA(0, 0, 0, 1)
                 SearchFields: =["Code_No2"]
-                SearchItems: =Search(Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="002"||Type_No="0003"&&Code_No1="003").Code_No2,Dropdown_Mechanism.SearchText,"Code_No2")
+                SearchItems: =[]
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =
@@ -1960,6 +1966,7 @@ SystemsScreen As screen:
                 Height: =28
                 HoverBorderColor: =RGBA(196, 200, 204, 1)
                 InputTextPlaceholder: ="請選擇部門/服務"
+                IsSearchable: =false
                 Items: |-
                     =//Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="002"||Type_No="0003"&&Code_No1="003").Code_No2
                     Distinct(FormTableType,DepartMentName)
@@ -1984,9 +1991,7 @@ SystemsScreen As screen:
                 PressedColor: =RGBA(50, 50, 50, 1)
                 PressedFill: =RGBA(0, 0, 0, 1)
                 SearchFields: =["Result"]
-                SearchItems: |-
-                    =Search(//Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="002"||Type_No="0003"&&Code_No1="003").Code_No2
-                    Distinct(FormTableType,DepartMentName),Dropdown_FormPermission_2.SearchText,"Result")
+                SearchItems: =[]
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =
@@ -2386,13 +2391,14 @@ SystemsScreen As screen:
                 Height: =28
                 HoverBorderColor: =RGBA(196, 200, 204, 1)
                 InputTextPlaceholder: ="請選擇職位"
+                IsSearchable: =false
                 Items: =Filter(PostRankInfo,PR_Type="職級").PR_Name
                 NoSelectionText: ="請選擇職位"
                 PaddingLeft: =12
                 PressedColor: =RGBA(50, 50, 50, 1)
                 PressedFill: =RGBA(0, 0, 0, 1)
                 SearchFields: =["field_3"]
-                SearchItems: =Search(Filter(PostRankInfo,PR_Type="職級").PR_Name,Dropdown_post_1.SearchText,"field_3")
+                SearchItems: =[]
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =
@@ -2686,6 +2692,7 @@ SystemsScreen As screen:
                 Height: =28
                 HoverBorderColor: =RGBA(196, 200, 204, 1)
                 InputTextPlaceholder: ="請選擇機構"
+                IsSearchable: =false
                 Items: =Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="003").Code_No2
                 NoSelectionText: ="請選擇機構"
                 OnChange: =Reset(Dropdown_FormPermission_1)
@@ -2693,7 +2700,7 @@ SystemsScreen As screen:
                 PressedColor: =RGBA(50, 50, 50, 1)
                 PressedFill: =RGBA(0, 0, 0, 1)
                 SearchFields: =["Code_No2"]
-                SearchItems: =Search(Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="003").Code_No2,Dropdown_Mechanism_1.SearchText,"Code_No2")
+                SearchItems: =[]
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =
@@ -2876,6 +2883,7 @@ SystemsScreen As screen:
                 Height: =28
                 HoverBorderColor: =RGBA(196, 200, 204, 1)
                 InputTextPlaceholder: ="請選擇部門/服務"
+                IsSearchable: =false
                 Items: |-
                     =//Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="002"||Type_No="0003"&&Code_No1="003").Code_No2
                     Distinct(FormTableType,DepartMentName)
@@ -2905,9 +2913,7 @@ SystemsScreen As screen:
                 PressedColor: =RGBA(50, 50, 50, 1)
                 PressedFill: =RGBA(0, 0, 0, 1)
                 SearchFields: =["Result"]
-                SearchItems: |-
-                    =Search(//Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="002"||Type_No="0003"&&Code_No1="003").Code_No2
-                    Distinct(FormTableType,DepartMentName),Dropdown_FormPermission_4.SearchText,"Result")
+                SearchItems: =[]
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =
@@ -3182,13 +3188,14 @@ SystemsScreen As screen:
                 Height: =28
                 HoverBorderColor: =RGBA(196, 200, 204, 1)
                 InputTextPlaceholder: ="請選擇機構"
+                IsSearchable: =false
                 Items: =Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="003").Code_No2
                 NoSelectionText: ="請選擇機構"
                 PaddingLeft: =12
                 PressedColor: =RGBA(50, 50, 50, 1)
                 PressedFill: =RGBA(0, 0, 0, 1)
                 SearchFields: =["Code_No2"]
-                SearchItems: =Search(Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="003").Code_No2,DropdownOrganization_Number_3.SearchText,"Code_No2")
+                SearchItems: =[]
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =
@@ -3246,13 +3253,14 @@ SystemsScreen As screen:
             Height: =28
             HoverBorderColor: =RGBA(196, 200, 204, 1)
             InputTextPlaceholder: ="請選擇郵箱"
+            IsSearchable: =false
             Items: =UserInfo.User_Email
             NoSelectionText: =
             PaddingLeft: =12
             PressedColor: =RGBA(50, 50, 50, 1)
             PressedFill: =RGBA(0, 0, 0, 1)
             SearchFields: =["User_Email"]
-            SearchItems: =Search(UserInfo.User_Email,Dropdown_Username_4.SearchText,"User_Email")
+            SearchItems: =[]
             SelectionColor: =RGBA(73, 77, 82, 1)
             SelectionFill: =RGBA(0, 0, 0, 0)
             SelectionTagFill: =
@@ -3292,13 +3300,14 @@ SystemsScreen As screen:
                 Height: =28
                 HoverBorderColor: =RGBA(196, 200, 204, 1)
                 InputTextPlaceholder: ="請選擇權限"
+                IsSearchable: =false
                 Items: =Filter(ConfigurationInfo,Type_No="0002"&&Code_No1="001").Value2
                 NoSelectionText: ="請選擇權限"
                 PaddingLeft: =12
                 PressedColor: =RGBA(50, 50, 50, 1)
                 PressedFill: =RGBA(0, 0, 0, 1)
                 SearchFields: =["Value2"]
-                SearchItems: =Search(Filter(ConfigurationInfo,Type_No="0002"&&Code_No1="001").Value2,Dropdown_OrganizationType_3.SearchText,"Value2")
+                SearchItems: =[]
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =
@@ -3601,13 +3610,14 @@ SystemsScreen As screen:
                 Height: =28
                 HoverBorderColor: =RGBA(196, 200, 204, 1)
                 InputTextPlaceholder: ="請選擇簽批角色"
+                IsSearchable: =false
                 Items: =Filter(ConfigurationInfo,Type_No="0002"&&Code_No1="001").Value2
                 NoSelectionText: ="請選擇簽批角色"
                 PaddingLeft: =12
                 PressedColor: =RGBA(50, 50, 50, 1)
                 PressedFill: =RGBA(0, 0, 0, 1)
                 SearchFields: =["Value2"]
-                SearchItems: =Search(Filter(ConfigurationInfo,Type_No="0002"&&Code_No1="001").Value2,Dropdown_OrganizationType_5.SearchText,"Value2")
+                SearchItems: =[]
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =
@@ -3648,13 +3658,14 @@ SystemsScreen As screen:
                 Height: =28
                 HoverBorderColor: =RGBA(196, 200, 204, 1)
                 InputTextPlaceholder: ="請選擇機構"
+                IsSearchable: =false
                 Items: =Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="003").Code_No2
                 NoSelectionText: ="請選擇機構"
                 PaddingLeft: =12
                 PressedColor: =RGBA(50, 50, 50, 1)
                 PressedFill: =RGBA(0, 0, 0, 1)
                 SearchFields: =["Code_No2"]
-                SearchItems: =Search(Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="003").Code_No2,DropdownOrganization_Number_5.SearchText,"Code_No2")
+                SearchItems: =[]
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =

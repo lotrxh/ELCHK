@@ -435,12 +435,13 @@ GeneralFormListScreen As screen:
                 HoverColor: =Self.Color
                 HoverFill: =ColorFade(Self.Fill, -5%)
                 InputTextPlaceholder: ="選擇部門"
+                IsSearchable: =false
                 Items: =Sort(Distinct(Filter(ConfigurationInfo,Type_Name="組織配置"&&(Value1="部門信息"||Value1="單位信息")),Code_No2&"-"&Value2),Result)
                 PaddingLeft: =10
                 PressedColor: =Self.Color
                 PressedFill: =ColorFade(Self.Fill, -5%)
                 SearchFields: =["Result"]
-                SearchItems: =Search(Sort(Distinct(Filter(ConfigurationInfo,Type_Name="組織配置"&&(Value1="部門信息"||Value1="單位信息")),Code_No2&"-"&Value2),Result),ComboBox1_5.SearchText,"Result")
+                SearchItems: =[]
                 SelectionColor: =glbThemePrimaryColor
                 SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                 Size: =11
@@ -466,12 +467,13 @@ GeneralFormListScreen As screen:
                 HoverColor: =Self.Color
                 HoverFill: =ColorFade(Self.Fill, -5%)
                 InputTextPlaceholder: ="表格類型"
+                IsSearchable: =false
                 Items: =Distinct(FormTableType,FormType)
                 PaddingLeft: =10
                 PressedColor: =Self.Color
                 PressedFill: =ColorFade(Self.Fill, -5%)
                 SearchFields: =["Result"]
-                SearchItems: =Search(Distinct(FormTableType,FormType),ComboBox1_6.SearchText,"Result")
+                SearchItems: =[]
                 SelectionColor: =glbThemePrimaryColor
                 SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                 Size: =11

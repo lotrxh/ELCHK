@@ -1,194 +1,83 @@
 {
-  "1db49336-23c2-48e5-aba0-f238d8fb8191": {
-    "connectionParameters": {
-      "workFlowCallbackUri": "https://prod-02.southeastasia.logic.azure.com:443/workflows/35adae6ae8b3467aa1d96b579ddc3558/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=SN0ktoF4D4UBy0Vsr3KzKFo2LefHD2u1E8Y1j6dfZMI",
-      "workflowEndpoint": "/subscriptions/427976e2-4271-4308-afb8-d28d53a6ad06/resourceGroups/b7a4bbdd6e9c4929b5a46550feead77c-e6499d5988674a80a809c89ca6efe348/providers/Microsoft.Logic/workflows/86fb1c9d-7f90-4a15-86c0-1271e68029ed",
-      "workflowName": "86fb1c9d-7f90-4a15-86c0-1271e68029ed",
-      "workflowPath": "/subscriptions/427976e2-4271-4308-afb8-d28d53a6ad06/resourceGroups/b7a4bbdd6e9c4929b5a46550feead77c-e6499d5988674a80a809c89ca6efe348/providers/Microsoft.Logic/workflows/86fb1c9d-7f90-4a15-86c0-1271e68029ed"
-    },
-    "connectionRef": {
-      "apiTier": "Standard",
-      "displayName": "逻辑流",
-      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1534/1.0.1534.2605/logicflows/icon.png",
-      "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
-      "parameterHints": {
-        "b9405572-3760-45f9-b897-4b304f7f48f7": {
-          "value": "shared_office365"
-        },
-        "workflowEntityId": {},
-        "workflowName": {
-          "value": "86fb1c9d-7f90-4a15-86c0-1271e68029ed"
-        }
-      },
-      "parameterHintsV2": {
-        "shared_office365": {
-          "value": "b9405572-3760-45f9-b897-4b304f7f48f7"
-        },
-        "workflowEntityId": {},
-        "workflowName": {
-          "value": "86fb1c9d-7f90-4a15-86c0-1271e68029ed"
-        }
-      }
-    },
-    "datasets": {},
-    "dataSources": [
-      "DashboardExportToEmail"
-    ],
-    "dependencies": {
-      "shared_office365": "b9405572-3760-45f9-b897-4b304f7f48f7"
-    },
-    "dependents": [],
-    "id": "1db49336-23c2-48e5-aba0-f238d8fb8191"
-  },
-  "503e0884-9185-4729-976d-0b665e664c01": {
+  "cc7cd85d-4da5-476a-bb51-52f23abf40e3": {
     "connectionParameters": {
       "sku": "Enterprise"
     },
     "connectionRef": {
-      "apiTier": "Standard",
       "displayName": "SharePoint",
-      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1607/1.0.1607.3068/sharepointonline/icon.png",
-      "id": "/providers/microsoft.powerapps/apis/shared_sharepointonline",
-      "parameterHints": {},
-      "parameterHintsV2": {}
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1601/1.0.1601.3047/sharepointonline/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_sharepointonline"
     },
     "datasets": {
-      "https://elcss.sharepoint.com/sites/eps-uat-2": {
+      "https://chinasofti0.sharepoint.com/sites/ELCHK_Chinasoft": {
         "dataSources": {
           "ApplitionJobPosition": {
-            "tableName": "b6cad91d-1d00-44a0-bda4-f1b49a3ddb5d"
+            "tableName": "06d57f8f-7b74-4687-9a44-f6600e780ad8"
           },
           "Approval_Table": {
-            "tableName": "8bac6401-1216-4bac-91b0-ac4af91123f5"
+            "tableName": "8ffc7c98-8957-4493-b659-a981442eed5e"
           },
           "ApprovalDetail_Table": {
-            "tableName": "e15e0a1c-ef67-41ed-afd7-08cc39d00d91"
+            "tableName": "b199dc7b-8202-4ca8-8f8d-f8ab22f16a79"
           },
           "ConfigurationInfo": {
-            "tableName": "0e28b495-f326-4747-bbf9-848592d1d26d"
+            "tableName": "9541365c-4686-4a2b-8771-57d920e89d8d"
           },
           "ContractNotice": {
-            "tableName": "60d82d1a-5b69-41e4-aef3-a6561d2b9a4f"
+            "tableName": "cd3ec9ea-b849-43f3-afe6-7e2a13c74ee3"
           },
           "EmploymentResource": {
-            "tableName": "8a5a5d08-b47a-49da-9d16-bae9cf66ce73"
+            "tableName": "d6018ca2-0109-40a1-9867-096bef9a50f5"
           },
           "FormTableType": {
-            "tableName": "cf1c3cc7-48eb-4c6b-9f1b-85f103af684b"
+            "tableName": "19d1ccbe-4397-4633-8745-9e38e19964ce"
           },
           "GenericFormList": {
-            "tableName": "ea4771f2-8c83-48a5-877b-c95a6b6def87"
+            "tableName": "8274b99c-afee-4757-bffb-00ea017c02aa"
           },
           "GenericFormModel": {
-            "tableName": "1e4831e0-de28-4391-9d3a-55ea19ffca6e"
-          },
-          "GenericUploadAttachMentFile": {
-            "tableName": "04c464d2-ad6d-409a-a793-a7c243c5eac7"
+            "tableName": "cc32c897-2d32-4d70-9646-01d8af2f240a"
           },
           "MyContacts": {
-            "tableName": "03acdf16-65dd-42b4-b35b-f751da047ceb"
+            "tableName": "df75e55f-b8bd-4dce-ba6b-a22c6847aa0f"
           },
           "PostRankInfo": {
-            "tableName": "cb57b90f-4799-4f9e-91f8-0f0d24b40ece"
+            "tableName": "ac408394-f4c4-42db-a99e-e99755f92bf8"
           },
           "SignerInfo": {
-            "tableName": "1f74b66d-7a62-4fa1-87b2-1198238206ed"
+            "tableName": "90f34231-0303-4839-9616-e107ed7373fe"
           },
           "TemplateFileList": {
-            "tableName": "3b48be6e-d672-4f70-8ef1-563ee936ae97"
+            "tableName": "df76d7e7-0216-457a-b770-110f35a82da6"
           },
           "UserInfo": {
-            "tableName": "76f2cc88-0ec4-42af-946b-7b3c9520f7f2"
+            "tableName": "8a07b3c5-11aa-4214-80db-88c9f2048063"
           },
           "VacationApprovalForm": {
-            "tableName": "91ca3ae7-4a66-4088-a28f-43f1a963c01a"
+            "tableName": "45e8f363-6b07-450e-8a10-2fd94f309898"
           }
         }
       }
     },
     "dataSources": [
-      "Approval_Table",
-      "EmploymentResource",
       "ApplitionJobPosition",
+      "Approval_Table",
       "ApprovalDetail_Table",
       "ConfigurationInfo",
+      "ContractNotice",
+      "EmploymentResource",
       "FormTableType",
       "GenericFormList",
       "GenericFormModel",
-      "GenericUploadAttachMentFile",
       "MyContacts",
+      "PostRankInfo",
       "SignerInfo",
       "TemplateFileList",
       "UserInfo",
-      "VacationApprovalForm",
-      "ContractNotice",
-      "PostRankInfo"
+      "VacationApprovalForm"
     ],
     "dependencies": {},
-    "dependents": [
-      "ab6c0b91-eeff-465a-a72c-fdfec19586c7"
-    ],
-    "id": "503e0884-9185-4729-976d-0b665e664c01"
-  },
-  "ab6c0b91-eeff-465a-a72c-fdfec19586c7": {
-    "connectionParameters": {
-      "workFlowCallbackUri": "https://prod-12.southeastasia.logic.azure.com:443/workflows/b53fc178287f402fa82d2b65074ddd81/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=aBu0It1_bMn0XSgCHQGpZJ8FFEUGcPEWQLjRy_v4HxQ",
-      "workflowEndpoint": "/subscriptions/427976e2-4271-4308-afb8-d28d53a6ad06/resourceGroups/b7a4bbdd6e9c4929b5a46550feead77c-e6499d5988674a80a809c89ca6efe348/providers/Microsoft.Logic/workflows/eba333d5-7069-410d-bc84-1d5d079b9494",
-      "workflowName": "eba333d5-7069-410d-bc84-1d5d079b9494",
-      "workflowPath": "/subscriptions/427976e2-4271-4308-afb8-d28d53a6ad06/resourceGroups/b7a4bbdd6e9c4929b5a46550feead77c-e6499d5988674a80a809c89ca6efe348/providers/Microsoft.Logic/workflows/eba333d5-7069-410d-bc84-1d5d079b9494"
-    },
-    "connectionRef": {
-      "apiTier": "Standard",
-      "displayName": "逻辑流",
-      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1534/1.0.1534.2605/logicflows/icon.png",
-      "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
-      "parameterHints": {
-        "503e0884-9185-4729-976d-0b665e664c01": {
-          "value": "shared_sharepointonline"
-        },
-        "workflowEntityId": {},
-        "workflowName": {
-          "value": "eba333d5-7069-410d-bc84-1d5d079b9494"
-        }
-      },
-      "parameterHintsV2": {
-        "shared_sharepointonline": {
-          "value": "503e0884-9185-4729-976d-0b665e664c01"
-        },
-        "workflowEntityId": {},
-        "workflowName": {
-          "value": "eba333d5-7069-410d-bc84-1d5d079b9494"
-        }
-      }
-    },
-    "datasets": {},
-    "dataSources": [
-      "UploadFiletoSharepoint"
-    ],
-    "dependencies": {
-      "shared_sharepointonline": "503e0884-9185-4729-976d-0b665e664c01"
-    },
     "dependents": [],
-    "id": "ab6c0b91-eeff-465a-a72c-fdfec19586c7"
-  },
-  "b9405572-3760-45f9-b897-4b304f7f48f7": {
-    "connectionParameters": {
-      "sku": "Enterprise"
-    },
-    "connectionRef": {
-      "apiTier": "Standard",
-      "displayName": "Office 365 Outlook",
-      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1599/1.0.1599.3017/office365/icon.png",
-      "id": "/providers/microsoft.powerapps/apis/shared_office365",
-      "parameterHints": {},
-      "parameterHintsV2": {}
-    },
-    "datasets": {},
-    "dataSources": [],
-    "dependencies": {},
-    "dependents": [
-      "1db49336-23c2-48e5-aba0-f238d8fb8191"
-    ],
-    "id": "b9405572-3760-45f9-b897-4b304f7f48f7"
+    "id": "cc7cd85d-4da5-476a-bb51-52f23abf40e3"
   }
 }
