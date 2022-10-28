@@ -3607,10 +3607,7 @@
                                                             SortByColumns(
                                                                 Filter(
                                                                     GenericUploadAttachMentFile,
-                                                                    StartsWith(
-                                                                        FormAttachMent,
-                                                                        AttachmentExcelName
-                                                                    ) && 
+                                                                    FormAttachMent = AttachmentExcelName, 
                                                                     FormId = FormListId
                                                                     //FormId=First(EditDetailUserForm_1).Title
                                                                 ),
@@ -3631,10 +3628,7 @@
                                                             SortByColumns(
                                                                 Filter(
                                                                     GenericUploadAttachMentFile,
-                                                                    StartsWith(
-                                                                        FormAttachMent,
-                                                                        AttachmentExcelName
-                                                                    ) && 
+                                                                    FormAttachMent = AttachmentExcelName, 
                                                                     FormId = FormListId
                                                                     //FormId=First(EditDetailUserForm_1).Title
                                                                 ),
