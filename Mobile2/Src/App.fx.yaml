@@ -17,9 +17,9 @@ App As appinfo:
         Set(glbNeutralQuaternaryColor,ColorValue( "#D2D0CE" ));
         Set(glbNeutralLightColor,ColorValue( "#EDEBE9" ));
         Set(glbNeutralLighterColor,ColorValue( "#f3f2f1" ));
-        //Set(FormModelIds,"a19e1c08-1583-4214-8304-fe5abbbebd8b");//通用流程
+        Set(FormModelIds,"a19e1c08-1583-4214-8304-fe5abbbebd8b");//通用流程
         //Set(FormModelIds,"8ba53e27-a2a8-473c-a7ea-a0061da6f79d");//預設流程
-        Set(FormModelIds,"ac07f223-d5d5-4a88-bf85-a343548908f4");//部門簡單流程
+        //Set(FormModelIds,"ac07f223-d5d5-4a88-bf85-a343548908f4");//部門簡單流程
         //设置部门经理权限筛选
         Set(CurrentUser,User().Email);
         Set(

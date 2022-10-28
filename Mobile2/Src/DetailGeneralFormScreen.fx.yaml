@@ -3589,7 +3589,13 @@
                         //上傳表格
                         If(Last(Attachment_Excel2.Attachments).Name <> Blank(),
                         Set(varAttachmentControl5,JSON(Image2.Image,IncludeBinaryData));
-                        Set(varBase64Only5,Mid(varAttachmentControl5,Find(",", varAttachmentControl5)+1,Len(varAttachmentControl5)-Find (",", varAttachmentControl5)-1));    
+                        Set(varBase64Only5,Mid(varAttachmentControl5,Find(",", varAttachmentControl5)+1,Len(varAttachmentControl5)-Find (",", varAttachmentControl5)-1));
+                        Collect(FormAttachmentName,Filter(
+                                                            GenericUploadAttachMentFile,
+                                                            FormId = FormListId,
+                                                            StartsWith(
+                                                                        FormAttachMent,
+                                                                        First(Split(AttachmentExcelName,".")).Result)));    
                         UploadFiletoSharepoint.Run(
                             "GenericUploadAttachMentFile",
                             "",
@@ -3605,16 +3611,8 @@
                                                         First(Split(
                                                         Last(
                                                             SortByColumns(
-                                                                Filter(
-                                                                    GenericUploadAttachMentFile,
-                                                                    StartsWith(
-                                                                        FormAttachMent,
-                                                                        First(Split(AttachmentExcelName,".")).Result
-                                                                    ), 
-                                                                    FormId = FormListId
-                                                                    //FormId=First(EditDetailUserForm_1).Title
-                                                                ),
-                                                                "FormAttachMent",
+                                                                FormAttachmentName,
+                                                                "ID",
                                                                 Ascending
                                                             )
                                                         ).FormAttachMent,".")).Result
@@ -3622,23 +3620,15 @@
                                                     3
                                                 ) + 1,
                                                 "000"
-                                            )&Last(Split(AttachmentExcelName,".")).Result,
+                                            )&"."&Last(Split(AttachmentExcelName,".")).Result,
                             TextInput2_30.Text,
                             First(Split(AttachmentExcelName,".")).Result&"_"&Text(
                                                 Right(
                                                         First(Split(
                                                         Last(
                                                             SortByColumns(
-                                                                Filter(
-                                                                    GenericUploadAttachMentFile,
-                                                                    StartsWith(
-                                                                        FormAttachMent,
-                                                                        First(Split(AttachmentExcelName,".")).Result
-                                                                    ),
-                                                                    FormId = FormListId
-                                                                    //FormId=First(EditDetailUserForm_1).Title
-                                                                ),
-                                                                "FormAttachMent",
+                                                                FormAttachmentName,
+                                                                "ID",
                                                                 Ascending
                                                             )
                                                         ).FormAttachMent,".")).Result
@@ -3646,7 +3636,7 @@
                                                     3
                                                 ) + 1,
                                                 "000"
-                                            )&Last(Split(AttachmentExcelName,".")).Result,
+                                            )&"."&Last(Split(AttachmentExcelName,".")).Result,
                             "",
                             "",
                             "",

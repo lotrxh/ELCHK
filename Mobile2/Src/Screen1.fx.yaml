@@ -37,6 +37,28 @@ Screen1 As screen:
             ZIndex: =4
 
     Rectangle7 As rectangle:
+        OnSelect: |
+            =
+            ClearCollect(testtable,Filter(GenericUploadAttachMentFile,FormId = "212ba80c-420f-43e5-81bf-d7a0b0f35fda",
+                                                        StartsWith(
+                                                            FormAttachMent,
+                                                            First(Split(AttachmentExcelName,".")).Result
+                                                        )));
+            Set(test,First(Split(AttachmentExcelName,".")).Result&"_"&Text(
+                                    Right(
+                                            First(Split(
+                                            Last(
+                                                SortByColumns(testtable
+                                                    ,
+                                                    "ID",
+                                                    Ascending
+                                                )
+                                            ).FormAttachMent,".")).Result
+                                        ,
+                                        3
+                                    ) + 1,
+                                    "000"
+                                )&"."&Last(Split(AttachmentExcelName,".")).Result)
         X: =40
         Y: =40
         ZIndex: =2
