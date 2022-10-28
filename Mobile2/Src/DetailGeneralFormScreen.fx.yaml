@@ -3609,8 +3609,8 @@
                                                                     GenericUploadAttachMentFile,
                                                                     StartsWith(
                                                                         FormAttachMent,
-                                                                        AttachmentExcelName
-                                                                    ) && 
+                                                                        First(Split(AttachmentExcelName,".")).Result
+                                                                    ), 
                                                                     FormId = FormListId
                                                                     //FormId=First(EditDetailUserForm_1).Title
                                                                 ),
@@ -3633,8 +3633,8 @@
                                                                     GenericUploadAttachMentFile,
                                                                     StartsWith(
                                                                         FormAttachMent,
-                                                                        AttachmentExcelName
-                                                                    ) && 
+                                                                        First(Split(AttachmentExcelName,".")).Result
+                                                                    ),
                                                                     FormId = FormListId
                                                                     //FormId=First(EditDetailUserForm_1).Title
                                                                 ),
