@@ -957,7 +957,8 @@ AdminFormDetailScreen As screen:
                                     )
                                 );
                             )
-                        )
+                        );
+                        Reset(Attachment_Demonstrationform);
                     PaddingLeft: =10
                     PaddingRight: =10
                     PaddingTop: =10
@@ -1142,7 +1143,9 @@ AdminFormDetailScreen As screen:
                                     )
                                 );
                             )
-                        )
+                        );
+                        
+                        Reset(Attachment_FillGuide);
                     PaddingLeft: =10
                     PaddingRight: =10
                     PaddingTop: =10
@@ -1465,8 +1468,8 @@ AdminFormDetailScreen As screen:
                                     )
                                 );
                             )
-                        )
-                        //Reset(Attachment_Form);//重置申請表附件控件
+                        );
+                        Reset(Attachment_Form);//重置申請表附件控件
                         //Clear(EditAttachment)
                     PaddingLeft: =10
                     PaddingRight: =10
