@@ -2338,7 +2338,7 @@
                     Color: =glbNeutralPrimaryColor
                     Default: |-
                         =If(
-                            (GeneralFlowSelectedActions="檢查" || GeneralFlowSelectedActions="簽批" || GeneralFlowSelectedActions="助理總幹事審批" || GeneralFlowSelectedActions="總幹事審批" || GeneralFlowSelectedActions="跟進" )
+                            (GeneralFlowSelectedActions1="檢查" || GeneralFlowSelectedActions1="簽批" || GeneralFlowSelectedActions1="助理總幹事審批" || GeneralFlowSelectedActions1="總幹事審批" || GeneralFlowSelectedActions1="跟進" )
                             && Checkbox2_7.Visible = true 
                         ,true,false)
                     FocusedBorderThickness: =0
@@ -2346,6 +2346,7 @@
                     HoverBorderColor: =
                     HoverColor: =glbNeutralPrimaryColor
                     HoverFill: =RGBA(0, 0, 0, 0)
+                    OnUncheck: =Set(GeneralFlowSelectedActions1,"補充資料")
                     PressedBorderColor: =
                     PressedColor: =glbNeutralPrimaryColor
                     PressedFill: =
@@ -2397,7 +2398,7 @@
                     PressedFill: =
                     Size: =10
                     Text: ="執行完成，結束整個申請流程"
-                    Visible: |-
+                    Visible: |
                         =With(
                             {
                                 UEmail: LookUp(
@@ -2417,44 +2418,8 @@
                                                 "Priortty",
                                                 Descending
                                             )
-                                        ).ActionNode = "跟進" 
-                                    
-                                    /*//退回后不能执行
-                                    ("跟進" in Filter(ApprovalDetail_Table,Approval_No=FLowId).ActionNode && CountA(Filter(ApprovalDetail_Table,Approval_No=FLowId,ActionNode="提交").ActionNode)<2)
-                                    //部门简单流程第二次提交后可以执行，第一次提交未选定部门邮箱，不能执行，第二次提交给具体负责人后可以执行
-                                    || (FlowType = "部門簡單流程" && First(
-                                            SortByColumns(
-                                                Filter(
-                                                    ApprovalDetail_Table,
-                                                    //TaskStatus = "002",
-                                                    Approval_No = FLowId,
-                                                    Priortty = "2"
-                                                                            ),
-                                                "Priortty",
-                                                Descending
-                                            )
-                                        ).ActionNode = "提交") 
-                                        //退回后提交未跟进时不能执行，更进后可以执行
-                                        || First(SortByColumns(
-                                                Filter(
-                                                    ApprovalDetail_Table,
-                                                    //TaskStatus = "002",
-                                                    Approval_No = FLowId,
-                                                    ActionNode = "跟進"            
-                                                                            ),
-                                                "Priortty",
-                                                Descending
-                                            )).Created > First(SortByColumns(
-                                                Filter(
-                                                    ApprovalDetail_Table,
-                                                    //TaskStatus = "002",
-                                                    Approval_No = FLowId,
-                                                    ActionNode = "提交"
-                                                                            ),
-                                                "Priortty",
-                                                Descending
-                                            )).Created*/
-                                    ),
+                                        ).ActionNode = "跟進"
+                                 ),
                                 true,
                                 false
                             )
@@ -2580,6 +2545,7 @@
                         ChevronHoverBackground: =ColorFade(Self.Fill, -5%)
                         ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
                         Color: =glbNeutralPrimaryColor
+                        Default: =GeneralFlowSelectedActions1
                         FocusedBorderColor: =ColorFade(Self.BorderColor, -20%)
                         FocusedBorderThickness: =1
                         Height: =36
@@ -2602,8 +2568,8 @@
                                                 )
                                             ).ActionNode = "跟進"
                                 ,DataFlowActionCol4.Result,If("005" in Filter(ApprovalDetail_Table,Approval_No=FLowId).TaskStatus,First(DataFlowActionCol5.Result),First(DataFlowActionCol3.Result))),FlowType = "部門簡單流程",DataFlowActionCol.Result)
-                        OnChange: =Set(GeneralFlowSelectedActions,Dropdown1_6.Selected.Result)
-                        OnSelect: =Set(GeneralFlowSelectedActions,Dropdown1_6.Selected.Result)
+                        OnChange: =Set(GeneralFlowSelectedActions1,Dropdown1_6.Selected.Result)
+                        OnSelect: =Set(GeneralFlowSelectedActions1,Dropdown1_6.Selected.Result)
                         PaddingBottom: =5
                         PaddingRight: =0
                         PaddingTop: =5
