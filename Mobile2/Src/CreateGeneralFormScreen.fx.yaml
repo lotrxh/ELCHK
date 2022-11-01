@@ -741,8 +741,7 @@
                             NotificationType.Success,
                             2000
                         );
-                        //測試時導航到具體任務頁面，實際使用應該退回到首頁
-                    //Navigate(DetailGeneralFormScreen,None,{HistoryList: ApprovalIDNumber});
+                        
                     If(
                             If(
                                 FlowType = "通用流程",
