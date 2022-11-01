@@ -459,6 +459,111 @@
                         //創建NewUserForm集合用作後續更新list-GenericUploadAttachMentFile中的FormId
                     //执行flow上传表格到list
                     If(
+                        Last(
+                        Split(
+                            CurrentUser,
+                            "@"
+                        ).Result
+                    ).Result = "chinasofti.com",
+                    //中軟環境上傳
+                    If(
+                            Last(Attachment_Excel.Attachments).Name <> Blank(),
+                            Set(
+                                varAttachmentControl1,
+                                JSON(
+                                    Image4_2.Image,
+                                    IncludeBinaryData
+                                )
+                            );
+                            Set(
+                                varBase64Only1,
+                                Mid(
+                                    varAttachmentControl1,
+                                    Find(
+                                        ",",
+                                        varAttachmentControl1
+                                    ) + 1,
+                                    Len(varAttachmentControl1) - Find (
+                                        ",",
+                                        varAttachmentControl1
+                                    ) - 1
+                                )
+                            );
+                            ELCHK_UploadFiletoSharepoint.Run(
+                                "GenericUploadAttachMentFile",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                GUID(),
+                                GenericFormlistGuid,
+                                First(EditUserForm).ModelType,
+                                Last(Attachment_Excel.Attachments).Name,
+                                TextInput_FormPWD.Text,
+                                Last(Attachment_Excel.Attachments).Name,
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                varBase64Only1,
+                                "",
+                                ""
+                            )
+                        );
+                        
+                    //执行flow上传附件到list
+                    If(
+                            Last(Attachment_Zip.Attachments).Name <> Blank(),
+                            Set(
+                                varAttachmentControl2,
+                                JSON(
+                                    Image4_1.Image,
+                                    IncludeBinaryData
+                                )
+                            );
+                            Set(
+                                varBase64Only2,
+                                Mid(
+                                    varAttachmentControl2,
+                                    Find(
+                                        ",",
+                                        varAttachmentControl2
+                                    ) + 1,
+                                    Len(varAttachmentControl2) - Find (
+                                        ",",
+                                        varAttachmentControl2
+                                    ) - 1
+                                )
+                            );
+                            ELCHK_UploadFiletoSharepoint.Run(
+                                "UploadFlowAttachMent",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                GenericFormlistGuid,
+                                ApprovalGuid,
+                                TextInput_zipPWD.Text,
+                                Last(Attachment_Zip.Attachments).Name,
+                                Last(Attachment_Zip.Attachments).Name,
+                                "",
+                                "",
+                                varBase64Only2
+                            )
+                        ),
+                    //客戶環境上傳
+                    If(
                             Last(Attachment_Excel.Attachments).Name <> Blank(),
                             Set(
                                 varAttachmentControl1,
@@ -557,6 +662,7 @@
                                 "",
                                 ""
                             )
+                        )
                         );
                         //收集当前用户的申请部门信息用作下一次创建任务时主动带入
                         If(

@@ -17,9 +17,7 @@ App As appinfo:
         Set(glbNeutralQuaternaryColor,ColorValue( "#D2D0CE" ));
         Set(glbNeutralLightColor,ColorValue( "#EDEBE9" ));
         Set(glbNeutralLighterColor,ColorValue( "#f3f2f1" ));
-        Set(FormModelIds,"a19e1c08-1583-4214-8304-fe5abbbebd8b");//通用流程
-        //Set(FormModelIds,"8ba53e27-a2a8-473c-a7ea-a0061da6f79d");//預設流程
-        //Set(FormModelIds,"ac07f223-d5d5-4a88-bf85-a343548908f4");//部門簡單流程
+        
         //设置部门经理权限筛选
         Set(CurrentUser,User().Email);
         Set(
@@ -52,9 +50,14 @@ App As appinfo:
                 "@"
             ).Result
         ).Result = "chinasofti.com",
-        Set(JumpUrlClientAPP,"https://apps.powerapps.com/play/d3797d8e-d0c9-4874-937a-30a8d585aad5?tenantId=c3dcdfe3-b2ca-40ea-bd83-1e6b704f5108");//中软环境
+        //中软环境
+        Set(JumpUrlClientAPP,"https://apps.powerapps.com/play/d3797d8e-d0c9-4874-937a-30a8d585aad5?tenantId=c3dcdfe3-b2ca-40ea-bd83-1e6b704f5108");
         ,
-        Set(JumpUrlClientAPP,"https://apps.powerapps.com/play/b70eb978-b287-42ca-b2b6-c32f2b467617?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c");//客户环境
+        //客户环境
+        Set(JumpUrlClientAPP,"https://apps.powerapps.com/play/b70eb978-b287-42ca-b2b6-c32f2b467617?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c");
+        Set(FormModelIds,"a19e1c08-1583-4214-8304-fe5abbbebd8b");//通用流程
+        //Set(FormModelIds,"8ba53e27-a2a8-473c-a7ea-a0061da6f79d");//預設流程
+        //Set(FormModelIds,"ac07f223-d5d5-4a88-bf85-a343548908f4");//部門簡單流程
         );
     StartScreen: |-
         =If(
