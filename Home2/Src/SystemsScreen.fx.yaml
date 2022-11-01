@@ -494,7 +494,7 @@ SystemsScreen As screen:
             ZIndex: =7
 
         GAListGallery_1 As gallery.galleryVertical:
-            Height: =494
+            Height: =435
             Items: |-
                 =Search(
                     Filter(
@@ -510,9 +510,9 @@ SystemsScreen As screen:
                 )
             Layout: =Layout.Vertical
             TemplateSize: =40
-            Width: =1140
-            X: =24
-            Y: =165
+            Width: =1118
+            X: =22
+            Y: =210
             ZIndex: =8
 
             Label33_30 As label:
@@ -1334,7 +1334,7 @@ SystemsScreen As screen:
                         UserInfo,
                         Defaults(UserInfo),
                         {
-                            标题: GUID(),
+                            Title: GUID(),
                             User_Name: UserTextInput.Text,
                             User_Email: UsaerEmaiLTextInput.Text,
                             O_Mechanism_No:Dropdown_Mechanism.Selected.Code_No2,
@@ -2146,7 +2146,7 @@ SystemsScreen As screen:
             Height: =36
             HoverFill: =RGBA(8, 127, 190, 1)
             OnSelect: |-
-                =RemoveIf(UserInfo,标题=UserListGallery_1.Selected.标题);Refresh(UserInfo);
+                =RemoveIf(UserInfo,Title=UserListGallery_1.Selected.Title);Refresh(UserInfo);
                 ClearCollect(
                     TempAllUserTable,
                     UserInfo
@@ -2223,7 +2223,7 @@ SystemsScreen As screen:
                     IsBlank(UserTextInput_1.Text) && IsBlank(UsaerEmaiLTextInput_1.Text) && IsBlank(UserTextInput_8.Text) && IsBlank(Dropdown_Mechanism_1.Selected.Code_No2) && IsBlank(UserTextInput_10.Text) && IsBlank(Dropdown_post_1.Selected.PR_Name) && IsBlank(UserTextInput_12.Text) && IsBlank(Dropdown_AgentEmail_1.Selected.Agent_Email),
                     UpdateContext({UserEditShow: true}),
                     Patch(
-                        UserInfo,LookUp(UserInfo,标题=UserListGallery_1.Selected.标题),     
+                        UserInfo,LookUp(UserInfo,Title=UserListGallery_1.Selected.Title),     
                             {User_Name: UserTextInput_1.Text},
                             {User_Email: UsaerEmaiLTextInput_1.Text},
                             {O_Mechanism: UserTextInput_8.Text},
@@ -2385,7 +2385,7 @@ SystemsScreen As screen:
                 ChevronHoverBackground: =
                 ChevronHoverFill: =RGBA(153, 153, 153, 1)
                 DefaultSelectedItems: |-
-                    =Table({field_3:UserListGallery_1.Selected.Post})
+                    =Table({PR_Name:UserListGallery_1.Selected.Post})
                 DisplayFields: =["PR_Name"]
                 FocusedBorderThickness: =1
                 Height: =28
@@ -3067,7 +3067,7 @@ SystemsScreen As screen:
                         SignerInfo,
                         Defaults(SignerInfo),
                         {
-                            标题: GUID(),
+                            Title: GUID(),
                             Signer: UserTextInput_3.Text,
                             Signer_Email: Dropdown_Username_4.Selected.User_Email,
                             S_Mechanism: UserTextInput_13.Text,
@@ -3425,7 +3425,7 @@ SystemsScreen As screen:
                         SignerInfo,
                         LookUp(
                             SignerInfo,
-                            标题 = GAListGallery_1.Selected.标题
+                            Title = GAListGallery_1.Selected.Title
                         ),
                         {Signer: UserTextInput_4.Text},
                         {Signer_Email: Dropdown_Username_5.Selected.User_Email},
@@ -3556,20 +3556,19 @@ SystemsScreen As screen:
             ChevronHoverBackground: =
             ChevronHoverFill: =RGBA(153, 153, 153, 1)
             DefaultSelectedItems: |-
-                =Table({field_User_Email:GAListGallery_1.Selected.Signer_Email}).field_User_Email
+                =Table({User_Email:GAListGallery_1.Selected.Signer_Email}).User_Email
             DisplayFields: =["User_Email"]
             FocusedBorderThickness: =1
             Height: =28
             HoverBorderColor: =RGBA(196, 200, 204, 1)
             InputTextPlaceholder: ="請選擇郵箱"
-            IsSearchable: =false
             Items: =UserInfo.User_Email
             NoSelectionText: =
             PaddingLeft: =12
             PressedColor: =RGBA(50, 50, 50, 1)
             PressedFill: =RGBA(0, 0, 0, 1)
             SearchFields: =["User_Email"]
-            SearchItems: =[]
+            SearchItems: =Search(UserInfo.User_Email,Dropdown_Username_5.SearchText,"User_Email")
             SelectionColor: =RGBA(73, 77, 82, 1)
             SelectionFill: =RGBA(0, 0, 0, 0)
             SelectionTagFill: =
@@ -3604,7 +3603,7 @@ SystemsScreen As screen:
                 ChevronHoverBackground: =
                 ChevronHoverFill: =RGBA(153, 153, 153, 1)
                 DefaultSelectedItems: |-
-                    =Table({field_6:GAListGallery_1.Selected.Role}).field_6
+                    =Table({Value2:GAListGallery_1.Selected.Role}).Value2
                 DisplayFields: =["Value2"]
                 FocusedBorderThickness: =1
                 Height: =28
@@ -3652,7 +3651,7 @@ SystemsScreen As screen:
                 ChevronHoverBackground: =
                 ChevronHoverFill: =RGBA(153, 153, 153, 1)
                 DefaultSelectedItems: |-
-                    =Table({field_5:GAListGallery_1.Selected.S_Mechanism_No}).field_5
+                    =Table({Code_No2:GAListGallery_1.Selected.S_Mechanism_No}).Code_No2
                 DisplayFields: =["Code_No2"]
                 FocusedBorderThickness: =1
                 Height: =28
@@ -3768,7 +3767,7 @@ SystemsScreen As screen:
             Fill: =RGBA(0, 134, 208, 1)
             HoverFill: =RGBA(8, 127, 190, 1)
             OnSelect: |-
-                =RemoveIf(SignerInfo,标题=GAListGallery_1.Selected.标题);Refresh( SignerInfo );UpdateContext({DeletGAMask:false})
+                =RemoveIf(SignerInfo,Title=GAListGallery_1.Selected.Title);Refresh( SignerInfo );UpdateContext({DeletGAMask:false})
             PressedColor: =RGBA(255, 255, 255, 1)
             PressedFill: =RGBA(255, 255, 255, 1)
             RadiusBottomLeft: =5

@@ -219,7 +219,7 @@ AdminFormDetailScreen As screen:
                             //如果表格名稱修改，同步附件的TempFileName
                     UpdateIf(
                                     TemplateFileList,
-                                    GenericFormId = First(EditForm).标题,
+                                    GenericFormId = First(EditForm).Title,
                                     {TempFileName: TextInput_FormName.Text}
                                 );
                             //如果附件修改，上傳新的申請表格,UAT环境代码
@@ -407,7 +407,7 @@ AdminFormDetailScreen As screen:
                                         [@TextInput_FormName].Text,
                                         drpFilter_FormType.Selected.Result,
                                         Last(Attachment_Form.Attachments).Name,
-                                        First(EditForm).标题,
+                                        First(EditForm).Title,
                                         Last(Attachment_Form.Attachments).Name,
                                         "",
                                         "",
@@ -456,7 +456,7 @@ AdminFormDetailScreen As screen:
                                         [@TextInput_FormName].Text,
                                         "示範表格",
                                         Last(Attachment_Demonstrationform.Attachments).Name,
-                                        First(EditForm).标题,
+                                        First(EditForm).Title,
                                         Last(Attachment_Demonstrationform.Attachments).Name,
                                         "",
                                         "",
@@ -505,7 +505,7 @@ AdminFormDetailScreen As screen:
                                         [@TextInput_FormName].Text,
                                         "填寫指引",
                                         Last(Attachment_FillGuide.Attachments).Name,
-                                        First(EditForm).标题,
+                                        First(EditForm).Title,
                                         Last(Attachment_FillGuide.Attachments).Name,
                                         "",
                                         "",
@@ -581,7 +581,7 @@ AdminFormDetailScreen As screen:
                                         GenericFormModel,
                                         Defaults(GenericFormModel),
                                         {
-                                            标题: GenericFormModeGuid,
+                                            Title: GenericFormModeGuid,
                                             ModelDepartment: drpFilter_Department.Selected.Result,
                                             ModelType: drpFilter_FormType.Selected.Result,
                                             ModelFlowNumber: TextInput_FormNumber.Text,
@@ -1236,7 +1236,7 @@ AdminFormDetailScreen As screen:
                         Clear(EditAttachment2)
                         */
                         With(
-                            {FormmodelID: First(EditForm).标题},
+                            {FormmodelID: First(EditForm).Title},
                             If(
                                 Label_newform.Text <> "新增表格",
                                 Remove(
@@ -1422,7 +1422,7 @@ AdminFormDetailScreen As screen:
                         */
                         
                         With(
-                            {FormmodelID: First(EditForm).标题},
+                            {FormmodelID: First(EditForm).Title},
                             If(
                                 Label_newform.Text <> "新增表格",
                                 Remove(
@@ -1747,7 +1747,7 @@ AdminFormDetailScreen As screen:
                     OnRemoveFile: |
                         =//删除list中的附件记录
                         With(
-                            {FormmodelID: First(EditForm).标题},
+                            {FormmodelID: First(EditForm).Title},
                             If(
                                 Label_newform.Text <> "新增表格",
                                 Remove(
