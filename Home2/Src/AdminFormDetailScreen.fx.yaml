@@ -222,7 +222,8 @@ AdminFormDetailScreen As screen:
                                     GenericFormId = First(EditForm).标题,
                                     {TempFileName: TextInput_FormName.Text}
                                 );
-                            //如果附件修改，上傳新的申請表格
+                            //如果附件修改，上傳新的申請表格,UAT环境代码
+                            /*
                     If(
                                     Last(Attachment_Form.Attachments).Name <> Blank() && attachmentchange1,
                                     Set(
@@ -374,7 +375,156 @@ AdminFormDetailScreen As screen:
                                         "",
                                         First(EditForm).标题
                                     )
+                                );*/
+                        //测试环境上传附件代码
+                    If(
+                                    Last(Attachment_Form.Attachments).Name <> Blank() && attachmentchange1,
+                                    Set(
+                                        varAttachmentControl,
+                                        JSON(
+                                            Image4.Image,
+                                            IncludeBinaryData
+                                        )
+                                    );
+                                    Set(
+                                        varBase64Only,
+                                        Mid(
+                                            varAttachmentControl,
+                                            Find(
+                                                ",",
+                                                varAttachmentControl
+                                            ) + 1,
+                                            Len(varAttachmentControl) - Find (
+                                                ",",
+                                                varAttachmentControl
+                                            ) - 1
+                                        )
+                                    );
+                                    //设置全局变量保存附件的base64值
+                    ELCHK_UploadFiletoSharepoint.Run(
+                                        "TemplateFileList",
+                                        GUID(),
+                                        [@TextInput_FormName].Text,
+                                        drpFilter_FormType.Selected.Result,
+                                        Last(Attachment_Form.Attachments).Name,
+                                        First(EditForm).标题,
+                                        Last(Attachment_Form.Attachments).Name,
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        varBase64Only,
+                                        ""
+                                )
+                    );
+                        //如果附件修改，上傳示範表格
+                    If(
+                                    Last(Attachment_Demonstrationform.Attachments).Name <> Blank() && attachmentchange2,
+                                    Set(
+                                        varAttachmentControl3,
+                                        JSON(
+                                            Image2_1.Image,
+                                            IncludeBinaryData
+                                        )
+                                    );
+                                    Set(
+                                        varBase64Only3,
+                                        Mid(
+                                            varAttachmentControl3,
+                                            Find(
+                                                ",",
+                                                varAttachmentControl3
+                                            ) + 1,
+                                            Len(varAttachmentControl3) - Find (
+                                                ",",
+                                                varAttachmentControl3
+                                            ) - 1
+                                        )
+                                    );
+                                    //设置全局变量保存附件的base64值
+                    ELCHK_UploadFiletoSharepoint.Run(
+                                        "TemplateFileList",
+                                        GUID(),
+                                        [@TextInput_FormName].Text,
+                                        "示範表格",
+                                        Last(Attachment_Demonstrationform.Attachments).Name,
+                                        First(EditForm).标题,
+                                        Last(Attachment_Demonstrationform.Attachments).Name,
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        varBase64Only3,
+                                        ""
+                                    )
                                 );
+                        //如果附件修改，上傳填寫指引
+                    If(
+                                    Last(Attachment_FillGuide.Attachments).Name <> Blank() && attachmentchange3,
+                                    Set(
+                                        varAttachmentControl4,
+                                        JSON(
+                                            Image3.Image,
+                                            IncludeBinaryData
+                                        )
+                                    );
+                                    Set(
+                                        varBase64Only4,
+                                        Mid(
+                                            varAttachmentControl4,
+                                            Find(
+                                                ",",
+                                                varAttachmentControl4
+                                            ) + 1,
+                                            Len(varAttachmentControl4) - Find (
+                                                ",",
+                                                varAttachmentControl4
+                                            ) - 1
+                                        )
+                                    );
+                                    //设置全局变量保存附件的base64值
+                    ELCHK_UploadFiletoSharepoint.Run(
+                                        "TemplateFileList",
+                                        GUID(),
+                                        [@TextInput_FormName].Text,
+                                        "填寫指引",
+                                        Last(Attachment_FillGuide.Attachments).Name,
+                                        First(EditForm).标题,
+                                        Last(Attachment_FillGuide.Attachments).Name,
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        varBase64Only4,
+                                        ""
+                                    )
+                                );
+                    
+                            
                         //更新MyContacts的TaskFormName
                     UpdateIf(
                                     MyContacts,
@@ -491,7 +641,8 @@ AdminFormDetailScreen As screen:
                                         }
                                     )
                                 );
-                        //上傳申請表格
+                        //上傳申請表格，UAT環境
+                        /*
                     If(
                                     Last(Attachment_Form.Attachments).Name <> Blank(),
                                     Set(
@@ -646,12 +797,158 @@ AdminFormDetailScreen As screen:
                                         "",
                                         GenericFormModeGuid
                                     )
+                                );*/
+                       
+                    //開發環境上傳附件
+                    
+                    If(
+                            Last(Attachment_Form.Attachments).Name <> Blank(),
+                                    Set(
+                                        varAttachmentControl,
+                                        JSON(
+                                            Image4.Image,
+                                            IncludeBinaryData
+                                        )
+                                    );
+                                    Set(
+                                        varBase64Only,
+                                        Mid(
+                                            varAttachmentControl,
+                                            Find(
+                                                ",",
+                                                varAttachmentControl
+                                            ) + 1,
+                                            Len(varAttachmentControl) - Find (
+                                                ",",
+                                                varAttachmentControl
+                                            ) - 1
+                                        )
+                                    );
+                                    //设置全局变量保存附件的base64值
+                    ELCHK_UploadFiletoSharepoint.Run(
+                                        "TemplateFileList",
+                                        GUID(),
+                                        [@TextInput_FormName].Text,
+                                        drpFilter_FormType.Selected.Result,
+                                        Last(Attachment_Form.Attachments).Name,
+                                        GenericFormModeGuid,
+                                        Last(Attachment_Form.Attachments).Name,
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        varBase64Only,
+                                        ""
+                                )
+                    );
+                        //上傳示範表格
+                    If(
+                                    Last(Attachment_Demonstrationform.Attachments).Name <> Blank(),
+                                    Set(
+                                        varAttachmentControl3,
+                                        JSON(
+                                            Image2_1.Image,
+                                            IncludeBinaryData
+                                        )
+                                    );
+                                    Set(
+                                        varBase64Only3,
+                                        Mid(
+                                            varAttachmentControl3,
+                                            Find(
+                                                ",",
+                                                varAttachmentControl3
+                                            ) + 1,
+                                            Len(varAttachmentControl3) - Find (
+                                                ",",
+                                                varAttachmentControl3
+                                            ) - 1
+                                        )
+                                    );
+                                    //设置全局变量保存附件的base64值
+                    ELCHK_UploadFiletoSharepoint.Run(
+                                        "TemplateFileList",
+                                        GUID(),
+                                        [@TextInput_FormName].Text,
+                                        "示範表格",
+                                        Last(Attachment_Demonstrationform.Attachments).Name,
+                                        GenericFormModeGuid,
+                                        Last(Attachment_Demonstrationform.Attachments).Name,
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        varBase64Only3,
+                                        ""
+                                    )
                                 );
-                        /*UpdateIf(
-                            TemplateFileList,
-                            TempFileName = TextInput_FormName.Text,
-                            {GenericFormId: First(NewForm).标题}
-                        );*/
+                        //上傳填寫指引
+                    If(
+                                    Last(Attachment_FillGuide.Attachments).Name <> Blank(),
+                                    Set(
+                                        varAttachmentControl4,
+                                        JSON(
+                                            Image3.Image,
+                                            IncludeBinaryData
+                                        )
+                                    );
+                                    Set(
+                                        varBase64Only4,
+                                        Mid(
+                                            varAttachmentControl4,
+                                            Find(
+                                                ",",
+                                                varAttachmentControl4
+                                            ) + 1,
+                                            Len(varAttachmentControl4) - Find (
+                                                ",",
+                                                varAttachmentControl4
+                                            ) - 1
+                                        )
+                                    );
+                                    //设置全局变量保存附件的base64值
+                    ELCHK_UploadFiletoSharepoint.Run(
+                                        "TemplateFileList",
+                                        GUID(),
+                                        [@TextInput_FormName].Text,
+                                        "填寫指引",
+                                        Last(Attachment_FillGuide.Attachments).Name,
+                                        GenericFormModeGuid,
+                                        Last(Attachment_FillGuide.Attachments).Name,
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        varBase64Only4,
+                                        ""
+                                    )
+                                );
+                    
+                    
                     Notify(
                                     "保存成功！",
                                     NotificationType.Success,
