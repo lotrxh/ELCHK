@@ -2336,7 +2336,11 @@
                     CheckboxSize: =24
                     CheckmarkFill: =glbLinkColor
                     Color: =glbNeutralPrimaryColor
-                    Default: =If(GeneralFlowSelectedActions="檢查" || GeneralFlowSelectedActions="簽批" || GeneralFlowSelectedActions="助理總幹事審批" || GeneralFlowSelectedActions="總幹事審批" || GeneralFlowSelectedActions="跟進" ,true,false)
+                    Default: |-
+                        =If(
+                            (GeneralFlowSelectedActions="檢查" || GeneralFlowSelectedActions="簽批" || GeneralFlowSelectedActions="助理總幹事審批" || GeneralFlowSelectedActions="總幹事審批" || GeneralFlowSelectedActions="跟進" )
+                            && Checkbox2_7.Visible = true 
+                        ,true,false)
                     FocusedBorderThickness: =0
                     Height: =24
                     HoverBorderColor: =
