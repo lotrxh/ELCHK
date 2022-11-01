@@ -1827,6 +1827,10 @@
                     CheckboxSize: =24
                     CheckmarkFill: =glbLinkColor
                     Color: =glbNeutralPrimaryColor
+                    Default: |-
+                        =If(GeneralFlowSelectedActions="檢查" || GeneralFlowSelectedActions="簽批" || GeneralFlowSelectedActions="助理總幹事審批" || GeneralFlowSelectedActions="總幹事審批" || GeneralFlowSelectedActions="跟進" ,true,false)
+                        
+                        //補充資料;提交;檢查;簽批;助理總幹事審批;總幹事審批;跟進
                     FocusedBorderThickness: =0
                     Height: =24
                     HoverBorderColor: =
@@ -1914,6 +1918,8 @@
                         HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                         HoverFill: =ColorFade(Self.Fill, -5%)
                         Items: =If(Checkbox2_5.Value = true,DataFlowActionCol_nonesubmit,DataFlowActionCol.Result)
+                        OnChange: =Set(GeneralFlowSelectedActions,Dropdown1_5.Selected.Result)
+                        OnSelect: =Set(GeneralFlowSelectedActions,Dropdown1_5.Selected.Result)
                         PaddingBottom: =5
                         PaddingRight: =0
                         PaddingTop: =5

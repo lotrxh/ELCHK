@@ -4604,7 +4604,9 @@
                     SelectMultiple: =false
                     Size: =11
                     Template: =ListItemTemplate.Double
-                    Visible: =If(First(EditUserForm).FlowType<>"部門簡單流程",true,false)
+                    Visible: |-
+                        =//If(First(EditUserForm).FlowType<>"部門簡單流程",true,false)
+                        true
                     Width: =615
                     X: =40
                     Y: =62
