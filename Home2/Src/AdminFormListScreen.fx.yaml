@@ -172,7 +172,7 @@ AdminFormListScreen As screen:
                 "FormName",
                 LookUp(
                     approvalCol1,
-                    标题 = Approval_No
+                    Title = Approval_No
                 ).Task_Name
             )
         );
@@ -356,7 +356,7 @@ AdminFormListScreen As screen:
                                 ),
                                 IsBlank(drpFilterDepartment.Selected.Result) || ModelDepartment in drpFilterDepartment.SelectedItems,
                                 IsBlank(ComboBox1_formtype.Selected.Result) || ModelType in ComboBox1_formtype.SelectedItems,
-                                (DateValue(Text(修改时间))>=DateValue(Text(TemplateStartDate_3.SelectedDate))&&DateValue(Text(修改时间))<=DateValue(Text(TemplateEndDate_3.SelectedDate)))   
+                                (DateValue(Text(Modified))>=DateValue(Text(TemplateStartDate_3.SelectedDate))&&DateValue(Text(Modified))<=DateValue(Text(TemplateEndDate_3.SelectedDate)))   
                             ),
                             TextInput_namenumber.Text,
                             "ModelName",
@@ -605,9 +605,9 @@ AdminFormListScreen As screen:
                     
                     Navigate(AdminFormDetailScreen,ScreenTransition.Fade);
                     ClearCollect(EditForm,ThisItem);
-                    ClearCollect(EditAttachment,Filter(TemplateFileList,GenericFormId=ThisItem.标题&&TempType=ThisItem.ModelType));
-                    ClearCollect(EditAttachment2,Filter(TemplateFileList,GenericFormId=ThisItem.标题&&TempType="示範表格"));
-                    ClearCollect(EditAttachment3,Filter(TemplateFileList,GenericFormId=ThisItem.标题&&TempType="填寫指引"));
+                    ClearCollect(EditAttachment,Filter(TemplateFileList,GenericFormId=ThisItem.Title&&TempType=ThisItem.ModelType));
+                    ClearCollect(EditAttachment2,Filter(TemplateFileList,GenericFormId=ThisItem.Title&&TempType="示範表格"));
+                    ClearCollect(EditAttachment3,Filter(TemplateFileList,GenericFormId=ThisItem.Title&&TempType="填寫指引"));
                     ClearCollect(CreateNewForm,{name:"查看表格"&"-"&ThisItem.ModelName});//創建集合變更編輯表格頁標題
                     
                 TemplatePadding: =0
@@ -671,7 +671,7 @@ AdminFormListScreen As screen:
                     PaddingTop: =0
                     Size: =12
                     Text: |-
-                        =Text(ThisItem.修改时间,"dd/mm/yyyy hh:mm" )
+                        =Text(ThisItem.Modified,"dd/mm/yyyy hh:mm" )
                     VerticalAlign: =VerticalAlign.Top
                     Width: =152
                     Wrap: =false
@@ -690,7 +690,7 @@ AdminFormListScreen As screen:
                     Size: =12
                     Text: |-
                         =//ThisItem.'Modified By'.DisplayName & Char(13) & ThisItem.Modified;
-                        ThisItem.修改者.DisplayName
+                        ThisItem.'Modified By'.DisplayName
                     VerticalAlign: =VerticalAlign.Top
                     Width: =136
                     Wrap: =false
@@ -745,9 +745,9 @@ AdminFormListScreen As screen:
                         Navigate(AdminFormDetailScreen,ScreenTransition.Fade);
                         ClearCollect(EditForm,Filter(FilterFormDepartment1,ModelFlowNumber = ThisItem.ModelFlowNumber));
                         //ClearCollect(EditAttachment,Filter(TemplateFileList,GenericFormId=ThisItem.Title&&TempType=ThisItem.ModelType));//編輯表格類型后不可用，下面方法替換
-                        ClearCollect(EditAttachment,Filter(TemplateFileList,GenericFormId=ThisItem.标题&&TempType=ThisItem.ModelType));
-                        ClearCollect(EditAttachment2,Filter(TemplateFileList,GenericFormId=ThisItem.标题&&TempType="示範表格"));
-                        ClearCollect(EditAttachment3,Filter(TemplateFileList,GenericFormId=ThisItem.标题&&TempType="填寫指引"));
+                        ClearCollect(EditAttachment,Filter(TemplateFileList,GenericFormId=ThisItem.Title&&TempType=ThisItem.ModelType));
+                        ClearCollect(EditAttachment2,Filter(TemplateFileList,GenericFormId=ThisItem.Title&&TempType="示範表格"));
+                        ClearCollect(EditAttachment3,Filter(TemplateFileList,GenericFormId=ThisItem.Title&&TempType="填寫指引"));
                         ClearCollect(CreateNewForm,{name:"編輯表格"&"-"&ThisItem.ModelName});//創建集合變更編輯表格頁標題
                     Size: =12
                     Text: ="編輯"
