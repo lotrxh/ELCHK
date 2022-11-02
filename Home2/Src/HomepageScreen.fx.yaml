@@ -3,7 +3,7 @@ HomepageScreen As screen:
     OnVisible: |+
         =ClearCollect(approvalCol,Approval_Table);ClearCollect(ApprovalDetailData,ApprovalDetail_Table);
         // 优先处理
-        With({XXX11:Filter(ApprovalDetailData,(CurrentUser in ApproverEmail||CurrentUser in AgentUserEmail)&&TaskStatus<>Blank()&&(TaskStatus="002"||TaskStatus="001")&&DateDiff(Modified,Today())>3)},ClearCollect(Priority_Processing,XXX11));
+        With({XXX11:Filter(ApprovalDetailData,(CurrentUser in ApproverEmail||CurrentUser in AgentUserEmail)&&TaskStatus<>Blank()&&(TaskStatus="002"||TaskStatus="001")&&DateDiff(修改时间,Today())>3)},ClearCollect(Priority_Processing,XXX11));
         // 待处理
         With({SearchPendingData:Filter(ApprovalDetailData,(CurrentUser in ApproverEmail||CurrentUser<>Blank()&&CurrentUser in AgentUserEmail)&&(TaskStatus="001"||TaskStatus="002"))},ClearCollect(FilterPendingDataCol,SearchPendingData));
         
@@ -449,7 +449,7 @@ HomepageScreen As screen:
                                         Defaults(MyContacts),
                                         {
                                             TaskFormName: "招聘職位申請表",
-                                            Title: GUID(),
+                                            标题: GUID(),
                                             UserEmail: User().Email,
                                             ContatsType: "",
                                             ModelFlowNumber: "A103"
@@ -479,7 +479,7 @@ HomepageScreen As screen:
                                         Defaults(MyContacts),
                                         {
                                             TaskFormName: "假期批核人資料表",
-                                            Title: GUID(),
+                                            标题: GUID(),
                                             UserEmail: User().Email,
                                             ContatsType: "",
                                             ModelFlowNumber: "A306"
@@ -509,7 +509,7 @@ HomepageScreen As screen:
                                         Defaults(MyContacts),
                                         {
                                             TaskFormName: "任職資源申請",
-                                            Title: GUID(),
+                                            标题: GUID(),
                                             UserEmail: User().Email,
                                             ContatsType: "",
                                             ModelFlowNumber: "A111"
@@ -539,7 +539,7 @@ HomepageScreen As screen:
                                         Defaults(MyContacts),
                                         {
                                             TaskFormName: "預備合約通知書(新入職)",
-                                            Title: GUID(),
+                                            标题: GUID(),
                                             UserEmail: User().Email,
                                             ContatsType: "",
                                             ModelFlowNumber: "A104"
@@ -568,7 +568,7 @@ HomepageScreen As screen:
                                         Defaults(MyContacts),
                                         {
                                             TaskFormName: ThisItem.ModelName,
-                                            Title: GUID(),
+                                            标题: GUID(),
                                             UserEmail: User().Email,
                                             ContatsType: "",
                                             TaskFormDescription: ThisItem.ModelDescription,
@@ -582,7 +582,7 @@ HomepageScreen As screen:
                                     FormModelId: LookUp(
                                         GenericFormModel,
                                         ModelFlowNumber = ThisItem.ModelFlowNumber
-                                    ).Title
+                                    ).标题
                                 },
                                 Launch(
                                     JumpUrlMobileApp&"&Screen=CreateGeneralFormScreen&FormModelId="&FormModelId,
