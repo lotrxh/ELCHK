@@ -1362,7 +1362,9 @@
                         LayoutMinHeight: =50
                         LayoutMinWidth: =250
                         LayoutMode: =LayoutMode.Auto
-                        Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
+                        Visible: |-
+                            =//非範本流程及密碼輸入可見時容器可見
+                            If(First(EditUserForm).FlowType<>"範本"&&TextInput_FormPWD.Visible,true,false)
                         ZIndex: =5
 
                         Label6 As label:
