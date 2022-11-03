@@ -2468,19 +2468,6 @@
                                         //勾選后執行checkbox后，不可見
                                         || Checkbox2_6.Value = true 
                         
-                                        //部门简单流程第二次跟進后可以执行，第一次跟進选定部门邮箱，不能执行，第二次跟進给具体负责人后，再進任務詳情后不可見
-                           ||  (FlowType = "部門簡單流程" && CountA(
-                                            SortByColumns(
-                                                Filter(
-                                                    ApprovalDetail_Table,
-                                                    TaskStatus = "002" || TaskStatus = "004",
-                                                    Approval_No = FLowId,
-                                                    ActionNode = "跟進"
-                                                                            ),
-                                                "Priortty",
-                                                Descending
-                                            ).ActionNode
-                                        ) = 2) 
                         //拒絕任務后不可見
                         || First(
                                     SortByColumns(
@@ -3911,20 +3898,7 @@
                                 ).ApproverEmail
                             }, 
                            If(Checkbox2_6.Value = true 
-                           //部门简单流程第二次提交后可以执行，第一次提交未选定部门邮箱，不能执行，第二次提交给具体负责人后,負責人點擊同意即执行，任務完成
-                           ||  UEmail = User().Email 
-                                &&(FlowType = "部門簡單流程" && CountA(
-                                            SortByColumns(
-                                                Filter(
-                                                    ApprovalDetail_Table,
-                                                    TaskStatus = "002" || TaskStatus = "004",
-                                                    Approval_No = FLowId,
-                                                    ActionNode = "跟進"
-                                                                            ),
-                                                "Priortty",
-                                                Descending
-                                            ).ActionNode
-                                        ) = 2) ,
+                            ,
                         
                            // 勾選后直接执行，并且审批完成
                            
