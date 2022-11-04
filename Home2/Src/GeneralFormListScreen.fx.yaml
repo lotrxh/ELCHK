@@ -1071,7 +1071,8 @@ GeneralFormListScreen As screen:
                                 SortByColumns(
                                     Filter(
                                         ApprovalDetail_Table,
-                                        Approval_No = ThisItem.Approval_No
+                                        Approval_No = ThisItem.Approval_No,
+                                        TaskStatus = "002"
                                     ),
                                     "Priortty",
                                     Descending
