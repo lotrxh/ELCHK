@@ -1986,7 +1986,7 @@ AdminFormDetailScreen As screen:
                     CheckboxBorderColor: =glbNeutralTertiaryColor
                     CheckboxSize: =24
                     CheckmarkFill: =glbLinkColor
-                    Default: =If(("助總總幹事審批" in First(EditForm).SelectedActions) && First(EditForm).FlowType="預設流程",true,false)
+                    Default: =If(("助理總幹事審批" in First(EditForm).SelectedActions) && First(EditForm).FlowType="預設流程",true,false)
                     DisplayMode: =attachment
                     FocusedBorderColor: =RGBA(0, 0, 0, 0)
                     Height: =32
