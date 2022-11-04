@@ -603,8 +603,24 @@ AdminFormListScreen As screen:
                 OnSelect: |+
                     =Set(ShowSavebutton,false);
                     Set(attachment,DisplayMode.Disabled);
-                    
-                    
+                    Reset(drpFilter_Department);
+                    Reset(drpFilter_FormType);
+                    Reset(TextInput_FormVersion);
+                    Reset(TextInput_FormName);
+                    Reset(TextInput_FormNumber);
+                    Reset(TextInput_FormDescription);
+                    Reset(TextInput_CustomFilter);
+                    Reset(Attachment_Form);
+                    Reset(Attachment_Demonstrationform);
+                    Reset(Attachment_FillGuide);
+                    Reset(Radio_attachment);
+                    Reset(Radio_password);
+                    Reset(Radio_password_1);
+                    Reset(Radio_flowtype);
+                    Reset(Checkbox1_3);
+                    Reset(Checkbox1_4);
+                    Reset(Checkbox1_5);
+                    Reset(Checkbox1_6);
                     Navigate(AdminFormDetailScreen,ScreenTransition.Fade);
                     ClearCollect(EditForm,ThisItem);
                     ClearCollect(EditAttachment,Filter(TemplateFileList,GenericFormId=ThisItem.标题&&TempType=ThisItem.ModelType));
@@ -741,7 +757,25 @@ AdminFormListScreen As screen:
                     Fill: =RGBA(255, 255, 255, 1)
                     Height: =34
                     OnSelect: |
-                        =Set(ShowSavebutton,true);
+                        =Reset(drpFilter_Department);
+                        Reset(drpFilter_FormType);
+                        Reset(TextInput_FormVersion);
+                        Reset(TextInput_FormName);
+                        Reset(TextInput_FormNumber);
+                        Reset(TextInput_FormDescription);
+                        Reset(TextInput_CustomFilter);
+                        Reset(Attachment_Form);
+                        Reset(Attachment_Demonstrationform);
+                        Reset(Attachment_FillGuide);
+                        Reset(Radio_attachment);
+                        Reset(Radio_password);
+                        Reset(Radio_password_1);
+                        Reset(Radio_flowtype);
+                        Reset(Checkbox1_3);
+                        Reset(Checkbox1_4);
+                        Reset(Checkbox1_5);
+                        Reset(Checkbox1_6);
+                        Set(ShowSavebutton,true);
                         Set(attachment,DisplayMode.Edit);
                         Set(NoEdit,DisplayMode.Disabled);//設置編輯模式下，不可編輯部門類型編號
                         Navigate(AdminFormDetailScreen,ScreenTransition.Fade);

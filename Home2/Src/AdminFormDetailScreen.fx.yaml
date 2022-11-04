@@ -1059,6 +1059,7 @@ AdminFormDetailScreen As screen:
                 BorderThickness: =1
                 Color: =glbNeutralPrimaryColor
                 Default: =First(EditForm).ModelDescription//加载编辑表格的表格描述
+                DisplayMode: =attachment
                 FocusedBorderColor: =glbNeutralSecondaryColor
                 FocusedBorderThickness: =1
                 Height: =64
@@ -1087,6 +1088,7 @@ AdminFormDetailScreen As screen:
                 BorderThickness: =1
                 Color: =glbNeutralPrimaryColor
                 Default: =First(EditForm).ModelName//加载编辑表格的表格名称
+                DisplayMode: =attachment
                 FocusedBorderColor: =glbNeutralSecondaryColor
                 FocusedBorderThickness: =1
                 Height: =32
@@ -1114,6 +1116,7 @@ AdminFormDetailScreen As screen:
                 BorderThickness: =1
                 Color: =glbNeutralPrimaryColor
                 Default: =First(EditForm).ModelVersion//加载编辑表格的表格版本
+                DisplayMode: =attachment
                 FocusedBorderColor: =glbNeutralSecondaryColor
                 FocusedBorderThickness: =1
                 Height: =32
@@ -1554,6 +1557,7 @@ AdminFormDetailScreen As screen:
                     BorderThickness: =1
                     Color: =glbNeutralPrimaryColor
                     Default: =First(EditForm).CustomFilter//加载编辑表格的自定義篩選
+                    DisplayMode: =attachment
                     FocusedBorderColor: =glbNeutralSecondaryColor
                     FocusedBorderThickness: =1
                     Height: =80
@@ -1588,6 +1592,7 @@ AdminFormDetailScreen As screen:
 
                 Radio_password_1 As radio:
                     Default: =If(First(EditForm).IsAttachmentPassWord="1","有",If(First(EditForm).IsAttachmentPassWord="2","無","可選"))//加载编辑表格的表格名称
+                    DisplayMode: =attachment
                     FocusedBorderThickness: =0
                     Height: =32
                     HoverColor: =RGBA(0, 0, 0, 1)
@@ -1631,6 +1636,7 @@ AdminFormDetailScreen As screen:
 
                 Radio_attachment As radio:
                     Default: =First(EditForm).ModelAttachMent//加载编辑表格的表格名称
+                    DisplayMode: =attachment
                     FocusedBorderThickness: =0
                     Height: =32
                     HoverColor: =RGBA(0, 0, 0, 1)
@@ -1827,6 +1833,7 @@ AdminFormDetailScreen As screen:
 
                 Radio_password As radio:
                     Default: =If(First(EditForm).IsPassWord="1","有",If(First(EditForm).IsPassWord="2","無","可選"))//加载编辑表格的表格名称
+                    DisplayMode: =attachment
                     FocusedBorderThickness: =0
                     Height: =32
                     HoverColor: =RGBA(0, 0, 0, 1)
@@ -1885,6 +1892,7 @@ AdminFormDetailScreen As screen:
 
                 Radio_flowtype As radio:
                     Default: =First(EditForm).FlowType//加载编辑表格的表格名称
+                    DisplayMode: =attachment
                     FocusedBorderThickness: =0
                     Height: =32
                     HoverColor: =RGBA(0, 0, 0, 1)
@@ -1940,6 +1948,7 @@ AdminFormDetailScreen As screen:
 
                 Label1_122 As label:
                     Color: =glbNeutralSecondaryColor
+                    DisplayMode: =attachment
                     Height: =28
                     PaddingBottom: =0
                     PaddingLeft: =0
@@ -1958,6 +1967,7 @@ AdminFormDetailScreen As screen:
                     CheckboxSize: =24
                     CheckmarkFill: =glbLinkColor
                     Default: =If(("簽批" in First(EditForm).SelectedActions) && First(EditForm).FlowType="預設流程",true,false)
+                    DisplayMode: =attachment
                     FocusedBorderColor: =RGBA(0, 0, 0, 0)
                     Height: =32
                     HoverBorderColor: =RGBA(0, 0, 0, 0)
@@ -1977,6 +1987,7 @@ AdminFormDetailScreen As screen:
                     CheckboxSize: =24
                     CheckmarkFill: =glbLinkColor
                     Default: =If(("助總總幹事審批" in First(EditForm).SelectedActions) && First(EditForm).FlowType="預設流程",true,false)
+                    DisplayMode: =attachment
                     FocusedBorderColor: =RGBA(0, 0, 0, 0)
                     Height: =32
                     HoverBorderColor: =RGBA(0, 0, 0, 0)
@@ -1996,6 +2007,7 @@ AdminFormDetailScreen As screen:
                     CheckboxSize: =24
                     CheckmarkFill: =glbLinkColor
                     Default: =If(("總幹事審批" in First(EditForm).SelectedActions) && First(EditForm).FlowType="預設流程",true,false)
+                    DisplayMode: =attachment
                     FocusedBorderColor: =RGBA(0, 0, 0, 0)
                     Height: =32
                     HoverBorderColor: =RGBA(0, 0, 0, 0)
@@ -2015,6 +2027,7 @@ AdminFormDetailScreen As screen:
                     CheckboxSize: =24
                     CheckmarkFill: =glbLinkColor
                     Default: =If(("檢查" in First(EditForm).SelectedActions) && First(EditForm).FlowType="預設流程",true,false)
+                    DisplayMode: =attachment
                     FocusedBorderColor: =RGBA(0, 0, 0, 0)
                     Height: =32
                     HoverBorderColor: =RGBA(0, 0, 0, 0)
