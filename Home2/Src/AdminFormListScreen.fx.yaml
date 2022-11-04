@@ -603,6 +603,7 @@ AdminFormListScreen As screen:
                 OnSelect: |+
                     =Set(ShowSavebutton,false);
                     Set(attachment,DisplayMode.Disabled);
+                    Set(NoEdit,DisplayMode.Disabled);//設置編輯模式下，不可編輯部門類型編號
                     Reset(drpFilter_Department);
                     Reset(drpFilter_FormType);
                     Reset(TextInput_FormVersion);
@@ -627,6 +628,7 @@ AdminFormListScreen As screen:
                     ClearCollect(EditAttachment2,Filter(TemplateFileList,GenericFormId=ThisItem.Title&&TempType="示範表格"));
                     ClearCollect(EditAttachment3,Filter(TemplateFileList,GenericFormId=ThisItem.Title&&TempType="填寫指引"));
                     ClearCollect(CreateNewForm,{name:"查看表格"&"-"&ThisItem.ModelName});//創建集合變更編輯表格頁標題
+                    
                     
                 TemplatePadding: =0
                 TemplateSize: =48
