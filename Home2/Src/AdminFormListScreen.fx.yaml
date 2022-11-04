@@ -990,16 +990,16 @@ AdminFormListScreen As screen:
                     [
                         "首頁",
                         "申請列表",
-                        If(CurrentRole,"統計",HRAO || SuperUser,"系統設定"),
-                        If(If(CurrentRole,"統計",HRAO || SuperUser,"系統設定")="系統設定",Blank(),HRAO || SuperUser,"系統設定")
+                        If(CurrentRole,"統計",CurrentRole || HRAO || SuperUser,"系統設定"),
+                        If(If(CurrentRole,"統計",CurrentRole || HRAO || SuperUser,"系統設定")="系統設定",Blank(),CurrentRole || HRAO || SuperUser,"系統設定")
                         
                     ],
                     [
                         "首頁",
                         "表格列表",
                         "申請列表",
-                        If(CurrentRole,"統計",HRAO || SuperUser,"系統設定"),
-                        If(If(CurrentRole,"統計",HRAO || SuperUser,"系統設定")="系統設定",Blank(),HRAO || SuperUser,"系統設定")
+                        If(CurrentRole,"統計",CurrentRole || HRAO || SuperUser,"系統設定"),
+                        If(If(CurrentRole,"統計",CurrentRole || HRAO || SuperUser,"系統設定")="系統設定",Blank(),CurrentRole || HRAO || SuperUser,"系統設定")
                     ]
                 ),ThisRecord.Value <> Blank())
             Layout: =Layout.Vertical
