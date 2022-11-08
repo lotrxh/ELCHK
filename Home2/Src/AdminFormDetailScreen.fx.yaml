@@ -1124,7 +1124,7 @@ AdminFormDetailScreen As screen:
                 FocusedBorderColor: =glbNeutralSecondaryColor
                 FocusedBorderThickness: =1
                 Height: =64
-                HintText: ="請輸入表格描述"
+                HintText: ="請輸入表格描述（最大長度為127個漢字）"
                 HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                 HoverFill: =ColorFade(Self.Fill, -5%)
                 MaxLength: =255

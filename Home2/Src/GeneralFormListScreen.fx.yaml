@@ -1014,7 +1014,7 @@ GeneralFormListScreen As screen:
                     ZIndex: =2
 
                 Label3_7 As label:
-                    Align: =Center
+                    Align: =Align.Center
                     Color: =glbNeutralSecondaryColor
                     Height: =48
                     HoverColor: =glbThemePrimaryColor
@@ -1025,7 +1025,9 @@ GeneralFormListScreen As screen:
                     PaddingTop: =0
                     Size: =12
                     Text: =ThisItem.FlowTaskName
+                    Tooltip: =ThisItem.FlowTaskName
                     Width: =200
+                    Wrap: =false
                     X: =170
                     ZIndex: =9
 
@@ -1202,7 +1204,6 @@ GeneralFormListScreen As screen:
                     ZIndex: =12
 
                 Label3_8 As label:
-                    Align: =Center
                     Color: =glbNeutralSecondaryColor
                     Height: =48
                     OnSelect: =Select(Parent)
@@ -1212,7 +1213,9 @@ GeneralFormListScreen As screen:
                     PaddingTop: =0
                     Size: =12
                     Text: =ThisItem.DepartMentName
+                    Tooltip: =ThisItem.DepartMentName
                     Width: =100
+                    Wrap: =false
                     X: =370
                     ZIndex: =13
 
@@ -1226,7 +1229,9 @@ GeneralFormListScreen As screen:
                     PaddingTop: =0
                     Size: =12
                     Text: =ThisItem.FormType
+                    Tooltip: =ThisItem.FormType
                     Width: =100
+                    Wrap: =false
                     X: =482
                     ZIndex: =14
 
@@ -1240,7 +1245,9 @@ GeneralFormListScreen As screen:
                     PaddingTop: =0
                     Size: =12
                     Text: =First(Split(ThisItem.SubmitApprover,"@")).Result
+                    Tooltip: =First(Split(ThisItem.SubmitApprover,"@")).Result
                     Width: =108
+                    Wrap: =false
                     X: =582
                     ZIndex: =15
 
