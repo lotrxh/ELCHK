@@ -1,8 +1,6 @@
 AdminFormDetailScreen As screen:
     OnVisible: |-
-        =UpdateContext({attachmentchange1:false});
-        UpdateContext({attachmentchange2:false});
-        UpdateContext({attachmentchange3:false});
+        =UpdateContext({attachmentchange1:false,attachmentchange2:false,attachmentchange3:false,attachmentdelete1:false,attachmentdelete2:false,attachmentdelete3:false});
 
     Container_title As groupContainer.manualLayoutContainer:
         Fill: =glbThemePrimaryColor
@@ -222,6 +220,69 @@ AdminFormDetailScreen As screen:
                                     GenericFormId = First(EditForm).Title,
                                     {TempFileName: TextInput_FormName.Text}
                                 );
+                    
+                            //如果附件修改，删除之前的版本
+                            //删除list中的附件记录
+                    With(
+                        {FormmodelID: First(EditForm).Title},
+                        If(
+                            Label_newform.Text <> "新增表格" && attachmentdelete1,
+                            Remove(
+                                TemplateFileList,
+                                First(
+                                    Filter(
+                                        SortByColumns(
+                                            TemplateFileList,
+                                            "Modified",
+                                            Descending
+                                        ),
+                                        TempType = drpFilter_FormType.Selected.Result,
+                                        GenericFormId = FormmodelID
+                                    )
+                                )
+                            );
+                        )
+                    );
+                    With(
+                        {FormmodelID: First(EditForm).Title},
+                        If(
+                            Label_newform.Text <> "新增表格" && attachmentdelete2,
+                            Remove(
+                                TemplateFileList,
+                                First(
+                                    Filter(
+                                        SortByColumns(
+                                            TemplateFileList,
+                                            "Modified",
+                                            Descending
+                                        ),
+                                        TempType = "示範表格TT",
+                                        GenericFormId = FormmodelID
+                                    )
+                                )
+                            );
+                        )
+                    );
+                    With(
+                        {FormmodelID: First(EditForm).Title},
+                        If(
+                            Label_newform.Text <> "新增表格" && attachmentdelete3,
+                            Remove(
+                                TemplateFileList,
+                                First(
+                                    Filter(
+                                        SortByColumns(
+                                            TemplateFileList,
+                                            "Modified",
+                                            Descending
+                                        ),
+                                        TempType = "填寫指引TT",
+                                        GenericFormId = FormmodelID
+                                    )
+                                )
+                            );
+                        )
+                    );
                             //如果附件修改，上傳新的申請表格,UAT环境代码
                             /*
                     If(
@@ -302,7 +363,7 @@ AdminFormDetailScreen As screen:
                     UploadFiletoSharepoint.Run(
                                         "TemplateFileList",
                                         GUID(),
-                                        "示範表格",
+                                        "示範表格TT",
                                         [@TextInput_FormName].Text,
                                         Last(Attachment_Demonstrationform.Attachments).Name,
                                         Last(Attachment_Demonstrationform.Attachments).Name,
@@ -353,7 +414,7 @@ AdminFormDetailScreen As screen:
                     UploadFiletoSharepoint.Run(
                                         "TemplateFileList",
                                         GUID(),
-                                        "填寫指引",
+                                        "填寫指引TT",
                                         [@TextInput_FormName].Text,
                                         Last(Attachment_FillGuide.Attachments).Name,
                                         Last(Attachment_FillGuide.Attachments).Name,
@@ -454,7 +515,7 @@ AdminFormDetailScreen As screen:
                                         "TemplateFileList",
                                         GUID(),
                                         [@TextInput_FormName].Text,
-                                        "示範表格",
+                                        "示範表格TT",
                                         Last(Attachment_Demonstrationform.Attachments).Name,
                                         First(EditForm).Title,
                                         Last(Attachment_Demonstrationform.Attachments).Name,
@@ -503,7 +564,7 @@ AdminFormDetailScreen As screen:
                                         "TemplateFileList",
                                         GUID(),
                                         [@TextInput_FormName].Text,
-                                        "填寫指引",
+                                        "填寫指引TT",
                                         Last(Attachment_FillGuide.Attachments).Name,
                                         First(EditForm).Title,
                                         Last(Attachment_FillGuide.Attachments).Name,
@@ -723,7 +784,7 @@ AdminFormDetailScreen As screen:
                     UploadFiletoSharepoint.Run(
                                         "TemplateFileList",
                                         GUID(),
-                                        "示範表格",
+                                        "示範表格TT",
                                         [@TextInput_FormName].Text,
                                         Last(Attachment_Demonstrationform.Attachments).Name,
                                         Last(Attachment_Demonstrationform.Attachments).Name,
@@ -775,7 +836,7 @@ AdminFormDetailScreen As screen:
                     UploadFiletoSharepoint.Run(
                                         "TemplateFileList",
                                         GUID(),
-                                        "填寫指引",
+                                        "填寫指引TT",
                                         [@TextInput_FormName].Text,
                                         Last(Attachment_FillGuide.Attachments).Name,
                                         Last(Attachment_FillGuide.Attachments).Name,
@@ -878,7 +939,7 @@ AdminFormDetailScreen As screen:
                                         "TemplateFileList",
                                         GUID(),
                                         [@TextInput_FormName].Text,
-                                        "示範表格",
+                                        "示範表格TT",
                                         Last(Attachment_Demonstrationform.Attachments).Name,
                                         GenericFormModeGuid,
                                         Last(Attachment_Demonstrationform.Attachments).Name,
@@ -927,7 +988,7 @@ AdminFormDetailScreen As screen:
                                         "TemplateFileList",
                                         GUID(),
                                         [@TextInput_FormName].Text,
-                                        "填寫指引",
+                                        "填寫指引TT",
                                         Last(Attachment_FillGuide.Attachments).Name,
                                         GenericFormModeGuid,
                                         Last(Attachment_FillGuide.Attachments).Name,
@@ -1187,6 +1248,7 @@ AdminFormDetailScreen As screen:
                     DropTargetTextColor: =glbLinkColor
                     Fill: =ColorFade(glbLinkColor, 95%)
                     FocusedBorderThickness: =1
+                    FontWeight: =FontWeight.Lighter
                     Height: =80
                     HoverColor: =ColorFade(Self.Color, -25%)
                     HoverFill: =ColorFade(glbLinkColor, 80%)
@@ -1200,64 +1262,10 @@ AdminFormDetailScreen As screen:
                     MaxAttachmentsText: ="最大附件"
                     NoAttachmentsText: ="無附件"
                     OnAddFile: |-
-                        =/*
-                        Set(varAttachmentControl3,JSON(Image2_1.Image,IncludeBinaryData));
-                        Set(varBase64Only3,Mid(varAttachmentControl3,Find(",", varAttachmentControl3)+1,Len(varAttachmentControl3)-Find (",", varAttachmentControl3)-1));//设置全局变量保存附件的base64值
-                        UploadFiletoSharepoint.Run(
-                            "TemplateFileList",
-                            GUID(),
-                            "示範表格",
-                            [@TextInput_FormName].Text,
-                            Last(Attachment_Demonstrationform.Attachments).Name,
-                            Last(Attachment_Demonstrationform.Attachments).Name,
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            varBase64Only3,
-                            "",
-                            "",
-                            "");//上传附件到sharepoint附件list
-                        ClearCollect(AttachmentDemonstrationformName,{Name:Last(Attachment_Demonstrationform.Attachments).Name});//收集上传附件的名称
-                        */
-                        UpdateContext({attachmentchange2:true});
+                        =UpdateContext({attachmentchange2:true});
                     OnRemoveFile: |-
-                        =/*
-                        Remove(TemplateFileList,First(Filter(TemplateFileList,(TempFileName=TextInput_FormName.Text)&&(TempAttachMent=First(AttachmentDemonstrationformName).Name))));//删除list中的附件记录
-                        
-                        Reset(Attachment_Demonstrationform);//重置申請表附件控件
-                        
-                        Clear(EditAttachment2)
-                        */
-                        With(
-                            {FormmodelID: First(EditForm).Title},
-                            If(
-                                Label_newform.Text <> "新增表格",
-                                Remove(
-                                    TemplateFileList,
-                                    First(
-                                        Filter(
-                                            SortByColumns(
-                                                TemplateFileList,
-                                                "Modified",
-                                                Descending
-                                            ),
-                                            TempType = "示範表格",
-                                            GenericFormId = FormmodelID
-                                        )
-                                    )
-                                );
-                            )
-                        );
+                        =UpdateContext({attachmentdelete2:true});
+                        Clear(EditAttachment2);
                         Reset(Attachment_Demonstrationform);
                     PaddingLeft: =10
                     PaddingRight: =10
@@ -1385,66 +1393,10 @@ AdminFormDetailScreen As screen:
                     MaxAttachmentsText: ="最大附件"
                     NoAttachmentsText: ="無附件"
                     OnAddFile: |-
-                        =/*
-                        Set(varAttachmentControl4,JSON(Image3.Image,IncludeBinaryData));
-                        Set(varBase64Only4,Mid(varAttachmentControl4,Find(",", varAttachmentControl4)+1,Len(varAttachmentControl4)-Find (",", varAttachmentControl4)-1));//设置全局变量保存附件的base64值
-                        UploadFiletoSharepoint.Run(
-                            "TemplateFileList",
-                            GUID(),
-                            "填寫指引",
-                            [@TextInput_FormName].Text,
-                            Last(Attachment_FillGuide.Attachments).Name,
-                            Last(Attachment_FillGuide.Attachments).Name,
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            varBase64Only4,
-                            "",
-                            "",
-                            "");//上传附件到sharepoint附件list
-                        ClearCollect(AttachmentFillGuideName,{Name:Last(Attachment_FillGuide.Attachments).Name});//收集上传附件的名称
-                        */
-                        UpdateContext({attachmentchange3:true});
+                        =UpdateContext({attachmentchange3:true});
                     OnRemoveFile: |-
-                        =/*
-                        Remove(TemplateFileList,First(Filter(TemplateFileList,(TempFileName=TextInput_FormName.Text)&&(TempAttachMent=First(AttachmentFillGuideName).Name))));//删除list中的附件记录
-                        
-                        Reset(Attachment_FillGuide);//重置申請表附件控件
-                        
-                        Clear(EditAttachment3)
-                        */
-                        
-                        With(
-                            {FormmodelID: First(EditForm).Title},
-                            If(
-                                Label_newform.Text <> "新增表格",
-                                Remove(
-                                    TemplateFileList,
-                                    First(
-                                        Filter(
-                                            SortByColumns(
-                                                TemplateFileList,
-                                                "Modified",
-                                                Descending
-                                            ),
-                                            TempType = "填寫指引",
-                                            GenericFormId = FormmodelID
-                                        )
-                                    )
-                                );
-                            )
-                        );
-                        
+                        =UpdateContext({attachmentdelete3:true});
+                        Clear(EditAttachment3);
                         Reset(Attachment_FillGuide);
                     PaddingLeft: =10
                     PaddingRight: =10
@@ -1720,60 +1672,11 @@ AdminFormDetailScreen As screen:
                     MaxAttachmentsText: ="最大附件"
                     NoAttachmentsText: ="無附件"
                     OnAddFile: |-
-                        =/*
-                        Set(varAttachmentControl,JSON(Image4.Image,IncludeBinaryData));
-                        Set(varBase64Only,Mid(varAttachmentControl,Find(",", varAttachmentControl)+1,Len(varAttachmentControl)-Find (",", varAttachmentControl)-1));//设置全局变量保存附件的base64值
-                        UploadFiletoSharepoint.Run(
-                            "TemplateFileList",
-                            GUID(),
-                            drpFilter_FormType.Selected.Result,
-                            [@TextInput_FormName].Text,
-                            Last(Attachment_Form.Attachments).Name,
-                            Last(Attachment_Form.Attachments).Name,
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            "",
-                            varBase64Only,
-                            "",
-                            "",
-                            "");//上传附件到sharepoint附件list
-                        ClearCollect(AttachmentFormName,{Name:Last(Attachment_Form.Attachments).Name});//收集上传附件的名称
-                        */
-                        UpdateContext({attachmentchange1:true});
+                        =UpdateContext({attachmentchange1:true});
                     OnRemoveFile: |
-                        =//删除list中的附件记录
-                        With(
-                            {FormmodelID: First(EditForm).Title},
-                            If(
-                                Label_newform.Text <> "新增表格",
-                                Remove(
-                                    TemplateFileList,
-                                    First(
-                                        Filter(
-                                            SortByColumns(
-                                                TemplateFileList,
-                                                "Modified",
-                                                Descending
-                                            ),
-                                            TempType = drpFilter_FormType.Selected.Result,
-                                            GenericFormId = FormmodelID
-                                        )
-                                    )
-                                );
-                            )
-                        );
+                        =UpdateContext({attachmentdelete1:true});
+                        Clear(EditAttachment);
                         Reset(Attachment_Form);//重置申請表附件控件
-                        //Clear(EditAttachment)
                     PaddingLeft: =10
                     PaddingRight: =10
                     PaddingTop: =10

@@ -3086,7 +3086,7 @@ SystemsScreen As screen:
                         SignerInfo,
                         Defaults(SignerInfo),
                         {
-                            Title: GUID(),
+                            标题: GUID(),
                             Signer: UserTextInput_3.Text,
                             Signer_Email: Dropdown_Username_4.Selected.User_Email,
                             S_Mechanism: UserTextInput_13.Text,
@@ -3450,7 +3450,7 @@ SystemsScreen As screen:
                         SignerInfo,
                         LookUp(
                             SignerInfo,
-                            Title = GAListGallery_1.Selected.Title
+                            标题 = GAListGallery_1.Selected.标题
                         ),
                         {Signer: UserTextInput_4.Text},
                         {Signer_Email: Dropdown_Username_5.Selected.User_Email},
@@ -3794,7 +3794,7 @@ SystemsScreen As screen:
             OnSelect: |-
                 =RemoveIf(
                     SignerInfo,
-                    Title = GAListGallery_1.Selected.Title
+                    标题 = GAListGallery_1.Selected.标题
                 );
                 //Refresh(SignerInfo);
                 //Reset(GAListGallery_1);
