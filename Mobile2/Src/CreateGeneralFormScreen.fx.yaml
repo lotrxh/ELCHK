@@ -880,7 +880,7 @@
                     HoverFill: =RGBA(255, 255, 255, 1)
                     OnSelect: |
                         =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).附件).AbsoluteUri)
-                        Launch("https://elcss.sharepoint.com/sites/eps-uat-2/Lists/TemplateFileList/Attachments/" & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).附件).DisplayName & "?web=1")
+                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).附件).DisplayName & "?web=1")
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
@@ -913,7 +913,7 @@
                     HoverFill: =RGBA(255, 255, 255, 1)
                     OnSelect: |-
                         =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text)).附件).AbsoluteUri)
-                        Launch("https://elcss.sharepoint.com/sites/eps-uat-2/Lists/TemplateFileList/Attachments/" & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text)).附件).DisplayName & "?web=1")
+                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text&"TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text&"TT")).附件).DisplayName & "?web=1")
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
@@ -946,7 +946,7 @@
                     HoverFill: =RGBA(255, 255, 255, 1)
                     OnSelect: |-
                         =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text)).附件).AbsoluteUri)
-                        Launch("https://elcss.sharepoint.com/sites/eps-uat-2/Lists/TemplateFileList/Attachments/" & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text)).附件).DisplayName & "?web=1")
+                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text&"TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text&"TT")).附件).DisplayName & "?web=1")
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
