@@ -655,8 +655,9 @@ AdminFormListScreen As screen:
                     PaddingTop: =0
                     Size: =12
                     Text: =ThisItem.ModelDepartment
+                    Tooltip: =ThisItem.ModelDepartment
                     VerticalAlign: =VerticalAlign.Top
-                    Width: =178
+                    Width: =166
                     Wrap: =false
                     X: =583
                     Y: =14
@@ -712,8 +713,9 @@ AdminFormListScreen As screen:
                     Text: |-
                         =//ThisItem.'Modified By'.DisplayName & Char(13) & ThisItem.Modified;
                         ThisItem.修改者.DisplayName
+                    Tooltip: =ThisItem.修改者.DisplayName
                     VerticalAlign: =VerticalAlign.Top
-                    Width: =136
+                    Width: =125
                     Wrap: =false
                     X: =749
                     Y: =14
@@ -746,6 +748,7 @@ AdminFormListScreen As screen:
                     PaddingTop: =0
                     Size: =12
                     Text: =ThisItem.ModelType
+                    Tooltip: =ThisItem.ModelType
                     VerticalAlign: =VerticalAlign.Top
                     Width: =233
                     Wrap: =false
