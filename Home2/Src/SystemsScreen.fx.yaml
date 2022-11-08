@@ -3950,6 +3950,107 @@ SystemsScreen As screen:
                 Y: =6
                 ZIndex: =3
 
+            QuanxianManager1 As button:
+                BorderColor: =Self.Color
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                Color: =If(ToUserInfoManager="權限管理", glbThemePrimaryColor,glbNeutralSecondaryColor)
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =If(ToUserInfoManager="權限管理", ColorFade(Self.Color, 90%),White)
+                FocusedBorderThickness: =1
+                FontWeight: =If(ToUserInfoManager="權限管理", FontWeight.Semibold,Normal)
+                Height: =34
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =If(ToUserInfoManager<>Blank(),ColorFade(glbThemePrimaryColor, 90%))
+                OnSelect: |-
+                    =UpdateContext({ToUserInfoManager:"權限管理"})
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =12
+                Text: ="權限管理"
+                Visible: =If((SuperUser&&!CurrentRole) || (HRAO&&!CurrentRole),false,true)//增加二期權限判斷，SuperUser和HRAO只能查看用戶管理頁面
+                Width: =120
+                X: =40
+                Y: =86
+                ZIndex: =4
+
+            ZuzhiManager1 As button:
+                BorderColor: =Self.Color
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                Color: =If(ToUserInfoManager="組織機構", glbThemePrimaryColor,glbNeutralSecondaryColor)
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =If(ToUserInfoManager="組織機構", ColorFade(Self.Color, 90%),White)
+                FocusedBorderThickness: =1
+                FontWeight: =If(ToUserInfoManager="組織機構", FontWeight.Semibold,Normal)
+                Height: =34
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =If(ToUserInfoManager<>Blank(),ColorFade(glbThemePrimaryColor, 90%))
+                OnSelect: |-
+                    =UpdateContext({ToUserInfoManager:"組織機構"})
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =12
+                Text: ="組織機構"
+                Visible: =If((SuperUser&&!CurrentRole) || (HRAO&&!CurrentRole),false,true)//增加二期權限判斷，SuperUser和HRAO只能查看用戶管理頁面
+                Width: =120
+                X: =40
+                Y: =46
+                ZIndex: =5
+
+            UserManager1 As button:
+                BorderColor: =Self.Color
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                Color: =If(ToUserInfoManager="用戶管理", glbThemePrimaryColor,glbNeutralSecondaryColor)
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =If(ToUserInfoManager="用戶管理", ColorFade(Self.Color, 90%),White)
+                FocusedBorderThickness: =1
+                FontWeight: =If(ToUserInfoManager="用戶管理", FontWeight.Semibold,Normal)
+                Height: =34
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =If(ToUserInfoManager<>Blank(),ColorFade(glbThemePrimaryColor, 90%))
+                OnSelect: |-
+                    =UpdateContext({ToUserInfoManager:"用戶管理"})
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =12
+                Text: ="用戶管理"
+                Width: =120
+                X: =40
+                Y: =6
+                ZIndex: =6
+
         GalleryNav_4 As gallery.galleryVertical:
             Height: =40*CountRows(GalleryNav_4.AllItems)
             Items: |
@@ -3984,11 +4085,11 @@ SystemsScreen As screen:
                 BorderColor: =Self.Color
                 BorderStyle: =BorderStyle.None
                 BorderThickness: =1
-                Color: =If(ThisItem.Value="系統", glbThemePrimaryColor,glbNeutralSecondaryColor)
+                Color: =If(ThisItem.Value="系統設定", glbThemePrimaryColor,glbNeutralSecondaryColor)
                 DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                Fill: =If(ThisItem.Value="系統", ColorFade(Self.Color, 90%),White)
+                Fill: =If(ThisItem.Value="系統設定", ColorFade(Self.Color, 90%),White)
                 FocusedBorderThickness: =1
-                FontWeight: =If(ThisItem.Value="系統", FontWeight.Semibold,Normal)
+                FontWeight: =If(ThisItem.Value="系統設定", FontWeight.Semibold,Normal)
                 Height: =32
                 HoverBorderColor: =ColorFade(Self.Color, -15%)
                 HoverColor: =ColorFade(Self.Color, -15%)
