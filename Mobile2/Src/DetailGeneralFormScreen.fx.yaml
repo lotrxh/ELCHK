@@ -2890,6 +2890,30 @@
                     BorderThickness: =1
                     Color: =glbNeutralPrimaryColor
                     Default: =""
+                    DisplayMode: |-
+                        =If(
+                            //任務執行完成后不可编辑
+                            "執行" in 
+                                            
+                                                Filter(
+                                                    ApprovalDetail_Table,
+                                                    //TaskStatus = "002",
+                                                    Approval_No = FLowId
+                                                
+                                            
+                                        ).ActionNode 
+                                        //任務拒絕后不可编辑
+                                       || First(
+                                    SortByColumns(
+                                                Filter(
+                                                    ApprovalDetail_Table,
+                                                    Approval_No = FLowId
+                                                                            ),
+                                                "Priortty",
+                                                Descending
+                                            )
+                                        ).TaskStatus = "000"
+                                        ,Disabled,DisplayMode.Edit)
                     FocusedBorderColor: =glbNeutralSecondaryColor
                     FocusedBorderThickness: =1
                     Height: =36
@@ -2968,6 +2992,30 @@
                     BorderThickness: =1
                     Color: =glbNeutralPrimaryColor
                     Default: =""
+                    DisplayMode: |-
+                        =If(
+                            //任務執行完成后不可编辑
+                            "執行" in 
+                                            
+                                                Filter(
+                                                    ApprovalDetail_Table,
+                                                    //TaskStatus = "002",
+                                                    Approval_No = FLowId
+                                                
+                                            
+                                        ).ActionNode 
+                                        //任務拒絕后不可编辑
+                                       || First(
+                                    SortByColumns(
+                                                Filter(
+                                                    ApprovalDetail_Table,
+                                                    Approval_No = FLowId
+                                                                            ),
+                                                "Priortty",
+                                                Descending
+                                            )
+                                        ).TaskStatus = "000"
+                                        ,Disabled,DisplayMode.Edit)
                     FocusedBorderColor: =glbNeutralSecondaryColor
                     FocusedBorderThickness: =1
                     Height: =36
