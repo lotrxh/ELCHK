@@ -126,7 +126,7 @@ App As appinfo:
         If(
             Last(
             Split(
-                CurrentUser,
+                User().Email,
                 "@"
             ).Result
         ).Result = "chinasofti.com",

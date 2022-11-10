@@ -217,14 +217,14 @@ AdminFormDetailScreen As screen:
                             //如果表格名稱修改，同步附件的TempFileName
                     UpdateIf(
                                     TemplateFileList,
-                                    GenericFormId = First(EditForm).Title,
+                                    GenericFormId = First(EditForm).标题,
                                     {TempFileName: TextInput_FormName.Text}
                                 );
                     
                             //如果附件修改，删除之前的版本
                             //删除list中的附件记录
                     With(
-                        {FormmodelID: First(EditForm).Title},
+                        {FormmodelID: First(EditForm).标题},
                         If(
                             Label_newform.Text <> "新增表格" && attachmentdelete1,
                             Remove(
@@ -244,7 +244,7 @@ AdminFormDetailScreen As screen:
                         )
                     );
                     With(
-                        {FormmodelID: First(EditForm).Title},
+                        {FormmodelID: First(EditForm).标题},
                         If(
                             Label_newform.Text <> "新增表格" && attachmentdelete2,
                             Remove(
@@ -264,7 +264,7 @@ AdminFormDetailScreen As screen:
                         )
                     );
                     With(
-                        {FormmodelID: First(EditForm).Title},
+                        {FormmodelID: First(EditForm).标题},
                         If(
                             Label_newform.Text <> "新增表格" && attachmentdelete3,
                             Remove(
@@ -468,7 +468,7 @@ AdminFormDetailScreen As screen:
                                         [@TextInput_FormName].Text,
                                         drpFilter_FormType.Selected.Result,
                                         Last(Attachment_Form.Attachments).Name,
-                                        First(EditForm).Title,
+                                        First(EditForm).标题,
                                         Last(Attachment_Form.Attachments).Name,
                                         "",
                                         "",
@@ -517,7 +517,7 @@ AdminFormDetailScreen As screen:
                                         [@TextInput_FormName].Text,
                                         "示範表格TT",
                                         Last(Attachment_Demonstrationform.Attachments).Name,
-                                        First(EditForm).Title,
+                                        First(EditForm).标题,
                                         Last(Attachment_Demonstrationform.Attachments).Name,
                                         "",
                                         "",
@@ -566,7 +566,7 @@ AdminFormDetailScreen As screen:
                                         [@TextInput_FormName].Text,
                                         "填寫指引TT",
                                         Last(Attachment_FillGuide.Attachments).Name,
-                                        First(EditForm).Title,
+                                        First(EditForm).标题,
                                         Last(Attachment_FillGuide.Attachments).Name,
                                         "",
                                         "",
@@ -642,7 +642,7 @@ AdminFormDetailScreen As screen:
                                         GenericFormModel,
                                         Defaults(GenericFormModel),
                                         {
-                                            Title: GenericFormModeGuid,
+                                            标题: GenericFormModeGuid,
                                             ModelDepartment: drpFilter_Department.Selected.Result,
                                             ModelType: drpFilter_FormType.Selected.Result,
                                             ModelFlowNumber: TextInput_FormNumber.Text,

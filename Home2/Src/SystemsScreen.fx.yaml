@@ -1332,7 +1332,7 @@ SystemsScreen As screen:
                         UserInfo,
                         Defaults(UserInfo),
                         {
-                            Title: GUID(),
+                            标题: GUID(),
                             User_Name: UserTextInput.Text,
                             User_Email: UsaerEmaiLTextInput.Text,
                             O_Mechanism_No:Dropdown_Mechanism.Selected.Code_No2,
@@ -2144,7 +2144,7 @@ SystemsScreen As screen:
             Height: =36
             HoverFill: =RGBA(8, 127, 190, 1)
             OnSelect: |-
-                =RemoveIf(UserInfo,Title=UserListGallery_1.Selected.Title);
+                =RemoveIf(UserInfo,标题=UserListGallery_1.Selected.标题);
                 //ClearCollect(TempAllUserTable,UserInfo);
                 UpdateContext({UserDeletShow: false });
             PressedColor: =RGBA(255, 255, 255, 1)
@@ -2218,7 +2218,7 @@ SystemsScreen As screen:
                     IsBlank(UserTextInput_1.Text) && IsBlank(UsaerEmaiLTextInput_1.Text) && IsBlank(UserTextInput_8.Text) && IsBlank(Dropdown_Mechanism_1.Selected.Code_No2) && IsBlank(UserTextInput_10.Text) && IsBlank(Dropdown_post_1.Selected.PR_Name) && IsBlank(UserTextInput_12.Text) && IsBlank(Dropdown_AgentEmail_1.Selected.Agent_Email),
                     UpdateContext({UserEditShow: true}),
                     Patch(
-                        UserInfo,LookUp(UserInfo,Title=UserListGallery_1.Selected.Title),     
+                        UserInfo,LookUp(UserInfo,标题=UserListGallery_1.Selected.标题),     
                             {User_Name: UserTextInput_1.Text},
                             {User_Email: UsaerEmaiLTextInput_1.Text},
                             {O_Mechanism: UserTextInput_8.Text},
