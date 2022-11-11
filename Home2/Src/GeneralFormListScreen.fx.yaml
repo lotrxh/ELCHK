@@ -608,7 +608,7 @@ GeneralFormListScreen As screen:
                 Default: |-
                     =If(ListID=2,{Value:"待處理"})
                 Height: =40
-                Items: =["全部","待處理","已處理"]
+                Items: =["待處理","已處理","全部"]
                 OnSelect: |
                     =//Select(BtnLgIconOnly_4);
                 TemplatePadding: =0
@@ -835,7 +835,7 @@ GeneralFormListScreen As screen:
                     Size: =12
                     Text: ="表格類型/"&Char(13)&"單位"
                     Width: =98
-                    X: =470
+                    X: =490
                     ZIndex: =3
 
                 Label4_9 As label:
@@ -846,7 +846,9 @@ GeneralFormListScreen As screen:
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =12
-                    Text: ="表格部門/"&Char(13)&"服務"
+                    Text: |-
+                        ="申請部門/
+                        服務"
                     Width: =100
                     X: =370
                     ZIndex: =4
@@ -859,23 +861,10 @@ GeneralFormListScreen As screen:
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =12
-                    Text: ="申請人"
-                    Width: =94
-                    X: =580
+                    Text: ="申請人/申請日期"
+                    Width: =128
+                    X: =608
                     ZIndex: =5
-
-                Label4_11 As label:
-                    Align: =Center
-                    Color: =glbNeutralPrimaryColor
-                    PaddingBottom: =0
-                    PaddingLeft: =0
-                    PaddingRight: =0
-                    PaddingTop: =0
-                    Size: =12
-                    Text: ="申請日期"
-                    Width: =141
-                    X: =674
-                    ZIndex: =6
 
                 Label4_12 As label:
                     Align: =Align.Center
@@ -900,7 +889,7 @@ GeneralFormListScreen As screen:
                     Size: =12
                     Text: ="標籤"
                     Width: =111
-                    X: =815
+                    X: =781
                     ZIndex: =8
 
             TaskListGallery As gallery.galleryVertical:
@@ -1024,7 +1013,7 @@ GeneralFormListScreen As screen:
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =12
-                    Text: =ThisItem.FlowTaskName
+                    Text: =Left(ThisItem.FlowOrder,4)&Char(10)&ThisItem.FlowTaskName
                     Tooltip: =ThisItem.FlowTaskName
                     Width: =200
                     Wrap: =false
@@ -1204,6 +1193,7 @@ GeneralFormListScreen As screen:
                     ZIndex: =12
 
                 Label3_8 As label:
+                    Align: =Align.Center
                     Color: =glbNeutralSecondaryColor
                     Height: =48
                     OnSelect: =Select(Parent)
@@ -1212,7 +1202,7 @@ GeneralFormListScreen As screen:
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =12
-                    Text: =ThisItem.DepartMentName
+                    Text: =First(Split(ThisItem.DepartMentName,"-")).Result
                     Tooltip: =ThisItem.DepartMentName
                     Width: =100
                     Wrap: =false
@@ -1230,7 +1220,7 @@ GeneralFormListScreen As screen:
                     Size: =12
                     Text: =ThisItem.FormType
                     Tooltip: =ThisItem.FormType
-                    Width: =100
+                    Width: =132
                     Wrap: =false
                     X: =482
                     ZIndex: =14
@@ -1244,27 +1234,13 @@ GeneralFormListScreen As screen:
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =12
-                    Text: =First(Split(ThisItem.SubmitApprover,"@")).Result
-                    Tooltip: =First(Split(ThisItem.SubmitApprover,"@")).Result
-                    Width: =108
-                    Wrap: =false
-                    X: =582
-                    ZIndex: =15
-
-                Label3_11 As label:
-                    Color: =glbNeutralSecondaryColor
-                    Height: =48
-                    OnSelect: =Select(Parent)
-                    PaddingBottom: =0
-                    PaddingLeft: =0
-                    PaddingRight: =0
-                    PaddingTop: =0
-                    Size: =11
                     Text: |-
-                        =Text(ThisItem.FlowCreateDate,"dd/mm/yyyy HH:mm")
-                    Width: =129
-                    X: =690
-                    ZIndex: =16
+                        =First(Split(ThisItem.SubmitApprover,"@")).Result&Char(10)&Text(ThisItem.FlowCreateDate,"dd/mm/yyyy HH:mm")
+                    Tooltip: =First(Split(ThisItem.SubmitApprover,"@")).Result
+                    Width: =141
+                    Wrap: =false
+                    X: =614
+                    ZIndex: =15
 
                 Label3_12 As label:
                     Align: =Align.Center
