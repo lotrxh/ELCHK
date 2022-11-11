@@ -848,7 +848,7 @@ GeneralFormListScreen As screen:
                     Size: =12
                     Text: |-
                         ="申請部門/
-                        服務"
+                        "
                     Width: =100
                     X: =370
                     ZIndex: =4
@@ -1202,7 +1202,7 @@ GeneralFormListScreen As screen:
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =12
-                    Text: =First(Split(ThisItem.DepartMentName,"-")).Result
+                    Text: =If(CountA(Split(ThisItem.DepartMentName,"-").Result)=2,First(Split(ThisItem.DepartMentName,"-")).Result,First(Split(ThisItem.DepartMentName,"-")).Result&"-"&Index(Split(ThisItem.DepartMentName,"-"),2).Result)
                     Tooltip: =ThisItem.DepartMentName
                     Width: =100
                     Wrap: =false
