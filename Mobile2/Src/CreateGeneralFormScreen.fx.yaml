@@ -823,7 +823,7 @@
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =16
-                    Text: =First(EditUserForm).ModelName
+                    Text: =First(EditUserForm).ModelFlowNumber&" "&First(EditUserForm).ModelName
                     Width: =300
                     X: =58
                     ZIndex: =1
@@ -2241,7 +2241,7 @@
                         PaddingRight: =0
                         PaddingTop: =0
                         Size: =11
-                        Text: ="備註信息"
+                        Text: ="申請備註"
                         Width: =140
                         X: =20
                         Y: =448
