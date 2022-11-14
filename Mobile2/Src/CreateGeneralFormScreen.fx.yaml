@@ -116,7 +116,7 @@
     BottomContainer As groupContainer.manualLayoutContainer:
         Fill: =White
         Height: =60
-        Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
+        Visible: =If(First(EditUserForm).FlowType<>"範本" && App.ActiveScreen.Width>600,true,false)
         Width: =Parent.Width
         Y: =Parent.Height-Self.Height
         ZIndex: =2
@@ -788,15 +788,17 @@
                 AlignInContainer: =AlignInContainer.SetByContainer
                 Fill: =RGBA(255, 255, 255, 1)
                 FillPortions: =0
-                Height: =BtnDefault_25.Y+BtnDefault_25.Height+10
+                Height: =BtnPrimaryLg_10.Y+BtnPrimaryLg_10.Height+10
+                LayoutAlignItems: =LayoutAlignItems.Center
                 LayoutGap: =5
                 LayoutMinHeight: =100
                 LayoutMinWidth: =250
                 LayoutMode: =LayoutMode.Auto
                 LayoutWrap: =true
+                PaddingBottom: =1
                 PaddingLeft: =1
                 PaddingRight: =1
-                PaddingTop: =20
+                PaddingTop: =1
                 Width: |
                     =Switch(
                             CreateGeneralFormScreen.Size,
@@ -811,10 +813,8 @@
                 ZIndex: =1
 
                 FormNameLabel_1 As label:
-                    AutoHeight: =true
                     Color: =glbNeutralPrimaryColor
                     Fill: =RGBA(255, 255, 255, 1)
-                    FillPortions: =1
                     FontWeight: =FontWeight.Semibold
                     Height: =30
                     LayoutMinWidth: =360
@@ -824,119 +824,607 @@
                     PaddingTop: =0
                     Size: =16
                     Text: =First(EditUserForm).ModelName
-                    Width: =Parent.Width-330
+                    Width: =300
                     X: =58
                     ZIndex: =1
 
-                BtnDefault_23 As button:
-                    BorderColor: =Self.Color
+                BtnPrimaryLg_10 As button:
+                    BorderColor: =Self.Fill
                     BorderThickness: =1
-                    Color: =glbThemePrimaryColor
                     DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                    Fill: =White
+                    Fill: =glbThemePrimaryColor
                     FocusedBorderThickness: =1
-                    FontWeight: =FontWeight.Normal
-                    Height: =28
-                    HoverBorderColor: =ColorFade(Self.Color, -15%)
-                    HoverColor: =ColorFade(Self.Color, -15%)
-                    HoverFill: =RGBA(255, 255, 255, 1)
+                    Height: =36
+                    HoverFill: =ColorFade(Self.Fill, -15%)
                     OnSelect: |
-                        =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).附件).AbsoluteUri)
-                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).附件).DisplayName & "?web=1")
+                        =//左边填写内容上传必選項判斷及流程必選項
+                        If(
+                            (Attachment_Excel.Visible = true && Last(Attachment_Excel.Attachments).Name = Blank()) || (Attachment_Zip.Visible = true && Last(Attachment_Zip.Attachments).Name = Blank()) || (Label6.Visible = true && IsBlank(TextInput_FormPWD) && IsBlank(TextInput_FormPWD_1)) || (Label6_1.Visible = true && IsBlank(TextInput_zipPWD) && IsBlank(TextInput_zipPWD_1)) || IsEmpty(drpFilterDepartment_1.SelectedItems) || (FlowType = "預設流程" && (Dropdown1_9.Selected.Result = Blank() || Label1_155.Text = "/")) || (FlowType = "通用流程" && (Dropdown1_5.Selected.Result = Blank() || Label1_137.Text = "/")) || (FlowType = "部門簡單流程" && Label1_153.Text = "/"),
+                            Notify(
+                                "必需項不能爲空，處理行動及處理人不能爲空",
+                                NotificationType.Error
+                            ),
+                            Set(
+                                ApprovalGuid,
+                                GUID()
+                            );
+                            
+                        //填寫人是否直接提交
+                        If(
+                                Checkbox2_5.Value = true,
+                        //記錄提交人信息记录
+                                Patch(
+                                    ApprovalListCol,
+                                    Defaults(ApprovalListCol),
+                                    {
+                                        idNumber: 1,
+                                        ActionName: "提交",
+                                        Approver: User().FullName,
+                                        ApprovalEmail: User().Email,
+                                        IsComplate: true,
+                                        BCCUser: If(
+                                            FlowType = "通用流程",
+                                            Concat(
+                                                ComboBox1_11.SelectedItems.Mail,
+                                                Mail,
+                                                ","
+                                            ),
+                                            FlowType = "預設流程",
+                                            Concat(
+                                                ComboBox1_15.SelectedItems.Mail,
+                                                Mail,
+                                                ","
+                                            )
+                                        ),
+                                        remark: ""
+                                    }
+                                ),
+                                //不直接提交時，cc記錄到填寫行動的cc中
+                                UpdateIf(
+                                    ApprovalListCol,
+                                    ActionName = "填寫",
+                                    {
+                                        BCCUser: If(
+                                            FlowType = "通用流程",
+                                            Concat(
+                                                ComboBox1_11.SelectedItems.Mail,
+                                                Mail,
+                                                ","
+                                            ),
+                                            FlowType = "預設流程",
+                                            Concat(
+                                                ComboBox1_15.SelectedItems.Mail,
+                                                Mail,
+                                                ","
+                                            ),
+                                            FlowType = "部門簡單流程",
+                                            Concat(
+                                                ComboBox1_13.SelectedItems.Mail,
+                                                Mail,
+                                                ","
+                                            )
+                                        )
+                                    }
+                                )
+                            );
+                            Patch(
+                                ApprovalListCol,
+                                Defaults(ApprovalListCol),
+                                {
+                                    idNumber: If(
+                                        CountA(ApprovalListCol.ActionName) = 1,
+                                        1,
+                                        CountA(ApprovalListCol.ActionName)
+                                    ),
+                                    ActionName: If(
+                                        FlowType = "通用流程" && !IsBlank(
+                                            LookUp(
+                                                GenericFormModel,
+                                                标题 = FormModelId
+                                            ).SelectedActions
+                                        ),
+                                        Dropdown1_5.Selected.Result,
+                                        If(
+                                            FlowType = "預設流程",
+                                            Dropdown1_9.Selected.Result,
+                                            FlowType = "部門簡單流程",
+                                            Dropdown1_7.Selected.Value
+                                        )
+                                    ),
+                                    ApprovalEmail: If(
+                                        FlowType = "通用流程",
+                                        Last(
+                                            Split(
+                                                Label1_137.Text,
+                                                "/"
+                                            )
+                                        ).Result,
+                                        FlowType = "預設流程",
+                                        Last(
+                                            Split(
+                                                Label1_155.Text,
+                                                "/"
+                                            )
+                                        ).Result,
+                                        FlowType = "部門簡單流程",
+                                        Last(
+                                            Split(
+                                                Label1_153.Text,
+                                                "/"
+                                            )
+                                        ).Result
+                                    ),
+                                    Approver: If(
+                                        FlowType = "通用流程",
+                                        First(
+                                            Split(
+                                                Label1_137.Text,
+                                                "/"
+                                            )
+                                        ).Result,
+                                        FlowType = "預設流程",
+                                        First(
+                                            Split(
+                                                Label1_155.Text,
+                                                "/"
+                                            )
+                                        ).Result,
+                                        FlowType = "部門簡單流程",
+                                        First(
+                                            Split(
+                                                Label1_153.Text,
+                                                "/"
+                                            )
+                                        ).Result
+                                    ),
+                                    IsComplate: false,
+                                    BCCUser: "",
+                                    remark: ""
+                                }
+                            );
+                            UpdateContext(
+                                {
+                                    TodayTask2Code: Label1_134.Text & Text(
+                                        Today(),
+                                        "yyyymmdd"
+                                    )
+                                }
+                            );
+                            
+                        //需要收集app_no
+                        Set(
+                                ApprovalIDNumber,
+                                Patch(
+                                    Approval_Table,
+                                    Defaults(Approval_Table),
+                                    {
+                                        Application_No: Label1_134.Text & Text(
+                                            Now(),
+                                            "yyyymmdd"
+                                        ) & Text(
+                                            Right(
+                                                Last(
+                                                    SortByColumns(
+                                                        Filter(
+                                                            Approval_Table,
+                                                            StartsWith(
+                                                                Application_No,
+                                                                TodayTask2Code
+                                                            )
+                                                        ),
+                                                        "Application_No",
+                                                        Ascending
+                                                    )
+                                                ).Application_No,
+                                                3
+                                            ) + 1,
+                                            "000"
+                                        ),
+                                        标题: ApprovalGuid,
+                                        Application_Status: "審批中",
+                                        DepartMentName: Label1_130.Text,
+                                        FormType: Label1_132.Text,
+                                        'Operator ': User().Email,
+                                        Task_Name: FormNameLabel_1.Text,
+                                        DepartMentUnit: drpFilterDepartment_1.Selected.Result
+                                    }
+                                )
+                            );
+                            ForAll(
+                                ApprovalListCol,
+                                Patch(
+                                    ApprovalDetail_Table,
+                                    Defaults(ApprovalDetail_Table),
+                                    {
+                                        标题: GUID(),
+                                        Advise: ApprovalListCol[@remark],
+                                        Approval_No: ApprovalGuid,
+                                        ApprovalBCC: ApprovalListCol[@BCCUser],
+                                        Approver: ApprovalListCol[@Approver],
+                                        ApproverEmail: ApprovalListCol[@ApprovalEmail],
+                                        TaskStatus: If(
+                                            ApprovalListCol[@IsComplate],
+                                            "004",
+                                            "002"
+                                        ),
+                                        Priortty: ApprovalListCol[@idNumber],
+                                        ActionNode: ApprovalListCol[@ActionName]
+                                    }
+                                )
+                            );
+                            
+                        //左边填写内容上传
+                        Set(
+                                GenericFormlistGuid,
+                                GUID()
+                            );
+                            ClearCollect(
+                                NewUserForm,
+                                Patch(
+                                    GenericFormList,
+                                    Defaults(GenericFormList),
+                                    {
+                                        标题: GenericFormlistGuid,
+                                        ApprovalId: ApprovalGuid,
+                                        ModelId: First(EditUserForm).标题,
+                                        ModelName: FormNameLabel_1.Text,
+                                        UploadFileId: Last(GenericUploadAttachMentFile).标题,
+                                        //目前取的是最后一个附件的id
+                                        MarkValue: TextInput_FormMark.Text,
+                                        FormType: Label1_132.Text,
+                                        Department: drpFilterDepartment_1.Selected.Result,
+                                        FormOrder: ApprovalIDNumber.Application_No,
+                                        FlowType: First(EditUserForm).FlowType,
+                                        SelectedActions: First(EditUserForm).SelectedActions
+                                    }
+                                )
+                            );
+                            //創建NewUserForm集合用作後續更新list-GenericUploadAttachMentFile中的FormId
+                        //执行flow上传表格到list
+                        If(
+                                Last(
+                                    Split(
+                                        CurrentUser,
+                                        "@"
+                                    ).Result
+                                ).Result = "chinasofti.com",
+                        //中軟環境上傳
+                                If(
+                                    Last(Attachment_Excel.Attachments).Name <> Blank(),
+                                    Set(
+                                        varAttachmentControl1,
+                                        JSON(
+                                            Image4_2.Image,
+                                            IncludeBinaryData
+                                        )
+                                    );
+                                    Set(
+                                        varBase64Only1,
+                                        Mid(
+                                            varAttachmentControl1,
+                                            Find(
+                                                ",",
+                                                varAttachmentControl1
+                                            ) + 1,
+                                            Len(varAttachmentControl1) - Find (
+                                                ",",
+                                                varAttachmentControl1
+                                            ) - 1
+                                        )
+                                    );
+                                    ELCHK_UploadFiletoSharepoint.Run(
+                                        "GenericUploadAttachMentFile",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        GUID(),
+                                        GenericFormlistGuid,
+                                        First(EditUserForm).ModelType,
+                                        Last(Attachment_Excel.Attachments).Name,
+                                        TextInput_FormPWD.Text,
+                                        Last(Attachment_Excel.Attachments).Name,
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        varBase64Only1,
+                                        "",
+                                        ""
+                                    )
+                                );
+                                
+                        //执行flow上传附件到list
+                        If(
+                                    Last(Attachment_Zip.Attachments).Name <> Blank(),
+                                    Set(
+                                        varAttachmentControl2,
+                                        JSON(
+                                            Image4_1.Image,
+                                            IncludeBinaryData
+                                        )
+                                    );
+                                    Set(
+                                        varBase64Only2,
+                                        Mid(
+                                            varAttachmentControl2,
+                                            Find(
+                                                ",",
+                                                varAttachmentControl2
+                                            ) + 1,
+                                            Len(varAttachmentControl2) - Find (
+                                                ",",
+                                                varAttachmentControl2
+                                            ) - 1
+                                        )
+                                    );
+                                    ELCHK_UploadFiletoSharepoint.Run(
+                                        "UploadFlowAttachMent",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        GenericFormlistGuid,
+                                        ApprovalGuid,
+                                        TextInput_zipPWD.Text,
+                                        Last(Attachment_Zip.Attachments).Name,
+                                        Last(Attachment_Zip.Attachments).Name,
+                                        "",
+                                        "",
+                                        varBase64Only2
+                                    )
+                                ),
+                        //客戶環境上傳
+                                If(
+                                    Last(Attachment_Excel.Attachments).Name <> Blank(),
+                                    Set(
+                                        varAttachmentControl1,
+                                        JSON(
+                                            Image4_2.Image,
+                                            IncludeBinaryData
+                                        )
+                                    );
+                                    Set(
+                                        varBase64Only1,
+                                        Mid(
+                                            varAttachmentControl1,
+                                            Find(
+                                                ",",
+                                                varAttachmentControl1
+                                            ) + 1,
+                                            Len(varAttachmentControl1) - Find (
+                                                ",",
+                                                varAttachmentControl1
+                                            ) - 1
+                                        )
+                                    );
+                                    UploadFiletoSharepoint.Run(
+                                        "GenericUploadAttachMentFile",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        GUID(),
+                                        GenericFormlistGuid,
+                                        First(EditUserForm).ModelType,
+                                        Last(Attachment_Excel.Attachments).Name,
+                                        TextInput_FormPWD.Text,
+                                        Last(Attachment_Excel.Attachments).Name,
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        varBase64Only1,
+                                        "",
+                                        "",
+                                        "",
+                                        ""
+                                    )
+                                );
+                                
+                        //执行flow上传附件到list
+                        If(
+                                    Last(Attachment_Zip.Attachments).Name <> Blank(),
+                                    Set(
+                                        varAttachmentControl2,
+                                        JSON(
+                                            Image4_1.Image,
+                                            IncludeBinaryData
+                                        )
+                                    );
+                                    Set(
+                                        varBase64Only2,
+                                        Mid(
+                                            varAttachmentControl2,
+                                            Find(
+                                                ",",
+                                                varAttachmentControl2
+                                            ) + 1,
+                                            Len(varAttachmentControl2) - Find (
+                                                ",",
+                                                varAttachmentControl2
+                                            ) - 1
+                                        )
+                                    );
+                                    UploadFiletoSharepoint.Run(
+                                        "UploadFlowAttachMent",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        GenericFormlistGuid,
+                                        ApprovalGuid,
+                                        TextInput_zipPWD.Text,
+                                        Last(Attachment_Zip.Attachments).Name,
+                                        Last(Attachment_Zip.Attachments).Name,
+                                        varBase64Only2,
+                                        "",
+                                        "",
+                                        "",
+                                        "",
+                                        ""
+                                    )
+                                )
+                            );
+                            //收集当前用户的申请部门信息用作下一次创建任务时主动带入
+                        If(
+                                CountA(
+                                    Filter(
+                                        MyContacts,
+                                        UserEmail = User().Email,
+                                        ContatsType = "部門"
+                                    //ApplyDepartment = drpFilterDepartment_1.Selected.Result
+                                    ).标题
+                                ) <= 0,
+                                Patch(
+                                    MyContacts,
+                                    Defaults(MyContacts),
+                                    {
+                                        标题: GUID(),
+                                        UserEmail: User().Email,
+                                        ContatsType: "部門",
+                                        ApplyDepartment: drpFilterDepartment_1.Selected.Result
+                                    }
+                                ),
+                                UpdateIf(
+                                    MyContacts,
+                                    (UserEmail = User().Email) && (ContatsType = "部門"),
+                                    {ApplyDepartment: drpFilterDepartment_1.Selected.Result}
+                                )
+                            );
+                            //下一節點操作人為當前填用戶時，帶入信息到任務詳情頁面    
+                        With(
+                                {FormModelTitle: First(NewUserForm).标题},
+                            //创建集合EditDetailUserForm_1收集表格信息，用作帶入表格名称、流程等数据
+                                ClearCollect(
+                                    EditDetailUserForm_1,
+                                    Filter(
+                                        GenericFormList,
+                                        标题 = FormModelTitle
+                                    )
+                                );
+                            //创建集合EditDetailUserForm_2,用作带入部门表格类型等数据
+                        ClearCollect(
+                                    EditDetailUserForm_2,
+                                    Filter(
+                                        GenericFormModel,
+                                        ModelFlowNumber = Label1_134.Text
+                                    )
+                                );
+                            //创建集合EditDetailUserAttachment, 帶入表格   
+                        ClearCollect(
+                                    EditDetailUserAttachment,
+                                    Filter(
+                                        GenericUploadAttachMentFile,
+                                        FormId = FormModelTitle
+                                    )
+                                );
+                            //创建集合EditDetailUserAttachment2, 帶入附件
+                        ClearCollect(
+                                    EditDetailUserAttachment2,
+                                    Filter(
+                                        UploadFlowAttachMent,
+                                        标题 = FormModelTitle
+                                    )
+                                )
+                            );
+                            Notify(
+                                "填寫成功！",
+                                NotificationType.Success,
+                                2000
+                            );
+                            If(
+                                If(
+                                    FlowType = "通用流程",
+                                    Last(
+                                        Split(
+                                            Label1_137.Text,
+                                            "/"
+                                        )
+                                    ).Result,
+                                    FlowType = "預設流程",
+                                    Last(
+                                        Split(
+                                            Label1_155.Text,
+                                            "/"
+                                        )
+                                    ).Result,
+                                    FlowType = "部門簡單流程",
+                                    Last(
+                                        Split(
+                                            Label1_153.Text,
+                                            "/"
+                                        )
+                                    ).Result
+                                ) = User().Email,
+                        //下一节点处理人为当前用户时，跳转到任务详情页面
+                                Navigate(
+                                    DetailGeneralFormScreen,
+                                    None,
+                                    {HistoryList: ApprovalIDNumber}
+                                ),
+                        //下一节点处理人不是当前用户时，返回認爲列表
+                                Launch(
+                                    JumpUrlClientAPP & "&Screen=GeneralFormListScreen",
+                                    {},
+                                    LaunchTarget.Replace
+                                )
+                            );
+                            
+                        );
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
                     PaddingTop: =0
-                    PressedBorderColor: =ColorFade(Self.Color, -25%)
-                    PressedColor: =ColorFade(Self.Color, -25%)
-                    PressedFill: =ColorFade(Self.Color, 95%)
-                    RadiusBottomLeft: =2
-                    RadiusBottomRight: =2
-                    RadiusTopLeft: =2
-                    RadiusTopRight: =2
-                    Size: =9
-                    Text: ="模板下載"
+                    PressedColor: =White
+                    PressedFill: =ColorFade(Self.Fill, -25%)
+                    RadiusBottomLeft: =4
+                    RadiusBottomRight: =4
+                    RadiusTopLeft: =4
+                    RadiusTopRight: =4
+                    Size: =11
+                    Text: ="完成"
+                    Visible: =If(App.ActiveScreen.Width>600,false,true)
                     Width: =100
-                    X: =Parent.Width-Self.Width-1
-                    Y: =1
+                    X: =983
+                    Y: =12
                     ZIndex: =2
-
-                BtnDefault_24 As button:
-                    BorderColor: =Self.Color
-                    BorderThickness: =1
-                    Color: =glbThemePrimaryColor
-                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                    Fill: =White
-                    FocusedBorderThickness: =1
-                    FontWeight: =FontWeight.Normal
-                    Height: =28
-                    HoverBorderColor: =ColorFade(Self.Color, -15%)
-                    HoverColor: =ColorFade(Self.Color, -15%)
-                    HoverFill: =RGBA(255, 255, 255, 1)
-                    OnSelect: |-
-                        =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text)).附件).AbsoluteUri)
-                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text&"TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text&"TT")).附件).DisplayName & "?web=1")
-                    PaddingBottom: =0
-                    PaddingLeft: =0
-                    PaddingRight: =0
-                    PaddingTop: =0
-                    PressedBorderColor: =ColorFade(Self.Color, -25%)
-                    PressedColor: =ColorFade(Self.Color, -25%)
-                    PressedFill: =ColorFade(Self.Color, 95%)
-                    RadiusBottomLeft: =2
-                    RadiusBottomRight: =2
-                    RadiusTopLeft: =2
-                    RadiusTopRight: =2
-                    Size: =9
-                    Text: ="填寫指引"
-                    Width: =100
-                    X: =Parent.Width-Self.Width-1
-                    Y: =1
-                    ZIndex: =3
-
-                BtnDefault_25 As button:
-                    BorderColor: =Self.Color
-                    BorderThickness: =1
-                    Color: =glbThemePrimaryColor
-                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                    Fill: =White
-                    FocusedBorderThickness: =1
-                    FontWeight: =FontWeight.Normal
-                    Height: =28
-                    HoverBorderColor: =ColorFade(Self.Color, -15%)
-                    HoverColor: =ColorFade(Self.Color, -15%)
-                    HoverFill: =RGBA(255, 255, 255, 1)
-                    OnSelect: |-
-                        =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text)).附件).AbsoluteUri)
-                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text&"TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text&"TT")).附件).DisplayName & "?web=1")
-                    PaddingBottom: =0
-                    PaddingLeft: =0
-                    PaddingRight: =0
-                    PaddingTop: =0
-                    PressedBorderColor: =ColorFade(Self.Color, -25%)
-                    PressedColor: =ColorFade(Self.Color, -25%)
-                    PressedFill: =ColorFade(Self.Color, 95%)
-                    RadiusBottomLeft: =2
-                    RadiusBottomRight: =2
-                    RadiusTopLeft: =2
-                    RadiusTopRight: =2
-                    Size: =9
-                    Text: ="示範表格"
-                    Width: =100
-                    X: =Parent.Width-Self.Width-1
-                    Y: =1
-                    ZIndex: =4
 
             InfoContainer12_2 As groupContainer.horizontalAutoLayoutContainer:
                 AlignInContainer: =AlignInContainer.SetByContainer
                 Fill: =RGBA(255, 255, 255, 1)
                 FillPortions: =0
-                Height: =Container13_11.Y+Container13_11.Height
+                Height: =BtnDefault_25.Y+BtnDefault_25.Height+10
                 LayoutGap: =10
                 LayoutMinHeight: =40
                 LayoutMinWidth: =250
                 LayoutMode: =LayoutMode.Auto
                 LayoutWrap: =true
+                PaddingBottom: =1
+                PaddingLeft: =1
+                PaddingRight: =1
+                PaddingTop: =1
                 Width: |
                     =Switch(
                             CreateGeneralFormScreen.Size,
@@ -959,6 +1447,7 @@
                     Height: =28
                     LayoutMinHeight: =100
                     LayoutMinWidth: =250
+                    Visible: =false
                     Width: =300
                     ZIndex: =1
 
@@ -994,6 +1483,7 @@
                     Height: =28
                     LayoutMinHeight: =100
                     LayoutMinWidth: =250
+                    Visible: =false
                     Width: =300
                     ZIndex: =2
 
@@ -1029,6 +1519,7 @@
                     Height: =28
                     LayoutMinHeight: =100
                     LayoutMinWidth: =250
+                    Visible: =false
                     Width: =250
                     ZIndex: =3
 
@@ -1060,10 +1551,9 @@
                 Container13_11 As groupContainer.manualLayoutContainer:
                     AlignInContainer: =AlignInContainer.SetByContainer
                     Fill: =RGBA(255, 255, 255, 1)
-                    FillPortions: =0
-                    Height: =28
+                    Height: =31
                     LayoutMinHeight: =100
-                    LayoutMinWidth: =250
+                    LayoutMinWidth: =360
                     Width: =250
                     ZIndex: =4
 
@@ -1091,6 +1581,105 @@
                         Width: =156
                         X: =94
                         ZIndex: =2
+
+                BtnDefault_23 As button:
+                    BorderColor: =Self.Color
+                    BorderThickness: =1
+                    Color: =glbThemePrimaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    Fill: =White
+                    FocusedBorderThickness: =1
+                    FontWeight: =FontWeight.Normal
+                    Height: =28
+                    HoverBorderColor: =ColorFade(Self.Color, -15%)
+                    HoverColor: =ColorFade(Self.Color, -15%)
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    OnSelect: |
+                        =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).附件).AbsoluteUri)
+                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).附件).DisplayName & "?web=1")
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =ColorFade(Self.Color, -25%)
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    PressedFill: =ColorFade(Self.Color, 95%)
+                    RadiusBottomLeft: =2
+                    RadiusBottomRight: =2
+                    RadiusTopLeft: =2
+                    RadiusTopRight: =2
+                    Size: =9
+                    Text: ="模板下載"
+                    Width: =100
+                    X: =Parent.Width-Self.Width-1
+                    Y: =1
+                    ZIndex: =5
+
+                BtnDefault_24 As button:
+                    BorderColor: =Self.Color
+                    BorderThickness: =1
+                    Color: =glbThemePrimaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    Fill: =White
+                    FocusedBorderThickness: =1
+                    FontWeight: =FontWeight.Normal
+                    Height: =28
+                    HoverBorderColor: =ColorFade(Self.Color, -15%)
+                    HoverColor: =ColorFade(Self.Color, -15%)
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    OnSelect: |-
+                        =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text)).附件).AbsoluteUri)
+                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text&"TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text&"TT")).附件).DisplayName & "?web=1")
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =ColorFade(Self.Color, -25%)
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    PressedFill: =ColorFade(Self.Color, 95%)
+                    RadiusBottomLeft: =2
+                    RadiusBottomRight: =2
+                    RadiusTopLeft: =2
+                    RadiusTopRight: =2
+                    Size: =9
+                    Text: ="填寫指引"
+                    Width: =100
+                    X: =Parent.Width-Self.Width-1
+                    Y: =1
+                    ZIndex: =6
+
+                BtnDefault_25 As button:
+                    BorderColor: =Self.Color
+                    BorderThickness: =1
+                    Color: =glbThemePrimaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    Fill: =White
+                    FocusedBorderThickness: =1
+                    FontWeight: =FontWeight.Normal
+                    Height: =28
+                    HoverBorderColor: =ColorFade(Self.Color, -15%)
+                    HoverColor: =ColorFade(Self.Color, -15%)
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    OnSelect: |-
+                        =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text)).附件).AbsoluteUri)
+                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text&"TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text&"TT")).附件).DisplayName & "?web=1")
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =ColorFade(Self.Color, -25%)
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    PressedFill: =ColorFade(Self.Color, 95%)
+                    RadiusBottomLeft: =2
+                    RadiusBottomRight: =2
+                    RadiusTopLeft: =2
+                    RadiusTopRight: =2
+                    Size: =9
+                    Text: ="示範表格"
+                    Width: =100
+                    X: =Parent.Width-Self.Width-1
+                    Y: =1
+                    ZIndex: =7
 
         FillInContainer As groupContainer.horizontalAutoLayoutContainer:
             AlignInContainer: =AlignInContainer.Center
