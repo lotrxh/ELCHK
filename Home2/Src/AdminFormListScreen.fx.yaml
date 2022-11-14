@@ -645,7 +645,7 @@ AdminFormListScreen As screen:
                     Text: =ThisItem.ModelDepartment
                     Tooltip: =ThisItem.ModelDepartment
                     VerticalAlign: =VerticalAlign.Top
-                    Width: =166
+                    Width: =195
                     Wrap: =false
                     X: =583
                     Y: =14
@@ -671,7 +671,6 @@ AdminFormListScreen As screen:
                     ZIndex: =3
 
                 ModifiedBy As label:
-                    Align: =Align.Center
                     Color: =glbNeutralSecondaryColor
                     Height: =45
                     OnSelect: =Select(Parent)
@@ -687,8 +686,7 @@ AdminFormListScreen As screen:
                     VerticalAlign: =VerticalAlign.Top
                     Width: =153
                     Wrap: =false
-                    X: =753
-                    Y: =2
+                    X: =791
                     ZIndex: =5
 
                 FormNumber As label:
