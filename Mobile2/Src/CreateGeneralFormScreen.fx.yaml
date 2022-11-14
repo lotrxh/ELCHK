@@ -1405,7 +1405,7 @@
                     RadiusTopRight: =4
                     Size: =11
                     Text: ="完成"
-                    Visible: =If(App.ActiveScreen.Width>600,false,true)
+                    Visible: =If(First(EditUserForm).FlowType = "範本" || App.ActiveScreen.Width>600,false,true)
                     Width: =100
                     X: =983
                     Y: =12

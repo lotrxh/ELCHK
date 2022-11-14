@@ -304,7 +304,7 @@
         InfoContainer_1 As groupContainer.horizontalAutoLayoutContainer:
             Fill: =RGBA(255, 255, 255, 1)
             FillPortions: =0
-            Height: =InfoContainer12_3.Y+InfoContainer12_3.Height+20
+            Height: =Rectangle5_3.Y+Rectangle5_3.Height
             LayoutAlignItems: =LayoutAlignItems.Center
             LayoutDirection: =LayoutDirection.Vertical
             LayoutGap: =10
@@ -392,6 +392,7 @@
                     RadiusTopRight: =2
                     Size: =9
                     Text: ="申請表格"
+                    Visible: =If(App.ActiveScreen.Width<600,false,true)
                     Width: =100
                     X: =Parent.Width-Self.Width-1
                     Y: =1
@@ -425,6 +426,7 @@
                     RadiusTopRight: =2
                     Size: =9
                     Text: ="填寫指引"
+                    Visible: =If(App.ActiveScreen.Width<600,false,true)
                     Width: =100
                     X: =Parent.Width-Self.Width-1
                     Y: =1
@@ -458,6 +460,7 @@
                     RadiusTopRight: =2
                     Size: =9
                     Text: ="示範表格"
+                    Visible: =If(App.ActiveScreen.Width<600,false,true)
                     Width: =100
                     X: =Parent.Width-Self.Width-1
                     Y: =1
@@ -512,6 +515,8 @@
                                                 Descending
                                             )
                                         ).TaskStatus = "000"
+                                        //移動端不可見
+                                        || App.ActiveScreen.Width<600
                                         ,false,true)
                     Width: =120
                     X: =1245
@@ -822,6 +827,1170 @@
                         Width: =120
                         X: =76
                         ZIndex: =2
+
+            InfoContainer12_4 As groupContainer.horizontalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.SetByContainer
+                Fill: =RGBA(255, 255, 255, 1)
+                FillPortions: =0
+                Height: =BtnPrimaryLg_14.Y+BtnPrimaryLg_14.Height+10
+                LayoutGap: =10
+                LayoutMinHeight: =40
+                LayoutMinWidth: =250
+                LayoutMode: =LayoutMode.Auto
+                LayoutWrap: =true
+                PaddingLeft: =1
+                PaddingTop: =5
+                Visible: =If(App.ActiveScreen.Width<600,true,false)
+                Width: |
+                    =Switch(
+                            DetailGeneralFormScreen.Size,
+                            ScreenSize.Small,
+                           Parent.Width-40,
+                            ScreenSize.Medium,
+                           Parent.Width-40,
+                           ScreenSize.Large,
+                           Parent.Width-40,
+                           1200
+                      )
+                X: =20
+                Y: =60
+                ZIndex: =3
+
+                BtnDefaultLg_14 As button:
+                    BorderColor: =Self.Color
+                    BorderThickness: =1
+                    Color: =glbErrorColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    DisplayMode: |-
+                        =With(
+                            {
+                                UEmail: LookUp(
+                                    ApprovalDetail_Table,
+                                    Approval_No = Label5.Text && TaskStatus = "002"
+                                ).ApproverEmail
+                            },
+                            If(
+                                //检查，签批，助理总干事签批，总干事签批，跟進时的行動負責人可以拒绝任务，部門簡單流程除外
+                                (UEmail = User().Email && (First(
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            TaskStatus = "002",
+                                            Approval_No = FLowId
+                                        ),
+                                        "Priortty",
+                                        Descending
+                                    )
+                                ).ActionNode = "檢查" || First(
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            TaskStatus = "002",
+                                            Approval_No = FLowId
+                                        ),
+                                        "Priortty",
+                                        Descending
+                                    )
+                                ).ActionNode = "簽批" || First(
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            TaskStatus = "002",
+                                            Approval_No = FLowId
+                                        ),
+                                        "Priortty",
+                                        Descending
+                                    )
+                                ).ActionNode = "助理總幹事審批" || First(
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            TaskStatus = "002",
+                                            Approval_No = FLowId
+                                        ),
+                                        "Priortty",
+                                        Descending
+                                    )
+                                ).ActionNode = "總幹事審批" || (First(
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            TaskStatus = "002",
+                                            Approval_No = FLowId
+                                        ),
+                                        "Priortty",
+                                        Descending
+                                    )
+                                ).ActionNode = "跟進" //&& FlowType<>"部門簡單流程"
+                                )
+                                )) 
+                                //提交经理和表格经理可以拒绝任所属部门下的儅當前行動超過30天為完成的任務
+                                || (
+                                    (CurrentRoleTaskPermissionForm = First(EditDetailUserForm_2).ModelDepartment || CurrentRoleTaskPermission = First(EditDetailUserForm_1).Department) 
+                                    && !("執行" in Filter(ApprovalDetail_Table,Approval_No = FLowId).ActionNode) 
+                                    && (DateDiff(Now(),First(SortByColumns(Filter(ApprovalDetail_Table,TaskStatus = "002",Approval_No = FLowId),"Priortty",Descending)).创建时间) > 30)
+                                    ),
+                                DisplayMode.Edit,
+                                DisplayMode.Disabled
+                            )
+                        )
+                    Fill: =White
+                    FocusedBorderThickness: =1
+                    FontWeight: =FontWeight.Bold
+                    Height: =36
+                    HoverBorderColor: =ColorFade(Self.Color, -15%)
+                    HoverColor: =ColorFade(Self.Color, -15%)
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    OnSelect: |
+                        =If(
+                            IsBlank(TextInput2_34.Text),
+                            Notify(
+                                "請填寫拒絕原因",
+                                Warning
+                            ),
+                            //上傳附件
+                            If(
+                            Last(
+                            Split(
+                                CurrentUser,
+                                "@"
+                            ).Result
+                        ).Result = "chinasofti.com",
+                        //中軟環境上傳
+                        If(Last(Attachment_Zip2.Attachments).Name <> Blank(),
+                                Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));
+                                Set(varBase64Only6,Mid(varAttachmentControl6,Find(",", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (",", varAttachmentControl6)-1));
+                            ELCHK_UploadFiletoSharepoint.Run(
+                                    "UploadFlowAttachMent",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    First(EditDetailUserForm_1).标题,
+                                    FLowId,
+                                    TextInput2_31.Text,
+                                    Last(Attachment_Zip2.Attachments).Name,
+                                    Last(Attachment_Zip2.Attachments).Name,
+                                    "",
+                                    "",
+                                    varBase64Only6
+                                )
+                            )
+                        ,
+                        //客戶環境上傳
+                            If(Last(Attachment_Zip2.Attachments).Name <> Blank(),
+                                Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));
+                                Set(varBase64Only6,Mid(varAttachmentControl6,Find(",", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (",", varAttachmentControl6)-1));
+                            UploadFiletoSharepoint.Run(
+                            "UploadFlowAttachMent",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            First(EditDetailUserForm_1).标题,
+                            FLowId,
+                            TextInput2_31.Text,
+                            Last(Attachment_Zip2.Attachments).Name,
+                            Last(Attachment_Zip2.Attachments).Name,
+                            varBase64Only6,
+                            "",
+                            "",
+                            "",
+                            "",
+                            ""
+                                )
+                            )
+                            );
+                            UpdateIf(
+                                ApprovalDetail_Table,
+                                标题 = First(
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            TaskStatus = "002",
+                                            Approval_No = FLowId
+                                        ),
+                                        "Priortty",
+                                        Descending
+                                    )
+                                ).标题,
+                                {
+                                    TaskStatus: "000",
+                                    Advise: TextInput2_34.Text,
+                                    ApprovalBCC: Concat(
+                                        ComboBox1_12.SelectedItems.Mail,
+                                        Mail,
+                                        ","
+                                    )
+                                }
+                            );
+                            UpdateIf(
+                                Approval_Table,
+                                标题 = FLowId,
+                                {
+                                    Application_Status:"已拒絕"
+                                }
+                            );
+                            Reset(TextInput2_30);
+                            Reset(TextInput2_31);
+                            Reset(TextInput2_35);
+                            Reset(TextInput2_37);
+                            Reset(Attachment_Excel2);
+                            Reset(Attachment_Zip2);
+                            Notify(
+                                "拒絕成功！",
+                                NotificationType.Success,
+                                2000
+                            );
+                            Reset(TextInput2_34);
+                            Launch(JumpUrlClientAPP&"&Screen=GeneralFormListScreen",{},LaunchTarget.Replace);
+                        );
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =ColorFade(Self.Color, -25%)
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    PressedFill: =ColorFade(Self.Color, 95%)
+                    RadiusBottomLeft: =4
+                    RadiusBottomRight: =4
+                    RadiusTopLeft: =4
+                    RadiusTopRight: =4
+                    Size: =11
+                    Text: ="拒絕申請"
+                    Width: =120
+                    X: =360
+                    Y: =7
+                    ZIndex: =9
+
+                BtnDefaultLg_15 As button:
+                    BorderColor: =Self.Color
+                    BorderThickness: =1
+                    Color: =glbThemePrimaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    DisplayMode: |-
+                        =With(
+                            {
+                                UEmail: LookUp(
+                                    ApprovalDetail_Table,
+                                    Approval_No = Label5.Text && TaskStatus = "002"
+                                ).ApproverEmail
+                            },
+                            If(
+                                //检查，签批，助理总干事签批，总干事签批，跟進时的行動負責人可以拒绝任务，每个行动每人只能退回一次
+                                UEmail = User().Email
+                                && (
+                                    (First(
+                                            SortByColumns(
+                                                Filter(
+                                                    ApprovalDetail_Table,
+                                                    TaskStatus = "002",
+                                                    Approval_No = FLowId
+                                                ),
+                                                "Priortty",
+                                                Descending
+                                            )
+                                        ).ActionNode = "檢查" && CountA(Filter(ApprovalDetail_Table,Approval_No = FLowId,TaskStatus = "005",ActionNode = "檢查",ApproverEmail = User().Email).标题)=0)
+                                        || (First(
+                                            SortByColumns(
+                                                Filter(
+                                                    ApprovalDetail_Table,
+                                                    TaskStatus = "002",
+                                                    Approval_No = FLowId
+                                                ),
+                                                "Priortty",
+                                                Descending
+                                            )
+                                        ).ActionNode = "簽批" && CountA(Filter(ApprovalDetail_Table,Approval_No = FLowId,TaskStatus = "005",ActionNode = "簽批",ApproverEmail = User().Email).标题)=0)
+                                        || (First(
+                                            SortByColumns(
+                                                Filter(
+                                                    ApprovalDetail_Table,
+                                                    TaskStatus = "002",
+                                                    Approval_No = FLowId
+                                                ),
+                                                "Priortty",
+                                                Descending
+                                            )
+                                        ).ActionNode = "助理總幹事審批" && CountA(Filter(ApprovalDetail_Table,Approval_No = FLowId,TaskStatus = "005",ActionNode = "助理總幹事審批",ApproverEmail = User().Email).标题)=0)
+                                        || (First(
+                                            SortByColumns(
+                                                Filter(
+                                                    ApprovalDetail_Table,
+                                                    TaskStatus = "002",
+                                                    Approval_No = FLowId
+                                                ),
+                                                "Priortty",
+                                                Descending
+                                            )
+                                        ).ActionNode = "總幹事審批" && CountA(Filter(ApprovalDetail_Table,Approval_No = FLowId,TaskStatus = "005",ActionNode = "總幹事審批",ApproverEmail = User().Email).标题)=0)
+                                        || (First(
+                                            SortByColumns(
+                                                Filter(
+                                                    ApprovalDetail_Table,
+                                                    TaskStatus = "002",
+                                                    Approval_No = FLowId
+                                                ),
+                                                "Priortty",
+                                                Descending
+                                            )
+                                        ).ActionNode = "跟進" && CountA(Filter(ApprovalDetail_Table,Approval_No = FLowId,TaskStatus = "005",ActionNode = "跟進",ApproverEmail = User().Email).标题)=0
+                                        //&& FlowType<>"部門簡單流程"
+                                        )
+                                ),
+                                DisplayMode.Edit,
+                                DisplayMode.Disabled
+                            )
+                        )
+                    Fill: =White
+                    FocusedBorderThickness: =1
+                    Height: =36
+                    HoverBorderColor: =ColorFade(Self.Color, -15%)
+                    HoverColor: =ColorFade(Self.Color, -15%)
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    OnSelect: |-
+                        =If(
+                            IsBlank(TextInput2_34.Text),
+                            Notify(
+                                "請填寫退回原因",
+                                Warning
+                            ),
+                        //更新退回時的审批行动状态为005，表示退回
+                           With(
+                                    {
+                                        CurrentLastData: First(
+                                            SortByColumns(
+                                                Filter(
+                                                    ApprovalDetail_Table,
+                                                    TaskStatus = "002",
+                                                    Approval_No = FLowId
+                                                ),
+                                                "Priortty",
+                                                Descending
+                                            )
+                                        )
+                                    },
+                                    UpdateIf(
+                                        ApprovalDetail_Table,
+                                        标题 = CurrentLastData.标题,
+                                        {
+                                            TaskStatus: "005",
+                                            Advise: TextInput2_34.Text,
+                                            ApprovalBCC: Concat(
+                                        ComboBox1_12.SelectedItems.Mail,
+                                        Mail,
+                                        ","
+                                    )
+                                        }
+                                    )
+                                );
+                        
+                             //上傳附件
+                            If(
+                            Last(
+                            Split(
+                                CurrentUser,
+                                "@"
+                            ).Result
+                        ).Result = "chinasofti.com",
+                        //中軟環境上傳
+                        If(Last(Attachment_Zip2.Attachments).Name <> Blank(),
+                                Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));
+                                Set(varBase64Only6,Mid(varAttachmentControl6,Find(",", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (",", varAttachmentControl6)-1));
+                            ELCHK_UploadFiletoSharepoint.Run(
+                                    "UploadFlowAttachMent",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    First(EditDetailUserForm_1).标题,
+                                    FLowId,
+                                    TextInput2_31.Text,
+                                    Last(Attachment_Zip2.Attachments).Name,
+                                    Last(Attachment_Zip2.Attachments).Name,
+                                    "",
+                                    "",
+                                    varBase64Only6
+                                )
+                            )
+                        ,
+                        //客戶環境上傳
+                            If(Last(Attachment_Zip2.Attachments).Name <> Blank(),
+                                Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));
+                                Set(varBase64Only6,Mid(varAttachmentControl6,Find(",", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (",", varAttachmentControl6)-1));
+                            UploadFiletoSharepoint.Run(
+                            "UploadFlowAttachMent",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            First(EditDetailUserForm_1).标题,
+                            FLowId,
+                            TextInput2_31.Text,
+                            Last(Attachment_Zip2.Attachments).Name,
+                            Last(Attachment_Zip2.Attachments).Name,
+                            varBase64Only6,
+                            "",
+                            "",
+                            "",
+                            "",
+                            ""
+                                )
+                            )
+                            );
+                        
+                        //RemoveIf(ApprovalDetail_Table,TaskStatus="002",Approval_No=FLowId);
+                        //UpdateIf(ApprovalDetail_Table,Title=First(SortByColumns(Filter(ApprovalDetail_Table,TaskStatus="004",Approval_No=FLowId),"Priortty",Descending)).Title,{TaskStatus:"002",Advise:""});
+                        
+                        //更新審批詳情表，新增一條提交申請，如果之前流程中沒有提交則退回到填寫人，即新增一條填寫申請
+                        If("提交" in Filter(
+                                    ApprovalDetail_Table,
+                                    Approval_No = FLowId).ActionNode,
+                            With(
+                                    {
+                                        Lastsubmit: First(
+                                            SortByColumns(
+                                                Filter(
+                                                    ApprovalDetail_Table,
+                                                    Approval_No = FLowId,
+                                                    ActionNode = "提交"
+                                        
+                                                ),
+                                                "Priortty",
+                                                Descending
+                                            )
+                                        )
+                                    },
+                              
+                                Patch(
+                                    ApprovalDetail_Table,
+                                    Defaults(ApprovalDetail_Table),
+                                    {
+                                        标题: GUID(),
+                                        Approval_No: FLowId,
+                                        Advise: Lastsubmit.Advise,
+                                        ApprovalBCC: Lastsubmit.ApprovalBCC,
+                                        Approver: Lastsubmit.Approver,
+                                        ApproverEmail: Lastsubmit.ApproverEmail,
+                                        Priortty: First(
+                                            SortByColumns(
+                                                Filter(
+                                                    ApprovalDetail_Table,
+                                                    Approval_No = FLowId
+                                                ),
+                                                "Priortty",
+                                                Descending
+                                            )
+                                        ).Priortty + 1,
+                                        TaskStatus: "002",
+                                        ActionNode: "提交"
+                                    }
+                                    )
+                                ),
+                                With(
+                                    {
+                                        Lastsubmit: First(
+                                            SortByColumns(
+                                                Filter(
+                                                    ApprovalDetail_Table,
+                                                    //TaskStatus = "002",
+                                                    Approval_No = FLowId,
+                                                    ActionNode = "填寫"
+                                        
+                                                ),
+                                                "Priortty",
+                                                Descending
+                                            )
+                                        )
+                                    },
+                                Patch(
+                                    ApprovalDetail_Table,
+                                    Defaults(ApprovalDetail_Table),
+                                    {
+                                        标题: GUID(),
+                                        Approval_No: FLowId,
+                                        Advise: Lastsubmit.Advise,
+                                        ApprovalBCC: Lastsubmit.ApprovalBCC,
+                                        Approver: Lastsubmit.Approver,
+                                        ApproverEmail: Lastsubmit.ApproverEmail,
+                                        Priortty: First(
+                                            SortByColumns(
+                                                Filter(
+                                                    ApprovalDetail_Table,
+                                                    Approval_No = FLowId
+                                                ),
+                                                "Priortty",
+                                                Descending
+                                            )
+                                        ).Priortty + 1,
+                                        TaskStatus: "002",
+                                        ActionNode: "填寫"
+                                    }
+                                    )
+                                )
+                            );
+                            //收集当前任务的审批数据
+                            ClearCollect(ThisFlowIDapprovetable,
+                            Filter
+                                (
+                                    ApprovalDetail_Table,
+                                    Approval_No = FLowId
+                                )
+                            );
+                            //DataFlowActionCol5,退回后的预设流程下一节行动
+                            ClearCollect(DataFlowActionCol5,DataFlowActionCol);
+                            Remove(
+                                DataFlowActionCol5,
+                                First(
+                                    Filter(
+                                        DataFlowActionCol5,
+                                        Result = "提交"
+                                    )
+                                )
+                            );
+                            RemoveIf(
+                                DataFlowActionCol5,
+                                Result in Filter(
+                                    ThisFlowIDapprovetable,
+                                    Value(Priortty) > Value(Last(Filter(
+                                    ApprovalDetail_Table,
+                                    Approval_No = FLowId,
+                                    TaskStatus = "005")).Priortty)
+                                ).ActionNode
+                            );
+                            Reset(TextInput2_30);
+                            Reset(TextInput2_31);
+                            Reset(TextInput2_35);
+                            Reset(TextInput2_37);
+                            Reset(Attachment_Excel2);
+                            Reset(Attachment_Zip2);
+                            Notify(
+                                "退回成功！",
+                                NotificationType.Success,
+                                2000
+                            );
+                            Reset(TextInput2_34);
+                            Launch(JumpUrlClientAPP&"&Screen=GeneralFormListScreen",{},LaunchTarget.Replace);
+                        )
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =ColorFade(Self.Color, -25%)
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    PressedFill: =ColorFade(Self.Color, 95%)
+                    RadiusBottomLeft: =4
+                    RadiusBottomRight: =4
+                    RadiusTopLeft: =4
+                    RadiusTopRight: =4
+                    Size: =11
+                    Text: ="退回至申請人"
+                    Width: =120
+                    X: =161
+                    Y: =7
+                    ZIndex: =10
+
+                BtnPrimaryLg_14 As button:
+                    BorderColor: =Self.Fill
+                    BorderThickness: =1
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    DisplayMode: |-
+                        =With(
+                            {
+                                UEmail: LookUp(
+                                    ApprovalDetail_Table,
+                                    Approval_No = Label5.Text && TaskStatus = "002"
+                                ).ApproverEmail
+                            },
+                            If(
+                                UEmail = User().Email  
+                                //測試需要，eps-vender都可以同意
+                                //|| User().Email = "eps-vendor@elchk.org.hk"
+                                ,
+                                DisplayMode.Edit,
+                                DisplayMode.Disabled
+                            )
+                        )
+                    Fill: =glbThemePrimaryColor
+                    FocusedBorderThickness: =1
+                    FontWeight: =FontWeight.Bold
+                    Height: =36
+                    HoverFill: =ColorFade(Self.Fill, -15%)
+                    OnSelect: |-
+                        =//判斷必填字段是否爲空
+                        If(
+                            (Label6_2.Visible = true && Last(Attachment_Excel2.Attachments).Name <> Blank() && IsBlank(TextInput2_30) && IsBlank(TextInput2_35)) || (Label6_3.Visible = true && Last(Attachment_Zip2.Attachments).Name <> Blank() && IsBlank(TextInput2_31) && IsBlank(TextInput2_37)) || (Dropdown1_6.Visible = true && Dropdown1_6.Selected.Result = Blank()) || (Label1_138.Visible = true && Label1_138.Text = "/") 
+                            //|| (TextInput_FilterLabel_2.Visible = true && IsBlank(TextInput_FilterLabel_2))
+                            ,
+                            Notify(
+                                "必需項不能爲空，處理行動及處理人不能爲空",
+                                NotificationType.Error
+                            ),
+                            
+                        If(
+                            Last(
+                            Split(
+                                CurrentUser,
+                                "@"
+                            ).Result
+                        ).Result = "chinasofti.com",
+                        //中軟環境上傳
+                        If(Last(Attachment_Excel2.Attachments).Name <> Blank(),
+                        Set(varAttachmentControl5,JSON(Image2.Image,IncludeBinaryData));
+                        Set(varBase64Only5,Mid(varAttachmentControl5,Find(",", varAttachmentControl5)+1,Len(varAttachmentControl5)-Find (",", varAttachmentControl5)-1));
+                        Collect(FormAttachmentName,Filter(
+                                                            GenericUploadAttachMentFile,
+                                                            FormId = FormListId,
+                                                            StartsWith(
+                                                                        FormAttachMent,
+                                                                        First(Split(AttachmentExcelName,".")).Result)));
+                        		ELCHK_UploadFiletoSharepoint.Run(
+                                    "GenericUploadAttachMentFile",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    GUID(),
+                                    First(EditDetailUserForm_1).标题,
+                                    First(EditDetailUserForm_1).FormType,
+                                    First(Split(AttachmentExcelName,".")).Result&"_"&Text(
+                                                Right(
+                                                        First(Split(
+                                                        Last(
+                                                            SortByColumns(
+                                                                FormAttachmentName,
+                                                                "ID",
+                                                                Ascending
+                                                            )
+                                                        ).FormAttachMent,".")).Result
+                                                    ,
+                                                    3
+                                                ) + 1,
+                                                "000"
+                                            )&"."&Last(Split(AttachmentExcelName,".")).Result,
+                        			TextInput2_30.Text,
+                                    First(Split(AttachmentExcelName,".")).Result&"_"&Text(
+                                                Right(
+                                                        First(Split(
+                                                        Last(
+                                                            SortByColumns(
+                                                                FormAttachmentName,
+                                                                "ID",
+                                                                Ascending
+                                                            )
+                                                        ).FormAttachMent,".")).Result
+                                                    ,
+                                                    3
+                                                ) + 1,
+                                                "000"
+                                            )&"."&Last(Split(AttachmentExcelName,".")).Result,
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    varBase64Only5,
+                                    "",
+                                    ""
+                                )
+                        		);
+                        //上傳附件
+                        If(Last(Attachment_Zip2.Attachments).Name <> Blank(),
+                        Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));
+                        Set(varBase64Only6,Mid(varAttachmentControl6,Find(",", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (",", varAttachmentControl6)-1));
+                        ELCHK_UploadFiletoSharepoint.Run(
+                                    "UploadFlowAttachMent",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    First(EditDetailUserForm_1).标题,
+                                    FLowId,
+                                    TextInput2_31.Text,
+                            Last(Attachment_Zip2.Attachments).Name,
+                            Last(Attachment_Zip2.Attachments).Name,
+                                    "",
+                                    "",
+                                    varBase64Only6
+                                )
+                        		);
+                        		,
+                        
+                        //客戶環境
+                        //上傳表格
+                        If(Last(Attachment_Excel2.Attachments).Name <> Blank(),
+                        Set(varAttachmentControl5,JSON(Image2.Image,IncludeBinaryData));
+                        Set(varBase64Only5,Mid(varAttachmentControl5,Find(",", varAttachmentControl5)+1,Len(varAttachmentControl5)-Find (",", varAttachmentControl5)-1));
+                        Collect(FormAttachmentName,Filter(
+                                                            GenericUploadAttachMentFile,
+                                                            FormId = FormListId,
+                                                            StartsWith(
+                                                                        FormAttachMent,
+                                                                        First(Split(AttachmentExcelName,".")).Result)));    
+                        UploadFiletoSharepoint.Run(
+                            "GenericUploadAttachMentFile",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            GUID(),
+                            First(EditDetailUserForm_1).标题,
+                            First(EditDetailUserForm_1).FormType,
+                            First(Split(AttachmentExcelName,".")).Result&"_"&Text(
+                                                Right(
+                                                        First(Split(
+                                                        Last(
+                                                            SortByColumns(
+                                                                FormAttachmentName,
+                                                                "ID",
+                                                                Ascending
+                                                            )
+                                                        ).FormAttachMent,".")).Result
+                                                    ,
+                                                    3
+                                                ) + 1,
+                                                "000"
+                                            )&"."&Last(Split(AttachmentExcelName,".")).Result,
+                            TextInput2_30.Text,
+                            First(Split(AttachmentExcelName,".")).Result&"_"&Text(
+                                                Right(
+                                                        First(Split(
+                                                        Last(
+                                                            SortByColumns(
+                                                                FormAttachmentName,
+                                                                "ID",
+                                                                Ascending
+                                                            )
+                                                        ).FormAttachMent,".")).Result
+                                                    ,
+                                                    3
+                                                ) + 1,
+                                                "000"
+                                            )&"."&Last(Split(AttachmentExcelName,".")).Result,
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            varBase64Only5,
+                            "",
+                            "",
+                            "",
+                            ""
+                            )
+                            
+                            );
+                        
+                        
+                        
+                        //上傳附件
+                        If(Last(Attachment_Zip2.Attachments).Name <> Blank(),
+                        Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));
+                        Set(varBase64Only6,Mid(varAttachmentControl6,Find(",", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (",", varAttachmentControl6)-1));
+                        UploadFiletoSharepoint.Run(
+                            "UploadFlowAttachMent",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            "",
+                            First(EditDetailUserForm_1).标题,
+                            FLowId,
+                            TextInput2_31.Text,
+                            Last(Attachment_Zip2.Attachments).Name,
+                            Last(Attachment_Zip2.Attachments).Name,
+                            varBase64Only6,
+                            "",
+                            "",
+                            "",
+                            "",
+                            ""
+                            )
+                        )
+                        );
+                        
+                        
+                        
+                        
+                            //更新FormId和PWD到UploadFlowAttachMent中
+                            Reset(TextInput2_30);
+                            Reset(TextInput2_31);
+                            Reset(TextInput2_35);
+                            Reset(TextInput2_37);
+                            Reset(Attachment_Excel2);
+                            Reset(Attachment_Zip2);
+                            //Clear(AttachmentExcelName);
+                            //Clear(AttachmentZipName);
+                        
+                        //更新GenericFormList标签
+                        UpdateIf(
+                                GenericFormList,
+                                标题 = FormListId,
+                                {
+                                    FilterLabel:TextInput_FilterLabel_2.Text
+                                }
+                            );
+                        
+                           With(
+                            {
+                                UEmail: LookUp(
+                                    ApprovalDetail_Table,
+                                    Approval_No = Label5.Text && TaskStatus = "002"
+                                ).ApproverEmail
+                            }, 
+                           If(Checkbox2_6.Value = true 
+                            ,
+                        
+                           // 勾選后直接执行，并且审批完成
+                           
+                            Patch(
+                                ApprovalDetail_Table,
+                                Defaults(ApprovalDetail_Table),
+                                {
+                                    标题: GUID(),
+                                    Approval_No: FLowId,
+                                    Advise: TextInput2_34.Text,
+                                    ApprovalBCC: Concat(
+                                        ComboBox1_12.SelectedItems.Mail,
+                                        Mail,
+                                        ","
+                                    ),
+                                    Approver: User().FullName,
+                                    //First(Split(Gallery2_1.Selected.AllOwnerName.DisplayName," ").Result).Result,
+                                    ApproverEmail: User().Email,
+                                    //Gallery2_1.Selected.AllOwnerName.Email,
+                                    Priortty: First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                Approval_No = FLowId
+                                            ),
+                                            "Priortty",
+                                            Descending
+                                        )
+                                    ).Priortty + 1,
+                                    TaskStatus: "006",
+                                    ActionNode: "執行"
+                                }
+                            );
+                            UpdateIf(
+                                Approval_Table,
+                                标题 = FLowId,
+                                {
+                                    Application_Status:"任務完成"
+                                }
+                            );
+                             With(
+                                {
+                                    CurrentLastData: First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                TaskStatus = "002",
+                                                Approval_No = FLowId
+                                            ),
+                                            "Priortty",
+                                            Descending
+                                        )
+                                    )
+                                },
+                                UpdateIf(
+                                    ApprovalDetail_Table,
+                                    标题 = CurrentLastData.标题,
+                                    {
+                                        TaskStatus: "004",
+                                        Advise: TextInput2_34.Text
+                                    }
+                                )
+                            );
+                            Reset(TextInput2_34);
+                            Reset(Dropdown1_6);
+                            Reset(ComboBox1_12);
+                            Set(
+                                AddApproverCol,
+                                {}
+                            );
+                            Refresh(GenericUploadAttachMentFile);
+                            Refresh(UploadFlowAttachMent);
+                            ClearCollect(
+                                    EditDetailUserAttachment,
+                                    Filter(
+                                        GenericUploadAttachMentFile,
+                                        FormId = FormListId
+                                    )
+                                );
+                            ClearCollect(
+                                    EditDetailUserAttachment2,
+                                    Filter(
+                                        UploadFlowAttachMent,
+                                        标题 = FormListId
+                                    )
+                                );
+                                Refresh(ApprovalDetail_Table);
+                                 Notify(
+                                "執行成功！",
+                                NotificationType.Success,
+                                2000
+                            );
+                                Launch(JumpUrlClientAPP&"&Screen=GeneralFormListScreen",{},LaunchTarget.Replace);
+                           ,
+                           
+                            //未勾選，則更新審批詳情表，流程繼續進行
+                            //填寫人是否直接提交
+                            If(
+                                Checkbox2_7.Value = true,
+                            //記錄提交人信息记录
+                                Patch(
+                                    ApprovalDetail_Table,
+                                    Defaults(ApprovalDetail_Table),
+                                    {
+                                        标题: GUID(),
+                                        Approval_No: FLowId,
+                                        Advise: "",
+                                        ApprovalBCC: "",
+                                        Approver: User().FullName,
+                                        ApproverEmail: User().Email,
+                                        Priortty: First(
+                                            SortByColumns(
+                                                Filter(
+                                                    ApprovalDetail_Table,
+                                                    Approval_No = FLowId
+                                                ),
+                                                "Priortty",
+                                                Descending
+                                            )
+                                        ).Priortty + 1,
+                                        TaskStatus: "004",
+                                        ActionNode:"提交"
+                                    }
+                                );
+                                );
+                            //更新當前行動狀態為完成，新增下一節行動
+                            With(
+                                    {
+                                        CurrentLastData: First(
+                                            SortByColumns(
+                                                Filter(
+                                                    ApprovalDetail_Table,
+                                                    TaskStatus = "002",
+                                                    Approval_No = FLowId
+                                                ),
+                                                "Priortty",
+                                                Descending
+                                            )
+                                        )
+                                    },
+                                    UpdateIf(
+                                        ApprovalDetail_Table,
+                                        标题 = CurrentLastData.标题,
+                                        {
+                                            TaskStatus: "004",
+                                            ApprovalBCC: Concat(
+                                            ComboBox1_12.SelectedItems.Mail,
+                                            Mail,
+                                            ","
+                                            ),
+                                            Advise: TextInput2_34.Text
+                                        }
+                                    )
+                                );
+                                Patch(
+                                    ApprovalDetail_Table,
+                                    Defaults(ApprovalDetail_Table),
+                                    {
+                                        标题: GUID(),
+                                        Approval_No: FLowId,
+                                        Advise: "",
+                                        ApprovalBCC: "",
+                                        Approver: First(Split(Label1_138.Text,"/")).Result,
+                                        //First(Split(Gallery2_1.Selected.AllOwnerName.DisplayName," ").Result).Result,
+                                        ApproverEmail: Last(Split(Label1_138.Text,"/")).Result,
+                                        //Gallery2_1.Selected.AllOwnerName.Email,
+                                        Priortty: First(
+                                            SortByColumns(
+                                                Filter(
+                                                    ApprovalDetail_Table,
+                                                    Approval_No = FLowId
+                                                ),
+                                                "Priortty",
+                                                Descending
+                                            )
+                                        ).Priortty + 1,
+                                        TaskStatus: "002",
+                                        ActionNode:Dropdown1_6.Selected.Result
+                                    }
+                                );
+                        
+                            //重置控件
+                            Reset(TextInput2_34);
+                            Reset(Dropdown1_6);
+                            Reset(ComboBox1_12);
+                        
+                            //更新行動狀態
+                            ClearCollect(
+                                DataFlowActionCol2,DataFlowActionCol);
+                                
+                            ClearCollect(
+                                DataFlowActionCol3,DataFlowActionCol);
+                            //提交之后下一次处理中无提交和补充资料
+                            Remove(
+                                DataFlowActionCol2,
+                                First(
+                                    Filter(
+                                        DataFlowActionCol2,
+                                        Result = "提交"
+                                    )
+                                ),
+                                First(
+                                    Filter(
+                                        DataFlowActionCol2,
+                                        Result = "補充資料"
+                                    )
+                                )
+                            );
+                            RemoveIf(
+                                DataFlowActionCol3,
+                                Result in Filter(
+                                    ApprovalDetail_Table,
+                                    Approval_No = FLowId
+                                ).ActionNode
+                            );
+                            ClearCollect(DataFlowActionCol4,{
+                                Result:"跟進"      
+                            }
+                            );
+                            //收集当前任务的审批数据
+                            ClearCollect(ThisFlowIDapprovetable,
+                            Filter
+                                (
+                                    ApprovalDetail_Table,
+                                    Approval_No = FLowId
+                                )
+                            );
+                            //DataFlowActionCol5,退回后的预设流程下一节行动
+                            ClearCollect(DataFlowActionCol5,DataFlowActionCol);
+                            Remove(
+                                DataFlowActionCol5,
+                                First(
+                                    Filter(
+                                        DataFlowActionCol5,
+                                        Result = "提交"
+                                    )
+                                )
+                            );
+                            RemoveIf(
+                                DataFlowActionCol5,
+                                Result in Filter(
+                                    ThisFlowIDapprovetable,
+                                    Value(Priortty) > Value(Last(Filter(
+                                    ApprovalDetail_Table,
+                                    Approval_No = FLowId,
+                                    TaskStatus = "005")).Priortty)
+                                ).ActionNode
+                            );
+                            
+                            Refresh(GenericUploadAttachMentFile);
+                            Refresh(UploadFlowAttachMent);
+                            ClearCollect(
+                                    EditDetailUserAttachment,
+                                    Filter(
+                                        GenericUploadAttachMentFile,
+                                        FormId = FormListId
+                                    )
+                                );
+                        ClearCollect(
+                                    EditDetailUserAttachment2,
+                                    Filter(
+                                        UploadFlowAttachMent,
+                                        标题 = FormListId
+                                    )
+                                );
+                        Notify(
+                                "審批成功！",
+                                NotificationType.Success,
+                                2000
+                            );
+                        If(Last(Split(Label1_138.Text,"/")).Result <> User().Email,
+                        //下一节点处理人不是当前用户时，跳转用户到任務列表
+                        Launch(JumpUrlClientAPP&"&Screen=GeneralFormListScreen",{},LaunchTarget.Replace)
+                        );
+                        
+                            Set(
+                                AddApproverCol,
+                                {}
+                            );
+                            );
+                           )
+                        )
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedColor: =White
+                    PressedFill: =ColorFade(Self.Fill, -25%)
+                    RadiusBottomLeft: =4
+                    RadiusBottomRight: =4
+                    RadiusTopLeft: =4
+                    RadiusTopRight: =4
+                    Size: =11
+                    Text: ="同意"
+                    Width: =120
+                    X: =304
+                    Y: =7
+                    ZIndex: =11
+
+            Rectangle5_3 As rectangle:
+                Fill: =RGBA(0, 0, 0, 0)
+                Height: =5
+                ZIndex: =4
 
         FillInContainer_1 As groupContainer.horizontalAutoLayoutContainer:
             AlignInContainer: =AlignInContainer.Center
@@ -2103,11 +3272,13 @@
 
             RightContainer_1 As groupContainer.verticalAutoLayoutContainer:
                 Fill: =RGBA(255, 255, 255, 1)
+                FillPortions: =0
                 Height: |-
                     =//NextStepContainer_1.Y+NextStepContainer_1.Height+20
                     Rectangle6_1.Y+Rectangle6_1.Height
                 LayoutAlignItems: =LayoutAlignItems.Stretch
                 LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinWidth: =250
                 LayoutMode: =LayoutMode.Auto
                 PaddingLeft: =20
                 PaddingRight: =20
@@ -2129,11 +3300,32 @@
                     ZIndex: =1
 
                 Gallery1 As gallery.variableTemplateHeightGallery:
-                    Height: =If(Statuslbl.Visible = true, 130, CommentsContainer_1.Y+CommentsContainer_1.Height+20-65)
+                    Height: |-
+                        =If("執行" in 
+                                            
+                                                Filter(
+                                                    ApprovalDetail_Table,
+                                                    //TaskStatus = "002",
+                                                    Approval_No = FLowId
+                                                
+                                            
+                                        ).ActionNode 
+                                        //任務拒絕后不可見
+                                       || First(
+                                    SortByColumns(
+                                                Filter(
+                                                    ApprovalDetail_Table,
+                                                    Approval_No = FLowId
+                                                                            ),
+                                                "Priortty",
+                                                Descending
+                                            )
+                                        ).TaskStatus = "000",  CommentsContainer_1.Y+CommentsContainer_1.Height+20-65,130)
                     Items: =Filter(ApprovalDetail_Table,Approval_No = FLowId)
                     Layout: =Layout.Vertical
                     TemplatePadding: =0
                     TemplateSize: =180
+                    Width: =460
                     ZIndex: =2
 
                     Label6_37 As label:
@@ -2162,7 +3354,7 @@
                         PaddingTop: =0
                         Size: =10
                         Text: =ThisItem.Approver&Char(13)&ThisItem.ApproverEmail
-                        Width: =447
+                        Width: =430
                         Wrap: =false
                         X: =30
                         Y: =28
@@ -2193,7 +3385,7 @@
                         LayoutDirection: =LayoutDirection.Vertical
                         LayoutGap: =-30
                         LayoutMode: =LayoutMode.Auto
-                        Width: =447
+                        Width: =430
                         X: =30
                         Y: =64
                         ZIndex: =9
@@ -2219,6 +3411,7 @@
 
                         Container21 As groupContainer.manualLayoutContainer:
                             Height: =CommentLabel_4.Height+CommentLabel_4.Y
+                            Width: =430
                             ZIndex: =5
 
                             CommentLabel_4 As label:
@@ -2895,16 +4088,18 @@
                     ZIndex: =9
 
                 Label9_32 As label:
+                    AlignInContainer: =AlignInContainer.Stretch
                     Color: =glbNeutralPrimaryColor
                     Height: =36
+                    LayoutMinWidth: =147
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =10
                     Text: ="處理備注"
-                    Visible: =If(App.ActiveScreen.Width<600,false,true)
                     Width: =70
+                    Wrap: =false
                     Y: =7
                     ZIndex: =10
 
@@ -3090,6 +4285,7 @@
     BottomContainer_2 As groupContainer.manualLayoutContainer:
         Fill: =White
         Height: =Container11_2.Height
+        Visible: =If(App.ActiveScreen.Width<600,false,true)
         Width: =Parent.Width
         Y: =Parent.Height-Self.Height
         ZIndex: =3
