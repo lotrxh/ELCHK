@@ -60,41 +60,20 @@ HomepageScreen As screen:
             Y: =100
             ZIndex: =1
 
-            Image2 As image:
-                Height: =30
-                Image: |
-                    =If(
-                        ThisItem.Value = "首頁",
-                        首页,
-                        ThisItem.Value = "表格資料",
-                        表格资料,
-                        ThisItem.Value = "數據統計",
-                        数据,
-                        ThisItem.Value = "系統設定",
-                        设置,
-                        ThisItem.Value = "申請列表",
-                        申请列表
-                    )
-                OnSelect: =Select(Parent)
-                Width: =30
-                X: =60
-                Y: =10
-                ZIndex: =1
-
             BtnDefault_9 As button:
                 Align: =Align.Left
                 BorderColor: =Self.Color
                 BorderStyle: =BorderStyle.None
-                BorderThickness: =1
+                BorderThickness: =0
                 Color: =If(ThisItem.Value="首頁", glbThemePrimaryColor,glbNeutralSecondaryColor)
                 DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                Fill: =Transparent
+                Fill: =If(ThisItem.Value="首頁", ColorFade(Self.Color, 90%),White)
                 FocusedBorderThickness: =1
                 FontWeight: =If(ThisItem.Value="首頁", FontWeight.Semibold,Normal)
                 Height: =46
                 HoverBorderColor: =ColorFade(Self.Color, -15%)
                 HoverColor: =ColorFade(Self.Color, -15%)
-                HoverFill: =
+                HoverFill: =If(ThisItem.Value<>Blank(),ColorFade(glbThemePrimaryColor, 90%))
                 OnSelect: |-
                     =If(
                         ThisItem.Value = "首頁",
@@ -137,6 +116,27 @@ HomepageScreen As screen:
                 Text: =ThisItem.Value
                 Width: =240
                 Y: =2
+                ZIndex: =1
+
+            Image2 As image:
+                Height: =30
+                Image: |
+                    =If(
+                        ThisItem.Value = "首頁",
+                        首页,
+                        ThisItem.Value = "表格資料",
+                        表格资料,
+                        ThisItem.Value = "數據統計",
+                        数据,
+                        ThisItem.Value = "系統設定",
+                        设置,
+                        ThisItem.Value = "申請列表",
+                        申请列表
+                    )
+                OnSelect: =Select(Parent)
+                Width: =30
+                X: =60
+                Y: =10
                 ZIndex: =2
 
         GalleryNav_5 As gallery.galleryVertical:
@@ -245,12 +245,6 @@ HomepageScreen As screen:
             X: =64
             Y: =31
             ZIndex: =10
-
-        Image11 As image:
-            Image: ='意见箱'
-            X: =70
-            Y: =481
-            ZIndex: =11
 
     Container4_2 As groupContainer.manualLayoutContainer:
         Fill: =glbNeutralLighterColor
