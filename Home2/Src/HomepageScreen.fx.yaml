@@ -1,15 +1,20 @@
 HomepageScreen As screen:
     Fill: =RGBA(243, 243, 243, 1)
-    OnVisible: |+
+    OnVisible: |
         =ClearCollect(approvalCol,Approval_Table);ClearCollect(ApprovalDetailData,ApprovalDetail_Table);
         // 优先处理
         With({XXX11:Filter(ApprovalDetailData,(CurrentUser in ApproverEmail||CurrentUser in AgentUserEmail)&&TaskStatus<>Blank()&&(TaskStatus="002"||TaskStatus="001")&&DateDiff(修改时间,Today())>3)},ClearCollect(Priority_Processing,XXX11));
         // 待处理
         With({SearchPendingData:Filter(ApprovalDetailData,(CurrentUser in ApproverEmail||CurrentUser<>Blank()&&CurrentUser in AgentUserEmail)&&(TaskStatus="001"||TaskStatus="002"))},ClearCollect(FilterPendingDataCol,SearchPendingData));
         
-        ClearCollect(DataModelName,{ModelName:"招聘職位申請表",ModelDescription:"招聘表格",ModelFlowNumber:"A103"},{ModelName:"假期批核人資料表",ModelDescription:"假期表格",ModelFlowNumber:"A306"},{ModelName:"任職資源申請",ModelDescription:"IT財務指引表格",ModelFlowNumber:"A111"},{ModelName:"預備合約通知書(新入職)",ModelDescription:"預備合約表格",ModelFlowNumber:"A104"});
+        ClearCollect(DataModelName,GenericFormModel);
+        Patch(DataModelName,Defaults(DataModelName),{ModelName:"招聘職位申請表",ModelDescription:"招聘表格",ModelFlowNumber:"A103",ModelDepartment:"行政部"});
+        Patch(DataModelName,Defaults(DataModelName),{ModelName:"假期批核人資料表",ModelDescription:"假期表格",ModelFlowNumber:"A306",ModelDepartment:"行政部"});
+        Patch(DataModelName,Defaults(DataModelName),{ModelName:"任職資源申請",ModelDescription:"IT財務指引表格",ModelFlowNumber:"A111",ModelDepartment:"行政部"});
+        Patch(DataModelName,Defaults(DataModelName),{ModelName:"預備合約通知書(新入職)",ModelDescription:"預備合約表格",ModelFlowNumber:"A104",ModelDepartment:"行政部"});
         
         //創建首頁部門集合
+        /*
         ClearCollect(FormTable3,FormTableType);
         Patch(FormTable3,Defaults(FormTable3),{
         DepartMentName:"常用表格",
@@ -17,78 +22,16 @@ HomepageScreen As screen:
         });
         ClearCollect(FormTable2,SortByColumns(FormTable3,"ID",Ascending));
         ClearCollect(FormTable4,Distinct(FormTable2,DepartMentName));
-        
-
-    Container1_3 As groupContainer.manualLayoutContainer:
-        Fill: =glbThemePrimaryColor
-        Height: =50
-        Width: =1366
-        ZIndex: =1
-
-        Image1_3 As image:
-            Height: =38
-            Image: =logo
-            OnSelect: |-
-                =If(
-                    visiblecount >= 4,
-                    Set(
-                        visiblecount,
-                        0
-                    ),
-                    Set(
-                        visiblecount,
-                        visiblecount + 1
-                    )
-                )
-            Width: =203
-            X: =15
-            Y: =5
-            ZIndex: =1
-
-        Label1_56 As label:
-            Color: =RGBA(255, 255, 255, 1)
-            Fill: =glbThemePrimaryColor
-            Height: =18
-            Size: =9
-            Text: ="基督教香港信義會社會服務部"
-            Width: =186
-            X: =63
-            Y: =5
-            ZIndex: =3
-
-        Label1_89 As label:
-            Color: =RGBA(255, 255, 255, 1)
-            Fill: =glbThemePrimaryColor
-            FontWeight: =FontWeight.Bold
-            Height: =21
-            Size: =12
-            Text: ="eProcessing System 2.0"
-            Width: =199
-            X: =63
-            Y: =22
-            ZIndex: =5
-
-        Image7 As image:
-            Height: =40
-            Image: =User().Image
-            RadiusBottomLeft: =10
-            RadiusBottomRight: =10
-            RadiusTopLeft: =10
-            RadiusTopRight: =10
-            Width: =40
-            X: =1310
-            Y: =5
-            ZIndex: =6
+        */
 
     Container3_3 As groupContainer.manualLayoutContainer:
         Fill: =RGBA(255, 255, 255, 1)
-        Height: =718
-        Width: =160
-        Y: =50
-        ZIndex: =2
+        Height: =768
+        Width: =240
+        ZIndex: =1
 
         GalleryNav_3 As gallery.galleryVertical:
-            Height: =40*CountRows(GalleryNav_3.AllItems)
+            Height: =327
             Items: |
                 =Filter(If(
                     CurrentRoleFormModelPermssion = "None"
@@ -96,24 +39,47 @@ HomepageScreen As screen:
                     [
                         "首頁",
                         "申請列表",
-                        If(CurrentRole,"統計",CurrentRole || HRAO || SuperUser,"系統設定"),
-                        If(If(CurrentRole,"統計",CurrentRole || HRAO || SuperUser,"系統設定")="系統設定",Blank(),CurrentRole || HRAO || SuperUser,"系統設定")
+                        If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定"),
+                        If(If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定")="系統設定",Blank(),CurrentRole || HRAO || SuperUser,"系統設定")
                         
                     ],
                     [
                         "首頁",
-                        "表格列表",
+                        "表格資料",
                         "申請列表",
-                        If(CurrentRole,"統計",CurrentRole || HRAO || SuperUser,"系統設定"),
-                        If(If(CurrentRole,"統計",CurrentRole || HRAO || SuperUser,"系統設定")="系統設定",Blank(),CurrentRole || HRAO || SuperUser,"系統設定")
+                        If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定"),
+                        If(If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定")="系統設定",Blank(),CurrentRole || HRAO || SuperUser,"系統設定")
                     ]
                 ),ThisRecord.Value <> Blank())
             Layout: =Layout.Vertical
             OnSelect: =
+            TemplateFill: =If(ThisItem.Value="首頁", RGBA(102,182,227,0.2),Transparent)
             TemplatePadding: =0
-            TemplateSize: =40
-            Width: =160
+            TemplateSize: =50
+            Width: =240
+            Y: =100
             ZIndex: =1
+
+            Image2 As image:
+                Height: =30
+                Image: |
+                    =If(
+                        ThisItem.Value = "首頁",
+                        首页,
+                        ThisItem.Value = "表格資料",
+                        表格资料,
+                        ThisItem.Value = "數據統計",
+                        数据,
+                        ThisItem.Value = "系統設定",
+                        设置,
+                        ThisItem.Value = "申請列表",
+                        申请列表
+                    )
+                OnSelect: =Select(Parent)
+                Width: =30
+                X: =60
+                Y: =10
+                ZIndex: =1
 
             BtnDefault_9 As button:
                 Align: =Align.Left
@@ -122,13 +88,13 @@ HomepageScreen As screen:
                 BorderThickness: =1
                 Color: =If(ThisItem.Value="首頁", glbThemePrimaryColor,glbNeutralSecondaryColor)
                 DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                Fill: =If(ThisItem.Value="首頁", ColorFade(Self.Color, 90%),White)
+                Fill: =Transparent
                 FocusedBorderThickness: =1
                 FontWeight: =If(ThisItem.Value="首頁", FontWeight.Semibold,Normal)
-                Height: =32
+                Height: =46
                 HoverBorderColor: =ColorFade(Self.Color, -15%)
                 HoverColor: =ColorFade(Self.Color, -15%)
-                HoverFill: =If(ThisItem.Value<>Blank(),ColorFade(glbThemePrimaryColor, 90%))
+                HoverFill: =
                 OnSelect: |-
                     =If(
                         ThisItem.Value = "首頁",
@@ -136,11 +102,11 @@ HomepageScreen As screen:
                             HomepageScreen,
                             ScreenTransition.None
                         ),
-                        ThisItem.Value = "表格列表",
+                        ThisItem.Value = "表格資料",
                         Navigate(AdminFormListScreen,
                             ScreenTransition.None
                         ),
-                        ThisItem.Value = "統計",
+                        ThisItem.Value = "數據統計",
                         Navigate(StatisticsScreen,
                             ScreenTransition.None
                         //Launch("https://apps.powerapps.com/play/c030168f-5133-4c9d-8e17-3c870ba99ab4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=StatisticsScreen"
@@ -157,68 +123,64 @@ HomepageScreen As screen:
                         )
                     )
                 PaddingBottom: =0
-                PaddingLeft: =36
+                PaddingLeft: =104
                 PaddingRight: =0
                 PaddingTop: =0
                 PressedBorderColor: =ColorFade(Self.Color, -25%)
                 PressedColor: =ColorFade(Self.Color, -25%)
-                PressedFill: =ColorFade(Self.Color, 95%)
+                PressedFill: =
                 RadiusBottomLeft: =4
                 RadiusBottomRight: =4
                 RadiusTopLeft: =4
                 RadiusTopRight: =4
-                Size: =12
+                Size: =11
                 Text: =ThisItem.Value
-                Width: =140
-                X: =10
-                ZIndex: =3
-
-            Icon1_3 As icon.ListScrollWatchlist:
-                Color: =If(ThisItem.Value="首頁", glbThemePrimaryColor,glbNeutralSecondaryColor)
-                Height: =20
-                Icon: |
-                    =If(
-                        ThisItem.Value = "首頁",
-                        Icon.Home,
-                        ThisItem.Value = "表格列表",
-                        Icon.ListScrollWatchlist,
-                        ThisItem.Value = "統計",
-                        Icon.LogJournal,
-                        ThisItem.Value = "系統設定",
-                        Icon.People,
-                        ThisItem.Value = "申請列表",
-                        Icon.Lock
-                    )
-                OnSelect: =Select(Parent)
-                Width: =20
-                X: =20
-                Y: =6
-                ZIndex: =5
+                Width: =240
+                Y: =2
+                ZIndex: =2
 
         GalleryNav_5 As gallery.galleryVertical:
-            Height: =120
-            Items: =["IT服務台","用戶手冊","意見箱"]
+            Height: =60
+            Items: =["IT服務台","用戶手冊","意見收集"]
             Layout: =Layout.Vertical
             TemplatePadding: =0
-            TemplateSize: =40
-            Width: =160
-            Y: =558
+            TemplateSize: =60
+            Width: =240
+            WrapCount: =3
+            Y: =690
             ZIndex: =5
 
+            Image2_4 As image:
+                Height: =26
+                Image: |
+                    =If(
+                        ThisItem.Value = "IT服務台",
+                        工作台,
+                        ThisItem.Value = "用戶手冊",
+                        手册,
+                        ThisItem.Value = "意見收集",
+                        意见箱
+                    )
+                OnSelect: =Select(Parent)
+                Width: =26
+                X: =27
+                Y: =6
+                ZIndex: =1
+
             BtnDefault_11 As button:
-                Align: =Align.Left
                 BorderColor: =Self.Color
                 BorderStyle: =BorderStyle.None
                 BorderThickness: =1
                 Color: =glbNeutralSecondaryColor
                 DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                Fill: =White
+                DisabledFill: =RGBA(0, 0, 0, 0)
+                Fill: =RGBA(0, 0, 0, 0)
                 FocusedBorderThickness: =1
                 FontWeight: =Normal
-                Height: =32
+                Height: =60
                 HoverBorderColor: =ColorFade(Self.Color, -15%)
                 HoverColor: =ColorFade(Self.Color, -15%)
-                HoverFill: =ColorFade(glbThemePrimaryColor, 90%)
+                HoverFill: =
                 OnSelect: |-
                     =If(
                         ThisItem.Value = "意見箱",
@@ -229,104 +191,105 @@ HomepageScreen As screen:
                         Download("https://elcss.sharepoint.com/:w:/r/sites/eps-prd/_layouts/15/download.aspx?SourceUrl=/sites/eps-prd/TempExcel/ePS%E7%B3%BB%E7%B5%B1-%E7%94%A8%E6%88%B6%E6%89%8B%E5%86%8A%20V1.3.4.pdf")
                     )
                 PaddingBottom: =0
-                PaddingLeft: =36
+                PaddingLeft: =0
                 PaddingRight: =0
-                PaddingTop: =0
+                PaddingTop: =34
                 PressedBorderColor: =ColorFade(Self.Color, -25%)
                 PressedColor: =ColorFade(Self.Color, -25%)
-                PressedFill: =ColorFade(Self.Color, 95%)
+                PressedFill: =
                 RadiusBottomLeft: =4
                 RadiusBottomRight: =4
                 RadiusTopLeft: =4
                 RadiusTopRight: =4
-                Size: =12
+                Size: =9
                 Text: =ThisItem.Value
-                Width: =140
-                X: =10
-                ZIndex: =3
-
-            Icon1_5 As icon.ListScrollWatchlist:
-                Color: =glbNeutralSecondaryColor
-                Height: =20
-                Icon: |
-                    =If(
-                        ThisItem.Value = "IT服務台",
-                        Icon.ComputerDesktop,
-                        ThisItem.Value = "用戶手冊",
-                        Icon.Notebook,
-                        ThisItem.Value = "組織機構",
-                        Icon.LogJournal,
-                        ThisItem.Value = "意見箱",
-                        Icon.Mail
-                    )
-                    //["IT服務台","操作手冊","用戶反饋"]
-                OnSelect: =Select(Parent)
-                Width: =20
-                X: =20
-                Y: =6
-                ZIndex: =5
+                Width: =70
+                X: =5
+                ZIndex: =2
 
         Label8 As label:
-            Align: =Align.Center
             Color: =RGBA(149, 149, 149, 1)
-            Size: =11
+            Height: =20
+            Italic: =true
+            Size: =8
             Text: ="Version 1.0.0"
             Width: =160
-            Y: =678
+            X: =64
+            Y: =56
             ZIndex: =6
 
+        Image8 As image:
+            Height: =40
+            Image: =logo_only_icon
+            Width: =40
+            X: =20
+            Y: =10
+            ZIndex: =7
+
+        Label1_89 As label:
+            Color: =RGBA(54, 52, 52, 1)
+            Height: =21
+            Size: =12
+            Text: ="ELCSS-HK"
+            Width: =100
+            X: =64
+            Y: =10
+            ZIndex: =9
+
+        Label1_96 As label:
+            Color: =RGBA(116, 116, 116, 1)
+            Height: =21
+            Size: =7
+            Text: ="eProcessing System (ePS)"
+            Width: =160
+            X: =64
+            Y: =31
+            ZIndex: =10
+
+        Image11 As image:
+            Image: ='意见箱'
+            X: =70
+            Y: =481
+            ZIndex: =11
+
     Container4_2 As groupContainer.manualLayoutContainer:
-        Fill: =RGBA(247, 247, 247, 1)
-        Height: =718
-        Width: =1206
-        X: =160
-        Y: =50
-        ZIndex: =3
+        Fill: =glbNeutralLighterColor
+        Height: =768
+        Width: =1126
+        X: =240
+        ZIndex: =2
 
         Container5_1 As groupContainer.manualLayoutContainer:
             Fill: =RGBA(255, 255, 255, 1)
-            Height: =586
-            Width: =1182
+            Height: =473
+            Width: =1102
             X: =12
-            Y: =119
+            Y: =283
             ZIndex: =4
 
             LineRectangle As rectangle:
                 Fill: =RGBA(219, 219, 219, 1)
-                Height: =1
-                Width: =1142
-                X: =20
-                Y: =72
+                Height: =430
+                Width: =1
+                X: =210
+                Y: =20
                 ZIndex: =2
 
-            TabGallery3_2 As gallery.galleryHorizontal:
-                Height: =76
-                Items: |-
-                    =FormTable4
-                    //["常用表格","行政部","人力資源部","財務部","傳訊及協作部"]
+            Gallery2 As gallery.galleryVertical:
+                Height: =401
+                Items: =Distinct(Filter(FormTableType,DepartMentType=TabGallery3_3.Selected.Value),DepartMentName)
+                Layout: =Layout.Vertical
                 ShowScrollbar: =false
                 TemplatePadding: =0
-                TemplateSize: =110
-                Width: =1160
-                WrapCount: =2
-                X: =11
-                ZIndex: =3
+                TemplateSize: =40
+                Width: =180
+                X: =20
+                Y: =50
+                ZIndex: =7
 
-                Label2_2 As label:
-                    Align: =Align.Center
-                    Color: |-
-                        =If(
-                            ThisItem.IsSelected,
-                            glbThemePrimaryColor,
-                            glbNeutralSecondaryColor
-                        )
-                    FontWeight: |-
-                        =If(
-                            ThisItem.IsSelected,
-                            FontWeight.Semibold,
-                            FontWeight.Normal
-                        )
-                    Height: =30
+                Label2_5 As label:
+                    Color: =If(ThisItem.IsSelected, glbThemePrimaryColor,glbNeutralSecondaryColor)
+                    FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold,FontWeight.Normal)
                     HoverColor: =glbThemePrimaryColor
                     OnSelect: =Select(Parent)
                     PaddingBottom: =0
@@ -335,106 +298,189 @@ HomepageScreen As screen:
                     PaddingTop: =0
                     Size: =10
                     Text: =ThisItem.Result
-                    Width: =110
+                    Width: =Parent.Width
+                    Wrap: =false
+                    ZIndex: =2
+
+                Button2 As button:
+                    BorderStyle: =BorderStyle.None
+                    Color: =RGBA(0, 0, 0, 0)
+                    Fill: =RGBA(0, 0, 0, 0)
+                    HoverBorderColor: =
+                    HoverColor: =RGBA(0, 0, 0, 0)
+                    HoverFill: =
+                    OnSelect: =Select(Parent)
+                    Text: ="Button"
+                    Width: =Parent.Width
+                    ZIndex: =3
+
+            TabGallery3_3 As gallery.galleryHorizontal:
+                Height: =32
+                Items: =["部門","服務"]
+                TemplatePadding: =0
+                TemplateSize: =90
+                Width: =180
+                X: =20
+                Y: =12
+                ZIndex: =8
+
+                Label2_4 As label:
+                    Align: =Align.Center
+                    Color: =If(ThisItem.IsSelected, glbThemePrimaryColor,glbNeutralSecondaryColor)
+                    FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold,FontWeight.Normal)
+                    Height: =32
+                    HoverColor: =glbThemePrimaryColor
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =11
+                    Text: =ThisItem.Value
+                    Width: =60
+                    X: =15
                     ZIndex: =1
 
-                Rectangle2_2 As rectangle:
+                Rectangle2_6 As rectangle:
                     Fill: =glbThemePrimaryColor
                     Height: =3
                     OnSelect: =Select(Parent)
                     Visible: =If(ThisItem.IsSelected, true, false)
-                    Width: =110
-                    Y: =30
+                    Width: =90
+                    Y: =29
                     ZIndex: =2
 
-            TaskNameGallery As gallery.galleryVertical:
-                Height: =352
+                Button2_1 As button:
+                    BorderStyle: =BorderStyle.None
+                    Color: =RGBA(0, 0, 0, 0)
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =32
+                    HoverBorderColor: =
+                    HoverColor: =RGBA(0, 0, 0, 0)
+                    HoverFill: =
+                    OnSelect: =Select(Parent)
+                    Text: ="Button"
+                    Width: =90
+                    ZIndex: =3
+
+            Gallery2_1 As gallery.galleryVertical:
+                Height: =401
                 Items: |-
-                    =If(
-                        TabGallery3_2.Selected.Result = "常用表格",
-                        Search(
-                            ShowColumns(RenameColumns(
-                                SortByColumns(
-                                    Filter(
-                                        MyContacts,
-                                        UserEmail = User().Email,
-                                        ContatsType = Blank()
-                                        //,TaskFormName = First(Filter(GenericFormModel,ModelName = TaskFormName, IsEnable= "1")).ModelName
-                                        
-                                    ),
-                                    "Created",
-                                    Descending
-                                ),
-                                "TaskFormName",
-                                "ModelName",
-                                "TaskFormDescription",
-                                "ModelDescription"
-                            ),"ModelName","ModelDescription","ModelFlowNumber"),
-                            TextInput2_15.Text,
-                            "ModelName","ModelDescription","ModelFlowNumber"
-                        ),
-                        If(
-                            TabGallery3_2.Selected.Result = "行政部",
-                            Search(
-                                ShowColumns(
-                                    DataModelName,
-                                   /* Filter(
-                                        ,
-                                        ModelDescription = TaskTypeNameGallery.Selected.FormType
-                                    ),*/
-                                    "ModelName",
-                                    "ModelDescription",
-                                    "ModelFlowNumber"
-                                ),
-                                TextInput2_15.Text,
-                                "ModelName","ModelDescription","ModelFlowNumber"
-                            ),
-                            Search(
-                                ShowColumns(
-                                    Filter(
-                                        GenericFormModel,
-                                        ModelDepartment = TabGallery3_2.Selected.Result,
-                                        ModelType = TaskTypeNameGallery.Selected.FormType
-                                        //,IsEnable = "1"
-                                    ),
-                                    "ModelName",
-                                    "ModelDescription",
-                                    "ModelFlowNumber"
-                                ),
-                                TextInput2_15.Text,
-                                "ModelName","ModelDescription","ModelFlowNumber"
-                            )
-                        )
-                    )
+                    =Filter(
+                            FormTableType,
+                            DepartMentName = Gallery2.Selected.Result
+                        ).FormType
                 Layout: =Layout.Vertical
                 ShowScrollbar: =false
                 TemplatePadding: =0
-                TemplateSize: =70
-                Width: =1160
-                WrapCount: =4
-                X: =11
-                Y: =223
-                ZIndex: =5
+                TemplateSize: =40
+                Width: =180
+                X: =230
+                Y: =50
+                ZIndex: =9
 
-                Button_large_11 As button:
+                Label2_6 As label:
+                    Color: =If(ThisItem.IsSelected, glbThemePrimaryColor,glbNeutralSecondaryColor)
+                    FontWeight: =If(ThisItem.IsSelected, FontWeight.Semibold,FontWeight.Normal)
+                    HoverColor: =glbThemePrimaryColor
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    Size: =10
+                    Text: =ThisItem.FormType
+                    Width: =Parent.Width
+                    Wrap: =false
+                    ZIndex: =2
+
+                Button2_6 As button:
+                    BorderStyle: =BorderStyle.None
+                    Color: =RGBA(0, 0, 0, 0)
+                    Fill: =RGBA(0, 0, 0, 0)
+                    HoverBorderColor: =
+                    HoverColor: =RGBA(0, 0, 0, 0)
+                    HoverFill: =
+                    OnSelect: =Select(Parent)
+                    Text: ="Button"
+                    Width: =Parent.Width
+                    ZIndex: =3
+
+            TaskNameGallery_1 As gallery.galleryVertical:
+                Height: =144
+                Items: |-
+                    =ShowColumns(
+                            Filter(
+                                        DataModelName,
+                                        ModelDepartment = Gallery2.Selected.Result,
+                                        ModelType = Gallery2_1.Selected.FormType
+                                    ),
+                                    "ModelName",
+                                    "ModelDescription",
+                                    "ModelFlowNumber"
+                                )
+                Layout: =Layout.Vertical
+                ShowScrollbar: =false
+                TemplatePadding: =0
+                TemplateSize: =62
+                Width: =652
+                WrapCount: =3
+                X: =440
+                Y: =50
+                ZIndex: =10
+
+                Label2_7 As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =20
+                    HoverColor: =glbThemePrimaryColor
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =10
+                    PaddingRight: =10
+                    PaddingTop: =0
+                    Size: =10
+                    Text: =ThisItem.ModelFlowNumber
+                    Width: =Parent.TemplateWidth-10
+                    Wrap: =false
+                    Y: =6
+                    ZIndex: =1
+
+                Label2_8 As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =20
+                    HoverColor: =glbThemePrimaryColor
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =10
+                    PaddingRight: =10
+                    PaddingTop: =0
+                    Size: =10
+                    Text: =ThisItem.ModelName
+                    Tooltip: =Self.Text
+                    Width: =Parent.TemplateWidth-10
+                    Wrap: =false
+                    Y: =26
+                    ZIndex: =2
+
+                Button_large_12 As button:
                     Align: =Align.Left
                     BorderColor: =glbNeutralQuaternaryColor
                     BorderThickness: =1
                     Color: =glbNeutralPrimaryColor
                     DisabledBorderColor: =RGBA(219, 219, 219, 1)
                     DisplayMode: =If(ThisItem.ModelName in Filter(GenericFormModel,IsEnable="0").ModelName,Disabled,Edit)
-                    Fill: =White
+                    Fill: =RGBA(0, 0, 0, 0)
                     FocusedBorderThickness: =1
                     FontWeight: =FontWeight.Normal
                     Height: =50
                     HoverBorderColor: =glbThemePrimaryColor
-                    HoverColor: =glbThemePrimaryColor
-                    HoverFill: =ColorFade(glbThemePrimaryColor, 97%)
+                    HoverColor: =
+                    HoverFill: =
                     OnSelect: |-
                         =If(
                             ThisItem.ModelName = "招聘職位申請表",
                             If(
-                                TabGallery3_2.Selected.Result = "常用表格",
+                                Gallery2.Selected.Result = "常用表格",
                                 "",
                                 If(
                                     !IsBlank(
@@ -464,7 +510,7 @@ HomepageScreen As screen:
                             ),
                             ThisItem.ModelName = "假期批核人資料表",
                             If(
-                                TabGallery3_2.Selected.Result = "常用表格",
+                                Gallery2.Selected.Result = "常用表格",
                                 "",
                                 If(
                                     !IsBlank(
@@ -494,7 +540,7 @@ HomepageScreen As screen:
                             ),
                             ThisItem.ModelName = "任職資源申請",
                             If(
-                                TabGallery3_2.Selected.Result = "常用表格",
+                                Gallery2.Selected.Result = "常用表格",
                                 "",
                                 If(
                                     !IsBlank(
@@ -524,7 +570,7 @@ HomepageScreen As screen:
                             ),
                             ThisItem.ModelName = "預備合約通知書(新入職)",
                             If(
-                                TabGallery3_2.Selected.Result = "常用表格",
+                                Gallery2.Selected.Result = "常用表格",
                                 "",
                                 If(
                                     !IsBlank(
@@ -553,7 +599,7 @@ HomepageScreen As screen:
                                 LaunchTarget.Replace
                             ),
                             If(
-                                TabGallery3_2.Selected.Result = "常用表格",
+                                Gallery2.Selected.Result = "常用表格",
                                 "",
                                 If(
                                     !IsBlank(
@@ -592,138 +638,77 @@ HomepageScreen As screen:
                             )
                         )
                     PaddingBottom: =0
-                    PaddingLeft: =36
+                    PaddingLeft: =10
                     PaddingRight: =0
                     PaddingTop: =0
                     PressedBorderColor: =glbThemePrimaryColor
-                    PressedColor: =glbThemePrimaryColor
-                    PressedFill: =ColorFade(glbThemePrimaryColor, 95%)
-                    RadiusBottomLeft: =4
-                    RadiusBottomRight: =4
-                    RadiusTopLeft: =4
-                    RadiusTopRight: =4
-                    Size: =14
-                    Text: =ThisItem.ModelFlowNumber&ThisItem.ModelName
-                    Tooltip: =ThisItem.ModelDescription
-                    Width: =Parent.TemplateWidth-20
-                    X: =1
-                    Y: =1
-                    ZIndex: =2
-
-                Image5 As image:
-                    Height: =50
-                    Image: |-
-                        ="data:image/svg+xml," & EncodeUrl("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>     <g>         <path fill='none' d='M0 0h24v24H0z'/>         <path fill='#01A8F4' d='M7.243 18H3v-4.243L14.435 2.322a1 1 0 0 1 1.414 0l2.829 2.829a1 1 0 0 1 0 1.414L7.243 18zM3 20h18v2H3v-2z'/>     </g> </svg>")
-                    OnSelect: =Select(Parent)
-                    PaddingLeft: =8
-                    PaddingRight: =4
-                    Width: =34
-                    X: =8
-                    Y: =1
-                    ZIndex: =3
-
-            TaskTypeNameGallery As gallery.galleryHorizontal:
-                Height: =135
-                Items: |-
-                    =If(
-                        TabGallery3_2.Selected.Result = "常用表格",
-                        Table({FormType:"全部"}),
-                        Filter(
-                            FormTableType,
-                            DepartMentName = TabGallery3_2.Selected.Result
-                        ).FormType
-                    )
-                ShowScrollbar: =false
-                TemplatePadding: =0
-                TemplateSize: =160
-                Width: =1160
-                WrapCount: |-
-                    =//3
-                    If(CountA(If(
-                        TabGallery3_2.Selected.Result = "常用表格",
-                        Table({FormType:"全部"}),
-                        Filter(
-                            FormTableType,
-                            DepartMentName = TabGallery3_2.Selected.Result
-                        ).FormType
-                    ))<8,1,CountA(If(
-                        TabGallery3_2.Selected.Result = "常用表格",
-                        Table({FormType:"全部"}),
-                        Filter(
-                            FormTableType,
-                            DepartMentName = TabGallery3_2.Selected.Result
-                        ).FormType
-                    ))>14,3,2)
-                X: =11
-                Y: =76
-                ZIndex: =6
-
-                BtnDefault_10 As button:
-                    BorderColor: =Self.Color
-                    BorderStyle: =BorderStyle.None
-                    BorderThickness: =1
-                    Color: |-
-                        =If(
-                            ThisItem.IsSelected,
-                            glbThemePrimaryColor,
-                            glbNeutralSecondaryColor
-                        )
-                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                    Fill: |-
-                        =If(
-                            ThisItem.IsSelected,
-                            ColorFade(glbThemePrimaryColor, 90%),
-                            glbNeutralLighterColor
-                        )
-                    FocusedBorderThickness: =1
-                    FontWeight: |-
-                        =If(
-                            ThisItem.IsSelected,
-                            FontWeight.Semibold,
-                            FontWeight.Normal
-                        )
-                    Height: =34
-                    HoverBorderColor: =ColorFade(Self.Color, -15%)
-                    HoverColor: =glbThemePrimaryColor
-                    HoverFill: =ColorFade(glbThemePrimaryColor, 90%)
-                    PaddingBottom: =0
-                    PaddingLeft: =0
-                    PaddingRight: =0
-                    PaddingTop: =0
-                    PressedBorderColor: =ColorFade(Self.Color, -25%)
-                    PressedColor: =ColorFade(Self.Color, -25%)
-                    PressedFill: =ColorFade(Self.Color, 95%)
+                    PressedColor: =
+                    PressedFill: =
                     RadiusBottomLeft: =4
                     RadiusBottomRight: =4
                     RadiusTopLeft: =4
                     RadiusTopRight: =4
                     Size: =10
-                    Text: =ThisItem.FormType
-                    Width: =150
-                    Y: =5
-                    ZIndex: =2
+                    Text: =
+                    Tooltip: =ThisItem.ModelDescription
+                    Width: =Parent.TemplateWidth-10
+                    X: =1
+                    Y: =1
+                    ZIndex: =3
+
+            Label7_4 As label:
+                Color: =glbNeutralSecondaryColor
+                DisplayMode: =DisplayMode.View
+                FontWeight: =FontWeight.Semibold
+                Height: =32
+                HoverColor: =glbThemePrimaryColor
+                OnSelect: |-
+                    =Navigate(GeneralFormListScreen,None,{ListID:2})
+                PaddingLeft: =0
+                Size: =11
+                Text: ="單位"
+                Width: =80
+                X: =230
+                Y: =12
+                ZIndex: =11
+
+            Label7_5 As label:
+                Color: =glbNeutralSecondaryColor
+                DisplayMode: =DisplayMode.View
+                FontWeight: =FontWeight.Semibold
+                Height: =32
+                HoverColor: =glbThemePrimaryColor
+                OnSelect: |-
+                    =Navigate(GeneralFormListScreen,None,{ListID:2})
+                PaddingLeft: =0
+                Size: =11
+                Text: ="表格"
+                Width: =80
+                X: =440
+                Y: =12
+                ZIndex: =12
 
             LineRectangle_2 As rectangle:
                 Fill: =RGBA(219, 219, 219, 1)
-                Height: =1
-                Width: =1142
-                X: =20
-                Y: =211
-                ZIndex: =7
+                Height: =430
+                Width: =1
+                X: =420
+                Y: =20
+                ZIndex: =13
 
         Container5_4 As groupContainer.manualLayoutContainer:
             Fill: =RGBA(255, 255, 255, 1)
-            Height: =90
-            Width: =1182
+            Height: =260
+            Width: =545
             X: =12
-            Y: =16
+            Y: =12
             ZIndex: =5
 
             Image6 As image:
                 Fill: =RGBA(252, 237, 230, 1)
                 Height: =50
                 Image: |-
-                    ="data:image/svg+xml," & EncodeUrl("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>     <g>         <path fill='none' d='M0 0h24v24H0z'/>         <path fill='#FA6400' d='M4 20v-6a8 8 0 1 1 16 0v6h1v2H3v-2h1zm2-6h2a4 4 0 0 1 4-4V8a6 6 0 0 0-6 6zm5-12h2v3h-2V2zm8.778 2.808l1.414 1.414-2.12 2.121-1.415-1.414 2.121-2.121zM2.808 6.222l1.414-1.414 2.121 2.12L4.93 8.344 2.808 6.222z'/>     </g> </svg>")
+                    ="data:image/svg+xml," & EncodeUrl("<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' id='mdi-bell-ring' width='24' height='24' viewBox='0 0 24 24'><path fill='#fa6400' d='M21,19V20H3V19L5,17V11C5,7.9 7.03,5.17 10,4.29C10,4.19 10,4.1 10,4A2,2 0 0,1 12,2A2,2 0 0,1 14,4C14,4.1 14,4.19 14,4.29C16.97,5.17 19,7.9 19,11V17L21,19M14,21A2,2 0 0,1 12,23A2,2 0 0,1 10,21M19.75,3.19L18.33,4.61C20.04,6.3 21,8.6 21,11H23C23,8.07 21.84,5.25 19.75,3.19M1,11H3C3,8.6 3.96,6.3 5.67,4.61L4.25,3.19C2.16,5.25 1,8.07 1,11Z' /></svg>")
                 PaddingBottom: =10
                 PaddingTop: =10
                 RadiusBottomLeft: =15
@@ -734,21 +719,6 @@ HomepageScreen As screen:
                 X: =31
                 Y: =20
                 ZIndex: =1
-
-            Label7 As label:
-                Color: =glbNeutralSecondaryColor
-                Font: =Font.'Lato Black'
-                Height: =24
-                HoverColor: =glbThemePrimaryColor
-                OnSelect: |-
-                    =Navigate(GeneralFormListScreen,None,{ListID:2})
-                PaddingLeft: =0
-                Size: =11
-                Text: ="優先處理"
-                Width: =80
-                X: =96
-                Y: =46
-                ZIndex: =2
 
             Label7_1 As label:
                 Color: =RGBA(250, 100, 0, 1)
@@ -774,23 +744,9 @@ HomepageScreen As screen:
                 RadiusTopLeft: =15
                 RadiusTopRight: =15
                 Width: =50
-                X: =271
+                X: =376
                 Y: =20
                 ZIndex: =5
-
-            Label7_2 As label:
-                Color: =glbNeutralSecondaryColor
-                Height: =24
-                HoverColor: =glbThemePrimaryColor
-                OnSelect: |-
-                    =Navigate(GeneralFormListScreen,None,{ListID:2})
-                PaddingLeft: =0
-                Size: =11
-                Text: ="待處理"
-                Width: =80
-                X: =336
-                Y: =46
-                ZIndex: =6
 
             Label7_3 As label:
                 Color: =glbThemePrimaryColor
@@ -800,7 +756,7 @@ HomepageScreen As screen:
                 Size: =18
                 Text: =CountRows(FilterPendingDataCol)
                 Width: =67
-                X: =336
+                X: =441
                 Y: =20
                 ZIndex: =7
 
@@ -809,24 +765,292 @@ HomepageScreen As screen:
                 Height: =24
                 HoverColor: =glbThemePrimaryColor
                 Icon: =Icon.ChevronRight
-                PaddingBottom: =4
-                PaddingTop: =4
+                PaddingBottom: =5
+                PaddingTop: =5
                 Width: =24
-                X: =155
+                X: =150
                 Y: =46
                 ZIndex: =8
+
+            Gallery5 As gallery.galleryVertical:
+                Height: =160
+                Items: =Sort(Filter(ApprovalDetail_Table,ApproverEmail = CurrentUser,TaskStatus = "002"),修改时间,Ascending)
+                Layout: =Layout.Vertical
+                OnSelect: |-
+                    =With(
+                    {
+                    FormName:LookUp(Approval_Table,标题=ThisItem.Approval_No).Task_Name
+                    },
+                    If(
+                        FormName = "招聘職位申請表",
+                        If(
+                            ThisItem.TaskStatus = "001",
+                            Launch(
+                                JumpUrl&"&Screen=JobTitleFormScreen&AppIds=" & LookUp(
+                                    ApplitionJobPosition,
+                                    ApprovalId = TaskListGallery.Selected.Approval_No
+                                ).标题 & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=true"
+                            ),
+                            Launch(
+                                JumpUrl&"&Screen=JobTitleFormDetailScreen&AppIds=" & LookUp(
+                                    ApplitionJobPosition,
+                                    ApprovalId = TaskListGallery.Selected.Approval_No
+                                ).标题 & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
+                            )
+                        ),
+                        FormName = "假期批核人資料表",
+                        If(
+                            ThisItem.TaskStatus = "001",
+                            Launch(
+                                JumpUrlA306A111&"&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
+                                    VacationApprovalForm,
+                                    Applicant_No = TaskListGallery.Selected.Approval_No
+                                ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true"
+                            ),
+                            Launch(
+                                JumpUrlA306A111&"&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
+                                    VacationApprovalForm,
+                                    Applicant_No = TaskListGallery.Selected.Approval_No
+                                ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
+                            )
+                        ),
+                        FormName = "預備合約通知書(新入職)",
+                        If(
+                            ThisItem.TaskStatus = "001",
+                            Launch(
+                                JumpUrl&"&Screen=ContractNoticeForm&taskNum=" & LookUp(
+                                    ContractNotice,
+                                    ApprovalId = TaskListGallery.Selected.Approval_No
+                                ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true"
+                            ),
+                            Launch(
+                                JumpUrl&"&Screen=ContractNoticeFormDetail&taskNum=" & LookUp(
+                                    ContractNotice,
+                                    ApprovalId = TaskListGallery.Selected.Approval_No
+                                ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
+                            )
+                        ),
+                        FormName = "任職資源申請",
+                        Launch(
+                            JumpUrlA306A111&"&Screen=EmploymentFormDetail&taskNum=" & LookUp(
+                                EmploymentResource,
+                                ApprovalId = TaskListGallery.Selected.Approval_No
+                            ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
+                        ),
+                        With(
+                            {
+                                FormId: LookUp(
+                                    GenericFormList,
+                                    ApprovalId = ThisItem.Approval_No
+                                ).标题
+                            },
+                            Launch(JumpUrlMobileApp&"&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & TaskListGallery.Selected.Approval_No
+                            ,{},LaunchTarget.Replace)
+                        )
+                    )
+                    )
+                ShowScrollbar: =false
+                TemplatePadding: =0
+                TemplateSize: =32
+                Width: =505
+                X: =20
+                Y: =95
+                ZIndex: =10
+
+                Label11 As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =32
+                    OnSelect: =Select(Parent)
+                    Size: =10
+                    Text: =LookUp(Approval_Table,标题=ThisItem.Approval_No).Application_No
+                    Width: =55
+                    Wrap: =false
+                    ZIndex: =1
+
+                Label11_1 As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =32
+                    OnSelect: =Select(Parent)
+                    Size: =10
+                    Text: =LookUp(Approval_Table,标题=ThisItem.Approval_No).DepartMentUnit
+                    Width: =101
+                    Wrap: =false
+                    X: =254
+                    ZIndex: =2
+
+                Label11_2 As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =32
+                    OnSelect: =Select(Parent)
+                    Size: =10
+                    Text: =LookUp(Approval_Table,标题=ThisItem.Approval_No).Task_Name
+                    Width: =180
+                    Wrap: =false
+                    X: =63
+                    ZIndex: =3
+
+                Label11_3 As label:
+                    Align: =Align.Right
+                    Color: =glbNeutralSecondaryColor
+                    Height: =32
+                    OnSelect: =Select(Parent)
+                    Size: =9
+                    Text: =ThisItem.修改时间
+                    Wrap: =false
+                    X: =355
+                    ZIndex: =4
+
+                LineRectangle_4 As rectangle:
+                    Fill: =RGBA(219, 219, 219, 1)
+                    Height: =1
+                    Width: =505
+                    Y: =31
+                    ZIndex: =5
+
+            LineRectangle_3 As rectangle:
+                Fill: =RGBA(221, 79, 14, 1)
+                Height: =1
+                Width: =505
+                X: =20
+                Y: =90
+                ZIndex: =11
 
             Icon5_1 As icon.ChevronRight:
                 Color: =RGBA(149, 149, 149, 1)
                 Height: =24
                 HoverColor: =glbThemePrimaryColor
                 Icon: =Icon.ChevronRight
-                PaddingBottom: =4
-                PaddingTop: =4
+                PaddingBottom: =5
+                PaddingTop: =5
                 Width: =24
-                X: =379
+                X: =483
                 Y: =46
-                ZIndex: =9
+                ZIndex: =12
+
+            BtnLink_5 As button:
+                Align: =Align.Left
+                BorderColor: =
+                BorderThickness: =0
+                Color: =glbLinkColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =RGBA(0, 0, 0, 0)
+                FocusedBorderThickness: =0
+                FontWeight: =FontWeight.Normal
+                Height: =24
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                OnSelect: |-
+                    =Navigate(GeneralFormListScreen,None,{ListID:2})
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =RGBA(0, 0, 0, 0)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =10
+                Text: ="待處理"
+                Width: =60
+                X: =441
+                Y: =46
+                ZIndex: =13
+
+            BtnLink_6 As button:
+                Align: =Align.Left
+                BorderColor: =
+                BorderThickness: =0
+                Color: =RGBA(250, 100, 0, 1)
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =RGBA(0, 0, 0, 0)
+                FocusedBorderThickness: =0
+                FontWeight: =FontWeight.Normal
+                Height: =24
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =RGBA(0, 0, 0, 0)
+                OnSelect: |-
+                    =Navigate(GeneralFormListScreen,None,{ListID:2})
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =RGBA(0, 0, 0, 0)
+                RadiusBottomLeft: =0
+                RadiusBottomRight: =0
+                RadiusTopLeft: =0
+                RadiusTopRight: =0
+                Size: =10
+                Text: ="優先處理"
+                Width: =80
+                X: =96
+                Y: =46
+                ZIndex: =14
+
+        Container1 As groupContainer.manualLayoutContainer:
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =90
+            Width: =545
+            X: =569
+            Y: =12
+            ZIndex: =6
+
+            Image7 As image:
+                Height: =40
+                Image: =User().Image
+                RadiusBottomLeft: =10
+                RadiusBottomRight: =10
+                RadiusTopLeft: =10
+                RadiusTopRight: =10
+                Width: =40
+                X: =24
+                Y: =25
+                ZIndex: =3
+
+            Label7_6 As label:
+                Color: =glbNeutralSecondaryColor
+                DisplayMode: =DisplayMode.View
+                Height: =24
+                HoverColor: =glbThemePrimaryColor
+                OnSelect: |-
+                    =Navigate(GeneralFormListScreen,None,{ListID:2})
+                PaddingLeft: =0
+                Size: =11
+                Text: ="歡迎你，"
+                Width: =80
+                X: =79
+                Y: =22
+                ZIndex: =4
+
+            Label7_7 As label:
+                Color: =glbNeutralSecondaryColor
+                DisplayMode: =DisplayMode.View
+                FontWeight: =FontWeight.Semibold
+                Height: =24
+                HoverColor: =glbThemePrimaryColor
+                OnSelect: |-
+                    =Navigate(GeneralFormListScreen,None,{ListID:2})
+                PaddingLeft: =0
+                Size: =11
+                Text: =User().FullName
+                Width: =300
+                X: =79
+                Y: =47
+                ZIndex: =5
+
+        Container4 As groupContainer.manualLayoutContainer:
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =158
+            Width: =545
+            X: =569
+            Y: =114
+            ZIndex: =7
 
             TextInput2_15 As text:
                 BorderColor: =glbNeutralQuaternaryColor
@@ -835,24 +1059,25 @@ HomepageScreen As screen:
                 Default: =""
                 FocusedBorderColor: =glbNeutralSecondaryColor
                 FocusedBorderThickness: =1
-                Height: =32
+                Height: =36
                 HintText: ="搜索表格"
-                HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
-                HoverFill: =ColorFade(Self.Fill, -5%)
+                HoverBorderColor: =glbThemePrimaryColor
+                HoverFill: =White
                 PaddingBottom: =0
-                PaddingLeft: =10
+                PaddingLeft: =34
                 PaddingRight: =0
                 PaddingTop: =0
                 PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                PressedFill: =White
                 RadiusBottomLeft: =4
                 RadiusBottomRight: =4
                 RadiusTopLeft: =4
                 RadiusTopRight: =4
                 Size: =11
-                Width: =232
-                X: =932
-                Y: =38
-                ZIndex: =10
+                Width: =505
+                X: =20
+                Y: =20
+                ZIndex: =1
 
             Icon3 As icon.Search:
                 Color: =RGBA(116, 116, 116, 1)
@@ -861,9 +1086,289 @@ HomepageScreen As screen:
                 PaddingBottom: =6
                 PaddingTop: =6
                 Width: =32
-                X: =1132
-                Y: =38
-                ZIndex: =11
+                X: =20
+                Y: =22
+                ZIndex: =2
+
+            TaskNameGallery_2 As gallery.galleryVertical:
+                Height: =60
+                Items: |-
+                    =If(
+                        TextInput2_15.Text = "",
+                        Search(
+                            ShowColumns(RenameColumns(
+                                SortByColumns(
+                                    Filter(
+                                        MyContacts,
+                                        UserEmail = User().Email,
+                                        ContatsType = Blank()
+                                        //,TaskFormName = First(Filter(GenericFormModel,ModelName = TaskFormName, IsEnable= "1")).ModelName
+                                        
+                                    ),
+                                    "Created",
+                                    Descending
+                                ),
+                                "TaskFormName",
+                                "ModelName",
+                                "TaskFormDescription",
+                                "ModelDescription"
+                            ),"ModelName","ModelDescription","ModelFlowNumber"),
+                            TextInput2_15.Text,
+                            "ModelName","ModelDescription","ModelFlowNumber"
+                        ),
+                        
+                            Search(
+                                ShowColumns(
+                                    DataModelName,
+                                   /* Filter(
+                                        ,
+                                        ModelDescription = Gallery2_1.Selected.FormType
+                                    ),*/
+                                    "ModelName",
+                                    "ModelDescription",
+                                    "ModelFlowNumber"
+                                ),
+                                TextInput2_15.Text,
+                                "ModelName","ModelDescription","ModelFlowNumber"
+                            
+                    )
+                    )
+                Layout: =Layout.Vertical
+                ShowScrollbar: =false
+                TemplatePadding: =0
+                TemplateSize: =60
+                Width: =515
+                WrapCount: =4
+                X: =20
+                Y: =70
+                ZIndex: =3
+
+                Label2_9 As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =20
+                    HoverColor: =glbThemePrimaryColor
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =10
+                    PaddingRight: =10
+                    PaddingTop: =0
+                    Size: =10
+                    Text: =ThisItem.ModelFlowNumber
+                    Width: =Parent.TemplateWidth-10
+                    Wrap: =false
+                    Y: =6
+                    ZIndex: =1
+
+                Label2_10 As label:
+                    Color: =glbNeutralSecondaryColor
+                    Height: =20
+                    HoverColor: =glbThemePrimaryColor
+                    OnSelect: =Select(Parent)
+                    PaddingBottom: =0
+                    PaddingLeft: =10
+                    PaddingRight: =10
+                    PaddingTop: =0
+                    Size: =10
+                    Text: =ThisItem.ModelName
+                    Tooltip: =Self.Text
+                    Width: =Parent.TemplateWidth-10
+                    Wrap: =false
+                    Y: =26
+                    ZIndex: =2
+
+                Button_large_13 As button:
+                    Align: =Align.Left
+                    BorderColor: =glbNeutralQuaternaryColor
+                    BorderThickness: =1
+                    Color: =glbNeutralPrimaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    DisplayMode: =If(ThisItem.ModelName in Filter(GenericFormModel,IsEnable="0").ModelName,Disabled,Edit)
+                    Fill: =RGBA(0, 0, 0, 0)
+                    FocusedBorderThickness: =1
+                    FontWeight: =FontWeight.Normal
+                    Height: =50
+                    HoverBorderColor: =glbThemePrimaryColor
+                    HoverColor: =
+                    HoverFill: =
+                    OnSelect: |-
+                        =If(
+                            ThisItem.ModelName = "招聘職位申請表",
+                            If(
+                                Gallery2.Selected.Result = "常用表格",
+                                "",
+                                If(
+                                    !IsBlank(
+                                        LookUp(
+                                            MyContacts,
+                                            UserEmail = User().Email && TaskFormName = "招聘職位申請表"
+                                        )
+                                    ),
+                                    "",
+                                    Patch(
+                                        MyContacts,
+                                        Defaults(MyContacts),
+                                        {
+                                            TaskFormName: "招聘職位申請表",
+                                            标题: GUID(),
+                                            UserEmail: User().Email,
+                                            ContatsType: "",
+                                            ModelFlowNumber: "A103"
+                                        }
+                                    )
+                                )
+                            );
+                            Launch(
+                                JumpUrl & "&Screen=JobTitleFormScreen&newApplicationGuid=" & GUID() & "&flowguid=" & GUID() & "&bustype=New",
+                                {},
+                                LaunchTarget.Replace
+                            ),
+                            ThisItem.ModelName = "假期批核人資料表",
+                            If(
+                                Gallery2.Selected.Result = "常用表格",
+                                "",
+                                If(
+                                    !IsBlank(
+                                        LookUp(
+                                            MyContacts,
+                                            UserEmail = User().Email && TaskFormName = "假期批核人資料表"
+                                        )
+                                    ),
+                                    "",
+                                    Patch(
+                                        MyContacts,
+                                        Defaults(MyContacts),
+                                        {
+                                            TaskFormName: "假期批核人資料表",
+                                            标题: GUID(),
+                                            UserEmail: User().Email,
+                                            ContatsType: "",
+                                            ModelFlowNumber: "A306"
+                                        }
+                                    )
+                                )
+                            );
+                            Launch(
+                                JumpUrlA306A111 & "&Screen=VacationFormScreen&newApplicationGuid=" & GUID() & "&flowguid=" & GUID() & "&bustype=New",
+                                {},
+                                LaunchTarget.Replace
+                            ),
+                            ThisItem.ModelName = "任職資源申請",
+                            If(
+                                Gallery2.Selected.Result = "常用表格",
+                                "",
+                                If(
+                                    !IsBlank(
+                                        LookUp(
+                                            MyContacts,
+                                            UserEmail = User().Email && TaskFormName = "任職資源申請"
+                                        )
+                                    ),
+                                    "",
+                                    Patch(
+                                        MyContacts,
+                                        Defaults(MyContacts),
+                                        {
+                                            TaskFormName: "任職資源申請",
+                                            标题: GUID(),
+                                            UserEmail: User().Email,
+                                            ContatsType: "",
+                                            ModelFlowNumber: "A111"
+                                        }
+                                    )
+                                )
+                            );
+                            Launch(
+                                JumpUrlA306A111 & "&Screen=EmploymentFormScreen&newApplicationGuid=" & GUID() & "&flowguid=" & GUID() & "&bustype=New",
+                                {},
+                                LaunchTarget.Replace
+                            ),
+                            ThisItem.ModelName = "預備合約通知書(新入職)",
+                            If(
+                                Gallery2.Selected.Result = "常用表格",
+                                "",
+                                If(
+                                    !IsBlank(
+                                        LookUp(
+                                            MyContacts,
+                                            UserEmail = User().Email && TaskFormName = "預備合約通知書(新入職)"
+                                        )
+                                    ),
+                                    "",
+                                    Patch(
+                                        MyContacts,
+                                        Defaults(MyContacts),
+                                        {
+                                            TaskFormName: "預備合約通知書(新入職)",
+                                            标题: GUID(),
+                                            UserEmail: User().Email,
+                                            ContatsType: "",
+                                            ModelFlowNumber: "A104"
+                                        }
+                                    )
+                                )
+                            );
+                            Launch(
+                                JumpUrl & "&Screen=ContractNoticeForm&newApplicationGuid=" & GUID() & "&flowguid=" & GUID() & "&bustype=New",
+                                {},
+                                LaunchTarget.Replace
+                            ),
+                            If(
+                                Gallery2.Selected.Result = "常用表格",
+                                "",
+                                If(
+                                    !IsBlank(
+                                        LookUp(
+                                            MyContacts,
+                                            UserEmail = User().Email && TaskFormName = ThisItem.ModelName
+                                        )
+                                    ),
+                                    "",
+                                    Patch(
+                                        MyContacts,
+                                        Defaults(MyContacts),
+                                        {
+                                            TaskFormName: ThisItem.ModelName,
+                                            标题: GUID(),
+                                            UserEmail: User().Email,
+                                            ContatsType: "",
+                                            TaskFormDescription: ThisItem.ModelDescription,
+                                            ModelFlowNumber: ThisItem.ModelFlowNumber
+                                        }
+                                    )
+                                )
+                            );
+                            With(
+                                {
+                                    FormModelId: LookUp(
+                                        GenericFormModel,
+                                        ModelFlowNumber = ThisItem.ModelFlowNumber
+                                    ).标题
+                                },
+                                Launch(
+                                    JumpUrlMobileApp&"&Screen=CreateGeneralFormScreen&FormModelId="&FormModelId,
+                                    {},
+                                    LaunchTarget.Replace
+                                )
+                            )
+                        )
+                    PaddingBottom: =0
+                    PaddingLeft: =10
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =glbThemePrimaryColor
+                    PressedColor: =
+                    PressedFill: =
+                    RadiusBottomLeft: =4
+                    RadiusBottomRight: =4
+                    RadiusTopLeft: =4
+                    RadiusTopRight: =4
+                    Size: =10
+                    Text: =
+                    Tooltip: =ThisItem.ModelDescription
+                    Width: =Parent.TemplateWidth-10
+                    X: =1
+                    Y: =1
+                    ZIndex: =3
 
     Dropdown1_2 As dropdown:
         Default: =""
@@ -981,5 +1486,5 @@ HomepageScreen As screen:
         Width: =259
         X: =902
         Y: =5
-        ZIndex: =4
+        ZIndex: =3
 
