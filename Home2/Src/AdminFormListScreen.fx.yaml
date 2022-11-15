@@ -178,61 +178,11 @@ AdminFormListScreen As screen:
         );
         Select(Reset_button);
 
-    Container1_4 As groupContainer.manualLayoutContainer:
-        Fill: =glbThemePrimaryColor
-        Height: =50
-        Width: =1366
-        ZIndex: =1
-
-        Image1_6 As image:
-            Height: =38
-            Image: =logo
-            Width: =203
-            X: =15
-            Y: =5
-            ZIndex: =1
-
-        Label1_82 As label:
-            Color: =RGBA(255, 255, 255, 1)
-            Fill: =glbThemePrimaryColor
-            Height: =18
-            Size: =9
-            Text: ="基督教香港信義會社會服務部"
-            Width: =186
-            X: =63
-            Y: =5
-            ZIndex: =3
-
-        Label1_99 As label:
-            Color: =RGBA(255, 255, 255, 1)
-            Fill: =glbThemePrimaryColor
-            FontWeight: =FontWeight.Bold
-            Height: =21
-            Size: =12
-            Text: ="eProcessing System 2.0"
-            Width: =199
-            X: =63
-            Y: =22
-            ZIndex: =5
-
-        Image7_2 As image:
-            Height: =40
-            Image: =User().Image
-            RadiusBottomLeft: =10
-            RadiusBottomRight: =10
-            RadiusTopLeft: =10
-            RadiusTopRight: =10
-            Width: =40
-            X: =1310
-            Y: =5
-            ZIndex: =6
-
     Container4_3 As groupContainer.manualLayoutContainer:
         Fill: =RGBA(247, 247, 247, 1)
-        Height: =718
+        Height: =768
         Width: =1206
         X: =160
-        Y: =50
         ZIndex: =2
 
         Container5_5 As groupContainer.manualLayoutContainer:
@@ -240,8 +190,8 @@ AdminFormListScreen As screen:
             Height: =70
             Width: =1182
             X: =12
-            Y: =50
-            ZIndex: =4
+            Y: =65
+            ZIndex: =1
 
             drpFilterDepartment As combobox:
                 BorderColor: =glbNeutralTertiaryColor
@@ -259,9 +209,9 @@ AdminFormListScreen As screen:
                 HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                 HoverColor: =Self.Color
                 HoverFill: =ColorFade(Self.Fill, -5%)
-                InputTextPlaceholder: ="選擇部門"
+                InputTextPlaceholder: ="表格部門/服務"
                 Items: =Distinct(FilterDepartment,DepartMentName)
-                NoSelectionText: ="選擇部門"
+                NoSelectionText: ="表格部門/服務"
                 PaddingLeft: =10
                 PressedColor: =Self.Color
                 PressedFill: =ColorFade(Self.Fill, -5%)
@@ -291,9 +241,9 @@ AdminFormListScreen As screen:
                 HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                 HoverColor: =Self.Color
                 HoverFill: =ColorFade(Self.Fill, -5%)
-                InputTextPlaceholder: ="表格類型"
+                InputTextPlaceholder: ="表格類型/單位"
                 Items: =Distinct(FilterFormType,FormType)
-                NoSelectionText: ="選擇表格類型"
+                NoSelectionText: ="表格類型/單位"
                 PaddingLeft: =10
                 PressedColor: =Self.Color
                 PressedFill: =ColorFade(Self.Fill, -5%)
@@ -315,7 +265,7 @@ AdminFormListScreen As screen:
                 FocusedBorderColor: =glbNeutralSecondaryColor
                 FocusedBorderThickness: =1
                 Height: =32
-                HintText: ="按表格名稱或編號搜索"
+                HintText: ="請輸入表格編號或名稱"
                 HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                 HoverFill: =ColorFade(Self.Fill, -5%)
                 PaddingBottom: =0
@@ -335,13 +285,15 @@ AdminFormListScreen As screen:
 
             Search_button As icon.Add:
                 BorderColor: =Self.Fill
-                BorderThickness: =1
-                Color: =RGBA(255, 255, 255, 1)
+                Color: =glbNeutralTertiaryColor
                 DisabledBorderColor: =RGBA(219, 219, 219, 1)
                 DisabledColor: =RGBA(149, 149, 149, 1)
                 DisabledFill: =RGBA(244, 244, 244, 1)
-                Fill: =glbThemePrimaryColor
-                Height: =32
+                Fill: =RGBA(255, 255, 255, 1)
+                FocusedBorderColor: =Self.Fill
+                Height: =35
+                HoverBorderColor: =Self.Fill
+                HoverColor: =Self.Fill
                 HoverFill: =ColorFade(Self.Fill, -15%)
                 Icon: =Icon.Search
                 OnSelect: |-
@@ -366,9 +318,8 @@ AdminFormListScreen As screen:
                 PaddingBottom: =8
                 PaddingTop: =8
                 PressedColor: =White
-                PressedFill: =ColorFade(Self.Fill, -25%)
-                Width: =32
-                X: =947
+                Width: =35
+                X: =1030
                 Y: =20
                 ZIndex: =8
 
@@ -474,45 +425,63 @@ AdminFormListScreen As screen:
                     Y: =24
                     ZIndex: =7
 
-            Reset_button As icon.Add:
-                BorderColor: =glbNeutralQuaternaryColor
-                BorderThickness: =1
-                Color: =glbNeutralPrimaryColor
-                DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                DisabledColor: =RGBA(149, 149, 149, 1)
-                DisabledFill: =RGBA(244, 244, 244, 1)
-                Fill: =White
-                FocusedBorderThickness: =1
-                Height: =32
-                HoverBorderColor: =glbThemePrimaryColor
-                HoverColor: =glbThemePrimaryColor
-                HoverFill: =White
-                Icon: =Icon.Erase
-                OnSelect: |-
-                    =Reset(TextInput_namenumber);
-                    Reset([@ComboBox1_formtype]);
-                    Reset([@drpFilterDepartment]);
-                    Reset(TemplateEndDate_3);
-                    Reset(TemplateStartDate_3);
-                    Select(Search_button);
-                PaddingBottom: =8
-                PaddingTop: =8
-                PressedBorderColor: =ColorFade(glbThemePrimaryColor, -15%)
-                PressedColor: =ColorFade(glbThemePrimaryColor, -15%)
-                PressedFill: =ColorFade(glbThemePrimaryColor, 95%)
-                Width: =32
-                X: =989
-                Y: =20
-                ZIndex: =9
+            Group23 As group:
+                Height: =5
+                Width: =5
+                X: =40
+                Y: =40
+                ZIndex: =11
+
+                Image5 As image:
+                    Height: =32
+                    Image: |-
+                        ="data:image/svg+xml," & EncodeUrl("<svg width='15' height='15' viewBox='0 0 15 15' fill='none' xmlns='http://www.w3.org/2000/svg'> <path fill-rule='evenodd' clip-rule='evenodd' d='M4.10957 2.18765C4.20445 2.06904 4.34811 2 4.5 2H13.5C14.3284 2 15 2.67157 15 3.5V11.5C15 12.3284 14.3284 13 13.5 13H4.5C4.34811 13 4.20445 12.931 4.10957 12.8123L0.109566 7.81235C-0.0365219 7.62974 -0.0365219 7.37026 0.109566 7.18765L4.10957 2.18765ZM10.1465 9.85356L8.50004 8.20711L6.85359 9.85356L6.14648 9.14645L7.79293 7.50001L6.14648 5.85356L6.85359 5.14645L8.50004 6.7929L10.1465 5.14645L10.8536 5.85356L9.20714 7.50001L10.8536 9.14645L10.1465 9.85356Z' fill='#cccccc'/> </svg>")
+                    PaddingBottom: =4
+                    PaddingTop: =4
+                    Width: =32
+                    X: =968
+                    Y: =20
+                    ZIndex: =9
+
+                Reset_button As icon.Add:
+                    BorderColor: =glbNeutralQuaternaryColor
+                    BorderStyle: =BorderStyle.None
+                    BorderThickness: =1
+                    Color: =RGBA(0, 0, 0, 0)
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    FocusedBorderThickness: =1
+                    Height: =32
+                    HoverBorderColor: =RGBA(0, 0, 0, 0)
+                    HoverColor: =RGBA(0, 0, 0, 0)
+                    HoverFill: =RGBA(0, 0, 0, 0)
+                    Icon: =Icon.Erase
+                    OnSelect: |-
+                        =Reset(TextInput_namenumber);
+                        Reset([@ComboBox1_formtype]);
+                        Reset([@drpFilterDepartment]);
+                        Reset(TemplateEndDate_3);
+                        Reset(TemplateStartDate_3);
+                        Select(Search_button);
+                    PaddingBottom: =8
+                    PaddingTop: =8
+                    PressedBorderColor: =ColorFade(glbThemePrimaryColor, -15%)
+                    PressedColor: =Transparent
+                    PressedFill: =Transparent
+                    Width: =32
+                    X: =968
+                    Y: =20
+                    ZIndex: =10
 
         Container5_6 As groupContainer.manualLayoutContainer:
             BorderColor: =RGBA(56, 96, 178, 1)
             Fill: =RGBA(255, 255, 255, 1)
-            Height: =584
+            Height: =626
             Width: =1182
             X: =12
-            Y: =120
-            ZIndex: =5
+            Y: =135
+            ZIndex: =2
 
             Container2_3 As groupContainer.manualLayoutContainer:
                 Fill: =RGBA(247, 247, 247, 1)
@@ -528,7 +497,7 @@ AdminFormListScreen As screen:
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =12
-                    Text: ="表格名稱"
+                    Text: ="名稱"
                     Width: =89
                     X: =133
                     ZIndex: =2
@@ -540,9 +509,9 @@ AdminFormListScreen As screen:
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =12
-                    Text: ="表格類型/單位"
+                    Text: ="類型/單位"
                     Width: =178
-                    X: =350
+                    X: =583
                     ZIndex: =3
 
                 Label4_15 As label:
@@ -552,9 +521,9 @@ AdminFormListScreen As screen:
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =12
-                    Text: ="表格部門/服務"
+                    Text: ="部門/服務"
                     Width: =114
-                    X: =583
+                    X: =345
                     ZIndex: =4
 
                 Label4_17 As label:
@@ -564,8 +533,8 @@ AdminFormListScreen As screen:
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =12
-                    Text: ="修改人/修改日期"
-                    Width: =65
+                    Text: ="修改人及日期"
+                    Width: =117
                     X: =792
                     ZIndex: =5
 
@@ -576,14 +545,14 @@ AdminFormListScreen As screen:
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =12
-                    Text: ="表格編號"
+                    Text: ="編號"
                     Width: =74
                     X: =18
                     ZIndex: =7
 
             "Gallery_Form As gallery.'BrowseLayout_Vertical_ThreeTextVariant_ver4.0'":
                 Fill: =RGBA(255, 255, 255, 1)
-                Height: =500
+                Height: =582
                 Items: |-
                     =//Sort(FilterFormDepartment1,修改时间,Descending)
                     FilterFormDepartment1
@@ -647,7 +616,7 @@ AdminFormListScreen As screen:
                     VerticalAlign: =VerticalAlign.Top
                     Width: =195
                     Wrap: =false
-                    X: =583
+                    X: =345
                     Y: =14
                     ZIndex: =2
 
@@ -666,7 +635,7 @@ AdminFormListScreen As screen:
                     VerticalAlign: =VerticalAlign.Top
                     Width: =206
                     Wrap: =false
-                    X: =132
+                    X: =133
                     Y: =14
                     ZIndex: =3
 
@@ -686,8 +655,8 @@ AdminFormListScreen As screen:
                     VerticalAlign: =VerticalAlign.Top
                     Width: =153
                     Wrap: =false
-                    X: =791
-                    ZIndex: =5
+                    X: =792
+                    ZIndex: =4
 
                 FormNumber As label:
                     Color: =glbNeutralSecondaryColor
@@ -702,9 +671,9 @@ AdminFormListScreen As screen:
                     VerticalAlign: =VerticalAlign.Top
                     Width: =82
                     Wrap: =false
-                    X: =19
+                    X: =18
                     Y: =14
-                    ZIndex: =6
+                    ZIndex: =5
 
                 FormType As label:
                     Color: =glbNeutralSecondaryColor
@@ -720,18 +689,144 @@ AdminFormListScreen As screen:
                     VerticalAlign: =VerticalAlign.Top
                     Width: =233
                     Wrap: =false
-                    X: =350
+                    X: =583
                     Y: =14
-                    ZIndex: =7
+                    ZIndex: =6
 
-                Edit_button As button:
+                Disable_button As button:
                     AutoDisableOnSelect: =false
+                    BorderColor: =
                     BorderStyle: =BorderStyle.None
-                    Color: =RGBA(102, 182, 227, 1)
-                    Fill: =RGBA(255, 255, 255, 1)
+                    DisabledColor: =RGBA(0, 0, 0, 1)
+                    Fill: =If(Self.Text="停用表格",glbErrorColor,glbSuccessColor)
                     Height: =34
-                    OnSelect: |
-                        =Reset(drpFilter_Department);
+                    OnSelect: |+
+                        =If(ThisItem.ModelName in ApprovalDetailColwithFormName1.FormName, Notify("該表單有待處理任務，當前無法停用，請處理后再停用",Warning),
+                        
+                        
+                        If(Disable_button.Text="啓用表格",UpdateContext({Isenable:0}),UpdateContext({Isenable:1}));
+                        If(Isenable=1,UpdateContext({Isenable:0}),Isenable=0,UpdateContext({Isenable:1}));
+                        If(Isenable=1,UpdateIf(GenericFormModel,ModelName=FormName.Text,{IsEnable:1}),Isenable=0,UpdateIf(GenericFormModel,ModelName=FormName.Text,{IsEnable:0}));
+                        ClearCollect(FilterForm,GenericFormModel))
+                        
+                    Size: =12
+                    Text: =If(ThisItem.IsSelected,If(Isenable=0,"啓用表格","停用表格"),If(ThisItem.IsEnable="0","啓用表格","停用表格"))
+                    Width: =79
+                    X: =1035
+                    Y: =7
+                    ZIndex: =9
+
+                Group22 As group:
+                    Height: =5
+                    Width: =5
+                    X: =40
+                    Y: =40
+                    ZIndex: =10
+
+                    Icon1 As icon.Edit:
+                        Color: =RGBA(255, 255, 255, 1)
+                        Fill: =RGBA(179, 179, 179, 1)
+                        Height: =30
+                        Icon: =Icon.Edit
+                        OnSelect: =
+                        Width: =30
+                        X: =964
+                        Y: =9
+                        ZIndex: =7
+
+                    Edit_button As button:
+                        AutoDisableOnSelect: =false
+                        BorderStyle: =BorderStyle.None
+                        Color: =RGBA(0, 0, 0, 0)
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =30
+                        HoverColor: =RGBA(0, 0, 0, 0)
+                        HoverFill: =RGBA(0, 0, 0, 0)
+                        OnSelect: |
+                            =Reset(drpFilter_Department);
+                            Reset(drpFilter_FormType);
+                            Reset(TextInput_FormVersion);
+                            Reset(TextInput_FormName);
+                            Reset(TextInput_FormNumber);
+                            Reset(TextInput_FormDescription);
+                            Reset(TextInput_CustomFilter);
+                            Reset(Attachment_Form);
+                            Reset(Attachment_Demonstrationform);
+                            Reset(Attachment_FillGuide);
+                            Reset(Radio_attachment);
+                            Reset(Radio_password);
+                            Reset(Radio_password_1);
+                            Reset(Radio_flowtype);
+                            Reset(Checkbox1_3);
+                            Reset(Checkbox1_4);
+                            Reset(Checkbox1_5);
+                            Reset(Checkbox1_6);
+                            Set(ShowSavebutton,true);
+                            Set(attachment,DisplayMode.Edit);
+                            Set(NoEdit,DisplayMode.Disabled);//設置編輯模式下，不可編輯部門類型編號
+                            Navigate(AdminFormDetailScreen,ScreenTransition.Fade);
+                            ClearCollect(EditForm,Filter(FilterFormDepartment1,ModelFlowNumber = ThisItem.ModelFlowNumber));
+                            //ClearCollect(EditAttachment,Filter(TemplateFileList,GenericFormId=ThisItem.Title&&TempType=ThisItem.ModelType));//編輯表格類型后不可用，下面方法替換
+                            ClearCollect(EditAttachment,Filter(TemplateFileList,GenericFormId=ThisItem.标题&&TempType=ThisItem.ModelType));
+                            ClearCollect(EditAttachment2,Filter(TemplateFileList,GenericFormId=ThisItem.标题&&TempType="示範表格TT"));
+                            ClearCollect(EditAttachment3,Filter(TemplateFileList,GenericFormId=ThisItem.标题&&TempType="填寫指引TT"));
+                            ClearCollect(CreateNewForm,{name:"編輯表格"&"-"&ThisItem.ModelName});//創建集合變更編輯表格頁標題
+                        PressedColor: =RGBA(0, 0, 0, 0)
+                        PressedFill: =RGBA(0, 0, 0, 0)
+                        Size: =12
+                        Text: ="編輯"
+                        Width: =30
+                        X: =964
+                        Y: =9
+                        ZIndex: =8
+
+        Container5 As groupContainer.manualLayoutContainer:
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =50
+            Width: =1182
+            X: =12
+            Y: =15
+            ZIndex: =6
+
+            Label9_15 As label:
+                Color: =glbNeutralPrimaryColor
+                Height: =50
+                PaddingBottom: =0
+                PaddingLeft: =10
+                PaddingRight: =0
+                PaddingTop: =0
+                Size: =15
+                Text: ="表格管理"
+                Width: =156
+                X: =10
+                ZIndex: =1
+
+            BtnLgIcon_3 As group:
+                Height: =5
+                Width: =5
+                X: =-1053
+                Y: =9
+                ZIndex: =3
+
+                BtnPrimary_5 As button:
+                    BorderColor: =Self.Fill
+                    BorderThickness: =1
+                    Color: =White
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    Fill: =glbLinkColor
+                    FocusedBorderThickness: =1
+                    Height: =32
+                    HoverFill: =ColorFade(Self.Fill, -15%)
+                    OnSelect: |-
+                        =Set(ShowSavebutton,true);//設置保存按鈕可見
+                        Set(attachment,DisplayMode.Edit);//設置附件可編輯
+                        Set(NoEdit,DisplayMode.Edit);//設置編輯模式下，不可編輯部門類型編號
+                        Navigate(AdminFormDetailScreen,ScreenTransition.Fade);
+                        Clear(EditForm);
+                        Clear(EditAttachment);
+                        Clear(EditAttachment2);
+                        Clear(EditAttachment3);
+                        Reset(drpFilter_Department);
                         Reset(drpFilter_FormType);
                         Reset(TextInput_FormVersion);
                         Reset(TextInput_FormName);
@@ -749,158 +844,62 @@ AdminFormListScreen As screen:
                         Reset(Checkbox1_4);
                         Reset(Checkbox1_5);
                         Reset(Checkbox1_6);
-                        Set(ShowSavebutton,true);
-                        Set(attachment,DisplayMode.Edit);
-                        Set(NoEdit,DisplayMode.Disabled);//設置編輯模式下，不可編輯部門類型編號
+                        ClearCollect(CreateNewForm,{name:"新增表格"});//創建集合變更新增表格頁標題
+                    PaddingBottom: =0
+                    PaddingLeft: =20
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedColor: =White
+                    PressedFill: =ColorFade(Self.Fill, -25%)
+                    RadiusBottomLeft: =4
+                    RadiusBottomRight: =4
+                    RadiusTopLeft: =4
+                    RadiusTopRight: =4
+                    Size: =12
+                    Text: ="新增表格"
+                    Width: =100
+                    X: =1063
+                    Y: =9
+                    ZIndex: =2
+
+                Icon4_27 As icon.Add:
+                    Color: =RGBA(255, 255, 255, 1)
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    Height: =16
+                    Icon: =Icon.Add
+                    OnSelect: |-
+                        =Set(ShowSavebutton,true);//設置保存按鈕可見
+                        Set(attachment,DisplayMode.Edit);//設置附件可編輯
+                        Set(NoEdit,DisplayMode.Edit);//設置編輯模式下，不可編輯部門類型編號
                         Navigate(AdminFormDetailScreen,ScreenTransition.Fade);
-                        ClearCollect(EditForm,Filter(FilterFormDepartment1,ModelFlowNumber = ThisItem.ModelFlowNumber));
-                        //ClearCollect(EditAttachment,Filter(TemplateFileList,GenericFormId=ThisItem.Title&&TempType=ThisItem.ModelType));//編輯表格類型后不可用，下面方法替換
-                        ClearCollect(EditAttachment,Filter(TemplateFileList,GenericFormId=ThisItem.标题&&TempType=ThisItem.ModelType));
-                        ClearCollect(EditAttachment2,Filter(TemplateFileList,GenericFormId=ThisItem.标题&&TempType="示範表格TT"));
-                        ClearCollect(EditAttachment3,Filter(TemplateFileList,GenericFormId=ThisItem.标题&&TempType="填寫指引TT"));
-                        ClearCollect(CreateNewForm,{name:"編輯表格"&"-"&ThisItem.ModelName});//創建集合變更編輯表格頁標題
-                    Size: =12
-                    Text: ="編輯"
-                    Width: =45
-                    X: =1032
-                    Y: =7
-                    ZIndex: =9
-
-                Disable_button As button:
-                    AutoDisableOnSelect: =false
-                    BorderStyle: =BorderStyle.None
-                    Color: =If(Self.Text="停用",glbErrorColor,glbSuccessColor)
-                    DisabledColor: =RGBA(0, 0, 0, 1)
-                    Fill: =RGBA(255, 255, 255, 1)
-                    Height: =34
-                    OnSelect: |+
-                        =If(ThisItem.ModelName in ApprovalDetailColwithFormName1.FormName, Notify("該表單有待處理任務，當前無法停用，請處理后再停用",Warning),
-                        
-                        
-                        If(Disable_button.Text="启用",UpdateContext({Isenable:0}),UpdateContext({Isenable:1}));
-                        If(Isenable=1,UpdateContext({Isenable:0}),Isenable=0,UpdateContext({Isenable:1}));
-                        If(Isenable=1,UpdateIf(GenericFormModel,ModelName=FormName.Text,{IsEnable:1}),Isenable=0,UpdateIf(GenericFormModel,ModelName=FormName.Text,{IsEnable:0}));
-                        ClearCollect(FilterForm,GenericFormModel))
-                        
-                    Size: =12
-                    Text: =If(ThisItem.IsSelected,If(Isenable=0,"启用","停用"),If(ThisItem.IsEnable="0","启用","停用"))
-                    Width: =45
-                    X: =1077
-                    Y: =7
-                    ZIndex: =10
-
-        Label9_15 As label:
-            Color: =glbNeutralPrimaryColor
-            Height: =50
-            PaddingBottom: =0
-            PaddingLeft: =10
-            PaddingRight: =0
-            PaddingTop: =0
-            Size: =15
-            Text: ="表格管理"
-            Width: =156
-            X: =12
-            ZIndex: =6
-
-        BtnLgIcon_3 As group:
-            Height: =5
-            Width: =5
-            X: =-181
-            Y: =-421
-            ZIndex: =9
-
-            BtnPrimary_5 As button:
-                BorderColor: =Self.Fill
-                BorderThickness: =1
-                Color: =White
-                DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                Fill: =glbThemePrimaryColor
-                FocusedBorderThickness: =1
-                Height: =32
-                HoverFill: =ColorFade(Self.Fill, -15%)
-                OnSelect: |-
-                    =Set(ShowSavebutton,true);//設置保存按鈕可見
-                    Set(attachment,DisplayMode.Edit);//設置附件可編輯
-                    Set(NoEdit,DisplayMode.Edit);//設置編輯模式下，不可編輯部門類型編號
-                    Navigate(AdminFormDetailScreen,ScreenTransition.Fade);
-                    Clear(EditForm);
-                    Clear(EditAttachment);
-                    Clear(EditAttachment2);
-                    Clear(EditAttachment3);
-                    Reset(drpFilter_Department);
-                    Reset(drpFilter_FormType);
-                    Reset(TextInput_FormVersion);
-                    Reset(TextInput_FormName);
-                    Reset(TextInput_FormNumber);
-                    Reset(TextInput_FormDescription);
-                    Reset(TextInput_CustomFilter);
-                    Reset(Attachment_Form);
-                    Reset(Attachment_Demonstrationform);
-                    Reset(Attachment_FillGuide);
-                    Reset(Radio_attachment);
-                    Reset(Radio_password);
-                    Reset(Radio_password_1);
-                    Reset(Radio_flowtype);
-                    Reset(Checkbox1_3);
-                    Reset(Checkbox1_4);
-                    Reset(Checkbox1_5);
-                    Reset(Checkbox1_6);
-                    ClearCollect(CreateNewForm,{name:"新增表格"});//創建集合變更新增表格頁標題
-                PaddingBottom: =0
-                PaddingLeft: =20
-                PaddingRight: =0
-                PaddingTop: =0
-                PressedColor: =White
-                PressedFill: =ColorFade(Self.Fill, -25%)
-                RadiusBottomLeft: =4
-                RadiusBottomRight: =4
-                RadiusTopLeft: =4
-                RadiusTopRight: =4
-                Size: =12
-                Text: ="新增表格"
-                Width: =100
-                X: =1093
-                Y: =9
-                ZIndex: =7
-
-            Icon4_27 As icon.Add:
-                Color: =RGBA(255, 255, 255, 1)
-                DisabledColor: =RGBA(149, 149, 149, 1)
-                Height: =16
-                Icon: =Icon.Add
-                OnSelect: |-
-                    =Set(ShowSavebutton,true);//設置保存按鈕可見
-                    Set(attachment,DisplayMode.Edit);//設置附件可編輯
-                    Set(NoEdit,DisplayMode.Edit);//設置編輯模式下，不可編輯部門類型編號
-                    Navigate(AdminFormDetailScreen,ScreenTransition.Fade);
-                    Clear(EditForm);
-                    Clear(EditAttachment);
-                    Clear(EditAttachment2);
-                    Clear(EditAttachment3);
-                    Reset(drpFilter_Department);
-                    Reset(drpFilter_FormType);
-                    Reset(TextInput_FormVersion);
-                    Reset(TextInput_FormName);
-                    Reset(TextInput_FormNumber);
-                    Reset(TextInput_FormDescription);
-                    Reset(TextInput_CustomFilter);
-                    Reset(Attachment_Form);
-                    Reset(Attachment_Demonstrationform);
-                    Reset(Attachment_FillGuide);
-                    Reset(Radio_attachment);
-                    Reset(Radio_password);
-                    Reset(Radio_password_1);
-                    Reset(Radio_flowtype);
-                    Reset(Checkbox1_3);
-                    Reset(Checkbox1_4);
-                    Reset(Checkbox1_5);
-                    Reset(Checkbox1_6);
-                    ClearCollect(CreateNewForm,{name:"新增表格"});//創建集合變更新增表格頁標題
-                PressedColor: =White
-                Width: =16
-                X: =1100
-                Y: =17
-                ZIndex: =8
+                        Clear(EditForm);
+                        Clear(EditAttachment);
+                        Clear(EditAttachment2);
+                        Clear(EditAttachment3);
+                        Reset(drpFilter_Department);
+                        Reset(drpFilter_FormType);
+                        Reset(TextInput_FormVersion);
+                        Reset(TextInput_FormName);
+                        Reset(TextInput_FormNumber);
+                        Reset(TextInput_FormDescription);
+                        Reset(TextInput_CustomFilter);
+                        Reset(Attachment_Form);
+                        Reset(Attachment_Demonstrationform);
+                        Reset(Attachment_FillGuide);
+                        Reset(Radio_attachment);
+                        Reset(Radio_password);
+                        Reset(Radio_password_1);
+                        Reset(Radio_flowtype);
+                        Reset(Checkbox1_3);
+                        Reset(Checkbox1_4);
+                        Reset(Checkbox1_5);
+                        Reset(Checkbox1_6);
+                        ClearCollect(CreateNewForm,{name:"新增表格"});//創建集合變更新增表格頁標題
+                    PressedColor: =White
+                    Width: =16
+                    X: =1070
+                    Y: =17
+                    ZIndex: =3
 
     Container3_4 As groupContainer.manualLayoutContainer:
         Fill: =RGBA(255, 255, 255, 1)

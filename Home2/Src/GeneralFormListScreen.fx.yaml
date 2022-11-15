@@ -353,61 +353,11 @@ GeneralFormListScreen As screen:
         );
         Select(BtnLgIconOnly_4);
 
-    ContainerTitle As groupContainer.manualLayoutContainer:
-        Fill: =glbThemePrimaryColor
-        Height: =50
-        Width: =1366
-        ZIndex: =1
-
-        Image1_2 As image:
-            Height: =38
-            Image: =logo
-            Width: =203
-            X: =15
-            Y: =5
-            ZIndex: =1
-
-        Label1_74 As label:
-            Color: =RGBA(255, 255, 255, 1)
-            Fill: =glbThemePrimaryColor
-            Height: =18
-            Size: =9
-            Text: ="基督教香港信義會社會服務部"
-            Width: =186
-            X: =63
-            Y: =5
-            ZIndex: =3
-
-        Label1_76 As label:
-            Color: =RGBA(255, 255, 255, 1)
-            Fill: =glbThemePrimaryColor
-            FontWeight: =FontWeight.Bold
-            Height: =21
-            Size: =12
-            Text: ="eProcessing System 2.0"
-            Width: =198
-            X: =63
-            Y: =22
-            ZIndex: =5
-
-        Image7_1 As image:
-            Height: =40
-            Image: =User().Image
-            RadiusBottomLeft: =10
-            RadiusBottomRight: =10
-            RadiusTopLeft: =10
-            RadiusTopRight: =10
-            Width: =40
-            X: =1310
-            Y: =5
-            ZIndex: =6
-
     ContainerMain As groupContainer.manualLayoutContainer:
         Fill: =RGBA(247, 247, 247, 1)
-        Height: =718
+        Height: =768
         Width: =1206
         X: =160
-        Y: =50
         ZIndex: =3
 
         Container5_2 As groupContainer.manualLayoutContainer:
@@ -437,6 +387,7 @@ GeneralFormListScreen As screen:
                 InputTextPlaceholder: ="選擇部門"
                 IsSearchable: =false
                 Items: =Sort(Distinct(Filter(ConfigurationInfo,Type_Name="組織配置"&&(Value1="部門信息"||Value1="單位信息")),Code_No2&"-"&Value2),Result)
+                NoSelectionText: ="表格部門/服務"
                 PaddingLeft: =10
                 PressedColor: =Self.Color
                 PressedFill: =ColorFade(Self.Fill, -5%)
@@ -446,7 +397,7 @@ GeneralFormListScreen As screen:
                 SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                 Size: =11
                 Width: =180
-                X: =290
+                X: =335
                 Y: =80
                 ZIndex: =1
 
@@ -469,6 +420,7 @@ GeneralFormListScreen As screen:
                 InputTextPlaceholder: ="表格類型"
                 IsSearchable: =false
                 Items: =Distinct(FormTableType,FormType)
+                NoSelectionText: ="表格類型/單位"
                 PaddingLeft: =10
                 PressedColor: =Self.Color
                 PressedFill: =ColorFade(Self.Fill, -5%)
@@ -478,18 +430,18 @@ GeneralFormListScreen As screen:
                 SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                 Size: =11
                 Width: =180
-                X: =480
+                X: =538
                 Y: =80
                 ZIndex: =3
 
             BtnLgIconOnly_4 As icon.Add:
                 BorderColor: =Self.Fill
                 BorderThickness: =1
-                Color: =RGBA(255, 255, 255, 1)
+                Color: =RGBA(153, 153, 153, 1)
                 DisabledBorderColor: =RGBA(219, 219, 219, 1)
                 DisabledColor: =RGBA(149, 149, 149, 1)
                 DisabledFill: =RGBA(244, 244, 244, 1)
-                Fill: =glbThemePrimaryColor
+                Fill: =RGBA(255, 255, 255, 1)
                 Height: =32
                 HoverFill: =ColorFade(Self.Fill, -15%)
                 Icon: =Icon.Search
@@ -561,40 +513,9 @@ GeneralFormListScreen As screen:
                 PressedColor: =White
                 PressedFill: =ColorFade(Self.Fill, -25%)
                 Width: =32
-                X: =947
+                X: =1096
                 Y: =80
                 ZIndex: =5
-
-            BtnSecondIconOnly_4 As icon.Add:
-                BorderColor: =glbNeutralQuaternaryColor
-                BorderThickness: =1
-                Color: =glbNeutralPrimaryColor
-                DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                DisabledColor: =RGBA(149, 149, 149, 1)
-                DisabledFill: =RGBA(244, 244, 244, 1)
-                Fill: =White
-                FocusedBorderThickness: =1
-                Height: =32
-                HoverBorderColor: =glbThemePrimaryColor
-                HoverColor: =glbThemePrimaryColor
-                HoverFill: =White
-                Icon: =Icon.Erase
-                OnSelect: |-
-                    =Reset(TextInput2_13);
-                    Reset(ComboBox1_5);
-                    Reset(ComboBox1_6);
-                    Reset(TemplateStartDate_2);
-                    Reset(TemplateEndDate_2);
-                    Select(BtnLgIconOnly_4);
-                PaddingBottom: =8
-                PaddingTop: =8
-                PressedBorderColor: =ColorFade(glbThemePrimaryColor, -15%)
-                PressedColor: =ColorFade(glbThemePrimaryColor, -15%)
-                PressedFill: =ColorFade(glbThemePrimaryColor, 95%)
-                Width: =32
-                X: =989
-                Y: =80
-                ZIndex: =6
 
             LineRectangle_1 As rectangle:
                 Fill: =RGBA(219, 219, 219, 1)
@@ -665,7 +586,7 @@ GeneralFormListScreen As screen:
                 FocusedBorderColor: =glbNeutralSecondaryColor
                 FocusedBorderThickness: =1
                 Height: =32
-                HintText: ="按表格名稱或編號搜索"
+                HintText: ="請輸入申請編號、表格編號、名稱或標簽"
                 HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                 HoverFill: =ColorFade(Self.Fill, -5%)
                 PaddingBottom: =0
@@ -678,7 +599,7 @@ GeneralFormListScreen As screen:
                 RadiusTopLeft: =0
                 RadiusTopRight: =0
                 Size: =11
-                Width: =260
+                Width: =290
                 X: =20
                 Y: =80
                 ZIndex: =9
@@ -714,7 +635,7 @@ GeneralFormListScreen As screen:
                     RadiusTopRight: =0
                     Size: =11
                     Width: =263
-                    X: =670
+                    X: =739
                     Y: =80
                     ZIndex: =10
 
@@ -745,7 +666,7 @@ GeneralFormListScreen As screen:
                     PaddingRight: =0
                     Size: =11
                     Width: =120
-                    X: =813
+                    X: =882
                     Y: =80
                     ZIndex: =11
 
@@ -768,7 +689,7 @@ GeneralFormListScreen As screen:
                     PaddingRight: =0
                     Size: =11
                     Width: =120
-                    X: =671
+                    X: =739
                     Y: =80
                     ZIndex: =12
 
@@ -781,13 +702,62 @@ GeneralFormListScreen As screen:
                     Size: =10
                     Text: ="—"
                     Width: =16
-                    X: =794
-                    Y: =84
+                    X: =866
+                    Y: =80
                     ZIndex: =13
+
+            Group23_1 As group:
+                Height: =5
+                Width: =5
+                X: =-928
+                Y: =20
+                ZIndex: =16
+
+                Image5_1 As image:
+                    Height: =32
+                    Image: |-
+                        ="data:image/svg+xml," & EncodeUrl("<svg width='15' height='15' viewBox='0 0 15 15' fill='none' xmlns='http://www.w3.org/2000/svg'> <path fill-rule='evenodd' clip-rule='evenodd' d='M4.10957 2.18765C4.20445 2.06904 4.34811 2 4.5 2H13.5C14.3284 2 15 2.67157 15 3.5V11.5C15 12.3284 14.3284 13 13.5 13H4.5C4.34811 13 4.20445 12.931 4.10957 12.8123L0.109566 7.81235C-0.0365219 7.62974 -0.0365219 7.37026 0.109566 7.18765L4.10957 2.18765ZM10.1465 9.85356L8.50004 8.20711L6.85359 9.85356L6.14648 9.14645L7.79293 7.50001L6.14648 5.85356L6.85359 5.14645L8.50004 6.7929L10.1465 5.14645L10.8536 5.85356L9.20714 7.50001L10.8536 9.14645L10.1465 9.85356Z' fill='#cccccc'/> </svg>")
+                    PaddingBottom: =4
+                    PaddingTop: =4
+                    Width: =32
+                    X: =1042
+                    Y: =80
+                    ZIndex: =14
+
+                BtnSecondIconOnly_4 As icon.Add:
+                    BorderColor: =glbNeutralQuaternaryColor
+                    BorderStyle: =BorderStyle.None
+                    BorderThickness: =1
+                    Color: =RGBA(0, 0, 0, 0)
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    FocusedBorderThickness: =1
+                    Height: =32
+                    HoverBorderColor: =RGBA(0, 0, 0, 0)
+                    HoverColor: =RGBA(0, 0, 0, 0)
+                    HoverFill: =RGBA(0, 0, 0, 0)
+                    Icon: =Icon.Erase
+                    OnSelect: |-
+                        =Reset(TextInput2_13);
+                        Reset(ComboBox1_5);
+                        Reset(ComboBox1_6);
+                        Reset(TemplateStartDate_2);
+                        Reset(TemplateEndDate_2);
+                        Select(BtnLgIconOnly_4);
+                    PaddingBottom: =8
+                    PaddingTop: =8
+                    PressedBorderColor: =ColorFade(glbThemePrimaryColor, -15%)
+                    PressedColor: =Transparent
+                    PressedFill: =Transparent
+                    Width: =32
+                    X: =1042
+                    Y: =80
+                    ZIndex: =15
 
         Container5_3 As groupContainer.manualLayoutContainer:
             Fill: =RGBA(255, 255, 255, 1)
-            Height: =559
+            Height: =608
             Width: =1182
             X: =12
             Y: =146
@@ -801,7 +771,6 @@ GeneralFormListScreen As screen:
                 ZIndex: =1
 
                 Label4_6 As label:
-                    Align: =Center
                     Color: =glbNeutralPrimaryColor
                     PaddingBottom: =0
                     PaddingLeft: =0
@@ -813,48 +782,30 @@ GeneralFormListScreen As screen:
                     ZIndex: =1
 
                 Label4_7 As label:
-                    Align: =Center
                     Color: =glbNeutralPrimaryColor
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =12
-                    Text: ="表格名稱"
+                    Text: ="表格名稱及編號"
                     Width: =200
-                    X: =165
+                    X: =170
                     ZIndex: =2
 
-                Label4_8 As label:
-                    Align: =Align.Center
-                    Color: =glbNeutralPrimaryColor
-                    PaddingBottom: =0
-                    PaddingLeft: =0
-                    PaddingRight: =0
-                    PaddingTop: =0
-                    Size: =12
-                    Text: ="表格類型/"&Char(13)&"單位"
-                    Width: =98
-                    X: =490
-                    ZIndex: =3
-
                 Label4_9 As label:
-                    Align: =Center
                     Color: =glbNeutralPrimaryColor
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =12
-                    Text: |-
-                        ="申請部門/
-                        "
-                    Width: =100
+                    Text: ="申請部門或單位"
+                    Width: =123
                     X: =370
                     ZIndex: =4
 
                 Label4_10 As label:
-                    Align: =Center
                     Color: =glbNeutralPrimaryColor
                     PaddingBottom: =0
                     PaddingLeft: =0
@@ -863,11 +814,10 @@ GeneralFormListScreen As screen:
                     Size: =12
                     Text: ="申請人/申請日期"
                     Width: =128
-                    X: =608
+                    X: =509
                     ZIndex: =5
 
                 Label4_12 As label:
-                    Align: =Align.Center
                     Color: =glbNeutralPrimaryColor
                     PaddingBottom: =0
                     PaddingLeft: =0
@@ -876,11 +826,10 @@ GeneralFormListScreen As screen:
                     Size: =12
                     Text: ="狀態"
                     Width: =74
-                    X: =938
+                    X: =771
                     ZIndex: =7
 
                 Label4_13 As label:
-                    Align: =Align.Center
                     Color: =glbNeutralPrimaryColor
                     PaddingBottom: =0
                     PaddingLeft: =0
@@ -889,12 +838,12 @@ GeneralFormListScreen As screen:
                     Size: =12
                     Text: ="標籤"
                     Width: =111
-                    X: =781
+                    X: =660
                     ZIndex: =8
 
             TaskListGallery As gallery.galleryVertical:
                 Fill: =RGBA(255, 255, 255, 1)
-                Height: =504
+                Height: =535
                 Items: |-
                     =If(
                         TabGallery3_4.Selected.Value = "全部",
@@ -990,8 +939,7 @@ GeneralFormListScreen As screen:
                     PaddingTop: =0
                     Size: =12
                     Text: =ThisItem.FlowOrder
-                    Width: =155
-                    X: =10
+                    Width: =165
                     ZIndex: =1
 
                 Rectangle3_3 As rectangle:
@@ -1003,7 +951,6 @@ GeneralFormListScreen As screen:
                     ZIndex: =2
 
                 Label3_7 As label:
-                    Align: =Align.Center
                     Color: =glbNeutralSecondaryColor
                     Height: =48
                     HoverColor: =glbThemePrimaryColor
@@ -1105,7 +1052,7 @@ GeneralFormListScreen As screen:
                             "審核中"
                         )
                     Width: =72
-                    X: =938
+                    X: =771
                     Y: =10
                     ZIndex: =10
 
@@ -1193,7 +1140,6 @@ GeneralFormListScreen As screen:
                     ZIndex: =12
 
                 Label3_8 As label:
-                    Align: =Align.Center
                     Color: =glbNeutralSecondaryColor
                     Height: =48
                     OnSelect: =Select(Parent)
@@ -1209,22 +1155,6 @@ GeneralFormListScreen As screen:
                     X: =370
                     ZIndex: =13
 
-                Label3_9 As label:
-                    Color: =glbNeutralSecondaryColor
-                    Height: =48
-                    OnSelect: =Select(Parent)
-                    PaddingBottom: =0
-                    PaddingLeft: =0
-                    PaddingRight: =0
-                    PaddingTop: =0
-                    Size: =12
-                    Text: =ThisItem.FormType
-                    Tooltip: =ThisItem.FormType
-                    Width: =132
-                    Wrap: =false
-                    X: =482
-                    ZIndex: =14
-
                 Label3_10 As label:
                     Color: =glbNeutralSecondaryColor
                     Height: =48
@@ -1239,11 +1169,10 @@ GeneralFormListScreen As screen:
                     Tooltip: =First(Split(ThisItem.SubmitApprover,"@")).Result
                     Width: =141
                     Wrap: =false
-                    X: =614
+                    X: =509
                     ZIndex: =15
 
                 Label3_12 As label:
-                    Align: =Align.Center
                     Color: =glbNeutralSecondaryColor
                     Height: =48
                     OnSelect: =Select(Parent)
@@ -1274,9 +1203,9 @@ GeneralFormListScreen As screen:
                             )
                         */
                     Tooltip: =ThisItem.CustomerSearch
-                    Width: =74
+                    Width: =101
                     Wrap: =false
-                    X: =840
+                    X: =660
                     ZIndex: =17
 
     ContainerMenu As groupContainer.manualLayoutContainer:
