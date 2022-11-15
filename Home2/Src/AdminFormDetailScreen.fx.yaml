@@ -127,7 +127,7 @@ AdminFormDetailScreen As screen:
                 BorderColor: =Self.Fill
                 BorderThickness: =1
                 DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                Fill: =glbLinkColor
+                Fill: =RGBA(50, 86, 160, 1)
                 FocusedBorderThickness: =1
                 FontWeight: =FontWeight.Bold
                 Height: =36
@@ -1060,14 +1060,14 @@ AdminFormDetailScreen As screen:
                 Text: ="保存"
                 Visible: =ShowSavebutton
                 Width: =100
-                X: =21
+                X: =1062
                 Y: =578
                 ZIndex: =11
 
             Cancel_button As button:
                 BorderColor: =Self.Color
                 BorderThickness: =1
-                Color: =glbThemePrimaryColor
+                Color: =RGBA(50, 86, 160, 1)
                 DisabledBorderColor: =RGBA(219, 219, 219, 1)
                 Fill: =White
                 FocusedBorderThickness: =1
@@ -1111,7 +1111,7 @@ AdminFormDetailScreen As screen:
                 Text: ="取消"
                 Visible: =ShowSavebutton
                 Width: =100
-                X: =155
+                X: =912
                 Y: =578
                 ZIndex: =12
 
