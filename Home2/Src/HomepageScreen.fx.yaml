@@ -473,9 +473,6 @@ HomepageScreen As screen:
                     OnSelect: |-
                         =If(
                             ThisItem.ModelName = "招聘職位申請表",
-                            If(
-                                Gallery2.Selected.Result = "常用表格",
-                                "",
                                 If(
                                     !IsBlank(
                                         LookUp(
@@ -495,17 +492,14 @@ HomepageScreen As screen:
                                             ModelFlowNumber: "A103"
                                         }
                                     )
-                                )
-                            );
+                                );
                             Launch(
                                 JumpUrl & "&Screen=JobTitleFormScreen&newApplicationGuid=" & GUID() & "&flowguid=" & GUID() & "&bustype=New",
                                 {},
                                 LaunchTarget.Replace
                             ),
                             ThisItem.ModelName = "假期批核人資料表",
-                            If(
-                                Gallery2.Selected.Result = "常用表格",
-                                "",
+                            
                                 If(
                                     !IsBlank(
                                         LookUp(
@@ -525,17 +519,13 @@ HomepageScreen As screen:
                                             ModelFlowNumber: "A306"
                                         }
                                     )
-                                )
-                            );
+                                );
                             Launch(
                                 JumpUrlA306A111 & "&Screen=VacationFormScreen&newApplicationGuid=" & GUID() & "&flowguid=" & GUID() & "&bustype=New",
                                 {},
                                 LaunchTarget.Replace
                             ),
                             ThisItem.ModelName = "任職資源申請",
-                            If(
-                                Gallery2.Selected.Result = "常用表格",
-                                "",
                                 If(
                                     !IsBlank(
                                         LookUp(
@@ -555,17 +545,13 @@ HomepageScreen As screen:
                                             ModelFlowNumber: "A111"
                                         }
                                     )
-                                )
-                            );
+                                );
                             Launch(
                                 JumpUrlA306A111 & "&Screen=EmploymentFormScreen&newApplicationGuid=" & GUID() & "&flowguid=" & GUID() & "&bustype=New",
                                 {},
                                 LaunchTarget.Replace
                             ),
                             ThisItem.ModelName = "預備合約通知書(新入職)",
-                            If(
-                                Gallery2.Selected.Result = "常用表格",
-                                "",
                                 If(
                                     !IsBlank(
                                         LookUp(
@@ -585,16 +571,12 @@ HomepageScreen As screen:
                                             ModelFlowNumber: "A104"
                                         }
                                     )
-                                )
-                            );
+                                );
                             Launch(
                                 JumpUrl & "&Screen=ContractNoticeForm&newApplicationGuid=" & GUID() & "&flowguid=" & GUID() & "&bustype=New",
                                 {},
                                 LaunchTarget.Replace
                             ),
-                            If(
-                                Gallery2.Selected.Result = "常用表格",
-                                "",
                                 If(
                                     !IsBlank(
                                         LookUp(
@@ -615,8 +597,7 @@ HomepageScreen As screen:
                                             ModelFlowNumber: ThisItem.ModelFlowNumber
                                         }
                                     )
-                                )
-                            );
+                                );
                             With(
                                 {
                                     FormModelId: LookUp(
@@ -782,14 +763,14 @@ HomepageScreen As screen:
                             Launch(
                                 JumpUrl&"&Screen=JobTitleFormScreen&AppIds=" & LookUp(
                                     ApplitionJobPosition,
-                                    ApprovalId = TaskListGallery.Selected.Approval_No
-                                ).标题 & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=true"
+                                    ApprovalId = Gallery5.Selected.Approval_No
+                                ).标题 & "&MasterflowId=" & Gallery5.Selected.Approval_No & "&resubmit=true"
                             ),
                             Launch(
                                 JumpUrl&"&Screen=JobTitleFormDetailScreen&AppIds=" & LookUp(
                                     ApplitionJobPosition,
-                                    ApprovalId = TaskListGallery.Selected.Approval_No
-                                ).标题 & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
+                                    ApprovalId = Gallery5.Selected.Approval_No
+                                ).标题 & "&MasterflowId=" & Gallery5.Selected.Approval_No & "&resubmit=false"
                             )
                         ),
                         FormName = "假期批核人資料表",
@@ -798,14 +779,14 @@ HomepageScreen As screen:
                             Launch(
                                 JumpUrlA306A111&"&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
                                     VacationApprovalForm,
-                                    Applicant_No = TaskListGallery.Selected.Approval_No
-                                ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true"
+                                    Applicant_No = Gallery5.Selected.Approval_No
+                                ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=true"
                             ),
                             Launch(
                                 JumpUrlA306A111&"&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
                                     VacationApprovalForm,
-                                    Applicant_No = TaskListGallery.Selected.Approval_No
-                                ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
+                                    Applicant_No = Gallery5.Selected.Approval_No
+                                ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
                             )
                         ),
                         FormName = "預備合約通知書(新入職)",
@@ -814,22 +795,22 @@ HomepageScreen As screen:
                             Launch(
                                 JumpUrl&"&Screen=ContractNoticeForm&taskNum=" & LookUp(
                                     ContractNotice,
-                                    ApprovalId = TaskListGallery.Selected.Approval_No
-                                ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true"
+                                    ApprovalId = Gallery5.Selected.Approval_No
+                                ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=true"
                             ),
                             Launch(
                                 JumpUrl&"&Screen=ContractNoticeFormDetail&taskNum=" & LookUp(
                                     ContractNotice,
-                                    ApprovalId = TaskListGallery.Selected.Approval_No
-                                ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
+                                    ApprovalId = Gallery5.Selected.Approval_No
+                                ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
                             )
                         ),
                         FormName = "任職資源申請",
                         Launch(
                             JumpUrlA306A111&"&Screen=EmploymentFormDetail&taskNum=" & LookUp(
                                 EmploymentResource,
-                                ApprovalId = TaskListGallery.Selected.Approval_No
-                            ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
+                                ApprovalId = Gallery5.Selected.Approval_No
+                            ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
                         ),
                         With(
                             {
@@ -838,7 +819,7 @@ HomepageScreen As screen:
                                     ApprovalId = ThisItem.Approval_No
                                 ).标题
                             },
-                            Launch(JumpUrlMobileApp&"&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & TaskListGallery.Selected.Approval_No
+                            Launch(JumpUrlMobileApp&"&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & Gallery5.Selected.Approval_No
                             ,{},LaunchTarget.Replace)
                         )
                     )
@@ -1187,9 +1168,6 @@ HomepageScreen As screen:
                     OnSelect: |-
                         =If(
                             ThisItem.ModelName = "招聘職位申請表",
-                            If(
-                                Gallery2.Selected.Result = "常用表格",
-                                "",
                                 If(
                                     !IsBlank(
                                         LookUp(
@@ -1209,17 +1187,14 @@ HomepageScreen As screen:
                                             ModelFlowNumber: "A103"
                                         }
                                     )
-                                )
-                            );
+                                );
                             Launch(
                                 JumpUrl & "&Screen=JobTitleFormScreen&newApplicationGuid=" & GUID() & "&flowguid=" & GUID() & "&bustype=New",
                                 {},
                                 LaunchTarget.Replace
                             ),
                             ThisItem.ModelName = "假期批核人資料表",
-                            If(
-                                Gallery2.Selected.Result = "常用表格",
-                                "",
+                            
                                 If(
                                     !IsBlank(
                                         LookUp(
@@ -1239,17 +1214,13 @@ HomepageScreen As screen:
                                             ModelFlowNumber: "A306"
                                         }
                                     )
-                                )
-                            );
+                                );
                             Launch(
                                 JumpUrlA306A111 & "&Screen=VacationFormScreen&newApplicationGuid=" & GUID() & "&flowguid=" & GUID() & "&bustype=New",
                                 {},
                                 LaunchTarget.Replace
                             ),
                             ThisItem.ModelName = "任職資源申請",
-                            If(
-                                Gallery2.Selected.Result = "常用表格",
-                                "",
                                 If(
                                     !IsBlank(
                                         LookUp(
@@ -1269,17 +1240,13 @@ HomepageScreen As screen:
                                             ModelFlowNumber: "A111"
                                         }
                                     )
-                                )
-                            );
+                                );
                             Launch(
                                 JumpUrlA306A111 & "&Screen=EmploymentFormScreen&newApplicationGuid=" & GUID() & "&flowguid=" & GUID() & "&bustype=New",
                                 {},
                                 LaunchTarget.Replace
                             ),
                             ThisItem.ModelName = "預備合約通知書(新入職)",
-                            If(
-                                Gallery2.Selected.Result = "常用表格",
-                                "",
                                 If(
                                     !IsBlank(
                                         LookUp(
@@ -1299,16 +1266,12 @@ HomepageScreen As screen:
                                             ModelFlowNumber: "A104"
                                         }
                                     )
-                                )
-                            );
+                                );
                             Launch(
                                 JumpUrl & "&Screen=ContractNoticeForm&newApplicationGuid=" & GUID() & "&flowguid=" & GUID() & "&bustype=New",
                                 {},
                                 LaunchTarget.Replace
                             ),
-                            If(
-                                Gallery2.Selected.Result = "常用表格",
-                                "",
                                 If(
                                     !IsBlank(
                                         LookUp(
@@ -1329,8 +1292,7 @@ HomepageScreen As screen:
                                             ModelFlowNumber: ThisItem.ModelFlowNumber
                                         }
                                     )
-                                )
-                            );
+                                );
                             With(
                                 {
                                     FormModelId: LookUp(

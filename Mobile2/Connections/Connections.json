@@ -11,15 +11,10 @@
     "datasets": {
       "https://chinasofti0.sharepoint.com/sites/ELCHK_Chinasoft": {
         "datasetOverride": {
-          "environmentVariableName": "elchk2_shared_sharepointonline_e3cc30c42a434697b011c12278b7e13a"
+          "environmentVariableName": "elchk2_shared_sharepointonline_e3cc30c42a434697b011c12278b7e13a",
+          "name": "https://chinasofti0.sharepoint.com/sites/ELCHK_Chinasoft"
         },
         "dataSources": {
-          "ApplitionJobPosition": {
-            "tableName": "06d57f8f-7b74-4687-9a44-f6600e780ad8",
-            "tableNameOverride": {
-              "environmentVariableName": "elchk2_shared_sharepointonline_6d3dab15eda64ab28a408b3c010f79d4"
-            }
-          },
           "Approval_Table": {
             "tableName": "8ffc7c98-8957-4493-b659-a981442eed5e",
             "tableNameOverride": {
@@ -46,12 +41,6 @@
             "tableNameOverride": {
               "environmentVariableName": "elchk2_shared_sharepointonline_833798cb35d84b0dad844d3e5e68b98a",
               "name": "cd3ec9ea-b849-43f3-afe6-7e2a13c74ee3"
-            }
-          },
-          "EmploymentResource": {
-            "tableName": "d6018ca2-0109-40a1-9867-096bef9a50f5",
-            "tableNameOverride": {
-              "environmentVariableName": "elchk2_shared_sharepointonline_7956a1c8bb144e8d81420f173b5b19c5"
             }
           },
           "FormTableType": {
@@ -116,12 +105,6 @@
               "environmentVariableName": "elchk2_shared_sharepointonline_d6bba121a8504198889b5d083b1a30e0",
               "name": "8a07b3c5-11aa-4214-80db-88c9f2048063"
             }
-          },
-          "VacationApprovalForm": {
-            "tableName": "45e8f363-6b07-450e-8a10-2fd94f309898",
-            "tableNameOverride": {
-              "environmentVariableName": "elchk2_shared_sharepointonline_6abfe1a61a344aaab9beab7ab4d1f419"
-            }
           }
         }
       }
@@ -139,10 +122,7 @@
       "ContractNotice",
       "TemplateFileList",
       "UploadFlowAttachMent",
-      "UserInfo",
-      "ApplitionJobPosition",
-      "VacationApprovalForm",
-      "EmploymentResource"
+      "UserInfo"
     ],
     "dependencies": {},
     "dependents": [
