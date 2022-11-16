@@ -55,7 +55,7 @@ HomepageScreen As screen:
             OnSelect: =
             TemplateFill: =If(ThisItem.Value="首頁", RGBA(102,182,227,0.2),Transparent)
             TemplatePadding: =0
-            TemplateSize: =50
+            TemplateSize: =46
             Width: =240
             Y: =100
             ZIndex: =1
@@ -115,7 +115,6 @@ HomepageScreen As screen:
                 Size: =11
                 Text: =ThisItem.Value
                 Width: =240
-                Y: =2
                 ZIndex: =1
 
             Image2 As image:
@@ -221,6 +220,7 @@ HomepageScreen As screen:
         Image8 As image:
             Height: =40
             Image: =logo_only_icon
+            OnSelect: =Set(visiblecount,If(visiblecount>3,0,visiblecount+1))
             Width: =40
             X: =20
             Y: =10
@@ -1478,7 +1478,7 @@ HomepageScreen As screen:
                 false
             )
         Width: =259
-        X: =902
-        Y: =5
+        X: =1005
+        Y: =35
         ZIndex: =3
 

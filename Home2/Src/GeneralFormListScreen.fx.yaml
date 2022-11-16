@@ -356,14 +356,14 @@ GeneralFormListScreen As screen:
     ContainerMain As groupContainer.manualLayoutContainer:
         Fill: =RGBA(247, 247, 247, 1)
         Height: =768
-        Width: =1206
-        X: =160
+        Width: =1126
+        X: =240
         ZIndex: =3
 
         Container5_2 As groupContainer.manualLayoutContainer:
             Fill: =RGBA(255, 255, 255, 1)
             Height: =130
-            Width: =1182
+            Width: =1105
             X: =12
             Y: =16
             ZIndex: =4
@@ -513,14 +513,14 @@ GeneralFormListScreen As screen:
                 PressedColor: =White
                 PressedFill: =ColorFade(Self.Fill, -25%)
                 Width: =32
-                X: =1096
+                X: =1060
                 Y: =80
                 ZIndex: =5
 
             LineRectangle_1 As rectangle:
                 Fill: =RGBA(219, 219, 219, 1)
                 Height: =1
-                Width: =1142
+                Width: =1085
                 X: =20
                 Y: =54
                 ZIndex: =7
@@ -720,7 +720,7 @@ GeneralFormListScreen As screen:
                     PaddingBottom: =4
                     PaddingTop: =4
                     Width: =32
-                    X: =1042
+                    X: =1016
                     Y: =80
                     ZIndex: =14
 
@@ -751,7 +751,7 @@ GeneralFormListScreen As screen:
                     PressedColor: =Transparent
                     PressedFill: =Transparent
                     Width: =32
-                    X: =1042
+                    X: =1016
                     Y: =80
                     ZIndex: =15
 
@@ -766,7 +766,7 @@ GeneralFormListScreen As screen:
             Container2_2 As groupContainer.manualLayoutContainer:
                 Fill: =RGBA(247, 247, 247, 1)
                 Height: =40
-                Width: =1142
+                Width: =1085
                 X: =20
                 ZIndex: =1
 
@@ -924,7 +924,7 @@ GeneralFormListScreen As screen:
                     )
                 TemplatePadding: =0
                 TemplateSize: =48
-                Width: =1142
+                Width: =1085
                 X: =20
                 Y: =40
                 ZIndex: =2
@@ -1104,7 +1104,7 @@ GeneralFormListScreen As screen:
                         =true
                         //If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","自助假期批核資料表"],true,false)
                     Width: =24
-                    X: =1067
+                    X: =1000
                     Y: =12
                     ZIndex: =11
 
@@ -1135,7 +1135,7 @@ GeneralFormListScreen As screen:
                             false
                         )
                     Width: =24
-                    X: =1103
+                    X: =1050
                     Y: =12
                     ZIndex: =12
 
@@ -1208,15 +1208,14 @@ GeneralFormListScreen As screen:
                     X: =660
                     ZIndex: =17
 
-    ContainerMenu As groupContainer.manualLayoutContainer:
+    Container3_7 As groupContainer.manualLayoutContainer:
         Fill: =RGBA(255, 255, 255, 1)
-        Height: =718
-        Width: =160
-        Y: =50
+        Height: =768
+        Width: =240
         ZIndex: =4
 
-        GalleryNav_6 As gallery.galleryVertical:
-            Height: =237
+        GalleryNav_15 As gallery.galleryVertical:
+            Height: =327
             Items: |
                 =Filter(If(
                     CurrentRoleFormModelPermssion = "None"
@@ -1224,36 +1223,38 @@ GeneralFormListScreen As screen:
                     [
                         "首頁",
                         "申請列表",
-                        If(CurrentRole,"統計",CurrentRole || HRAO || SuperUser,"系統設定"),
-                        If(If(CurrentRole,"統計",CurrentRole || HRAO || SuperUser,"系統設定")="系統設定",Blank(),CurrentRole || HRAO || SuperUser,"系統設定")
+                        If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定"),
+                        If(If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定")="系統設定",Blank(),CurrentRole || HRAO || SuperUser,"系統設定")
                         
                     ],
                     [
                         "首頁",
-                        "表格列表",
+                        "表格資料",
                         "申請列表",
-                        If(CurrentRole,"統計",CurrentRole || HRAO || SuperUser,"系統設定"),
-                        If(If(CurrentRole,"統計",CurrentRole || HRAO || SuperUser,"系統設定")="系統設定",Blank(),CurrentRole || HRAO || SuperUser,"系統設定")
+                        If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定"),
+                        If(If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定")="系統設定",Blank(),CurrentRole || HRAO || SuperUser,"系統設定")
                     ]
                 ),ThisRecord.Value <> Blank())
             Layout: =Layout.Vertical
+            OnSelect: =
+            TemplateFill: =If(ThisItem.Value="申請列表", RGBA(102,182,227,0.2),Transparent)
             TemplatePadding: =0
-            TemplateSize: =40
-            Width: =160
+            TemplateSize: =46
+            Width: =240
+            Y: =100
             ZIndex: =1
 
             BtnDefault_12 As button:
                 Align: =Align.Left
-                BorderColor: =Self.Color
-                BorderStyle: =BorderStyle.None
-                BorderThickness: =1
+                BorderColor: =RGBA(255, 255, 255, 1)
+                BorderThickness: =0
                 Color: =If(ThisItem.Value="申請列表", glbThemePrimaryColor,glbNeutralSecondaryColor)
-                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                DisabledBorderColor: =
                 Fill: =If(ThisItem.Value="申請列表", ColorFade(Self.Color, 90%),White)
                 FocusedBorderThickness: =1
                 FontWeight: =If(ThisItem.Value="申請列表", FontWeight.Semibold,Normal)
-                Height: =32
-                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                Height: =46
+                HoverBorderColor: =
                 HoverColor: =ColorFade(Self.Color, -15%)
                 HoverFill: =If(ThisItem.Value<>Blank(),ColorFade(glbThemePrimaryColor, 90%))
                 OnSelect: |-
@@ -1263,11 +1264,11 @@ GeneralFormListScreen As screen:
                             HomepageScreen,
                             ScreenTransition.None
                         ),
-                        ThisItem.Value = "表格列表",
+                        ThisItem.Value = "表格資料",
                         Navigate(AdminFormListScreen,
                             ScreenTransition.None
                         ),
-                        ThisItem.Value = "統計",
+                        ThisItem.Value = "數據統計",
                         Navigate(StatisticsScreen,
                             ScreenTransition.None
                         //Launch("https://apps.powerapps.com/play/c030168f-5133-4c9d-8e17-3c870ba99ab4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=StatisticsScreen"
@@ -1284,68 +1285,84 @@ GeneralFormListScreen As screen:
                         )
                     )
                 PaddingBottom: =0
-                PaddingLeft: =36
+                PaddingLeft: =104
                 PaddingRight: =0
                 PaddingTop: =0
-                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedBorderColor: =
                 PressedColor: =ColorFade(Self.Color, -25%)
-                PressedFill: =ColorFade(Self.Color, 95%)
+                PressedFill: =
                 RadiusBottomLeft: =4
                 RadiusBottomRight: =4
                 RadiusTopLeft: =4
                 RadiusTopRight: =4
-                Size: =12
+                Size: =11
                 Text: =ThisItem.Value
-                Width: =140
-                X: =10
-                ZIndex: =3
+                Width: =240
+                ZIndex: =1
 
-            Icon1_6 As icon.ListScrollWatchlist:
-                Color: =If(ThisItem.Value="任務管理", glbThemePrimaryColor,glbNeutralSecondaryColor)
-                Height: =20
-                Icon: |
+            Image2_7 As image:
+                Height: =30
+                Image: |
                     =If(
                         ThisItem.Value = "首頁",
-                        Icon.Home,
-                        ThisItem.Value = "表格列表",
-                        Icon.ListScrollWatchlist,
-                        ThisItem.Value = "統計",
-                        Icon.LogJournal,
+                        首页,
+                        ThisItem.Value = "表格資料",
+                        表格资料,
+                        ThisItem.Value = "數據統計",
+                        数据,
                         ThisItem.Value = "系統設定",
-                        Icon.People,
+                        设置,
                         ThisItem.Value = "申請列表",
-                        Icon.Lock
+                        申请列表
                     )
                 OnSelect: =Select(Parent)
-                Width: =20
-                X: =20
-                Y: =6
-                ZIndex: =5
+                Width: =30
+                X: =60
+                Y: =10
+                ZIndex: =2
 
-        GalleryNav_7 As gallery.galleryVertical:
-            Height: =120
-            Items: =["IT服務台","用戶手冊","意見箱"]
+        GalleryNav_16 As gallery.galleryVertical:
+            Height: =60
+            Items: =["IT服務台","用戶手冊","意見收集"]
             Layout: =Layout.Vertical
             TemplatePadding: =0
-            TemplateSize: =40
-            Width: =160
-            Y: =558
+            TemplateSize: =60
+            Width: =240
+            WrapCount: =3
+            Y: =690
             ZIndex: =5
 
+            Image2_8 As image:
+                Height: =26
+                Image: |
+                    =If(
+                        ThisItem.Value = "IT服務台",
+                        工作台,
+                        ThisItem.Value = "用戶手冊",
+                        手册,
+                        ThisItem.Value = "意見收集",
+                        意见箱
+                    )
+                OnSelect: =Select(Parent)
+                Width: =26
+                X: =27
+                Y: =6
+                ZIndex: =1
+
             BtnDefault_14 As button:
-                Align: =Align.Left
                 BorderColor: =Self.Color
                 BorderStyle: =BorderStyle.None
                 BorderThickness: =1
                 Color: =glbNeutralSecondaryColor
                 DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                Fill: =White
+                DisabledFill: =RGBA(0, 0, 0, 0)
+                Fill: =RGBA(0, 0, 0, 0)
                 FocusedBorderThickness: =1
                 FontWeight: =Normal
-                Height: =32
+                Height: =60
                 HoverBorderColor: =ColorFade(Self.Color, -15%)
                 HoverColor: =ColorFade(Self.Color, -15%)
-                HoverFill: =ColorFade(glbThemePrimaryColor, 90%)
+                HoverFill: =
                 OnSelect: |-
                     =If(
                         ThisItem.Value = "意見箱",
@@ -1356,49 +1373,58 @@ GeneralFormListScreen As screen:
                         Download("https://elcss.sharepoint.com/:w:/r/sites/eps-prd/_layouts/15/download.aspx?SourceUrl=/sites/eps-prd/TempExcel/ePS%E7%B3%BB%E7%B5%B1-%E7%94%A8%E6%88%B6%E6%89%8B%E5%86%8A%20V1.3.4.pdf")
                     )
                 PaddingBottom: =0
-                PaddingLeft: =36
+                PaddingLeft: =0
                 PaddingRight: =0
-                PaddingTop: =0
+                PaddingTop: =34
                 PressedBorderColor: =ColorFade(Self.Color, -25%)
                 PressedColor: =ColorFade(Self.Color, -25%)
-                PressedFill: =ColorFade(Self.Color, 95%)
+                PressedFill: =
                 RadiusBottomLeft: =4
                 RadiusBottomRight: =4
                 RadiusTopLeft: =4
                 RadiusTopRight: =4
-                Size: =12
+                Size: =9
                 Text: =ThisItem.Value
-                Width: =140
-                X: =10
-                ZIndex: =3
+                Width: =70
+                X: =5
+                ZIndex: =2
 
-            Icon1_7 As icon.ListScrollWatchlist:
-                Color: =glbNeutralSecondaryColor
-                Height: =20
-                Icon: |
-                    =If(
-                        ThisItem.Value = "IT服務台",
-                        Icon.ComputerDesktop,
-                        ThisItem.Value = "用戶手冊",
-                        Icon.Notebook,
-                        ThisItem.Value = "組織機構",
-                        Icon.LogJournal,
-                        ThisItem.Value = "意見箱",
-                        Icon.Mail
-                    )
-                    //["IT服務台","操作手冊","用戶反饋"]
-                OnSelect: =Select(Parent)
-                Width: =20
-                X: =20
-                Y: =6
-                ZIndex: =5
-
-        Label8_1 As label:
-            Align: =Align.Center
+        Label8_6 As label:
             Color: =RGBA(149, 149, 149, 1)
-            Size: =11
+            Height: =20
+            Italic: =true
+            Size: =8
             Text: ="Version 1.0.0"
             Width: =160
-            Y: =678
+            X: =64
+            Y: =56
             ZIndex: =6
+
+        Image8_2 As image:
+            Height: =40
+            Image: =logo_only_icon
+            Width: =40
+            X: =20
+            Y: =10
+            ZIndex: =7
+
+        Label1_99 As label:
+            Color: =RGBA(54, 52, 52, 1)
+            Height: =21
+            Size: =12
+            Text: ="ELCSS-HK"
+            Width: =100
+            X: =64
+            Y: =10
+            ZIndex: =9
+
+        Label1_100 As label:
+            Color: =RGBA(116, 116, 116, 1)
+            Height: =21
+            Size: =7
+            Text: ="eProcessing System (ePS)"
+            Width: =160
+            X: =64
+            Y: =31
+            ZIndex: =10
 

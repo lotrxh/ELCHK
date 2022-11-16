@@ -930,9 +930,9 @@ AdminFormListScreen As screen:
                 ),ThisRecord.Value <> Blank())
             Layout: =Layout.Vertical
             OnSelect: =
-            TemplateFill: =If(ThisItem.Value="首頁", RGBA(102,182,227,0.2),Transparent)
+            TemplateFill: =If(ThisItem.Value="表格資料", RGBA(102,182,227,0.2),Transparent)
             TemplatePadding: =0
-            TemplateSize: =50
+            TemplateSize: =46
             Width: =240
             Y: =100
             ZIndex: =1
@@ -942,12 +942,12 @@ AdminFormListScreen As screen:
                 BorderColor: =RGBA(255, 255, 255, 1)
                 BorderThickness: =0
                 Color: =If(ThisItem.Value="表格資料", glbThemePrimaryColor,glbNeutralSecondaryColor)
-                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                DisabledBorderColor: =
                 Fill: =If(ThisItem.Value="表格資料", ColorFade(Self.Color, 90%),White)
                 FocusedBorderThickness: =1
                 FontWeight: =If(ThisItem.Value="表格資料", FontWeight.Semibold,Normal)
                 Height: =46
-                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverBorderColor: =
                 HoverColor: =ColorFade(Self.Color, -15%)
                 HoverFill: =If(ThisItem.Value<>Blank(),ColorFade(glbThemePrimaryColor, 90%))
                 OnSelect: |-
@@ -981,7 +981,7 @@ AdminFormListScreen As screen:
                 PaddingLeft: =104
                 PaddingRight: =0
                 PaddingTop: =0
-                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedBorderColor: =
                 PressedColor: =ColorFade(Self.Color, -25%)
                 PressedFill: =
                 RadiusBottomLeft: =4
