@@ -204,7 +204,7 @@ AdminFormListScreen As screen:
                 ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
                 Color: =glbNeutralPrimaryColor
                 DisplayFields: =["Result"]
-                FocusedBorderThickness: =0
+                FocusedBorderThickness: =1
                 Height: =32
                 HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                 HoverColor: =Self.Color
@@ -236,7 +236,7 @@ AdminFormListScreen As screen:
                 ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
                 Color: =glbNeutralPrimaryColor
                 DisplayFields: =["Result"]
-                FocusedBorderThickness: =0
+                FocusedBorderThickness: =1
                 Height: =32
                 HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                 HoverColor: =Self.Color
@@ -699,6 +699,7 @@ AdminFormListScreen As screen:
                     BorderStyle: =BorderStyle.None
                     DisabledColor: =RGBA(0, 0, 0, 1)
                     Fill: =If(Self.Text="停用表格",glbErrorColor,glbSuccessColor)
+                    FontWeight: =FontWeight.Normal
                     Height: =34
                     OnSelect: |+
                         =If(ThisItem.ModelName in ApprovalDetailColwithFormName1.FormName, Notify("該表單有待處理任務，當前無法停用，請處理后再停用",Warning),
@@ -709,7 +710,7 @@ AdminFormListScreen As screen:
                         If(Isenable=1,UpdateIf(GenericFormModel,ModelName=FormName.Text,{IsEnable:1}),Isenable=0,UpdateIf(GenericFormModel,ModelName=FormName.Text,{IsEnable:0}));
                         ClearCollect(FilterForm,GenericFormModel))
                         
-                    Size: =12
+                    Size: =10
                     Text: =If(ThisItem.IsSelected,If(Isenable=0,"啓用表格","停用表格"),If(ThisItem.IsEnable="0","啓用表格","停用表格"))
                     Width: =79
                     X: =980
@@ -726,10 +727,10 @@ AdminFormListScreen As screen:
                     Icon1 As icon.Edit:
                         Color: =RGBA(255, 255, 255, 1)
                         Fill: =RGBA(179, 179, 179, 1)
-                        Height: =30
+                        Height: =28
                         Icon: =Icon.Edit
                         OnSelect: =
-                        Width: =30
+                        Width: =28
                         X: =900
                         Y: =9
                         ZIndex: =7
@@ -739,7 +740,7 @@ AdminFormListScreen As screen:
                         BorderStyle: =BorderStyle.None
                         Color: =RGBA(0, 0, 0, 0)
                         Fill: =RGBA(0, 0, 0, 0)
-                        Height: =30
+                        Height: =28
                         HoverColor: =RGBA(0, 0, 0, 0)
                         HoverFill: =RGBA(0, 0, 0, 0)
                         OnSelect: |
@@ -775,7 +776,7 @@ AdminFormListScreen As screen:
                         PressedFill: =RGBA(0, 0, 0, 0)
                         Size: =12
                         Text: ="編輯"
-                        Width: =30
+                        Width: =28
                         X: =900
                         Y: =9
                         ZIndex: =8
@@ -815,6 +816,7 @@ AdminFormListScreen As screen:
                     DisabledBorderColor: =RGBA(219, 219, 219, 1)
                     Fill: =RGBA(50, 86, 160, 1)
                     FocusedBorderThickness: =1
+                    FontWeight: =FontWeight.Normal
                     Height: =32
                     HoverFill: =ColorFade(Self.Fill, -15%)
                     OnSelect: |-
@@ -855,7 +857,7 @@ AdminFormListScreen As screen:
                     RadiusBottomRight: =4
                     RadiusTopLeft: =4
                     RadiusTopRight: =4
-                    Size: =12
+                    Size: =10
                     Text: ="新增表格"
                     Width: =100
                     X: =977
