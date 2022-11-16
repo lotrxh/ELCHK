@@ -608,7 +608,8 @@
 
                 Container4_2 As groupContainer.manualLayoutContainer:
                     Fill: =RGBA(255, 255, 255, 1)
-                    Height: =158
+                    FillPortions: =0
+                    Height: =TaskNameGallery_1.Y+TaskNameGallery_1.Height+10
                     LayoutMinHeight: =100
                     LayoutMinWidth: =250
                     Width: =477
@@ -740,7 +741,7 @@
                         ZIndex: =6
 
                     TaskNameGallery_1 As gallery.galleryVertical:
-                        Height: =236
+                        Height: =251
                         Items: |-
                             =ShowColumns(
                                     Filter(
