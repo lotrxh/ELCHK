@@ -59,7 +59,6 @@
         FillInContainer_2 As groupContainer.horizontalAutoLayoutContainer:
             AlignInContainer: =AlignInContainer.Center
             Fill: =RGBA(242, 242, 242, 1)
-            FillPortions: =0
             Height: =Max(LeftContainer12_2.Y+LeftContainer12_2.Height+40,RightContainer_2.Y+RightContainer_2.Height+40)
             LayoutGap: =10
             LayoutMinHeight: =100
@@ -138,7 +137,7 @@
                         ZIndex: =1
 
                     Gallery5 As gallery.galleryVertical:
-                        Height: =160
+                        Height: =500
                         Items: =Search(SortByColumns(ApprovalDetailColwithdepartment,"Modified",Ascending),TextInput2_15.Text,"DepartMentUnit","Application_No","Task_Name")
                         Layout: =Layout.Vertical
                         LayoutMinHeight: =287
@@ -299,6 +298,7 @@
 
                 Container4_1 As groupContainer.manualLayoutContainer:
                     Fill: =RGBA(255, 255, 255, 1)
+                    FillPortions: =0
                     Height: =158
                     LayoutMinHeight: =100
                     LayoutMinWidth: =250
@@ -601,7 +601,371 @@
                             Size: =10
                             Text: =
                             Tooltip: =ThisItem.ModelDescription
-                            Width: =102
+                            Width: =Parent.TemplateWidth-10
+                            X: =1
+                            Y: =1
+                            ZIndex: =3
+
+                Container4_2 As groupContainer.manualLayoutContainer:
+                    Fill: =RGBA(255, 255, 255, 1)
+                    Height: =158
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    Width: =477
+                    ZIndex: =5
+
+                    drpFilterDepartmentType As combobox:
+                        BorderColor: =glbNeutralTertiaryColor
+                        BorderThickness: =1
+                        ChevronBackground: =RGBA(255, 255, 255, 1)
+                        ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
+                        ChevronDisabledFill: =RGBA(202, 202, 202, 1)
+                        ChevronFill: =glbNeutralTertiaryColor
+                        ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
+                        ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
+                        Color: =glbNeutralPrimaryColor
+                        DefaultSelectedItems: |-
+                            =//Distinct(DepartmentForm,Department)//加载编辑表格部门
+                            Distinct(Filter(
+                                MyContacts,
+                                    UserEmail = User().Email,
+                                        ContatsType = "部門"
+                                    ),ApplyDepartment)
+                        DisplayFields: =["Value"]
+                        FocusedBorderThickness: =1
+                        Height: =33
+                        HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                        HoverColor: =Self.Color
+                        HoverFill: =ColorFade(Self.Fill, -5%)
+                        InputTextPlaceholder: ="請選擇部門/服務"
+                        IsSearchable: =false
+                        Items: =["部門","服務"]
+                        NoSelectionText: ="請選擇部門/服務"
+                        OnChange: =Reset(drpFilterDepartmentName);Reset(drpFilterFormTypeName);
+                        PaddingLeft: =10
+                        PressedColor: =Self.Color
+                        PressedFill: =ColorFade(Self.Fill, -5%)
+                        SearchFields: =["Value"]
+                        SearchItems: =[]
+                        SelectionColor: =glbThemePrimaryColor
+                        SelectionFill: =ColorFade(Self.SelectionColor, 90%)
+                        SelectMultiple: =false
+                        Size: =9
+                        Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
+                        Width: =423
+                        X: =20
+                        Y: =15
+                        ZIndex: =4
+
+                    drpFilterDepartmentName As combobox:
+                        BorderColor: =glbNeutralTertiaryColor
+                        BorderThickness: =1
+                        ChevronBackground: =RGBA(255, 255, 255, 1)
+                        ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
+                        ChevronDisabledFill: =RGBA(202, 202, 202, 1)
+                        ChevronFill: =glbNeutralTertiaryColor
+                        ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
+                        ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
+                        Color: =glbNeutralPrimaryColor
+                        DefaultSelectedItems: =
+                        DisplayFields: =["Result"]
+                        FocusedBorderThickness: =1
+                        Height: =33
+                        HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                        HoverColor: =Self.Color
+                        HoverFill: =ColorFade(Self.Fill, -5%)
+                        InputTextPlaceholder: ="請選擇部門/服務"
+                        Items: =Distinct(Filter(FormTableType,DepartMentType=drpFilterDepartmentType.Selected.Value),DepartMentName)
+                        NoSelectionText: ="請選擇類型/單位"
+                        OnChange: =Reset(drpFilterFormTypeName);
+                        PaddingLeft: =10
+                        PressedColor: =Self.Color
+                        PressedFill: =ColorFade(Self.Fill, -5%)
+                        SearchFields: =["Result"]
+                        SearchItems: =Search(Distinct(Filter(FormTableType,DepartMentType=drpFilterDepartmentType.Selected.Value),DepartMentName),drpFilterDepartmentName.SearchText,"Result")
+                        SelectionColor: =glbThemePrimaryColor
+                        SelectionFill: =ColorFade(Self.SelectionColor, 90%)
+                        SelectMultiple: =false
+                        Size: =9
+                        Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
+                        Width: =423
+                        X: =20
+                        Y: =67
+                        ZIndex: =5
+
+                    drpFilterFormTypeName As combobox:
+                        BorderColor: =glbNeutralTertiaryColor
+                        BorderThickness: =1
+                        ChevronBackground: =RGBA(255, 255, 255, 1)
+                        ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
+                        ChevronDisabledFill: =RGBA(202, 202, 202, 1)
+                        ChevronFill: =glbNeutralTertiaryColor
+                        ChevronHoverBackground: =ColorFade(Self.ChevronBackground, -5%)
+                        ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
+                        Color: =glbNeutralPrimaryColor
+                        DefaultSelectedItems: |-
+                            =//Distinct(DepartmentForm,Department)//加载编辑表格部门
+                            Distinct(Filter(
+                                MyContacts,
+                                    UserEmail = User().Email,
+                                        ContatsType = "部門"
+                                    ),ApplyDepartment)
+                        DisplayFields: =["FormType"]
+                        FocusedBorderThickness: =1
+                        Height: =33
+                        HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+                        HoverColor: =Self.Color
+                        HoverFill: =ColorFade(Self.Fill, -5%)
+                        InputTextPlaceholder: ="請選擇填申請部門/單位"
+                        IsSearchable: =false
+                        Items: |-
+                            =Filter(
+                                    FormTableType,
+                                    DepartMentName = drpFilterDepartmentName.Selected.Result
+                                ).FormType
+                        NoSelectionText: ="請選擇填申請部門/單位"
+                        PaddingLeft: =10
+                        PressedColor: =Self.Color
+                        PressedFill: =ColorFade(Self.Fill, -5%)
+                        SearchFields: =["FormType"]
+                        SearchItems: =[]
+                        SelectionColor: =glbThemePrimaryColor
+                        SelectionFill: =ColorFade(Self.SelectionColor, 90%)
+                        SelectMultiple: =false
+                        Size: =9
+                        Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
+                        Width: =423
+                        X: =20
+                        Y: =120
+                        ZIndex: =6
+
+                    TaskNameGallery_1 As gallery.galleryVertical:
+                        Height: =236
+                        Items: |-
+                            =ShowColumns(
+                                    Filter(
+                                                DataModelName,
+                                                ModelDepartment = drpFilterDepartmentName.Selected.Result,
+                                                ModelType = drpFilterFormTypeName.Selected.FormType
+                                            ),
+                                            "ModelName",
+                                            "ModelDescription",
+                                            "ModelFlowNumber"
+                                        )
+                        Layout: =Layout.Vertical
+                        ShowScrollbar: =false
+                        TemplatePadding: =0
+                        TemplateSize: =60
+                        Width: =423
+                        WrapCount: =4
+                        X: =20
+                        Y: =170
+                        ZIndex: =7
+
+                        Label2_7 As label:
+                            Color: =glbNeutralSecondaryColor
+                            Height: =20
+                            HoverColor: =glbThemePrimaryColor
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =10
+                            PaddingRight: =10
+                            PaddingTop: =0
+                            Size: =10
+                            Text: =ThisItem.ModelFlowNumber
+                            Width: =Parent.TemplateWidth-10
+                            Wrap: =false
+                            Y: =6
+                            ZIndex: =1
+
+                        Label2_8 As label:
+                            Color: =glbNeutralSecondaryColor
+                            Height: =20
+                            HoverColor: =glbThemePrimaryColor
+                            OnSelect: =Select(Parent)
+                            PaddingBottom: =0
+                            PaddingLeft: =10
+                            PaddingRight: =10
+                            PaddingTop: =0
+                            Size: =10
+                            Text: =ThisItem.ModelName
+                            Tooltip: =Self.Text
+                            Width: =Parent.TemplateWidth-10
+                            Wrap: =false
+                            Y: =26
+                            ZIndex: =2
+
+                        Button_large_12 As button:
+                            Align: =Align.Left
+                            BorderColor: =glbNeutralQuaternaryColor
+                            BorderThickness: =1
+                            Color: =glbNeutralPrimaryColor
+                            DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                            DisplayMode: =If(ThisItem.ModelName in Filter(GenericFormModel,IsEnable="0").ModelName,Disabled,Edit)
+                            Fill: =RGBA(0, 0, 0, 0)
+                            FocusedBorderThickness: =1
+                            FontWeight: =FontWeight.Normal
+                            Height: =50
+                            HoverBorderColor: =glbThemePrimaryColor
+                            HoverColor: =RGBA(128, 128, 128, 1)
+                            HoverFill: =
+                            OnSelect: |-
+                                =If(
+                                    ThisItem.ModelName = "招聘職位申請表",
+                                        If(
+                                            !IsBlank(
+                                                LookUp(
+                                                    MyContacts,
+                                                    UserEmail = User().Email && TaskFormName = "招聘職位申請表"
+                                                )
+                                            ),
+                                            "",
+                                            Patch(
+                                                MyContacts,
+                                                Defaults(MyContacts),
+                                                {
+                                                    TaskFormName: "招聘職位申請表",
+                                                    标题: GUID(),
+                                                    UserEmail: User().Email,
+                                                    ContatsType: "",
+                                                    ModelFlowNumber: "A103"
+                                                }
+                                            )
+                                        );
+                                    Launch(
+                                        JumpUrl & "&Screen=JobTitleFormScreen&newApplicationGuid=" & GUID() & "&flowguid=" & GUID() & "&bustype=New",
+                                        {},
+                                        LaunchTarget.Replace
+                                    ),
+                                    ThisItem.ModelName = "假期批核人資料表",
+                                    
+                                        If(
+                                            !IsBlank(
+                                                LookUp(
+                                                    MyContacts,
+                                                    UserEmail = User().Email && TaskFormName = "假期批核人資料表"
+                                                )
+                                            ),
+                                            "",
+                                            Patch(
+                                                MyContacts,
+                                                Defaults(MyContacts),
+                                                {
+                                                    TaskFormName: "假期批核人資料表",
+                                                    标题: GUID(),
+                                                    UserEmail: User().Email,
+                                                    ContatsType: "",
+                                                    ModelFlowNumber: "A306"
+                                                }
+                                            )
+                                        );
+                                    Launch(
+                                        JumpUrlA306A111 & "&Screen=VacationFormScreen&newApplicationGuid=" & GUID() & "&flowguid=" & GUID() & "&bustype=New",
+                                        {},
+                                        LaunchTarget.Replace
+                                    ),
+                                    ThisItem.ModelName = "任職資源申請",
+                                        If(
+                                            !IsBlank(
+                                                LookUp(
+                                                    MyContacts,
+                                                    UserEmail = User().Email && TaskFormName = "任職資源申請"
+                                                )
+                                            ),
+                                            "",
+                                            Patch(
+                                                MyContacts,
+                                                Defaults(MyContacts),
+                                                {
+                                                    TaskFormName: "任職資源申請",
+                                                    标题: GUID(),
+                                                    UserEmail: User().Email,
+                                                    ContatsType: "",
+                                                    ModelFlowNumber: "A111"
+                                                }
+                                            )
+                                        );
+                                    Launch(
+                                        JumpUrlA306A111 & "&Screen=EmploymentFormScreen&newApplicationGuid=" & GUID() & "&flowguid=" & GUID() & "&bustype=New",
+                                        {},
+                                        LaunchTarget.Replace
+                                    ),
+                                    ThisItem.ModelName = "預備合約通知書(新入職)",
+                                        If(
+                                            !IsBlank(
+                                                LookUp(
+                                                    MyContacts,
+                                                    UserEmail = User().Email && TaskFormName = "預備合約通知書(新入職)"
+                                                )
+                                            ),
+                                            "",
+                                            Patch(
+                                                MyContacts,
+                                                Defaults(MyContacts),
+                                                {
+                                                    TaskFormName: "預備合約通知書(新入職)",
+                                                    标题: GUID(),
+                                                    UserEmail: User().Email,
+                                                    ContatsType: "",
+                                                    ModelFlowNumber: "A104"
+                                                }
+                                            )
+                                        );
+                                    Launch(
+                                        JumpUrl & "&Screen=ContractNoticeForm&newApplicationGuid=" & GUID() & "&flowguid=" & GUID() & "&bustype=New",
+                                        {},
+                                        LaunchTarget.Replace
+                                    ),
+                                        If(
+                                            !IsBlank(
+                                                LookUp(
+                                                    MyContacts,
+                                                    UserEmail = User().Email && TaskFormName = ThisItem.ModelName
+                                                )
+                                            ),
+                                            "",
+                                            Patch(
+                                                MyContacts,
+                                                Defaults(MyContacts),
+                                                {
+                                                    TaskFormName: ThisItem.ModelName,
+                                                    标题: GUID(),
+                                                    UserEmail: User().Email,
+                                                    ContatsType: "",
+                                                    TaskFormDescription: ThisItem.ModelDescription,
+                                                    ModelFlowNumber: ThisItem.ModelFlowNumber
+                                                }
+                                            )
+                                        );
+                                    With(
+                                        {
+                                            FormModelId: LookUp(
+                                                GenericFormModel,
+                                                ModelFlowNumber = ThisItem.ModelFlowNumber
+                                            ).标题
+                                        },
+                                        Launch(
+                                            JumpUrlMobileApp&"&Screen=CreateGeneralFormScreen&FormModelId="&FormModelId,
+                                            {},
+                                            LaunchTarget.Replace
+                                        )
+                                    )
+                                )
+                            PaddingBottom: =0
+                            PaddingLeft: =10
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            PressedBorderColor: =glbThemePrimaryColor
+                            PressedColor: =
+                            PressedFill: =
+                            RadiusBottomLeft: =4
+                            RadiusBottomRight: =4
+                            RadiusTopLeft: =4
+                            RadiusTopRight: =4
+                            Size: =10
+                            Text: =
+                            Tooltip: =ThisItem.ModelDescription
+                            Width: =Parent.TemplateWidth-10
                             X: =1
                             Y: =1
                             ZIndex: =3
@@ -611,18 +975,6 @@
         Height: =60
         Width: =Parent.Width
         ZIndex: =6
-
-        Icon2_7 As icon.Home:
-            Color: =RGBA(39, 67, 125, 1)
-            Fill: =RGBA(255, 255, 255, 1)
-            Height: =60
-            Icon: =Icon.Home
-            OnSelect: =Launch(JumpUrlClientAPP&"&Screen=HomepageScreen",{},LaunchTarget.Replace);
-            PaddingBottom: =14
-            PaddingTop: =14
-            Width: =60
-            X: =20
-            ZIndex: =6
 
         Image1_3 As image:
             Height: =60
@@ -646,19 +998,19 @@
                 =If(App.ActiveScreen.Width<600,"eProcessing System",
                 "ELCSS-HK
                 eProcessing System (ePS)")
-            Width: =509
+            Width: =217
             X: =136
             ZIndex: =8
 
         Image7 As image:
             Height: =40
             Image: =User().Image
-            RadiusBottomLeft: =10
-            RadiusBottomRight: =10
-            RadiusTopLeft: =10
-            RadiusTopRight: =10
+            RadiusBottomLeft: =20
+            RadiusBottomRight: =20
+            RadiusTopLeft: =20
+            RadiusTopRight: =20
             Width: =40
-            X: =344
+            X: =370
             Y: =10
             ZIndex: =9
 
