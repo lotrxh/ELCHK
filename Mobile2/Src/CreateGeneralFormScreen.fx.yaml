@@ -151,7 +151,7 @@
             BtnDefaultLg_6 As button:
                 BorderColor: =Self.Color
                 BorderThickness: =1
-                Color: =glbThemePrimaryColor
+                Color: =RGBA(39, 67, 125, 1)
                 DisabledBorderColor: =RGBA(219, 219, 219, 1)
                 Fill: =White
                 FocusedBorderThickness: =1
@@ -182,7 +182,7 @@
                 BorderColor: =Self.Fill
                 BorderThickness: =1
                 DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                Fill: =glbThemePrimaryColor
+                Fill: =RGBA(39, 67, 125, 1)
                 FocusedBorderThickness: =1
                 Height: =36
                 HoverFill: =ColorFade(Self.Fill, -15%)
@@ -1560,18 +1560,20 @@
                     Label1_135 As label:
                         Color: =glbNeutralSecondaryColor
                         Height: =28
+                        Italic: =true
                         PaddingBottom: =0
                         PaddingLeft: =0
                         PaddingRight: =0
                         PaddingTop: =0
                         Size: =10
                         Text: ="表格版本："
-                        Width: =94
+                        Width: =70
                         ZIndex: =1
 
                     Label1_136 As label:
                         Color: =glbNeutralPrimaryColor
                         Height: =28
+                        Italic: =true
                         PaddingBottom: =0
                         PaddingLeft: =0
                         PaddingRight: =0
@@ -1579,13 +1581,13 @@
                         Size: =10
                         Text: =First(EditUserForm).ModelVersion
                         Width: =156
-                        X: =94
+                        X: =65
                         ZIndex: =2
 
                 BtnDefault_23 As button:
                     BorderColor: =Self.Color
                     BorderThickness: =1
-                    Color: =glbThemePrimaryColor
+                    Color: =RGBA(39, 67, 125, 1)
                     DisabledBorderColor: =RGBA(219, 219, 219, 1)
                     Fill: =White
                     FocusedBorderThickness: =1
@@ -1618,7 +1620,7 @@
                 BtnDefault_24 As button:
                     BorderColor: =Self.Color
                     BorderThickness: =1
-                    Color: =glbThemePrimaryColor
+                    Color: =RGBA(39, 67, 125, 1)
                     DisabledBorderColor: =RGBA(219, 219, 219, 1)
                     Fill: =White
                     FocusedBorderThickness: =1
@@ -1651,7 +1653,7 @@
                 BtnDefault_25 As button:
                     BorderColor: =Self.Color
                     BorderThickness: =1
-                    Color: =glbThemePrimaryColor
+                    Color: =RGBA(39, 67, 125, 1)
                     DisabledBorderColor: =RGBA(219, 219, 219, 1)
                     Fill: =White
                     FocusedBorderThickness: =1
@@ -3246,13 +3248,14 @@
                         ZIndex: =12
 
     HeaderContainer_4 As groupContainer.manualLayoutContainer:
-        Fill: =glbThemePrimaryColor
+        Fill: =RGBA(255, 255, 255, 1)
         Height: =60
         Width: =Parent.Width
         ZIndex: =6
 
         Icon2_6 As icon.Home:
-            Color: =RGBA(255, 255, 255, 1)
+            Color: =RGBA(39, 67, 125, 1)
+            Fill: =RGBA(255, 255, 255, 1)
             Height: =60
             Icon: =Icon.Home
             OnSelect: =Launch(JumpUrlClientAPP&"&Screen=HomepageScreen",{},LaunchTarget.Replace);
@@ -3271,10 +3274,9 @@
             ZIndex: =7
 
         Label1_74 As label:
-            Color: =RGBA(255, 255, 255, 1)
-            Fill: =glbThemePrimaryColor
-            FontWeight: =FontWeight.Bold
-            Height: =44
+            Fill: =RGBA(255, 255, 255, 1)
+            FontWeight: =FontWeight.Semibold
+            Height: =60
             OnSelect: =Launch(JumpUrlClientAPP&"&Screen=HomepageScreen",{},LaunchTarget.Replace);
             PaddingBottom: =0
             PaddingLeft: =0
@@ -3283,10 +3285,11 @@
             Size: =12
             Text: |-
                 =If(App.ActiveScreen.Width<600,"eProcessing System",
-                "基督教香港信義會社會服務部 | eProcessing System")
+                "ELCSS-HK
+                eProcessing System (ePS)
+                版本：1.0.0")
             Width: =509
-            X: =132
-            Y: =8
+            X: =136
             ZIndex: =8
 
     SelectUserContainer_2 As groupContainer.horizontalAutoLayoutContainer:

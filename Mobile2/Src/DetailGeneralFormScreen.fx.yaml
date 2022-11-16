@@ -3271,6 +3271,7 @@
                         ZIndex: =3
 
             RightContainer_1 As groupContainer.verticalAutoLayoutContainer:
+                AlignInContainer: =AlignInContainer.SetByContainer
                 Fill: =RGBA(255, 255, 255, 1)
                 FillPortions: =0
                 Height: |-
@@ -3278,6 +3279,7 @@
                     Rectangle6_1.Y+Rectangle6_1.Height
                 LayoutAlignItems: =LayoutAlignItems.Stretch
                 LayoutDirection: =LayoutDirection.Vertical
+                LayoutMinHeight: =100
                 LayoutMinWidth: =250
                 LayoutMode: =LayoutMode.Auto
                 PaddingLeft: =20
@@ -3300,6 +3302,7 @@
                     ZIndex: =1
 
                 Gallery1 As gallery.variableTemplateHeightGallery:
+                    AlignInContainer: =AlignInContainer.SetByContainer
                     Height: |-
                         =If("執行" in 
                                             
@@ -3323,6 +3326,8 @@
                                         ).TaskStatus = "000",  CommentsContainer_1.Y+CommentsContainer_1.Height+20-65,130)
                     Items: =Filter(ApprovalDetail_Table,Approval_No = FLowId)
                     Layout: =Layout.Vertical
+                    LayoutMinHeight: =287
+                    LayoutMinWidth: =320
                     TemplatePadding: =0
                     TemplateSize: =180
                     Width: =460
@@ -3410,7 +3415,10 @@
                             ZIndex: =1
 
                         Container21 As groupContainer.manualLayoutContainer:
+                            AlignInContainer: =AlignInContainer.SetByContainer
                             Height: =CommentLabel_4.Height+CommentLabel_4.Y
+                            LayoutMinHeight: =100
+                            LayoutMinWidth: =250
                             Width: =430
                             ZIndex: =5
 
@@ -3458,11 +3466,14 @@
                                 ZIndex: =2
 
                 ActionFlowGallery As gallery.galleryVertical:
+                    AlignInContainer: =AlignInContainer.SetByContainer
                     BorderStyle: =BorderStyle.None
                     Fill: =RGBA(255, 255, 255, 1)
                     Height: =CountRows(Self.AllItems)+180
                     Items: =Filter(ApprovalDetail_Table,Approval_No=FLowId)
                     Layout: =Layout.Vertical
+                    LayoutMinHeight: =287
+                    LayoutMinWidth: =320
                     TemplatePadding: =0
                     TemplateSize: =180
                     Visible: |-
@@ -3687,7 +3698,10 @@
                     ZIndex: =5
 
                 NextStepContainer_1 As groupContainer.manualLayoutContainer:
+                    AlignInContainer: =AlignInContainer.SetByContainer
                     Height: =150
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
                     Visible: |-
                         =// flow类型是通用且当前节点不为执行时显示，否则不显示
                         //If(FlowType = "通用流程" || FlowType = "預設流程" || FlowType = "部門簡單流程",true,false)
@@ -4078,6 +4092,9 @@
                     ZIndex: =8
 
                 FlowActionStepContainer As groupContainer.manualLayoutContainer:
+                    AlignInContainer: =AlignInContainer.SetByContainer
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
                     Visible: |-
                         =FlowType = "Generic Flow" && IsBlank(
                             LookUp(
