@@ -1106,6 +1106,7 @@ AdminFormDetailScreen As screen:
                 HintText: ="請輸入表格名稱"
                 HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                 HoverFill: =ColorFade(Self.Fill, -5%)
+                MaxLength: =100
                 OnChange: =If(TextInput_FormName in GenericFormModel.ModelName,Notify("該表格名稱已經存在，繼續創建將會覆蓋原有記錄",NotificationType.Warning,3000))
                 PaddingBottom: =0
                 PaddingLeft: =10
@@ -1134,6 +1135,7 @@ AdminFormDetailScreen As screen:
                 HintText: ="例子：v1.0"
                 HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                 HoverFill: =ColorFade(Self.Fill, -5%)
+                MaxLength: =50
                 PaddingBottom: =0
                 PaddingLeft: =10
                 PaddingRight: =0
@@ -1161,6 +1163,7 @@ AdminFormDetailScreen As screen:
                 HintText: ="例子：A111"
                 HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                 HoverFill: =ColorFade(Self.Fill, -5%)
+                MaxLength: =50
                 OnChange: =If(IsMatch(TextInput_FormNumber.Text,Letter&Digit&Digit&Digit),If(TextInput_FormNumber in GenericFormModel.ModelFlowNumber||TextInput_FormNumber.Text="A103"||TextInput_FormNumber.Text="A104"||TextInput_FormNumber.Text="A111"||TextInput_FormNumber.Text="A306",Notify("該表格編號已經存在，保存會覆蓋原有表格",Warning,3000),Notify("格式正確",Success,3000)),Notify("格式錯誤，請輸入字母+3個數字",Warning,3000))
                 PaddingBottom: =0
                 PaddingLeft: =10
@@ -1468,6 +1471,7 @@ AdminFormDetailScreen As screen:
                         "
                     HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                     HoverFill: =ColorFade(Self.Fill, -5%)
+                    MaxLength: =100
                     Mode: =TextMode.MultiLine
                     PaddingBottom: =10
                     PaddingLeft: =10
