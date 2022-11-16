@@ -468,7 +468,7 @@ HomepageScreen As screen:
                     FontWeight: =FontWeight.Normal
                     Height: =50
                     HoverBorderColor: =glbThemePrimaryColor
-                    HoverColor: =
+                    HoverColor: =RGBA(128, 128, 128, 1)
                     HoverFill: =
                     OnSelect: |-
                         =If(
@@ -638,10 +638,10 @@ HomepageScreen As screen:
                 Height: =32
                 HoverColor: =glbThemePrimaryColor
                 OnSelect: |-
-                    =Navigate(GeneralFormListScreen,None,{ListID:2})
+                    =//Navigate(GeneralFormListScreen,None,{ListID:2})
                 PaddingLeft: =0
                 Size: =11
-                Text: ="單位"
+                Text: =If(TabGallery3_3.Selected.Value="服務","單位","類型")
                 Width: =80
                 X: =230
                 Y: =12
