@@ -59,6 +59,7 @@
         FillInContainer_2 As groupContainer.horizontalAutoLayoutContainer:
             AlignInContainer: =AlignInContainer.Center
             Fill: =RGBA(242, 242, 242, 1)
+            FillPortions: =0
             Height: =Max(LeftContainer12_2.Y+LeftContainer12_2.Height+40,RightContainer_2.Y+RightContainer_2.Height+40)
             LayoutGap: =10
             LayoutMinHeight: =100
@@ -90,7 +91,6 @@
                 LayoutMinHeight: =100
                 LayoutMinWidth: =250
                 LayoutMode: =LayoutMode.Auto
-                Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
                 ZIndex: =1
 
                 WaitingTaskContainer As groupContainer.verticalAutoLayoutContainer:
@@ -284,7 +284,7 @@
             RightContainer_2 As groupContainer.verticalAutoLayoutContainer:
                 AlignInContainer: =AlignInContainer.SetByContainer
                 Fill: =RGBA(255, 255, 255, 1)
-                Height: =Container4_2.Y+Container4_2.Height+20
+                Height: =Rectangle5_7.Y+Rectangle5_7.Height+20
                 LayoutAlignItems: =LayoutAlignItems.Stretch
                 LayoutDirection: =LayoutDirection.Vertical
                 LayoutMinHeight: =100
@@ -293,7 +293,6 @@
                 PaddingLeft: =20
                 PaddingRight: =20
                 PaddingTop: =20
-                Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
                 ZIndex: =2
 
                 Container4_1 As groupContainer.manualLayoutContainer:
@@ -652,7 +651,6 @@
                         SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                         SelectMultiple: =false
                         Size: =9
-                        Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
                         Width: =423
                         X: =20
                         Y: =15
@@ -688,7 +686,6 @@
                         SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                         SelectMultiple: =false
                         Size: =9
-                        Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
                         Width: =423
                         X: =20
                         Y: =67
@@ -734,14 +731,13 @@
                         SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                         SelectMultiple: =false
                         Size: =9
-                        Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
                         Width: =423
                         X: =20
                         Y: =120
                         ZIndex: =6
 
                     TaskNameGallery_1 As gallery.galleryVertical:
-                        Height: =251
+                        Height: =186
                         Items: |-
                             =ShowColumns(
                                     Filter(
@@ -971,10 +967,28 @@
                             Y: =1
                             ZIndex: =3
 
+                Rectangle5_7 As rectangle:
+                    Fill: =RGBA(0, 0, 0, 0)
+                    Height: =5
+                    X: =40
+                    Y: =40
+                    ZIndex: =6
+
     HeaderContainer_5 As groupContainer.manualLayoutContainer:
         Fill: =RGBA(255, 255, 255, 1)
         Height: =60
-        Width: =Parent.Width
+        Width: |
+            =Switch(
+                    HomePageScreen.Size,
+                    ScreenSize.Small,
+                   Parent.Width,
+                    ScreenSize.Medium,
+                   Parent.Width-40,
+                   ScreenSize.Large,
+                   Parent.Width-40,
+                   1200
+              )
+        X: =(Parent.Width-Self.Width)/2
         ZIndex: =6
 
         Image1_3 As image:
@@ -982,7 +996,7 @@
             Image: =logo_单图标
             OnSelect: =
             Width: =40
-            X: =84
+            X: =8
             ZIndex: =7
 
         Label1_76 As label:
@@ -1000,7 +1014,7 @@
                 "ELCSS-HK
                 eProcessing System (ePS)")
             Width: =217
-            X: =136
+            X: =60
             ZIndex: =8
 
         Image7 As image:
@@ -1010,8 +1024,22 @@
             RadiusBottomRight: =20
             RadiusTopLeft: =20
             RadiusTopRight: =20
+            Visible: =If(App.ActiveScreen.Width<600,true,false)
             Width: =40
-            X: =370
+            X: =424
             Y: =10
             ZIndex: =9
+
+        Image7_1 As image:
+            Height: =40
+            Image: =User().Image
+            RadiusBottomLeft: =20
+            RadiusBottomRight: =20
+            RadiusTopLeft: =20
+            RadiusTopRight: =20
+            Visible: =If(App.ActiveScreen.Width>600,true,false)
+            Width: =40
+            X: =1150
+            Y: =10
+            ZIndex: =10
 
