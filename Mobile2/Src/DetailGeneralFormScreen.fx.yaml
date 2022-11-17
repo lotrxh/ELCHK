@@ -255,8 +255,10 @@
         Icon2_4 As icon.Home:
             Color: =RGBA(255, 255, 255, 1)
             Height: =60
-            Icon: =Icon.Home
-            OnSelect: =Launch(JumpUrlClientAPP&"&Screen=GeneralFormListScreen",{},LaunchTarget.Replace);
+            Icon: =Icon.BackArrow
+            OnSelect: |-
+                =//Launch(JumpUrlClientAPP&"&Screen=GeneralFormListScreen",{},LaunchTarget.Replace);
+                Navigate(HomePageScreen,ScreenTransition.None)
             PaddingBottom: =14
             PaddingTop: =14
             Width: =60
@@ -266,7 +268,9 @@
         Image1 As image:
             Height: =60
             Image: =logo_单图标
-            OnSelect: =Launch(JumpUrlClientAPP&"&Screen=HomepageScreen",{},LaunchTarget.Replace);
+            OnSelect: |-
+                =//Launch(JumpUrlClientAPP&"&Screen=HomepageScreen",{},LaunchTarget.Replace);
+                Navigate(HomePageScreen,ScreenTransition.None)
             Width: =40
             X: =84
             ZIndex: =7
@@ -276,7 +280,9 @@
             Fill: =glbThemePrimaryColor
             FontWeight: =FontWeight.Bold
             Height: =44
-            OnSelect: =Launch(JumpUrlClientAPP&"&Screen=HomepageScreen",{},LaunchTarget.Replace);
+            OnSelect: |-
+                =//Launch(JumpUrlClientAPP&"&Screen=HomepageScreen",{},LaunchTarget.Replace);
+                Navigate(HomePageScreen,ScreenTransition.None)
             PaddingBottom: =0
             PaddingLeft: =0
             PaddingRight: =0
@@ -4543,7 +4549,8 @@
                                 2000
                             );
                             Reset(TextInput2_34);
-                            Launch(JumpUrlClientAPP&"&Screen=GeneralFormListScreen",{},LaunchTarget.Replace);
+                            //Launch(JumpUrlClientAPP&"&Screen=GeneralFormListScreen",{},LaunchTarget.Replace);
+                            Navigate(HomePageScreen,ScreenTransition.None)
                         );
                     PaddingBottom: =0
                     PaddingLeft: =0
@@ -4885,7 +4892,8 @@
                                 2000
                             );
                             Reset(TextInput2_34);
-                            Launch(JumpUrlClientAPP&"&Screen=GeneralFormListScreen",{},LaunchTarget.Replace);
+                            //Launch(JumpUrlClientAPP&"&Screen=GeneralFormListScreen",{},LaunchTarget.Replace);
+                            Navigate(HomePageScreen,ScreenTransition.None)
                         )
                     PaddingBottom: =0
                     PaddingLeft: =0
@@ -5265,7 +5273,8 @@
                                 NotificationType.Success,
                                 2000
                             );
-                                Launch(JumpUrlClientAPP&"&Screen=GeneralFormListScreen",{},LaunchTarget.Replace);
+                                //Launch(JumpUrlClientAPP&"&Screen=GeneralFormListScreen",{},LaunchTarget.Replace);
+                                Navigate(HomePageScreen,ScreenTransition.None)
                            ,
                            
                             //未勾選，則更新審批詳情表，流程繼續進行
@@ -5444,8 +5453,9 @@
                                 2000
                             );
                         If(Last(Split(Label1_138.Text,"/")).Result <> User().Email,
-                        //下一节点处理人不是当前用户时，跳转用户到任務列表
-                        Launch(JumpUrlClientAPP&"&Screen=GeneralFormListScreen",{},LaunchTarget.Replace)
+                        //下一节点处理人不是当前用户时，跳转用户到移動端首頁
+                        //Launch(JumpUrlClientAPP&"&Screen=GeneralFormListScreen",{},LaunchTarget.Replace)
+                        Navigate(HomePageScreen,ScreenTransition.None)
                         );
                         
                             Set(

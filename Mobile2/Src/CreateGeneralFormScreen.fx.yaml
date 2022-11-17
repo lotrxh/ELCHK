@@ -159,7 +159,9 @@
                 HoverBorderColor: =ColorFade(Self.Color, -15%)
                 HoverColor: =ColorFade(Self.Color, -15%)
                 HoverFill: =RGBA(255, 255, 255, 1)
-                OnSelect: =Launch(JumpUrlClientAPP&"&Screen=HomepageScreen",{},LaunchTarget.Replace);
+                OnSelect: |-
+                    =//Launch(JumpUrlClientAPP&"&Screen=HomepageScreen",{},LaunchTarget.Replace);
+                    Navigate(HomePageScreen,ScreenTransition.None)
                 PaddingBottom: =0
                 PaddingLeft: =0
                 PaddingRight: =0
@@ -735,11 +737,8 @@
                                 {HistoryList: ApprovalIDNumber}
                             ),
                     //下一节点处理人不是当前用户时，返回認爲列表
-                            Launch(
-                                JumpUrlClientAPP & "&Screen=GeneralFormListScreen",
-                                {},
-                                LaunchTarget.Replace
-                            )
+                            //Launch(JumpUrlClientAPP & "&Screen=GeneralFormListScreen",{},LaunchTarget.Replace)
+                            Navigate(HomePageScreen,ScreenTransition.None)
                         );
                         
                     );
@@ -3257,8 +3256,10 @@
             Color: =RGBA(39, 67, 125, 1)
             Fill: =RGBA(255, 255, 255, 1)
             Height: =60
-            Icon: =Icon.Home
-            OnSelect: =Launch(JumpUrlClientAPP&"&Screen=HomepageScreen",{},LaunchTarget.Replace);
+            Icon: =Icon.BackArrow
+            OnSelect: |-
+                =//Launch(JumpUrlClientAPP&"&Screen=HomepageScreen",{},LaunchTarget.Replace);
+                Navigate(HomePageScreen,ScreenTransition.None)
             PaddingBottom: =14
             PaddingTop: =14
             Width: =60
@@ -3268,7 +3269,9 @@
         Image1_1 As image:
             Height: =60
             Image: =logo_单图标
-            OnSelect: =Launch(JumpUrlClientAPP&"&Screen=HomepageScreen",{},LaunchTarget.Replace);
+            OnSelect: |-
+                =//Launch(JumpUrlClientAPP&"&Screen=HomepageScreen",{},LaunchTarget.Replace);
+                Navigate(HomePageScreen,ScreenTransition.None)
             Width: =40
             X: =84
             ZIndex: =7
@@ -3277,7 +3280,9 @@
             Fill: =RGBA(255, 255, 255, 1)
             FontWeight: =FontWeight.Semibold
             Height: =60
-            OnSelect: =Launch(JumpUrlClientAPP&"&Screen=HomepageScreen",{},LaunchTarget.Replace);
+            OnSelect: |-
+                =//Launch(JumpUrlClientAPP&"&Screen=HomepageScreen",{},LaunchTarget.Replace);
+                Navigate(HomePageScreen,ScreenTransition.None)
             PaddingBottom: =0
             PaddingLeft: =0
             PaddingRight: =0

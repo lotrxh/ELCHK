@@ -84,7 +84,7 @@
                 AlignInContainer: =AlignInContainer.SetByContainer
                 Fill: =RGBA(255, 255, 255, 1)
                 FillPortions: =1.3
-                Height: =UploadTemplateContainer_2.Y+UploadTemplateContainer_2.Height+20
+                Height: =WaitingTaskContainer.Y+WaitingTaskContainer.Height+20
                 LayoutAlignItems: =LayoutAlignItems.Stretch
                 LayoutDirection: =LayoutDirection.Vertical
                 LayoutMinHeight: =100
@@ -93,7 +93,7 @@
                 Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
                 ZIndex: =1
 
-                UploadTemplateContainer_2 As groupContainer.verticalAutoLayoutContainer:
+                WaitingTaskContainer As groupContainer.verticalAutoLayoutContainer:
                     AlignInContainer: =AlignInContainer.SetByContainer
                     Fill: =RGBA(255, 255, 255, 1)
                     FillPortions: =0
@@ -109,7 +109,6 @@
                     ZIndex: =1
 
                     TextInput2_15 As text:
-                        AlignInContainer: =AlignInContainer.Stretch
                         BorderColor: =glbNeutralQuaternaryColor
                         BorderThickness: =1
                         Color: =glbNeutralPrimaryColor
@@ -131,12 +130,13 @@
                         RadiusTopLeft: =4
                         RadiusTopRight: =4
                         Size: =11
-                        Width: =600
+                        Width: =500
                         X: =20
                         Y: =20
                         ZIndex: =1
 
                     Gallery5 As gallery.galleryVertical:
+                        AlignInContainer: =AlignInContainer.SetByContainer
                         Height: =500
                         Items: =Search(SortByColumns(ApprovalDetailColwithdepartment,"Modified",Ascending),TextInput2_15.Text,"DepartMentUnit","Application_No","Task_Name")
                         Layout: =Layout.Vertical
@@ -980,7 +980,7 @@
         Image1_3 As image:
             Height: =60
             Image: =logo_单图标
-            OnSelect: =Launch(JumpUrlClientAPP&"&Screen=HomepageScreen",{},LaunchTarget.Replace);
+            OnSelect: =
             Width: =40
             X: =84
             ZIndex: =7
@@ -989,7 +989,7 @@
             Fill: =RGBA(255, 255, 255, 1)
             FontWeight: =FontWeight.Semibold
             Height: =60
-            OnSelect: =Launch(JumpUrlClientAPP&"&Screen=HomepageScreen",{},LaunchTarget.Replace);
+            OnSelect: =
             PaddingBottom: =0
             PaddingLeft: =0
             PaddingRight: =0
