@@ -47,13 +47,13 @@
 
     MainflowContainer_1 As groupContainer.verticalAutoLayoutContainer:
         Fill: =RGBA(242, 242, 242, 1)
-        Height: =Parent.Height - 120
+        Height: =642
         LayoutDirection: =LayoutDirection.Vertical
         LayoutGap: =10
         LayoutMode: =LayoutMode.Auto
         LayoutOverflowY: =LayoutOverflow.Scroll
         Width: =Parent.Width
-        Y: =73
+        Y: =80
         ZIndex: =5
 
         FillInContainer_2 As groupContainer.horizontalAutoLayoutContainer:
@@ -61,7 +61,7 @@
             Fill: =RGBA(242, 242, 242, 1)
             FillPortions: =0
             Height: =Max(LeftContainer12_2.Y+LeftContainer12_2.Height+40,RightContainer_2.Y+RightContainer_2.Height+40)
-            LayoutGap: =10
+            LayoutGap: =20
             LayoutMinHeight: =100
             LayoutMinWidth: =250
             LayoutMode: =LayoutMode.Auto
@@ -108,178 +108,200 @@
                     PaddingTop: =20
                     ZIndex: =1
 
-                    TextInput2_15 As text:
-                        BorderColor: =glbNeutralQuaternaryColor
-                        BorderThickness: =1
-                        Color: =glbNeutralPrimaryColor
-                        Default: =""
-                        FocusedBorderColor: =glbNeutralSecondaryColor
-                        FocusedBorderThickness: =1
-                        Height: =36
-                        HintText: ="搜索待處理"
-                        HoverBorderColor: =glbThemePrimaryColor
-                        HoverFill: =White
-                        PaddingBottom: =0
-                        PaddingLeft: =34
-                        PaddingRight: =0
-                        PaddingTop: =0
-                        PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
-                        PressedFill: =White
-                        RadiusBottomLeft: =4
-                        RadiusBottomRight: =4
-                        RadiusTopLeft: =4
-                        RadiusTopRight: =4
-                        Size: =11
-                        Width: =500
-                        X: =20
-                        Y: =20
+                    Container15 As groupContainer.horizontalAutoLayoutContainer:
+                        FillPortions: =0
+                        Height: =TextInput2_15.Height+10
+                        LayoutMinHeight: =100
+                        LayoutMinWidth: =250
+                        LayoutMode: =LayoutMode.Auto
+                        PaddingLeft: =1
+                        PaddingRight: =1
                         ZIndex: =1
 
-                    Gallery5 As gallery.galleryVertical:
-                        AlignInContainer: =AlignInContainer.SetByContainer
-                        Height: =500
-                        Items: =Search(SortByColumns(ApprovalDetailColwithdepartment,"Modified",Ascending),TextInput2_15.Text,"DepartMentUnit","Application_No","Task_Name")
-                        Layout: =Layout.Vertical
-                        LayoutMinHeight: =287
-                        LayoutMinWidth: =320
-                        OnSelect: |-
-                            =With(
-                            {
-                            FormName:LookUp(Approval_Table,标题=ThisItem.Approval_No).Task_Name
-                            },
-                            If(
-                                FormName = "招聘職位申請表",
-                                If(
-                                    ThisItem.TaskStatus = "001",
-                                    Launch(
-                                        JumpUrl&"&Screen=JobTitleFormScreen&AppIds=" & LookUp(
-                                            ApplitionJobPosition,
-                                            ApprovalId = Gallery5.Selected.Approval_No
-                                        ).标题 & "&MasterflowId=" & Gallery5.Selected.Approval_No & "&resubmit=true"
-                                    ),
-                                    Launch(
-                                        JumpUrl&"&Screen=JobTitleFormDetailScreen&AppIds=" & LookUp(
-                                            ApplitionJobPosition,
-                                            ApprovalId = Gallery5.Selected.Approval_No
-                                        ).标题 & "&MasterflowId=" & Gallery5.Selected.Approval_No & "&resubmit=false"
-                                    )
-                                ),
-                                FormName = "假期批核人資料表",
-                                If(
-                                    ThisItem.TaskStatus = "001",
-                                    Launch(
-                                        JumpUrlA306A111&"&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
-                                            VacationApprovalForm,
-                                            Applicant_No = Gallery5.Selected.Approval_No
-                                        ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=true"
-                                    ),
-                                    Launch(
-                                        JumpUrlA306A111&"&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
-                                            VacationApprovalForm,
-                                            Applicant_No = Gallery5.Selected.Approval_No
-                                        ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
-                                    )
-                                ),
-                                FormName = "預備合約通知書(新入職)",
-                                If(
-                                    ThisItem.TaskStatus = "001",
-                                    Launch(
-                                        JumpUrl&"&Screen=ContractNoticeForm&taskNum=" & LookUp(
-                                            ContractNotice,
-                                            ApprovalId = Gallery5.Selected.Approval_No
-                                        ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=true"
-                                    ),
-                                    Launch(
-                                        JumpUrl&"&Screen=ContractNoticeFormDetail&taskNum=" & LookUp(
-                                            ContractNotice,
-                                            ApprovalId = Gallery5.Selected.Approval_No
-                                        ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
-                                    )
-                                ),
-                                FormName = "任職資源申請",
-                                Launch(
-                                    JumpUrlA306A111&"&Screen=EmploymentFormDetail&taskNum=" & LookUp(
-                                        EmploymentResource,
-                                        ApprovalId = Gallery5.Selected.Approval_No
-                                    ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
-                                ),
-                                With(
-                                    {
-                                        FormId: LookUp(
-                                            GenericFormList,
-                                            ApprovalId = ThisItem.Approval_No
-                                        ).标题,
-                                        FLowId: Gallery5.Selected.Approval_No
-                                    },
-                                    Launch(JumpUrlMobileApp&"&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & Gallery5.Selected.Approval_No
-                                    ,{},LaunchTarget.Replace)
-                                )
-                            )
-                            )
-                        ShowScrollbar: =false
-                        TemplatePadding: =0
-                        TemplateSize: =32
-                        Width: =505
-                        X: =20
-                        Y: =95
-                        ZIndex: =2
-
-                        Label11 As label:
-                            Color: =glbNeutralSecondaryColor
-                            Height: =32
-                            OnSelect: =Select(Parent)
-                            Size: =10
-                            Text: =ThisItem.Application_No
-                            Width: =56
-                            Wrap: =false
-                            X: =1
+                        TextInput2_15 As text:
+                            AlignInContainer: =AlignInContainer.Center
+                            BorderColor: =glbNeutralQuaternaryColor
+                            BorderThickness: =1
+                            Color: =glbNeutralPrimaryColor
+                            Default: =""
+                            FillPortions: =1
+                            FocusedBorderColor: =glbNeutralSecondaryColor
+                            FocusedBorderThickness: =1
+                            Height: =36
+                            HintText: ="搜索待處理"
+                            HoverBorderColor: =glbThemePrimaryColor
+                            HoverFill: =White
+                            PaddingBottom: =0
+                            PaddingLeft: =34
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
+                            PressedFill: =White
+                            RadiusBottomLeft: =4
+                            RadiusBottomRight: =4
+                            RadiusTopLeft: =4
+                            RadiusTopRight: =4
+                            Size: =11
+                            Width: =500
+                            X: =20
+                            Y: =20
                             ZIndex: =1
 
-                        Label11_1 As label:
-                            Color: =glbNeutralSecondaryColor
-                            Height: =32
-                            OnSelect: =Select(Parent)
-                            Size: =10
-                            Text: =ThisItem.DepartMentUnit
-                            Width: =71
-                            Wrap: =false
-                            X: =219
-                            ZIndex: =2
+                    Container16 As groupContainer.horizontalAutoLayoutContainer:
+                        FillPortions: =0
+                        Height: =Gallery5.Height+10
+                        LayoutAlignItems: =LayoutAlignItems.Center
+                        LayoutMinHeight: =100
+                        LayoutMinWidth: =250
+                        LayoutMode: =LayoutMode.Auto
+                        PaddingLeft: =1
+                        PaddingRight: =1
+                        ZIndex: =2
 
-                        Label11_2 As label:
-                            Color: =glbNeutralSecondaryColor
-                            Height: =32
-                            OnSelect: =Select(Parent)
-                            Size: =10
-                            Text: =ThisItem.Task_Name
-                            Width: =133
-                            Wrap: =false
-                            X: =86
-                            ZIndex: =3
+                        Gallery5 As gallery.galleryVertical:
+                            AlignInContainer: =AlignInContainer.SetByContainer
+                            Height: =320
+                            Items: =Search(SortByColumns(ApprovalDetailColwithdepartment,"Modified",Ascending),TextInput2_15.Text,"DepartMentUnit","Application_No","Task_Name")
+                            Layout: =Layout.Vertical
+                            LayoutMinHeight: =287
+                            LayoutMinWidth: =320
+                            OnSelect: |-
+                                =With(
+                                {
+                                FormName:LookUp(Approval_Table,标题=ThisItem.Approval_No).Task_Name
+                                },
+                                If(
+                                    FormName = "招聘職位申請表",
+                                    If(
+                                        ThisItem.TaskStatus = "001",
+                                        Launch(
+                                            JumpUrl&"&Screen=JobTitleFormScreen&AppIds=" & LookUp(
+                                                ApplitionJobPosition,
+                                                ApprovalId = Gallery5.Selected.Approval_No
+                                            ).标题 & "&MasterflowId=" & Gallery5.Selected.Approval_No & "&resubmit=true"
+                                        ),
+                                        Launch(
+                                            JumpUrl&"&Screen=JobTitleFormDetailScreen&AppIds=" & LookUp(
+                                                ApplitionJobPosition,
+                                                ApprovalId = Gallery5.Selected.Approval_No
+                                            ).标题 & "&MasterflowId=" & Gallery5.Selected.Approval_No & "&resubmit=false"
+                                        )
+                                    ),
+                                    FormName = "假期批核人資料表",
+                                    If(
+                                        ThisItem.TaskStatus = "001",
+                                        Launch(
+                                            JumpUrlA306A111&"&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
+                                                VacationApprovalForm,
+                                                Applicant_No = Gallery5.Selected.Approval_No
+                                            ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=true"
+                                        ),
+                                        Launch(
+                                            JumpUrlA306A111&"&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
+                                                VacationApprovalForm,
+                                                Applicant_No = Gallery5.Selected.Approval_No
+                                            ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
+                                        )
+                                    ),
+                                    FormName = "預備合約通知書(新入職)",
+                                    If(
+                                        ThisItem.TaskStatus = "001",
+                                        Launch(
+                                            JumpUrl&"&Screen=ContractNoticeForm&taskNum=" & LookUp(
+                                                ContractNotice,
+                                                ApprovalId = Gallery5.Selected.Approval_No
+                                            ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=true"
+                                        ),
+                                        Launch(
+                                            JumpUrl&"&Screen=ContractNoticeFormDetail&taskNum=" & LookUp(
+                                                ContractNotice,
+                                                ApprovalId = Gallery5.Selected.Approval_No
+                                            ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
+                                        )
+                                    ),
+                                    FormName = "任職資源申請",
+                                    Launch(
+                                        JumpUrlA306A111&"&Screen=EmploymentFormDetail&taskNum=" & LookUp(
+                                            EmploymentResource,
+                                            ApprovalId = Gallery5.Selected.Approval_No
+                                        ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
+                                    ),
+                                    With(
+                                        {
+                                            FormId: LookUp(
+                                                GenericFormList,
+                                                ApprovalId = ThisItem.Approval_No
+                                            ).标题,
+                                            FLowId: Gallery5.Selected.Approval_No
+                                        },
+                                        Launch(JumpUrlMobileApp&"&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & Gallery5.Selected.Approval_No
+                                        ,{},LaunchTarget.Replace)
+                                    )
+                                )
+                                )
+                            ShowScrollbar: =false
+                            TemplatePadding: =0
+                            TemplateSize: =32
+                            Width: =505
+                            X: =20
+                            Y: =95
+                            ZIndex: =1
 
-                        Label11_3 As label:
-                            Align: =Align.Right
-                            Color: =glbNeutralSecondaryColor
-                            Height: =32
-                            OnSelect: =Select(Parent)
-                            Size: =9
-                            Text: =ThisItem.Modified
-                            Width: =105
-                            Wrap: =false
-                            X: =290
-                            ZIndex: =4
+                            Label11 As label:
+                                Color: =glbNeutralSecondaryColor
+                                Height: =32
+                                OnSelect: =Select(Parent)
+                                Size: =10
+                                Text: =ThisItem.Application_No
+                                Width: =If(App.ActiveScreen.Width<600,60,138)
+                                Wrap: =false
+                                ZIndex: =1
 
-                        LineRectangle_4 As rectangle:
-                            Fill: =RGBA(219, 219, 219, 1)
-                            Height: =1
-                            Width: =Gallery5.Width
-                            Y: =31
-                            ZIndex: =5
+                            Label11_1 As label:
+                                Color: =glbNeutralSecondaryColor
+                                Height: =32
+                                OnSelect: =Select(Parent)
+                                Size: =10
+                                Text: =ThisItem.DepartMentUnit
+                                Width: =If(App.ActiveScreen.Width>600,150,60)
+                                Wrap: =false
+                                X: =Gallery5.Width-Label11_3.Width-10-Label11_1.Width-10
+                                ZIndex: =2
+
+                            Label11_2 As label:
+                                Color: =glbNeutralSecondaryColor
+                                Height: =32
+                                OnSelect: =Select(Parent)
+                                Size: =10
+                                Text: =ThisItem.Task_Name
+                                Width: =If(App.ActiveScreen.Width>600,152,130)
+                                Wrap: =false
+                                X: =Label11.Width+10
+                                ZIndex: =3
+
+                            Label11_3 As label:
+                                Align: =Align.Right
+                                Color: =glbNeutralSecondaryColor
+                                Height: =32
+                                OnSelect: =Select(Parent)
+                                Size: =9
+                                Text: =ThisItem.Modified
+                                Width: =110
+                                Wrap: =false
+                                X: =Gallery5.Width-Label11_3.Width-10
+                                ZIndex: =4
+
+                            LineRectangle_4 As rectangle:
+                                Fill: =RGBA(219, 219, 219, 1)
+                                Height: =1
+                                Width: =Gallery5.Width
+                                Y: =31
+                                ZIndex: =5
 
                     Rectangle5_5 As rectangle:
                         Fill: =RGBA(0, 0, 0, 0)
                         Height: =5
-                        ZIndex: =6
+                        ZIndex: =4
 
             RightContainer_2 As groupContainer.verticalAutoLayoutContainer:
                 AlignInContainer: =AlignInContainer.SetByContainer
@@ -328,7 +350,7 @@
                         RadiusTopLeft: =4
                         RadiusTopRight: =4
                         Size: =11
-                        Width: =426
+                        Width: =430
                         X: =20
                         Y: =20
                         ZIndex: =1
@@ -391,7 +413,7 @@
                         ShowScrollbar: =false
                         TemplatePadding: =0
                         TemplateSize: =60
-                        Width: =426
+                        Width: =430
                         WrapCount: =4
                         X: =20
                         Y: =70
@@ -651,7 +673,7 @@
                         SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                         SelectMultiple: =false
                         Size: =9
-                        Width: =423
+                        Width: =430
                         X: =20
                         Y: =15
                         ZIndex: =4
@@ -686,7 +708,7 @@
                         SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                         SelectMultiple: =false
                         Size: =9
-                        Width: =423
+                        Width: =430
                         X: =20
                         Y: =67
                         ZIndex: =5
@@ -731,7 +753,7 @@
                         SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                         SelectMultiple: =false
                         Size: =9
-                        Width: =423
+                        Width: =430
                         X: =20
                         Y: =120
                         ZIndex: =6
@@ -753,7 +775,7 @@
                         ShowScrollbar: =false
                         TemplatePadding: =0
                         TemplateSize: =60
-                        Width: =423
+                        Width: =430
                         WrapCount: =4
                         X: =20
                         Y: =170

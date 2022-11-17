@@ -3974,19 +3974,19 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "HomePageScreen.MainflowContainer_1.FillInContainer_2.LeftContainer12_2.WaitingTaskContainer.Gallery5.AccessibleLabel"
+                  "fullyQualifiedName": "HomePageScreen.MainflowContainer_1.FillInContainer_2.LeftContainer12_2.WaitingTaskContainer.Container16.Gallery5.AccessibleLabel"
                 }
               ],
               "physicalLocation": {
                 "address": {
-                  "fullyQualifiedName": "HomePageScreen.MainflowContainer_1.FillInContainer_2.LeftContainer12_2.WaitingTaskContainer.Gallery5.AccessibleLabel",
+                  "fullyQualifiedName": "HomePageScreen.MainflowContainer_1.FillInContainer_2.LeftContainer12_2.WaitingTaskContainer.Container16.Gallery5.AccessibleLabel",
                   "relativeAddress": 0
                 }
               },
               "properties": {
                 "member": "AccessibleLabel",
                 "module": "HomePageScreen",
-                "type": "HomePageScreen.MainflowContainer_1.FillInContainer_2.LeftContainer12_2.WaitingTaskContainer.Gallery5"
+                "type": "HomePageScreen.MainflowContainer_1.FillInContainer_2.LeftContainer12_2.WaitingTaskContainer.Container16.Gallery5"
               }
             }
           ],
@@ -4004,19 +4004,49 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "HomePageScreen.MainflowContainer_1.FillInContainer_2.LeftContainer12_2.WaitingTaskContainer.Gallery5.TabIndex"
+                  "fullyQualifiedName": "HomePageScreen.MainflowContainer_1.FillInContainer_2.LeftContainer12_2.WaitingTaskContainer.Container15.TextInput2_15.AccessibleLabel"
                 }
               ],
               "physicalLocation": {
                 "address": {
-                  "fullyQualifiedName": "HomePageScreen.MainflowContainer_1.FillInContainer_2.LeftContainer12_2.WaitingTaskContainer.Gallery5.TabIndex",
+                  "fullyQualifiedName": "HomePageScreen.MainflowContainer_1.FillInContainer_2.LeftContainer12_2.WaitingTaskContainer.Container15.TextInput2_15.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "HomePageScreen",
+                "type": "HomePageScreen.MainflowContainer_1.FillInContainer_2.LeftContainer12_2.WaitingTaskContainer.Container15.TextInput2_15"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 0
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "HomePageScreen.MainflowContainer_1.FillInContainer_2.LeftContainer12_2.WaitingTaskContainer.Container16.Gallery5.TabIndex"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "HomePageScreen.MainflowContainer_1.FillInContainer_2.LeftContainer12_2.WaitingTaskContainer.Container16.Gallery5.TabIndex",
                   "relativeAddress": 0
                 }
               },
               "properties": {
                 "member": "TabIndex",
                 "module": "HomePageScreen",
-                "type": "HomePageScreen.MainflowContainer_1.FillInContainer_2.LeftContainer12_2.WaitingTaskContainer.Gallery5"
+                "type": "HomePageScreen.MainflowContainer_1.FillInContainer_2.LeftContainer12_2.WaitingTaskContainer.Container16.Gallery5"
               }
             }
           ],
@@ -4028,36 +4058,6 @@
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
           "ruleIndex": 1
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "HomePageScreen.MainflowContainer_1.FillInContainer_2.LeftContainer12_2.WaitingTaskContainer.TextInput2_15.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "HomePageScreen.MainflowContainer_1.FillInContainer_2.LeftContainer12_2.WaitingTaskContainer.TextInput2_15.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "HomePageScreen",
-                "type": "HomePageScreen.MainflowContainer_1.FillInContainer_2.LeftContainer12_2.WaitingTaskContainer.TextInput2_15"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 0
         },
         {
           "locations": [
