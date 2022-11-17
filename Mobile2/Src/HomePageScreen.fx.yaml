@@ -253,7 +253,7 @@
                                 OnSelect: =Select(Parent)
                                 Size: =10
                                 Text: =ThisItem.Application_No
-                                Width: =If(App.ActiveScreen.Width<600,60,138)
+                                Width: =If(App.ActiveScreen.Width<1000,60,138)
                                 Wrap: =false
                                 ZIndex: =1
 
@@ -263,7 +263,7 @@
                                 OnSelect: =Select(Parent)
                                 Size: =10
                                 Text: =ThisItem.DepartMentUnit
-                                Width: =If(App.ActiveScreen.Width>600,150,60)
+                                Width: =If(App.ActiveScreen.Width>1000,150,60)
                                 Wrap: =false
                                 X: =Gallery5.Width-Label11_3.Width-10-Label11_1.Width-10
                                 ZIndex: =2
@@ -274,7 +274,7 @@
                                 OnSelect: =Select(Parent)
                                 Size: =10
                                 Text: =ThisItem.Task_Name
-                                Width: =If(App.ActiveScreen.Width>600,152,130)
+                                Width: =If(App.ActiveScreen.Width>1000,152,130)
                                 Wrap: =false
                                 X: =Label11.Width+10
                                 ZIndex: =3
@@ -306,6 +306,7 @@
             RightContainer_2 As groupContainer.verticalAutoLayoutContainer:
                 AlignInContainer: =AlignInContainer.SetByContainer
                 Fill: =RGBA(255, 255, 255, 1)
+                FillPortions: =0
                 Height: =Rectangle5_7.Y+Rectangle5_7.Height+20
                 LayoutAlignItems: =LayoutAlignItems.Stretch
                 LayoutDirection: =LayoutDirection.Vertical
@@ -350,7 +351,7 @@
                         RadiusTopLeft: =4
                         RadiusTopRight: =4
                         Size: =11
-                        Width: =430
+                        Width: =400
                         X: =20
                         Y: =20
                         ZIndex: =1
@@ -413,7 +414,7 @@
                         ShowScrollbar: =false
                         TemplatePadding: =0
                         TemplateSize: =60
-                        Width: =430
+                        Width: =400
                         WrapCount: =4
                         X: =20
                         Y: =70
@@ -673,7 +674,7 @@
                         SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                         SelectMultiple: =false
                         Size: =9
-                        Width: =430
+                        Width: =400
                         X: =20
                         Y: =15
                         ZIndex: =4
@@ -708,7 +709,7 @@
                         SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                         SelectMultiple: =false
                         Size: =9
-                        Width: =430
+                        Width: =400
                         X: =20
                         Y: =67
                         ZIndex: =5
@@ -753,7 +754,7 @@
                         SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                         SelectMultiple: =false
                         Size: =9
-                        Width: =430
+                        Width: =400
                         X: =20
                         Y: =120
                         ZIndex: =6
@@ -775,7 +776,7 @@
                         ShowScrollbar: =false
                         TemplatePadding: =0
                         TemplateSize: =60
-                        Width: =430
+                        Width: =400
                         WrapCount: =4
                         X: =20
                         Y: =170
