@@ -85,7 +85,9 @@
                 AlignInContainer: =AlignInContainer.SetByContainer
                 Fill: =RGBA(255, 255, 255, 1)
                 FillPortions: =1.3
-                Height: =WaitingTaskContainer.Y+WaitingTaskContainer.Height+20
+                Height: |-
+                    =//WaitingTaskContainer.Y+WaitingTaskContainer.Height+20
+                    Rectangle5_7.Y+Rectangle5_7.Height+20
                 LayoutAlignItems: =LayoutAlignItems.Stretch
                 LayoutDirection: =LayoutDirection.Vertical
                 LayoutMinHeight: =100
@@ -160,7 +162,7 @@
 
                         Gallery5 As gallery.galleryVertical:
                             AlignInContainer: =AlignInContainer.SetByContainer
-                            Height: =320
+                            Height: =450
                             Items: =Search(SortByColumns(ApprovalDetailColwithdepartment,"Modified",Ascending),TextInput2_15.Text,"DepartMentUnit","Application_No","Task_Name")
                             Layout: =Layout.Vertical
                             LayoutMinHeight: =287
@@ -696,7 +698,7 @@
                         HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                         HoverColor: =Self.Color
                         HoverFill: =ColorFade(Self.Fill, -5%)
-                        InputTextPlaceholder: ="請選擇部門/服務"
+                        InputTextPlaceholder: ="請選擇類型/單位"
                         Items: =Distinct(Filter(FormTableType,DepartMentType=drpFilterDepartmentType.Selected.Value),DepartMentName)
                         NoSelectionText: ="請選擇類型/單位"
                         OnChange: =Reset(drpFilterFormTypeName);
