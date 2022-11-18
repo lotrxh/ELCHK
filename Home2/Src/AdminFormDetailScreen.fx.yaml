@@ -1982,16 +1982,16 @@ AdminFormDetailScreen As screen:
                     CurrentRoleFormModelPermssion = "None"
                     ,
                     [
-                        "首頁",
-                        "申請列表",
+                        "開始申請",
+                        "申請記錄",
                         If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定"),
                         If(If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定")="系統設定",Blank(),CurrentRole || HRAO || SuperUser,"系統設定")
                         
                     ],
                     [
-                        "首頁",
+                        "開始申請",
                         "表格資料",
-                        "申請列表",
+                        "申請記錄",
                         If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定"),
                         If(If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定")="系統設定",Blank(),CurrentRole || HRAO || SuperUser,"系統設定")
                     ]
@@ -2020,7 +2020,7 @@ AdminFormDetailScreen As screen:
                 HoverFill: =If(ThisItem.Value<>Blank(),ColorFade(glbThemePrimaryColor, 90%))
                 OnSelect: |-
                     =If(
-                        ThisItem.Value = "首頁",
+                        ThisItem.Value = "開始申請",
                         Navigate(
                             HomepageScreen,
                             ScreenTransition.None
@@ -2039,7 +2039,7 @@ AdminFormDetailScreen As screen:
                         Navigate(SystemsScreen,None,{ToUserInfoManager:"用戶管理"}),
                         //Launch("https://apps.powerapps.com/play/c030168f-5133-4c9d-8e17-3c870ba99ab4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=UserScreen"),
                     
-                        ThisItem.Value = "申請列表",
+                        ThisItem.Value = "申請記錄",
                         Navigate(
                             GeneralFormListScreen,
                             ScreenTransition.None,{ListID:1}
@@ -2065,7 +2065,7 @@ AdminFormDetailScreen As screen:
                 Height: =30
                 Image: |
                     =If(
-                        ThisItem.Value = "首頁",
+                        ThisItem.Value = "開始申請",
                         首页,
                         ThisItem.Value = "表格資料",
                         表格资料,
@@ -2073,7 +2073,7 @@ AdminFormDetailScreen As screen:
                         数据,
                         ThisItem.Value = "系統設定",
                         设置,
-                        ThisItem.Value = "申請列表",
+                        ThisItem.Value = "申請記錄",
                         申请列表
                     )
                 OnSelect: =Select(Parent)

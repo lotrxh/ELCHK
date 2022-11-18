@@ -37,23 +37,23 @@ HomepageScreen As screen:
                     CurrentRoleFormModelPermssion = "None"
                     ,
                     [
-                        "首頁",
-                        "申請列表",
+                        "開始申請",
+                        "申請記錄",
                         If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定"),
                         If(If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定")="系統設定",Blank(),CurrentRole || HRAO || SuperUser,"系統設定")
                         
                     ],
                     [
-                        "首頁",
+                        "開始申請",
                         "表格資料",
-                        "申請列表",
+                        "申請記錄",
                         If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定"),
                         If(If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定")="系統設定",Blank(),CurrentRole || HRAO || SuperUser,"系統設定")
                     ]
                 ),ThisRecord.Value <> Blank())
             Layout: =Layout.Vertical
             OnSelect: =
-            TemplateFill: =If(ThisItem.Value="首頁", RGBA(102,182,227,0.2),Transparent)
+            TemplateFill: =If(ThisItem.Value="開始申請", RGBA(102,182,227,0.2),Transparent)
             TemplatePadding: =0
             TemplateSize: =46
             Width: =240
@@ -65,18 +65,18 @@ HomepageScreen As screen:
                 BorderColor: =Self.Color
                 BorderStyle: =BorderStyle.None
                 BorderThickness: =0
-                Color: =If(ThisItem.Value="首頁", glbThemePrimaryColor,glbNeutralSecondaryColor)
+                Color: =If(ThisItem.Value="開始申請", glbThemePrimaryColor,glbNeutralSecondaryColor)
                 DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                Fill: =If(ThisItem.Value="首頁", ColorFade(Self.Color, 90%),White)
+                Fill: =If(ThisItem.Value="開始申請", ColorFade(Self.Color, 90%),White)
                 FocusedBorderThickness: =1
-                FontWeight: =If(ThisItem.Value="首頁", FontWeight.Semibold,Normal)
+                FontWeight: =If(ThisItem.Value="開始申請", FontWeight.Semibold,Normal)
                 Height: =46
                 HoverBorderColor: =ColorFade(Self.Color, -15%)
                 HoverColor: =ColorFade(Self.Color, -15%)
                 HoverFill: =If(ThisItem.Value<>Blank(),ColorFade(glbThemePrimaryColor, 90%))
                 OnSelect: |-
                     =If(
-                        ThisItem.Value = "首頁",
+                        ThisItem.Value = "開始申請",
                         Navigate(
                             HomepageScreen,
                             ScreenTransition.None
@@ -95,7 +95,7 @@ HomepageScreen As screen:
                         Navigate(SystemsScreen,None,{ToUserInfoManager:"用戶管理"}),
                         //Launch("https://apps.powerapps.com/play/c030168f-5133-4c9d-8e17-3c870ba99ab4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=UserScreen"),
                     
-                        ThisItem.Value = "申請列表",
+                        ThisItem.Value = "申請記錄",
                         Navigate(
                             GeneralFormListScreen,
                             ScreenTransition.None
@@ -121,7 +121,7 @@ HomepageScreen As screen:
                 Height: =30
                 Image: |
                     =If(
-                        ThisItem.Value = "首頁",
+                        ThisItem.Value = "開始申請",
                         首页,
                         ThisItem.Value = "表格資料",
                         表格资料,
@@ -129,7 +129,7 @@ HomepageScreen As screen:
                         数据,
                         ThisItem.Value = "系統設定",
                         设置,
-                        ThisItem.Value = "申請列表",
+                        ThisItem.Value = "申請記錄",
                         申请列表
                     )
                 OnSelect: =Select(Parent)
@@ -868,6 +868,7 @@ HomepageScreen As screen:
                         OnSelect: =Select(Parent)
                         Size: =10
                         Text: =LookUp(Approval_Table,标题=ThisItem.Approval_No).Application_No
+                        Tooltip: =LookUp(Approval_Table,标题=ThisItem.Approval_No).Application_No
                         Width: =142
                         Wrap: =false
                         ZIndex: =1
@@ -881,6 +882,7 @@ HomepageScreen As screen:
                             =//LookUp(Approval_Table,标题=ThisItem.Approval_No).DepartMentUnit
                             
                             If(CountA(Split(LookUp(Approval_Table,标题=ThisItem.Approval_No).DepartMentUnit,"-").Result)=2,First(Split(LookUp(Approval_Table,标题=ThisItem.Approval_No).DepartMentUnit,"-")).Result,First(Split(LookUp(Approval_Table,标题=ThisItem.Approval_No).DepartMentUnit,"-")).Result&"-"&Index(Split(LookUp(Approval_Table,标题=ThisItem.Approval_No).DepartMentUnit,"-"),2).Result)
+                        Tooltip: =LookUp(Approval_Table,标题=ThisItem.Approval_No).DepartMentUnit
                         Width: =100
                         Wrap: =false
                         X: =418
@@ -892,6 +894,7 @@ HomepageScreen As screen:
                         OnSelect: =Select(Parent)
                         Size: =10
                         Text: =LookUp(Approval_Table,标题=ThisItem.Approval_No).Task_Name
+                        Tooltip: =LookUp(Approval_Table,标题=ThisItem.Approval_No).Task_Name
                         Width: =276
                         Wrap: =false
                         X: =142
@@ -903,7 +906,10 @@ HomepageScreen As screen:
                         Height: =32
                         OnSelect: =Select(Parent)
                         Size: =9
-                        Text: =ThisItem.修改时间
+                        Text: |-
+                            =Text(ThisItem.修改时间,"dd/mm/yyyy HH:mm")
+                        Tooltip: |-
+                            =Text(ThisItem.修改时间,"dd/mm/yyyy HH:mm")
                         Width: =115
                         Wrap: =false
                         X: =518
@@ -1073,7 +1079,7 @@ HomepageScreen As screen:
                 RadiusBottomRight: =4
                 RadiusTopLeft: =4
                 RadiusTopRight: =4
-                Size: =11
+                Size: =10
                 Width: =370
                 X: =20
                 Y: =20

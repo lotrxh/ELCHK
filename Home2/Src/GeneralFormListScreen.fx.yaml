@@ -395,9 +395,9 @@ GeneralFormListScreen As screen:
                 SearchItems: =[]
                 SelectionColor: =glbThemePrimaryColor
                 SelectionFill: =ColorFade(Self.SelectionColor, 90%)
-                Size: =11
+                Size: =10
                 Width: =180
-                X: =335
+                X: =340
                 Y: =80
                 ZIndex: =1
 
@@ -428,9 +428,9 @@ GeneralFormListScreen As screen:
                 SearchItems: =[]
                 SelectionColor: =glbThemePrimaryColor
                 SelectionFill: =ColorFade(Self.SelectionColor, 90%)
-                Size: =11
+                Size: =10
                 Width: =180
-                X: =538
+                X: =530
                 Y: =80
                 ZIndex: =3
 
@@ -465,7 +465,7 @@ GeneralFormListScreen As screen:
                                 "FlowOrder",
                                 "FlowTaskName",
                                 "CustomerSearch",
-                                "DepartMentName"
+                                "SubmitApprover"
                             )
                         ),
                         TabGallery3_4.Selected.Value = "待我處理",
@@ -486,7 +486,7 @@ GeneralFormListScreen As screen:
                                 "FlowOrder",
                                 "FlowTaskName",
                                 "CustomerSearch",
-                                "DepartMentName"
+                                "SubmitApprover"
                             )
                         ),
                         TabGallery3_4.Selected.Value = "我已處理",
@@ -507,7 +507,7 @@ GeneralFormListScreen As screen:
                                 "FlowOrder",
                                 "FlowTaskName",
                                 "CustomerSearch",
-                                "DepartMentName"
+                                "SubmitApprover"
                             )
                         )
                     )
@@ -586,7 +586,7 @@ GeneralFormListScreen As screen:
                 FocusedBorderColor: =glbNeutralSecondaryColor
                 FocusedBorderThickness: =1
                 Height: =32
-                HintText: ="請輸入申請編號、表格編號、名稱或標簽"
+                HintText: ="請輸入申請編號、表格編號、名稱、申請人或標簽"
                 HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                 HoverFill: =ColorFade(Self.Fill, -5%)
                 PaddingBottom: =0
@@ -598,8 +598,8 @@ GeneralFormListScreen As screen:
                 RadiusBottomRight: =0
                 RadiusTopLeft: =0
                 RadiusTopRight: =0
-                Size: =11
-                Width: =290
+                Size: =10
+                Width: =310
                 X: =20
                 Y: =80
                 ZIndex: =9
@@ -635,7 +635,7 @@ GeneralFormListScreen As screen:
                     RadiusTopRight: =0
                     Size: =11
                     Width: =263
-                    X: =739
+                    X: =721
                     Y: =80
                     ZIndex: =10
 
@@ -664,9 +664,9 @@ GeneralFormListScreen As screen:
                     OnSelect: =
                     PaddingBottom: =0
                     PaddingRight: =0
-                    Size: =11
+                    Size: =10
                     Width: =120
-                    X: =882
+                    X: =864
                     Y: =80
                     ZIndex: =11
 
@@ -687,9 +687,9 @@ GeneralFormListScreen As screen:
                     InputTextPlaceholder: =
                     PaddingBottom: =0
                     PaddingRight: =0
-                    Size: =11
+                    Size: =10
                     Width: =120
-                    X: =739
+                    X: =721
                     Y: =80
                     ZIndex: =12
 
@@ -702,7 +702,7 @@ GeneralFormListScreen As screen:
                     Size: =10
                     Text: ="—"
                     Width: =16
-                    X: =866
+                    X: =848
                     Y: =80
                     ZIndex: =13
 
@@ -1149,6 +1149,7 @@ GeneralFormListScreen As screen:
                     ZIndex: =13
 
                 Label3_10 As label:
+                    Align: =Align.Center
                     Color: =glbNeutralSecondaryColor
                     Height: =48
                     OnSelect: =Select(Parent)
@@ -1291,23 +1292,23 @@ GeneralFormListScreen As screen:
                     CurrentRoleFormModelPermssion = "None"
                     ,
                     [
-                        "首頁",
-                        "申請列表",
+                        "開始申請",
+                        "申請記錄",
                         If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定"),
                         If(If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定")="系統設定",Blank(),CurrentRole || HRAO || SuperUser,"系統設定")
                         
                     ],
                     [
-                        "首頁",
+                        "開始申請",
                         "表格資料",
-                        "申請列表",
+                        "申請記錄",
                         If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定"),
                         If(If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定")="系統設定",Blank(),CurrentRole || HRAO || SuperUser,"系統設定")
                     ]
                 ),ThisRecord.Value <> Blank())
             Layout: =Layout.Vertical
             OnSelect: =
-            TemplateFill: =If(ThisItem.Value="申請列表", RGBA(102,182,227,0.2),Transparent)
+            TemplateFill: =If(ThisItem.Value="申請記錄", RGBA(102,182,227,0.2),Transparent)
             TemplatePadding: =0
             TemplateSize: =46
             Width: =240
@@ -1318,18 +1319,18 @@ GeneralFormListScreen As screen:
                 Align: =Align.Left
                 BorderColor: =RGBA(255, 255, 255, 1)
                 BorderThickness: =0
-                Color: =If(ThisItem.Value="申請列表", glbThemePrimaryColor,glbNeutralSecondaryColor)
+                Color: =If(ThisItem.Value="申請記錄", glbThemePrimaryColor,glbNeutralSecondaryColor)
                 DisabledBorderColor: =
-                Fill: =If(ThisItem.Value="申請列表", ColorFade(Self.Color, 90%),White)
+                Fill: =If(ThisItem.Value="申請記錄", ColorFade(Self.Color, 90%),White)
                 FocusedBorderThickness: =1
-                FontWeight: =If(ThisItem.Value="申請列表", FontWeight.Semibold,Normal)
+                FontWeight: =If(ThisItem.Value="申請記錄", FontWeight.Semibold,Normal)
                 Height: =46
                 HoverBorderColor: =
                 HoverColor: =ColorFade(Self.Color, -15%)
                 HoverFill: =If(ThisItem.Value<>Blank(),ColorFade(glbThemePrimaryColor, 90%))
                 OnSelect: |-
                     =If(
-                        ThisItem.Value = "首頁",
+                        ThisItem.Value = "開始申請",
                         Navigate(
                             HomepageScreen,
                             ScreenTransition.None
@@ -1348,7 +1349,7 @@ GeneralFormListScreen As screen:
                         Navigate(SystemsScreen,None,{ToUserInfoManager:"用戶管理"}),
                         //Launch("https://apps.powerapps.com/play/c030168f-5133-4c9d-8e17-3c870ba99ab4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=UserScreen"),
                     
-                        ThisItem.Value = "申請列表",
+                        ThisItem.Value = "申請記錄",
                         Navigate(
                             GeneralFormListScreen,
                             ScreenTransition.None,{ListID:1}
@@ -1374,7 +1375,7 @@ GeneralFormListScreen As screen:
                 Height: =30
                 Image: |
                     =If(
-                        ThisItem.Value = "首頁",
+                        ThisItem.Value = "開始申請",
                         首页,
                         ThisItem.Value = "表格資料",
                         表格资料,
@@ -1382,7 +1383,7 @@ GeneralFormListScreen As screen:
                         数据,
                         ThisItem.Value = "系統設定",
                         设置,
-                        ThisItem.Value = "申請列表",
+                        ThisItem.Value = "申請記錄",
                         申请列表
                     )
                 OnSelect: =Select(Parent)
