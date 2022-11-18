@@ -712,26 +712,67 @@ AdminFormListScreen As screen:
                         
                     Size: =10
                     Text: =If(ThisItem.IsSelected,If(Isenable=0,"啓用表格","停用表格"),If(ThisItem.IsEnable="0","啓用表格","停用表格"))
+                    Visible: =false
                     Width: =79
                     X: =980
                     Y: =7
                     ZIndex: =9
+
+                Toggle1_1 As toggleSwitch:
+                    Default: =If(ThisItem.IsEnable="1",true,ThisItem.IsEnable="0",false)
+                    DisabledBorderColor: =RGBA(0, 13, 75, 1)
+                    FalseFill: =RGBA(202, 202, 202, 1)
+                    FalseText: ="停用中"
+                    FocusedBorderThickness: =0
+                    Height: =27
+                    OnCheck: =
+                    OnSelect: |
+                        =If(
+                            ThisItem.ModelName in ApprovalDetailColwithFormName1.FormName,
+                            Notify(
+                                "該表單有待處理任務，當前無法停用，請處理后再停用",
+                                Warning
+                            ),
+                            If(
+                                ThisItem.IsEnable = "1",
+                                UpdateIf(
+                                    GenericFormModel,
+                                    ModelName = FormName.Text,
+                                    {IsEnable: 0}
+                                ),
+                                ThisItem.IsEnable = "0",
+                                UpdateIf(
+                                    GenericFormModel,
+                                    ModelName = FormName.Text,
+                                    {IsEnable: 1}
+                                )
+                            )
+                        );
+                        Select(Reset_button);
+                    OnUncheck: =
+                    Size: =10
+                    TrueFill: =glbLinkColor
+                    TrueText: ="使用中"
+                    Width: =102
+                    X: =938
+                    Y: =14
+                    ZIndex: =10
 
                 Group22 As group:
                     Height: =5
                     Width: =5
                     X: =40
                     Y: =40
-                    ZIndex: =10
+                    ZIndex: =11
 
-                    Icon1 As icon.Edit:
-                        Color: =RGBA(255, 255, 255, 1)
-                        Fill: =RGBA(179, 179, 179, 1)
-                        Height: =28
-                        Icon: =Icon.Edit
-                        OnSelect: =
-                        Width: =28
-                        X: =900
+                    Image5_2 As image:
+                        Height: =32
+                        Image: |-
+                            ="data:image/svg+xml," & EncodeUrl("<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' id='mdi-square-edit-outline' width='24' height='24' viewBox='0 0 24 24'><path fill='#01A8F4' d='M5,3C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19H5V5H12V3H5M17.78,4C17.61,4 17.43,4.07 17.3,4.2L16.08,5.41L18.58,7.91L19.8,6.7C20.06,6.44 20.06,6 19.8,5.75L18.25,4.2C18.12,4.07 17.95,4 17.78,4M15.37,6.12L8,13.5V16H10.5L17.87,8.62L15.37,6.12Z' /></svg>")
+                        PaddingBottom: =4
+                        PaddingTop: =4
+                        Width: =32
+                        X: =858
                         Y: =9
                         ZIndex: =7
 
@@ -740,7 +781,7 @@ AdminFormListScreen As screen:
                         BorderStyle: =BorderStyle.None
                         Color: =RGBA(0, 0, 0, 0)
                         Fill: =RGBA(0, 0, 0, 0)
-                        Height: =28
+                        Height: =32
                         HoverColor: =RGBA(0, 0, 0, 0)
                         HoverFill: =RGBA(0, 0, 0, 0)
                         OnSelect: |
@@ -776,8 +817,8 @@ AdminFormListScreen As screen:
                         PressedFill: =RGBA(0, 0, 0, 0)
                         Size: =12
                         Text: ="編輯"
-                        Width: =28
-                        X: =900
+                        Width: =32
+                        X: =858
                         Y: =9
                         ZIndex: =8
 
