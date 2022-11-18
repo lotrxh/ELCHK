@@ -7904,6 +7904,66 @@
             {
               "logicalLocations": [
                 {
+                  "fullyQualifiedName": "GeneralFormListScreen.ContainerMain.Container5_3.TaskListGallery.Icon1.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "GeneralFormListScreen.ContainerMain.Container5_3.TaskListGallery.Icon1.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "GeneralFormListScreen",
+                "type": "GeneralFormListScreen.ContainerMain.Container5_3.TaskListGallery.Icon1"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 2
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "GeneralFormListScreen.ContainerMain.Container5_3.TaskListGallery.Icon1.TabIndex"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "GeneralFormListScreen.ContainerMain.Container5_3.TaskListGallery.Icon1.TabIndex",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "TabIndex",
+                "module": "GeneralFormListScreen",
+                "type": "GeneralFormListScreen.ContainerMain.Container5_3.TaskListGallery.Icon1"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
+          "ruleIndex": 3
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
                   "fullyQualifiedName": "App.Formheight"
                 }
               ],

@@ -628,7 +628,7 @@ HomepageScreen As screen:
                     RadiusTopRight: =4
                     Size: =10
                     Text: =
-                    Tooltip: =ThisItem.ModelDescription
+                    Tooltip: ="名稱："&ThisItem.ModelName&Char(10)&"備注："&ThisItem.ModelDescription
                     Width: =Parent.TemplateWidth-10
                     X: =1
                     Y: =1
@@ -1350,7 +1350,7 @@ HomepageScreen As screen:
                     RadiusTopRight: =4
                     Size: =10
                     Text: =
-                    Tooltip: =ThisItem.ModelDescription
+                    Tooltip: ="名稱："&ThisItem.ModelName&Char(10)&"備注："&ThisItem.ModelDescription
                     Width: =Parent.TemplateWidth-10
                     X: =1
                     Y: =1

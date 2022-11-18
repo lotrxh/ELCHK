@@ -529,7 +529,7 @@ GeneralFormListScreen As screen:
                 Default: |-
                     =If(ListID=2,{Value:"待處理"})
                 Height: =40
-                Items: =["待處理","已處理","全部"]
+                Items: =["待我處理","我已處理","全部"]
                 OnSelect: |
                     =//Select(BtnLgIconOnly_4);
                 TemplatePadding: =0
@@ -764,13 +764,14 @@ GeneralFormListScreen As screen:
             ZIndex: =5
 
             Container2_2 As groupContainer.manualLayoutContainer:
-                Fill: =RGBA(247, 247, 247, 1)
+                Fill: =RGBA(255, 255, 255, 1)
                 Height: =40
                 Width: =1085
                 X: =20
                 ZIndex: =1
 
                 Label4_6 As label:
+                    Align: =Align.Center
                     Color: =glbNeutralPrimaryColor
                     PaddingBottom: =0
                     PaddingLeft: =0
@@ -782,6 +783,7 @@ GeneralFormListScreen As screen:
                     ZIndex: =1
 
                 Label4_7 As label:
+                    Align: =Align.Center
                     Color: =glbNeutralPrimaryColor
                     PaddingBottom: =0
                     PaddingLeft: =0
@@ -794,6 +796,7 @@ GeneralFormListScreen As screen:
                     ZIndex: =2
 
                 Label4_9 As label:
+                    Align: =Align.Center
                     Color: =glbNeutralPrimaryColor
                     PaddingBottom: =0
                     PaddingLeft: =0
@@ -806,6 +809,7 @@ GeneralFormListScreen As screen:
                     ZIndex: =4
 
                 Label4_10 As label:
+                    Align: =Align.Center
                     Color: =glbNeutralPrimaryColor
                     PaddingBottom: =0
                     PaddingLeft: =0
@@ -813,11 +817,12 @@ GeneralFormListScreen As screen:
                     PaddingTop: =0
                     Size: =12
                     Text: ="申請人/申請日期"
-                    Width: =128
+                    Width: =137
                     X: =509
                     ZIndex: =5
 
                 Label4_12 As label:
+                    Align: =Align.Center
                     Color: =glbNeutralPrimaryColor
                     PaddingBottom: =0
                     PaddingLeft: =0
@@ -825,11 +830,12 @@ GeneralFormListScreen As screen:
                     PaddingTop: =0
                     Size: =12
                     Text: ="狀態"
-                    Width: =74
+                    Width: =105
                     X: =771
                     ZIndex: =7
 
                 Label4_13 As label:
+                    Align: =Align.Center
                     Color: =glbNeutralPrimaryColor
                     PaddingBottom: =0
                     PaddingLeft: =0
@@ -848,80 +854,13 @@ GeneralFormListScreen As screen:
                     =If(
                         TabGallery3_4.Selected.Value = "全部",
                         AllApprovalListDataCol,
-                        TabGallery3_4.Selected.Value = "待處理",
+                        TabGallery3_4.Selected.Value = "待我處理",
                         AllPendingApprovalData,
-                        TabGallery3_4.Selected.Value = "已處理",
+                        TabGallery3_4.Selected.Value = "我已處理",
                         AllinprogressApprovalData
                     )
                 Layout: =Layout.Vertical
-                OnSelect: |-
-                    =If(
-                        ThisItem.FlowTaskName = "招聘職位申請表",
-                        If(
-                            ThisItem.TaskStatus = "001",
-                            Launch(
-                                JumpUrl&"&Screen=JobTitleFormScreen&AppIds=" & LookUp(
-                                    ApplitionJobPosition,
-                                    ApprovalId = TaskListGallery.Selected.Approval_No
-                                ).标题 & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=true"
-                            ),
-                            Launch(
-                                JumpUrl&"&Screen=JobTitleFormDetailScreen&AppIds=" & LookUp(
-                                    ApplitionJobPosition,
-                                    ApprovalId = TaskListGallery.Selected.Approval_No
-                                ).标题 & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
-                            )
-                        ),
-                        ThisItem.FlowTaskName = "假期批核人資料表",
-                        If(
-                            ThisItem.TaskStatus = "001",
-                            Launch(
-                                JumpUrlA306A111&"&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
-                                    VacationApprovalForm,
-                                    Applicant_No = TaskListGallery.Selected.Approval_No
-                                ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true"
-                            ),
-                            Launch(
-                                JumpUrlA306A111&"&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
-                                    VacationApprovalForm,
-                                    Applicant_No = TaskListGallery.Selected.Approval_No
-                                ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
-                            )
-                        ),
-                        ThisItem.FlowTaskName = "預備合約通知書(新入職)",
-                        If(
-                            ThisItem.TaskStatus = "001",
-                            Launch(
-                                JumpUrl&"&Screen=ContractNoticeForm&taskNum=" & LookUp(
-                                    ContractNotice,
-                                    ApprovalId = TaskListGallery.Selected.Approval_No
-                                ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true"
-                            ),
-                            Launch(
-                                JumpUrl&"&Screen=ContractNoticeFormDetail&taskNum=" & LookUp(
-                                    ContractNotice,
-                                    ApprovalId = TaskListGallery.Selected.Approval_No
-                                ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
-                            )
-                        ),
-                        ThisItem.FlowTaskName = "任職資源申請",
-                        Launch(
-                            JumpUrlA306A111&"&Screen=EmploymentFormDetail&taskNum=" & LookUp(
-                                EmploymentResource,
-                                ApprovalId = TaskListGallery.Selected.Approval_No
-                            ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
-                        ),
-                        With(
-                            {
-                                FormId: LookUp(
-                                    GenericFormList,
-                                    ApprovalId = ThisItem.Approval_No
-                                ).标题
-                            },
-                            Launch(JumpUrlMobileApp&"&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & TaskListGallery.Selected.Approval_No
-                            ,{},LaunchTarget.Replace)
-                        )
-                    )
+                OnSelect: =
                 TemplatePadding: =0
                 TemplateSize: =48
                 Width: =1085
@@ -930,6 +869,7 @@ GeneralFormListScreen As screen:
                 ZIndex: =2
 
                 Label3_6 As label:
+                    Align: =Align.Center
                     Color: =glbNeutralSecondaryColor
                     Height: =48
                     OnSelect: =Select(Parent)
@@ -937,7 +877,7 @@ GeneralFormListScreen As screen:
                     PaddingLeft: =0
                     PaddingRight: =0
                     PaddingTop: =0
-                    Size: =12
+                    Size: =10
                     Text: =ThisItem.FlowOrder
                     Width: =165
                     ZIndex: =1
@@ -951,6 +891,7 @@ GeneralFormListScreen As screen:
                     ZIndex: =2
 
                 Label3_7 As label:
+                    Align: =Align.Center
                     Color: =glbNeutralSecondaryColor
                     Height: =48
                     HoverColor: =glbThemePrimaryColor
@@ -959,7 +900,7 @@ GeneralFormListScreen As screen:
                     PaddingLeft: =0
                     PaddingRight: =0
                     PaddingTop: =0
-                    Size: =12
+                    Size: =10
                     Text: =Left(ThisItem.FlowOrder,4)&Char(10)&ThisItem.FlowTaskName
                     Tooltip: =ThisItem.FlowTaskName
                     Width: =200
@@ -1051,7 +992,7 @@ GeneralFormListScreen As screen:
                             "處理完成",
                             "審核中"
                         )
-                    Width: =72
+                    Width: =105
                     X: =771
                     Y: =10
                     ZIndex: =10
@@ -1104,8 +1045,8 @@ GeneralFormListScreen As screen:
                         =true
                         //If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","自助假期批核資料表"],true,false)
                     Width: =24
-                    X: =1000
-                    Y: =12
+                    X: =1006
+                    Y: =14
                     ZIndex: =11
 
                 BtnDefaultIconOnly_6 As icon.Add:
@@ -1129,17 +1070,15 @@ GeneralFormListScreen As screen:
                     PressedColor: =ColorFade(Self.BorderColor, -15%)
                     PressedFill: =ColorFade(Self.Color, 95%)
                     Visible: |-
-                        =If(
-                            ThisItem.TaskStatus = "001",
-                            true,
-                            false
-                        )
+                        =//If(ThisItem.TaskStatus="001", true , false )
+                        true
                     Width: =24
                     X: =1050
                     Y: =12
                     ZIndex: =12
 
                 Label3_8 As label:
+                    Align: =Align.Center
                     Color: =glbNeutralSecondaryColor
                     Height: =48
                     OnSelect: =Select(Parent)
@@ -1147,10 +1086,10 @@ GeneralFormListScreen As screen:
                     PaddingLeft: =0
                     PaddingRight: =0
                     PaddingTop: =0
-                    Size: =12
+                    Size: =10
                     Text: =If(CountA(Split(ThisItem.DepartMentName,"-").Result)=2,First(Split(ThisItem.DepartMentName,"-")).Result,First(Split(ThisItem.DepartMentName,"-")).Result&"-"&Index(Split(ThisItem.DepartMentName,"-"),2).Result)
                     Tooltip: =ThisItem.DepartMentName
-                    Width: =100
+                    Width: =123
                     Wrap: =false
                     X: =370
                     ZIndex: =13
@@ -1163,16 +1102,17 @@ GeneralFormListScreen As screen:
                     PaddingLeft: =0
                     PaddingRight: =0
                     PaddingTop: =0
-                    Size: =12
+                    Size: =10
                     Text: |-
                         =First(Split(ThisItem.SubmitApprover,"@")).Result&Char(10)&Text(ThisItem.FlowCreateDate,"dd/mm/yyyy HH:mm")
                     Tooltip: =First(Split(ThisItem.SubmitApprover,"@")).Result
-                    Width: =141
+                    Width: =137
                     Wrap: =false
                     X: =509
                     ZIndex: =15
 
                 Label3_12 As label:
+                    Align: =Align.Center
                     Color: =glbNeutralSecondaryColor
                     Height: =48
                     OnSelect: =Select(Parent)
@@ -1203,10 +1143,86 @@ GeneralFormListScreen As screen:
                             )
                         */
                     Tooltip: =ThisItem.CustomerSearch
-                    Width: =101
+                    Width: =111
                     Wrap: =false
                     X: =660
                     ZIndex: =17
+
+                Icon1 As icon.View:
+                    Height: =24
+                    Icon: =Icon.View
+                    OnSelect: |-
+                        =If(
+                            ThisItem.FlowTaskName = "招聘職位申請表",
+                            If(
+                                ThisItem.TaskStatus = "001",
+                                Launch(
+                                    JumpUrl&"&Screen=JobTitleFormScreen&AppIds=" & LookUp(
+                                        ApplitionJobPosition,
+                                        ApprovalId = TaskListGallery.Selected.Approval_No
+                                    ).标题 & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=true"
+                                ),
+                                Launch(
+                                    JumpUrl&"&Screen=JobTitleFormDetailScreen&AppIds=" & LookUp(
+                                        ApplitionJobPosition,
+                                        ApprovalId = TaskListGallery.Selected.Approval_No
+                                    ).标题 & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
+                                )
+                            ),
+                            ThisItem.FlowTaskName = "假期批核人資料表",
+                            If(
+                                ThisItem.TaskStatus = "001",
+                                Launch(
+                                    JumpUrlA306A111&"&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
+                                        VacationApprovalForm,
+                                        Applicant_No = TaskListGallery.Selected.Approval_No
+                                    ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true"
+                                ),
+                                Launch(
+                                    JumpUrlA306A111&"&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
+                                        VacationApprovalForm,
+                                        Applicant_No = TaskListGallery.Selected.Approval_No
+                                    ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
+                                )
+                            ),
+                            ThisItem.FlowTaskName = "預備合約通知書(新入職)",
+                            If(
+                                ThisItem.TaskStatus = "001",
+                                Launch(
+                                    JumpUrl&"&Screen=ContractNoticeForm&taskNum=" & LookUp(
+                                        ContractNotice,
+                                        ApprovalId = TaskListGallery.Selected.Approval_No
+                                    ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true"
+                                ),
+                                Launch(
+                                    JumpUrl&"&Screen=ContractNoticeFormDetail&taskNum=" & LookUp(
+                                        ContractNotice,
+                                        ApprovalId = TaskListGallery.Selected.Approval_No
+                                    ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
+                                )
+                            ),
+                            ThisItem.FlowTaskName = "任職資源申請",
+                            Launch(
+                                JumpUrlA306A111&"&Screen=EmploymentFormDetail&taskNum=" & LookUp(
+                                    EmploymentResource,
+                                    ApprovalId = TaskListGallery.Selected.Approval_No
+                                ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
+                            ),
+                            With(
+                                {
+                                    FormId: LookUp(
+                                        GenericFormList,
+                                        ApprovalId = ThisItem.Approval_No
+                                    ).标题
+                                },
+                                Launch(JumpUrlMobileApp&"&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & TaskListGallery.Selected.Approval_No
+                                ,{},LaunchTarget.Replace)
+                            )
+                        )
+                    Width: =24
+                    X: =954
+                    Y: =14
+                    ZIndex: =18
 
     Container3_7 As groupContainer.manualLayoutContainer:
         Fill: =RGBA(255, 255, 255, 1)

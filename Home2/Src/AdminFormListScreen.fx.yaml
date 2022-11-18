@@ -484,13 +484,13 @@ AdminFormListScreen As screen:
             ZIndex: =2
 
             Container2_3 As groupContainer.manualLayoutContainer:
-                Fill: =RGBA(247, 247, 247, 1)
+                Fill: =RGBA(255, 255, 255, 1)
                 Height: =40
-                Width: =1142
-                X: =20
+                Width: =1101
                 ZIndex: =1
 
                 Label4_14 As label:
+                    Align: =Align.Center
                     Color: =glbNeutralPrimaryColor
                     PaddingBottom: =0
                     PaddingLeft: =0
@@ -498,11 +498,12 @@ AdminFormListScreen As screen:
                     PaddingTop: =0
                     Size: =12
                     Text: ="名稱"
-                    Width: =89
+                    Width: =212
                     X: =133
                     ZIndex: =2
 
                 Label4_16 As label:
+                    Align: =Align.Center
                     Color: =glbNeutralPrimaryColor
                     PaddingBottom: =0
                     PaddingLeft: =0
@@ -510,11 +511,12 @@ AdminFormListScreen As screen:
                     PaddingTop: =0
                     Size: =12
                     Text: ="類型/單位"
-                    Width: =178
+                    Width: =200
                     X: =496
                     ZIndex: =3
 
                 Label4_15 As label:
+                    Align: =Align.Center
                     Color: =glbNeutralPrimaryColor
                     PaddingBottom: =0
                     PaddingLeft: =0
@@ -522,11 +524,12 @@ AdminFormListScreen As screen:
                     PaddingTop: =0
                     Size: =12
                     Text: ="部門/服務"
-                    Width: =114
+                    Width: =151
                     X: =345
                     ZIndex: =4
 
                 Label4_17 As label:
+                    Align: =Align.Center
                     Color: =glbNeutralPrimaryColor
                     PaddingBottom: =0
                     PaddingLeft: =0
@@ -534,11 +537,12 @@ AdminFormListScreen As screen:
                     PaddingTop: =0
                     Size: =12
                     Text: ="修改人及日期"
-                    Width: =117
+                    Width: =120
                     X: =696
                     ZIndex: =5
 
                 Label4_19 As label:
+                    Align: =Align.Center
                     Color: =glbNeutralPrimaryColor
                     PaddingBottom: =0
                     PaddingLeft: =0
@@ -546,7 +550,7 @@ AdminFormListScreen As screen:
                     PaddingTop: =0
                     Size: =12
                     Text: ="編號"
-                    Width: =74
+                    Width: =82
                     X: =18
                     ZIndex: =7
 
@@ -589,8 +593,8 @@ AdminFormListScreen As screen:
                     
                 TemplatePadding: =0
                 TemplateSize: =48
-                Width: =1093
-                X: =20
+                Width: =1100
+                X: =1
                 Y: =40
                 ZIndex: =1
 
@@ -603,24 +607,26 @@ AdminFormListScreen As screen:
                     ZIndex: =1
 
                 FormDepartment As label:
+                    Align: =Align.Center
                     Color: =glbNeutralSecondaryColor
-                    Height: =22
+                    Height: =18
                     OnSelect: =Select(Parent)
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
                     PaddingTop: =0
-                    Size: =12
+                    Size: =10
                     Text: =ThisItem.ModelDepartment
                     Tooltip: =ThisItem.ModelDepartment
                     VerticalAlign: =VerticalAlign.Top
-                    Width: =142
+                    Width: =151
                     Wrap: =false
                     X: =345
                     Y: =14
                     ZIndex: =2
 
                 FormName As label:
+                    Align: =Align.Center
                     Color: =glbNeutralSecondaryColor
                     Height: =20
                     HoverColor: =glbLinkColor
@@ -629,11 +635,11 @@ AdminFormListScreen As screen:
                     PaddingLeft: =0
                     PaddingRight: =0
                     PaddingTop: =0
-                    Size: =12
+                    Size: =10
                     Text: =ThisItem.ModelName
                     Tooltip: =ThisItem.ModelName
                     VerticalAlign: =VerticalAlign.Top
-                    Width: =206
+                    Width: =212
                     Wrap: =false
                     X: =133
                     Y: =14
@@ -647,18 +653,20 @@ AdminFormListScreen As screen:
                     PaddingLeft: =0
                     PaddingRight: =0
                     PaddingTop: =0
-                    Size: =12
+                    Size: =10
                     Text: |-
                         =//ThisItem.'Modified By'.DisplayName & Char(13) & ThisItem.Modified;
                         ThisItem.修改者.DisplayName&Char(10)&Text(ThisItem.修改时间,"dd/mm/yyyy hh:mm" )
                     Tooltip: =ThisItem.修改者.DisplayName
                     VerticalAlign: =VerticalAlign.Top
-                    Width: =153
+                    Width: =120
                     Wrap: =false
                     X: =696
+                    Y: =7
                     ZIndex: =4
 
                 FormNumber As label:
+                    Align: =Align.Center
                     Color: =glbNeutralSecondaryColor
                     Height: =22
                     OnSelect: =Select(Parent)
@@ -666,7 +674,7 @@ AdminFormListScreen As screen:
                     PaddingLeft: =0
                     PaddingRight: =0
                     PaddingTop: =0
-                    Size: =12
+                    Size: =10
                     Text: =ThisItem.ModelFlowNumber
                     VerticalAlign: =VerticalAlign.Top
                     Width: =82
@@ -676,14 +684,15 @@ AdminFormListScreen As screen:
                     ZIndex: =5
 
                 FormType As label:
+                    Align: =Align.Center
                     Color: =glbNeutralSecondaryColor
-                    Height: =20
+                    Height: =18
                     OnSelect: =Select(Parent)
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
                     PaddingTop: =0
-                    Size: =12
+                    Size: =10
                     Text: =ThisItem.ModelType
                     Tooltip: =ThisItem.ModelType
                     VerticalAlign: =VerticalAlign.Top
@@ -724,7 +733,7 @@ AdminFormListScreen As screen:
                     FalseFill: =RGBA(202, 202, 202, 1)
                     FalseText: ="停用中"
                     FocusedBorderThickness: =0
-                    Height: =27
+                    Height: =24
                     OnCheck: =
                     OnSelect: |
                         =If(
@@ -755,7 +764,7 @@ AdminFormListScreen As screen:
                     TrueText: ="使用中"
                     Width: =102
                     X: =938
-                    Y: =14
+                    Y: =12
                     ZIndex: =10
 
                 Group22 As group:
@@ -827,7 +836,6 @@ AdminFormListScreen As screen:
             Height: =50
             Width: =1101
             X: =12
-            Y: =15
             ZIndex: =6
 
             Label9_15 As label:
