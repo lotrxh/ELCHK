@@ -8615,6 +8615,36 @@
           },
           "ruleId": "app-ScreenHasManyControls",
           "ruleIndex": 11
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "GeneralFormListScreen.ListID"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "GeneralFormListScreen.ListID",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "ListID",
+                "module": "GeneralFormListScreen",
+                "type": "GeneralFormListScreen"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "app-UnusedVariables",
+          "ruleIndex": 7
         }
       ],
       "tool": {

@@ -351,7 +351,7 @@ GeneralFormListScreen As screen:
                 )
             )
         );
-        Select(BtnLgIconOnly_4);
+        Select(BtnSecondIconOnly_4);
 
     ContainerMain As groupContainer.manualLayoutContainer:
         Fill: =RGBA(247, 247, 247, 1)
@@ -449,7 +449,7 @@ GeneralFormListScreen As screen:
                     =If(
                         TabGallery3_4.Selected.Value = "全部",
                         ClearCollect(
-                            AllApprovalListDataCol,
+                            AllApprovalDataCol,
                             Search(
                                 Filter(
                                     SortByColumns(
@@ -464,10 +464,11 @@ GeneralFormListScreen As screen:
                                 TextInput2_13.Text,
                                 "FlowOrder",
                                 "FlowTaskName",
-                                "CustomerSearch"
+                                "CustomerSearch",
+                                "DepartMentName"
                             )
                         ),
-                        TabGallery3_4.Selected.Value = "待處理",
+                        TabGallery3_4.Selected.Value = "待我處理",
                         ClearCollect(
                             AllPendingApprovalData,
                             Search(
@@ -484,10 +485,11 @@ GeneralFormListScreen As screen:
                                 TextInput2_13.Text,
                                 "FlowOrder",
                                 "FlowTaskName",
-                                "CustomerSearch"
+                                "CustomerSearch",
+                                "DepartMentName"
                             )
                         ),
-                        TabGallery3_4.Selected.Value = "已處理",
+                        TabGallery3_4.Selected.Value = "我已處理",
                         ClearCollect(
                             AllinprogressApprovalData,
                             Search(
@@ -504,7 +506,8 @@ GeneralFormListScreen As screen:
                                 TextInput2_13.Text,
                                 "FlowOrder",
                                 "FlowTaskName",
-                                "CustomerSearch"
+                                "CustomerSearch",
+                                "DepartMentName"
                             )
                         )
                     )
@@ -520,14 +523,11 @@ GeneralFormListScreen As screen:
             LineRectangle_1 As rectangle:
                 Fill: =RGBA(219, 219, 219, 1)
                 Height: =1
-                Width: =1085
-                X: =20
+                Width: =1105
                 Y: =54
                 ZIndex: =7
 
             TabGallery3_4 As gallery.galleryHorizontal:
-                Default: |-
-                    =If(ListID=2,{Value:"待處理"})
                 Height: =40
                 Items: =["待我處理","我已處理","全部"]
                 OnSelect: |
@@ -758,7 +758,7 @@ GeneralFormListScreen As screen:
         Container5_3 As groupContainer.manualLayoutContainer:
             Fill: =RGBA(255, 255, 255, 1)
             Height: =608
-            Width: =1182
+            Width: =1105
             X: =12
             Y: =146
             ZIndex: =5
@@ -830,7 +830,7 @@ GeneralFormListScreen As screen:
                     PaddingTop: =0
                     Size: =12
                     Text: ="狀態"
-                    Width: =105
+                    Width: =130
                     X: =771
                     ZIndex: =7
 
@@ -853,7 +853,7 @@ GeneralFormListScreen As screen:
                 Items: |-
                     =If(
                         TabGallery3_4.Selected.Value = "全部",
-                        AllApprovalListDataCol,
+                        AllApprovalDataCol,
                         TabGallery3_4.Selected.Value = "待我處理",
                         AllPendingApprovalData,
                         TabGallery3_4.Selected.Value = "我已處理",
@@ -915,15 +915,15 @@ GeneralFormListScreen As screen:
                     BorderThickness: =1
                     Color: |-
                         =If(
-                            lblTag_7.Text = "處理完成",
+                            lblTag_7.Text = "執行完成",
                             glbSuccessColor,
                             lblTag_7.Text = "準備中",//"Success",
                             glbThemeSecondaryColor,
-                            lblTag_7.Text = "處理中",//"Processing",
+                            "待" in lblTag_7.Text,//"Processing",
                             glbLinkColor,
                             lblTag_7.Text = "審核中",
                             glbWarningColor,
-                            lblTag_7.Text = "已拒絕",
+                            lblTag_7.Text = "被拒絕",
                             glbErrorColor
                         )
                     Fill: =ColorFade(Self.Color, 90%)
@@ -934,18 +934,9 @@ GeneralFormListScreen As screen:
                     PaddingLeft: =0
                     PaddingRight: =0
                     PaddingTop: =0
-                    Size: =11.5
+                    Size: =10
                     Text: |-
                         =If(
-                            !("提交" in Filter(
-                                ApprovalDetail_Table,
-                                Approval_No = ThisItem.Approval_No,
-                                TaskStatus = "004"
-                            ).ActionNode) && !("006" in Filter(
-                                ApprovalDetail_Table,
-                                Approval_No = ThisItem.Approval_No
-                            ).TaskStatus),
-                            "準備中",
                             First(
                                 SortByColumns(
                                     Filter(
@@ -956,18 +947,84 @@ GeneralFormListScreen As screen:
                                     "Priortty",
                                     Descending
                                 )
-                            ).ActionNode = "跟進" || Index(
+                            ).ActionNode = "填寫", "待：填寫",
+                            First(
                                 SortByColumns(
                                     Filter(
                                         ApprovalDetail_Table,
-                                        Approval_No = ThisItem.Approval_No
+                                        Approval_No = ThisItem.Approval_No,
+                                        TaskStatus = "002"
                                     ),
                                     "Priortty",
                                     Descending
-                                ),
-                                2
-                            ).TaskStatus = "005",
-                            "處理中",
+                                )
+                            ).ActionNode = "提交", "待：提交",
+                            First(
+                                SortByColumns(
+                                    Filter(
+                                        ApprovalDetail_Table,
+                                        Approval_No = ThisItem.Approval_No,
+                                        TaskStatus = "002"
+                                    ),
+                                    "Priortty",
+                                    Descending
+                                )
+                            ).ActionNode = "補充資料", "待：補充資料",
+                            First(
+                                SortByColumns(
+                                    Filter(
+                                        ApprovalDetail_Table,
+                                        Approval_No = ThisItem.Approval_No,
+                                        TaskStatus = "002"
+                                    ),
+                                    "Priortty",
+                                    Descending
+                                )
+                            ).ActionNode = "檢查", "待：檢查",
+                            First(
+                                SortByColumns(
+                                    Filter(
+                                        ApprovalDetail_Table,
+                                        Approval_No = ThisItem.Approval_No,
+                                        TaskStatus = "002"
+                                    ),
+                                    "Priortty",
+                                    Descending
+                                )
+                            ).ActionNode = "簽批", "待：簽批",
+                            First(
+                                SortByColumns(
+                                    Filter(
+                                        ApprovalDetail_Table,
+                                        Approval_No = ThisItem.Approval_No,
+                                        TaskStatus = "002"
+                                    ),
+                                    "Priortty",
+                                    Descending
+                                )
+                            ).ActionNode = "助理總幹事審批", "待：助理總幹事審批",
+                            First(
+                                SortByColumns(
+                                    Filter(
+                                        ApprovalDetail_Table,
+                                        Approval_No = ThisItem.Approval_No,
+                                        TaskStatus = "002"
+                                    ),
+                                    "Priortty",
+                                    Descending
+                                )
+                            ).ActionNode = "總幹事審批", "待：總幹事審批",
+                            First(
+                                SortByColumns(
+                                    Filter(
+                                        ApprovalDetail_Table,
+                                        Approval_No = ThisItem.Approval_No,
+                                        TaskStatus = "002"
+                                    ),
+                                    "Priortty",
+                                    Descending
+                                )
+                            ).ActionNode = "跟進", "待：跟進",
                             First(
                                 SortByColumns(
                                     Filter(
@@ -977,8 +1034,7 @@ GeneralFormListScreen As screen:
                                     "Priortty",
                                     Descending
                                 )
-                            ).TaskStatus = "000",
-                            "已拒絕",
+                            ).TaskStatus = "000","被拒絕",
                             First(
                                 SortByColumns(
                                     Filter(
@@ -988,11 +1044,9 @@ GeneralFormListScreen As screen:
                                     "Priortty",
                                     Descending
                                 )
-                            ).TaskStatus = "006",
-                            "處理完成",
-                            "審核中"
+                            ).TaskStatus = "006","執行完成"
                         )
-                    Width: =105
+                    Width: =130
                     X: =771
                     Y: =10
                     ZIndex: =10
