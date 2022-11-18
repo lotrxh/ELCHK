@@ -762,13 +762,13 @@
 
     MainflowContainer As groupContainer.verticalAutoLayoutContainer:
         Fill: =RGBA(242, 242, 242, 1)
-        Height: =648
+        Height: =If(HeaderContainer_4.Visible=true,648,711)
         LayoutDirection: =LayoutDirection.Vertical
         LayoutGap: =10
         LayoutMode: =LayoutMode.Auto
         LayoutOverflowY: =LayoutOverflow.Scroll
         Width: =Parent.Width
-        Y: =63
+        Y: =If(HeaderContainer_4.Visible=true,63,0)
         ZIndex: =5
 
         InfoContainer As groupContainer.horizontalAutoLayoutContainer:
@@ -788,7 +788,7 @@
                 AlignInContainer: =AlignInContainer.SetByContainer
                 Fill: =RGBA(255, 255, 255, 1)
                 FillPortions: =0
-                Height: =BtnPrimaryLg_10.Y+BtnPrimaryLg_10.Height
+                Height: =If(HeaderContainer_4.Visible=true,BtnPrimaryLg_10.Y+BtnPrimaryLg_10.Height,HeaderContainer_6.Y+HeaderContainer_6.Height)
                 LayoutAlignItems: =LayoutAlignItems.Center
                 LayoutGap: =5
                 LayoutMinHeight: =100
@@ -808,9 +808,66 @@
                            Parent.Width-40,
                            ScreenSize.Large,
                            Parent.Width-40,
-                           1200
+                           //1200
+                           Parent.Width
                       )
                 ZIndex: =1
+
+                HeaderContainer_6 As groupContainer.manualLayoutContainer:
+                    AlignInContainer: =AlignInContainer.Center
+                    Fill: =RGBA(255, 255, 255, 1)
+                    FillPortions: =0
+                    Height: =60
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    Visible: =If(App.ActiveScreen.Width<600,false,true)
+                    Width: =250
+                    ZIndex: =1
+
+                    Icon2_7 As icon.Home:
+                        Color: =RGBA(39, 67, 125, 1)
+                        Fill: =RGBA(255, 255, 255, 1)
+                        Height: =30
+                        Icon: =Icon.BackArrow
+                        OnSelect: |-
+                            =//Launch(JumpUrlClientAPP&"&Screen=HomepageScreen",{},LaunchTarget.Replace);
+                            Navigate(HomePageScreen,ScreenTransition.None)
+                        Width: =30
+                        X: =6
+                        Y: =15
+                        ZIndex: =6
+
+                    Image1_4 As image:
+                        Height: =30
+                        Image: =logo_单图标
+                        OnSelect: |-
+                            =//Launch(JumpUrlClientAPP&"&Screen=HomepageScreen",{},LaunchTarget.Replace);
+                            Navigate(HomePageScreen,ScreenTransition.None)
+                        Width: =30
+                        X: =47
+                        Y: =15
+                        ZIndex: =7
+
+                    Label1_77 As label:
+                        Fill: =RGBA(255, 255, 255, 1)
+                        Height: =60
+                        OnSelect: |-
+                            =//Launch(JumpUrlClientAPP&"&Screen=HomepageScreen",{},LaunchTarget.Replace);
+                            Navigate(HomePageScreen,ScreenTransition.None)
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =8
+                        Text: |-
+                            =If(App.ActiveScreen.Width<600,"ELCSS-HK
+                            eProcessing System (ePS)",
+                            "ELCSS-HK
+                            eProcessing System (ePS)
+                            版本：1.0.0")
+                        Width: =146
+                        X: =88
+                        ZIndex: =8
 
                 FormNameLabel_1 As label:
                     Color: =glbNeutralPrimaryColor
@@ -826,7 +883,7 @@
                     Text: =First(EditUserForm).ModelFlowNumber&" "&First(EditUserForm).ModelName
                     Width: =300
                     X: =58
-                    ZIndex: =1
+                    ZIndex: =2
 
                 BtnPrimaryLg_10 As button:
                     BorderColor: =Self.Fill
@@ -1406,7 +1463,7 @@
                     Width: =100
                     X: =983
                     Y: =12
-                    ZIndex: =2
+                    ZIndex: =3
 
             InfoContainer12_2 As groupContainer.horizontalAutoLayoutContainer:
                 AlignInContainer: =AlignInContainer.SetByContainer
@@ -3416,35 +3473,36 @@
     HeaderContainer_4 As groupContainer.manualLayoutContainer:
         Fill: =RGBA(255, 255, 255, 1)
         Height: =60
+        Visible: =If(App.ActiveScreen.Width<600,true,false)
         Width: =Parent.Width
         ZIndex: =6
 
         Icon2_6 As icon.Home:
             Color: =RGBA(39, 67, 125, 1)
             Fill: =RGBA(255, 255, 255, 1)
-            Height: =60
+            Height: =30
             Icon: =Icon.BackArrow
             OnSelect: |-
                 =//Launch(JumpUrlClientAPP&"&Screen=HomepageScreen",{},LaunchTarget.Replace);
                 Navigate(HomePageScreen,ScreenTransition.None)
-            PaddingBottom: =14
-            PaddingTop: =14
-            Width: =60
+            Width: =30
+            X: =6
+            Y: =15
             ZIndex: =6
 
         Image1_1 As image:
-            Height: =60
+            Height: =30
             Image: =logo_单图标
             OnSelect: |-
                 =//Launch(JumpUrlClientAPP&"&Screen=HomepageScreen",{},LaunchTarget.Replace);
                 Navigate(HomePageScreen,ScreenTransition.None)
-            Width: =40
-            X: =60
+            Width: =30
+            X: =42
+            Y: =15
             ZIndex: =7
 
         Label1_74 As label:
             Fill: =RGBA(255, 255, 255, 1)
-            FontWeight: =FontWeight.Semibold
             Height: =60
             OnSelect: |-
                 =//Launch(JumpUrlClientAPP&"&Screen=HomepageScreen",{},LaunchTarget.Replace);
@@ -3453,15 +3511,15 @@
             PaddingLeft: =0
             PaddingRight: =0
             PaddingTop: =0
-            Size: =12
+            Size: =10
             Text: |-
                 =If(App.ActiveScreen.Width<600,"ELCSS-HK
                 eProcessing System (ePS)",
                 "ELCSS-HK
                 eProcessing System (ePS)
                 版本：1.0.0")
-            Width: =509
-            X: =111
+            Width: =158
+            X: =83
             ZIndex: =8
 
     SelectUserContainer_2 As groupContainer.horizontalAutoLayoutContainer:
