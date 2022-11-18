@@ -1385,11 +1385,8 @@
                                     {HistoryList: ApprovalIDNumber}
                                 ),
                         //下一节点处理人不是当前用户时，返回認爲列表
-                                Launch(
-                                    JumpUrlClientAPP & "&Screen=GeneralFormListScreen",
-                                    {},
-                                    LaunchTarget.Replace
-                                )
+                                //Launch(JumpUrlClientAPP & "&Screen=GeneralFormListScreen",{},LaunchTarget.Replace)
+                                Navigate(HomePageScreen,ScreenTransition.None)
                             );
                             
                         );
@@ -1611,7 +1608,7 @@
                     RadiusTopLeft: =2
                     RadiusTopRight: =2
                     Size: =9
-                    Text: ="模板下載"
+                    Text: ="下載表格"
                     Width: =100
                     X: =Parent.Width-Self.Width-1
                     Y: =1
@@ -1631,7 +1628,7 @@
                     HoverFill: =RGBA(255, 255, 255, 1)
                     OnSelect: |-
                         =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text)).附件).AbsoluteUri)
-                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text&"TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text&"TT")).附件).DisplayName & "?web=1")
+                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType="填寫指引TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType="填寫指引TT")).附件).DisplayName & "?web=1")
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
@@ -1644,7 +1641,7 @@
                     RadiusTopLeft: =2
                     RadiusTopRight: =2
                     Size: =9
-                    Text: ="填寫指引"
+                    Text: ="下載指引"
                     Width: =100
                     X: =Parent.Width-Self.Width-1
                     Y: =1
@@ -1664,7 +1661,7 @@
                     HoverFill: =RGBA(255, 255, 255, 1)
                     OnSelect: |-
                         =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text)).附件).AbsoluteUri)
-                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text&"TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text&"TT")).附件).DisplayName & "?web=1")
+                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType="示範表格TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType="示範表格TT")).附件).DisplayName & "?web=1")
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
@@ -1677,7 +1674,7 @@
                     RadiusTopLeft: =2
                     RadiusTopRight: =2
                     Size: =9
-                    Text: ="示範表格"
+                    Text: ="下載範例"
                     Width: =100
                     X: =Parent.Width-Self.Width-1
                     Y: =1
@@ -2396,7 +2393,7 @@
                     PressedColor: =glbNeutralPrimaryColor
                     PressedFill: =
                     Size: =10
-                    Text: ="以當前賬戶提交申請"
+                    Text: ="遞交申請，申請表將不能被編輯"
                     Visible: =If(FlowType="通用流程" || FlowType="預設流程",true,false)
                     X: =40
                     Y: =238
