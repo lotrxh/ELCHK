@@ -155,7 +155,12 @@ GeneralFormListScreen As screen:
                     LookUp(
                         GenericFormList,
                         ApprovalId = Approval_No
-                    ).FilterLabel
+                    ).FilterLabel,
+                    "ActionNode",
+                    LookUp(
+                        SearchPendingData,
+                        Approval_No = Approval_No
+                    ).ActionNode
                 )
             )
         );
@@ -928,7 +933,7 @@ GeneralFormListScreen As screen:
                         )
                     Fill: =ColorFade(Self.Color, 90%)
                     FocusedBorderThickness: =2
-                    Height: =28
+                    Height: =38
                     OnSelect: =
                     PaddingBottom: =0
                     PaddingLeft: =0
@@ -1045,10 +1050,20 @@ GeneralFormListScreen As screen:
                                     Descending
                                 )
                             ).TaskStatus = "006","執行完成"
-                        )
+                        )&If(Index(
+                                SortByColumns(
+                                    Filter(
+                                        ApprovalDetail_Table,
+                                        Approval_No = ThisItem.Approval_No
+                                    ),
+                                    "Priortty",
+                                    Descending
+                                ),
+                                2
+                            ).TaskStatus = "005",Char(10)&"（被退回）","")
                     Width: =130
                     X: =771
-                    Y: =10
+                    Y: =5
                     ZIndex: =10
 
                 BtnDefaultIconOnly_5 As icon.Add:
