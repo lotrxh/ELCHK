@@ -86,12 +86,12 @@ AdminFormDetailScreen As screen:
                     =If(
                         IsEmpty(drpFilter_Department.SelectedItems) || IsEmpty(drpFilter_FormType.SelectedItems) || IsBlank(TextInput_FormName.Text)  || IsBlank(TextInput_FormNumber) || Last(Attachment_Form.Attachments).Name = Blank() || Radio_flowtype.SelectedText.Value = Blank() || (Radio_password.Visible = true && Radio_password.SelectedText.Value = Blank()) || (Radio_attachment.Visible = true && Radio_attachment.SelectedText.Value = Blank()),
                         Notify(
-                            "必选项不能为空",
+                            "必選項不能留空。",
                             NotificationType.Error,3000
                         ),
                         !IsMatch(TextInput_FormName.Text,MultipleNonSpaces),
                         Notify(
-                            "表格名稱格式有誤，請刪除空格",
+                            "表格名稱格式有誤，請刪除空格。",
                             NotificationType.Error,3000
                         ),
                         //編輯表單模板，部門，類型，表格標號為不可更改項
@@ -101,7 +101,7 @@ AdminFormDetailScreen As screen:
                             If(
                                 TextInput_FormVersion.Text = First(EditForm).ModelVersion,
                                 Notify(
-                                    "與歷史版本相同，請修改版本號",
+                                    "與歷史版本相同，請修改版本號。",
                                     NotificationType.Error,3000
                                 ),
                                 UpdateIf(
@@ -581,7 +581,7 @@ AdminFormDetailScreen As screen:
                                     "該表格編號已經存在，請更換！",
                                     Warning,3000
                                 ),
-                                If(IsMatch(TextInput_FormNumber.Text,Letter&Digit&Digit&Digit),
+                                If(IsMatch(TextInput_FormNumber.Text,Letter&Digit&Digit&Digit&Digit),
                                 Set(
                                     GenericFormModeGuid,
                                     GUID()
@@ -992,7 +992,7 @@ AdminFormDetailScreen As screen:
                                     ScreenTransition.Fade
                                 );
                                 ,
-                                Notify("表格編號格式錯誤，請輸入字母+3個數字",Warning,3000))
+                                Notify("表格編號格式錯誤，請輸入字母+4個數字",Warning,3000))
                             )
                         )
                     )
@@ -1160,11 +1160,11 @@ AdminFormDetailScreen As screen:
                 FocusedBorderColor: =glbNeutralSecondaryColor
                 FocusedBorderThickness: =1
                 Height: =32
-                HintText: ="例子：A111"
+                HintText: ="例子：A1111"
                 HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                 HoverFill: =ColorFade(Self.Fill, -5%)
                 MaxLength: =50
-                OnChange: =If(IsMatch(TextInput_FormNumber.Text,Letter&Digit&Digit&Digit),If(TextInput_FormNumber in GenericFormModel.ModelFlowNumber||TextInput_FormNumber.Text="A103"||TextInput_FormNumber.Text="A104"||TextInput_FormNumber.Text="A111"||TextInput_FormNumber.Text="A306",Notify("該表格編號已經存在，保存會覆蓋原有表格",Warning,3000),Notify("格式正確",Success,3000)),Notify("格式錯誤，請輸入字母+3個數字",Warning,3000))
+                OnChange: =If(IsMatch(TextInput_FormNumber.Text,Letter&Digit&Digit&Digit&Digit),If(TextInput_FormNumber in GenericFormModel.ModelFlowNumber||TextInput_FormNumber.Text="A103"||TextInput_FormNumber.Text="A104"||TextInput_FormNumber.Text="A111"||TextInput_FormNumber.Text="A306",Notify("該表格編號已經存在，保存會覆蓋原有表格",Warning,3000),Notify("格式正確",Success,3000)),Notify("格式錯誤，請輸入字母+4個數字",Warning,3000))
                 PaddingBottom: =0
                 PaddingLeft: =10
                 PaddingRight: =0
