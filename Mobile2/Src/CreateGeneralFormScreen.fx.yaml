@@ -117,7 +117,7 @@
     BottomContainer As groupContainer.manualLayoutContainer:
         Fill: =White
         Height: =60
-        Visible: =If(First(EditUserForm).FlowType<>"範本" && App.ActiveScreen.Width>600,true,false)
+        Visible: =If(First(EditUserForm).FlowType="範本" || App.ActiveScreen.Width<600,false,true)
         Width: =Parent.Width
         Y: =Parent.Height-Self.Height
         ZIndex: =2
@@ -194,7 +194,7 @@
                     If(
                         (Attachment_Excel.Visible = true && Last(Attachment_Excel.Attachments).Name = Blank()) || (Attachment_Zip.Visible = true && Last(Attachment_Zip.Attachments).Name = Blank()) || (Label6.Visible = true && IsBlank(TextInput_FormPWD) && IsBlank(TextInput_FormPWD_1)) || (Label6_1.Visible = true && IsBlank(TextInput_zipPWD) && IsBlank(TextInput_zipPWD_1)) || IsEmpty(drpFilterDepartment_1.SelectedItems) || (FlowType = "預設流程" && (Dropdown1_9.Selected.Result = Blank() || Label1_155.Text = "/")) || (FlowType = "通用流程" && (Dropdown1_5.Selected.Result = Blank() || Label1_137.Text = "/")) || (FlowType = "部門簡單流程" && Label1_153.Text = "/"),
                         Notify(
-                            "必需項不能爲空，處理行動及處理人不能爲空",
+                            "必填項目不能留空，處理行動及處理人不能留空。",
                             NotificationType.Error
                         ),
                         Set(
@@ -375,10 +375,10 @@
                                     ),
                                     标题: ApprovalGuid,
                                     Application_Status: "審批中",
-                                    DepartMentName: Label1_130.Text,
-                                    FormType: Label1_132.Text,
+                                    DepartMentName: First(EditUserForm).ModelDepartment,
+                                    FormType: First(EditUserForm).ModelType,
                                     'Operator ': User().Email,
-                                    Task_Name: FormNameLabel_1.Text,
+                                    Task_Name: First(EditUserForm).ModelName,
                                     DepartMentUnit: drpFilterDepartment_1.Selected.Result
                                 }
                             )
@@ -412,7 +412,7 @@
                             GUID()
                         );
                         ClearCollect(
-                            NewUserForm,
+                            NewUserForm,//創建NewUserForm集合用作後續更新list-GenericUploadAttachMentFile中的FormId
                             Patch(
                                 GenericFormList,
                                 Defaults(GenericFormList),
@@ -420,19 +420,20 @@
                                     标题: GenericFormlistGuid,
                                     ApprovalId: ApprovalGuid,
                                     ModelId: First(EditUserForm).标题,
-                                    ModelName: FormNameLabel_1.Text,
+                                    ModelName: First(EditUserForm).ModelName,
                                     UploadFileId: Last(GenericUploadAttachMentFile).标题,
                                     //目前取的是最后一个附件的id
                                     MarkValue: TextInput_FormMark.Text,
-                                    FormType: Label1_132.Text,
+                                    FormType: First(EditUserForm).ModelType,
                                     Department: drpFilterDepartment_1.Selected.Result,
                                     FormOrder: ApprovalIDNumber.Application_No,
                                     FlowType: First(EditUserForm).FlowType,
-                                    SelectedActions: First(EditUserForm).SelectedActions
+                                    SelectedActions: First(EditUserForm).SelectedActions,
+                                    ReferNumber:"false"//該字段用來判斷申請人是填寫人還是提交人，false代表申請人為填寫人，true代表申請人為提交人（在認爲填寫時，先默認申請人為填寫人）
                                 }
                             )
                         );
-                        //創建NewUserForm集合用作後續更新list-GenericUploadAttachMentFile中的FormId
+                        
                     //执行flow上传表格到list
                     If(
                             Last(
@@ -820,7 +821,7 @@
                     Height: =60
                     LayoutMinHeight: =100
                     LayoutMinWidth: =250
-                    Visible: =If(App.ActiveScreen.Width<600,false,true)
+                    Visible: =If(App.ActiveScreen.Width<500,false,true)
                     Width: =250
                     ZIndex: =1
 
@@ -898,7 +899,7 @@
                         If(
                             (Attachment_Excel.Visible = true && Last(Attachment_Excel.Attachments).Name = Blank()) || (Attachment_Zip.Visible = true && Last(Attachment_Zip.Attachments).Name = Blank()) || (Label6.Visible = true && IsBlank(TextInput_FormPWD) && IsBlank(TextInput_FormPWD_1)) || (Label6_1.Visible = true && IsBlank(TextInput_zipPWD) && IsBlank(TextInput_zipPWD_1)) || IsEmpty(drpFilterDepartment_1.SelectedItems) || (FlowType = "預設流程" && (Dropdown1_9.Selected.Result = Blank() || Label1_155.Text = "/")) || (FlowType = "通用流程" && (Dropdown1_5.Selected.Result = Blank() || Label1_137.Text = "/")) || (FlowType = "部門簡單流程" && Label1_153.Text = "/"),
                             Notify(
-                                "必需項不能爲空，處理行動及處理人不能爲空",
+                                "必填項目不能留空，處理行動及處理人不能留空。",
                                 NotificationType.Error
                             ),
                             Set(
@@ -1079,10 +1080,10 @@
                                         ),
                                         标题: ApprovalGuid,
                                         Application_Status: "審批中",
-                                        DepartMentName: Label1_130.Text,
-                                        FormType: Label1_132.Text,
+                                        DepartMentName: First(EditUserForm).ModelDepartment,
+                                        FormType: First(EditUserForm).ModelType,
                                         'Operator ': User().Email,
-                                        Task_Name: FormNameLabel_1.Text,
+                                        Task_Name: First(EditUserForm).ModelName,
                                         DepartMentUnit: drpFilterDepartment_1.Selected.Result
                                     }
                                 )
@@ -1116,7 +1117,7 @@
                                 GUID()
                             );
                             ClearCollect(
-                                NewUserForm,
+                                NewUserForm,//創建NewUserForm集合用作後續更新list-GenericUploadAttachMentFile中的FormId
                                 Patch(
                                     GenericFormList,
                                     Defaults(GenericFormList),
@@ -1124,19 +1125,20 @@
                                         标题: GenericFormlistGuid,
                                         ApprovalId: ApprovalGuid,
                                         ModelId: First(EditUserForm).标题,
-                                        ModelName: FormNameLabel_1.Text,
+                                        ModelName: First(EditUserForm).ModelName,
                                         UploadFileId: Last(GenericUploadAttachMentFile).标题,
                                         //目前取的是最后一个附件的id
                                         MarkValue: TextInput_FormMark.Text,
-                                        FormType: Label1_132.Text,
+                                        FormType: First(EditUserForm).ModelType,
                                         Department: drpFilterDepartment_1.Selected.Result,
                                         FormOrder: ApprovalIDNumber.Application_No,
                                         FlowType: First(EditUserForm).FlowType,
-                                        SelectedActions: First(EditUserForm).SelectedActions
+                                        SelectedActions: First(EditUserForm).SelectedActions,
+                                        ReferNumber:"false"//該字段用來判斷申請人是填寫人還是提交人，false代表申請人為填寫人，true代表申請人為提交人（在認爲填寫時，先默認申請人為填寫人）
                                     }
                                 )
                             );
-                            //創建NewUserForm集合用作後續更新list-GenericUploadAttachMentFile中的FormId
+                            
                         //执行flow上传表格到list
                         If(
                                 Last(
@@ -3352,7 +3354,7 @@
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =16
-                    Text: ="当前表格只供下载。"
+                    Text: ="當前表格只供下載。"
                     Width: =300
                     X: =58
                     ZIndex: =1
