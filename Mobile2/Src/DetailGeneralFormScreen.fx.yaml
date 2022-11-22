@@ -3907,7 +3907,21 @@
                         HoverFill: =ColorFade(Self.Fill, -5%)
                         Items: |-
                             =If(FlowType = "通用流程",
-                                If("提交" in Filter(ApprovalDetail_Table,Approval_No=FLowId).ActionNode || Checkbox2_7.Value = true,DataFlowActionCol2.Result,DataFlowActionCol.Result),
+                                If(
+                                    ("提交" in Filter(ApprovalDetail_Table,Approval_No=FLowId).ActionNode 
+                                    && First(
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            TaskStatus = "002",
+                                            Approval_No = FLowId
+                                        ),
+                                        "Priortty",
+                                        Descending
+                                    )
+                                ).ActionNode <> "填寫"
+                                    )
+                                    || Checkbox2_7.Value = true,DataFlowActionCol2.Result,DataFlowActionCol.Result),
                                 FlowType = "預設流程",If(
                                     //"跟進" in Filter(ApprovalDetail_Table,Approval_No=FLowId).ActionNode&& !("005" in Filter(ApprovalDetail_Table,Approval_No=FLowId).TaskStatus)
                                     First(
