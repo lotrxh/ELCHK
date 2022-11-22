@@ -117,7 +117,7 @@
     BottomContainer As groupContainer.manualLayoutContainer:
         Fill: =White
         Height: =60
-        Visible: =If(First(EditUserForm).FlowType<>"範本" && App.ActiveScreen.Width>600,true,false)
+        Visible: =If(First(EditUserForm).FlowType="範本" && App.ActiveScreen.Width<500,false,true)
         Width: =Parent.Width
         Y: =Parent.Height-Self.Height
         ZIndex: =2
