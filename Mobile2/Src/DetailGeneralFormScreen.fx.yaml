@@ -2428,9 +2428,10 @@
                                         Descending
                                     )
                                 ).TaskStatus <> "006")
-                                //部门简单流程，退回到填寫后可以上传
+                                //所有流程，退回到填寫后可以上传
                                  || (
-                                     FlowType = "部門簡單流程" && First(
+                                     //FlowType = "部門簡單流程" && 
+                                     First(
                                     SortByColumns(
                                         Filter(
                                             ApprovalDetail_Table,
@@ -2579,9 +2580,10 @@
                                         Descending
                                     )
                                 ).TaskStatus <> "006")
-                                //部门简单流程，退回到填寫后可以上传
+                                //所有流程，退回到填寫后可以上传
                                  || (
-                                     FlowType = "部門簡單流程" && First(
+                                     //FlowType = "部門簡單流程" && 
+                                     First(
                                     SortByColumns(
                                         Filter(
                                             ApprovalDetail_Table,
@@ -3037,7 +3039,17 @@
                                         "Priortty",
                                         Descending
                                     )
-                                ).ActionNode = "跟進",
+                                ).ActionNode = "跟進"|| First(
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            TaskStatus = "002",
+                                            Approval_No = FLowId
+                                        ),
+                                        "Priortty",
+                                        Descending
+                                    )
+                                ).ActionNode = "填寫",
                                 DisplayMode.Edit,
                                 DisplayMode.Disabled
                             )
@@ -3119,7 +3131,17 @@
                                         "Priortty",
                                         Descending
                                     )
-                                ).ActionNode = "跟進",
+                                ).ActionNode = "跟進" || First(
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            TaskStatus = "002",
+                                            Approval_No = FLowId
+                                        ),
+                                        "Priortty",
+                                        Descending
+                                    )
+                                ).ActionNode = "填寫",
                                 true,
                                 false
                             )
