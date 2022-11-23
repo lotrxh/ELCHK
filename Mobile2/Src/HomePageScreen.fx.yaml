@@ -168,7 +168,6 @@
                             LayoutMinHeight: =287
                             LayoutMinWidth: =320
                             OnSelect: =
-                            ShowScrollbar: =false
                             TemplatePadding: =0
                             TemplateSize: =32
                             Transition: =Transition.Pop
@@ -308,7 +307,7 @@
                                                 ).标题,
                                                 FLowId: Gallery5.Selected.Approval_No
                                             },
-                                            Launch(JumpUrlMobileApp&"&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & Gallery5.Selected.Approval_No
+                                            Launch(JumpUrlMobileApp&"&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & Gallery5.Selected.Approval_No & "&Page=Moblie"
                                             ,{},LaunchTarget.Replace)
                                         )
                                     )
@@ -626,7 +625,7 @@
                                             ).标题
                                         },
                                         Launch(
-                                            JumpUrlMobileApp&"&Screen=CreateGeneralFormScreen&FormModelId="&FormModelId,
+                                            JumpUrlMobileApp&"&Screen=CreateGeneralFormScreen&FormModelId="&FormModelId & "&Page=Moblie",
                                             {},
                                             LaunchTarget.Replace
                                         )
@@ -796,7 +795,6 @@
                                             "ModelFlowNumber"
                                         )
                         Layout: =Layout.Vertical
-                        ShowScrollbar: =false
                         TemplatePadding: =0
                         TemplateSize: =60
                         Width: =400
@@ -988,7 +986,7 @@
                                             ).标题
                                         },
                                         Launch(
-                                            JumpUrlMobileApp&"&Screen=CreateGeneralFormScreen&FormModelId="&FormModelId,
+                                            JumpUrlMobileApp&"&Screen=CreateGeneralFormScreen&FormModelId="&FormModelId & "&Page=Moblie",
                                             {},
                                             LaunchTarget.Replace
                                         )
