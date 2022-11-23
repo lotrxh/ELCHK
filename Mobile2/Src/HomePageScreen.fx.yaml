@@ -210,7 +210,7 @@
                                 Tooltip: ="ThisItem.Task_Name"
                                 Width: =If(App.ActiveScreen.Width>1000,152,100)
                                 Wrap: =false
-                                X: =138
+                                X: =Label11.Width
                                 ZIndex: =3
 
                             Label11_3 As label:
@@ -1072,7 +1072,7 @@
             RadiusTopRight: =20
             Visible: =If(App.ActiveScreen.Width<600,true,false)
             Width: =40
-            X: =424
+            X: =300
             Y: =10
             ZIndex: =9
 
