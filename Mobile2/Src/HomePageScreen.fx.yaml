@@ -192,11 +192,13 @@
                                 Height: =32
                                 OnSelect: =Select(Parent)
                                 Size: =10
-                                Text: =ThisItem.DepartMentUnit
+                                Text: |-
+                                    =//ThisItem.DepartMentUnit
+                                    If(CountA(Split(ThisItem.DepartMentUnit,"-").Result)=2,First(Split(ThisItem.DepartMentUnit,"-")).Result,First(Split(ThisItem.DepartMentUnit,"-")).Result&"-"&Index(Split(ThisItem.DepartMentUnit,"-"),2).Result)
                                 Tooltip: ="ThisItem.DepartMentUnit"
-                                Width: =If(App.ActiveScreen.Width>1000,150,60)
+                                Width: =If(App.ActiveScreen.Width>1000,80,60)
                                 Wrap: =false
-                                X: =Gallery5.Width-Label11_3.Width-10-Label11_1.Width-10-Icon5_6.Width
+                                X: =418
                                 ZIndex: =2
 
                             Label11_2 As label:
@@ -206,9 +208,9 @@
                                 Size: =10
                                 Text: =ThisItem.Task_Name
                                 Tooltip: ="ThisItem.Task_Name"
-                                Width: =If(App.ActiveScreen.Width>1000,152,130)
+                                Width: =If(App.ActiveScreen.Width>1000,152,100)
                                 Wrap: =false
-                                X: =Label11.Width+10
+                                X: =Label11.Width
                                 ZIndex: =3
 
                             Label11_3 As label:
@@ -218,7 +220,7 @@
                                 OnSelect: =Select(Parent)
                                 Size: =9
                                 Text: |-
-                                    =Text(ThisItem.Modified,"dd/mm/yyyy HH:mm")
+                                    =If(App.ActiveScreen.Width>1000,Text(ThisItem.Modified,"dd/mm/yyyy HH:mm"),Text(ThisItem.Modified,"dd/mm/yyyy"))
                                 Tooltip: ="ThisItem.Modified"
                                 Width: =110
                                 Wrap: =false
@@ -1070,7 +1072,7 @@
             RadiusTopRight: =20
             Visible: =If(App.ActiveScreen.Width<600,true,false)
             Width: =40
-            X: =424
+            X: =300
             Y: =10
             ZIndex: =9
 
