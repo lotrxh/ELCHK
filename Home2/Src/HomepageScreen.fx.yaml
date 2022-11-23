@@ -607,7 +607,7 @@ HomepageScreen As screen:
                                     ).标题
                                 },
                                 Launch(
-                                    JumpUrlMobileApp&"&Screen=CreateGeneralFormScreen&FormModelId="&FormModelId,
+                                    JumpUrlMobileApp&"&Screen=CreateGeneralFormScreen&FormModelId="&FormModelId & "&Page=Home",
                                     {},
                                     LaunchTarget.Replace
                                 )
@@ -843,7 +843,7 @@ HomepageScreen As screen:
                                         ApprovalId = ThisItem.Approval_No
                                     ).标题
                                 },
-                                Launch(JumpUrlMobileApp&"&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & Gallery5.Selected.Approval_No
+                                Launch(JumpUrlMobileApp&"&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & Gallery5.Selected.Approval_No & "&Page=Home"
                                 ,{},LaunchTarget.Replace)
                             )
                         )
@@ -1333,7 +1333,7 @@ HomepageScreen As screen:
                                     ).标题
                                 },
                                 Launch(
-                                    JumpUrlMobileApp&"&Screen=CreateGeneralFormScreen&FormModelId="&FormModelId,
+                                    JumpUrlMobileApp&"&Screen=CreateGeneralFormScreen&FormModelId="&FormModelId & "&Page=Home",
                                     {},
                                     LaunchTarget.Replace
                                 )

@@ -1285,7 +1285,7 @@ GeneralFormListScreen As screen:
                                         ApprovalId = ThisItem.Approval_No
                                     ).标题
                                 },
-                                Launch(JumpUrlMobileApp&"&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & TaskListGallery.Selected.Approval_No
+                                Launch(JumpUrlMobileApp&"&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & TaskListGallery.Selected.Approval_No & "&Page=Home"
                                 ,{},LaunchTarget.Replace)
                             )
                         )
