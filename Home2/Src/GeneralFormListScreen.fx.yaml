@@ -922,15 +922,18 @@ GeneralFormListScreen As screen:
                         =If(
                             lblTag_7.Text = "執行完成",
                             glbSuccessColor,
-                            lblTag_7.Text = "審核中",//"Success",
+                            lblTag_7.Text = "準備中",//"Success",
                             glbThemeSecondaryColor,
                             "待" in lblTag_7.Text && !("被退回" in lblTag_7.Text),//"Processing",
                             glbLinkColor,
                             "被退回" in lblTag_7.Text,
                             glbWarningColor,
                             lblTag_7.Text = "被拒絕",
-                            glbErrorColor
-                        )
+                            glbErrorColor,
+                            lblTag_7.Text = "待執行",
+                            glbNeutralLightColor,
+                            glbNeutralQuaternaryColor
+                            )
                     Fill: =ColorFade(Self.Color, 90%)
                     FocusedBorderThickness: =2
                     Height: =38
