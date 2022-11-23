@@ -1049,7 +1049,28 @@ GeneralFormListScreen As screen:
                                     "Priortty",
                                     Descending
                                 )
-                            ).TaskStatus = "006","執行完成","審核中"
+                            ).TaskStatus = "006","執行完成",
+                            First(
+                                SortByColumns(
+                                    Filter(
+                                        ApprovalDetail_Table,
+                                        Approval_No = ThisItem.Approval_No
+                                    ),
+                                    "Priortty",
+                                    Descending
+                                )
+                            ).TaskStatus = "001","準備中",
+                            First(
+                                SortByColumns(
+                                    Filter(
+                                        ApprovalDetail_Table,
+                                        Approval_No = ThisItem.Approval_No
+                                    ),
+                                    "Priortty",
+                                    Descending
+                                )
+                            ).TaskStatus = "003","待執行",
+                            "待批准"
                         )&If(Index(
                                 SortByColumns(
                                     Filter(
