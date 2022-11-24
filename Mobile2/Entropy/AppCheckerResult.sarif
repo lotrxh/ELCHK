@@ -23,10 +23,10 @@
                   "relativeAddress": 0
                 },
                 "region": {
-                  "charLength": 669,
-                  "charOffset": 9123,
+                  "charLength": 705,
+                  "charOffset": 11957,
                   "snippet": {
-                    "text": "ELCHK_UploadFiletoSharepoint.Run(\r\n                \"GenericUploadAttachMentFile\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                GUID(),\r\n                GenericFormlistGuid,\r\n                First(EditUserForm).ModelType,\r\n                Last(Attachment_Excel.Attachments).Name,\r\n                TextInput_FormPWD.Text,\r\n                Last(Attachment_Excel.Attachments).Name,\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                varBase64Only1,\r\n                \"\",\r\n                \"\"\r\n            )"
+                    "text": "UploadFiletoSharepoint.Run(\r\n                \"GenericUploadAttachMentFile\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                GUID(),\r\n                GenericFormlistGuid,\r\n                First(EditUserForm).ModelType,\r\n                Last(Attachment_Excel.Attachments).Name,\r\n                TextInput_FormPWD.Text,\r\n                Last(Attachment_Excel.Attachments).Name,\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                varBase64Only1,\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\"\r\n            )"
                   }
                 }
               },
@@ -40,7 +40,7 @@
           "message": {
             "arguments": [
               "Run",
-              "ELCHK_UploadFiletoSharepoint"
+              "UploadFiletoSharepoint"
             ],
             "id": "issue"
           },
@@ -65,7 +65,7 @@
                 },
                 "region": {
                   "charLength": 1,
-                  "charOffset": 8663,
+                  "charOffset": 11497,
                   "snippet": {
                     "text": ";"
                   }
@@ -101,10 +101,10 @@
                   "relativeAddress": 0
                 },
                 "region": {
-                  "charLength": 1399,
-                  "charOffset": 8404,
+                  "charLength": 1435,
+                  "charOffset": 11238,
                   "snippet": {
-                    "text": "If(\r\n            Last(Attachment_Excel.Attachments).Name <> Blank(),\r\n            Set(\r\n                varAttachmentControl1,\r\n                JSON(\r\n                    Image4_2.Image,\r\n                    IncludeBinaryData\r\n                )\r\n            );\r\n            Set(\r\n                varBase64Only1,\r\n                Mid(\r\n                    varAttachmentControl1,\r\n                    Find(\r\n                        \",\",\r\n                        varAttachmentControl1\r\n                    ) + 1,\r\n                    Len(varAttachmentControl1) - Find (\r\n                        \",\",\r\n                        varAttachmentControl1\r\n                    ) - 1\r\n                )\r\n            );\r\n            ELCHK_UploadFiletoSharepoint.Run(\r\n                \"GenericUploadAttachMentFile\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                GUID(),\r\n                GenericFormlistGuid,\r\n                First(EditUserForm).ModelType,\r\n                Last(Attachment_Excel.Attachments).Name,\r\n                TextInput_FormPWD.Text,\r\n                Last(Attachment_Excel.Attachments).Name,\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                varBase64Only1,\r\n                \"\",\r\n                \"\"\r\n            )\r\n        )"
+                    "text": "If(\r\n            Last(Attachment_Excel.Attachments).Name <> Blank(),\r\n            Set(\r\n                varAttachmentControl1,\r\n                JSON(\r\n                    Image4_2.Image,\r\n                    IncludeBinaryData\r\n                )\r\n            );\r\n            Set(\r\n                varBase64Only1,\r\n                Mid(\r\n                    varAttachmentControl1,\r\n                    Find(\r\n                        \",\",\r\n                        varAttachmentControl1\r\n                    ) + 1,\r\n                    Len(varAttachmentControl1) - Find (\r\n                        \",\",\r\n                        varAttachmentControl1\r\n                    ) - 1\r\n                )\r\n            );\r\n            UploadFiletoSharepoint.Run(\r\n                \"GenericUploadAttachMentFile\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                GUID(),\r\n                GenericFormlistGuid,\r\n                First(EditUserForm).ModelType,\r\n                Last(Attachment_Excel.Attachments).Name,\r\n                TextInput_FormPWD.Text,\r\n                Last(Attachment_Excel.Attachments).Name,\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                varBase64Only1,\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\"\r\n            )\r\n        )"
                   }
                 }
               },
@@ -141,10 +141,10 @@
                   "relativeAddress": 0
                 },
                 "region": {
-                  "charLength": 636,
-                  "charOffset": 10552,
+                  "charLength": 672,
+                  "charOffset": 13422,
                   "snippet": {
-                    "text": "ELCHK_UploadFiletoSharepoint.Run(\r\n                \"UploadFlowAttachMent\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                GenericFormlistGuid,\r\n                ApprovalGuid,\r\n                TextInput_zipPWD.Text,\r\n                Last(Attachment_Zip.Attachments).Name,\r\n                Last(Attachment_Zip.Attachments).Name,\r\n                \"\",\r\n                \"\",\r\n                varBase64Only2\r\n            )"
+                    "text": "UploadFiletoSharepoint.Run(\r\n                \"UploadFlowAttachMent\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                GenericFormlistGuid,\r\n                ApprovalGuid,\r\n                TextInput_zipPWD.Text,\r\n                Last(Attachment_Zip.Attachments).Name,\r\n                Last(Attachment_Zip.Attachments).Name,\r\n                varBase64Only2,\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\"\r\n            )"
                   }
                 }
               },
@@ -158,7 +158,7 @@
           "message": {
             "arguments": [
               "Run",
-              "ELCHK_UploadFiletoSharepoint"
+              "UploadFiletoSharepoint"
             ],
             "id": "issue"
           },
@@ -183,7 +183,7 @@
                 },
                 "region": {
                   "charLength": 1,
-                  "charOffset": 10092,
+                  "charOffset": 12962,
                   "snippet": {
                     "text": ";"
                   }
@@ -219,10 +219,10 @@
                   "relativeAddress": 0
                 },
                 "region": {
-                  "charLength": 1364,
-                  "charOffset": 9835,
+                  "charLength": 1400,
+                  "charOffset": 12705,
                   "snippet": {
-                    "text": "If(\r\n            Last(Attachment_Zip.Attachments).Name <> Blank(),\r\n            Set(\r\n                varAttachmentControl2,\r\n                JSON(\r\n                    Image4_1.Image,\r\n                    IncludeBinaryData\r\n                )\r\n            );\r\n            Set(\r\n                varBase64Only2,\r\n                Mid(\r\n                    varAttachmentControl2,\r\n                    Find(\r\n                        \",\",\r\n                        varAttachmentControl2\r\n                    ) + 1,\r\n                    Len(varAttachmentControl2) - Find (\r\n                        \",\",\r\n                        varAttachmentControl2\r\n                    ) - 1\r\n                )\r\n            );\r\n            ELCHK_UploadFiletoSharepoint.Run(\r\n                \"UploadFlowAttachMent\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                GenericFormlistGuid,\r\n                ApprovalGuid,\r\n                TextInput_zipPWD.Text,\r\n                Last(Attachment_Zip.Attachments).Name,\r\n                Last(Attachment_Zip.Attachments).Name,\r\n                \"\",\r\n                \"\",\r\n                varBase64Only2\r\n            )\r\n        )"
+                    "text": "If(\r\n            Last(Attachment_Zip.Attachments).Name <> Blank(),\r\n            Set(\r\n                varAttachmentControl2,\r\n                JSON(\r\n                    Image4_1.Image,\r\n                    IncludeBinaryData\r\n                )\r\n            );\r\n            Set(\r\n                varBase64Only2,\r\n                Mid(\r\n                    varAttachmentControl2,\r\n                    Find(\r\n                        \",\",\r\n                        varAttachmentControl2\r\n                    ) + 1,\r\n                    Len(varAttachmentControl2) - Find (\r\n                        \",\",\r\n                        varAttachmentControl2\r\n                    ) - 1\r\n                )\r\n            );\r\n            UploadFiletoSharepoint.Run(\r\n                \"UploadFlowAttachMent\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                GenericFormlistGuid,\r\n                ApprovalGuid,\r\n                TextInput_zipPWD.Text,\r\n                Last(Attachment_Zip.Attachments).Name,\r\n                Last(Attachment_Zip.Attachments).Name,\r\n                varBase64Only2,\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\"\r\n            )\r\n        )"
                   }
                 }
               },
@@ -260,7 +260,7 @@
                 },
                 "region": {
                   "charLength": 1,
-                  "charOffset": 9803,
+                  "charOffset": 12673,
                   "snippet": {
                     "text": ";"
                   }
@@ -287,46 +287,6 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "CreateGeneralFormScreen.MainflowContainer.InfoContainer.FormNameContainer.BtnPrimaryLg_10.OnSelect"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "CreateGeneralFormScreen.MainflowContainer.InfoContainer.FormNameContainer.BtnPrimaryLg_10.OnSelect",
-                  "relativeAddress": 0
-                },
-                "region": {
-                  "charLength": 5859,
-                  "charOffset": 8235,
-                  "snippet": {
-                    "text": "If(\r\n        Last(\r\n            Split(\r\n                CurrentUser,\r\n                \"@\"\r\n            ).Result\r\n        ).Result = \"chinasofti.com\",\r\n//中軟環境上傳\r\n        If(\r\n            Last(Attachment_Excel.Attachments).Name <> Blank(),\r\n            Set(\r\n                varAttachmentControl1,\r\n                JSON(\r\n                    Image4_2.Image,\r\n                    IncludeBinaryData\r\n                )\r\n            );\r\n            Set(\r\n                varBase64Only1,\r\n                Mid(\r\n                    varAttachmentControl1,\r\n                    Find(\r\n                        \",\",\r\n                        varAttachmentControl1\r\n                    ) + 1,\r\n                    Len(varAttachmentControl1) - Find (\r\n                        \",\",\r\n                        varAttachmentControl1\r\n                    ) - 1\r\n                )\r\n            );\r\n            ELCHK_UploadFiletoSharepoint.Run(\r\n                \"GenericUploadAttachMentFile\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                GUID(),\r\n                GenericFormlistGuid,\r\n                First(EditUserForm).ModelType,\r\n                Last(Attachment_Excel.Attachments).Name,\r\n                TextInput_FormPWD.Text,\r\n                Last(Attachment_Excel.Attachments).Name,\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                varBase64Only1,\r\n                \"\",\r\n                \"\"\r\n            )\r\n        );\r\n        \r\n//执行flow上传附件到list\r\nIf(\r\n            Last(Attachment_Zip.Attachments).Name <> Blank(),\r\n            Set(\r\n                varAttachmentControl2,\r\n                JSON(\r\n                    Image4_1.Image,\r\n                    IncludeBinaryData\r\n                )\r\n            );\r\n            Set(\r\n                varBase64Only2,\r\n                Mid(\r\n                    varAttachmentControl2,\r\n                    Find(\r\n                        \",\",\r\n                        varAttachmentControl2\r\n                    ) + 1,\r\n                    Len(varAttachmentControl2) - Find (\r\n                        \",\",\r\n                        varAttachmentControl2\r\n                    ) - 1\r\n                )\r\n            );\r\n            ELCHK_UploadFiletoSharepoint.Run(\r\n                \"UploadFlowAttachMent\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                GenericFormlistGuid,\r\n                ApprovalGuid,\r\n                TextInput_zipPWD.Text,\r\n                Last(Attachment_Zip.Attachments).Name,\r\n                Last(Attachment_Zip.Attachments).Name,\r\n                \"\",\r\n                \"\",\r\n                varBase64Only2\r\n            )\r\n        ),\r\n//客戶環境上傳\r\n        If(\r\n            Last(Attachment_Excel.Attachments).Name <> Blank(),\r\n            Set(\r\n                varAttachmentControl1,\r\n                JSON(\r\n                    Image4_2.Image,\r\n                    IncludeBinaryData\r\n                )\r\n            );\r\n            Set(\r\n                varBase64Only1,\r\n                Mid(\r\n                    varAttachmentControl1,\r\n                    Find(\r\n                        \",\",\r\n                        varAttachmentControl1\r\n                    ) + 1,\r\n                    Len(varAttachmentControl1) - Find (\r\n                        \",\",\r\n                        varAttachmentControl1\r\n                    ) - 1\r\n                )\r\n            );\r\n            UploadFiletoSharepoint.Run(\r\n                \"GenericUploadAttachMentFile\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                GUID(),\r\n                GenericFormlistGuid,\r\n                First(EditUserForm).ModelType,\r\n                Last(Attachment_Excel.Attachments).Name,\r\n                TextInput_FormPWD.Text,\r\n                Last(Attachment_Excel.Attachments).Name,\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                varBase64Only1,\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\"\r\n            )\r\n        );\r\n        \r\n//执行flow上传附件到list\r\nIf(\r\n            Last(Attachment_Zip.Attachments).Name <> Blank(),\r\n            Set(\r\n                varAttachmentControl2,\r\n                JSON(\r\n                    Image4_1.Image,\r\n                    IncludeBinaryData\r\n                )\r\n            );\r\n            Set(\r\n                varBase64Only2,\r\n                Mid(\r\n                    varAttachmentControl2,\r\n                    Find(\r\n                        \",\",\r\n                        varAttachmentControl2\r\n                    ) + 1,\r\n                    Len(varAttachmentControl2) - Find (\r\n                        \",\",\r\n                        varAttachmentControl2\r\n                    ) - 1\r\n                )\r\n            );\r\n            UploadFiletoSharepoint.Run(\r\n                \"UploadFlowAttachMent\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                GenericFormlistGuid,\r\n                ApprovalGuid,\r\n                TextInput_zipPWD.Text,\r\n                Last(Attachment_Zip.Attachments).Name,\r\n                Last(Attachment_Zip.Attachments).Name,\r\n                varBase64Only2,\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\"\r\n            )\r\n        )\r\n    )"
-                  }
-                }
-              },
-              "properties": {
-                "member": "OnSelect",
-                "module": "CreateGeneralFormScreen",
-                "type": "CreateGeneralFormScreen.MainflowContainer.InfoContainer.FormNameContainer.BtnPrimaryLg_10"
-              }
-            }
-          ],
-          "message": {
-            "arguments": [
-              "If"
-            ],
-            "id": "issue"
-          },
-          "properties": {
-            "level": "High"
-          },
-          "ruleId": "app-ErrInvalidArgs-Func",
-          "ruleIndex": 2
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
                   "fullyQualifiedName": "CreateGeneralFormScreen.BottomContainer.Container11_1.BtnPrimaryLg_7.OnSelect"
                 }
               ],
@@ -336,10 +296,10 @@
                   "relativeAddress": 0
                 },
                 "region": {
-                  "charLength": 669,
-                  "charOffset": 9123,
+                  "charLength": 705,
+                  "charOffset": 11957,
                   "snippet": {
-                    "text": "ELCHK_UploadFiletoSharepoint.Run(\r\n                \"GenericUploadAttachMentFile\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                GUID(),\r\n                GenericFormlistGuid,\r\n                First(EditUserForm).ModelType,\r\n                Last(Attachment_Excel.Attachments).Name,\r\n                TextInput_FormPWD.Text,\r\n                Last(Attachment_Excel.Attachments).Name,\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                varBase64Only1,\r\n                \"\",\r\n                \"\"\r\n            )"
+                    "text": "UploadFiletoSharepoint.Run(\r\n                \"GenericUploadAttachMentFile\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                GUID(),\r\n                GenericFormlistGuid,\r\n                First(EditUserForm).ModelType,\r\n                Last(Attachment_Excel.Attachments).Name,\r\n                TextInput_FormPWD.Text,\r\n                Last(Attachment_Excel.Attachments).Name,\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                varBase64Only1,\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\"\r\n            )"
                   }
                 }
               },
@@ -353,7 +313,7 @@
           "message": {
             "arguments": [
               "Run",
-              "ELCHK_UploadFiletoSharepoint"
+              "UploadFiletoSharepoint"
             ],
             "id": "issue"
           },
@@ -378,7 +338,7 @@
                 },
                 "region": {
                   "charLength": 1,
-                  "charOffset": 8663,
+                  "charOffset": 11497,
                   "snippet": {
                     "text": ";"
                   }
@@ -414,10 +374,10 @@
                   "relativeAddress": 0
                 },
                 "region": {
-                  "charLength": 1399,
-                  "charOffset": 8404,
+                  "charLength": 1435,
+                  "charOffset": 11238,
                   "snippet": {
-                    "text": "If(\r\n            Last(Attachment_Excel.Attachments).Name <> Blank(),\r\n            Set(\r\n                varAttachmentControl1,\r\n                JSON(\r\n                    Image4_2.Image,\r\n                    IncludeBinaryData\r\n                )\r\n            );\r\n            Set(\r\n                varBase64Only1,\r\n                Mid(\r\n                    varAttachmentControl1,\r\n                    Find(\r\n                        \",\",\r\n                        varAttachmentControl1\r\n                    ) + 1,\r\n                    Len(varAttachmentControl1) - Find (\r\n                        \",\",\r\n                        varAttachmentControl1\r\n                    ) - 1\r\n                )\r\n            );\r\n            ELCHK_UploadFiletoSharepoint.Run(\r\n                \"GenericUploadAttachMentFile\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                GUID(),\r\n                GenericFormlistGuid,\r\n                First(EditUserForm).ModelType,\r\n                Last(Attachment_Excel.Attachments).Name,\r\n                TextInput_FormPWD.Text,\r\n                Last(Attachment_Excel.Attachments).Name,\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                varBase64Only1,\r\n                \"\",\r\n                \"\"\r\n            )\r\n        )"
+                    "text": "If(\r\n            Last(Attachment_Excel.Attachments).Name <> Blank(),\r\n            Set(\r\n                varAttachmentControl1,\r\n                JSON(\r\n                    Image4_2.Image,\r\n                    IncludeBinaryData\r\n                )\r\n            );\r\n            Set(\r\n                varBase64Only1,\r\n                Mid(\r\n                    varAttachmentControl1,\r\n                    Find(\r\n                        \",\",\r\n                        varAttachmentControl1\r\n                    ) + 1,\r\n                    Len(varAttachmentControl1) - Find (\r\n                        \",\",\r\n                        varAttachmentControl1\r\n                    ) - 1\r\n                )\r\n            );\r\n            UploadFiletoSharepoint.Run(\r\n                \"GenericUploadAttachMentFile\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                GUID(),\r\n                GenericFormlistGuid,\r\n                First(EditUserForm).ModelType,\r\n                Last(Attachment_Excel.Attachments).Name,\r\n                TextInput_FormPWD.Text,\r\n                Last(Attachment_Excel.Attachments).Name,\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                varBase64Only1,\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\"\r\n            )\r\n        )"
                   }
                 }
               },
@@ -454,10 +414,10 @@
                   "relativeAddress": 0
                 },
                 "region": {
-                  "charLength": 636,
-                  "charOffset": 10552,
+                  "charLength": 672,
+                  "charOffset": 13422,
                   "snippet": {
-                    "text": "ELCHK_UploadFiletoSharepoint.Run(\r\n                \"UploadFlowAttachMent\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                GenericFormlistGuid,\r\n                ApprovalGuid,\r\n                TextInput_zipPWD.Text,\r\n                Last(Attachment_Zip.Attachments).Name,\r\n                Last(Attachment_Zip.Attachments).Name,\r\n                \"\",\r\n                \"\",\r\n                varBase64Only2\r\n            )"
+                    "text": "UploadFiletoSharepoint.Run(\r\n                \"UploadFlowAttachMent\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                GenericFormlistGuid,\r\n                ApprovalGuid,\r\n                TextInput_zipPWD.Text,\r\n                Last(Attachment_Zip.Attachments).Name,\r\n                Last(Attachment_Zip.Attachments).Name,\r\n                varBase64Only2,\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\"\r\n            )"
                   }
                 }
               },
@@ -471,7 +431,7 @@
           "message": {
             "arguments": [
               "Run",
-              "ELCHK_UploadFiletoSharepoint"
+              "UploadFiletoSharepoint"
             ],
             "id": "issue"
           },
@@ -496,7 +456,7 @@
                 },
                 "region": {
                   "charLength": 1,
-                  "charOffset": 10092,
+                  "charOffset": 12962,
                   "snippet": {
                     "text": ";"
                   }
@@ -532,10 +492,10 @@
                   "relativeAddress": 0
                 },
                 "region": {
-                  "charLength": 1364,
-                  "charOffset": 9835,
+                  "charLength": 1400,
+                  "charOffset": 12705,
                   "snippet": {
-                    "text": "If(\r\n            Last(Attachment_Zip.Attachments).Name <> Blank(),\r\n            Set(\r\n                varAttachmentControl2,\r\n                JSON(\r\n                    Image4_1.Image,\r\n                    IncludeBinaryData\r\n                )\r\n            );\r\n            Set(\r\n                varBase64Only2,\r\n                Mid(\r\n                    varAttachmentControl2,\r\n                    Find(\r\n                        \",\",\r\n                        varAttachmentControl2\r\n                    ) + 1,\r\n                    Len(varAttachmentControl2) - Find (\r\n                        \",\",\r\n                        varAttachmentControl2\r\n                    ) - 1\r\n                )\r\n            );\r\n            ELCHK_UploadFiletoSharepoint.Run(\r\n                \"UploadFlowAttachMent\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                GenericFormlistGuid,\r\n                ApprovalGuid,\r\n                TextInput_zipPWD.Text,\r\n                Last(Attachment_Zip.Attachments).Name,\r\n                Last(Attachment_Zip.Attachments).Name,\r\n                \"\",\r\n                \"\",\r\n                varBase64Only2\r\n            )\r\n        )"
+                    "text": "If(\r\n            Last(Attachment_Zip.Attachments).Name <> Blank(),\r\n            Set(\r\n                varAttachmentControl2,\r\n                JSON(\r\n                    Image4_1.Image,\r\n                    IncludeBinaryData\r\n                )\r\n            );\r\n            Set(\r\n                varBase64Only2,\r\n                Mid(\r\n                    varAttachmentControl2,\r\n                    Find(\r\n                        \",\",\r\n                        varAttachmentControl2\r\n                    ) + 1,\r\n                    Len(varAttachmentControl2) - Find (\r\n                        \",\",\r\n                        varAttachmentControl2\r\n                    ) - 1\r\n                )\r\n            );\r\n            UploadFiletoSharepoint.Run(\r\n                \"UploadFlowAttachMent\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                GenericFormlistGuid,\r\n                ApprovalGuid,\r\n                TextInput_zipPWD.Text,\r\n                Last(Attachment_Zip.Attachments).Name,\r\n                Last(Attachment_Zip.Attachments).Name,\r\n                varBase64Only2,\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\"\r\n            )\r\n        )"
                   }
                 }
               },
@@ -573,7 +533,7 @@
                 },
                 "region": {
                   "charLength": 1,
-                  "charOffset": 9803,
+                  "charOffset": 12673,
                   "snippet": {
                     "text": ";"
                   }
@@ -594,46 +554,6 @@
           },
           "ruleId": "app-ErrTypeError",
           "ruleIndex": 1
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "CreateGeneralFormScreen.BottomContainer.Container11_1.BtnPrimaryLg_7.OnSelect"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "CreateGeneralFormScreen.BottomContainer.Container11_1.BtnPrimaryLg_7.OnSelect",
-                  "relativeAddress": 0
-                },
-                "region": {
-                  "charLength": 5859,
-                  "charOffset": 8235,
-                  "snippet": {
-                    "text": "If(\r\n        Last(\r\n            Split(\r\n                CurrentUser,\r\n                \"@\"\r\n            ).Result\r\n        ).Result = \"chinasofti.com\",\r\n//中軟環境上傳\r\n        If(\r\n            Last(Attachment_Excel.Attachments).Name <> Blank(),\r\n            Set(\r\n                varAttachmentControl1,\r\n                JSON(\r\n                    Image4_2.Image,\r\n                    IncludeBinaryData\r\n                )\r\n            );\r\n            Set(\r\n                varBase64Only1,\r\n                Mid(\r\n                    varAttachmentControl1,\r\n                    Find(\r\n                        \",\",\r\n                        varAttachmentControl1\r\n                    ) + 1,\r\n                    Len(varAttachmentControl1) - Find (\r\n                        \",\",\r\n                        varAttachmentControl1\r\n                    ) - 1\r\n                )\r\n            );\r\n            ELCHK_UploadFiletoSharepoint.Run(\r\n                \"GenericUploadAttachMentFile\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                GUID(),\r\n                GenericFormlistGuid,\r\n                First(EditUserForm).ModelType,\r\n                Last(Attachment_Excel.Attachments).Name,\r\n                TextInput_FormPWD.Text,\r\n                Last(Attachment_Excel.Attachments).Name,\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                varBase64Only1,\r\n                \"\",\r\n                \"\"\r\n            )\r\n        );\r\n        \r\n//执行flow上传附件到list\r\nIf(\r\n            Last(Attachment_Zip.Attachments).Name <> Blank(),\r\n            Set(\r\n                varAttachmentControl2,\r\n                JSON(\r\n                    Image4_1.Image,\r\n                    IncludeBinaryData\r\n                )\r\n            );\r\n            Set(\r\n                varBase64Only2,\r\n                Mid(\r\n                    varAttachmentControl2,\r\n                    Find(\r\n                        \",\",\r\n                        varAttachmentControl2\r\n                    ) + 1,\r\n                    Len(varAttachmentControl2) - Find (\r\n                        \",\",\r\n                        varAttachmentControl2\r\n                    ) - 1\r\n                )\r\n            );\r\n            ELCHK_UploadFiletoSharepoint.Run(\r\n                \"UploadFlowAttachMent\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                GenericFormlistGuid,\r\n                ApprovalGuid,\r\n                TextInput_zipPWD.Text,\r\n                Last(Attachment_Zip.Attachments).Name,\r\n                Last(Attachment_Zip.Attachments).Name,\r\n                \"\",\r\n                \"\",\r\n                varBase64Only2\r\n            )\r\n        ),\r\n//客戶環境上傳\r\n        If(\r\n            Last(Attachment_Excel.Attachments).Name <> Blank(),\r\n            Set(\r\n                varAttachmentControl1,\r\n                JSON(\r\n                    Image4_2.Image,\r\n                    IncludeBinaryData\r\n                )\r\n            );\r\n            Set(\r\n                varBase64Only1,\r\n                Mid(\r\n                    varAttachmentControl1,\r\n                    Find(\r\n                        \",\",\r\n                        varAttachmentControl1\r\n                    ) + 1,\r\n                    Len(varAttachmentControl1) - Find (\r\n                        \",\",\r\n                        varAttachmentControl1\r\n                    ) - 1\r\n                )\r\n            );\r\n            UploadFiletoSharepoint.Run(\r\n                \"GenericUploadAttachMentFile\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                GUID(),\r\n                GenericFormlistGuid,\r\n                First(EditUserForm).ModelType,\r\n                Last(Attachment_Excel.Attachments).Name,\r\n                TextInput_FormPWD.Text,\r\n                Last(Attachment_Excel.Attachments).Name,\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                varBase64Only1,\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\"\r\n            )\r\n        );\r\n        \r\n//执行flow上传附件到list\r\nIf(\r\n            Last(Attachment_Zip.Attachments).Name <> Blank(),\r\n            Set(\r\n                varAttachmentControl2,\r\n                JSON(\r\n                    Image4_1.Image,\r\n                    IncludeBinaryData\r\n                )\r\n            );\r\n            Set(\r\n                varBase64Only2,\r\n                Mid(\r\n                    varAttachmentControl2,\r\n                    Find(\r\n                        \",\",\r\n                        varAttachmentControl2\r\n                    ) + 1,\r\n                    Len(varAttachmentControl2) - Find (\r\n                        \",\",\r\n                        varAttachmentControl2\r\n                    ) - 1\r\n                )\r\n            );\r\n            UploadFiletoSharepoint.Run(\r\n                \"UploadFlowAttachMent\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                GenericFormlistGuid,\r\n                ApprovalGuid,\r\n                TextInput_zipPWD.Text,\r\n                Last(Attachment_Zip.Attachments).Name,\r\n                Last(Attachment_Zip.Attachments).Name,\r\n                varBase64Only2,\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\",\r\n                \"\"\r\n            )\r\n        )\r\n    )"
-                  }
-                }
-              },
-              "properties": {
-                "member": "OnSelect",
-                "module": "CreateGeneralFormScreen",
-                "type": "CreateGeneralFormScreen.BottomContainer.Container11_1.BtnPrimaryLg_7"
-              }
-            }
-          ],
-          "message": {
-            "arguments": [
-              "If"
-            ],
-            "id": "issue"
-          },
-          "properties": {
-            "level": "High"
-          },
-          "ruleId": "app-ErrInvalidArgs-Func",
-          "ruleIndex": 2
         },
         {
           "locations": [
@@ -649,10 +569,10 @@
                   "relativeAddress": 0
                 },
                 "region": {
-                  "charLength": 552,
-                  "charOffset": 867,
+                  "charLength": 399,
+                  "charOffset": 1736,
                   "snippet": {
-                    "text": "ELCHK_UploadFiletoSharepoint.Run(\r\n            \"UploadFlowAttachMent\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            First(EditDetailUserForm_1).标题,\r\n            FLowId,\r\n            TextInput2_31.Text,\r\n            Last(Attachment_Zip2.Attachments).Name,\r\n            Last(Attachment_Zip2.Attachments).Name,\r\n            \"\",\r\n            \"\",\r\n            varBase64Only6\r\n        )"
+                    "text": "UploadFiletoSharepoint.Run(\r\n    \"UploadFlowAttachMent\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    First(EditDetailUserForm_1).Title,\r\n    FLowId,\r\n    TextInput2_31.Text,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    varBase64Only6,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\"\r\n        )"
                   }
                 }
               },
@@ -666,7 +586,7 @@
           "message": {
             "arguments": [
               "Run",
-              "ELCHK_UploadFiletoSharepoint"
+              "UploadFiletoSharepoint"
             ],
             "id": "issue"
           },
@@ -691,7 +611,7 @@
                 },
                 "region": {
                   "charLength": 1,
-                  "charOffset": 705,
+                  "charOffset": 1574,
                   "snippet": {
                     "text": ";"
                   }
@@ -727,10 +647,10 @@
                   "relativeAddress": 0
                 },
                 "region": {
-                  "charLength": 847,
-                  "charOffset": 579,
+                  "charLength": 694,
+                  "charOffset": 1448,
                   "snippet": {
-                    "text": "If(Last(Attachment_Zip2.Attachments).Name <> Blank(),\r\n        Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));\r\n        Set(varBase64Only6,Mid(varAttachmentControl6,Find(\",\", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (\",\", varAttachmentControl6)-1));\r\n    ELCHK_UploadFiletoSharepoint.Run(\r\n            \"UploadFlowAttachMent\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            First(EditDetailUserForm_1).标题,\r\n            FLowId,\r\n            TextInput2_31.Text,\r\n            Last(Attachment_Zip2.Attachments).Name,\r\n            Last(Attachment_Zip2.Attachments).Name,\r\n            \"\",\r\n            \"\",\r\n            varBase64Only6\r\n        )\r\n    )"
+                    "text": "If(Last(Attachment_Zip2.Attachments).Name <> Blank(),\r\n        Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));\r\n        Set(varBase64Only6,Mid(varAttachmentControl6,Find(\",\", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (\",\", varAttachmentControl6)-1));\r\n    UploadFiletoSharepoint.Run(\r\n    \"UploadFlowAttachMent\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    First(EditDetailUserForm_1).Title,\r\n    FLowId,\r\n    TextInput2_31.Text,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    varBase64Only6,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\"\r\n        )\r\n    )"
                   }
                 }
               },
@@ -767,10 +687,10 @@
                   "relativeAddress": 0
                 },
                 "region": {
-                  "charLength": 847,
-                  "charOffset": 579,
+                  "charLength": 694,
+                  "charOffset": 1448,
                   "snippet": {
-                    "text": "If(Last(Attachment_Zip2.Attachments).Name <> Blank(),\r\n        Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));\r\n        Set(varBase64Only6,Mid(varAttachmentControl6,Find(\",\", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (\",\", varAttachmentControl6)-1));\r\n    ELCHK_UploadFiletoSharepoint.Run(\r\n            \"UploadFlowAttachMent\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            First(EditDetailUserForm_1).标题,\r\n            FLowId,\r\n            TextInput2_31.Text,\r\n            Last(Attachment_Zip2.Attachments).Name,\r\n            Last(Attachment_Zip2.Attachments).Name,\r\n            \"\",\r\n            \"\",\r\n            varBase64Only6\r\n        )\r\n    )"
+                    "text": "If(Last(Attachment_Zip2.Attachments).Name <> Blank(),\r\n        Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));\r\n        Set(varBase64Only6,Mid(varAttachmentControl6,Find(\",\", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (\",\", varAttachmentControl6)-1));\r\n    UploadFiletoSharepoint.Run(\r\n    \"UploadFlowAttachMent\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    First(EditDetailUserForm_1).Title,\r\n    FLowId,\r\n    TextInput2_31.Text,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    varBase64Only6,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\"\r\n        )\r\n    )"
                   }
                 }
               },
@@ -795,46 +715,6 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "DetailGeneralFormScreen.Container10_1.InfoContainer_1.InfoContainer12_4.BtnDefaultLg_14.OnSelect"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "DetailGeneralFormScreen.Container10_1.InfoContainer_1.InfoContainer12_4.BtnDefaultLg_14.OnSelect",
-                  "relativeAddress": 0
-                },
-                "region": {
-                  "charLength": 1681,
-                  "charOffset": 462,
-                  "snippet": {
-                    "text": "If(\r\n    Last(\r\n    Split(\r\n        CurrentUser,\r\n        \"@\"\r\n    ).Result\r\n).Result = \"chinasofti.com\",\r\n//中軟環境上傳\r\nIf(Last(Attachment_Zip2.Attachments).Name <> Blank(),\r\n        Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));\r\n        Set(varBase64Only6,Mid(varAttachmentControl6,Find(\",\", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (\",\", varAttachmentControl6)-1));\r\n    ELCHK_UploadFiletoSharepoint.Run(\r\n            \"UploadFlowAttachMent\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            First(EditDetailUserForm_1).标题,\r\n            FLowId,\r\n            TextInput2_31.Text,\r\n            Last(Attachment_Zip2.Attachments).Name,\r\n            Last(Attachment_Zip2.Attachments).Name,\r\n            \"\",\r\n            \"\",\r\n            varBase64Only6\r\n        )\r\n    )\r\n,\r\n//客戶環境上傳\r\n    If(Last(Attachment_Zip2.Attachments).Name <> Blank(),\r\n        Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));\r\n        Set(varBase64Only6,Mid(varAttachmentControl6,Find(\",\", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (\",\", varAttachmentControl6)-1));\r\n    UploadFiletoSharepoint.Run(\r\n    \"UploadFlowAttachMent\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    First(EditDetailUserForm_1).标题,\r\n    FLowId,\r\n    TextInput2_31.Text,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    varBase64Only6,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\"\r\n        )\r\n    )\r\n    )"
-                  }
-                }
-              },
-              "properties": {
-                "member": "OnSelect",
-                "module": "DetailGeneralFormScreen",
-                "type": "DetailGeneralFormScreen.Container10_1.InfoContainer_1.InfoContainer12_4.BtnDefaultLg_14"
-              }
-            }
-          ],
-          "message": {
-            "arguments": [
-              "If"
-            ],
-            "id": "issue"
-          },
-          "properties": {
-            "level": "High"
-          },
-          "ruleId": "app-ErrInvalidArgs-Func",
-          "ruleIndex": 2
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
                   "fullyQualifiedName": "DetailGeneralFormScreen.Container10_1.InfoContainer_1.InfoContainer12_4.BtnDefaultLg_15.OnSelect"
                 }
               ],
@@ -844,10 +724,10 @@
                   "relativeAddress": 0
                 },
                 "region": {
-                  "charLength": 552,
-                  "charOffset": 1399,
+                  "charLength": 399,
+                  "charOffset": 2274,
                   "snippet": {
-                    "text": "ELCHK_UploadFiletoSharepoint.Run(\r\n            \"UploadFlowAttachMent\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            First(EditDetailUserForm_1).标题,\r\n            FLowId,\r\n            TextInput2_31.Text,\r\n            Last(Attachment_Zip2.Attachments).Name,\r\n            Last(Attachment_Zip2.Attachments).Name,\r\n            \"\",\r\n            \"\",\r\n            varBase64Only6\r\n        )"
+                    "text": "UploadFiletoSharepoint.Run(\r\n    \"UploadFlowAttachMent\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    First(EditDetailUserForm_1).Title,\r\n    FLowId,\r\n    TextInput2_31.Text,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    varBase64Only6,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\"\r\n        )"
                   }
                 }
               },
@@ -861,7 +741,7 @@
           "message": {
             "arguments": [
               "Run",
-              "ELCHK_UploadFiletoSharepoint"
+              "UploadFiletoSharepoint"
             ],
             "id": "issue"
           },
@@ -886,7 +766,7 @@
                 },
                 "region": {
                   "charLength": 1,
-                  "charOffset": 1237,
+                  "charOffset": 2112,
                   "snippet": {
                     "text": ";"
                   }
@@ -922,10 +802,10 @@
                   "relativeAddress": 0
                 },
                 "region": {
-                  "charLength": 847,
-                  "charOffset": 1111,
+                  "charLength": 694,
+                  "charOffset": 1986,
                   "snippet": {
-                    "text": "If(Last(Attachment_Zip2.Attachments).Name <> Blank(),\r\n        Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));\r\n        Set(varBase64Only6,Mid(varAttachmentControl6,Find(\",\", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (\",\", varAttachmentControl6)-1));\r\n    ELCHK_UploadFiletoSharepoint.Run(\r\n            \"UploadFlowAttachMent\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            First(EditDetailUserForm_1).标题,\r\n            FLowId,\r\n            TextInput2_31.Text,\r\n            Last(Attachment_Zip2.Attachments).Name,\r\n            Last(Attachment_Zip2.Attachments).Name,\r\n            \"\",\r\n            \"\",\r\n            varBase64Only6\r\n        )\r\n    )"
+                    "text": "If(Last(Attachment_Zip2.Attachments).Name <> Blank(),\r\n        Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));\r\n        Set(varBase64Only6,Mid(varAttachmentControl6,Find(\",\", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (\",\", varAttachmentControl6)-1));\r\n    UploadFiletoSharepoint.Run(\r\n    \"UploadFlowAttachMent\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    First(EditDetailUserForm_1).Title,\r\n    FLowId,\r\n    TextInput2_31.Text,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    varBase64Only6,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\"\r\n        )\r\n    )"
                   }
                 }
               },
@@ -962,10 +842,10 @@
                   "relativeAddress": 0
                 },
                 "region": {
-                  "charLength": 847,
-                  "charOffset": 1111,
+                  "charLength": 694,
+                  "charOffset": 1986,
                   "snippet": {
-                    "text": "If(Last(Attachment_Zip2.Attachments).Name <> Blank(),\r\n        Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));\r\n        Set(varBase64Only6,Mid(varAttachmentControl6,Find(\",\", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (\",\", varAttachmentControl6)-1));\r\n    ELCHK_UploadFiletoSharepoint.Run(\r\n            \"UploadFlowAttachMent\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            First(EditDetailUserForm_1).标题,\r\n            FLowId,\r\n            TextInput2_31.Text,\r\n            Last(Attachment_Zip2.Attachments).Name,\r\n            Last(Attachment_Zip2.Attachments).Name,\r\n            \"\",\r\n            \"\",\r\n            varBase64Only6\r\n        )\r\n    )"
+                    "text": "If(Last(Attachment_Zip2.Attachments).Name <> Blank(),\r\n        Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));\r\n        Set(varBase64Only6,Mid(varAttachmentControl6,Find(\",\", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (\",\", varAttachmentControl6)-1));\r\n    UploadFiletoSharepoint.Run(\r\n    \"UploadFlowAttachMent\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    First(EditDetailUserForm_1).Title,\r\n    FLowId,\r\n    TextInput2_31.Text,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    varBase64Only6,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\"\r\n        )\r\n    )"
                   }
                 }
               },
@@ -990,46 +870,6 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "DetailGeneralFormScreen.Container10_1.InfoContainer_1.InfoContainer12_4.BtnDefaultLg_15.OnSelect"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "DetailGeneralFormScreen.Container10_1.InfoContainer_1.InfoContainer12_4.BtnDefaultLg_15.OnSelect",
-                  "relativeAddress": 0
-                },
-                "region": {
-                  "charLength": 1681,
-                  "charOffset": 994,
-                  "snippet": {
-                    "text": "If(\r\n    Last(\r\n    Split(\r\n        CurrentUser,\r\n        \"@\"\r\n    ).Result\r\n).Result = \"chinasofti.com\",\r\n//中軟環境上傳\r\nIf(Last(Attachment_Zip2.Attachments).Name <> Blank(),\r\n        Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));\r\n        Set(varBase64Only6,Mid(varAttachmentControl6,Find(\",\", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (\",\", varAttachmentControl6)-1));\r\n    ELCHK_UploadFiletoSharepoint.Run(\r\n            \"UploadFlowAttachMent\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            First(EditDetailUserForm_1).标题,\r\n            FLowId,\r\n            TextInput2_31.Text,\r\n            Last(Attachment_Zip2.Attachments).Name,\r\n            Last(Attachment_Zip2.Attachments).Name,\r\n            \"\",\r\n            \"\",\r\n            varBase64Only6\r\n        )\r\n    )\r\n,\r\n//客戶環境上傳\r\n    If(Last(Attachment_Zip2.Attachments).Name <> Blank(),\r\n        Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));\r\n        Set(varBase64Only6,Mid(varAttachmentControl6,Find(\",\", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (\",\", varAttachmentControl6)-1));\r\n    UploadFiletoSharepoint.Run(\r\n    \"UploadFlowAttachMent\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    First(EditDetailUserForm_1).标题,\r\n    FLowId,\r\n    TextInput2_31.Text,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    varBase64Only6,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\"\r\n        )\r\n    )\r\n    )"
-                  }
-                }
-              },
-              "properties": {
-                "member": "OnSelect",
-                "module": "DetailGeneralFormScreen",
-                "type": "DetailGeneralFormScreen.Container10_1.InfoContainer_1.InfoContainer12_4.BtnDefaultLg_15"
-              }
-            }
-          ],
-          "message": {
-            "arguments": [
-              "If"
-            ],
-            "id": "issue"
-          },
-          "properties": {
-            "level": "High"
-          },
-          "ruleId": "app-ErrInvalidArgs-Func",
-          "ruleIndex": 2
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
                   "fullyQualifiedName": "DetailGeneralFormScreen.Container10_1.InfoContainer_1.InfoContainer12_4.BtnPrimaryLg_14.OnSelect"
                 }
               ],
@@ -1039,10 +879,10 @@
                   "relativeAddress": 0
                 },
                 "region": {
-                  "charLength": 1868,
-                  "charOffset": 1370,
+                  "charLength": 1720,
+                  "charOffset": 4741,
                   "snippet": {
-                    "text": "ELCHK_UploadFiletoSharepoint.Run(\r\n            \"GenericUploadAttachMentFile\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            GUID(),\r\n            First(EditDetailUserForm_1).标题,\r\n            First(EditDetailUserForm_1).FormType,\r\n            First(Split(AttachmentExcelName,\".\")).Result&\"_\"&Text(\r\n                        Right(\r\n                                First(Split(\r\n                                Last(\r\n                                    SortByColumns(\r\n                                        FormAttachmentName,\r\n                                        \"ID\",\r\n                                        Ascending\r\n                                    )\r\n                                ).FormAttachMent,\".\")).Result\r\n                            ,\r\n                            3\r\n                        ) + 1,\r\n                        \"000\"\r\n                    )&\".\"&Last(Split(AttachmentExcelName,\".\")).Result,\r\n\t\t\tTextInput2_30.Text,\r\n            First(Split(AttachmentExcelName,\".\")).Result&\"_\"&Text(\r\n                        Right(\r\n                                First(Split(\r\n                                Last(\r\n                                    SortByColumns(\r\n                                        FormAttachmentName,\r\n                                        \"ID\",\r\n                                        Ascending\r\n                                    )\r\n                                ).FormAttachMent,\".\")).Result\r\n                            ,\r\n                            3\r\n                        ) + 1,\r\n                        \"000\"\r\n                    )&\".\"&Last(Split(AttachmentExcelName,\".\")).Result,\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            varBase64Only5,\r\n            \"\",\r\n            \"\"\r\n        )"
+                    "text": "UploadFiletoSharepoint.Run(\r\n    \"GenericUploadAttachMentFile\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    GUID(),\r\n    First(EditDetailUserForm_1).Title,\r\n    First(EditDetailUserForm_1).FormType,\r\n    First(Split(AttachmentExcelName,\".\")).Result&\"_\"&Text(\r\n                        Right(\r\n                                First(Split(\r\n                                Last(\r\n                                    SortByColumns(\r\n                                        FormAttachmentName,\r\n                                        \"ID\",\r\n                                        Ascending\r\n                                    )\r\n                                ).FormAttachMent,\".\")).Result\r\n                            ,\r\n                            3\r\n                        ) + 1,\r\n                        \"000\"\r\n                    )&\".\"&Last(Split(AttachmentExcelName,\".\")).Result,\r\n    TextInput2_30.Text,\r\n    First(Split(AttachmentExcelName,\".\")).Result&\"_\"&Text(\r\n                        Right(\r\n                                First(Split(\r\n                                Last(\r\n                                    SortByColumns(\r\n                                        FormAttachmentName,\r\n                                        \"ID\",\r\n                                        Ascending\r\n                                    )\r\n                                ).FormAttachMent,\".\")).Result\r\n                            ,\r\n                            3\r\n                        ) + 1,\r\n                        \"000\"\r\n                    )&\".\"&Last(Split(AttachmentExcelName,\".\")).Result,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    varBase64Only5,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\"\r\n    )"
                   }
                 }
               },
@@ -1056,7 +896,7 @@
           "message": {
             "arguments": [
               "Run",
-              "ELCHK_UploadFiletoSharepoint"
+              "UploadFiletoSharepoint"
             ],
             "id": "issue"
           },
@@ -1081,7 +921,7 @@
                 },
                 "region": {
                   "charLength": 1,
-                  "charOffset": 846,
+                  "charOffset": 4215,
                   "snippet": {
                     "text": ";"
                   }
@@ -1117,10 +957,10 @@
                   "relativeAddress": 0
                 },
                 "region": {
-                  "charLength": 2517,
-                  "charOffset": 726,
+                  "charLength": 2379,
+                  "charOffset": 4095,
                   "snippet": {
-                    "text": "If(Last(Attachment_Excel2.Attachments).Name <> Blank(),\r\nSet(varAttachmentControl5,JSON(Image2.Image,IncludeBinaryData));\r\nSet(varBase64Only5,Mid(varAttachmentControl5,Find(\",\", varAttachmentControl5)+1,Len(varAttachmentControl5)-Find (\",\", varAttachmentControl5)-1));\r\nCollect(FormAttachmentName,Filter(\r\n                                    GenericUploadAttachMentFile,\r\n                                    FormId = FormListId,\r\n                                    StartsWith(\r\n                                                FormAttachMent,\r\n                                                First(Split(AttachmentExcelName,\".\")).Result)));\r\n\t\tELCHK_UploadFiletoSharepoint.Run(\r\n            \"GenericUploadAttachMentFile\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            GUID(),\r\n            First(EditDetailUserForm_1).标题,\r\n            First(EditDetailUserForm_1).FormType,\r\n            First(Split(AttachmentExcelName,\".\")).Result&\"_\"&Text(\r\n                        Right(\r\n                                First(Split(\r\n                                Last(\r\n                                    SortByColumns(\r\n                                        FormAttachmentName,\r\n                                        \"ID\",\r\n                                        Ascending\r\n                                    )\r\n                                ).FormAttachMent,\".\")).Result\r\n                            ,\r\n                            3\r\n                        ) + 1,\r\n                        \"000\"\r\n                    )&\".\"&Last(Split(AttachmentExcelName,\".\")).Result,\r\n\t\t\tTextInput2_30.Text,\r\n            First(Split(AttachmentExcelName,\".\")).Result&\"_\"&Text(\r\n                        Right(\r\n                                First(Split(\r\n                                Last(\r\n                                    SortByColumns(\r\n                                        FormAttachmentName,\r\n                                        \"ID\",\r\n                                        Ascending\r\n                                    )\r\n                                ).FormAttachMent,\".\")).Result\r\n                            ,\r\n                            3\r\n                        ) + 1,\r\n                        \"000\"\r\n                    )&\".\"&Last(Split(AttachmentExcelName,\".\")).Result,\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            varBase64Only5,\r\n            \"\",\r\n            \"\"\r\n        )\r\n\t\t)"
+                    "text": "If(Last(Attachment_Excel2.Attachments).Name <> Blank(),\r\nSet(varAttachmentControl5,JSON(Image2.Image,IncludeBinaryData));\r\nSet(varBase64Only5,Mid(varAttachmentControl5,Find(\",\", varAttachmentControl5)+1,Len(varAttachmentControl5)-Find (\",\", varAttachmentControl5)-1));\r\nCollect(FormAttachmentName,Filter(\r\n                                    GenericUploadAttachMentFile,\r\n                                    FormId = FormListId,\r\n                                    StartsWith(\r\n                                                FormAttachMent,\r\n                                                First(Split(AttachmentExcelName,\".\")).Result)));    \r\nUploadFiletoSharepoint.Run(\r\n    \"GenericUploadAttachMentFile\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    GUID(),\r\n    First(EditDetailUserForm_1).Title,\r\n    First(EditDetailUserForm_1).FormType,\r\n    First(Split(AttachmentExcelName,\".\")).Result&\"_\"&Text(\r\n                        Right(\r\n                                First(Split(\r\n                                Last(\r\n                                    SortByColumns(\r\n                                        FormAttachmentName,\r\n                                        \"ID\",\r\n                                        Ascending\r\n                                    )\r\n                                ).FormAttachMent,\".\")).Result\r\n                            ,\r\n                            3\r\n                        ) + 1,\r\n                        \"000\"\r\n                    )&\".\"&Last(Split(AttachmentExcelName,\".\")).Result,\r\n    TextInput2_30.Text,\r\n    First(Split(AttachmentExcelName,\".\")).Result&\"_\"&Text(\r\n                        Right(\r\n                                First(Split(\r\n                                Last(\r\n                                    SortByColumns(\r\n                                        FormAttachmentName,\r\n                                        \"ID\",\r\n                                        Ascending\r\n                                    )\r\n                                ).FormAttachMent,\".\")).Result\r\n                            ,\r\n                            3\r\n                        ) + 1,\r\n                        \"000\"\r\n                    )&\".\"&Last(Split(AttachmentExcelName,\".\")).Result,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    varBase64Only5,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\"\r\n    )\r\n    \r\n    )"
                   }
                 }
               },
@@ -1157,10 +997,10 @@
                   "relativeAddress": 0
                 },
                 "region": {
-                  "charLength": 536,
-                  "charOffset": 3522,
+                  "charLength": 395,
+                  "charOffset": 6759,
                   "snippet": {
-                    "text": "ELCHK_UploadFiletoSharepoint.Run(\r\n            \"UploadFlowAttachMent\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            First(EditDetailUserForm_1).标题,\r\n            FLowId,\r\n            TextInput2_31.Text,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n            \"\",\r\n            \"\",\r\n            varBase64Only6\r\n        )"
+                    "text": "UploadFiletoSharepoint.Run(\r\n    \"UploadFlowAttachMent\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    First(EditDetailUserForm_1).Title,\r\n    FLowId,\r\n    TextInput2_31.Text,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    varBase64Only6,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\"\r\n    )"
                   }
                 }
               },
@@ -1174,7 +1014,7 @@
           "message": {
             "arguments": [
               "Run",
-              "ELCHK_UploadFiletoSharepoint"
+              "UploadFiletoSharepoint"
             ],
             "id": "issue"
           },
@@ -1199,7 +1039,7 @@
                 },
                 "region": {
                   "charLength": 1,
-                  "charOffset": 3372,
+                  "charOffset": 6609,
                   "snippet": {
                     "text": ";"
                   }
@@ -1235,10 +1075,10 @@
                   "relativeAddress": 0
                 },
                 "region": {
-                  "charLength": 809,
-                  "charOffset": 3254,
+                  "charLength": 666,
+                  "charOffset": 6491,
                   "snippet": {
-                    "text": "If(Last(Attachment_Zip2.Attachments).Name <> Blank(),\r\nSet(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));\r\nSet(varBase64Only6,Mid(varAttachmentControl6,Find(\",\", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (\",\", varAttachmentControl6)-1));\r\nELCHK_UploadFiletoSharepoint.Run(\r\n            \"UploadFlowAttachMent\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            First(EditDetailUserForm_1).标题,\r\n            FLowId,\r\n            TextInput2_31.Text,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n            \"\",\r\n            \"\",\r\n            varBase64Only6\r\n        )\r\n\t\t)"
+                    "text": "If(Last(Attachment_Zip2.Attachments).Name <> Blank(),\r\nSet(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));\r\nSet(varBase64Only6,Mid(varAttachmentControl6,Find(\",\", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (\",\", varAttachmentControl6)-1));\r\nUploadFiletoSharepoint.Run(\r\n    \"UploadFlowAttachMent\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    First(EditDetailUserForm_1).Title,\r\n    FLowId,\r\n    TextInput2_31.Text,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    varBase64Only6,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\"\r\n    )\r\n)"
                   }
                 }
               },
@@ -1276,7 +1116,7 @@
                 },
                 "region": {
                   "charLength": 1,
-                  "charOffset": 3243,
+                  "charOffset": 6474,
                   "snippet": {
                     "text": ";"
                   }
@@ -1297,46 +1137,6 @@
           },
           "ruleId": "app-ErrTypeError",
           "ruleIndex": 1
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "DetailGeneralFormScreen.Container10_1.InfoContainer_1.InfoContainer12_4.BtnPrimaryLg_14.OnSelect"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "DetailGeneralFormScreen.Container10_1.InfoContainer_1.InfoContainer12_4.BtnPrimaryLg_14.OnSelect",
-                  "relativeAddress": 0
-                },
-                "region": {
-                  "charLength": 6539,
-                  "charOffset": 609,
-                  "snippet": {
-                    "text": "If(\r\n    Last(\r\n    Split(\r\n        CurrentUser,\r\n        \"@\"\r\n    ).Result\r\n).Result = \"chinasofti.com\",\r\n//中軟環境上傳\r\nIf(Last(Attachment_Excel2.Attachments).Name <> Blank(),\r\nSet(varAttachmentControl5,JSON(Image2.Image,IncludeBinaryData));\r\nSet(varBase64Only5,Mid(varAttachmentControl5,Find(\",\", varAttachmentControl5)+1,Len(varAttachmentControl5)-Find (\",\", varAttachmentControl5)-1));\r\nCollect(FormAttachmentName,Filter(\r\n                                    GenericUploadAttachMentFile,\r\n                                    FormId = FormListId,\r\n                                    StartsWith(\r\n                                                FormAttachMent,\r\n                                                First(Split(AttachmentExcelName,\".\")).Result)));\r\n\t\tELCHK_UploadFiletoSharepoint.Run(\r\n            \"GenericUploadAttachMentFile\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            GUID(),\r\n            First(EditDetailUserForm_1).标题,\r\n            First(EditDetailUserForm_1).FormType,\r\n            First(Split(AttachmentExcelName,\".\")).Result&\"_\"&Text(\r\n                        Right(\r\n                                First(Split(\r\n                                Last(\r\n                                    SortByColumns(\r\n                                        FormAttachmentName,\r\n                                        \"ID\",\r\n                                        Ascending\r\n                                    )\r\n                                ).FormAttachMent,\".\")).Result\r\n                            ,\r\n                            3\r\n                        ) + 1,\r\n                        \"000\"\r\n                    )&\".\"&Last(Split(AttachmentExcelName,\".\")).Result,\r\n\t\t\tTextInput2_30.Text,\r\n            First(Split(AttachmentExcelName,\".\")).Result&\"_\"&Text(\r\n                        Right(\r\n                                First(Split(\r\n                                Last(\r\n                                    SortByColumns(\r\n                                        FormAttachmentName,\r\n                                        \"ID\",\r\n                                        Ascending\r\n                                    )\r\n                                ).FormAttachMent,\".\")).Result\r\n                            ,\r\n                            3\r\n                        ) + 1,\r\n                        \"000\"\r\n                    )&\".\"&Last(Split(AttachmentExcelName,\".\")).Result,\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            varBase64Only5,\r\n            \"\",\r\n            \"\"\r\n        )\r\n\t\t);\r\n//上傳附件\r\nIf(Last(Attachment_Zip2.Attachments).Name <> Blank(),\r\nSet(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));\r\nSet(varBase64Only6,Mid(varAttachmentControl6,Find(\",\", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (\",\", varAttachmentControl6)-1));\r\nELCHK_UploadFiletoSharepoint.Run(\r\n            \"UploadFlowAttachMent\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            First(EditDetailUserForm_1).标题,\r\n            FLowId,\r\n            TextInput2_31.Text,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n            \"\",\r\n            \"\",\r\n            varBase64Only6\r\n        )\r\n\t\t);\r\n\t\t,\r\n\r\n//客戶環境\r\n//上傳表格\r\nIf(Last(Attachment_Excel2.Attachments).Name <> Blank(),\r\nSet(varAttachmentControl5,JSON(Image2.Image,IncludeBinaryData));\r\nSet(varBase64Only5,Mid(varAttachmentControl5,Find(\",\", varAttachmentControl5)+1,Len(varAttachmentControl5)-Find (\",\", varAttachmentControl5)-1));\r\nCollect(FormAttachmentName,Filter(\r\n                                    GenericUploadAttachMentFile,\r\n                                    FormId = FormListId,\r\n                                    StartsWith(\r\n                                                FormAttachMent,\r\n                                                First(Split(AttachmentExcelName,\".\")).Result)));    \r\nUploadFiletoSharepoint.Run(\r\n    \"GenericUploadAttachMentFile\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    GUID(),\r\n    First(EditDetailUserForm_1).标题,\r\n    First(EditDetailUserForm_1).FormType,\r\n    First(Split(AttachmentExcelName,\".\")).Result&\"_\"&Text(\r\n                        Right(\r\n                                First(Split(\r\n                                Last(\r\n                                    SortByColumns(\r\n                                        FormAttachmentName,\r\n                                        \"ID\",\r\n                                        Ascending\r\n                                    )\r\n                                ).FormAttachMent,\".\")).Result\r\n                            ,\r\n                            3\r\n                        ) + 1,\r\n                        \"000\"\r\n                    )&\".\"&Last(Split(AttachmentExcelName,\".\")).Result,\r\n    TextInput2_30.Text,\r\n    First(Split(AttachmentExcelName,\".\")).Result&\"_\"&Text(\r\n                        Right(\r\n                                First(Split(\r\n                                Last(\r\n                                    SortByColumns(\r\n                                        FormAttachmentName,\r\n                                        \"ID\",\r\n                                        Ascending\r\n                                    )\r\n                                ).FormAttachMent,\".\")).Result\r\n                            ,\r\n                            3\r\n                        ) + 1,\r\n                        \"000\"\r\n                    )&\".\"&Last(Split(AttachmentExcelName,\".\")).Result,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    varBase64Only5,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\"\r\n    )\r\n    \r\n    );\r\n\r\n\r\n\r\n//上傳附件\r\nIf(Last(Attachment_Zip2.Attachments).Name <> Blank(),\r\nSet(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));\r\nSet(varBase64Only6,Mid(varAttachmentControl6,Find(\",\", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (\",\", varAttachmentControl6)-1));\r\nUploadFiletoSharepoint.Run(\r\n    \"UploadFlowAttachMent\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    First(EditDetailUserForm_1).标题,\r\n    FLowId,\r\n    TextInput2_31.Text,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    varBase64Only6,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\"\r\n    )\r\n)\r\n)"
-                  }
-                }
-              },
-              "properties": {
-                "member": "OnSelect",
-                "module": "DetailGeneralFormScreen",
-                "type": "DetailGeneralFormScreen.Container10_1.InfoContainer_1.InfoContainer12_4.BtnPrimaryLg_14"
-              }
-            }
-          ],
-          "message": {
-            "arguments": [
-              "If"
-            ],
-            "id": "issue"
-          },
-          "properties": {
-            "level": "High"
-          },
-          "ruleId": "app-ErrInvalidArgs-Func",
-          "ruleIndex": 2
         },
         {
           "locations": [
@@ -1352,10 +1152,10 @@
                   "relativeAddress": 0
                 },
                 "region": {
-                  "charLength": 552,
-                  "charOffset": 867,
+                  "charLength": 399,
+                  "charOffset": 1736,
                   "snippet": {
-                    "text": "ELCHK_UploadFiletoSharepoint.Run(\r\n            \"UploadFlowAttachMent\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            First(EditDetailUserForm_1).标题,\r\n            FLowId,\r\n            TextInput2_31.Text,\r\n            Last(Attachment_Zip2.Attachments).Name,\r\n            Last(Attachment_Zip2.Attachments).Name,\r\n            \"\",\r\n            \"\",\r\n            varBase64Only6\r\n        )"
+                    "text": "UploadFiletoSharepoint.Run(\r\n    \"UploadFlowAttachMent\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    First(EditDetailUserForm_1).Title,\r\n    FLowId,\r\n    TextInput2_31.Text,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    varBase64Only6,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\"\r\n        )"
                   }
                 }
               },
@@ -1369,7 +1169,7 @@
           "message": {
             "arguments": [
               "Run",
-              "ELCHK_UploadFiletoSharepoint"
+              "UploadFiletoSharepoint"
             ],
             "id": "issue"
           },
@@ -1394,7 +1194,7 @@
                 },
                 "region": {
                   "charLength": 1,
-                  "charOffset": 705,
+                  "charOffset": 1574,
                   "snippet": {
                     "text": ";"
                   }
@@ -1430,10 +1230,10 @@
                   "relativeAddress": 0
                 },
                 "region": {
-                  "charLength": 847,
-                  "charOffset": 579,
+                  "charLength": 694,
+                  "charOffset": 1448,
                   "snippet": {
-                    "text": "If(Last(Attachment_Zip2.Attachments).Name <> Blank(),\r\n        Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));\r\n        Set(varBase64Only6,Mid(varAttachmentControl6,Find(\",\", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (\",\", varAttachmentControl6)-1));\r\n    ELCHK_UploadFiletoSharepoint.Run(\r\n            \"UploadFlowAttachMent\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            First(EditDetailUserForm_1).标题,\r\n            FLowId,\r\n            TextInput2_31.Text,\r\n            Last(Attachment_Zip2.Attachments).Name,\r\n            Last(Attachment_Zip2.Attachments).Name,\r\n            \"\",\r\n            \"\",\r\n            varBase64Only6\r\n        )\r\n    )"
+                    "text": "If(Last(Attachment_Zip2.Attachments).Name <> Blank(),\r\n        Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));\r\n        Set(varBase64Only6,Mid(varAttachmentControl6,Find(\",\", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (\",\", varAttachmentControl6)-1));\r\n    UploadFiletoSharepoint.Run(\r\n    \"UploadFlowAttachMent\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    First(EditDetailUserForm_1).Title,\r\n    FLowId,\r\n    TextInput2_31.Text,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    varBase64Only6,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\"\r\n        )\r\n    )"
                   }
                 }
               },
@@ -1470,10 +1270,10 @@
                   "relativeAddress": 0
                 },
                 "region": {
-                  "charLength": 847,
-                  "charOffset": 579,
+                  "charLength": 694,
+                  "charOffset": 1448,
                   "snippet": {
-                    "text": "If(Last(Attachment_Zip2.Attachments).Name <> Blank(),\r\n        Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));\r\n        Set(varBase64Only6,Mid(varAttachmentControl6,Find(\",\", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (\",\", varAttachmentControl6)-1));\r\n    ELCHK_UploadFiletoSharepoint.Run(\r\n            \"UploadFlowAttachMent\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            First(EditDetailUserForm_1).标题,\r\n            FLowId,\r\n            TextInput2_31.Text,\r\n            Last(Attachment_Zip2.Attachments).Name,\r\n            Last(Attachment_Zip2.Attachments).Name,\r\n            \"\",\r\n            \"\",\r\n            varBase64Only6\r\n        )\r\n    )"
+                    "text": "If(Last(Attachment_Zip2.Attachments).Name <> Blank(),\r\n        Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));\r\n        Set(varBase64Only6,Mid(varAttachmentControl6,Find(\",\", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (\",\", varAttachmentControl6)-1));\r\n    UploadFiletoSharepoint.Run(\r\n    \"UploadFlowAttachMent\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    First(EditDetailUserForm_1).Title,\r\n    FLowId,\r\n    TextInput2_31.Text,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    varBase64Only6,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\"\r\n        )\r\n    )"
                   }
                 }
               },
@@ -1498,46 +1298,6 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "DetailGeneralFormScreen.BottomContainer_2.Container11_2.Container17.BtnDefaultLg_7.OnSelect"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "DetailGeneralFormScreen.BottomContainer_2.Container11_2.Container17.BtnDefaultLg_7.OnSelect",
-                  "relativeAddress": 0
-                },
-                "region": {
-                  "charLength": 1681,
-                  "charOffset": 462,
-                  "snippet": {
-                    "text": "If(\r\n    Last(\r\n    Split(\r\n        CurrentUser,\r\n        \"@\"\r\n    ).Result\r\n).Result = \"chinasofti.com\",\r\n//中軟環境上傳\r\nIf(Last(Attachment_Zip2.Attachments).Name <> Blank(),\r\n        Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));\r\n        Set(varBase64Only6,Mid(varAttachmentControl6,Find(\",\", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (\",\", varAttachmentControl6)-1));\r\n    ELCHK_UploadFiletoSharepoint.Run(\r\n            \"UploadFlowAttachMent\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            First(EditDetailUserForm_1).标题,\r\n            FLowId,\r\n            TextInput2_31.Text,\r\n            Last(Attachment_Zip2.Attachments).Name,\r\n            Last(Attachment_Zip2.Attachments).Name,\r\n            \"\",\r\n            \"\",\r\n            varBase64Only6\r\n        )\r\n    )\r\n,\r\n//客戶環境上傳\r\n    If(Last(Attachment_Zip2.Attachments).Name <> Blank(),\r\n        Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));\r\n        Set(varBase64Only6,Mid(varAttachmentControl6,Find(\",\", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (\",\", varAttachmentControl6)-1));\r\n    UploadFiletoSharepoint.Run(\r\n    \"UploadFlowAttachMent\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    First(EditDetailUserForm_1).标题,\r\n    FLowId,\r\n    TextInput2_31.Text,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    varBase64Only6,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\"\r\n        )\r\n    )\r\n    )"
-                  }
-                }
-              },
-              "properties": {
-                "member": "OnSelect",
-                "module": "DetailGeneralFormScreen",
-                "type": "DetailGeneralFormScreen.BottomContainer_2.Container11_2.Container17.BtnDefaultLg_7"
-              }
-            }
-          ],
-          "message": {
-            "arguments": [
-              "If"
-            ],
-            "id": "issue"
-          },
-          "properties": {
-            "level": "High"
-          },
-          "ruleId": "app-ErrInvalidArgs-Func",
-          "ruleIndex": 2
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
                   "fullyQualifiedName": "DetailGeneralFormScreen.BottomContainer_2.Container11_2.Container17.BtnDefaultLg_8.OnSelect"
                 }
               ],
@@ -1547,10 +1307,10 @@
                   "relativeAddress": 0
                 },
                 "region": {
-                  "charLength": 552,
-                  "charOffset": 1399,
+                  "charLength": 399,
+                  "charOffset": 2274,
                   "snippet": {
-                    "text": "ELCHK_UploadFiletoSharepoint.Run(\r\n            \"UploadFlowAttachMent\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            First(EditDetailUserForm_1).标题,\r\n            FLowId,\r\n            TextInput2_31.Text,\r\n            Last(Attachment_Zip2.Attachments).Name,\r\n            Last(Attachment_Zip2.Attachments).Name,\r\n            \"\",\r\n            \"\",\r\n            varBase64Only6\r\n        )"
+                    "text": "UploadFiletoSharepoint.Run(\r\n    \"UploadFlowAttachMent\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    First(EditDetailUserForm_1).Title,\r\n    FLowId,\r\n    TextInput2_31.Text,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    varBase64Only6,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\"\r\n        )"
                   }
                 }
               },
@@ -1564,7 +1324,7 @@
           "message": {
             "arguments": [
               "Run",
-              "ELCHK_UploadFiletoSharepoint"
+              "UploadFiletoSharepoint"
             ],
             "id": "issue"
           },
@@ -1589,7 +1349,7 @@
                 },
                 "region": {
                   "charLength": 1,
-                  "charOffset": 1237,
+                  "charOffset": 2112,
                   "snippet": {
                     "text": ";"
                   }
@@ -1625,10 +1385,10 @@
                   "relativeAddress": 0
                 },
                 "region": {
-                  "charLength": 847,
-                  "charOffset": 1111,
+                  "charLength": 694,
+                  "charOffset": 1986,
                   "snippet": {
-                    "text": "If(Last(Attachment_Zip2.Attachments).Name <> Blank(),\r\n        Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));\r\n        Set(varBase64Only6,Mid(varAttachmentControl6,Find(\",\", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (\",\", varAttachmentControl6)-1));\r\n    ELCHK_UploadFiletoSharepoint.Run(\r\n            \"UploadFlowAttachMent\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            First(EditDetailUserForm_1).标题,\r\n            FLowId,\r\n            TextInput2_31.Text,\r\n            Last(Attachment_Zip2.Attachments).Name,\r\n            Last(Attachment_Zip2.Attachments).Name,\r\n            \"\",\r\n            \"\",\r\n            varBase64Only6\r\n        )\r\n    )"
+                    "text": "If(Last(Attachment_Zip2.Attachments).Name <> Blank(),\r\n        Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));\r\n        Set(varBase64Only6,Mid(varAttachmentControl6,Find(\",\", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (\",\", varAttachmentControl6)-1));\r\n    UploadFiletoSharepoint.Run(\r\n    \"UploadFlowAttachMent\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    First(EditDetailUserForm_1).Title,\r\n    FLowId,\r\n    TextInput2_31.Text,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    varBase64Only6,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\"\r\n        )\r\n    )"
                   }
                 }
               },
@@ -1665,10 +1425,10 @@
                   "relativeAddress": 0
                 },
                 "region": {
-                  "charLength": 847,
-                  "charOffset": 1111,
+                  "charLength": 694,
+                  "charOffset": 1986,
                   "snippet": {
-                    "text": "If(Last(Attachment_Zip2.Attachments).Name <> Blank(),\r\n        Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));\r\n        Set(varBase64Only6,Mid(varAttachmentControl6,Find(\",\", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (\",\", varAttachmentControl6)-1));\r\n    ELCHK_UploadFiletoSharepoint.Run(\r\n            \"UploadFlowAttachMent\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            First(EditDetailUserForm_1).标题,\r\n            FLowId,\r\n            TextInput2_31.Text,\r\n            Last(Attachment_Zip2.Attachments).Name,\r\n            Last(Attachment_Zip2.Attachments).Name,\r\n            \"\",\r\n            \"\",\r\n            varBase64Only6\r\n        )\r\n    )"
+                    "text": "If(Last(Attachment_Zip2.Attachments).Name <> Blank(),\r\n        Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));\r\n        Set(varBase64Only6,Mid(varAttachmentControl6,Find(\",\", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (\",\", varAttachmentControl6)-1));\r\n    UploadFiletoSharepoint.Run(\r\n    \"UploadFlowAttachMent\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    First(EditDetailUserForm_1).Title,\r\n    FLowId,\r\n    TextInput2_31.Text,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    varBase64Only6,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\"\r\n        )\r\n    )"
                   }
                 }
               },
@@ -1693,46 +1453,6 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "DetailGeneralFormScreen.BottomContainer_2.Container11_2.Container17.BtnDefaultLg_8.OnSelect"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "DetailGeneralFormScreen.BottomContainer_2.Container11_2.Container17.BtnDefaultLg_8.OnSelect",
-                  "relativeAddress": 0
-                },
-                "region": {
-                  "charLength": 1681,
-                  "charOffset": 994,
-                  "snippet": {
-                    "text": "If(\r\n    Last(\r\n    Split(\r\n        CurrentUser,\r\n        \"@\"\r\n    ).Result\r\n).Result = \"chinasofti.com\",\r\n//中軟環境上傳\r\nIf(Last(Attachment_Zip2.Attachments).Name <> Blank(),\r\n        Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));\r\n        Set(varBase64Only6,Mid(varAttachmentControl6,Find(\",\", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (\",\", varAttachmentControl6)-1));\r\n    ELCHK_UploadFiletoSharepoint.Run(\r\n            \"UploadFlowAttachMent\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            First(EditDetailUserForm_1).标题,\r\n            FLowId,\r\n            TextInput2_31.Text,\r\n            Last(Attachment_Zip2.Attachments).Name,\r\n            Last(Attachment_Zip2.Attachments).Name,\r\n            \"\",\r\n            \"\",\r\n            varBase64Only6\r\n        )\r\n    )\r\n,\r\n//客戶環境上傳\r\n    If(Last(Attachment_Zip2.Attachments).Name <> Blank(),\r\n        Set(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));\r\n        Set(varBase64Only6,Mid(varAttachmentControl6,Find(\",\", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (\",\", varAttachmentControl6)-1));\r\n    UploadFiletoSharepoint.Run(\r\n    \"UploadFlowAttachMent\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    First(EditDetailUserForm_1).标题,\r\n    FLowId,\r\n    TextInput2_31.Text,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    varBase64Only6,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\"\r\n        )\r\n    )\r\n    )"
-                  }
-                }
-              },
-              "properties": {
-                "member": "OnSelect",
-                "module": "DetailGeneralFormScreen",
-                "type": "DetailGeneralFormScreen.BottomContainer_2.Container11_2.Container17.BtnDefaultLg_8"
-              }
-            }
-          ],
-          "message": {
-            "arguments": [
-              "If"
-            ],
-            "id": "issue"
-          },
-          "properties": {
-            "level": "High"
-          },
-          "ruleId": "app-ErrInvalidArgs-Func",
-          "ruleIndex": 2
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
                   "fullyQualifiedName": "DetailGeneralFormScreen.BottomContainer_2.Container11_2.Container17.BtnPrimaryLg_8.OnSelect"
                 }
               ],
@@ -1742,10 +1462,10 @@
                   "relativeAddress": 0
                 },
                 "region": {
-                  "charLength": 1868,
-                  "charOffset": 1370,
+                  "charLength": 1720,
+                  "charOffset": 4741,
                   "snippet": {
-                    "text": "ELCHK_UploadFiletoSharepoint.Run(\r\n            \"GenericUploadAttachMentFile\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            GUID(),\r\n            First(EditDetailUserForm_1).标题,\r\n            First(EditDetailUserForm_1).FormType,\r\n            First(Split(AttachmentExcelName,\".\")).Result&\"_\"&Text(\r\n                        Right(\r\n                                First(Split(\r\n                                Last(\r\n                                    SortByColumns(\r\n                                        FormAttachmentName,\r\n                                        \"ID\",\r\n                                        Ascending\r\n                                    )\r\n                                ).FormAttachMent,\".\")).Result\r\n                            ,\r\n                            3\r\n                        ) + 1,\r\n                        \"000\"\r\n                    )&\".\"&Last(Split(AttachmentExcelName,\".\")).Result,\r\n\t\t\tTextInput2_30.Text,\r\n            First(Split(AttachmentExcelName,\".\")).Result&\"_\"&Text(\r\n                        Right(\r\n                                First(Split(\r\n                                Last(\r\n                                    SortByColumns(\r\n                                        FormAttachmentName,\r\n                                        \"ID\",\r\n                                        Ascending\r\n                                    )\r\n                                ).FormAttachMent,\".\")).Result\r\n                            ,\r\n                            3\r\n                        ) + 1,\r\n                        \"000\"\r\n                    )&\".\"&Last(Split(AttachmentExcelName,\".\")).Result,\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            varBase64Only5,\r\n            \"\",\r\n            \"\"\r\n        )"
+                    "text": "UploadFiletoSharepoint.Run(\r\n    \"GenericUploadAttachMentFile\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    GUID(),\r\n    First(EditDetailUserForm_1).Title,\r\n    First(EditDetailUserForm_1).FormType,\r\n    First(Split(AttachmentExcelName,\".\")).Result&\"_\"&Text(\r\n                        Right(\r\n                                First(Split(\r\n                                Last(\r\n                                    SortByColumns(\r\n                                        FormAttachmentName,\r\n                                        \"ID\",\r\n                                        Ascending\r\n                                    )\r\n                                ).FormAttachMent,\".\")).Result\r\n                            ,\r\n                            3\r\n                        ) + 1,\r\n                        \"000\"\r\n                    )&\".\"&Last(Split(AttachmentExcelName,\".\")).Result,\r\n    TextInput2_30.Text,\r\n    First(Split(AttachmentExcelName,\".\")).Result&\"_\"&Text(\r\n                        Right(\r\n                                First(Split(\r\n                                Last(\r\n                                    SortByColumns(\r\n                                        FormAttachmentName,\r\n                                        \"ID\",\r\n                                        Ascending\r\n                                    )\r\n                                ).FormAttachMent,\".\")).Result\r\n                            ,\r\n                            3\r\n                        ) + 1,\r\n                        \"000\"\r\n                    )&\".\"&Last(Split(AttachmentExcelName,\".\")).Result,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    varBase64Only5,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\"\r\n    )"
                   }
                 }
               },
@@ -1759,7 +1479,7 @@
           "message": {
             "arguments": [
               "Run",
-              "ELCHK_UploadFiletoSharepoint"
+              "UploadFiletoSharepoint"
             ],
             "id": "issue"
           },
@@ -1784,7 +1504,7 @@
                 },
                 "region": {
                   "charLength": 1,
-                  "charOffset": 846,
+                  "charOffset": 4215,
                   "snippet": {
                     "text": ";"
                   }
@@ -1820,10 +1540,10 @@
                   "relativeAddress": 0
                 },
                 "region": {
-                  "charLength": 2517,
-                  "charOffset": 726,
+                  "charLength": 2379,
+                  "charOffset": 4095,
                   "snippet": {
-                    "text": "If(Last(Attachment_Excel2.Attachments).Name <> Blank(),\r\nSet(varAttachmentControl5,JSON(Image2.Image,IncludeBinaryData));\r\nSet(varBase64Only5,Mid(varAttachmentControl5,Find(\",\", varAttachmentControl5)+1,Len(varAttachmentControl5)-Find (\",\", varAttachmentControl5)-1));\r\nCollect(FormAttachmentName,Filter(\r\n                                    GenericUploadAttachMentFile,\r\n                                    FormId = FormListId,\r\n                                    StartsWith(\r\n                                                FormAttachMent,\r\n                                                First(Split(AttachmentExcelName,\".\")).Result)));\r\n\t\tELCHK_UploadFiletoSharepoint.Run(\r\n            \"GenericUploadAttachMentFile\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            GUID(),\r\n            First(EditDetailUserForm_1).标题,\r\n            First(EditDetailUserForm_1).FormType,\r\n            First(Split(AttachmentExcelName,\".\")).Result&\"_\"&Text(\r\n                        Right(\r\n                                First(Split(\r\n                                Last(\r\n                                    SortByColumns(\r\n                                        FormAttachmentName,\r\n                                        \"ID\",\r\n                                        Ascending\r\n                                    )\r\n                                ).FormAttachMent,\".\")).Result\r\n                            ,\r\n                            3\r\n                        ) + 1,\r\n                        \"000\"\r\n                    )&\".\"&Last(Split(AttachmentExcelName,\".\")).Result,\r\n\t\t\tTextInput2_30.Text,\r\n            First(Split(AttachmentExcelName,\".\")).Result&\"_\"&Text(\r\n                        Right(\r\n                                First(Split(\r\n                                Last(\r\n                                    SortByColumns(\r\n                                        FormAttachmentName,\r\n                                        \"ID\",\r\n                                        Ascending\r\n                                    )\r\n                                ).FormAttachMent,\".\")).Result\r\n                            ,\r\n                            3\r\n                        ) + 1,\r\n                        \"000\"\r\n                    )&\".\"&Last(Split(AttachmentExcelName,\".\")).Result,\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            varBase64Only5,\r\n            \"\",\r\n            \"\"\r\n        )\r\n\t\t)"
+                    "text": "If(Last(Attachment_Excel2.Attachments).Name <> Blank(),\r\nSet(varAttachmentControl5,JSON(Image2.Image,IncludeBinaryData));\r\nSet(varBase64Only5,Mid(varAttachmentControl5,Find(\",\", varAttachmentControl5)+1,Len(varAttachmentControl5)-Find (\",\", varAttachmentControl5)-1));\r\nCollect(FormAttachmentName,Filter(\r\n                                    GenericUploadAttachMentFile,\r\n                                    FormId = FormListId,\r\n                                    StartsWith(\r\n                                                FormAttachMent,\r\n                                                First(Split(AttachmentExcelName,\".\")).Result)));    \r\nUploadFiletoSharepoint.Run(\r\n    \"GenericUploadAttachMentFile\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    GUID(),\r\n    First(EditDetailUserForm_1).Title,\r\n    First(EditDetailUserForm_1).FormType,\r\n    First(Split(AttachmentExcelName,\".\")).Result&\"_\"&Text(\r\n                        Right(\r\n                                First(Split(\r\n                                Last(\r\n                                    SortByColumns(\r\n                                        FormAttachmentName,\r\n                                        \"ID\",\r\n                                        Ascending\r\n                                    )\r\n                                ).FormAttachMent,\".\")).Result\r\n                            ,\r\n                            3\r\n                        ) + 1,\r\n                        \"000\"\r\n                    )&\".\"&Last(Split(AttachmentExcelName,\".\")).Result,\r\n    TextInput2_30.Text,\r\n    First(Split(AttachmentExcelName,\".\")).Result&\"_\"&Text(\r\n                        Right(\r\n                                First(Split(\r\n                                Last(\r\n                                    SortByColumns(\r\n                                        FormAttachmentName,\r\n                                        \"ID\",\r\n                                        Ascending\r\n                                    )\r\n                                ).FormAttachMent,\".\")).Result\r\n                            ,\r\n                            3\r\n                        ) + 1,\r\n                        \"000\"\r\n                    )&\".\"&Last(Split(AttachmentExcelName,\".\")).Result,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    varBase64Only5,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\"\r\n    )\r\n    \r\n    )"
                   }
                 }
               },
@@ -1860,10 +1580,10 @@
                   "relativeAddress": 0
                 },
                 "region": {
-                  "charLength": 536,
-                  "charOffset": 3522,
+                  "charLength": 395,
+                  "charOffset": 6759,
                   "snippet": {
-                    "text": "ELCHK_UploadFiletoSharepoint.Run(\r\n            \"UploadFlowAttachMent\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            First(EditDetailUserForm_1).标题,\r\n            FLowId,\r\n            TextInput2_31.Text,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n            \"\",\r\n            \"\",\r\n            varBase64Only6\r\n        )"
+                    "text": "UploadFiletoSharepoint.Run(\r\n    \"UploadFlowAttachMent\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    First(EditDetailUserForm_1).Title,\r\n    FLowId,\r\n    TextInput2_31.Text,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    varBase64Only6,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\"\r\n    )"
                   }
                 }
               },
@@ -1877,7 +1597,7 @@
           "message": {
             "arguments": [
               "Run",
-              "ELCHK_UploadFiletoSharepoint"
+              "UploadFiletoSharepoint"
             ],
             "id": "issue"
           },
@@ -1902,7 +1622,7 @@
                 },
                 "region": {
                   "charLength": 1,
-                  "charOffset": 3372,
+                  "charOffset": 6609,
                   "snippet": {
                     "text": ";"
                   }
@@ -1938,10 +1658,10 @@
                   "relativeAddress": 0
                 },
                 "region": {
-                  "charLength": 809,
-                  "charOffset": 3254,
+                  "charLength": 666,
+                  "charOffset": 6491,
                   "snippet": {
-                    "text": "If(Last(Attachment_Zip2.Attachments).Name <> Blank(),\r\nSet(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));\r\nSet(varBase64Only6,Mid(varAttachmentControl6,Find(\",\", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (\",\", varAttachmentControl6)-1));\r\nELCHK_UploadFiletoSharepoint.Run(\r\n            \"UploadFlowAttachMent\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            First(EditDetailUserForm_1).标题,\r\n            FLowId,\r\n            TextInput2_31.Text,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n            \"\",\r\n            \"\",\r\n            varBase64Only6\r\n        )\r\n\t\t)"
+                    "text": "If(Last(Attachment_Zip2.Attachments).Name <> Blank(),\r\nSet(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));\r\nSet(varBase64Only6,Mid(varAttachmentControl6,Find(\",\", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (\",\", varAttachmentControl6)-1));\r\nUploadFiletoSharepoint.Run(\r\n    \"UploadFlowAttachMent\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    First(EditDetailUserForm_1).Title,\r\n    FLowId,\r\n    TextInput2_31.Text,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    varBase64Only6,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\"\r\n    )\r\n)"
                   }
                 }
               },
@@ -1979,7 +1699,7 @@
                 },
                 "region": {
                   "charLength": 1,
-                  "charOffset": 3243,
+                  "charOffset": 6474,
                   "snippet": {
                     "text": ";"
                   }
@@ -2000,76 +1720,6 @@
           },
           "ruleId": "app-ErrTypeError",
           "ruleIndex": 1
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "DetailGeneralFormScreen.BottomContainer_2.Container11_2.Container17.BtnPrimaryLg_8.OnSelect"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "DetailGeneralFormScreen.BottomContainer_2.Container11_2.Container17.BtnPrimaryLg_8.OnSelect",
-                  "relativeAddress": 0
-                },
-                "region": {
-                  "charLength": 6539,
-                  "charOffset": 609,
-                  "snippet": {
-                    "text": "If(\r\n    Last(\r\n    Split(\r\n        CurrentUser,\r\n        \"@\"\r\n    ).Result\r\n).Result = \"chinasofti.com\",\r\n//中軟環境上傳\r\nIf(Last(Attachment_Excel2.Attachments).Name <> Blank(),\r\nSet(varAttachmentControl5,JSON(Image2.Image,IncludeBinaryData));\r\nSet(varBase64Only5,Mid(varAttachmentControl5,Find(\",\", varAttachmentControl5)+1,Len(varAttachmentControl5)-Find (\",\", varAttachmentControl5)-1));\r\nCollect(FormAttachmentName,Filter(\r\n                                    GenericUploadAttachMentFile,\r\n                                    FormId = FormListId,\r\n                                    StartsWith(\r\n                                                FormAttachMent,\r\n                                                First(Split(AttachmentExcelName,\".\")).Result)));\r\n\t\tELCHK_UploadFiletoSharepoint.Run(\r\n            \"GenericUploadAttachMentFile\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            GUID(),\r\n            First(EditDetailUserForm_1).标题,\r\n            First(EditDetailUserForm_1).FormType,\r\n            First(Split(AttachmentExcelName,\".\")).Result&\"_\"&Text(\r\n                        Right(\r\n                                First(Split(\r\n                                Last(\r\n                                    SortByColumns(\r\n                                        FormAttachmentName,\r\n                                        \"ID\",\r\n                                        Ascending\r\n                                    )\r\n                                ).FormAttachMent,\".\")).Result\r\n                            ,\r\n                            3\r\n                        ) + 1,\r\n                        \"000\"\r\n                    )&\".\"&Last(Split(AttachmentExcelName,\".\")).Result,\r\n\t\t\tTextInput2_30.Text,\r\n            First(Split(AttachmentExcelName,\".\")).Result&\"_\"&Text(\r\n                        Right(\r\n                                First(Split(\r\n                                Last(\r\n                                    SortByColumns(\r\n                                        FormAttachmentName,\r\n                                        \"ID\",\r\n                                        Ascending\r\n                                    )\r\n                                ).FormAttachMent,\".\")).Result\r\n                            ,\r\n                            3\r\n                        ) + 1,\r\n                        \"000\"\r\n                    )&\".\"&Last(Split(AttachmentExcelName,\".\")).Result,\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            varBase64Only5,\r\n            \"\",\r\n            \"\"\r\n        )\r\n\t\t);\r\n//上傳附件\r\nIf(Last(Attachment_Zip2.Attachments).Name <> Blank(),\r\nSet(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));\r\nSet(varBase64Only6,Mid(varAttachmentControl6,Find(\",\", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (\",\", varAttachmentControl6)-1));\r\nELCHK_UploadFiletoSharepoint.Run(\r\n            \"UploadFlowAttachMent\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            \"\",\r\n            First(EditDetailUserForm_1).标题,\r\n            FLowId,\r\n            TextInput2_31.Text,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n            \"\",\r\n            \"\",\r\n            varBase64Only6\r\n        )\r\n\t\t);\r\n\t\t,\r\n\r\n//客戶環境\r\n//上傳表格\r\nIf(Last(Attachment_Excel2.Attachments).Name <> Blank(),\r\nSet(varAttachmentControl5,JSON(Image2.Image,IncludeBinaryData));\r\nSet(varBase64Only5,Mid(varAttachmentControl5,Find(\",\", varAttachmentControl5)+1,Len(varAttachmentControl5)-Find (\",\", varAttachmentControl5)-1));\r\nCollect(FormAttachmentName,Filter(\r\n                                    GenericUploadAttachMentFile,\r\n                                    FormId = FormListId,\r\n                                    StartsWith(\r\n                                                FormAttachMent,\r\n                                                First(Split(AttachmentExcelName,\".\")).Result)));    \r\nUploadFiletoSharepoint.Run(\r\n    \"GenericUploadAttachMentFile\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    GUID(),\r\n    First(EditDetailUserForm_1).标题,\r\n    First(EditDetailUserForm_1).FormType,\r\n    First(Split(AttachmentExcelName,\".\")).Result&\"_\"&Text(\r\n                        Right(\r\n                                First(Split(\r\n                                Last(\r\n                                    SortByColumns(\r\n                                        FormAttachmentName,\r\n                                        \"ID\",\r\n                                        Ascending\r\n                                    )\r\n                                ).FormAttachMent,\".\")).Result\r\n                            ,\r\n                            3\r\n                        ) + 1,\r\n                        \"000\"\r\n                    )&\".\"&Last(Split(AttachmentExcelName,\".\")).Result,\r\n    TextInput2_30.Text,\r\n    First(Split(AttachmentExcelName,\".\")).Result&\"_\"&Text(\r\n                        Right(\r\n                                First(Split(\r\n                                Last(\r\n                                    SortByColumns(\r\n                                        FormAttachmentName,\r\n                                        \"ID\",\r\n                                        Ascending\r\n                                    )\r\n                                ).FormAttachMent,\".\")).Result\r\n                            ,\r\n                            3\r\n                        ) + 1,\r\n                        \"000\"\r\n                    )&\".\"&Last(Split(AttachmentExcelName,\".\")).Result,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    varBase64Only5,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\"\r\n    )\r\n    \r\n    );\r\n\r\n\r\n\r\n//上傳附件\r\nIf(Last(Attachment_Zip2.Attachments).Name <> Blank(),\r\nSet(varAttachmentControl6,JSON(Image3.Image,IncludeBinaryData));\r\nSet(varBase64Only6,Mid(varAttachmentControl6,Find(\",\", varAttachmentControl6)+1,Len(varAttachmentControl6)-Find (\",\", varAttachmentControl6)-1));\r\nUploadFiletoSharepoint.Run(\r\n    \"UploadFlowAttachMent\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    First(EditDetailUserForm_1).标题,\r\n    FLowId,\r\n    TextInput2_31.Text,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    Last(Attachment_Zip2.Attachments).Name,\r\n    varBase64Only6,\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\",\r\n    \"\"\r\n    )\r\n)\r\n)"
-                  }
-                }
-              },
-              "properties": {
-                "member": "OnSelect",
-                "module": "DetailGeneralFormScreen",
-                "type": "DetailGeneralFormScreen.BottomContainer_2.Container11_2.Container17.BtnPrimaryLg_8"
-              }
-            }
-          ],
-          "message": {
-            "arguments": [
-              "If"
-            ],
-            "id": "issue"
-          },
-          "properties": {
-            "level": "High"
-          },
-          "ruleId": "app-ErrInvalidArgs-Func",
-          "ruleIndex": 2
-        },
-        {
-          "locations": [
-            {
-              "logicalLocations": [
-                {
-                  "fullyQualifiedName": "CompleteScreen.TextInput1.AccessibleLabel"
-                }
-              ],
-              "physicalLocation": {
-                "address": {
-                  "fullyQualifiedName": "CompleteScreen.TextInput1.AccessibleLabel",
-                  "relativeAddress": 0
-                }
-              },
-              "properties": {
-                "member": "AccessibleLabel",
-                "module": "CompleteScreen",
-                "type": "CompleteScreen.TextInput1"
-              }
-            }
-          ],
-          "message": {
-            "id": "issue"
-          },
-          "properties": {
-            "level": "Medium"
-          },
-          "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
         },
         {
           "locations": [
@@ -2099,7 +1749,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-FocusBorderShouldBeVisible",
-          "ruleIndex": 4
+          "ruleIndex": 3
         },
         {
           "locations": [
@@ -2129,7 +1779,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -2159,7 +1809,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -2189,7 +1839,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -2219,7 +1869,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -2249,7 +1899,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -2279,7 +1929,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -2309,7 +1959,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-FocusBorderShouldBeVisible",
-          "ruleIndex": 4
+          "ruleIndex": 3
         },
         {
           "locations": [
@@ -2339,7 +1989,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -2369,7 +2019,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -2399,7 +2049,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -2429,7 +2079,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -2459,7 +2109,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -2489,7 +2139,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -2519,7 +2169,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -2549,7 +2199,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -2579,7 +2229,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -2609,7 +2259,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -2639,7 +2289,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -2669,7 +2319,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -2699,7 +2349,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -2729,7 +2379,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-FocusBorderShouldBeVisible",
-          "ruleIndex": 4
+          "ruleIndex": 3
         },
         {
           "locations": [
@@ -2759,7 +2409,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -2789,7 +2439,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -2819,7 +2469,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-FocusBorderShouldBeVisible",
-          "ruleIndex": 4
+          "ruleIndex": 3
         },
         {
           "locations": [
@@ -2849,7 +2499,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -2879,7 +2529,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -2909,7 +2559,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -2939,7 +2589,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -2969,7 +2619,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -2999,7 +2649,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -3029,7 +2679,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -3059,7 +2709,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -3089,7 +2739,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -3119,7 +2769,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -3149,7 +2799,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -3179,7 +2829,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -3209,7 +2859,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-FocusBorderShouldBeVisible",
-          "ruleIndex": 4
+          "ruleIndex": 3
         },
         {
           "locations": [
@@ -3239,7 +2889,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -3269,7 +2919,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -3299,7 +2949,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-FocusBorderShouldBeVisible",
-          "ruleIndex": 4
+          "ruleIndex": 3
         },
         {
           "locations": [
@@ -3329,7 +2979,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-FocusBorderShouldBeVisible",
-          "ruleIndex": 4
+          "ruleIndex": 3
         },
         {
           "locations": [
@@ -3359,7 +3009,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-FocusBorderShouldBeVisible",
-          "ruleIndex": 4
+          "ruleIndex": 3
         },
         {
           "locations": [
@@ -3389,7 +3039,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-FocusBorderShouldBeVisible",
-          "ruleIndex": 4
+          "ruleIndex": 3
         },
         {
           "locations": [
@@ -3419,7 +3069,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-FocusBorderShouldBeVisible",
-          "ruleIndex": 4
+          "ruleIndex": 3
         },
         {
           "locations": [
@@ -3449,7 +3099,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-FocusBorderShouldBeVisible",
-          "ruleIndex": 4
+          "ruleIndex": 3
         },
         {
           "locations": [
@@ -3479,7 +3129,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-FocusBorderShouldBeVisible",
-          "ruleIndex": 4
+          "ruleIndex": 3
         },
         {
           "locations": [
@@ -3509,7 +3159,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-FocusBorderShouldBeVisible",
-          "ruleIndex": 4
+          "ruleIndex": 3
         },
         {
           "locations": [
@@ -3539,7 +3189,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -3569,7 +3219,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -3599,7 +3249,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -3629,7 +3279,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -3659,7 +3309,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -3689,7 +3339,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -3719,7 +3369,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -3779,7 +3429,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -3809,7 +3459,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-FocusBorderShouldBeVisible",
-          "ruleIndex": 4
+          "ruleIndex": 3
         },
         {
           "locations": [
@@ -3839,7 +3489,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-FocusBorderShouldBeVisible",
-          "ruleIndex": 4
+          "ruleIndex": 3
         },
         {
           "locations": [
@@ -3869,7 +3519,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -3899,7 +3549,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-FocusBorderShouldBeVisible",
-          "ruleIndex": 4
+          "ruleIndex": 3
         },
         {
           "locations": [
@@ -3929,7 +3579,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -3959,7 +3609,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -3989,7 +3639,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -4019,7 +3669,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -4049,7 +3699,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -4079,7 +3729,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -4109,7 +3759,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -4139,7 +3789,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-FocusBorderShouldBeVisible",
-          "ruleIndex": 4
+          "ruleIndex": 3
         },
         {
           "locations": [
@@ -4169,7 +3819,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-FocusBorderShouldBeVisible",
-          "ruleIndex": 4
+          "ruleIndex": 3
         },
         {
           "locations": [
@@ -4199,7 +3849,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-FocusBorderShouldBeVisible",
-          "ruleIndex": 4
+          "ruleIndex": 3
         },
         {
           "locations": [
@@ -4229,7 +3879,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -4259,7 +3909,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -4289,7 +3939,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -4319,7 +3969,37 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "CompleteScreen.TextInput1.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "CompleteScreen.TextInput1.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "CompleteScreen",
+                "type": "CompleteScreen.TextInput1"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -4349,7 +4029,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -4379,7 +4059,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -4409,7 +4089,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -4439,7 +4119,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -4469,7 +4149,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-FocusBorderShouldBeVisible",
-          "ruleIndex": 4
+          "ruleIndex": 3
         },
         {
           "locations": [
@@ -4499,7 +4179,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -4529,7 +4209,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -4559,7 +4239,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -4589,7 +4269,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -4619,7 +4299,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -4649,7 +4329,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -4679,7 +4359,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -4709,7 +4389,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -4739,7 +4419,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -4769,7 +4449,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -4799,7 +4479,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -4829,7 +4509,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -4859,7 +4539,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -4889,7 +4569,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -4919,7 +4599,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -4949,7 +4629,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -4979,7 +4659,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -5009,7 +4689,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -5039,7 +4719,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -5069,7 +4749,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-FocusBorderShouldBeVisible",
-          "ruleIndex": 4
+          "ruleIndex": 3
         },
         {
           "locations": [
@@ -5099,7 +4779,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -5129,7 +4809,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -5159,7 +4839,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-FocusBorderShouldBeVisible",
-          "ruleIndex": 4
+          "ruleIndex": 3
         },
         {
           "locations": [
@@ -5189,7 +4869,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -5219,7 +4899,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -5249,7 +4929,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -5279,7 +4959,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -5309,7 +4989,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -5339,7 +5019,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -5369,7 +5049,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -5399,7 +5079,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -5429,7 +5109,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -5459,7 +5139,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -5489,7 +5169,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -5519,7 +5199,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -5549,7 +5229,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -5579,7 +5259,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -5609,7 +5289,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -5639,7 +5319,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -5669,7 +5349,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -5699,7 +5379,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -5729,7 +5409,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -5759,7 +5439,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -5789,7 +5469,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -5819,7 +5499,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -5849,7 +5529,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -5879,7 +5559,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -5909,7 +5589,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -5939,7 +5619,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -5969,7 +5649,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -5999,7 +5679,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -6029,7 +5709,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-FocusBorderShouldBeVisible",
-          "ruleIndex": 4
+          "ruleIndex": 3
         },
         {
           "locations": [
@@ -6059,7 +5739,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -6089,7 +5769,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-FocusBorderShouldBeVisible",
-          "ruleIndex": 4
+          "ruleIndex": 3
         },
         {
           "locations": [
@@ -6119,7 +5799,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-FocusBorderShouldBeVisible",
-          "ruleIndex": 4
+          "ruleIndex": 3
         },
         {
           "locations": [
@@ -6149,7 +5829,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -6179,7 +5859,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -6209,7 +5889,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -6239,7 +5919,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -6269,7 +5949,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -6299,7 +5979,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -6329,7 +6009,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -6359,7 +6039,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -6389,7 +6069,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -6419,7 +6099,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -6449,7 +6129,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -6479,7 +6159,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -6509,7 +6189,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -6539,7 +6219,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -6569,7 +6249,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -6599,7 +6279,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -6658,7 +6338,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -6688,7 +6368,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -6718,7 +6398,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-AccessibleLabelNeeded",
-          "ruleIndex": 3
+          "ruleIndex": 5
         },
         {
           "locations": [
@@ -6748,7 +6428,7 @@
             "level": "Medium"
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
-          "ruleIndex": 5
+          "ruleIndex": 4
         },
         {
           "locations": [
@@ -7009,23 +6689,6 @@
               }
             },
             {
-              "id": "acc-AccessibleLabelNeeded",
-              "messageStrings": {
-                "issue": {
-                  "text": "Missing accessible label"
-                }
-              },
-              "properties": {
-                "componentType": "app",
-                "howToFix": [
-                  "Edit the accessible label property to describe the item."
-                ],
-                "level": "Medium",
-                "primaryCategory": "accessibility",
-                "whyFix": "If there's no accessible text, people who can’t see the screen won't understand what’s in images and controls."
-              }
-            },
-            {
               "id": "acc-FocusBorderShouldBeVisible",
               "messageStrings": {
                 "issue": {
@@ -7057,6 +6720,23 @@
                 "level": "Medium",
                 "primaryCategory": "accessibility",
                 "whyFix": "People who use the keyboard with your app will not be able to access this element without a tab stop."
+              }
+            },
+            {
+              "id": "acc-AccessibleLabelNeeded",
+              "messageStrings": {
+                "issue": {
+                  "text": "Missing accessible label"
+                }
+              },
+              "properties": {
+                "componentType": "app",
+                "howToFix": [
+                  "Edit the accessible label property to describe the item."
+                ],
+                "level": "Medium",
+                "primaryCategory": "accessibility",
+                "whyFix": "If there's no accessible text, people who can’t see the screen won't understand what’s in images and controls."
               }
             },
             {
@@ -7097,106 +6777,106 @@
               "id": "app-UnusedVariables",
               "messageStrings": {
                 "issue": {
-                  "text": "未用变量"
+                  "text": "Unused variable"
                 }
               },
               "properties": {
                 "componentType": "app",
                 "howToFix": [
-                  "请删除未用变量。"
+                  "Remove the unused variable."
                 ],
                 "level": "Medium",
                 "primaryCategory": "performance",
-                "whyFix": "此变量已声明，但未被任何控件引用，因此不是必需的。"
+                "whyFix": "This variable is declared but is not referenced by any control, so it is not needed."
               }
             },
             {
               "id": "app-UnusedMediaResources",
               "messageStrings": {
                 "issue": {
-                  "text": "未使用的媒体文件"
+                  "text": "Unused media files"
                 }
               },
               "properties": {
                 "componentType": "app",
                 "howToFix": [
-                  "在“媒体”窗格中删除未使用的媒体文件。"
+                  "Remove the unused media file in the Media pane."
                 ],
                 "level": "Medium",
                 "primaryCategory": "performance",
-                "whyFix": "任何控件公式都未引用此媒体文件，因此不需要该文件。删除它可提高性能。"
+                "whyFix": "This media file is not referenced by any control formulas so it is not needed. Removing it will improve performance."
               }
             },
             {
               "id": "app-CollectDelegatableDataSource",
               "messageStrings": {
                 "issue": {
-                  "text": "从数据源检索的行可能不完整。"
+                  "text": "The rows retrieved from the data source may not be complete."
                 }
               },
               "properties": {
                 "componentType": "app",
                 "howToFix": [
-                  "通过更新公式“ClearCollect(DataModelName, GenericFormModel)”以包含筛选函数(如 \"Filter\" 或 \"Search\")，限制从数据源收集的数据。"
+                  "Limit the data collected from the data source by updating the formula \"ClearCollect(DataModelName, GenericFormModel)\" to include a filtering function, such as 'Filter' or 'Search'."
                 ],
                 "level": "Medium",
                 "primaryCategory": "performance",
-                "whyFix": "如果数据源过大，则使用 \"Collect\" 函数直接从连接的数据源创建集合可能无法加载每一行。"
+                "whyFix": "Using the 'Collect' function to create a collection directly from a connected data source may not load every row if the data source is too large."
               }
             },
             {
               "id": "app-DataSourceDefaultMaxRowsLimit",
               "messageStrings": {
                 "issue": {
-                  "text": "非可委派查询的数据行限制大于 500"
+                  "text": "Data row limit for non-delegable queries is more than 500"
                 }
               },
               "properties": {
                 "componentType": "app",
                 "howToFix": [
-                  "在“高级应用设置”中更新“非可委派查询的数据行限制”。"
+                  "Update 'Data row limit for non-delegable queries' in the advanced app settings."
                 ],
                 "level": "Medium",
                 "primaryCategory": "performance",
-                "whyFix": "在运行非委托查询时，如果“数据行限制”超过 500，可能会导致应用运行速度较慢，因为应用将不得不自行处理每一行，而不是在服务器上运行查询。"
+                "whyFix": "A 'data row limit' more than 500 may result in a slower app when running non-delegable queries, because the app will have to process every row itself, rather than running the query on the server."
               }
             },
             {
               "id": "app-ScreenHasManyControls",
               "messageStrings": {
                 "issue": {
-                  "text": "屏幕上的控件过多"
+                  "text": "Too many controls on a screen"
                 }
               },
               "properties": {
                 "componentType": "app",
                 "howToFix": [
-                  "减少屏幕上的控件数。",
-                  "将应用拆分为多个屏幕，降低每个屏幕的复杂性。",
-                  "使用组件来统一屏幕之间相同的分组控件，从而减少重复。",
-                  "使用库来表示一系列重复的相似控件。",
-                  "将应用分解为多个应用，以便每个应用大小较小且性能良好。"
+                  "Reduce the number of controls on the screen.",
+                  "Break the app into more screens to reduce the per-screen complexity.",
+                  "Use components to unify grouped controls that are identical across screens, reducing duplication.",
+                  "Use galleries to represent a series of repeated similar controls.",
+                  "Break the app into multiple apps so that each app is small and performant."
                 ],
                 "level": "Medium",
                 "primaryCategory": "performance",
-                "whyFix": "如果屏幕上的控件过多，则每个控件都将使用资源，并且应用运行速度可能变慢或可能会变得无响应。“Design Guide Screen”的估计复杂性为 357，超过了建议的最大阈值(300)。"
+                "whyFix": "Each control consumes resources, and an app may become slow or unresponsive if a screen has too many controls. The estimated complexity of \"Design Guide Screen\" is 357, which exceeds the maximum threshold recommended (300)."
               }
             },
             {
               "id": "app-InefficientDelayLoading",
               "messageStrings": {
                 "issue": {
-                  "text": "低效的延迟加载"
+                  "text": "Inefficient delay loading"
                 }
               },
               "properties": {
                 "componentType": "app",
                 "howToFix": [
-                  "改用变量、集合和导航上下文在屏幕之间共享状态。"
+                  "Use variables, collections, and navigation context to share state across screens instead."
                 ],
                 "level": "Medium",
                 "primaryCategory": "performance",
-                "whyFix": "引用其他屏幕上的控件的控件会拖慢应用加载和导航的速度。这样做可能会强制应用立即加载其他屏幕，而不是等到用户导航到该屏幕之后。"
+                "whyFix": "Controls that reference controls on other screens can slow down app loading and navigation. Doing this may force the app to load the other screens immediately, rather than waiting until the user navigates to that screen."
               }
             }
           ],
