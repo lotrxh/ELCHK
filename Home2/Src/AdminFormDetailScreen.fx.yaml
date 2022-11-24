@@ -167,14 +167,14 @@ AdminFormDetailScreen As screen:
                             //如果表格名稱修改，同步附件的TempFileName
                     UpdateIf(
                                     TemplateFileList,
-                                    GenericFormId = First(EditForm).标题,
+                                    GenericFormId = First(EditForm).Title,
                                     {TempFileName: TextInput_FormName.Text}
                                 );
                     
                             //如果附件修改，删除之前的版本
                             //删除list中的附件记录
                     With(
-                        {FormmodelID: First(EditForm).标题},
+                        {FormmodelID: First(EditForm).Title},
                         If(
                             Label_newform.Text <> "新增表格" && attachmentdelete1,
                             Remove(
@@ -194,7 +194,7 @@ AdminFormDetailScreen As screen:
                         )
                     );
                     With(
-                        {FormmodelID: First(EditForm).标题},
+                        {FormmodelID: First(EditForm).Title},
                         If(
                             Label_newform.Text <> "新增表格" && attachmentdelete2,
                             Remove(
@@ -214,7 +214,7 @@ AdminFormDetailScreen As screen:
                         )
                     );
                     With(
-                        {FormmodelID: First(EditForm).标题},
+                        {FormmodelID: First(EditForm).Title},
                         If(
                             Label_newform.Text <> "新增表格" && attachmentdelete3,
                             Remove(
@@ -265,7 +265,7 @@ AdminFormDetailScreen As screen:
                                         [@TextInput_FormName].Text,
                                         drpFilter_FormType.Selected.Result,
                                         Last(Attachment_Form.Attachments).Name,
-                                        First(EditForm).标题,
+                                        First(EditForm).Title,
                                         Last(Attachment_Form.Attachments).Name,
                                         "",
                                         "",
@@ -314,7 +314,7 @@ AdminFormDetailScreen As screen:
                                         [@TextInput_FormName].Text,
                                         "示範表格TT",
                                         Last(Attachment_Demonstrationform.Attachments).Name,
-                                        First(EditForm).标题,
+                                        First(EditForm).Title,
                                         Last(Attachment_Demonstrationform.Attachments).Name,
                                         "",
                                         "",
@@ -363,7 +363,7 @@ AdminFormDetailScreen As screen:
                                         [@TextInput_FormName].Text,
                                         "填寫指引TT",
                                         Last(Attachment_FillGuide.Attachments).Name,
-                                        First(EditForm).标题,
+                                        First(EditForm).Title,
                                         Last(Attachment_FillGuide.Attachments).Name,
                                         "",
                                         "",
@@ -439,7 +439,7 @@ AdminFormDetailScreen As screen:
                                         GenericFormModel,
                                         Defaults(GenericFormModel),
                                         {
-                                            标题: GenericFormModeGuid,
+                                            Title: GenericFormModeGuid,
                                             ModelDepartment: drpFilter_Department.Selected.Result,
                                             ModelType: drpFilter_FormType.Selected.Result,
                                             ModelFlowNumber: TextInput_FormNumber.Text,
@@ -1204,7 +1204,7 @@ AdminFormDetailScreen As screen:
                     Size: =11
                     Visible: =If((Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程") && Radio_attachment.Selected.Value="有",true,false)
                     Width: =233
-                    X: =605
+                    X: =562
                     Y: =521
                     ZIndex: =65
 
@@ -1219,7 +1219,7 @@ AdminFormDetailScreen As screen:
                     Text: ="附件密碼"
                     Visible: =If((Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程") && Radio_attachment.Selected.Value="有",true,false)
                     Width: =120
-                    X: =604
+                    X: =562
                     Y: =484
                     ZIndex: =66
 
@@ -1248,7 +1248,7 @@ AdminFormDetailScreen As screen:
                     Size: =11
                     Visible: =If(Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
                     Width: =150
-                    X: =311
+                    X: =292
                     Y: =521
                     ZIndex: =3
 
@@ -1263,7 +1263,7 @@ AdminFormDetailScreen As screen:
                     Text: ="申請表附件"
                     Visible: =If(Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
                     Width: =81
-                    X: =311
+                    X: =292
                     Y: =487
                     ZIndex: =8
 
@@ -1278,7 +1278,7 @@ AdminFormDetailScreen As screen:
                     Text: ="*"
                     Visible: =If(Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
                     Width: =10
-                    X: =303
+                    X: =282
                     Y: =484
                     ZIndex: =69
 
@@ -1396,7 +1396,7 @@ AdminFormDetailScreen As screen:
                     Size: =11
                     Visible: =If(Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
                     Width: =233
-                    X: =23
+                    X: =21
                     Y: =521
                     ZIndex: =43
 
@@ -1411,7 +1411,7 @@ AdminFormDetailScreen As screen:
                     Text: ="申請表密碼"
                     Visible: =If(Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
                     Width: =120
-                    X: =23
+                    X: =21
                     Y: =484
                     ZIndex: =44
 
@@ -1426,7 +1426,7 @@ AdminFormDetailScreen As screen:
                     Text: ="*"
                     Visible: =If(Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
                     Width: =10
-                    X: =13
+                    X: =11
                     Y: =484
                     ZIndex: =68
 

@@ -285,7 +285,7 @@ StatisticsScreen As screen:
                                         drpFilterPedningDepartment_2.Selected.Value
                                     ),
                                     IsBlank(drpFilterPedningDepartment_1.Selected.Result) || 'Operator ' = drpFilterPedningDepartment_1.Selected.Result,
-                                    创建时间 >= DatePicker1_4.SelectedDate && 创建时间 <= DatePicker1_5.SelectedDate
+                                    Created >= DatePicker1_4.SelectedDate && Created <= DatePicker1_5.SelectedDate
                                 ),
                                 "DepartMentUnit",
                                 "DepartMentUnitData"
@@ -414,7 +414,7 @@ StatisticsScreen As screen:
                                         true,
                                         false
                                     ) || DepartMentUnit = drpFilterPedningDepartment_3.Selected.Result,
-                                    创建时间 >= DatePicker1_4.SelectedDate && 创建时间 <= DatePicker1_5.SelectedDate
+                                    Created >= DatePicker1_4.SelectedDate && Created <= DatePicker1_5.SelectedDate
                                 ),
                                 "Task_Name",
                                 "TaskN"
@@ -479,7 +479,7 @@ StatisticsScreen As screen:
         Label20_3 As label:
             Size: =FountSise
             Text: |-
-                ="报表类型:"
+                ="報表類型:"
             Width: =79
             X: =192
             Y: =25
