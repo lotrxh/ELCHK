@@ -844,6 +844,7 @@
                             BorderThickness: =1
                             Color: =glbNeutralPrimaryColor
                             DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                            DisabledFill: =RGBA(0, 0, 0,0)
                             DisplayMode: =If(ThisItem.ModelName in Filter(GenericFormModel,IsEnable="0").ModelName,Disabled,Edit)
                             Fill: =RGBA(0, 0, 0, 0)
                             FocusedBorderThickness: =1
