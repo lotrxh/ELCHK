@@ -333,15 +333,16 @@
                 AlignInContainer: =AlignInContainer.Center
                 Fill: =RGBA(255, 255, 255, 1)
                 FillPortions: =0
-                Height: =Max(40,Statuslbl.Y+Statuslbl.Height+3)
+                Height: =Max(40,FormNameLabel_2.Y+FormNameLabel_2.Height+3)
                 LayoutGap: =10
                 LayoutMinHeight: =100
                 LayoutMinWidth: =250
                 LayoutMode: =LayoutMode.Auto
                 LayoutWrap: =true
+                PaddingBottom: =1
                 PaddingLeft: =1
                 PaddingRight: =1
-                PaddingTop: =20
+                PaddingTop: =5
                 Width: |
                     =Switch(
                             DetailGeneralFormScreen.Size,
@@ -356,7 +357,6 @@
                 ZIndex: =1
 
                 FormNameLabel_2 As label:
-                    AlignInContainer: =AlignInContainer.Start
                     AutoHeight: =true
                     Color: =glbNeutralPrimaryColor
                     Fill: =RGBA(255, 255, 255, 1)
@@ -380,6 +380,7 @@
                     ZIndex: =2
 
                 BtnDefault_20 As button:
+                    AlignInContainer: =AlignInContainer.Start
                     BorderColor: =Self.Color
                     BorderThickness: =1
                     Color: =glbThemePrimaryColor
@@ -483,7 +484,6 @@
 
                 Statuslbl As label:
                     Align: =Align.Center
-                    AlignInContainer: =AlignInContainer.Start
                     BorderColor: =RGBA(255, 255, 255, 1)
                     BorderStyle: =BorderStyle.None
                     BorderThickness: =1
@@ -951,13 +951,28 @@
                         )
                     Fill: =White
                     FocusedBorderThickness: =1
-                    FontWeight: =FontWeight.Bold
+                    FontWeight: =FontWeight.Normal
                     Height: =36
                     HoverBorderColor: =ColorFade(Self.Color, -15%)
                     HoverColor: =ColorFade(Self.Color, -15%)
                     HoverFill: =RGBA(255, 255, 255, 1)
                     OnSelect: |
                         =If(
+                            First(
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            Approval_No = FLowId
+                                        ),
+                                        "Priortty",
+                                        Descending
+                                    )
+                                ).TaskStatus = "000",
+                                Notify(
+                                "該任務已經被拒絕，請勿重複操作。",
+                                Warning
+                            ),
+                        If(
                             IsBlank(TextInput2_34.Text),
                             Notify(
                                 "請填寫拒絕原因",
@@ -1079,6 +1094,7 @@
                                 Navigate(HomePageScreen,ScreenTransition.None)
                             )
                         );
+                        )
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
@@ -4563,6 +4579,21 @@
                     HoverFill: =RGBA(255, 255, 255, 1)
                     OnSelect: |
                         =If(
+                            First(
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            Approval_No = FLowId
+                                        ),
+                                        "Priortty",
+                                        Descending
+                                    )
+                                ).TaskStatus = "000",
+                                Notify(
+                                "該任務已經被拒絕，請勿重複操作。",
+                                Warning
+                            ),
+                        If(
                             IsBlank(TextInput2_34.Text),
                             Notify(
                                 "請填寫拒絕原因",
@@ -4684,6 +4715,7 @@
                                 Navigate(HomePageScreen,ScreenTransition.None)
                             )
                         );
+                            )
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
