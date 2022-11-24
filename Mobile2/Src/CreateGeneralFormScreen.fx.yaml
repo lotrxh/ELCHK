@@ -188,7 +188,7 @@
                 BorderColor: =Self.Fill
                 BorderThickness: =1
                 DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                Fill: =RGBA(39, 67, 125, 1)
+                Fill: =glbThemePrimaryColor
                 FocusedBorderThickness: =1
                 Height: =36
                 HoverFill: =ColorFade(Self.Fill, -15%)
@@ -660,20 +660,20 @@
 
     MainflowContainer As groupContainer.verticalAutoLayoutContainer:
         Fill: =RGBA(242, 242, 242, 1)
-        Height: =If(HeaderContainer_4.Visible=true,648,711)
+        Height: =If(BottomContainer.Visible = true,Parent.Height-Self.Y-BottomContainer.Height,Parent.Height-Self.Y)
         LayoutDirection: =LayoutDirection.Vertical
         LayoutGap: =10
         LayoutMode: =LayoutMode.Auto
         LayoutOverflowY: =LayoutOverflow.Scroll
         Width: =Parent.Width
-        Y: =If(HeaderContainer_4.Visible=true,63,0)
+        Y: =52
         ZIndex: =5
 
         InfoContainer As groupContainer.horizontalAutoLayoutContainer:
             AlignInContainer: =AlignInContainer.SetByContainer
             Fill: =RGBA(255, 255, 255, 1)
             FillPortions: =0
-            Height: =InfoContainer12_2.Y+InfoContainer12_2.Height+20
+            Height: =InfoContainer12_2.Y+InfoContainer12_2.Height
             LayoutAlignItems: =LayoutAlignItems.Center
             LayoutDirection: =LayoutDirection.Vertical
             LayoutMinHeight: =100
@@ -686,7 +686,7 @@
                 AlignInContainer: =AlignInContainer.SetByContainer
                 Fill: =RGBA(255, 255, 255, 1)
                 FillPortions: =0
-                Height: =If(HeaderContainer_4.Visible=true,BtnPrimaryLg_10.Y+BtnPrimaryLg_10.Height,HeaderContainer_6.Y+HeaderContainer_6.Height)
+                Height: =40
                 LayoutAlignItems: =LayoutAlignItems.Center
                 LayoutGap: =5
                 LayoutMinHeight: =100
@@ -701,80 +701,14 @@
                     =Switch(
                             CreateGeneralFormScreen.Size,
                             ScreenSize.Small,
-                           Parent.Width-40,
+                           Parent.Width,
                             ScreenSize.Medium,
                            Parent.Width-40,
                            ScreenSize.Large,
                            Parent.Width-40,
-                           //1200
-                           Parent.Width
+                           1200
                       )
                 ZIndex: =1
-
-                HeaderContainer_6 As groupContainer.manualLayoutContainer:
-                    AlignInContainer: =AlignInContainer.Center
-                    Fill: =RGBA(255, 255, 255, 1)
-                    FillPortions: =0
-                    Height: =60
-                    LayoutMinHeight: =100
-                    LayoutMinWidth: =250
-                    Visible: =If(App.ActiveScreen.Width<500,false,true)
-                    Width: =250
-                    ZIndex: =1
-
-                    Icon2_7 As icon.Home:
-                        Color: =RGBA(39, 67, 125, 1)
-                        Fill: =RGBA(255, 255, 255, 1)
-                        Height: =30
-                        Icon: =Icon.BackArrow
-                        OnSelect: |-
-                            =If(
-                                Param("Page")="Home",
-                                    Launch(JumpUrlClientAPP & "&Screen=HomepageScreen",{},LaunchTarget.Replace),
-                                    Navigate(HomePageScreen,ScreenTransition.None)
-                                )
-                        Width: =30
-                        X: =6
-                        Y: =15
-                        ZIndex: =6
-
-                    Image1_4 As image:
-                        Height: =30
-                        Image: =logo_单图标
-                        OnSelect: |-
-                            =If(
-                                Param("Page")="Home",
-                                    Launch(JumpUrlClientAPP & "&Screen=HomepageScreen",{},LaunchTarget.Replace),
-                                    Navigate(HomePageScreen,ScreenTransition.None)
-                                )
-                        Width: =30
-                        X: =47
-                        Y: =15
-                        ZIndex: =7
-
-                    Label1_77 As label:
-                        Fill: =RGBA(255, 255, 255, 1)
-                        Height: =60
-                        OnSelect: |-
-                            =If(
-                                Param("Page")="Home",
-                                    Launch(JumpUrlClientAPP & "&Screen=HomepageScreen",{},LaunchTarget.Replace),
-                                    Navigate(HomePageScreen,ScreenTransition.None)
-                                )
-                        PaddingBottom: =0
-                        PaddingLeft: =0
-                        PaddingRight: =0
-                        PaddingTop: =0
-                        Size: =8
-                        Text: |-
-                            =If(App.ActiveScreen.Width<600,"ELCSS-HK
-                            eProcessing System (ePS)",
-                            "ELCSS-HK
-                            eProcessing System (ePS)
-                            版本：1.0.0")
-                        Width: =146
-                        X: =88
-                        ZIndex: =8
 
                 FormNameLabel_1 As label:
                     Color: =glbNeutralPrimaryColor
@@ -1270,21 +1204,21 @@
                 AlignInContainer: =AlignInContainer.SetByContainer
                 Fill: =RGBA(255, 255, 255, 1)
                 FillPortions: =0
-                Height: =BtnDefault_25.Y+BtnDefault_25.Height+10
+                Height: =Container19.Y+Container19.Height+5
                 LayoutGap: =10
                 LayoutMinHeight: =40
                 LayoutMinWidth: =250
                 LayoutMode: =LayoutMode.Auto
                 LayoutWrap: =true
                 PaddingBottom: =1
-                PaddingLeft: =1
-                PaddingRight: =1
+                PaddingLeft: =10
+                PaddingRight: =10
                 PaddingTop: =1
                 Width: |
                     =Switch(
                             CreateGeneralFormScreen.Size,
                             ScreenSize.Small,
-                           Parent.Width-40,
+                           Parent.Width,
                             ScreenSize.Medium,
                            Parent.Width-40,
                            ScreenSize.Large,
@@ -1296,9 +1230,8 @@
                 ZIndex: =2
 
                 Container13_8 As groupContainer.manualLayoutContainer:
-                    AlignInContainer: =AlignInContainer.SetByContainer
+                    AlignInContainer: =AlignInContainer.Start
                     Fill: =RGBA(255, 255, 255, 1)
-                    FillPortions: =0
                     Height: =28
                     LayoutMinHeight: =100
                     LayoutMinWidth: =250
@@ -1404,7 +1337,7 @@
                         ZIndex: =2
 
                 Container13_11 As groupContainer.manualLayoutContainer:
-                    AlignInContainer: =AlignInContainer.SetByContainer
+                    AlignInContainer: =AlignInContainer.Center
                     Fill: =RGBA(255, 255, 255, 1)
                     Height: =31
                     LayoutMinHeight: =100
@@ -1439,104 +1372,125 @@
                         X: =65
                         ZIndex: =2
 
-                BtnDefault_23 As button:
-                    BorderColor: =Self.Color
-                    BorderThickness: =1
-                    Color: =RGBA(39, 67, 125, 1)
-                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                    Fill: =White
-                    FocusedBorderThickness: =1
-                    FontWeight: =FontWeight.Normal
-                    Height: =28
-                    HoverBorderColor: =ColorFade(Self.Color, -15%)
-                    HoverColor: =ColorFade(Self.Color, -15%)
-                    HoverFill: =RGBA(255, 255, 255, 1)
-                    OnSelect: |
-                        =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).附件).AbsoluteUri)
-                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).附件).DisplayName & "?web=1")
-                    PaddingBottom: =0
-                    PaddingLeft: =0
-                    PaddingRight: =0
-                    PaddingTop: =0
-                    PressedBorderColor: =ColorFade(Self.Color, -25%)
-                    PressedColor: =ColorFade(Self.Color, -25%)
-                    PressedFill: =ColorFade(Self.Color, 95%)
-                    RadiusBottomLeft: =2
-                    RadiusBottomRight: =2
-                    RadiusTopLeft: =2
-                    RadiusTopRight: =2
-                    Size: =9
-                    Text: ="下載表格"
-                    Width: =100
-                    X: =Parent.Width-Self.Width-1
-                    Y: =1
-                    ZIndex: =5
+                Container19 As groupContainer.horizontalAutoLayoutContainer:
+                    AlignInContainer: =AlignInContainer.Start
+                    FillPortions: =0.8
+                    Height: =38
+                    LayoutGap: =10
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =If(CreateGeneralFormScreen.Size<=2,Parent.Width-20,250)
+                    LayoutMode: =LayoutMode.Auto
+                    PaddingLeft: =1
+                    PaddingRight: =10
+                    ZIndex: =8
 
-                BtnDefault_24 As button:
-                    BorderColor: =Self.Color
-                    BorderThickness: =1
-                    Color: =RGBA(39, 67, 125, 1)
-                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                    Fill: =White
-                    FocusedBorderThickness: =1
-                    FontWeight: =FontWeight.Normal
-                    Height: =28
-                    HoverBorderColor: =ColorFade(Self.Color, -15%)
-                    HoverColor: =ColorFade(Self.Color, -15%)
-                    HoverFill: =RGBA(255, 255, 255, 1)
-                    OnSelect: |-
-                        =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text)).附件).AbsoluteUri)
-                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType="填寫指引TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType="填寫指引TT")).附件).DisplayName & "?web=1")
-                    PaddingBottom: =0
-                    PaddingLeft: =0
-                    PaddingRight: =0
-                    PaddingTop: =0
-                    PressedBorderColor: =ColorFade(Self.Color, -25%)
-                    PressedColor: =ColorFade(Self.Color, -25%)
-                    PressedFill: =ColorFade(Self.Color, 95%)
-                    RadiusBottomLeft: =2
-                    RadiusBottomRight: =2
-                    RadiusTopLeft: =2
-                    RadiusTopRight: =2
-                    Size: =9
-                    Text: ="下載指引"
-                    Width: =100
-                    X: =Parent.Width-Self.Width-1
-                    Y: =1
-                    ZIndex: =6
+                    BtnDefault_23 As button:
+                        AlignInContainer: =AlignInContainer.Center
+                        BorderColor: =Self.Color
+                        BorderThickness: =1
+                        Color: =RGBA(39, 67, 125, 1)
+                        DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                        Fill: =White
+                        FillPortions: =1
+                        FocusedBorderThickness: =1
+                        FontWeight: =FontWeight.Normal
+                        Height: =28
+                        HoverBorderColor: =ColorFade(Self.Color, -15%)
+                        HoverColor: =ColorFade(Self.Color, -15%)
+                        HoverFill: =RGBA(255, 255, 255, 1)
+                        LayoutMinWidth: =20
+                        OnSelect: |
+                            =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).附件).AbsoluteUri)
+                            Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).附件).DisplayName & "?web=1")
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        PressedBorderColor: =ColorFade(Self.Color, -25%)
+                        PressedColor: =ColorFade(Self.Color, -25%)
+                        PressedFill: =ColorFade(Self.Color, 95%)
+                        RadiusBottomLeft: =2
+                        RadiusBottomRight: =2
+                        RadiusTopLeft: =2
+                        RadiusTopRight: =2
+                        Size: =10
+                        Text: ="下載表格"
+                        Width: =100
+                        X: =Parent.Width-Self.Width-1
+                        Y: =1
+                        ZIndex: =1
 
-                BtnDefault_25 As button:
-                    BorderColor: =Self.Color
-                    BorderThickness: =1
-                    Color: =RGBA(39, 67, 125, 1)
-                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                    Fill: =White
-                    FocusedBorderThickness: =1
-                    FontWeight: =FontWeight.Normal
-                    Height: =28
-                    HoverBorderColor: =ColorFade(Self.Color, -15%)
-                    HoverColor: =ColorFade(Self.Color, -15%)
-                    HoverFill: =RGBA(255, 255, 255, 1)
-                    OnSelect: |-
-                        =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text)).附件).AbsoluteUri)
-                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType="示範表格TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType="示範表格TT")).附件).DisplayName & "?web=1")
-                    PaddingBottom: =0
-                    PaddingLeft: =0
-                    PaddingRight: =0
-                    PaddingTop: =0
-                    PressedBorderColor: =ColorFade(Self.Color, -25%)
-                    PressedColor: =ColorFade(Self.Color, -25%)
-                    PressedFill: =ColorFade(Self.Color, 95%)
-                    RadiusBottomLeft: =2
-                    RadiusBottomRight: =2
-                    RadiusTopLeft: =2
-                    RadiusTopRight: =2
-                    Size: =9
-                    Text: ="下載範例"
-                    Width: =100
-                    X: =Parent.Width-Self.Width-1
-                    Y: =1
-                    ZIndex: =7
+                    BtnDefault_24 As button:
+                        AlignInContainer: =AlignInContainer.Center
+                        BorderColor: =Self.Color
+                        BorderThickness: =1
+                        Color: =RGBA(39, 67, 125, 1)
+                        DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                        Fill: =White
+                        FillPortions: =1
+                        FocusedBorderThickness: =1
+                        FontWeight: =FontWeight.Normal
+                        Height: =28
+                        HoverBorderColor: =ColorFade(Self.Color, -15%)
+                        HoverColor: =ColorFade(Self.Color, -15%)
+                        HoverFill: =RGBA(255, 255, 255, 1)
+                        LayoutMinWidth: =20
+                        OnSelect: |-
+                            =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text)).附件).AbsoluteUri)
+                            Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType="填寫指引TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType="填寫指引TT")).附件).DisplayName & "?web=1")
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        PressedBorderColor: =ColorFade(Self.Color, -25%)
+                        PressedColor: =ColorFade(Self.Color, -25%)
+                        PressedFill: =ColorFade(Self.Color, 95%)
+                        RadiusBottomLeft: =2
+                        RadiusBottomRight: =2
+                        RadiusTopLeft: =2
+                        RadiusTopRight: =2
+                        Size: =10
+                        Text: ="下載指引"
+                        Width: =100
+                        X: =Parent.Width-Self.Width-1
+                        Y: =1
+                        ZIndex: =2
+
+                    BtnDefault_25 As button:
+                        AlignInContainer: =AlignInContainer.Center
+                        BorderColor: =Self.Color
+                        BorderThickness: =1
+                        Color: =RGBA(39, 67, 125, 1)
+                        DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                        Fill: =White
+                        FillPortions: =1
+                        FocusedBorderThickness: =1
+                        FontWeight: =FontWeight.Normal
+                        Height: =28
+                        HoverBorderColor: =ColorFade(Self.Color, -15%)
+                        HoverColor: =ColorFade(Self.Color, -15%)
+                        HoverFill: =RGBA(255, 255, 255, 1)
+                        LayoutMinWidth: =20
+                        OnSelect: |-
+                            =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text)).附件).AbsoluteUri)
+                            Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType="示範表格TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType="示範表格TT")).附件).DisplayName & "?web=1")
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        PressedBorderColor: =ColorFade(Self.Color, -25%)
+                        PressedColor: =ColorFade(Self.Color, -25%)
+                        PressedFill: =ColorFade(Self.Color, 95%)
+                        RadiusBottomLeft: =2
+                        RadiusBottomRight: =2
+                        RadiusTopLeft: =2
+                        RadiusTopRight: =2
+                        Size: =10
+                        Text: ="下載範例"
+                        Width: =100
+                        X: =Parent.Width-Self.Width-1
+                        Y: =1
+                        ZIndex: =3
 
         FillInContainer As groupContainer.horizontalAutoLayoutContainer:
             AlignInContainer: =AlignInContainer.Center
@@ -1593,6 +1547,22 @@
                     Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
                     ZIndex: =1
 
+                    Label9_44 As label:
+                        AlignInContainer: =AlignInContainer.Start
+                        Color: =glbNeutralPrimaryColor
+                        FontWeight: =FontWeight.Semibold
+                        Height: =30
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =11
+                        Text: ="申請資料"
+                        Width: =100
+                        X: =20
+                        Y: =363
+                        ZIndex: =1
+
                     Container8 As groupContainer.horizontalAutoLayoutContainer:
                         FillPortions: =0
                         Height: =30
@@ -1600,7 +1570,7 @@
                         LayoutMinWidth: =250
                         LayoutMode: =LayoutMode.Auto
                         Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
-                        ZIndex: =1
+                        ZIndex: =2
 
                         Label6_4 As label:
                             AlignInContainer: =AlignInContainer.Start
@@ -1618,7 +1588,6 @@
                         Label9_34 As label:
                             AlignInContainer: =AlignInContainer.Center
                             Color: =glbNeutralPrimaryColor
-                            FontWeight: =FontWeight.Semibold
                             Height: =30
                             PaddingBottom: =0
                             PaddingLeft: =0
@@ -1626,10 +1595,24 @@
                             PaddingTop: =0
                             Size: =11
                             Text: ="申請部門/單位"
-                            Width: =140
+                            Width: =100
                             X: =20
                             Y: =363
                             ZIndex: =2
+
+                        Label9_41 As label:
+                            Align: =Align.Center
+                            Color: =glbNeutralPrimaryColor
+                            Fill: =RGBA(252, 242, 212, 1)
+                            Height: =30
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =11
+                            Text: ="必填"
+                            Width: =40
+                            ZIndex: =3
 
                     drpFilterDepartment_1 As combobox:
                         AlignInContainer: =AlignInContainer.Stretch
@@ -1671,7 +1654,7 @@
                         Width: =300
                         X: =90
                         Y: =3
-                        ZIndex: =2
+                        ZIndex: =3
 
                     Container12_3 As groupContainer.horizontalAutoLayoutContainer:
                         Fill: =RGBA(255, 255, 255, 1)
@@ -1683,7 +1666,7 @@
                         LayoutWrap: =true
                         PaddingRight: =1
                         PaddingTop: =1
-                        ZIndex: =3
+                        ZIndex: =4
 
                         Label6_5 As label:
                             AlignInContainer: =AlignInContainer.Start
@@ -1700,7 +1683,6 @@
 
                         Label9_33 As label:
                             Color: =glbNeutralPrimaryColor
-                            FontWeight: =FontWeight.Semibold
                             Height: =30
                             PaddingBottom: =0
                             PaddingLeft: =0
@@ -1708,15 +1690,29 @@
                             PaddingTop: =0
                             Size: =11
                             Text: ="上傳申請表"
-                            Width: =300
+                            Width: =80
                             ZIndex: =2
+
+                        Label9_40 As label:
+                            Align: =Align.Center
+                            Color: =glbNeutralPrimaryColor
+                            Fill: =RGBA(252, 242, 212, 1)
+                            Height: =30
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =11
+                            Text: ="必填"
+                            Width: =40
+                            ZIndex: =3
 
                         Image4_2 As image:
                             Height: =10
                             Image: =Last(Attachment_Excel.Attachments).Value
                             Visible: =false
                             Width: =10
-                            ZIndex: =3
+                            ZIndex: =4
 
                     Attachment_Excel As attachments:
                         AddAttachmentText: ="點擊或拖拽上傳附件"
@@ -1764,7 +1760,59 @@
                         Width: =Parent.Width-40
                         X: =20
                         Y: =56
-                        ZIndex: =4
+                        ZIndex: =5
+
+                    Container8_1 As groupContainer.horizontalAutoLayoutContainer:
+                        FillPortions: =0
+                        Height: =30
+                        LayoutMinHeight: =40
+                        LayoutMinWidth: =250
+                        LayoutMode: =LayoutMode.Auto
+                        Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
+                        ZIndex: =6
+
+                        Label6_7 As label:
+                            AlignInContainer: =AlignInContainer.Start
+                            Color: =glbErrorColor
+                            Height: =30
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =10
+                            Text: ="*"
+                            Visible: =If(First(EditUserForm).IsPassWord="1",true,false)
+                            Width: =15
+                            ZIndex: =1
+
+                        Label9_42 As label:
+                            AlignInContainer: =AlignInContainer.Center
+                            Color: =glbNeutralPrimaryColor
+                            Height: =30
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =11
+                            Text: ="密碼"
+                            Width: =40
+                            X: =20
+                            Y: =363
+                            ZIndex: =2
+
+                        Label9_43 As label:
+                            Align: =Align.Center
+                            Color: =glbNeutralPrimaryColor
+                            Fill: =RGBA(252, 242, 212, 1)
+                            Height: =30
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =11
+                            Text: =If(First(EditUserForm).IsPassWord="1","必填",First(EditUserForm).IsPassWord="0","選填")
+                            Width: =40
+                            ZIndex: =3
 
                     Container1 As groupContainer.horizontalAutoLayoutContainer:
                         LayoutJustifyContent: =LayoutJustifyContent.Center
@@ -1774,11 +1822,11 @@
                         Visible: |-
                             =//非範本流程及密碼輸入可見時容器可見
                             If(First(EditUserForm).FlowType<>"範本"&&TextInput_FormPWD.Visible,true,false)
-                        ZIndex: =5
+                        ZIndex: =7
 
                         Label6 As label:
                             AlignInContainer: =AlignInContainer.Stretch
-                            Color: =glbErrorColor
+                            Color: =RGBA(255, 255, 255, 1)
                             PaddingBottom: =0
                             PaddingLeft: =0
                             PaddingRight: =0
@@ -1867,7 +1915,7 @@
                     Rectangle5 As rectangle:
                         Fill: =RGBA(0, 0, 0, 0)
                         Height: =5
-                        ZIndex: =6
+                        ZIndex: =8
 
                 UploadAttachmentsContainer As groupContainer.verticalAutoLayoutContainer:
                     AlignInContainer: =AlignInContainer.SetByContainer
@@ -1908,7 +1956,6 @@
 
                         Label9_22 As label:
                             Color: =glbNeutralPrimaryColor
-                            FontWeight: =FontWeight.Semibold
                             Height: =30
                             PaddingBottom: =0
                             PaddingLeft: =0
@@ -1916,10 +1963,24 @@
                             PaddingTop: =0
                             Size: =11
                             Text: ="上傳附件"
-                            Width: =100
+                            Width: =70
                             X: =20
                             Y: =192
                             ZIndex: =3
+
+                        Label9_45 As label:
+                            Align: =Align.Center
+                            Color: =glbNeutralPrimaryColor
+                            Fill: =RGBA(252, 242, 212, 1)
+                            Height: =30
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =11
+                            Text: ="必填"
+                            Width: =40
+                            ZIndex: =4
 
                     Attachment_Zip As attachments:
                         AddAttachmentText: ="點擊或拖拽上傳附件"
@@ -2089,21 +2150,43 @@
                     Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
                     ZIndex: =4
 
-                    Label9_24 As label:
-                        AlignInContainer: =AlignInContainer.Stretch
-                        Color: =glbNeutralPrimaryColor
-                        FontWeight: =FontWeight.Semibold
+                    Container8_2 As groupContainer.horizontalAutoLayoutContainer:
+                        FillPortions: =0
                         Height: =30
-                        PaddingBottom: =0
-                        PaddingLeft: =0
-                        PaddingRight: =0
-                        PaddingTop: =0
-                        Size: =11
-                        Text: ="申請備註"
-                        Width: =140
-                        X: =20
-                        Y: =448
+                        LayoutMinHeight: =40
+                        LayoutMinWidth: =250
+                        LayoutMode: =LayoutMode.Auto
+                        Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
                         ZIndex: =1
+
+                        Label9_24 As label:
+                            AlignInContainer: =AlignInContainer.Start
+                            Color: =glbNeutralPrimaryColor
+                            Height: =30
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =11
+                            Text: ="申請備註"
+                            Width: =70
+                            X: =20
+                            Y: =448
+                            ZIndex: =1
+
+                        Label9_47 As label:
+                            Align: =Align.Center
+                            Color: =glbNeutralPrimaryColor
+                            Fill: =RGBA(204, 231, 246, 1)
+                            Height: =30
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =11
+                            Text: ="選填"
+                            Width: =40
+                            ZIndex: =2
 
                     TextInput_FormMark As text:
                         AlignInContainer: =AlignInContainer.Stretch
@@ -2167,8 +2250,8 @@
                     PaddingLeft: =0
                     PaddingRight: =0
                     PaddingTop: =0
-                    Size: =12
-                    Text: ="審批流程"
+                    Size: =11
+                    Text: ="申請流程"
                     Width: =351
                     X: =20
                     Y: =20
@@ -2192,7 +2275,7 @@
                         PaddingLeft: =0
                         PaddingRight: =0
                         PaddingTop: =0
-                        Size: =10
+                        Size: =11
                         Text: =First(ApprovalListCol).ActionName
                         Width: =70
                         X: =30
@@ -3273,8 +3356,10 @@
 
     HeaderContainer_4 As groupContainer.manualLayoutContainer:
         Fill: =RGBA(255, 255, 255, 1)
-        Height: =60
-        Visible: =If(App.ActiveScreen.Width<600,true,false)
+        Height: =50
+        Visible: |-
+            =//If(App.ActiveScreen.Width<600,true,false)
+            true
         Width: =Parent.Width
         ZIndex: =6
 
@@ -3289,9 +3374,11 @@
                         Launch(JumpUrlClientAPP & "&Screen=HomepageScreen",{},LaunchTarget.Replace),
                         Navigate(HomePageScreen,ScreenTransition.None)
                     )
+            PaddingBottom: =2
+            PaddingTop: =2
             Width: =30
             X: =6
-            Y: =15
+            Y: =10
             ZIndex: =6
 
         Image1_1 As image:
@@ -3305,12 +3392,12 @@
                     )
             Width: =30
             X: =42
-            Y: =15
+            Y: =10
             ZIndex: =7
 
         Label1_74 As label:
             Fill: =RGBA(255, 255, 255, 1)
-            Height: =60
+            Height: =50
             OnSelect: |-
                 =If(
                     Param("Page")="Home",
@@ -3323,11 +3410,8 @@
             PaddingTop: =0
             Size: =10
             Text: |-
-                =If(App.ActiveScreen.Width<600,"ELCSS-HK
-                eProcessing System (ePS)",
-                "ELCSS-HK
-                eProcessing System (ePS)
-                版本：1.0.0")
+                ="ELCSS-HK
+                eProcessing System (ePS)"
             Width: =158
             X: =83
             ZIndex: =8
