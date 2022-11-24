@@ -778,7 +778,7 @@ HomepageScreen As screen:
                     OnSelect: |-
                         =With(
                         {
-                        FormName:LookUp(Approval_Table,标题=ThisItem.Approval_No).Task_Name
+                        FormName:LookUp(Approval_Table,Title=ThisItem.Approval_No).Task_Name
                         },
                         If(
                             FormName = "招聘職位申請表",
@@ -867,8 +867,8 @@ HomepageScreen As screen:
                         Height: =32
                         OnSelect: =Select(Parent)
                         Size: =10
-                        Text: =LookUp(Approval_Table,标题=ThisItem.Approval_No).Application_No
-                        Tooltip: =LookUp(Approval_Table,标题=ThisItem.Approval_No).Application_No
+                        Text: =LookUp(Approval_Table,Title=ThisItem.Approval_No).Application_No
+                        Tooltip: =LookUp(Approval_Table,Title=ThisItem.Approval_No).Application_No
                         Width: =142
                         Wrap: =false
                         ZIndex: =1
@@ -881,8 +881,8 @@ HomepageScreen As screen:
                         Text: |-
                             =//LookUp(Approval_Table,标题=ThisItem.Approval_No).DepartMentUnit
                             
-                            If(CountA(Split(LookUp(Approval_Table,标题=ThisItem.Approval_No).DepartMentUnit,"-").Result)=2,First(Split(LookUp(Approval_Table,标题=ThisItem.Approval_No).DepartMentUnit,"-")).Result,First(Split(LookUp(Approval_Table,标题=ThisItem.Approval_No).DepartMentUnit,"-")).Result&"-"&Index(Split(LookUp(Approval_Table,标题=ThisItem.Approval_No).DepartMentUnit,"-"),2).Result)
-                        Tooltip: =LookUp(Approval_Table,标题=ThisItem.Approval_No).DepartMentUnit
+                            If(CountA(Split(LookUp(Approval_Table,Title=ThisItem.Approval_No).DepartMentUnit,"-").Result)=2,First(Split(LookUp(Approval_Table,Title=ThisItem.Approval_No).DepartMentUnit,"-")).Result,First(Split(LookUp(Approval_Table,Title=ThisItem.Approval_No).DepartMentUnit,"-")).Result&"-"&Index(Split(LookUp(Approval_Table,Title=ThisItem.Approval_No).DepartMentUnit,"-"),2).Result)
+                        Tooltip: =LookUp(Approval_Table,Title=ThisItem.Approval_No).DepartMentUnit
                         Width: =100
                         Wrap: =false
                         X: =418
@@ -893,8 +893,8 @@ HomepageScreen As screen:
                         Height: =32
                         OnSelect: =Select(Parent)
                         Size: =10
-                        Text: =LookUp(Approval_Table,标题=ThisItem.Approval_No).Task_Name
-                        Tooltip: =LookUp(Approval_Table,标题=ThisItem.Approval_No).Task_Name
+                        Text: =LookUp(Approval_Table,Title=ThisItem.Approval_No).Task_Name
+                        Tooltip: =LookUp(Approval_Table,Title=ThisItem.Approval_No).Task_Name
                         Width: =276
                         Wrap: =false
                         X: =142
