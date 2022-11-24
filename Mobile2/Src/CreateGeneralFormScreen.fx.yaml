@@ -9,8 +9,8 @@
                     FormModelIds,
                     LookUp(
                         GenericFormModel,
-                        Title = Param("FormModelId"),
-                        Title
+                        标题 = Param("FormModelId"),
+                        标题
                     )
                 )
             }
@@ -19,7 +19,7 @@
             FlowType,
             LookUp(
                 GenericFormModel,
-                Title = FormModelId
+                标题 = FormModelId
             ).FlowType
         );
         /*If(
@@ -41,7 +41,7 @@
                 Split(
                         LookUp(
                             GenericFormModel,
-                            Title = FormModelId
+                            标题 = FormModelId
                         ).SelectedActions,
                     ";"
                 ).Result
@@ -85,7 +85,7 @@
             EditUserForm,
             Filter(
                 GenericFormModel,
-                Title = FormModelId
+                标题 = FormModelId
                 //Title = Param("FormModelId")
             )
         );
@@ -95,7 +95,7 @@
             EditUserAttachment,
             Filter(
                 TemplateFileList,
-                Title = FormModelId
+                标题 = FormModelId
                 //GenericFormId = Param("FormModelId")
             )
         );
@@ -276,7 +276,7 @@
                                     FlowType = "通用流程" && !IsBlank(
                                         LookUp(
                                             GenericFormModel,
-                                            Title = FormModelId
+                                            标题 = FormModelId
                                         ).SelectedActions
                                     ),
                                     Dropdown1_5.Selected.Result,
@@ -376,7 +376,7 @@
                                         ) + 1,
                                         "000"
                                     ),
-                                    Title: ApprovalGuid,
+                                    标题: ApprovalGuid,
                                     Application_Status: "審批中",
                                     DepartMentName: First(EditUserForm).ModelDepartment,
                                     FormType: First(EditUserForm).ModelType,
@@ -392,7 +392,7 @@
                                 ApprovalDetail_Table,
                                 Defaults(ApprovalDetail_Table),
                                 {
-                                    Title: GUID(),
+                                    标题: GUID(),
                                     Advise: ApprovalListCol[@remark],
                                     Approval_No: ApprovalGuid,
                                     ApprovalBCC: ApprovalListCol[@BCCUser],
@@ -420,11 +420,11 @@
                                 GenericFormList,
                                 Defaults(GenericFormList),
                                 {
-                                    Title: GenericFormlistGuid,
+                                    标题: GenericFormlistGuid,
                                     ApprovalId: ApprovalGuid,
-                                    ModelId: First(EditUserForm).Title,
+                                    ModelId: First(EditUserForm).标题,
                                     ModelName: First(EditUserForm).ModelName,
-                                    UploadFileId: Last(GenericUploadAttachMentFile).Title,
+                                    UploadFileId: Last(GenericUploadAttachMentFile).标题,
                                     //目前取的是最后一个附件的id
                                     MarkValue: TextInput_FormMark.Text,
                                     FormType: First(EditUserForm).ModelType,
@@ -438,14 +438,6 @@
                         );
                         
                     //执行flow上传表格到list
-                    If(
-                            Last(
-                                Split(
-                                    CurrentUser,
-                                    "@"
-                                ).Result
-                            ).Result = "chinasofti.com",
-                    //中軟環境上傳
                             If(
                                 Last(Attachment_Excel.Attachments).Name <> Blank(),
                                 Set(
@@ -495,7 +487,7 @@
                             );
                             
                     //执行flow上传附件到list
-                    If(
+                            If(
                                 Last(Attachment_Zip.Attachments).Name <> Blank(),
                                 Set(
                                     varAttachmentControl2,
@@ -541,109 +533,8 @@
                                     "",
                                     varBase64Only2
                                 )
-                            ),
-                    //客戶環境上傳
-                            If(
-                                Last(Attachment_Excel.Attachments).Name <> Blank(),
-                                Set(
-                                    varAttachmentControl1,
-                                    JSON(
-                                        Image4_2.Image,
-                                        IncludeBinaryData
-                                    )
-                                );
-                                Set(
-                                    varBase64Only1,
-                                    Mid(
-                                        varAttachmentControl1,
-                                        Find(
-                                            ",",
-                                            varAttachmentControl1
-                                        ) + 1,
-                                        Len(varAttachmentControl1) - Find (
-                                            ",",
-                                            varAttachmentControl1
-                                        ) - 1
-                                    )
-                                );
-                                UploadFiletoSharepoint.Run(
-                                    "GenericUploadAttachMentFile",
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    GUID(),
-                                    GenericFormlistGuid,
-                                    First(EditUserForm).ModelType,
-                                    Last(Attachment_Excel.Attachments).Name,
-                                    TextInput_FormPWD.Text,
-                                    Last(Attachment_Excel.Attachments).Name,
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    varBase64Only1,
-                                    "",
-                                    "",
-                                    "",
-                                    ""
-                                )
                             );
-                            
-                    //执行flow上传附件到list
-                    If(
-                                Last(Attachment_Zip.Attachments).Name <> Blank(),
-                                Set(
-                                    varAttachmentControl2,
-                                    JSON(
-                                        Image4_1.Image,
-                                        IncludeBinaryData
-                                    )
-                                );
-                                Set(
-                                    varBase64Only2,
-                                    Mid(
-                                        varAttachmentControl2,
-                                        Find(
-                                            ",",
-                                            varAttachmentControl2
-                                        ) + 1,
-                                        Len(varAttachmentControl2) - Find (
-                                            ",",
-                                            varAttachmentControl2
-                                        ) - 1
-                                    )
-                                );
-                                UploadFiletoSharepoint.Run(
-                                    "UploadFlowAttachMent",
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    GenericFormlistGuid,
-                                    ApprovalGuid,
-                                    TextInput_zipPWD.Text,
-                                    Last(Attachment_Zip.Attachments).Name,
-                                    Last(Attachment_Zip.Attachments).Name,
-                                    varBase64Only2,
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    ""
-                                )
-                            )
-                        );
+                    
                         //收集当前用户的申请部门信息用作下一次创建任务时主动带入
                     If(
                             CountA(
@@ -652,13 +543,13 @@
                                     UserEmail = User().Email,
                                     ContatsType = "部門"
                                 //ApplyDepartment = drpFilterDepartment_1.Selected.Result
-                                ).Title
+                                ).标题
                             ) <= 0,
                             Patch(
                                 MyContacts,
                                 Defaults(MyContacts),
                                 {
-                                    Title: GUID(),
+                                    标题: GUID(),
                                     UserEmail: User().Email,
                                     ContatsType: "部門",
                                     ApplyDepartment: drpFilterDepartment_1.Selected.Result
@@ -672,13 +563,13 @@
                         );
                         //下一節點操作人為當前填用戶時，帶入信息到任務詳情頁面    
                     With(
-                            {FormModelTitle: First(NewUserForm).Title},
+                            {FormModelTitle: First(NewUserForm).标题},
                         //创建集合EditDetailUserForm_1收集表格信息，用作帶入表格名称、流程等数据
                             ClearCollect(
                                 EditDetailUserForm_1,
                                 Filter(
                                     GenericFormList,
-                                    Title = FormModelTitle
+                                    标题 = FormModelTitle
                                 )
                             );
                         //创建集合EditDetailUserForm_2,用作带入部门表格类型等数据
@@ -702,7 +593,7 @@
                                 EditDetailUserAttachment2,
                                 Filter(
                                     UploadFlowAttachMent,
-                                    Title = FormModelTitle
+                                    标题 = FormModelTitle
                                 )
                             )
                         );
@@ -993,7 +884,7 @@
                                         FlowType = "通用流程" && !IsBlank(
                                             LookUp(
                                                 GenericFormModel,
-                                                Title = FormModelId
+                                                标题 = FormModelId
                                             ).SelectedActions
                                         ),
                                         Dropdown1_5.Selected.Result,
@@ -1093,7 +984,7 @@
                                             ) + 1,
                                             "000"
                                         ),
-                                        Title: ApprovalGuid,
+                                        标题: ApprovalGuid,
                                         Application_Status: "審批中",
                                         DepartMentName: First(EditUserForm).ModelDepartment,
                                         FormType: First(EditUserForm).ModelType,
@@ -1109,7 +1000,7 @@
                                     ApprovalDetail_Table,
                                     Defaults(ApprovalDetail_Table),
                                     {
-                                        Title: GUID(),
+                                        标题: GUID(),
                                         Advise: ApprovalListCol[@remark],
                                         Approval_No: ApprovalGuid,
                                         ApprovalBCC: ApprovalListCol[@BCCUser],
@@ -1137,11 +1028,11 @@
                                     GenericFormList,
                                     Defaults(GenericFormList),
                                     {
-                                        Title: GenericFormlistGuid,
+                                        标题: GenericFormlistGuid,
                                         ApprovalId: ApprovalGuid,
-                                        ModelId: First(EditUserForm).Title,
+                                        ModelId: First(EditUserForm).标题,
                                         ModelName: First(EditUserForm).ModelName,
-                                        UploadFileId: Last(GenericUploadAttachMentFile).Title,
+                                        UploadFileId: Last(GenericUploadAttachMentFile).标题,
                                         //目前取的是最后一个附件的id
                                         MarkValue: TextInput_FormMark.Text,
                                         FormType: First(EditUserForm).ModelType,
@@ -1155,14 +1046,6 @@
                             );
                             
                         //执行flow上传表格到list
-                        If(
-                                Last(
-                                    Split(
-                                        CurrentUser,
-                                        "@"
-                                    ).Result
-                                ).Result = "chinasofti.com",
-                        //中軟環境上傳
                                 If(
                                     Last(Attachment_Excel.Attachments).Name <> Blank(),
                                     Set(
@@ -1258,108 +1141,6 @@
                                         "",
                                         varBase64Only2
                                     )
-                                ),
-                        //客戶環境上傳
-                                If(
-                                    Last(Attachment_Excel.Attachments).Name <> Blank(),
-                                    Set(
-                                        varAttachmentControl1,
-                                        JSON(
-                                            Image4_2.Image,
-                                            IncludeBinaryData
-                                        )
-                                    );
-                                    Set(
-                                        varBase64Only1,
-                                        Mid(
-                                            varAttachmentControl1,
-                                            Find(
-                                                ",",
-                                                varAttachmentControl1
-                                            ) + 1,
-                                            Len(varAttachmentControl1) - Find (
-                                                ",",
-                                                varAttachmentControl1
-                                            ) - 1
-                                        )
-                                    );
-                                    UploadFiletoSharepoint.Run(
-                                        "GenericUploadAttachMentFile",
-                                        "",
-                                        "",
-                                        "",
-                                        "",
-                                        "",
-                                        GUID(),
-                                        GenericFormlistGuid,
-                                        First(EditUserForm).ModelType,
-                                        Last(Attachment_Excel.Attachments).Name,
-                                        TextInput_FormPWD.Text,
-                                        Last(Attachment_Excel.Attachments).Name,
-                                        "",
-                                        "",
-                                        "",
-                                        "",
-                                        "",
-                                        "",
-                                        varBase64Only1,
-                                        "",
-                                        "",
-                                        "",
-                                        ""
-                                    )
-                                );
-                                
-                        //执行flow上传附件到list
-                        If(
-                                    Last(Attachment_Zip.Attachments).Name <> Blank(),
-                                    Set(
-                                        varAttachmentControl2,
-                                        JSON(
-                                            Image4_1.Image,
-                                            IncludeBinaryData
-                                        )
-                                    );
-                                    Set(
-                                        varBase64Only2,
-                                        Mid(
-                                            varAttachmentControl2,
-                                            Find(
-                                                ",",
-                                                varAttachmentControl2
-                                            ) + 1,
-                                            Len(varAttachmentControl2) - Find (
-                                                ",",
-                                                varAttachmentControl2
-                                            ) - 1
-                                        )
-                                    );
-                                    UploadFiletoSharepoint.Run(
-                                        "UploadFlowAttachMent",
-                                        "",
-                                        "",
-                                        "",
-                                        "",
-                                        "",
-                                        "",
-                                        "",
-                                        "",
-                                        "",
-                                        "",
-                                        "",
-                                        GenericFormlistGuid,
-                                        ApprovalGuid,
-                                        TextInput_zipPWD.Text,
-                                        Last(Attachment_Zip.Attachments).Name,
-                                        Last(Attachment_Zip.Attachments).Name,
-                                        varBase64Only2,
-                                        "",
-                                        "",
-                                        "",
-                                        "",
-                                        ""
-                                    )
-                                )
                             );
                             //收集当前用户的申请部门信息用作下一次创建任务时主动带入
                         If(
@@ -1369,13 +1150,13 @@
                                         UserEmail = User().Email,
                                         ContatsType = "部門"
                                     //ApplyDepartment = drpFilterDepartment_1.Selected.Result
-                                    ).Title
+                                    ).标题
                                 ) <= 0,
                                 Patch(
                                     MyContacts,
                                     Defaults(MyContacts),
                                     {
-                                        Title: GUID(),
+                                        标题: GUID(),
                                         UserEmail: User().Email,
                                         ContatsType: "部門",
                                         ApplyDepartment: drpFilterDepartment_1.Selected.Result
@@ -1389,13 +1170,13 @@
                             );
                             //下一節點操作人為當前填用戶時，帶入信息到任務詳情頁面    
                         With(
-                                {FormModelTitle: First(NewUserForm).Title},
+                                {FormModelTitle: First(NewUserForm).标题},
                             //创建集合EditDetailUserForm_1收集表格信息，用作帶入表格名称、流程等数据
                                 ClearCollect(
                                     EditDetailUserForm_1,
                                     Filter(
                                         GenericFormList,
-                                        Title = FormModelTitle
+                                        标题 = FormModelTitle
                                     )
                                 );
                             //创建集合EditDetailUserForm_2,用作带入部门表格类型等数据
@@ -1419,7 +1200,7 @@
                                     EditDetailUserAttachment2,
                                     Filter(
                                         UploadFlowAttachMent,
-                                        Title = FormModelTitle
+                                        标题 = FormModelTitle
                                     )
                                 )
                             );
@@ -1672,7 +1453,7 @@
                     HoverFill: =RGBA(255, 255, 255, 1)
                     OnSelect: |
                         =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).附件).AbsoluteUri)
-                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).Attachments).DisplayName & "?web=1")
+                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).附件).DisplayName & "?web=1")
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
@@ -1705,7 +1486,7 @@
                     HoverFill: =RGBA(255, 255, 255, 1)
                     OnSelect: |-
                         =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text)).附件).AbsoluteUri)
-                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType="填寫指引TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType="填寫指引TT")).Attachments).DisplayName & "?web=1")
+                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType="填寫指引TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType="填寫指引TT")).附件).DisplayName & "?web=1")
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
@@ -1738,7 +1519,7 @@
                     HoverFill: =RGBA(255, 255, 255, 1)
                     OnSelect: |-
                         =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text)).附件).AbsoluteUri)
-                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType="示範表格TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType="示範表格TT")).Attachments).DisplayName & "?web=1")
+                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType="示範表格TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType="示範表格TT")).附件).DisplayName & "?web=1")
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
@@ -3405,7 +3186,7 @@
                     HoverFill: =RGBA(255, 255, 255, 1)
                     OnSelect: |
                         =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).附件).AbsoluteUri)
-                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).Attachments).DisplayName & "?web=1")
+                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).附件).DisplayName & "?web=1")
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
@@ -3438,7 +3219,7 @@
                     HoverFill: =RGBA(255, 255, 255, 1)
                     OnSelect: |-
                         =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text)).附件).AbsoluteUri)
-                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_29.Text&"TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_29.Text&"TT")).Attachments).DisplayName & "?web=1")
+                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_29.Text&"TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_29.Text&"TT")).附件).DisplayName & "?web=1")
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
@@ -3471,7 +3252,7 @@
                     HoverFill: =RGBA(255, 255, 255, 1)
                     OnSelect: |-
                         =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text)).附件).AbsoluteUri)
-                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_30.Text&"TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_30.Text&"TT")).Attachments).DisplayName & "?web=1")
+                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_30.Text&"TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_30.Text&"TT")).附件).DisplayName & "?web=1")
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
@@ -4019,13 +3800,13 @@
                                         UserEmail = User().Email,
                                         ContatsType = "個人",
                                         AllOwnerName.Email = ComboBox1_5.Selected.Mail
-                                    ).Title
+                                    ).标题
                                 ) <= 0 && !Checkbox2_1.Value && !Checkbox2_2.Value && FlowType<>"部門簡單流程",
                                 Patch(
                                     MyContacts,
                                     Defaults(MyContacts),
                                     {
-                                        Title: GUID(),
+                                        标题: GUID(),
                                         UserEmail: User().Email,
                                         AllOwnerName: {
                                             Claims: "i:0#.f|membership|" & ComboBox1_5.Selected.Mail,
@@ -4049,7 +3830,7 @@
                                             UserEmail = User().Email,
                                             ContatsType = "個人",
                                             AllOwnerName.Email = ComboBox1_5.Selected.Mail
-                                        ).Title
+                                        ).标题
                                     ) > 0 && !Checkbox2_1.Value && !Checkbox2_2.Value && FlowType<>"部門簡單流程",
                                     UpdateIf(
                                         MyContacts,
@@ -4069,7 +3850,7 @@
                                         UpdateIf(
                                             MyContacts,
                                             (UserEmail = User().Email) && (ContatsType = "個人") && (AllOwnerName.Email = Gallery2_2.Selected.AllOwnerName.Email),
-                                            {Title:GUID()}
+                                            {标题:GUID()}
                                             //{UserEmail: User().Email}
                                         ),
                                         Checkbox2_2.Value = true //|| (FlowType = "部門簡單流程"&& Departmentselect<>true)

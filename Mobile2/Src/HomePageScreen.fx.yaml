@@ -25,17 +25,17 @@
                 "DepartMentUnit",
                 LookUp(
                     Approval_Table,
-                    Title = Approval_No
+                    标题 = Approval_No
                 ).DepartMentUnit,
                 "Application_No",
                 LookUp(
                     Approval_Table,
-                    Title = Approval_No
+                    标题 = Approval_No
                 ).Application_No,
                 "Task_Name",
                 LookUp(
                     Approval_Table,
-                    Title = Approval_No
+                    标题 = Approval_No
                 ).Task_Name
             )
         );
@@ -243,7 +243,7 @@
                                 OnSelect: |-
                                     =With(
                                     {
-                                    FormName:LookUp(Approval_Table,Title=ThisItem.Approval_No).Task_Name
+                                    FormName:LookUp(Approval_Table,标题=ThisItem.Approval_No).Task_Name
                                     },
                                     If(
                                         FormName = "招聘職位申請表",
@@ -285,13 +285,13 @@
                                                 JumpUrl&"&Screen=ContractNoticeForm&taskNum=" & LookUp(
                                                     ContractNotice,
                                                     ApprovalId = Gallery5.Selected.Approval_No
-                                                ).Title & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=true"
+                                                ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=true"
                                             ),
                                             Launch(
                                                 JumpUrl&"&Screen=ContractNoticeFormDetail&taskNum=" & LookUp(
                                                     ContractNotice,
                                                     ApprovalId = Gallery5.Selected.Approval_No
-                                                ).Title & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
+                                                ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
                                             )
                                         ),
                                         FormName = "任職資源申請",
@@ -306,7 +306,7 @@
                                                 FormId: LookUp(
                                                     GenericFormList,
                                                     ApprovalId = ThisItem.Approval_No
-                                                ).Title,
+                                                ).标题,
                                                 FLowId: Gallery5.Selected.Approval_No
                                             },
                                             Launch(JumpUrlMobileApp&"&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & Gallery5.Selected.Approval_No & "&Page=Moblie"
@@ -507,7 +507,7 @@
                                                 Defaults(MyContacts),
                                                 {
                                                     TaskFormName: "招聘職位申請表",
-                                                    Title: GUID(),
+                                                    标题: GUID(),
                                                     UserEmail: User().Email,
                                                     ContatsType: "",
                                                     ModelFlowNumber: "A103"
@@ -534,7 +534,7 @@
                                                 Defaults(MyContacts),
                                                 {
                                                     TaskFormName: "假期批核人資料表",
-                                                    Title: GUID(),
+                                                    标题: GUID(),
                                                     UserEmail: User().Email,
                                                     ContatsType: "",
                                                     ModelFlowNumber: "A306"
@@ -560,7 +560,7 @@
                                                 Defaults(MyContacts),
                                                 {
                                                     TaskFormName: "任職資源申請",
-                                                    Title: GUID(),
+                                                    标题: GUID(),
                                                     UserEmail: User().Email,
                                                     ContatsType: "",
                                                     ModelFlowNumber: "A111"
@@ -586,7 +586,7 @@
                                                 Defaults(MyContacts),
                                                 {
                                                     TaskFormName: "預備合約通知書(新入職)",
-                                                    Title: GUID(),
+                                                    标题: GUID(),
                                                     UserEmail: User().Email,
                                                     ContatsType: "",
                                                     ModelFlowNumber: "A104"
@@ -611,7 +611,7 @@
                                                 Defaults(MyContacts),
                                                 {
                                                     TaskFormName: ThisItem.ModelName,
-                                                    Title: GUID(),
+                                                    标题: GUID(),
                                                     UserEmail: User().Email,
                                                     ContatsType: "",
                                                     TaskFormDescription: ThisItem.ModelDescription,
@@ -624,7 +624,7 @@
                                             FormModelId: LookUp(
                                                 GenericFormModel,
                                                 ModelFlowNumber = ThisItem.ModelFlowNumber
-                                            ).Title
+                                            ).标题
                                         },
                                         Launch(
                                             JumpUrlMobileApp&"&Screen=CreateGeneralFormScreen&FormModelId="&FormModelId & "&Page=Moblie",
@@ -868,7 +868,7 @@
                                                 Defaults(MyContacts),
                                                 {
                                                     TaskFormName: "招聘職位申請表",
-                                                    Title: GUID(),
+                                                    标题: GUID(),
                                                     UserEmail: User().Email,
                                                     ContatsType: "",
                                                     ModelFlowNumber: "A103"
@@ -895,7 +895,7 @@
                                                 Defaults(MyContacts),
                                                 {
                                                     TaskFormName: "假期批核人資料表",
-                                                    Title: GUID(),
+                                                    标题: GUID(),
                                                     UserEmail: User().Email,
                                                     ContatsType: "",
                                                     ModelFlowNumber: "A306"
@@ -921,7 +921,7 @@
                                                 Defaults(MyContacts),
                                                 {
                                                     TaskFormName: "任職資源申請",
-                                                    Title: GUID(),
+                                                    标题: GUID(),
                                                     UserEmail: User().Email,
                                                     ContatsType: "",
                                                     ModelFlowNumber: "A111"
@@ -947,7 +947,7 @@
                                                 Defaults(MyContacts),
                                                 {
                                                     TaskFormName: "預備合約通知書(新入職)",
-                                                    Title: GUID(),
+                                                    标题: GUID(),
                                                     UserEmail: User().Email,
                                                     ContatsType: "",
                                                     ModelFlowNumber: "A104"
@@ -972,7 +972,7 @@
                                                 Defaults(MyContacts),
                                                 {
                                                     TaskFormName: ThisItem.ModelName,
-                                                    Title: GUID(),
+                                                    标题: GUID(),
                                                     UserEmail: User().Email,
                                                     ContatsType: "",
                                                     TaskFormDescription: ThisItem.ModelDescription,
@@ -985,7 +985,7 @@
                                             FormModelId: LookUp(
                                                 GenericFormModel,
                                                 ModelFlowNumber = ThisItem.ModelFlowNumber
-                                            ).Title
+                                            ).标题
                                         },
                                         Launch(
                                             JumpUrlMobileApp&"&Screen=CreateGeneralFormScreen&FormModelId="&FormModelId & "&Page=Moblie",
