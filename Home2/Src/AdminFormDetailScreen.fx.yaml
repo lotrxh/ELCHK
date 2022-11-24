@@ -1204,7 +1204,7 @@ AdminFormDetailScreen As screen:
                     Size: =11
                     Visible: =If((Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程") && Radio_attachment.Selected.Value="有",true,false)
                     Width: =233
-                    X: =605
+                    X: =562
                     Y: =521
                     ZIndex: =65
 
@@ -1219,7 +1219,7 @@ AdminFormDetailScreen As screen:
                     Text: ="附件密碼"
                     Visible: =If((Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程") && Radio_attachment.Selected.Value="有",true,false)
                     Width: =120
-                    X: =604
+                    X: =562
                     Y: =484
                     ZIndex: =66
 
@@ -1248,7 +1248,7 @@ AdminFormDetailScreen As screen:
                     Size: =11
                     Visible: =If(Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
                     Width: =150
-                    X: =311
+                    X: =292
                     Y: =521
                     ZIndex: =3
 
@@ -1263,7 +1263,7 @@ AdminFormDetailScreen As screen:
                     Text: ="申請表附件"
                     Visible: =If(Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
                     Width: =81
-                    X: =311
+                    X: =292
                     Y: =487
                     ZIndex: =8
 
@@ -1278,7 +1278,7 @@ AdminFormDetailScreen As screen:
                     Text: ="*"
                     Visible: =If(Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
                     Width: =10
-                    X: =303
+                    X: =282
                     Y: =484
                     ZIndex: =69
 
@@ -1396,7 +1396,7 @@ AdminFormDetailScreen As screen:
                     Size: =11
                     Visible: =If(Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
                     Width: =233
-                    X: =23
+                    X: =21
                     Y: =521
                     ZIndex: =43
 
@@ -1411,7 +1411,7 @@ AdminFormDetailScreen As screen:
                     Text: ="申請表密碼"
                     Visible: =If(Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
                     Width: =120
-                    X: =23
+                    X: =21
                     Y: =484
                     ZIndex: =44
 
@@ -1426,7 +1426,7 @@ AdminFormDetailScreen As screen:
                     Text: ="*"
                     Visible: =If(Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
                     Width: =10
-                    X: =13
+                    X: =11
                     Y: =484
                     ZIndex: =68
 
