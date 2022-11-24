@@ -906,7 +906,7 @@ GeneralFormListScreen As screen:
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =10
-                    Text: =Left(ThisItem.FlowOrder,4)&Char(10)&ThisItem.FlowTaskName
+                    Text: =If(Len(ThisItem.FlowOrder) = 15,Left(ThisItem.FlowOrder,4),Len(ThisItem.FlowOrder) = 16,Left(ThisItem.FlowOrder,5))&Char(10)&ThisItem.FlowTaskName
                     Tooltip: =ThisItem.FlowTaskName
                     Width: =200
                     Wrap: =false
