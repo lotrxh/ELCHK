@@ -8719,89 +8719,89 @@
               "id": "app-UnusedVariables",
               "messageStrings": {
                 "issue": {
-                  "text": "Unused variable"
+                  "text": "未用变量"
                 }
               },
               "properties": {
                 "componentType": "app",
                 "howToFix": [
-                  "Remove the unused variable."
+                  "请删除未用变量。"
                 ],
                 "level": "Medium",
                 "primaryCategory": "performance",
-                "whyFix": "This variable is declared but is not referenced by any control, so it is not needed."
+                "whyFix": "此变量已声明，但未被任何控件引用，因此不是必需的。"
               }
             },
             {
               "id": "app-UnusedMediaResources",
               "messageStrings": {
                 "issue": {
-                  "text": "Unused media files"
+                  "text": "未使用的媒体文件"
                 }
               },
               "properties": {
                 "componentType": "app",
                 "howToFix": [
-                  "Remove the unused media file in the Media pane."
+                  "在“媒体”窗格中删除未使用的媒体文件。"
                 ],
                 "level": "Medium",
                 "primaryCategory": "performance",
-                "whyFix": "This media file is not referenced by any control formulas so it is not needed. Removing it will improve performance."
+                "whyFix": "任何控件公式都未引用此媒体文件，因此不需要该文件。删除它可提高性能。"
               }
             },
             {
               "id": "app-CollectDelegatableDataSource",
               "messageStrings": {
                 "issue": {
-                  "text": "The rows retrieved from the data source may not be complete."
+                  "text": "从数据源检索的行可能不完整。"
                 }
               },
               "properties": {
                 "componentType": "app",
                 "howToFix": [
-                  "Limit the data collected from the data source by updating the formula \"ClearCollect(ApprovalDetailData, ApprovalDetail_Table)\" to include a filtering function, such as 'Filter' or 'Search'."
+                  "通过更新公式“ClearCollect(ApprovalDetailData, ApprovalDetail_Table)”以包含筛选函数(如 \"Filter\" 或 \"Search\")，限制从数据源收集的数据。"
                 ],
                 "level": "Medium",
                 "primaryCategory": "performance",
-                "whyFix": "Using the 'Collect' function to create a collection directly from a connected data source may not load every row if the data source is too large."
+                "whyFix": "如果数据源过大，则使用 \"Collect\" 函数直接从连接的数据源创建集合可能无法加载每一行。"
               }
             },
             {
               "id": "app-DataSourceDefaultMaxRowsLimit",
               "messageStrings": {
                 "issue": {
-                  "text": "Data row limit for non-delegable queries is more than 500"
+                  "text": "非可委派查询的数据行限制大于 500"
                 }
               },
               "properties": {
                 "componentType": "app",
                 "howToFix": [
-                  "Update 'Data row limit for non-delegable queries' in the advanced app settings."
+                  "在“高级应用设置”中更新“非可委派查询的数据行限制”。"
                 ],
                 "level": "Medium",
                 "primaryCategory": "performance",
-                "whyFix": "A 'data row limit' more than 500 may result in a slower app when running non-delegable queries, because the app will have to process every row itself, rather than running the query on the server."
+                "whyFix": "在运行非委托查询时，如果“数据行限制”超过 500，可能会导致应用运行速度较慢，因为应用将不得不自行处理每一行，而不是在服务器上运行查询。"
               }
             },
             {
               "id": "app-ScreenHasManyControls",
               "messageStrings": {
                 "issue": {
-                  "text": "Too many controls on a screen"
+                  "text": "屏幕上的控件过多"
                 }
               },
               "properties": {
                 "componentType": "app",
                 "howToFix": [
-                  "Reduce the number of controls on the screen.",
-                  "Break the app into more screens to reduce the per-screen complexity.",
-                  "Use components to unify grouped controls that are identical across screens, reducing duplication.",
-                  "Use galleries to represent a series of repeated similar controls.",
-                  "Break the app into multiple apps so that each app is small and performant."
+                  "减少屏幕上的控件数。",
+                  "将应用拆分为多个屏幕，降低每个屏幕的复杂性。",
+                  "使用组件来统一屏幕之间相同的分组控件，从而减少重复。",
+                  "使用库来表示一系列重复的相似控件。",
+                  "将应用分解为多个应用，以便每个应用大小较小且性能良好。"
                 ],
                 "level": "Medium",
                 "primaryCategory": "performance",
-                "whyFix": "Each control consumes resources, and an app may become slow or unresponsive if a screen has too many controls. The estimated complexity of \"SystemsScreen\" is 430, which exceeds the maximum threshold recommended (300)."
+                "whyFix": "如果屏幕上的控件过多，则每个控件都将使用资源，并且应用运行速度可能变慢或可能会变得无响应。“SystemsScreen”的估计复杂性为 430，超过了建议的最大阈值(300)。"
               }
             }
           ],
