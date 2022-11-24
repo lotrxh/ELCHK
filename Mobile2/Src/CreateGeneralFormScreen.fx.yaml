@@ -9,8 +9,8 @@
                     FormModelIds,
                     LookUp(
                         GenericFormModel,
-                        标题 = Param("FormModelId"),
-                        标题
+                        Title = Param("FormModelId"),
+                        Title
                     )
                 )
             }
@@ -19,7 +19,7 @@
             FlowType,
             LookUp(
                 GenericFormModel,
-                标题 = FormModelId
+                Title = FormModelId
             ).FlowType
         );
         /*If(
@@ -41,7 +41,7 @@
                 Split(
                         LookUp(
                             GenericFormModel,
-                            标题 = FormModelId
+                            Title = FormModelId
                         ).SelectedActions,
                     ";"
                 ).Result
@@ -85,7 +85,7 @@
             EditUserForm,
             Filter(
                 GenericFormModel,
-                标题 = FormModelId
+                Title = FormModelId
                 //Title = Param("FormModelId")
             )
         );
@@ -95,7 +95,7 @@
             EditUserAttachment,
             Filter(
                 TemplateFileList,
-                标题 = FormModelId
+                Title = FormModelId
                 //GenericFormId = Param("FormModelId")
             )
         );
@@ -276,7 +276,7 @@
                                     FlowType = "通用流程" && !IsBlank(
                                         LookUp(
                                             GenericFormModel,
-                                            标题 = FormModelId
+                                            Title = FormModelId
                                         ).SelectedActions
                                     ),
                                     Dropdown1_5.Selected.Result,
@@ -376,7 +376,7 @@
                                         ) + 1,
                                         "000"
                                     ),
-                                    标题: ApprovalGuid,
+                                    Title: ApprovalGuid,
                                     Application_Status: "審批中",
                                     DepartMentName: First(EditUserForm).ModelDepartment,
                                     FormType: First(EditUserForm).ModelType,
@@ -392,7 +392,7 @@
                                 ApprovalDetail_Table,
                                 Defaults(ApprovalDetail_Table),
                                 {
-                                    标题: GUID(),
+                                    Title: GUID(),
                                     Advise: ApprovalListCol[@remark],
                                     Approval_No: ApprovalGuid,
                                     ApprovalBCC: ApprovalListCol[@BCCUser],
@@ -420,11 +420,11 @@
                                 GenericFormList,
                                 Defaults(GenericFormList),
                                 {
-                                    标题: GenericFormlistGuid,
+                                    Title: GenericFormlistGuid,
                                     ApprovalId: ApprovalGuid,
-                                    ModelId: First(EditUserForm).标题,
+                                    ModelId: First(EditUserForm).Title,
                                     ModelName: First(EditUserForm).ModelName,
-                                    UploadFileId: Last(GenericUploadAttachMentFile).标题,
+                                    UploadFileId: Last(GenericUploadAttachMentFile).Title,
                                     //目前取的是最后一个附件的id
                                     MarkValue: TextInput_FormMark.Text,
                                     FormType: First(EditUserForm).ModelType,
@@ -652,13 +652,13 @@
                                     UserEmail = User().Email,
                                     ContatsType = "部門"
                                 //ApplyDepartment = drpFilterDepartment_1.Selected.Result
-                                ).标题
+                                ).Title
                             ) <= 0,
                             Patch(
                                 MyContacts,
                                 Defaults(MyContacts),
                                 {
-                                    标题: GUID(),
+                                    Title: GUID(),
                                     UserEmail: User().Email,
                                     ContatsType: "部門",
                                     ApplyDepartment: drpFilterDepartment_1.Selected.Result
@@ -672,13 +672,13 @@
                         );
                         //下一節點操作人為當前填用戶時，帶入信息到任務詳情頁面    
                     With(
-                            {FormModelTitle: First(NewUserForm).标题},
+                            {FormModelTitle: First(NewUserForm).Title},
                         //创建集合EditDetailUserForm_1收集表格信息，用作帶入表格名称、流程等数据
                             ClearCollect(
                                 EditDetailUserForm_1,
                                 Filter(
                                     GenericFormList,
-                                    标题 = FormModelTitle
+                                    Title = FormModelTitle
                                 )
                             );
                         //创建集合EditDetailUserForm_2,用作带入部门表格类型等数据
@@ -702,7 +702,7 @@
                                 EditDetailUserAttachment2,
                                 Filter(
                                     UploadFlowAttachMent,
-                                    标题 = FormModelTitle
+                                    Title = FormModelTitle
                                 )
                             )
                         );
@@ -993,7 +993,7 @@
                                         FlowType = "通用流程" && !IsBlank(
                                             LookUp(
                                                 GenericFormModel,
-                                                标题 = FormModelId
+                                                Title = FormModelId
                                             ).SelectedActions
                                         ),
                                         Dropdown1_5.Selected.Result,
@@ -1093,7 +1093,7 @@
                                             ) + 1,
                                             "000"
                                         ),
-                                        标题: ApprovalGuid,
+                                        Title: ApprovalGuid,
                                         Application_Status: "審批中",
                                         DepartMentName: First(EditUserForm).ModelDepartment,
                                         FormType: First(EditUserForm).ModelType,
@@ -1109,7 +1109,7 @@
                                     ApprovalDetail_Table,
                                     Defaults(ApprovalDetail_Table),
                                     {
-                                        标题: GUID(),
+                                        Title: GUID(),
                                         Advise: ApprovalListCol[@remark],
                                         Approval_No: ApprovalGuid,
                                         ApprovalBCC: ApprovalListCol[@BCCUser],
@@ -1137,11 +1137,11 @@
                                     GenericFormList,
                                     Defaults(GenericFormList),
                                     {
-                                        标题: GenericFormlistGuid,
+                                        Title: GenericFormlistGuid,
                                         ApprovalId: ApprovalGuid,
-                                        ModelId: First(EditUserForm).标题,
+                                        ModelId: First(EditUserForm).Title,
                                         ModelName: First(EditUserForm).ModelName,
-                                        UploadFileId: Last(GenericUploadAttachMentFile).标题,
+                                        UploadFileId: Last(GenericUploadAttachMentFile).Title,
                                         //目前取的是最后一个附件的id
                                         MarkValue: TextInput_FormMark.Text,
                                         FormType: First(EditUserForm).ModelType,
@@ -1369,13 +1369,13 @@
                                         UserEmail = User().Email,
                                         ContatsType = "部門"
                                     //ApplyDepartment = drpFilterDepartment_1.Selected.Result
-                                    ).标题
+                                    ).Title
                                 ) <= 0,
                                 Patch(
                                     MyContacts,
                                     Defaults(MyContacts),
                                     {
-                                        标题: GUID(),
+                                        Title: GUID(),
                                         UserEmail: User().Email,
                                         ContatsType: "部門",
                                         ApplyDepartment: drpFilterDepartment_1.Selected.Result
@@ -1389,13 +1389,13 @@
                             );
                             //下一節點操作人為當前填用戶時，帶入信息到任務詳情頁面    
                         With(
-                                {FormModelTitle: First(NewUserForm).标题},
+                                {FormModelTitle: First(NewUserForm).Title},
                             //创建集合EditDetailUserForm_1收集表格信息，用作帶入表格名称、流程等数据
                                 ClearCollect(
                                     EditDetailUserForm_1,
                                     Filter(
                                         GenericFormList,
-                                        标题 = FormModelTitle
+                                        Title = FormModelTitle
                                     )
                                 );
                             //创建集合EditDetailUserForm_2,用作带入部门表格类型等数据
@@ -1419,7 +1419,7 @@
                                     EditDetailUserAttachment2,
                                     Filter(
                                         UploadFlowAttachMent,
-                                        标题 = FormModelTitle
+                                        Title = FormModelTitle
                                     )
                                 )
                             );
@@ -1672,7 +1672,7 @@
                     HoverFill: =RGBA(255, 255, 255, 1)
                     OnSelect: |
                         =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).附件).AbsoluteUri)
-                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).附件).DisplayName & "?web=1")
+                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).Attachments).DisplayName & "?web=1")
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
@@ -1705,7 +1705,7 @@
                     HoverFill: =RGBA(255, 255, 255, 1)
                     OnSelect: |-
                         =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text)).附件).AbsoluteUri)
-                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType="填寫指引TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType="填寫指引TT")).附件).DisplayName & "?web=1")
+                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType="填寫指引TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType="填寫指引TT")).Attachments).DisplayName & "?web=1")
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
@@ -1738,7 +1738,7 @@
                     HoverFill: =RGBA(255, 255, 255, 1)
                     OnSelect: |-
                         =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text)).附件).AbsoluteUri)
-                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType="示範表格TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType="示範表格TT")).附件).DisplayName & "?web=1")
+                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType="示範表格TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType="示範表格TT")).Attachments).DisplayName & "?web=1")
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
@@ -3405,7 +3405,7 @@
                     HoverFill: =RGBA(255, 255, 255, 1)
                     OnSelect: |
                         =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).附件).AbsoluteUri)
-                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).附件).DisplayName & "?web=1")
+                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).Attachments).DisplayName & "?web=1")
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
@@ -3438,7 +3438,7 @@
                     HoverFill: =RGBA(255, 255, 255, 1)
                     OnSelect: |-
                         =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text)).附件).AbsoluteUri)
-                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_29.Text&"TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_29.Text&"TT")).附件).DisplayName & "?web=1")
+                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_29.Text&"TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_29.Text&"TT")).Attachments).DisplayName & "?web=1")
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
@@ -3471,7 +3471,7 @@
                     HoverFill: =RGBA(255, 255, 255, 1)
                     OnSelect: |-
                         =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text)).附件).AbsoluteUri)
-                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_30.Text&"TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_30.Text&"TT")).附件).DisplayName & "?web=1")
+                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_30.Text&"TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_30.Text&"TT")).Attachments).DisplayName & "?web=1")
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
@@ -4019,13 +4019,13 @@
                                         UserEmail = User().Email,
                                         ContatsType = "個人",
                                         AllOwnerName.Email = ComboBox1_5.Selected.Mail
-                                    ).标题
+                                    ).Title
                                 ) <= 0 && !Checkbox2_1.Value && !Checkbox2_2.Value && FlowType<>"部門簡單流程",
                                 Patch(
                                     MyContacts,
                                     Defaults(MyContacts),
                                     {
-                                        标题: GUID(),
+                                        Title: GUID(),
                                         UserEmail: User().Email,
                                         AllOwnerName: {
                                             Claims: "i:0#.f|membership|" & ComboBox1_5.Selected.Mail,
@@ -4049,7 +4049,7 @@
                                             UserEmail = User().Email,
                                             ContatsType = "個人",
                                             AllOwnerName.Email = ComboBox1_5.Selected.Mail
-                                        ).标题
+                                        ).Title
                                     ) > 0 && !Checkbox2_1.Value && !Checkbox2_2.Value && FlowType<>"部門簡單流程",
                                     UpdateIf(
                                         MyContacts,
@@ -4069,7 +4069,7 @@
                                         UpdateIf(
                                             MyContacts,
                                             (UserEmail = User().Email) && (ContatsType = "個人") && (AllOwnerName.Email = Gallery2_2.Selected.AllOwnerName.Email),
-                                            {标题:GUID()}
+                                            {Title:GUID()}
                                             //{UserEmail: User().Email}
                                         ),
                                         Checkbox2_2.Value = true //|| (FlowType = "部門簡單流程"&& Departmentselect<>true)

@@ -1,12 +1,13 @@
-<application xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:service="https://asia-001.azure-apim.net/apim/logicflows" xmlns:siena="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11" siena:serviceId="UploadFiletoSharepoint" xmlns="http://wadl.dev.java.net/2009/02">
-  <doc title="UploadFiletoSharepoint" />
+<application xmlns:xml="http://www.w3.org/XML/1998/namespace" xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:service="https://unitedstates-002.azure-apim.net/apim/logicflows" xmlns:siena="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11" siena:serviceId="ELCHK_UploadFiletoSharepoint" xmlns="http://wadl.dev.java.net/2009/02">
+  <doc title="ELCHK_UploadFiletoSharepoint" />
   <grammars>
-    <jsonTypes targetNamespace="https://asia-001.azure-apim.net/apim/logicflows" xmlns="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11">
+    <jsonTypes targetNamespace="https://unitedstates-002.azure-apim.net/apim/logicflows" xmlns="http://schemas.microsoft.com/MicrosoftProjectSiena/WADL/2014/11">
       <string name="ManualTriggerInput_Condition_ObjectName_def" />
       <string name="ManualTriggerInput_Createitem_Title_def" />
-      <string name="ManualTriggerInput_Createitem_TempType_def" />
       <string name="ManualTriggerInput_Createitem_TempFileName_def" />
+      <string name="ManualTriggerInput_Createitem_TempType_def" />
       <string name="ManualTriggerInput_Createitem_TempAttachMent_def" />
+      <string name="ManualTriggerInput_Createitem_GenericFormId_def" />
       <string name="ManualTriggerInput_Addattachment_FileName_def" />
       <string name="ManualTriggerInput_Createitem2_Title_def" />
       <string name="ManualTriggerInput_Createitem2_FormId_def" />
@@ -19,18 +20,16 @@
       <string name="ManualTriggerInput_Createitem3_FlowAttachPWD_def" />
       <string name="ManualTriggerInput_Createitem3_FlowAttachName_def" />
       <string name="ManualTriggerInput_Addattachment3_FileName_def" />
-      <string name="ManualTriggerInput_Addattachment3_FileContent_def" />
       <string name="ManualTriggerInput_Addattachment2_FileContent_def" />
       <string name="ManualTriggerInput_Addattachment_FileContent_def" />
-      <string name="ManualTriggerInput_Condition2_ObjectName_def" />
-      <string name="ManualTriggerInput_Compose_Inputs_def" />
-      <string name="ManualTriggerInput_Createitem_GenericFormId_def" />
+      <string name="ManualTriggerInput_Addattachment3_FileContent_def" />
       <object name="ManualTriggerInput">
         <property name="Condition_ObjectName" type="string" />
         <property name="Createitem_Title" type="string" />
-        <property name="Createitem_TempType" type="string" />
         <property name="Createitem_TempFileName" type="string" />
+        <property name="Createitem_TempType" type="string" />
         <property name="Createitem_TempAttachMent" type="string" />
+        <property name="Createitem_GenericFormId" type="string" />
         <property name="Addattachment_FileName" type="string" />
         <property name="Createitem2_Title" type="string" />
         <property name="Createitem2_FormId" type="string" />
@@ -43,18 +42,15 @@
         <property name="Createitem3_FlowAttachPWD" type="string" />
         <property name="Createitem3_FlowAttachName" type="string" />
         <property name="Addattachment3_FileName" type="string" />
-        <property name="Addattachment3_FileContent" type="string" />
         <property name="Addattachment2_FileContent" type="string" />
         <property name="Addattachment_FileContent" type="string" />
-        <property name="Condition2_ObjectName" type="string" />
-        <property name="Compose_Inputs" type="string" />
-        <property name="Createitem_GenericFormId" type="string" />
+        <property name="Addattachment3_FileContent" type="string" />
       </object>
       <object name="ResponseActionOutput" />
       <object name="Run_responses_default_def" />
     </jsonTypes>
   </grammars>
-  <resources siena:authenticationProviderHref="#PowerAppAuth" base="https://asia-001.azure-apim.net/apim/logicflows">
+  <resources siena:authenticationProviderHref="#PowerAppAuth" base="https://unitedstates-002.azure-apim.net/apim/logicflows">
     <resource path="/{connectionId}/triggers/manual/run">
       <param style="template" name="connectionId" type="xs:string" required="true" />
       <method siena:requiresAuthentication="true" name="POST" id="Run">
@@ -66,9 +62,10 @@
           <representation mediaType="application/json">
             <param style="plain" name="Condition_ObjectName" path="/Condition_ObjectName" type="xs:string" required="true" />
             <param style="plain" name="Createitem_Title" path="/Createitem_Title" type="xs:string" required="true" />
-            <param style="plain" name="Createitem_TempType" path="/Createitem_TempType" type="xs:string" required="true" />
             <param style="plain" name="Createitem_TempFileName" path="/Createitem_TempFileName" type="xs:string" required="true" />
+            <param style="plain" name="Createitem_TempType" path="/Createitem_TempType" type="xs:string" required="true" />
             <param style="plain" name="Createitem_TempAttachMent" path="/Createitem_TempAttachMent" type="xs:string" required="true" />
+            <param style="plain" name="Createitem_GenericFormId" path="/Createitem_GenericFormId" type="xs:string" required="true" />
             <param style="plain" name="Addattachment_FileName" path="/Addattachment_FileName" type="xs:string" required="true" />
             <param style="plain" name="Createitem2_Title" path="/Createitem2_Title" type="xs:string" required="true" />
             <param style="plain" name="Createitem2_FormId" path="/Createitem2_FormId" type="xs:string" required="true" />
@@ -81,12 +78,9 @@
             <param style="plain" name="Createitem3_FlowAttachPWD" path="/Createitem3_FlowAttachPWD" type="xs:string" required="true" />
             <param style="plain" name="Createitem3_FlowAttachName" path="/Createitem3_FlowAttachName" type="xs:string" required="true" />
             <param style="plain" name="Addattachment3_FileName" path="/Addattachment3_FileName" type="xs:string" required="true" />
-            <param style="plain" name="Addattachment3_FileContent" path="/Addattachment3_FileContent" type="xs:string" required="true" />
             <param style="plain" name="Addattachment2_FileContent" path="/Addattachment2_FileContent" type="xs:string" required="true" />
             <param style="plain" name="Addattachment_FileContent" path="/Addattachment_FileContent" type="xs:string" required="true" />
-            <param style="plain" name="Condition2_ObjectName" path="/Condition2_ObjectName" type="xs:string" required="true" />
-            <param style="plain" name="Compose_Inputs" path="/Compose_Inputs" type="xs:string" required="true" />
-            <param style="plain" name="Createitem_GenericFormId" path="/Createitem_GenericFormId" type="xs:string" required="true" />
+            <param style="plain" name="Addattachment3_FileContent" path="/Addattachment3_FileContent" type="xs:string" required="true" />
           </representation>
         </request>
         <response>
