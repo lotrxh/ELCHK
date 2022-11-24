@@ -141,8 +141,49 @@
       "SignerInfo"
     ],
     "dependencies": {},
-    "dependents": [],
+    "dependents": [
+      "70e042c4-c51b-418f-ae21-41e747edc89f"
+    ],
     "id": "6335c568-a1b9-4ef6-9a71-9f5785a65310"
+  },
+  "70e042c4-c51b-418f-ae21-41e747edc89f": {
+    "connectionParameters": {
+      "workFlowCallbackUri": "https://prod-185.westus.logic.azure.com:443/workflows/fce274852bd8428a8effbe6970eacb7e/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=WOLoJLT13KkirW9RBifqiMj53sL71h_C9GLEO6C_kEw",
+      "workflowEndpoint": "/subscriptions/427976e2-4271-4308-afb8-d28d53a6ad06/resourceGroups/c3dcdfe3b2ca40eabd831e6b704f5108-ac29b4b3c9f447ddae165cb576311baa/providers/Microsoft.Logic/workflows/09d8f021-3d51-4043-8c70-a73a11cee479",
+      "workflowEntityId": "5aac1c92-9556-ed11-bba2-002248081121",
+      "workflowName": "09d8f021-3d51-4043-8c70-a73a11cee479",
+      "workflowPath": "/subscriptions/427976e2-4271-4308-afb8-d28d53a6ad06/resourceGroups/c3dcdfe3b2ca40eabd831e6b704f5108-ac29b4b3c9f447ddae165cb576311baa/providers/Microsoft.Logic/workflows/09d8f021-3d51-4043-8c70-a73a11cee479"
+    },
+    "connectionRef": {
+      "displayName": "Logic flows",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1534/1.0.1534.2605/logicflows/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
+      "parameterHints": {
+        "workflowEntityId": {
+          "value": "5aac1c92-9556-ed11-bba2-002248081121"
+        },
+        "workflowName": {
+          "value": "09d8f021-3d51-4043-8c70-a73a11cee479"
+        }
+      },
+      "parameterHintsV2": {
+        "workflowEntityId": {
+          "value": "5aac1c92-9556-ed11-bba2-002248081121"
+        },
+        "workflowName": {
+          "value": "09d8f021-3d51-4043-8c70-a73a11cee479"
+        }
+      }
+    },
+    "datasets": {},
+    "dataSources": [
+      "ELCHK_UploadFiletoSharepoint"
+    ],
+    "dependencies": {
+      "shared_sharepointonline_1": "6335c568-a1b9-4ef6-9a71-9f5785a65310"
+    },
+    "dependents": [],
+    "id": "70e042c4-c51b-418f-ae21-41e747edc89f"
   },
   "96386780-8b4d-4db7-adfb-978236ec5f5e": {
     "connectionParameters": {
