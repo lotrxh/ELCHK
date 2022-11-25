@@ -27,10 +27,24 @@
             }
         );
         
+        
         Reset(TextInput2_34);
-        //设置密码不可见
-        UpdateContext({ShowFormPassword: TextMode.Password});
+        //设置密码不可见,设置显示隐藏密码按钮初始值
+        UpdateContext(
+            {
+                ShowFormPassword: TextMode.Password,
+                ShowPwd: true,
+                ShowHidePwd: false,
+                ShowPwd1: true,
+                ShowHidePwd1: false,
+                ShowPwd2: true,
+                ShowHidePwd2: false,
+                ShowFormHistory: false
+                //,CurrentAction: LookUp(ApprovalDetail_Table,Approval_No = Label5.Text && TaskStatus = "002").ActionNode
+            }
+        );
         //设置显示隐藏密码按钮初始值
+        /*
         UpdateContext({ShowPwd: true});
         UpdateContext({ShowHidePwd: false});
         UpdateContext({ShowPwd1: true});
@@ -38,6 +52,7 @@
         UpdateContext({ShowPwd2: true});
         UpdateContext({ShowHidePwd2: false});
         UpdateContext({ShowFormHistory: false});
+        */
         //收集当前任务的审批数据
         ClearCollect(ThisFlowIDapprovetable,
         Filter(
@@ -972,7 +987,7 @@
                                     )
                                 ).TaskStatus = "000",
                                 Notify(
-                                "該任務已經被拒絕，請勿重複操作。",
+                                "該任務已經被拒絕，請刷新頁面，勿重複操作。",
                                 Warning
                             ),
                         If(
@@ -1163,6 +1178,21 @@
                     HoverFill: =RGBA(255, 255, 255, 1)
                     OnSelect: |-
                         =If(
+                            Index(
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            Approval_No = FLowId
+                                        ),
+                                        "Priortty",
+                                        Descending
+                                    ),2
+                                ).TaskStatus = "005",
+                                Notify(
+                                "該任務當前行動已被您退回，請刷新頁面，勿重複操作。",
+                                Warning
+                            ),
+                        If(
                             IsBlank(TextInput2_34.Text),
                             Notify(
                                 "請在處理備注中填寫退回原因。",
@@ -1364,6 +1394,7 @@
                                 Launch(JumpUrlClientAPP & "&Screen=GeneralFormListScreen",{},LaunchTarget.Replace),
                                 Navigate(HomePageScreen,ScreenTransition.None)
                             )
+                        )
                         )
                     PaddingBottom: =0
                     PaddingLeft: =0
@@ -4501,7 +4532,7 @@
                                     )
                                 ).TaskStatus = "000",
                                 Notify(
-                                "該任務已經被拒絕，請勿重複操作。",
+                                "該任務已經被拒絕，請刷新頁面，勿重複操作。",
                                 Warning
                             ),
                         If(
@@ -4692,6 +4723,21 @@
                     HoverFill: =RGBA(255, 255, 255, 1)
                     OnSelect: |-
                         =If(
+                            Index(
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            Approval_No = FLowId
+                                        ),
+                                        "Priortty",
+                                        Descending
+                                    ),2
+                                ).TaskStatus = "005",
+                                Notify(
+                                "該任務當前行動已被您退回，請刷新頁面，勿重複操作。",
+                                Warning
+                            ),
+                        If(
                             IsBlank(TextInput2_34.Text),
                             Notify(
                                 "請在處理備注中填寫退回原因。",
@@ -4893,6 +4939,7 @@
                                 Launch(JumpUrlClientAPP & "&Screen=GeneralFormListScreen",{},LaunchTarget.Replace),
                                 Navigate(HomePageScreen,ScreenTransition.None)
                             )
+                        )
                         )
                     PaddingBottom: =0
                     PaddingLeft: =0
