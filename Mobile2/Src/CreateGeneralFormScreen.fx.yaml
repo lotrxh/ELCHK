@@ -716,7 +716,7 @@
                     FillPortions: =0.8
                     FontWeight: =FontWeight.Semibold
                     Height: =30
-                    LayoutMinWidth: =250
+                    LayoutMinWidth: =200
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
@@ -1297,7 +1297,7 @@
                         PaddingRight: =0
                         PaddingTop: =0
                         Size: =10
-                        Text: =First(EditUserForm).ModelType
+                        Text: =First(EditUserForm).ModelType//用作下載使用，請勿刪除
                         Width: =170
                         X: =128
                         ZIndex: =2
@@ -1321,7 +1321,7 @@
                         PaddingRight: =0
                         PaddingTop: =0
                         Size: =10
-                        Text: ="表格編號："
+                        Text: ="表格名稱："
                         Width: =92
                         ZIndex: =1
 
@@ -1333,7 +1333,7 @@
                         PaddingRight: =0
                         PaddingTop: =0
                         Size: =10
-                        Text: =First(EditUserForm).ModelFlowNumber
+                        Text: =First(EditUserForm).ModelName //用來文件下載使用，請勿刪除
                         Width: =158
                         X: =92
                         ZIndex: =2
@@ -1403,7 +1403,7 @@
                         LayoutMinWidth: =20
                         OnSelect: |
                             =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).附件).AbsoluteUri)
-                            Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).附件).DisplayName & "?web=1")
+                            Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=Label1_134.Text&&TempType=Label1_132.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=Label1_134.Text&&TempType=Label1_132.Text)).附件).DisplayName & "?web=1")
                         PaddingBottom: =0
                         PaddingLeft: =0
                         PaddingRight: =0
@@ -1439,7 +1439,7 @@
                         LayoutMinWidth: =20
                         OnSelect: |-
                             =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text)).附件).AbsoluteUri)
-                            Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType="填寫指引TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType="填寫指引TT")).附件).DisplayName & "?web=1")
+                            Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=Label1_134.Text&&TempType="填寫指引TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=Label1_134.Text&&TempType="填寫指引TT")).附件).DisplayName & "?web=1")
                         PaddingBottom: =0
                         PaddingLeft: =0
                         PaddingRight: =0
@@ -1475,7 +1475,7 @@
                         LayoutMinWidth: =20
                         OnSelect: |-
                             =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text)).附件).AbsoluteUri)
-                            Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType="示範表格TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType="示範表格TT")).附件).DisplayName & "?web=1")
+                            Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=Label1_134.Text&&TempType="示範表格TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=Label1_134.Text&&TempType="示範表格TT")).附件).DisplayName & "?web=1")
                         PaddingBottom: =0
                         PaddingLeft: =0
                         PaddingRight: =0
@@ -3327,7 +3327,7 @@
                     HoverFill: =RGBA(255, 255, 255, 1)
                     OnSelect: |
                         =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).附件).AbsoluteUri)
-                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).附件).DisplayName & "?web=1")
+                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=Label1_134.Text&&TempType=Label1_132.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=Label1_134.Text&&TempType=Label1_132.Text)).附件).DisplayName & "?web=1")
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
@@ -3340,7 +3340,7 @@
                     RadiusTopLeft: =2
                     RadiusTopRight: =2
                     Size: =9
-                    Text: ="模板下載"
+                    Text: ="下載表格"
                     Width: =100
                     X: =Parent.Width-Self.Width-1
                     Y: =1
@@ -3360,7 +3360,7 @@
                     HoverFill: =RGBA(255, 255, 255, 1)
                     OnSelect: |-
                         =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_24.Text)).附件).AbsoluteUri)
-                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_29.Text&"TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_29.Text&"TT")).附件).DisplayName & "?web=1")
+                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=Label1_134.Text&&TempType="填寫指引TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=Label1_134.Text&&TempType="填寫指引TT")).附件).DisplayName & "?web=1")
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
@@ -3373,7 +3373,7 @@
                     RadiusTopLeft: =2
                     RadiusTopRight: =2
                     Size: =9
-                    Text: ="填寫指引"
+                    Text: ="下載指引"
                     Width: =100
                     X: =Parent.Width-Self.Width-1
                     Y: =1
@@ -3393,7 +3393,7 @@
                     HoverFill: =RGBA(255, 255, 255, 1)
                     OnSelect: |-
                         =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_25.Text)).附件).AbsoluteUri)
-                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_30.Text&"TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=BtnDefault_30.Text&"TT")).附件).DisplayName & "?web=1")
+                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=Label1_134.Text&&TempType="示範表格TT")).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=Label1_134.Text&&TempType="示範表格TT")).附件).DisplayName & "?web=1")
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
@@ -3406,7 +3406,7 @@
                     RadiusTopLeft: =2
                     RadiusTopRight: =2
                     Size: =9
-                    Text: ="示範表格"
+                    Text: ="下載範例"
                     Width: =100
                     X: =Parent.Width-Self.Width-1
                     Y: =1
