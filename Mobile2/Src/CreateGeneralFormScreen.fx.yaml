@@ -195,7 +195,7 @@
                 OnSelect: |
                     =//左边填写内容上传必選項判斷及流程必選項
                     If(
-                        (Attachment_Excel.Visible = true && Last(Attachment_Excel.Attachments).Name = Blank()) || (Attachment_Zip.Visible = true && Last(Attachment_Zip.Attachments).Name = Blank()) || (Label6.Visible = true && IsBlank(TextInput_FormPWD) && IsBlank(TextInput_FormPWD_1)) || (Label6_1.Visible = true && IsBlank(TextInput_zipPWD) && IsBlank(TextInput_zipPWD_1)) || IsEmpty(drpFilterDepartment_1.SelectedItems) || (FlowType = "預設流程" && (Dropdown1_9.Selected.Result = Blank() || Label1_155.Text = "/")) || (FlowType = "通用流程" && (Dropdown1_5.Selected.Result = Blank() || Label1_137.Text = "/")) || (FlowType = "部門簡單流程" && Label1_153.Text = "/"),
+                        (Attachment_Excel.Visible = true && Last(Attachment_Excel.Attachments).Name = Blank()) || (Attachment_Zip.Visible = true && Last(Attachment_Zip.Attachments).Name = Blank()) || (Label6_7.Visible = true && IsBlank(TextInput_FormPWD) && IsBlank(TextInput_FormPWD_1)) || (Label6_8.Visible = true && IsBlank(TextInput_zipPWD) && IsBlank(TextInput_zipPWD_1)) || IsEmpty(drpFilterDepartment_1.SelectedItems) || (FlowType = "預設流程" && (Dropdown1_9.Selected.Result = Blank() || Label1_155.Text = "/")) || (FlowType = "通用流程" && (Dropdown1_5.Selected.Result = Blank() || Label1_137.Text = "/")) || (FlowType = "部門簡單流程" && Label1_153.Text = "/"),
                         Notify(
                             "必填項目不能留空，處理行動及處理人不能留空。",
                             NotificationType.Error
@@ -695,7 +695,7 @@
                 LayoutWrap: =true
                 PaddingBottom: =1
                 PaddingLeft: =1
-                PaddingRight: =1
+                PaddingRight: =10
                 PaddingTop: =1
                 Width: |
                     =Switch(
@@ -713,9 +713,10 @@
                 FormNameLabel_1 As label:
                     Color: =glbNeutralPrimaryColor
                     Fill: =RGBA(255, 255, 255, 1)
+                    FillPortions: =0.8
                     FontWeight: =FontWeight.Semibold
                     Height: =30
-                    LayoutMinWidth: =360
+                    LayoutMinWidth: =250
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
@@ -734,10 +735,11 @@
                     FocusedBorderThickness: =1
                     Height: =36
                     HoverFill: =ColorFade(Self.Fill, -15%)
+                    LayoutMinWidth: =20
                     OnSelect: |
                         =//左边填写内容上传必選項判斷及流程必選項
                         If(
-                            (Attachment_Excel.Visible = true && Last(Attachment_Excel.Attachments).Name = Blank()) || (Attachment_Zip.Visible = true && Last(Attachment_Zip.Attachments).Name = Blank()) || (Label6.Visible = true && IsBlank(TextInput_FormPWD) && IsBlank(TextInput_FormPWD_1)) || (Label6_1.Visible = true && IsBlank(TextInput_zipPWD) && IsBlank(TextInput_zipPWD_1)) || IsEmpty(drpFilterDepartment_1.SelectedItems) || (FlowType = "預設流程" && (Dropdown1_9.Selected.Result = Blank() || Label1_155.Text = "/")) || (FlowType = "通用流程" && (Dropdown1_5.Selected.Result = Blank() || Label1_137.Text = "/")) || (FlowType = "部門簡單流程" && Label1_153.Text = "/"),
+                            (Attachment_Excel.Visible = true && Last(Attachment_Excel.Attachments).Name = Blank()) || (Attachment_Zip.Visible = true && Last(Attachment_Zip.Attachments).Name = Blank()) || (Label6_7.Visible = true && IsBlank(TextInput_FormPWD) && IsBlank(TextInput_FormPWD_1)) || (Label6_8.Visible = true && IsBlank(TextInput_zipPWD) && IsBlank(TextInput_zipPWD_1)) || IsEmpty(drpFilterDepartment_1.SelectedItems) || (FlowType = "預設流程" && (Dropdown1_9.Selected.Result = Blank() || Label1_155.Text = "/")) || (FlowType = "通用流程" && (Dropdown1_5.Selected.Result = Blank() || Label1_137.Text = "/")) || (FlowType = "部門簡單流程" && Label1_153.Text = "/"),
                             Notify(
                                 "必填項目不能留空，處理行動及處理人不能留空。",
                                 NotificationType.Error
@@ -1708,10 +1710,10 @@
                             ZIndex: =3
 
                         Image4_2 As image:
-                            Height: =10
+                            Height: =1
                             Image: =Last(Attachment_Excel.Attachments).Value
                             Visible: =false
-                            Width: =10
+                            Width: =1
                             ZIndex: =4
 
                     Attachment_Excel As attachments:
@@ -1803,7 +1805,7 @@
                         Label9_43 As label:
                             Align: =Align.Center
                             Color: =glbNeutralPrimaryColor
-                            Fill: =RGBA(252, 242, 212, 1)
+                            Fill: =If(Label9_43.Text = "必填",RGBA(252, 242, 212, 1),Label9_43.Text = "選填",RGBA(204, 231, 246, 1))
                             Height: =30
                             PaddingBottom: =0
                             PaddingLeft: =0
@@ -1833,8 +1835,9 @@
                             PaddingTop: =0
                             Size: =10
                             Text: ="*"
-                            Visible: |
-                                =If(First(EditUserForm).IsPassWord="1",true,false)
+                            Visible: |-
+                                =//If(First(EditUserForm).IsPassWord="1",true,false)
+                                true
                             Width: =15
                             ZIndex: =1
 
@@ -2027,14 +2030,66 @@
                         Width: =Parent.Width-40
                         X: =20
                         Y: =35
-                        ZIndex: =3
+                        ZIndex: =2
 
                     Image4_1 As image:
                         Height: =10
                         Image: =Last(Attachment_Zip.Attachments).Value
                         Visible: =false
                         Width: =10
+                        ZIndex: =3
+
+                    Container8_3 As groupContainer.horizontalAutoLayoutContainer:
+                        FillPortions: =0
+                        Height: =30
+                        LayoutMinHeight: =40
+                        LayoutMinWidth: =250
+                        LayoutMode: =LayoutMode.Auto
+                        Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
                         ZIndex: =4
+
+                        Label6_8 As label:
+                            AlignInContainer: =AlignInContainer.Start
+                            Color: =glbErrorColor
+                            Height: =30
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =10
+                            Text: ="*"
+                            Visible: =If(First(EditUserForm).IsAttachmentPassWord="1",true,false)
+                            Width: =15
+                            ZIndex: =1
+
+                        Label9_46 As label:
+                            AlignInContainer: =AlignInContainer.Center
+                            Color: =glbNeutralPrimaryColor
+                            Height: =30
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =11
+                            Text: ="密碼"
+                            Width: =40
+                            X: =20
+                            Y: =363
+                            ZIndex: =2
+
+                        Label9_48 As label:
+                            Align: =Align.Center
+                            Color: =glbNeutralPrimaryColor
+                            Fill: =If(Label9_48.Text = "必填",RGBA(252, 242, 212, 1),Label9_48.Text = "選填",RGBA(204, 231, 246, 1))
+                            Height: =30
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =11
+                            Text: =If(First(EditUserForm).IsAttachmentPassWord="1","必填",First(EditUserForm).IsAttachmentPassWord="0","選填")
+                            Width: =40
+                            ZIndex: =3
 
                     Container3 As groupContainer.horizontalAutoLayoutContainer:
                         LayoutJustifyContent: =LayoutJustifyContent.Center
@@ -2045,14 +2100,17 @@
                         ZIndex: =5
 
                         Label6_1 As label:
-                            Color: =glbErrorColor
+                            Color: =RGBA(255, 255, 255, 1)
+                            Fill: =RGBA(255, 255, 255, 1)
                             PaddingBottom: =0
                             PaddingLeft: =0
                             PaddingRight: =0
                             PaddingTop: =0
                             Size: =10
                             Text: ="*"
-                            Visible: =If(First(EditUserForm).IsAttachmentPassWord="1",true,false)
+                            Visible: |-
+                                =//If(First(EditUserForm).IsAttachmentPassWord="1",true,false)
+                                true
                             Width: =15
                             ZIndex: =1
 
@@ -3364,7 +3422,7 @@
         ZIndex: =6
 
         Icon2_6 As icon.Home:
-            Color: =RGBA(39, 67, 125, 1)
+            Color: =glbThemePrimaryColor
             Fill: =RGBA(255, 255, 255, 1)
             Height: =30
             Icon: =Icon.BackArrow

@@ -1,4 +1,5 @@
 "DetailGeneralFormScreen As screen.'phoneLayout_FluidGridWithHeaderPageLayout_ver3.0'":
+    Fill: =RGBA(230, 230, 230, 1)
     OnVisible: |-
         =UpdateContext(
             {
@@ -247,14 +248,14 @@
         Refresh(UploadFlowAttachMent);
 
     HeaderContainer_2 As groupContainer.manualLayoutContainer:
-        Fill: =glbThemePrimaryColor
-        Height: =60
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =50
         Width: =Parent.Width
         ZIndex: =1
 
         Icon2_4 As icon.Home:
-            Color: =RGBA(255, 255, 255, 1)
-            Height: =60
+            Color: =glbThemePrimaryColor
+            Height: =30
             Icon: =Icon.BackArrow
             OnSelect: |-
                 =If(
@@ -262,14 +263,15 @@
                         Launch(JumpUrlClientAPP & "&Screen=GeneralFormListScreen",{},LaunchTarget.Replace),
                         Navigate(HomePageScreen,ScreenTransition.None)
                     )
-            PaddingBottom: =14
-            PaddingTop: =14
-            Width: =60
-            X: =20
+            PaddingBottom: =2
+            PaddingTop: =2
+            Width: =30
+            X: =6
+            Y: =10
             ZIndex: =6
 
         Image1 As image:
-            Height: =60
+            Height: =30
             Image: =logo_单图标
             OnSelect: |-
                 =If(
@@ -277,15 +279,14 @@
                         Launch(JumpUrlClientAPP & "&Screen=HomepageScreen",{},LaunchTarget.Replace),
                         Navigate(HomePageScreen,ScreenTransition.None)
                     )
-            Width: =40
-            X: =84
+            Width: =30
+            X: =42
+            Y: =10
             ZIndex: =7
 
         Label1_73 As label:
-            Color: =RGBA(255, 255, 255, 1)
-            Fill: =glbThemePrimaryColor
-            FontWeight: =FontWeight.Bold
-            Height: =44
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =50
             OnSelect: |-
                 =If(
                     Param("Page")="Home",
@@ -296,24 +297,23 @@
             PaddingLeft: =0
             PaddingRight: =0
             PaddingTop: =0
-            Size: =12
+            Size: =10
             Text: |-
-                =If(App.ActiveScreen.Width<600,"eProcessing System",
-                "基督教香港信義會社會服務部 | eProcessing System")
-            Width: =509
-            X: =132
-            Y: =8
+                ="ELCSS-HK
+                eProcessing System (ePS)"
+            Width: =158
+            X: =83
             ZIndex: =8
 
     Container10_1 As groupContainer.verticalAutoLayoutContainer:
         Fill: =RGBA(242, 242, 242, 1)
-        Height: =Parent.Height - 120
+        Height: =If(BottomContainer_2.Visible = true,Parent.Height-Self.Y-BottomContainer_2.Height,Parent.Height-Self.Y)
         LayoutDirection: =LayoutDirection.Vertical
         LayoutGap: =10
         LayoutMode: =LayoutMode.Auto
         LayoutOverflowY: =LayoutOverflow.Scroll
         Width: =Parent.Width
-        Y: =60
+        Y: =52
         ZIndex: =2
 
         InfoContainer_1 As groupContainer.horizontalAutoLayoutContainer:
@@ -406,7 +406,7 @@
                     RadiusBottomRight: =2
                     RadiusTopLeft: =2
                     RadiusTopRight: =2
-                    Size: =9
+                    Size: =10
                     Text: ="下載表格"
                     Visible: =If(App.ActiveScreen.Width<600,false,true)
                     Width: =100
@@ -440,7 +440,7 @@
                     RadiusBottomRight: =2
                     RadiusTopLeft: =2
                     RadiusTopRight: =2
-                    Size: =9
+                    Size: =10
                     Text: ="下載指引"
                     Visible: =If(App.ActiveScreen.Width<600,false,true)
                     Width: =100
@@ -474,7 +474,7 @@
                     RadiusBottomRight: =2
                     RadiusTopLeft: =2
                     RadiusTopRight: =2
-                    Size: =9
+                    Size: =10
                     Text: ="下載範例"
                     Visible: =If(App.ActiveScreen.Width<600,false,true)
                     Width: =100
@@ -684,6 +684,7 @@
                     Label1_145 As label:
                         Color: =glbNeutralSecondaryColor
                         Height: =28
+                        Italic: =true
                         PaddingBottom: =0
                         PaddingLeft: =0
                         PaddingRight: =0
@@ -696,6 +697,7 @@
                     Label1_146 As label:
                         Color: =glbNeutralPrimaryColor
                         Height: =28
+                        Italic: =true
                         PaddingBottom: =0
                         PaddingLeft: =0
                         PaddingRight: =0
@@ -818,6 +820,7 @@
                     Label1_152 As label:
                         Color: =glbNeutralPrimaryColor
                         Height: =28
+                        Italic: =true
                         PaddingBottom: =0
                         PaddingLeft: =0
                         PaddingRight: =0
@@ -975,7 +978,7 @@
                         If(
                             IsBlank(TextInput2_34.Text),
                             Notify(
-                                "請填寫拒絕原因",
+                                "請在處理備注中填寫拒絕原因。",
                                 Warning
                             ),
                             //上傳附件
@@ -1068,7 +1071,7 @@
                     RadiusTopRight: =4
                     Size: =11
                     Text: ="拒絕申請"
-                    Width: =120
+                    Width: =100
                     X: =360
                     Y: =7
                     ZIndex: =9
@@ -1162,7 +1165,7 @@
                         =If(
                             IsBlank(TextInput2_34.Text),
                             Notify(
-                                "請填寫退回原因",
+                                "請在處理備注中填寫退回原因。",
                                 Warning
                             ),
                         //更新退回時的审批行动状态为005，表示退回
@@ -1375,7 +1378,7 @@
                     RadiusTopRight: =4
                     Size: =11
                     Text: ="退回至申請人"
-                    Width: =120
+                    Width: =100
                     X: =161
                     Y: =7
                     ZIndex: =10
@@ -1409,7 +1412,7 @@
                     OnSelect: |-
                         =//判斷必填字段是否爲空
                         If(
-                            (Label6_2.Visible = true && Last(Attachment_Excel2.Attachments).Name <> Blank() && IsBlank(TextInput2_30) && IsBlank(TextInput2_35)) || (Label6_3.Visible = true && Last(Attachment_Zip2.Attachments).Name <> Blank() && IsBlank(TextInput2_31) && IsBlank(TextInput2_37)) || (Dropdown1_6.Visible = true && Dropdown1_6.Selected.Result = Blank()) || (Label1_138.Visible = true && Label1_138.Text = "/") 
+                            (Label6_9.Visible = true && Last(Attachment_Excel2.Attachments).Name <> Blank() && IsBlank(TextInput2_30) && IsBlank(TextInput2_35)) || (Label6_10.Visible = true && Last(Attachment_Zip2.Attachments).Name <> Blank() && IsBlank(TextInput2_31) && IsBlank(TextInput2_37)) || (Dropdown1_6.Visible = true && Dropdown1_6.Selected.Result = Blank()) || (Label1_138.Visible = true && Label1_138.Text = "/") 
                             //|| (TextInput_FilterLabel_2.Visible = true && IsBlank(TextInput_FilterLabel_2))
                             ,
                             Notify(
@@ -1851,7 +1854,7 @@
                     RadiusTopRight: =4
                     Size: =11
                     Text: ="同意"
-                    Width: =120
+                    Width: =100
                     X: =304
                     Y: =7
                     ZIndex: =11
@@ -2441,21 +2444,19 @@
                         Y: =56
                         ZIndex: =7
 
-                    Container6 As groupContainer.horizontalAutoLayoutContainer:
+                    Container8_4 As groupContainer.horizontalAutoLayoutContainer:
                         FillPortions: =0
-                        Height: =50
-                        LayoutJustifyContent: =LayoutJustifyContent.Center
+                        Height: =30
                         LayoutMinHeight: =40
                         LayoutMinWidth: =250
                         LayoutMode: =LayoutMode.Auto
-                        Visible: |-
-                            =//密碼輸入框不可見時，整個密碼容器不可見
-                            TextInput2_30.Visible
+                        Visible: =TextInput2_30.Visible
                         ZIndex: =8
 
-                        Label6_2 As label:
+                        Label6_9 As label:
                             AlignInContainer: =AlignInContainer.Start
                             Color: =glbErrorColor
+                            Height: =30
                             PaddingBottom: =0
                             PaddingLeft: =0
                             PaddingRight: =0
@@ -2469,6 +2470,63 @@
                                     true,
                                     false
                                 )
+                            Width: =15
+                            ZIndex: =1
+
+                        Label9_49 As label:
+                            AlignInContainer: =AlignInContainer.Center
+                            Color: =glbNeutralPrimaryColor
+                            Height: =30
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =11
+                            Text: ="密碼"
+                            Width: =40
+                            X: =20
+                            Y: =363
+                            ZIndex: =2
+
+                        Label9_50 As label:
+                            Align: =Align.Center
+                            Color: =glbNeutralPrimaryColor
+                            Fill: =If(Label9_50.Text = "必填",RGBA(252, 242, 212, 1),Label9_50.Text = "選填",RGBA(204, 231, 246, 1))
+                            Height: =30
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =11
+                            Text: =If(Label6_9.Visible = true,"必填",Label6_9.Visible = false,"選填")
+                            Width: =40
+                            ZIndex: =3
+
+                    Container6 As groupContainer.horizontalAutoLayoutContainer:
+                        FillPortions: =0
+                        Height: =50
+                        LayoutJustifyContent: =LayoutJustifyContent.Center
+                        LayoutMinHeight: =40
+                        LayoutMinWidth: =250
+                        LayoutMode: =LayoutMode.Auto
+                        Visible: |-
+                            =//密碼輸入框不可見時，整個密碼容器不可見
+                            TextInput2_30.Visible
+                        ZIndex: =9
+
+                        Label6_2 As label:
+                            AlignInContainer: =AlignInContainer.Start
+                            Color: =RGBA(255, 255, 255, 1)
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =10
+                            Text: ="*"
+                            Visible: |-
+                                =//必填字段標簽在密碼設定為必填時出現以及同時表格可上傳的時候顯示
+                                //If(First(EditDetailUserForm_2).IsPassWord="1"&&Attachment_Excel2.Visible= true , true , false )
+                                true
                             Width: =15
                             ZIndex: =1
 
@@ -2610,12 +2668,12 @@
                         Image: =Last(Attachment_Excel2.Attachments).Value
                         Visible: =false
                         Width: =1
-                        ZIndex: =9
+                        ZIndex: =10
 
                     Rectangle5_2 As rectangle:
                         Fill: =RGBA(0, 0, 0, 0)
                         Height: =5
-                        ZIndex: =10
+                        ZIndex: =11
 
                 UploadAttachmentsContainer_1 As groupContainer.verticalAutoLayoutContainer:
                     AlignInContainer: =AlignInContainer.SetByContainer
@@ -2988,6 +3046,58 @@
                         Y: =35
                         ZIndex: =3
 
+                    Container8_5 As groupContainer.horizontalAutoLayoutContainer:
+                        FillPortions: =0
+                        Height: =30
+                        LayoutMinHeight: =40
+                        LayoutMinWidth: =250
+                        LayoutMode: =LayoutMode.Auto
+                        Visible: =TextInput2_31.Visible
+                        ZIndex: =4
+
+                        Label6_10 As label:
+                            AlignInContainer: =AlignInContainer.Start
+                            Color: =glbErrorColor
+                            Height: =30
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =10
+                            Text: ="*"
+                            Visible: =If(First(EditDetailUserForm_2).IsAttachmentPassWord="1"&&Attachment_Zip2.Visible,true,false)
+                            Width: =15
+                            ZIndex: =1
+
+                        Label9_51 As label:
+                            AlignInContainer: =AlignInContainer.Center
+                            Color: =glbNeutralPrimaryColor
+                            Height: =30
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =11
+                            Text: ="密碼"
+                            Width: =40
+                            X: =20
+                            Y: =363
+                            ZIndex: =2
+
+                        Label9_52 As label:
+                            Align: =Align.Center
+                            Color: =glbNeutralPrimaryColor
+                            Fill: =If(Label9_52.Text = "必填",RGBA(252, 242, 212, 1),Label9_52.Text = "選填",RGBA(204, 231, 246, 1))
+                            Height: =30
+                            PaddingBottom: =0
+                            PaddingLeft: =0
+                            PaddingRight: =0
+                            PaddingTop: =0
+                            Size: =11
+                            Text: =If(Label6_10.Visible = true,"必填",Label6_10.Visible = false,"選填")
+                            Width: =40
+                            ZIndex: =3
+
                     Container7 As groupContainer.horizontalAutoLayoutContainer:
                         FillPortions: =0
                         Height: =50
@@ -2996,17 +3106,19 @@
                         LayoutMinWidth: =250
                         LayoutMode: =LayoutMode.Auto
                         Visible: =TextInput2_31.Visible
-                        ZIndex: =4
+                        ZIndex: =5
 
                         Label6_3 As label:
-                            Color: =glbErrorColor
+                            Color: =RGBA(255, 255, 255, 1)
                             PaddingBottom: =0
                             PaddingLeft: =0
                             PaddingRight: =0
                             PaddingTop: =0
                             Size: =10
                             Text: ="*"
-                            Visible: =If(First(EditDetailUserForm_2).IsAttachmentPassWord="1"&&Attachment_Zip2.Visible,true,false)
+                            Visible: |-
+                                =//If(First(EditDetailUserForm_2).IsAttachmentPassWord="1"&&Attachment_Zip2.Visible,true,false)
+                                true
                             Width: =15
                             ZIndex: =1
 
@@ -3105,13 +3217,13 @@
                     Image3 As image:
                         Image: =Last(Attachment_Zip2.Attachments).Value
                         Visible: =false
-                        ZIndex: =5
+                        ZIndex: =6
 
                     Rectangle6 As rectangle:
                         BorderColor: =RGBA(0, 0, 0, 0)
                         Fill: =RGBA(0, 0, 0, 0)
                         Height: =5
-                        ZIndex: =6
+                        ZIndex: =7
 
                 CommentsContainer_1 As groupContainer.verticalAutoLayoutContainer:
                     AlignInContainer: =AlignInContainer.SetByContainer
@@ -3180,7 +3292,7 @@
                     PaddingLeft: =0
                     PaddingRight: =0
                     PaddingTop: =0
-                    Size: =12
+                    Size: =11
                     Text: ="申請流程"
                     Width: =351
                     X: =20
@@ -3227,7 +3339,7 @@
                         PaddingLeft: =0
                         PaddingRight: =0
                         PaddingTop: =0
-                        Size: =12
+                        Size: =11
                         Text: |-
                             =//Switch(ThisItem.ActionNode,"0","填写","1","提交","2","檢查","3","簽批","4","審批","5","執行")
                             If(ThisItem.TaskStatus = "005",ThisItem.ActionNode&"(退回)",ThisItem.TaskStatus = "000",ThisItem.ActionNode&"(拒絕)",ThisItem.ActionNode)
@@ -4395,7 +4507,7 @@
                         If(
                             IsBlank(TextInput2_34.Text),
                             Notify(
-                                "請填寫拒絕原因",
+                                "請在處理備注中填寫拒絕原因。",
                                 Warning
                             ),
                             //上傳附件
@@ -4582,7 +4694,7 @@
                         =If(
                             IsBlank(TextInput2_34.Text),
                             Notify(
-                                "請填寫退回原因",
+                                "請在處理備注中填寫退回原因。",
                                 Warning
                             ),
                         //更新退回時的审批行动状态为005，表示退回
@@ -4829,7 +4941,7 @@
                     OnSelect: |-
                         =//判斷必填字段是否爲空
                         If(
-                            (Label6_2.Visible = true && Last(Attachment_Excel2.Attachments).Name <> Blank() && IsBlank(TextInput2_30) && IsBlank(TextInput2_35)) || (Label6_3.Visible = true && Last(Attachment_Zip2.Attachments).Name <> Blank() && IsBlank(TextInput2_31) && IsBlank(TextInput2_37)) || (Dropdown1_6.Visible = true && Dropdown1_6.Selected.Result = Blank()) || (Label1_138.Visible = true && Label1_138.Text = "/") 
+                            (Label6_9.Visible = true && Last(Attachment_Excel2.Attachments).Name <> Blank() && IsBlank(TextInput2_30) && IsBlank(TextInput2_35)) || (Label6_10.Visible = true && Last(Attachment_Zip2.Attachments).Name <> Blank() && IsBlank(TextInput2_31) && IsBlank(TextInput2_37)) || (Dropdown1_6.Visible = true && Dropdown1_6.Selected.Result = Blank()) || (Label1_138.Visible = true && Label1_138.Text = "/") 
                             //|| (TextInput_FilterLabel_2.Visible = true && IsBlank(TextInput_FilterLabel_2))
                             ,
                             Notify(

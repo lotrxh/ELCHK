@@ -1048,14 +1048,13 @@
 
         Label1_76 As label:
             Fill: =RGBA(255, 255, 255, 1)
-            FontWeight: =FontWeight.Semibold
             Height: =60
             OnSelect: =
             PaddingBottom: =0
             PaddingLeft: =0
             PaddingRight: =0
             PaddingTop: =0
-            Size: =12
+            Size: =10
             Text: |-
                 =If(App.ActiveScreen.Width<600,"eProcessing System",
                 "ELCSS-HK
