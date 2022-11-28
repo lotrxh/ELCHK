@@ -12,6 +12,12 @@
       "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1534/1.0.1534.2605/logicflows/icon.png",
       "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
       "parameterHints": {
+        "3ebb830e-4b29-4393-b8fe-258567d15f53": {
+          "value": "shared_sharepointonline"
+        },
+        "fe4b0e08-14e8-41ce-b0c7-dca498f80aa7": {
+          "value": "shared_office365_1"
+        },
         "workflowEntityId": {
           "value": "680edb30-8756-ed11-bba2-0022480819b5"
         },
@@ -20,6 +26,12 @@
         }
       },
       "parameterHintsV2": {
+        "shared_office365_1": {
+          "value": "fe4b0e08-14e8-41ce-b0c7-dca498f80aa7"
+        },
+        "shared_sharepointonline": {
+          "value": "3ebb830e-4b29-4393-b8fe-258567d15f53"
+        },
         "workflowEntityId": {
           "value": "680edb30-8756-ed11-bba2-0022480819b5"
         },
@@ -49,7 +61,23 @@
       "id": "/providers/microsoft.powerapps/apis/shared_sharepointonline"
     },
     "datasets": {},
-    "dataSources": [],
+    "dataSources": [
+      "MyContacts",
+      "TemplateFileList",
+      "ApprovalDetail_Table",
+      "Approval_Table",
+      "GenericFormList",
+      "GenericFormModel",
+      "ConfigurationInfo",
+      "SignerInfo",
+      "PostRankInfo",
+      "UserInfo",
+      "VacationApprovalForm",
+      "FormTableType",
+      "ApplitionJobPosition",
+      "ContractNotice",
+      "EmploymentResource"
+    ],
     "dependencies": {},
     "dependents": [
       "05c63e0c-2ca3-46df-b2e2-c7704dd6f19b"
@@ -103,8 +131,7 @@
           "ContractNotice": {
             "tableName": "cd3ec9ea-b849-43f3-afe6-7e2a13c74ee3",
             "tableNameOverride": {
-              "environmentVariableName": "elchk2_shared_sharepointonline_833798cb35d84b0dad844d3e5e68b98a",
-              "name": "cd3ec9ea-b849-43f3-afe6-7e2a13c74ee3"
+              "environmentVariableName": "elchk2_shared_sharepointonline_833798cb35d84b0dad844d3e5e68b98a"
             }
           },
           "EmploymentResource": {
@@ -166,8 +193,7 @@
           "UserInfo": {
             "tableName": "8a07b3c5-11aa-4214-80db-88c9f2048063",
             "tableNameOverride": {
-              "environmentVariableName": "elchk2_shared_sharepointonline_d6bba121a8504198889b5d083b1a30e0",
-              "name": "8a07b3c5-11aa-4214-80db-88c9f2048063"
+              "environmentVariableName": "elchk2_shared_sharepointonline_d6bba121a8504198889b5d083b1a30e0"
             }
           },
           "VacationApprovalForm": {
