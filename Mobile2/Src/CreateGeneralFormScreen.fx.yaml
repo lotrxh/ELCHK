@@ -919,6 +919,18 @@
                         BorderThickness: =1
                         Color: =RGBA(39, 67, 125, 1)
                         DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                        DisplayMode: |-
+                            =If(
+                                CountA(
+                                    Filter(
+                                        TemplateFileList,
+                                        TempFileName = Label1_134.Text,
+                                        TempType = Label1_132.Text
+                                    ).TempFileName
+                                ) > 0,
+                                DisplayMode.Edit,
+                                Disabled
+                            )
                         Fill: =White
                         FillPortions: =1
                         FocusedBorderThickness: =1
@@ -929,7 +941,7 @@
                         HoverFill: =RGBA(255, 255, 255, 1)
                         LayoutMinWidth: =20
                         OnSelect: |
-                            =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_1.Text&&TempType=Label1_132.Text)).附件).AbsoluteUri)
+                            =//Launch(First(First(Filter(TemplateFileList,TempFileName=Label1_134.Text&&TempType=Label1_132.Text)).附件).AbsoluteUri)
                             Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,TempFileName=Label1_134.Text&&TempType=Label1_132.Text)).ID & "/" & First(Last(Filter(TemplateFileList,TempFileName=Label1_134.Text&&TempType=Label1_132.Text)).附件).DisplayName & "?web=1")
                         PaddingBottom: =0
                         PaddingLeft: =0
@@ -1299,7 +1311,7 @@
                         LayoutMinHeight: =40
                         LayoutMinWidth: =250
                         LayoutMode: =LayoutMode.Auto
-                        Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
+                        Visible: =If(First(EditUserForm).IsPassWord="2",false,true)
                         ZIndex: =6
 
                         Label6_7 As label:
@@ -1574,7 +1586,7 @@
                         LayoutMinHeight: =40
                         LayoutMinWidth: =250
                         LayoutMode: =LayoutMode.Auto
-                        Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
+                        Visible: =If(First(EditUserForm).IsAttachmentPassWord="2",false,true)
                         ZIndex: =4
 
                         Label6_8 As label:
@@ -1626,6 +1638,7 @@
                         LayoutMinHeight: =50
                         LayoutMinWidth: =250
                         LayoutMode: =LayoutMode.Auto
+                        Visible: =If(First(EditUserForm).IsAttachmentPassWord="2",false,true)
                         Width: =633
                         ZIndex: =5
 
