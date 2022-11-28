@@ -340,7 +340,7 @@
                         );
                         UpdateContext(
                             {
-                                TodayTask2Code: Label1_136.Text & Text(
+                                TodayTask2Code: Label1_133.Text & Text(
                                     Today(),
                                     "yyyymmdd"
                                 )
@@ -354,7 +354,7 @@
                                 Approval_Table,
                                 Defaults(Approval_Table),
                                 {
-                                    Application_No: Label1_136.Text & Text(
+                                    Application_No: Label1_133.Text & Text(
                                         Now(),
                                         "yyyymmdd"
                                     ) & Text(
@@ -577,7 +577,7 @@
                                 EditDetailUserForm_2,
                                 Filter(
                                     GenericFormModel,
-                                    ModelFlowNumber = Label1_136.Text
+                                    ModelFlowNumber = Label1_133.Text
                                 )
                             );
                         //创建集合EditDetailUserAttachment, 帶入表格   
@@ -786,7 +786,7 @@
                         PaddingRight: =0
                         PaddingTop: =0
                         Size: =10
-                        Text: =First(EditUserForm).ModelDepartment
+                        Text: =First(EditUserForm).ModelDepartment//请问删除，自动推荐部门邮箱时需要
                         Width: =174
                         X: =126
                         ZIndex: =2
@@ -846,7 +846,9 @@
                         PaddingRight: =0
                         PaddingTop: =0
                         Size: =10
-                        Text: ="表格名稱："
+                        Text: |-
+                            =First(EditUserForm).ModelFlowNumber
+                            //请勿删除，完成按钮需要应用
                         Width: =92
                         ZIndex: =1
 
@@ -894,9 +896,7 @@
                         PaddingRight: =0
                         PaddingTop: =0
                         Size: =10
-                        Text: |-
-                            =First(EditUserForm).ModelFlowNumber
-                            //请勿删除，完成按钮需要应用
+                        Text: =First(EditUserForm).ModelVersion
                         Width: =156
                         X: =65
                         ZIndex: =2
@@ -3105,7 +3105,7 @@
                     );
                     UpdateContext(
                         {
-                            TodayTask2Code: Label1_136.Text & Text(
+                            TodayTask2Code: Label1_133.Text & Text(
                                 Today(),
                                 "yyyymmdd"
                             )
@@ -3119,7 +3119,7 @@
                             Approval_Table,
                             Defaults(Approval_Table),
                             {
-                                Application_No: Label1_136.Text & Text(
+                                Application_No: Label1_133.Text & Text(
                                     Now(),
                                     "yyyymmdd"
                                 ) & Text(
@@ -3341,7 +3341,7 @@
                             EditDetailUserForm_2,
                             Filter(
                                 GenericFormModel,
-                                ModelFlowNumber = Label1_136.Text
+                                ModelFlowNumber = Label1_133.Text
                             )
                         );
                     //创建集合EditDetailUserAttachment, 帶入表格   
