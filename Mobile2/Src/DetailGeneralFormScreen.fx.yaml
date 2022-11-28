@@ -2554,10 +2554,7 @@
                             PaddingTop: =0
                             Size: =10
                             Text: ="*"
-                            Visible: |-
-                                =//必填字段標簽在密碼設定為必填時出現以及同時表格可上傳的時候顯示
-                                //If(First(EditDetailUserForm_2).IsPassWord="1"&&Attachment_Excel2.Visible= true , true , false )
-                                true
+                            Visible: =false
                             Width: =15
                             ZIndex: =1
 
@@ -3147,9 +3144,7 @@
                             PaddingTop: =0
                             Size: =10
                             Text: ="*"
-                            Visible: |-
-                                =//If(First(EditDetailUserForm_2).IsAttachmentPassWord="1"&&Attachment_Zip2.Visible,true,false)
-                                true
+                            Visible: =false
                             Width: =15
                             ZIndex: =1
 
