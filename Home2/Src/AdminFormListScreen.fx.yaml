@@ -658,7 +658,7 @@ AdminFormListScreen As screen:
                     Text: |-
                         =//ThisItem.'Modified By'.DisplayName & Char(13) & ThisItem.Modified;
                         ThisItem.修改者.DisplayName&Char(10)&Text(ThisItem.Modified,"dd/mm/yyyy hh:mm" )
-                    Tooltip: =ThisItem.'修改者'.DisplayName
+                    Tooltip: =ThisItem.修改者.DisplayName
                     VerticalAlign: =VerticalAlign.Top
                     Width: =120
                     Wrap: =false
