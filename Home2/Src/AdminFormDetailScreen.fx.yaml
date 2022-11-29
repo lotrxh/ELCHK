@@ -797,7 +797,7 @@ AdminFormDetailScreen As screen:
                 HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                 HoverFill: =ColorFade(Self.Fill, -5%)
                 MaxLength: =100
-                OnChange: =If(TextInput_FormName in GenericFormModel.ModelName,Notify("該表格名稱已經存在，繼續創建將會覆蓋原有記錄",NotificationType.Warning,3000))
+                OnChange: =If(TextInput_FormName in GenericFormModel.ModelName,Notify("該表格名稱已經存在",NotificationType.Warning,3000))
                 PaddingBottom: =0
                 PaddingLeft: =10
                 PaddingRight: =0
@@ -1234,7 +1234,7 @@ AdminFormDetailScreen As screen:
                 PaddingRight: =0
                 PaddingTop: =0
                 Size: =12
-                Text: =First(EditForm).ModelName//加载编辑表格的表格名称
+                Text: =First(EditForm).标题//加载编辑表格的表格名称
                 Visible: =false
                 Width: =177
                 X: =126
