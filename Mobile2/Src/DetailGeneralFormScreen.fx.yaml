@@ -1377,7 +1377,7 @@
                 LayoutMode: =LayoutMode.Auto
                 LayoutWrap: =true
                 PaddingBottom: =1
-                PaddingLeft: =1
+                PaddingLeft: =15
                 PaddingRight: =1
                 PaddingTop: =5
                 Width: |
@@ -1442,8 +1442,8 @@
                     HoverColor: =ColorFade(Self.Color, -15%)
                     HoverFill: =RGBA(255, 255, 255, 1)
                     OnSelect: |-
-                        =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=Label1_142.Text)).附件).AbsoluteUri)
-                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType=Label1_142.Text)).ID & "/" & First(Last(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType=Label1_142.Text)).附件).DisplayName & "?web=1")
+                        =Launch(First(First(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType=Label1_142.Text)).附件).AbsoluteUri)
+                        //Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType=Label1_142.Text)).ID & "/" & First(Last(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType=Label1_142.Text)).附件).DisplayName & "?web=1")
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
@@ -1488,8 +1488,8 @@
                     HoverColor: =ColorFade(Self.Color, -15%)
                     HoverFill: =RGBA(255, 255, 255, 1)
                     OnSelect: |-
-                        =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=BtnDefault_21.Text)).附件).AbsoluteUri)
-                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType="填寫指引TT")).ID & "/" & First(Last(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType="填寫指引TT")).附件).DisplayName & "?web=1")
+                        =Launch(First(First(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType="填寫指引TT")).附件).AbsoluteUri)
+                        //Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType="填寫指引TT")).ID & "/" & First(Last(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType="填寫指引TT")).附件).DisplayName & "?web=1")
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
@@ -1534,8 +1534,8 @@
                     HoverColor: =ColorFade(Self.Color, -15%)
                     HoverFill: =RGBA(255, 255, 255, 1)
                     OnSelect: |-
-                        =//Launch(First(First(Filter(TemplateFileList,TempFileName=FormNameLabel_2.Text&&TempType=BtnDefault_22.Text)).附件).AbsoluteUri)
-                        Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType="示範表格TT")).ID & "/" & First(Last(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType="示範表格TT")).附件).DisplayName & "?web=1")
+                        =Launch(First(First(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType="示範表格TT")).附件).AbsoluteUri)
+                        //Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType="示範表格TT")).ID & "/" & First(Last(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType="示範表格TT")).附件).DisplayName & "?web=1")
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
@@ -1621,6 +1621,7 @@
                 LayoutMinWidth: =250
                 LayoutMode: =LayoutMode.Auto
                 LayoutWrap: =true
+                PaddingLeft: =15
                 Width: |
                     =Switch(
                             DetailGeneralFormScreen.Size,
@@ -4121,7 +4122,7 @@
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =10
-                    Text: ="抄送人"
+                    Text: ="請輸入抄送人電郵或名稱"
                     Visible: |-
                         =If(
                             //任務執行完成后不可見
@@ -5868,6 +5869,7 @@
                     HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                     HoverColor: =Self.Color
                     HoverFill: =ColorFade(Self.Fill, -5%)
+                    InputTextPlaceholder: ="請輸入處理人電郵或名稱"
                     Items: |-
                         =//Choices(MyContacts.AllOwnerName)
                         Office365用户.SearchUserV2({searchTerm:ComboBox1_6.SearchText,top:10}).value
