@@ -1338,6 +1338,7 @@
                             PaddingTop: =0
                             Size: =11
                             Text: ="密碼"
+                            Visible: =If(First(EditUserForm).IsPassWord="2",false,true)
                             Width: =40
                             X: =20
                             Y: =363
@@ -1613,6 +1614,7 @@
                             PaddingTop: =0
                             Size: =11
                             Text: ="密碼"
+                            Visible: =If(First(EditUserForm).IsAttachmentPassWord="2",false,true)
                             Width: =40
                             X: =20
                             Y: =363
