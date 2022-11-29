@@ -902,7 +902,7 @@ AdminFormDetailScreen As screen:
                     ItemHoverFill: =ColorFade(glbLinkColor, 80%)
                     Items: |-
                         =//Last(EditAttachment2.TempAttachMent)//加载编辑表格的附件信息
-                        First(Filter(TemplateFileList,GenericFormId=Label1_88.Text&&TempType="示範表格TT")).附件
+                        First(Filter(TemplateFileList,GenericFormId=Label1_88.Text&&TempType="示範表格TT")).Attachments
                     MaxAttachments: =1
                     MaxAttachmentsText: ="最大附件"
                     NoAttachmentsText: ="無附件"
@@ -1034,7 +1034,7 @@ AdminFormDetailScreen As screen:
                     ItemHoverFill: =ColorFade(glbLinkColor, 80%)
                     Items: |-
                         =//Last(EditAttachment3.TempAttachMent)//加载编辑表格的附件信息
-                        First(Filter(TemplateFileList,GenericFormId=Label1_88.Text&&TempType="填寫指引TT")).附件
+                        First(Filter(TemplateFileList,GenericFormId=Label1_88.Text&&TempType="填寫指引TT")).Attachments
                     MaxAttachments: =1
                     MaxAttachmentsText: ="最大附件"
                     NoAttachmentsText: ="無附件"
@@ -1334,7 +1334,7 @@ AdminFormDetailScreen As screen:
                     ItemHoverFill: =ColorFade(glbLinkColor, 80%)
                     Items: |-
                         =//Last(EditAttachment.TempAttachMent)//加载编辑表格的附件信息
-                        First(Filter(TemplateFileList,GenericFormId=Label1_88.Text&&TempType=drpFilter_FormType.Selected.Result)).附件
+                        First(Filter(TemplateFileList,GenericFormId=Label1_88.Text&&TempType=drpFilter_FormType.Selected.Result)).Attachments
                     MaxAttachments: =1
                     MaxAttachmentsText: ="最大附件"
                     NoAttachmentsText: ="無附件"
