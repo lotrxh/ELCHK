@@ -1204,8 +1204,11 @@ AdminFormDetailScreen As screen:
                     RadioBorderColor: =glbNeutralTertiaryColor
                     RadioSelectionFill: =glbLinkColor
                     RadioSize: =24
+                    Reset: |-
+                        =//If(Radio_attachment.Selected.Value="无",true,false)
+                        false
                     Size: =11
-                    Visible: =If((Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程") && Radio_attachment.Selected.Value="有",true,false)
+                    Visible: =If((Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程") && (Radio_attachment.Selected.Value="可選" || Radio_attachment.Selected.Value="有"),true,false)
                     Width: =233
                     X: =562
                     Y: =521
@@ -1220,7 +1223,7 @@ AdminFormDetailScreen As screen:
                     PaddingTop: =0
                     Size: =12
                     Text: ="附件密碼"
-                    Visible: =If((Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程") && Radio_attachment.Selected.Value="有",true,false)
+                    Visible: =If((Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程") && (Radio_attachment.Selected.Value="可選" || Radio_attachment.Selected.Value="有"),true,false)
                     Width: =120
                     X: =562
                     Y: =484
@@ -1249,13 +1252,13 @@ AdminFormDetailScreen As screen:
                 ZIndex: =71
 
                 Radio_attachment As radio:
-                    Default: =First(EditForm).ModelAttachMent//加载编辑表格的表格名称
+                    Default: =If(First(EditForm).ModelAttachMent ="有","有",First(EditForm).ModelAttachMent ="無","無","可選")//加载编辑表格的表格名称
                     DisplayMode: =attachment
                     FocusedBorderThickness: =0
                     Height: =32
                     HoverColor: =RGBA(0, 0, 0, 1)
                     HoverFill: =RGBA(0, 0, 0, 0)
-                    Items: =["有","無"]
+                    Items: =["可選","有","無"]
                     Layout: =Layout.Horizontal
                     PaddingBottom: =0
                     PaddingTop: =0
@@ -1265,7 +1268,7 @@ AdminFormDetailScreen As screen:
                     RadioSize: =24
                     Size: =11
                     Visible: =If(Radio_flowtype.Selected.Value="預設流程" || Radio_flowtype.Selected.Value="通用流程" || Radio_flowtype.Selected.Value="部門簡單流程",true,false)
-                    Width: =150
+                    Width: =250
                     X: =292
                     Y: =521
                     ZIndex: =3
