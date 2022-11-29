@@ -1260,7 +1260,7 @@ GeneralFormListScreen As screen:
                                     JumpUrl & "&Screen=JobTitleFormScreen&AppIds=" & LookUp(
                                         ApplitionJobPosition,
                                         ApprovalId = TaskListGallery.Selected.Approval_No
-                                    ).Title & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=true"
+                                    ).Title & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
                                 ),
                                 ThisItem.TaskStatus = "002",
                                 Launch(
@@ -1280,10 +1280,10 @@ GeneralFormListScreen As screen:
                             If(
                                 ThisItem.TaskStatus = "001",
                                 Launch(
-                                    JumpUrlA306A111 & "&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
+                                    JumpUrlA306A111 & "&Screen=VacationFormScreen&taskNum=" & LookUp(
                                         VacationApprovalForm,
                                         Applicant_No = TaskListGallery.Selected.Approval_No
-                                    ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true"
+                                    ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
                                 ),
                                 ThisItem.TaskStatus = "002",
                                 Launch(
@@ -1306,7 +1306,7 @@ GeneralFormListScreen As screen:
                                     JumpUrl & "&Screen=ContractNoticeForm&taskNum=" & LookUp(
                                         ContractNotice,
                                         ApprovalId = TaskListGallery.Selected.Approval_No
-                                    ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true"
+                                    ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
                                 ),
                                 ThisItem.TaskStatus = "002",
                                 Launch(
