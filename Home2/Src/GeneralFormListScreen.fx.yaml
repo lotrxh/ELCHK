@@ -784,7 +784,7 @@ GeneralFormListScreen As screen:
                     PaddingTop: =0
                     Size: =12
                     Text: ="申請編號"
-                    Width: =165
+                    Width: =140
                     ZIndex: =1
 
                 Label4_7 As label:
@@ -796,8 +796,8 @@ GeneralFormListScreen As screen:
                     PaddingTop: =0
                     Size: =12
                     Text: ="表格名稱及編號"
-                    Width: =200
-                    X: =170
+                    Width: =246
+                    X: =140
                     ZIndex: =2
 
                 Label4_9 As label:
@@ -810,7 +810,7 @@ GeneralFormListScreen As screen:
                     Size: =12
                     Text: ="申請部門或單位"
                     Width: =123
-                    X: =370
+                    X: =386
                     ZIndex: =4
 
                 Label4_10 As label:
@@ -836,7 +836,7 @@ GeneralFormListScreen As screen:
                     Size: =12
                     Text: ="狀態"
                     Width: =130
-                    X: =771
+                    X: =850
                     ZIndex: =7
 
                 Label4_13 As label:
@@ -848,8 +848,8 @@ GeneralFormListScreen As screen:
                     PaddingTop: =0
                     Size: =12
                     Text: ="標籤"
-                    Width: =111
-                    X: =660
+                    Width: =200
+                    X: =650
                     ZIndex: =8
 
             TaskListGallery As gallery.galleryVertical:
@@ -884,7 +884,7 @@ GeneralFormListScreen As screen:
                     PaddingTop: =0
                     Size: =10
                     Text: =ThisItem.FlowOrder
-                    Width: =165
+                    Width: =140
                     ZIndex: =1
 
                 Rectangle3_3 As rectangle:
@@ -908,9 +908,9 @@ GeneralFormListScreen As screen:
                     Size: =10
                     Text: =If(Len(ThisItem.FlowOrder) = 15,Left(ThisItem.FlowOrder,4),Len(ThisItem.FlowOrder) = 16,Left(ThisItem.FlowOrder,5))&Char(10)&ThisItem.FlowTaskName
                     Tooltip: =ThisItem.FlowTaskName
-                    Width: =200
+                    Width: =246
                     Wrap: =false
-                    X: =170
+                    X: =140
                     ZIndex: =9
 
                 lblTag_7 As label:
@@ -1086,7 +1086,7 @@ GeneralFormListScreen As screen:
                                 2
                             ).TaskStatus = "005",Char(10)&"（被退回）","")
                     Width: =130
-                    X: =771
+                    X: =850
                     Y: =5
                     ZIndex: =10
 
@@ -1138,7 +1138,7 @@ GeneralFormListScreen As screen:
                         =true
                         //If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","自助假期批核資料表"],true,false)
                     Width: =24
-                    X: =1006
+                    X: =1026
                     Y: =14
                     ZIndex: =11
 
@@ -1146,7 +1146,7 @@ GeneralFormListScreen As screen:
                     BorderColor: =Self.Color
                     BorderStyle: =BorderStyle.None
                     BorderThickness: =1
-                    Color: =glbErrorColor
+                    Color: =glbThemePrimaryColor
                     DisabledBorderColor: =RGBA(219, 219, 219, 1)
                     DisabledColor: =RGBA(149, 149, 149, 1)
                     DisabledFill: =RGBA(244, 244, 244, 1)
@@ -1167,7 +1167,7 @@ GeneralFormListScreen As screen:
                         true
                     Width: =24
                     X: =1050
-                    Y: =12
+                    Y: =14
                     ZIndex: =12
 
                 Label3_8 As label:
@@ -1184,7 +1184,7 @@ GeneralFormListScreen As screen:
                     Tooltip: =ThisItem.DepartMentName
                     Width: =123
                     Wrap: =false
-                    X: =370
+                    X: =386
                     ZIndex: =13
 
                 Label3_10 As label:
@@ -1237,14 +1237,17 @@ GeneralFormListScreen As screen:
                             )
                         */
                     Tooltip: =ThisItem.CustomerSearch
-                    Width: =111
+                    Width: =200
                     Wrap: =false
-                    X: =660
+                    X: =650
                     ZIndex: =17
 
-                Icon1 As icon.View:
+                Icon5_3 As icon.ChevronRight:
+                    Color: =glbThemePrimaryColor
                     Height: =24
-                    Icon: =Icon.View
+                    HoverColor: =RGBA(102, 182, 227, 1)
+                    HoverFill: =RGBA(0, 0, 0, 0)
+                    Icon: =Icon.ChevronRight
                     OnSelect: |-
                         =If(
                             ThisItem.FlowTaskName = "招聘職位申請表",
@@ -1337,10 +1340,12 @@ GeneralFormListScreen As screen:
                                 )
                             )
                         )
+                    PaddingBottom: =3
+                    PaddingTop: =3
                     Width: =24
-                    X: =954
+                    X: =1002
                     Y: =14
-                    ZIndex: =18
+                    ZIndex: =19
 
     Container3_7 As groupContainer.manualLayoutContainer:
         Fill: =RGBA(255, 255, 255, 1)

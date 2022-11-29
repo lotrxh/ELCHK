@@ -657,8 +657,8 @@ AdminFormListScreen As screen:
                     Size: =10
                     Text: |-
                         =//ThisItem.'Modified By'.DisplayName & Char(13) & ThisItem.Modified;
-                        ThisItem.'Modified By'.DisplayName&Char(10)&Text(ThisItem.Modified,"dd/mm/yyyy hh:mm" )
-                    Tooltip: =ThisItem.'Modified By'.DisplayName
+                        ThisItem.修改者.DisplayName&Char(10)&Text(ThisItem.Modified,"dd/mm/yyyy hh:mm" )
+                    Tooltip: =ThisItem.'修改者'.DisplayName
                     VerticalAlign: =VerticalAlign.Top
                     Width: =120
                     Wrap: =false
@@ -864,7 +864,7 @@ AdminFormListScreen As screen:
                     BorderThickness: =1
                     Color: =White
                     DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                    Fill: =RGBA(50, 86, 160, 1)
+                    Fill: =glbThemePrimaryColor
                     FocusedBorderThickness: =1
                     FontWeight: =FontWeight.Normal
                     Height: =32
