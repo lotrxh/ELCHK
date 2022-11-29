@@ -626,7 +626,7 @@ HomepageScreen As screen:
                     RadiusTopRight: =4
                     Size: =10
                     Text: =
-                    Tooltip: ="名稱："&ThisItem.ModelName&Char(10)&"備注："&ThisItem.ModelDescription
+                    Tooltip: ="名稱："&ThisItem.ModelName&Char(10)&"備註："&If(ThisItem.ModelDescription=Blank(),"/",ThisItem.ModelDescription)
                     Width: =Parent.TemplateWidth-10
                     X: =1
                     Y: =1
@@ -770,7 +770,7 @@ HomepageScreen As screen:
                     ZIndex: =5
 
                 Icon5_2 As icon.ChevronRight:
-                    Color: =RGBA(149, 149, 149, 1)
+                    Color: =glbThemePrimaryColor
                     Height: =24
                     HoverColor: =RGBA(102, 182, 227, 1)
                     HoverFill: =RGBA(0, 0, 0, 0)
@@ -848,8 +848,8 @@ HomepageScreen As screen:
                             )
                         )
                         )
-                    PaddingBottom: =5
-                    PaddingTop: =5
+                    PaddingBottom: =3
+                    PaddingTop: =3
                     Width: =24
                     X: =633
                     Y: =4
@@ -1353,7 +1353,7 @@ HomepageScreen As screen:
                     RadiusTopRight: =4
                     Size: =10
                     Text: =
-                    Tooltip: ="名稱："&ThisItem.ModelName&Char(10)&"備注："&ThisItem.ModelDescription
+                    Tooltip: ="名稱："&ThisItem.ModelName&Char(10)&"備註："&If(ThisItem.ModelDescription=Blank(),"/",ThisItem.ModelDescription)
                     Width: =Parent.TemplateWidth-10
                     X: =1
                     Y: =1
@@ -1473,7 +1473,7 @@ HomepageScreen As screen:
                 false
             )
         Width: =259
-        X: =1030
+        X: =1035
         Y: =40
         ZIndex: =3
 
