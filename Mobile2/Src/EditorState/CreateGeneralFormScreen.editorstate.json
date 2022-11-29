@@ -1091,7 +1091,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Attachment_Zip",
-      "ParentIndex": 4,
+      "ParentIndex": 2,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -15377,6 +15377,14 @@
           "InvariantPropertyName": "OnSelect",
           "IsLockable": false,
           "NameMapSourceSchema": "?"
+        },
+        {
+          "AFDDataSourceName": "",
+          "AutoRuleBindingEnabled": false,
+          "AutoRuleBindingString": "\"查找项目\"",
+          "InvariantPropertyName": "InputTextPlaceholder",
+          "IsLockable": false,
+          "NameMapSourceSchema": "?"
         }
       ],
       "DynamicProperties": [
@@ -15470,6 +15478,11 @@
         {
           "Category": "Data",
           "PropertyName": "SelectMultiple",
+          "RuleProviderType": "Unknown"
+        },
+        {
+          "Category": "Data",
+          "PropertyName": "InputTextPlaceholder",
           "RuleProviderType": "Unknown"
         },
         {
@@ -19516,7 +19529,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Container3",
-      "ParentIndex": 2,
+      "ParentIndex": 4,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -19723,7 +19736,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Container5",
-      "ParentIndex": 3,
+      "ParentIndex": 1,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -20550,7 +20563,7 @@
       "LayoutName": "",
       "MetaDataIDKey": "",
       "Name": "Container8_3",
-      "ParentIndex": 1,
+      "ParentIndex": 3,
       "PersistMetaDataIDKey": false,
       "Properties": [
         {
@@ -36178,6 +36191,14 @@
           "InvariantPropertyName": "PaddingLeft",
           "IsLockable": false,
           "NameMapSourceSchema": "?"
+        },
+        {
+          "AFDDataSourceName": "",
+          "AutoRuleBindingEnabled": false,
+          "AutoRuleBindingString": "",
+          "InvariantPropertyName": "AutoHeight",
+          "IsLockable": false,
+          "NameMapSourceSchema": "?"
         }
       ],
       "HasDynamicProperties": false,
@@ -36386,6 +36407,11 @@
         {
           "Category": "Design",
           "PropertyName": "PaddingLeft",
+          "RuleProviderType": "Unknown"
+        },
+        {
+          "Category": "Design",
+          "PropertyName": "AutoHeight",
           "RuleProviderType": "Unknown"
         },
         {
