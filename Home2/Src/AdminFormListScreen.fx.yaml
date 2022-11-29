@@ -285,13 +285,13 @@ AdminFormListScreen As screen:
 
             Search_button As icon.Add:
                 BorderColor: =Self.Fill
-                Color: =glbNeutralTertiaryColor
+                Color: =glbThemePrimaryColor
                 DisabledBorderColor: =RGBA(219, 219, 219, 1)
                 DisabledColor: =RGBA(149, 149, 149, 1)
                 DisabledFill: =RGBA(244, 244, 244, 1)
                 Fill: =RGBA(255, 255, 255, 1)
                 FocusedBorderColor: =Self.Fill
-                Height: =35
+                Height: =32
                 HoverBorderColor: =Self.Fill
                 HoverColor: =Self.Fill
                 HoverFill: =ColorFade(Self.Fill, -15%)
@@ -315,10 +315,10 @@ AdminFormListScreen As screen:
                             "ModelFlowNumber"
                         )
                     )
-                PaddingBottom: =8
-                PaddingTop: =8
+                PaddingBottom: =2
+                PaddingTop: =2
                 PressedColor: =White
-                Width: =35
+                Width: =32
                 X: =1030
                 Y: =20
                 ZIndex: =8
@@ -367,7 +367,7 @@ AdminFormListScreen As screen:
                     FocusedBorderThickness: =1
                     Font: =Font.Arial
                     Format: ="dd/mm/yyyy"
-                    Height: =30
+                    Height: =32
                     IconBackground: =RGBA(0, 0, 0, 0)
                     IconFill: =glbNeutralSecondaryColor
                     InputTextPlaceholder: =//If(IsBlank(Self.SelectedDate), Text(Date(2001,12,31), Self.Format, Self.Language))
@@ -400,7 +400,7 @@ AdminFormListScreen As screen:
                     FocusedBorderThickness: =0
                     Font: =Font.Arial
                     Format: ="dd/mm/yyyy"
-                    Height: =30
+                    Height: =32
                     IconBackground: =RGBA(0, 0, 0, 0)
                     IconFill: =glbNeutralSecondaryColor
                     InputTextPlaceholder: =
@@ -416,13 +416,16 @@ AdminFormListScreen As screen:
                     Align: =Align.Center
                     Color: =RGBA(149, 149, 149, 1)
                     Font: =Font.Arial
-                    Height: =20
+                    Height: =32
+                    PaddingBottom: =3
                     PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
                     Size: =10
                     Text: ="—"
                     Width: =16
-                    X: =795
-                    Y: =24
+                    X: =797
+                    Y: =20
                     ZIndex: =7
 
             Group23 As group:

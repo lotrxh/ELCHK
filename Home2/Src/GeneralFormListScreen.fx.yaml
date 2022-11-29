@@ -442,7 +442,7 @@ GeneralFormListScreen As screen:
             BtnLgIconOnly_4 As icon.Add:
                 BorderColor: =Self.Fill
                 BorderThickness: =1
-                Color: =RGBA(153, 153, 153, 1)
+                Color: =glbThemePrimaryColor
                 DisabledBorderColor: =RGBA(219, 219, 219, 1)
                 DisabledColor: =RGBA(149, 149, 149, 1)
                 DisabledFill: =RGBA(244, 244, 244, 1)
@@ -516,8 +516,8 @@ GeneralFormListScreen As screen:
                             )
                         )
                     )
-                PaddingBottom: =8
-                PaddingTop: =8
+                PaddingBottom: =2
+                PaddingTop: =2
                 PressedColor: =White
                 PressedFill: =ColorFade(Self.Fill, -25%)
                 Width: =32
@@ -591,7 +591,7 @@ GeneralFormListScreen As screen:
                 FocusedBorderColor: =glbNeutralSecondaryColor
                 FocusedBorderThickness: =1
                 Height: =32
-                HintText: ="請輸入申請編號、表格編號、名稱、申請人或標簽"
+                HintText: ="請輸入申請編號、申請人、表格或標籤"
                 HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                 HoverFill: =ColorFade(Self.Fill, -5%)
                 PaddingBottom: =0
@@ -653,7 +653,7 @@ GeneralFormListScreen As screen:
                     FocusedBorderThickness: =1
                     Font: =Font.Arial
                     Format: ="dd/mm/yyyy"
-                    Height: =30
+                    Height: =32
                     IconBackground: =RGBA(0, 0, 0, 0)
                     IconFill: =glbNeutralSecondaryColor
                     InputTextPlaceholder: =//If(IsBlank(Self.SelectedDate), Text(Date(2001,12,31), Self.Format, Self.Language))
@@ -686,7 +686,7 @@ GeneralFormListScreen As screen:
                     FocusedBorderThickness: =0
                     Font: =Font.Arial
                     Format: ="dd/mm/yyyy"
-                    Height: =30
+                    Height: =32
                     IconBackground: =RGBA(0, 0, 0, 0)
                     IconFill: =glbNeutralSecondaryColor
                     InputTextPlaceholder: =
@@ -702,8 +702,11 @@ GeneralFormListScreen As screen:
                     Align: =Align.Center
                     Color: =RGBA(149, 149, 149, 1)
                     Font: =Font.Arial
-                    Height: =20
+                    Height: =32
+                    PaddingBottom: =3
                     PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
                     Size: =10
                     Text: ="—"
                     Width: =16
