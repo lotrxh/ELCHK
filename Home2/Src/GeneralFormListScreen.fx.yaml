@@ -1323,11 +1323,20 @@ GeneralFormListScreen As screen:
                                 )
                             ),
                             ThisItem.FlowTaskName = "任職資源申請",
-                            Launch(
-                                JumpUrlA306A111 & "&Screen=EmploymentFormDetail&taskNum=" & LookUp(
-                                    EmploymentResource,
-                                    ApprovalId = TaskListGallery.Selected.Approval_No
-                                ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
+                            If(
+                                ThisItem.TaskStatus = "001",
+                                Launch(
+                                    JumpUrlA306A111 & "&Screen=EmploymentFormScreen&taskNum=" & LookUp(
+                                        ContractNotice,
+                                        ApprovalId = TaskListGallery.Selected.Approval_No
+                                    ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
+                                ),
+                                Launch(
+                                    JumpUrlA306A111 & "&Screen=EmploymentFormDetail&taskNum=" & LookUp(
+                                        EmploymentResource,
+                                        ApprovalId = TaskListGallery.Selected.Approval_No
+                                    ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
+                                )
                             ),
                             With(
                                 {
