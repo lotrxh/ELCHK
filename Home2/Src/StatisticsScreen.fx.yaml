@@ -121,7 +121,6 @@ StatisticsScreen As screen:
             BorderColor: =RGBA(196, 200, 204, 1)
             BorderThickness: =1
             Color: =RGBA(50, 50, 50, 100)
-            DefaultDate: =Today()+1
             FocusedBorderThickness: =1
             Font: =Font.'Segoe UI'
             Format: ="dd/mm/yyyy"
@@ -285,7 +284,7 @@ StatisticsScreen As screen:
                                         drpFilterPedningDepartment_2.Selected.Value
                                     ),
                                     IsBlank(drpFilterPedningDepartment_1.Selected.Result) || 'Operator ' = drpFilterPedningDepartment_1.Selected.Result,
-                                    创建时间 >= DatePicker1_4.SelectedDate && 创建时间 <= DatePicker1_5.SelectedDate
+                                    Created >= DatePicker1_4.SelectedDate && Created <= DateAdd(DatePicker1_5.SelectedDate,1,Days)
                                 ),
                                 "DepartMentUnit",
                                 "DepartMentUnitData"
@@ -414,7 +413,7 @@ StatisticsScreen As screen:
                                         true,
                                         false
                                     ) || DepartMentUnit = drpFilterPedningDepartment_3.Selected.Result,
-                                    创建时间 >= DatePicker1_4.SelectedDate && 创建时间 <= DatePicker1_5.SelectedDate
+                                    Created >= DatePicker1_4.SelectedDate && Created <= DateAdd(DatePicker1_5.SelectedDate,1,Days)
                                 ),
                                 "Task_Name",
                                 "TaskN"
