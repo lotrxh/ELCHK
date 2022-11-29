@@ -924,7 +924,7 @@
                                 CountA(
                                     Filter(
                                         TemplateFileList,
-                                        TempFileName = Label1_134.Text,
+                                        GenericFormId=Label1_131.Text,
                                         TempType = Label1_132.Text
                                     ).TempFileName
                                 ) > 0,
@@ -967,6 +967,18 @@
                         BorderThickness: =1
                         Color: =RGBA(39, 67, 125, 1)
                         DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                        DisplayMode: |-
+                            =If(
+                                CountA(
+                                    Filter(
+                                        TemplateFileList,
+                                        GenericFormId=Label1_131.Text,
+                                        TempType = "填寫指引TT"
+                                    ).TempFileName
+                                ) > 0,
+                                DisplayMode.Edit,
+                                Disabled
+                            )
                         Fill: =White
                         FillPortions: =1
                         FocusedBorderThickness: =1
@@ -1003,6 +1015,18 @@
                         BorderThickness: =1
                         Color: =RGBA(39, 67, 125, 1)
                         DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                        DisplayMode: |-
+                            =If(
+                                CountA(
+                                    Filter(
+                                        TemplateFileList,
+                                        GenericFormId=Label1_131.Text,
+                                        TempType = "示範表格TT"
+                                    ).TempFileName
+                                ) > 0,
+                                DisplayMode.Edit,
+                                Disabled
+                            )
                         Fill: =White
                         FillPortions: =1
                         FocusedBorderThickness: =1
@@ -2861,6 +2885,18 @@
                     BorderThickness: =1
                     Color: =RGBA(39, 67, 125, 1)
                     DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    DisplayMode: |-
+                        =If(
+                            CountA(
+                                Filter(
+                                    TemplateFileList,
+                                    GenericFormId=Label1_131.Text,
+                                    TempType = Label1_132.Text
+                                ).TempFileName
+                            ) > 0,
+                            DisplayMode.Edit,
+                            Disabled
+                        )
                     Fill: =White
                     FocusedBorderThickness: =1
                     FontWeight: =FontWeight.Normal
@@ -2894,6 +2930,18 @@
                     BorderThickness: =1
                     Color: =RGBA(39, 67, 125, 1)
                     DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    DisplayMode: |-
+                        =If(
+                            CountA(
+                                Filter(
+                                    TemplateFileList,
+                                    GenericFormId=Label1_131.Text,
+                                    TempType = "填寫指引TT"
+                                ).TempFileName
+                            ) > 0,
+                            DisplayMode.Edit,
+                            Disabled
+                        )
                     Fill: =White
                     FocusedBorderThickness: =1
                     FontWeight: =FontWeight.Normal
@@ -2927,6 +2975,18 @@
                     BorderThickness: =1
                     Color: =RGBA(39, 67, 125, 1)
                     DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    DisplayMode: |-
+                        =If(
+                            CountA(
+                                Filter(
+                                    TemplateFileList,
+                                    GenericFormId=Label1_131.Text,
+                                    TempType = "示範表格TT"
+                                ).TempFileName
+                            ) > 0,
+                            DisplayMode.Edit,
+                            Disabled
+                        )
                     Fill: =White
                     FocusedBorderThickness: =1
                     FontWeight: =FontWeight.Normal
