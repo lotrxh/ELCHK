@@ -1251,13 +1251,20 @@ GeneralFormListScreen As screen:
                             If(
                                 ThisItem.TaskStatus = "001",
                                 Launch(
-                                    JumpUrl&"&Screen=JobTitleFormScreen&AppIds=" & LookUp(
+                                    JumpUrl & "&Screen=JobTitleFormScreen&AppIds=" & LookUp(
                                         ApplitionJobPosition,
                                         ApprovalId = TaskListGallery.Selected.Approval_No
                                     ).Title & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=true"
                                 ),
+                                ThisItem.TaskStatus = "002",
                                 Launch(
-                                    JumpUrl&"&Screen=JobTitleFormDetailScreen&AppIds=" & LookUp(
+                                    JumpUrl & "&Screen=JobTitleFormDetailScreen&AppIds=" & LookUp(
+                                        ApplitionJobPosition,
+                                        ApprovalId = TaskListGallery.Selected.Approval_No
+                                    ).Title & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
+                                ),
+                                Launch(
+                                    JumpUrl & "&Screen=JobTitleFormDetailScreen&AppIds=" & LookUp(
                                         ApplitionJobPosition,
                                         ApprovalId = TaskListGallery.Selected.Approval_No
                                     ).Title & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
@@ -1267,13 +1274,20 @@ GeneralFormListScreen As screen:
                             If(
                                 ThisItem.TaskStatus = "001",
                                 Launch(
-                                    JumpUrlA306A111&"&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
+                                    JumpUrlA306A111 & "&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
                                         VacationApprovalForm,
                                         Applicant_No = TaskListGallery.Selected.Approval_No
                                     ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true"
                                 ),
+                                ThisItem.TaskStatus = "002",
                                 Launch(
-                                    JumpUrlA306A111&"&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
+                                    JumpUrlA306A111 & "&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
+                                        VacationApprovalForm,
+                                        Applicant_No = TaskListGallery.Selected.Approval_No
+                                    ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
+                                ),
+                                Launch(
+                                    JumpUrlA306A111 & "&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
                                         VacationApprovalForm,
                                         Applicant_No = TaskListGallery.Selected.Approval_No
                                     ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
@@ -1283,13 +1297,20 @@ GeneralFormListScreen As screen:
                             If(
                                 ThisItem.TaskStatus = "001",
                                 Launch(
-                                    JumpUrl&"&Screen=ContractNoticeForm&taskNum=" & LookUp(
+                                    JumpUrl & "&Screen=ContractNoticeForm&taskNum=" & LookUp(
                                         ContractNotice,
                                         ApprovalId = TaskListGallery.Selected.Approval_No
                                     ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true"
                                 ),
+                                ThisItem.TaskStatus = "002",
                                 Launch(
-                                    JumpUrl&"&Screen=ContractNoticeFormDetail&taskNum=" & LookUp(
+                                    JumpUrl & "&Screen=ContractNoticeFormDetail&taskNum=" & LookUp(
+                                        ContractNotice,
+                                        ApprovalId = TaskListGallery.Selected.Approval_No
+                                    ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
+                                ),
+                                Launch(
+                                    JumpUrl & "&Screen=ContractNoticeFormDetail&taskNum=" & LookUp(
                                         ContractNotice,
                                         ApprovalId = TaskListGallery.Selected.Approval_No
                                     ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
@@ -1297,7 +1318,7 @@ GeneralFormListScreen As screen:
                             ),
                             ThisItem.FlowTaskName = "任職資源申請",
                             Launch(
-                                JumpUrlA306A111&"&Screen=EmploymentFormDetail&taskNum=" & LookUp(
+                                JumpUrlA306A111 & "&Screen=EmploymentFormDetail&taskNum=" & LookUp(
                                     EmploymentResource,
                                     ApprovalId = TaskListGallery.Selected.Approval_No
                                 ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
@@ -1309,8 +1330,11 @@ GeneralFormListScreen As screen:
                                         ApprovalId = ThisItem.Approval_No
                                     ).Title
                                 },
-                                Launch(JumpUrlMobileApp&"&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & TaskListGallery.Selected.Approval_No & "&Page=Home"
-                                ,{},LaunchTarget.Replace)
+                                Launch(
+                                    JumpUrlMobileApp & "&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & TaskListGallery.Selected.Approval_No & "&Page=Home",
+                                    {},
+                                    LaunchTarget.Replace
+                                )
                             )
                         )
                     Width: =24
