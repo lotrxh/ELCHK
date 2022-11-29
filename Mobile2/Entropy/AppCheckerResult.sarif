@@ -4004,19 +4004,19 @@
             {
               "logicalLocations": [
                 {
-                  "fullyQualifiedName": "HomePageScreen.MainflowContainer_1.FillInContainer_2.LeftContainer12_2.WaitingTaskContainer.Container15.TextInput2_15.AccessibleLabel"
+                  "fullyQualifiedName": "HomePageScreen.MainflowContainer_1.FillInContainer_2.LeftContainer12_2.WaitingTaskContainer.Container15.Container23.TextInput2_15.AccessibleLabel"
                 }
               ],
               "physicalLocation": {
                 "address": {
-                  "fullyQualifiedName": "HomePageScreen.MainflowContainer_1.FillInContainer_2.LeftContainer12_2.WaitingTaskContainer.Container15.TextInput2_15.AccessibleLabel",
+                  "fullyQualifiedName": "HomePageScreen.MainflowContainer_1.FillInContainer_2.LeftContainer12_2.WaitingTaskContainer.Container15.Container23.TextInput2_15.AccessibleLabel",
                   "relativeAddress": 0
                 }
               },
               "properties": {
                 "member": "AccessibleLabel",
                 "module": "HomePageScreen",
-                "type": "HomePageScreen.MainflowContainer_1.FillInContainer_2.LeftContainer12_2.WaitingTaskContainer.Container15.TextInput2_15"
+                "type": "HomePageScreen.MainflowContainer_1.FillInContainer_2.LeftContainer12_2.WaitingTaskContainer.Container15.Container23.TextInput2_15"
               }
             }
           ],
@@ -4537,6 +4537,36 @@
           },
           "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
           "ruleIndex": 2
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "App.AttachmentDownloadUrl"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "App.AttachmentDownloadUrl",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AttachmentDownloadUrl",
+                "module": "App",
+                "type": "App"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "app-UnusedVariables",
+          "ruleIndex": 5
         },
         {
           "locations": [
