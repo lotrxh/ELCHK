@@ -199,7 +199,7 @@
                                     If(CountA(Split(ThisItem.DepartMentUnit,"-").Result)=2,First(Split(ThisItem.DepartMentUnit,"-")).Result,First(Split(ThisItem.DepartMentUnit,"-")).Result&"-"&Index(Split(ThisItem.DepartMentUnit,"-"),2).Result)
                                 Tooltip: ="ThisItem.DepartMentUnit"
                                 Wrap: =false
-                                X: =Gallery5.Width-Icon5_6.Width-Label11_1.Width
+                                X: =Gallery5.Width-Icon5_6.Width-Label11_1.Width-10
                                 Y: =7
                                 ZIndex: =2
 
@@ -224,7 +224,7 @@
                                     =If(App.ActiveScreen.Width>1000,Text(ThisItem.Modified,"dd/mm/yyyy HH:mm"),Text(ThisItem.Modified,"dd/mm/yyyy"))
                                 Tooltip: ="ThisItem.Modified"
                                 Wrap: =false
-                                X: =Gallery5.Width-Icon5_6.Width-Label11_1.Width
+                                X: =Gallery5.Width-Icon5_6.Width-Label11_1.Width-10
                                 Y: =39
                                 ZIndex: =4
 
@@ -236,8 +236,8 @@
                                 ZIndex: =5
 
                             Icon5_6 As icon.ChevronRight:
-                                Color: =RGBA(149, 149, 149, 1)
-                                Height: =24
+                                Color: =RGBA(128, 128, 128, 1)
+                                Height: =30
                                 HoverColor: =RGBA(102, 182, 227, 1)
                                 HoverFill: =RGBA(0, 0, 0, 0)
                                 Icon: =Icon.ChevronRight
@@ -317,9 +317,9 @@
                                     )
                                 PaddingBottom: =5
                                 PaddingTop: =5
-                                Width: =20
-                                X: =Gallery5.Width-Self.Width
-                                Y: =32
+                                Width: =30
+                                X: =Gallery5.Width-Self.Width-5
+                                Y: =26
                                 ZIndex: =6
 
                     Rectangle5_5 As rectangle:
@@ -350,7 +350,7 @@
                     Width: =545
                     X: =569
                     Y: =114
-                    ZIndex: =3
+                    ZIndex: =1
 
                     TextInput2_16 As text:
                         BorderColor: =glbNeutralQuaternaryColor
@@ -652,6 +652,14 @@
                             Y: =1
                             ZIndex: =3
 
+                LineRectangle_7 As rectangle:
+                    AlignInContainer: =AlignInContainer.Center
+                    Fill: =RGBA(237, 237, 237, 1)
+                    Height: =3
+                    Width: =RightContainer_2.Width
+                    Y: =79
+                    ZIndex: =2
+
                 Container4_2 As groupContainer.manualLayoutContainer:
                     Fill: =RGBA(255, 255, 255, 1)
                     FillPortions: =0
@@ -659,7 +667,7 @@
                     LayoutMinHeight: =100
                     LayoutMinWidth: =250
                     Width: =477
-                    ZIndex: =5
+                    ZIndex: =3
 
                     drpFilterDepartmentType As combobox:
                         BorderColor: =glbNeutralTertiaryColor
@@ -1019,7 +1027,7 @@
                     Height: =5
                     X: =40
                     Y: =40
-                    ZIndex: =6
+                    ZIndex: =4
 
     HeaderContainer_5 As groupContainer.manualLayoutContainer:
         Fill: =RGBA(255, 255, 255, 1)
