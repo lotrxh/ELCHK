@@ -687,7 +687,7 @@
                 Fill: =RGBA(255, 255, 255, 1)
                 FillPortions: =0
                 Height: =40
-                LayoutAlignItems: =LayoutAlignItems.Center
+                LayoutAlignItems: =LayoutAlignItems.End
                 LayoutGap: =5
                 LayoutMinHeight: =100
                 LayoutMinWidth: =250
@@ -757,7 +757,7 @@
                 ZIndex: =2
 
                 Container13_8 As groupContainer.manualLayoutContainer:
-                    AlignInContainer: =AlignInContainer.Start
+                    AlignInContainer: =AlignInContainer.SetByContainer
                     Fill: =RGBA(255, 255, 255, 1)
                     Height: =28
                     LayoutMinHeight: =100
@@ -866,7 +866,7 @@
                         ZIndex: =2
 
                 Container13_11 As groupContainer.manualLayoutContainer:
-                    AlignInContainer: =AlignInContainer.Center
+                    AlignInContainer: =AlignInContainer.SetByContainer
                     Fill: =RGBA(255, 255, 255, 1)
                     Height: =31
                     LayoutMinHeight: =100
@@ -902,7 +902,7 @@
                         ZIndex: =2
 
                 Container19 As groupContainer.horizontalAutoLayoutContainer:
-                    AlignInContainer: =AlignInContainer.Start
+                    AlignInContainer: =AlignInContainer.SetByContainer
                     FillPortions: =0.8
                     Height: =38
                     LayoutGap: =10
@@ -911,10 +911,10 @@
                     LayoutMode: =LayoutMode.Auto
                     PaddingLeft: =1
                     PaddingRight: =10
+                    PaddingTop: =1
                     ZIndex: =8
 
                     BtnDefault_23 As button:
-                        AlignInContainer: =AlignInContainer.Center
                         BorderColor: =Self.Color
                         BorderThickness: =1
                         Color: =RGBA(39, 67, 125, 1)
@@ -962,7 +962,6 @@
                         ZIndex: =1
 
                     BtnDefault_24 As button:
-                        AlignInContainer: =AlignInContainer.Center
                         BorderColor: =Self.Color
                         BorderThickness: =1
                         Color: =RGBA(39, 67, 125, 1)
@@ -1010,7 +1009,6 @@
                         ZIndex: =2
 
                     BtnDefault_25 As button:
-                        AlignInContainer: =AlignInContainer.Center
                         BorderColor: =Self.Color
                         BorderThickness: =1
                         Color: =RGBA(39, 67, 125, 1)

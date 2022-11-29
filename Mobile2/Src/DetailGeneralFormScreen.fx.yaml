@@ -1370,7 +1370,10 @@
                 AlignInContainer: =AlignInContainer.Center
                 Fill: =RGBA(255, 255, 255, 1)
                 FillPortions: =0
-                Height: =Max(40,FormNameLabel_2.Y+FormNameLabel_2.Height+3)
+                Height: |-
+                    =//Max(40,FormNameLabel_2.Y+FormNameLabel_2.Height+3)
+                    40
+                LayoutAlignItems: =LayoutAlignItems.End
                 LayoutGap: =10
                 LayoutMinHeight: =100
                 LayoutMinWidth: =250
@@ -1417,7 +1420,6 @@
                     ZIndex: =2
 
                 BtnDefault_20 As button:
-                    AlignInContainer: =AlignInContainer.Start
                     BorderColor: =Self.Color
                     BorderThickness: =1
                     Color: =glbThemePrimaryColor
