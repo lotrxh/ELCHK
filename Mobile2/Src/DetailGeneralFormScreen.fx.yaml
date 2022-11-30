@@ -1359,7 +1359,6 @@
             Height: =Rectangle5_3.Y+Rectangle5_3.Height
             LayoutAlignItems: =LayoutAlignItems.Center
             LayoutDirection: =LayoutDirection.Vertical
-            LayoutGap: =10
             LayoutMinHeight: =100
             LayoutMinWidth: =250
             LayoutMode: =LayoutMode.Auto
@@ -1419,144 +1418,6 @@
                     Visible: =false
                     ZIndex: =2
 
-                BtnDefault_20 As button:
-                    BorderColor: =Self.Color
-                    BorderThickness: =1
-                    Color: =glbThemePrimaryColor
-                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                    DisplayMode: |-
-                        =If(
-                            CountA(
-                                Filter(
-                                    TemplateFileList,
-                                    GenericFormId=Label1_144.Text,
-                                    TempType = Label1_142.Text
-                                ).TempFileName
-                            ) > 0,
-                            DisplayMode.Edit,
-                            Disabled
-                        )
-                    Fill: =White
-                    FocusedBorderThickness: =1
-                    FontWeight: =FontWeight.Normal
-                    Height: =28
-                    HoverBorderColor: =ColorFade(Self.Color, -15%)
-                    HoverColor: =ColorFade(Self.Color, -15%)
-                    HoverFill: =RGBA(255, 255, 255, 1)
-                    OnSelect: |-
-                        =Launch(First(First(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType=Label1_142.Text)).附件).AbsoluteUri)
-                        //Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType=Label1_142.Text)).ID & "/" & First(Last(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType=Label1_142.Text)).附件).DisplayName & "?web=1")
-                    PaddingBottom: =0
-                    PaddingLeft: =0
-                    PaddingRight: =0
-                    PaddingTop: =0
-                    PressedBorderColor: =ColorFade(Self.Color, -25%)
-                    PressedColor: =ColorFade(Self.Color, -25%)
-                    PressedFill: =ColorFade(Self.Color, 95%)
-                    RadiusBottomLeft: =2
-                    RadiusBottomRight: =2
-                    RadiusTopLeft: =2
-                    RadiusTopRight: =2
-                    Size: =10
-                    Text: ="下載表格"
-                    Visible: =If(App.ActiveScreen.Width<600,false,true)
-                    Width: =100
-                    X: =Parent.Width-Self.Width-1
-                    Y: =1
-                    ZIndex: =3
-
-                BtnDefault_21 As button:
-                    BorderColor: =Self.Color
-                    BorderThickness: =1
-                    Color: =glbThemePrimaryColor
-                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                    DisplayMode: |-
-                        =If(
-                            CountA(
-                                Filter(
-                                    TemplateFileList,
-                                    GenericFormId=Label1_144.Text,
-                                    TempType = "填寫指引TT"
-                                ).TempFileName
-                            ) > 0,
-                            DisplayMode.Edit,
-                            Disabled
-                        )
-                    Fill: =White
-                    FocusedBorderThickness: =1
-                    FontWeight: =FontWeight.Normal
-                    Height: =28
-                    HoverBorderColor: =ColorFade(Self.Color, -15%)
-                    HoverColor: =ColorFade(Self.Color, -15%)
-                    HoverFill: =RGBA(255, 255, 255, 1)
-                    OnSelect: |-
-                        =Launch(First(First(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType="填寫指引TT")).附件).AbsoluteUri)
-                        //Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType="填寫指引TT")).ID & "/" & First(Last(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType="填寫指引TT")).附件).DisplayName & "?web=1")
-                    PaddingBottom: =0
-                    PaddingLeft: =0
-                    PaddingRight: =0
-                    PaddingTop: =0
-                    PressedBorderColor: =ColorFade(Self.Color, -25%)
-                    PressedColor: =ColorFade(Self.Color, -25%)
-                    PressedFill: =ColorFade(Self.Color, 95%)
-                    RadiusBottomLeft: =2
-                    RadiusBottomRight: =2
-                    RadiusTopLeft: =2
-                    RadiusTopRight: =2
-                    Size: =10
-                    Text: ="下載指引"
-                    Visible: =If(App.ActiveScreen.Width<600,false,true)
-                    Width: =100
-                    X: =Parent.Width-Self.Width-1
-                    Y: =1
-                    ZIndex: =4
-
-                BtnDefault_22 As button:
-                    BorderColor: =Self.Color
-                    BorderThickness: =1
-                    Color: =glbThemePrimaryColor
-                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                    DisplayMode: |-
-                        =If(
-                            CountA(
-                                Filter(
-                                    TemplateFileList,
-                                    GenericFormId=Label1_144.Text,
-                                    TempType = "示範表格TT"
-                                ).TempFileName
-                            ) > 0,
-                            DisplayMode.Edit,
-                            Disabled
-                        )
-                    Fill: =White
-                    FocusedBorderThickness: =1
-                    FontWeight: =FontWeight.Normal
-                    Height: =28
-                    HoverBorderColor: =ColorFade(Self.Color, -15%)
-                    HoverColor: =ColorFade(Self.Color, -15%)
-                    HoverFill: =RGBA(255, 255, 255, 1)
-                    OnSelect: |-
-                        =Launch(First(First(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType="示範表格TT")).附件).AbsoluteUri)
-                        //Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType="示範表格TT")).ID & "/" & First(Last(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType="示範表格TT")).附件).DisplayName & "?web=1")
-                    PaddingBottom: =0
-                    PaddingLeft: =0
-                    PaddingRight: =0
-                    PaddingTop: =0
-                    PressedBorderColor: =ColorFade(Self.Color, -25%)
-                    PressedColor: =ColorFade(Self.Color, -25%)
-                    PressedFill: =ColorFade(Self.Color, 95%)
-                    RadiusBottomLeft: =2
-                    RadiusBottomRight: =2
-                    RadiusTopLeft: =2
-                    RadiusTopRight: =2
-                    Size: =10
-                    Text: ="下載範例"
-                    Visible: =If(App.ActiveScreen.Width<600,false,true)
-                    Width: =100
-                    X: =Parent.Width-Self.Width-1
-                    Y: =1
-                    ZIndex: =5
-
                 Statuslbl As label:
                     Align: =Align.Center
                     BorderColor: =RGBA(255, 255, 255, 1)
@@ -1608,7 +1469,7 @@
                                         //移動端不可見
                                         || App.ActiveScreen.Width<600
                                         ,false,true)
-                    Width: =120
+                    Width: =165
                     X: =1245
                     Y: =14
                     ZIndex: =6
@@ -1617,13 +1478,16 @@
                 AlignInContainer: =AlignInContainer.SetByContainer
                 Fill: =RGBA(255, 255, 255, 1)
                 FillPortions: =0
-                Height: =Container13_18.Y+Container13_18.Height
+                Height: =Container13_18.Y+Container13_18.Height+2
                 LayoutGap: =10
                 LayoutMinHeight: =40
                 LayoutMinWidth: =250
                 LayoutMode: =LayoutMode.Auto
                 LayoutWrap: =true
+                PaddingBottom: =1
                 PaddingLeft: =15
+                PaddingRight: =1
+                PaddingTop: =1
                 Width: |
                     =Switch(
                             DetailGeneralFormScreen.Size,
@@ -1750,7 +1614,6 @@
                 Container13_15 As groupContainer.manualLayoutContainer:
                     AlignInContainer: =AlignInContainer.SetByContainer
                     Fill: =RGBA(255, 255, 255, 1)
-                    FillPortions: =0
                     Height: =28
                     LayoutMinHeight: =100
                     LayoutMinWidth: =250
@@ -1921,6 +1784,144 @@
                         Width: =120
                         X: =76
                         ZIndex: =2
+
+                BtnDefault_20 As button:
+                    BorderColor: =Self.Color
+                    BorderThickness: =1
+                    Color: =glbThemePrimaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    DisplayMode: |-
+                        =If(
+                            CountA(
+                                Filter(
+                                    TemplateFileList,
+                                    GenericFormId=Label1_144.Text,
+                                    TempType = Label1_142.Text
+                                ).TempFileName
+                            ) > 0,
+                            DisplayMode.Edit,
+                            Disabled
+                        )
+                    Fill: =White
+                    FocusedBorderThickness: =1
+                    FontWeight: =FontWeight.Normal
+                    Height: =28
+                    HoverBorderColor: =ColorFade(Self.Color, -15%)
+                    HoverColor: =ColorFade(Self.Color, -15%)
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    OnSelect: |-
+                        =Launch(First(First(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType=Label1_142.Text)).附件).AbsoluteUri)
+                        //Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType=Label1_142.Text)).ID & "/" & First(Last(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType=Label1_142.Text)).附件).DisplayName & "?web=1")
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =ColorFade(Self.Color, -25%)
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    PressedFill: =ColorFade(Self.Color, 95%)
+                    RadiusBottomLeft: =2
+                    RadiusBottomRight: =2
+                    RadiusTopLeft: =2
+                    RadiusTopRight: =2
+                    Size: =10
+                    Text: ="下載表格"
+                    Visible: =If(App.ActiveScreen.Width<600,false,true)
+                    Width: =165
+                    X: =Parent.Width-Self.Width-1
+                    Y: =1
+                    ZIndex: =8
+
+                BtnDefault_21 As button:
+                    BorderColor: =Self.Color
+                    BorderThickness: =1
+                    Color: =glbThemePrimaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    DisplayMode: |-
+                        =If(
+                            CountA(
+                                Filter(
+                                    TemplateFileList,
+                                    GenericFormId=Label1_144.Text,
+                                    TempType = "填寫指引TT"
+                                ).TempFileName
+                            ) > 0,
+                            DisplayMode.Edit,
+                            Disabled
+                        )
+                    Fill: =White
+                    FocusedBorderThickness: =1
+                    FontWeight: =FontWeight.Normal
+                    Height: =28
+                    HoverBorderColor: =ColorFade(Self.Color, -15%)
+                    HoverColor: =ColorFade(Self.Color, -15%)
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    OnSelect: |-
+                        =Launch(First(First(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType="填寫指引TT")).附件).AbsoluteUri)
+                        //Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType="填寫指引TT")).ID & "/" & First(Last(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType="填寫指引TT")).附件).DisplayName & "?web=1")
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =ColorFade(Self.Color, -25%)
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    PressedFill: =ColorFade(Self.Color, 95%)
+                    RadiusBottomLeft: =2
+                    RadiusBottomRight: =2
+                    RadiusTopLeft: =2
+                    RadiusTopRight: =2
+                    Size: =10
+                    Text: ="下載指引"
+                    Visible: =If(App.ActiveScreen.Width<600,false,true)
+                    Width: =165
+                    X: =Parent.Width-Self.Width-1
+                    Y: =1
+                    ZIndex: =9
+
+                BtnDefault_22 As button:
+                    BorderColor: =Self.Color
+                    BorderThickness: =1
+                    Color: =glbThemePrimaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    DisplayMode: |-
+                        =If(
+                            CountA(
+                                Filter(
+                                    TemplateFileList,
+                                    GenericFormId=Label1_144.Text,
+                                    TempType = "示範表格TT"
+                                ).TempFileName
+                            ) > 0,
+                            DisplayMode.Edit,
+                            Disabled
+                        )
+                    Fill: =White
+                    FocusedBorderThickness: =1
+                    FontWeight: =FontWeight.Normal
+                    Height: =28
+                    HoverBorderColor: =ColorFade(Self.Color, -15%)
+                    HoverColor: =ColorFade(Self.Color, -15%)
+                    HoverFill: =RGBA(255, 255, 255, 1)
+                    OnSelect: |-
+                        =Launch(First(First(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType="示範表格TT")).附件).AbsoluteUri)
+                        //Launch(AttachmentDownloadUrl & Last(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType="示範表格TT")).ID & "/" & First(Last(Filter(TemplateFileList,GenericFormId=Label1_144.Text&&TempType="示範表格TT")).附件).DisplayName & "?web=1")
+                    PaddingBottom: =0
+                    PaddingLeft: =0
+                    PaddingRight: =0
+                    PaddingTop: =0
+                    PressedBorderColor: =ColorFade(Self.Color, -25%)
+                    PressedColor: =ColorFade(Self.Color, -25%)
+                    PressedFill: =ColorFade(Self.Color, 95%)
+                    RadiusBottomLeft: =2
+                    RadiusBottomRight: =2
+                    RadiusTopLeft: =2
+                    RadiusTopRight: =2
+                    Size: =10
+                    Text: ="下載範例"
+                    Visible: =If(App.ActiveScreen.Width<600,false,true)
+                    Width: =165
+                    X: =Parent.Width-Self.Width-1
+                    Y: =1
+                    ZIndex: =10
 
             Rectangle5_3 As rectangle:
                 Fill: =RGBA(0, 0, 0, 0)
