@@ -73,7 +73,7 @@
             {
                 idNumber: 0,
                 ActionName: "填寫",
-                Approver: User().FullName,
+                Approver: CurrentUserName,
                 ApprovalEmail: User().Email,
                 IsComplate: true,
                 BCCUser: "",
@@ -215,7 +215,7 @@
                                 {
                                     idNumber: 1,
                                     ActionName: "提交",
-                                    Approver: User().FullName,
+                                    Approver: CurrentUserName,
                                     ApprovalEmail: User().Email,
                                     IsComplate: true,
                                     BCCUser: If(
@@ -3054,7 +3054,7 @@
                             {
                                 idNumber: 1,
                                 ActionName: "提交",
-                                Approver: User().FullName,
+                                Approver: CurrentUserName,
                                 ApprovalEmail: User().Email,
                                 IsComplate: true,
                                 BCCUser: If(

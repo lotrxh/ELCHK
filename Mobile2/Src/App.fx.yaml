@@ -20,6 +20,7 @@ App As appinfo:
         
         //设置部门经理权限筛选
         Set(CurrentUser,User().Email);
+        Set(CurrentUserName,Office365用户.MyProfile().DisplayName);
         Set(
             CurrentRoleTaskPermission,
             If(LookUp(
