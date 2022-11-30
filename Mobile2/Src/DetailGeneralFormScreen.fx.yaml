@@ -847,7 +847,7 @@
                         //|| (TextInput_FilterLabel_2.Visible = true && IsBlank(TextInput_FilterLabel_2))
                         ,
                         Notify(
-                            "必填項目不能留空，處理行動及處理人不能留空。",
+                            "請選擇下一節處理行動及處理人。",
                             NotificationType.Error
                         ),
                     //上傳
@@ -3382,7 +3382,10 @@
                                                 "Priortty",
                                                 Descending
                                             )
-                                        ).TaskStatus = "000",  CommentsContainer_1.Y+CommentsContainer_1.Height+20-65,130)
+                                        ).TaskStatus = "000",  CommentsContainer_1.Y+CommentsContainer_1.Height+20-65,
+                                        CountA(Filter(ApprovalDetail_Table,Approval_No = FLowId).Approval_No)<=2,130,
+                                        CountA(Filter(ApprovalDetail_Table,Approval_No = FLowId).Approval_No)>6,390,
+                                        CountA(Filter(ApprovalDetail_Table,Approval_No = FLowId).Approval_No)*65)
                     Items: =Filter(ApprovalDetail_Table,Approval_No = FLowId)
                     Layout: =Layout.Vertical
                     LayoutMinHeight: =130
@@ -5021,7 +5024,7 @@
                             //|| (TextInput_FilterLabel_2.Visible = true && IsBlank(TextInput_FilterLabel_2))
                             ,
                             Notify(
-                                "必填項目不能留空，處理行動及處理人不能留空。",
+                                "請選擇下一節處理行動及處理人。",
                                 NotificationType.Error
                             ),
                             
