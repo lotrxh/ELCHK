@@ -2842,6 +2842,7 @@
                             ZIndex: =3
 
                         UploaderLabel_1 As label:
+                            Align: =Align.Right
                             Color: =glbNeutralSecondaryColor
                             Height: =23
                             OnSelect: =Select(Parent)
@@ -2850,8 +2851,9 @@
                             PaddingRight: =0
                             PaddingTop: =0
                             Size: =10
-                            Text: =ThisItem.创建者.DisplayName
+                            Text: ="上傳者："&ThisItem.创建者.DisplayName
                             Width: =278
+                            X: =Gallery6_3.Width-Self.Width
                             ZIndex: =6
 
                         DownloadIcon_1 As icon.Add:
@@ -4324,6 +4326,7 @@
                         HintText: ="請輸入批核建議或跟進事項等等"
                         HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                         HoverFill: =ColorFade(Self.Fill, -5%)
+                        MaxLength: =255
                         Mode: =TextMode.MultiLine
                         PaddingBottom: =10
                         PaddingLeft: =10
@@ -4426,6 +4429,7 @@
                         HintText: =First(EditDetailUserForm_2).CustomFilter
                         HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                         HoverFill: =ColorFade(Self.Fill, -5%)
+                        MaxLength: =255
                         Mode: =TextMode.MultiLine
                         PaddingBottom: =10
                         PaddingLeft: =10

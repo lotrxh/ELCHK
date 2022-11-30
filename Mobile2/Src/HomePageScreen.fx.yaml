@@ -87,7 +87,7 @@
                 FillPortions: =1.3
                 Height: |-
                     =//WaitingTaskContainer.Y+WaitingTaskContainer.Height+20
-                    Rectangle5_7.Y+Rectangle5_7.Height+20
+                    Rectangle5_5.Y+Rectangle5_5.Height
                 LayoutAlignItems: =LayoutAlignItems.Stretch
                 LayoutDirection: =LayoutDirection.Vertical
                 LayoutMinHeight: =100
@@ -136,7 +136,7 @@
                                 FocusedBorderColor: =glbNeutralSecondaryColor
                                 FocusedBorderThickness: =1
                                 Height: =36
-                                HintText: ="搜索待處理"
+                                HintText: ="搜尋待處理申請"
                                 HoverBorderColor: =glbThemePrimaryColor
                                 HoverFill: =White
                                 PaddingBottom: =1
@@ -179,7 +179,14 @@
 
                         Gallery5 As gallery.galleryVertical:
                             AlignInContainer: =AlignInContainer.SetByContainer
-                            Height: =450
+                            Height: |-
+                                =//400
+                                If(
+                                    CountA(
+                                        ApprovalDetailColwithdepartment.ActionNode)<5,
+                                    CountA(
+                                        ApprovalDetailColwithdepartment.ActionNode)*80,
+                                        400)
                             Items: =Search(SortByColumns(ApprovalDetailColwithdepartment,"Modified",Descending),TextInput2_15.Text,"DepartMentUnit","Application_No","Task_Name")
                             Layout: =Layout.Vertical
                             LayoutMinHeight: =287
@@ -347,7 +354,7 @@
             RightContainer_2 As groupContainer.verticalAutoLayoutContainer:
                 AlignInContainer: =AlignInContainer.SetByContainer
                 Fill: =RGBA(255, 255, 255, 1)
-                Height: =Rectangle5_7.Y+Rectangle5_7.Height+20
+                Height: =Rectangle5_7.Y+Rectangle5_7.Height+10
                 LayoutAlignItems: =LayoutAlignItems.Stretch
                 LayoutDirection: =LayoutDirection.Vertical
                 LayoutMinHeight: =100
@@ -355,7 +362,6 @@
                 LayoutMode: =LayoutMode.Auto
                 PaddingLeft: =20
                 PaddingRight: =20
-                PaddingTop: =20
                 ZIndex: =2
 
                 Container4_1 As groupContainer.manualLayoutContainer:
@@ -377,7 +383,7 @@
                         FocusedBorderColor: =glbNeutralSecondaryColor
                         FocusedBorderThickness: =1
                         Height: =36
-                        HintText: ="搜索表格"
+                        HintText: ="搜尋表格"
                         HoverBorderColor: =glbThemePrimaryColor
                         HoverFill: =White
                         PaddingBottom: =0
@@ -393,7 +399,7 @@
                         Size: =11
                         Width: =Parent.Width-2
                         X: =1
-                        Y: =20
+                        Y: =23
                         ZIndex: =1
 
                     Icon3_1 As icon.Search:
@@ -408,7 +414,7 @@
                         ZIndex: =2
 
                     TaskNameGallery_2 As gallery.galleryVertical:
-                        Height: =60
+                        Height: =72
                         Items: |-
                             =If(
                                 TextInput2_16.Text = "",
@@ -453,7 +459,7 @@
                         Layout: =Layout.Vertical
                         ShowScrollbar: =false
                         TemplatePadding: =0
-                        TemplateSize: =60
+                        TemplateSize: =70
                         Width: =Parent.Width-2
                         WrapCount: =3
                         X: =1
@@ -466,14 +472,14 @@
                             HoverColor: =glbThemePrimaryColor
                             OnSelect: =Select(Parent)
                             PaddingBottom: =0
-                            PaddingLeft: =10
-                            PaddingRight: =10
+                            PaddingLeft: =20
+                            PaddingRight: =20
                             PaddingTop: =0
                             Size: =10
                             Text: =If(ThisItem.ModelName in Filter(GenericFormModel,IsEnable="0").ModelName,ThisItem.ModelFlowNumber&"(停用中)",ThisItem.ModelFlowNumber)
                             Width: =Parent.TemplateWidth-10
                             Wrap: =false
-                            Y: =6
+                            Y: =16
                             ZIndex: =1
 
                         Label2_10 As label:
@@ -482,15 +488,15 @@
                             HoverColor: =glbThemePrimaryColor
                             OnSelect: =Select(Parent)
                             PaddingBottom: =0
-                            PaddingLeft: =10
-                            PaddingRight: =10
+                            PaddingLeft: =20
+                            PaddingRight: =20
                             PaddingTop: =0
                             Size: =10
                             Text: =ThisItem.ModelName
                             Tooltip: =Self.Text
                             Width: =Parent.TemplateWidth-10
                             Wrap: =false
-                            Y: =26
+                            Y: =36
                             ZIndex: =2
 
                         Button_large_13 As button:
@@ -504,7 +510,7 @@
                             Fill: =RGBA(0, 0, 0, 0)
                             FocusedBorderThickness: =1
                             FontWeight: =FontWeight.Normal
-                            Height: =50
+                            Height: =70
                             HoverBorderColor: =glbThemePrimaryColor
                             HoverColor: =
                             HoverFill: =
@@ -809,7 +815,20 @@
                         ZIndex: =6
 
                     TaskNameGallery_1 As gallery.galleryVertical:
-                        Height: =186
+                        Height: |-
+                            =//144
+                            If(CountA(
+                                Filter(
+                                                DataModelName,
+                                                ModelDepartment = drpFilterDepartmentName.Selected.Result,
+                                                ModelType = drpFilterFormTypeName.Selected.FormType
+                                            ).ModelType)=0,0,
+                            CountA(
+                                Filter(
+                                                DataModelName,
+                                                ModelDepartment = drpFilterDepartmentName.Selected.Result,
+                                                ModelType = drpFilterFormTypeName.Selected.FormType
+                                            ).ModelType)<4,72,144)
                         Items: |-
                             =ShowColumns(
                                     Filter(
@@ -823,7 +842,7 @@
                                         )
                         Layout: =Layout.Vertical
                         TemplatePadding: =0
-                        TemplateSize: =60
+                        TemplateSize: =70
                         Width: =Parent.Width-2
                         WrapCount: =3
                         X: =1
@@ -836,14 +855,14 @@
                             HoverColor: =glbThemePrimaryColor
                             OnSelect: =Select(Parent)
                             PaddingBottom: =0
-                            PaddingLeft: =10
-                            PaddingRight: =10
+                            PaddingLeft: =20
+                            PaddingRight: =20
                             PaddingTop: =0
                             Size: =10
                             Text: =If(ThisItem.ModelName in Filter(GenericFormModel,IsEnable="0").ModelName,ThisItem.ModelFlowNumber&"(停用中)",ThisItem.ModelFlowNumber)
                             Width: =Parent.TemplateWidth-10
                             Wrap: =false
-                            Y: =6
+                            Y: =16
                             ZIndex: =1
 
                         Label2_8 As label:
@@ -852,15 +871,15 @@
                             HoverColor: =glbThemePrimaryColor
                             OnSelect: =Select(Parent)
                             PaddingBottom: =0
-                            PaddingLeft: =10
-                            PaddingRight: =10
+                            PaddingLeft: =20
+                            PaddingRight: =20
                             PaddingTop: =0
                             Size: =10
                             Text: =ThisItem.ModelName
                             Tooltip: =Self.Text
                             Width: =Parent.TemplateWidth-10
                             Wrap: =false
-                            Y: =26
+                            Y: =36
                             ZIndex: =2
 
                         Button_large_12 As button:
@@ -874,7 +893,7 @@
                             Fill: =RGBA(0, 0, 0, 0)
                             FocusedBorderThickness: =1
                             FontWeight: =FontWeight.Normal
-                            Height: =50
+                            Height: =70
                             HoverBorderColor: =glbThemePrimaryColor
                             HoverColor: =RGBA(128, 128, 128, 1)
                             HoverFill: =
@@ -1081,9 +1100,8 @@
             PaddingTop: =0
             Size: =10
             Text: |-
-                =If(App.ActiveScreen.Width<600,"eProcessing System",
-                "ELCSS-HK
-                eProcessing System (ePS)")
+                ="ELCSS-HK
+                eProcessing System (ePS)"
             Width: =217
             X: =60
             ZIndex: =8
@@ -1095,8 +1113,25 @@
             RadiusBottomRight: =20
             RadiusTopLeft: =20
             RadiusTopRight: =20
+            Visible: =If(App.ActiveScreen.Width>700,true,false)
             Width: =40
             X: =Parent.Width-Self.Width-8
             Y: =10
             ZIndex: =10
+
+        Label1_77 As label:
+            Align: =Align.Right
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =60
+            OnSelect: =
+            PaddingBottom: =0
+            PaddingLeft: =0
+            PaddingRight: =0
+            PaddingTop: =0
+            Size: =10
+            Text: ="歡迎你，"&CurrentUserName
+            Visible: =If(App.ActiveScreen.Width>700,true,false)
+            Width: =191
+            X: =947
+            ZIndex: =11
 
