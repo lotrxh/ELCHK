@@ -1,10 +1,7 @@
 StatisticsScreen As screen:
     Fill: =RGBA(230, 230, 230, 1)
     OnVisible: |-
-        =Clear(FilterQuery);
-        ClearCollect(TableNumber,Table({ModelFlowNumber:"全部"},{ModelFlowNumber:"A103"},{ModelFlowNumber:"A104"},{ModelFlowNumber:"A111"},{ModelFlowNumber:"A306"}),ShowColumns(Filter(GenericFormModel,1=1),"ModelFlowNumber"));
-        Collect(FilterQuery,RemoveIf(Distinct(Approval_Table,DepartMentUnit),Result=Blank()),{Result:"全部"});
-        Concurrent(Reset(DatePicker1_4),Reset(DatePicker1_5),Reset(drpFilterPedningDepartment_1),Reset(drpFilterPedningDepartment_2),Reset(drpFilterPedningDepartment_3))
+        =Clear(FilterQuery);ClearCollect(TableNumber,Table({ModelFlowNumber:"全部"},{ModelFlowNumber:"A103"},{ModelFlowNumber:"A104"},{ModelFlowNumber:"A111"},{ModelFlowNumber:"A306"}),ShowColumns(Filter(GenericFormModel,1=1),"ModelFlowNumber"));Collect(FilterQuery,RemoveIf(Distinct(Approval_Table,DepartMentUnit),Result=Blank()),{Result:"全部"});Concurrent(Reset(DatePicker1_4),Reset(DatePicker1_5),Reset(drpFilterPedningDepartment_1),Reset(drpFilterPedningDepartment_2),Reset(drpFilterPedningDepartment_3))
 
     Siteinfo_4 As group:
         Height: =5
