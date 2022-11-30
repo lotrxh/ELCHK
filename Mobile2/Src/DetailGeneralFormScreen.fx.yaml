@@ -4216,6 +4216,7 @@
                             =//Choices(MyContacts.AllOwnerName)
                             Office365用户.SearchUserV2({searchTerm:ComboBox1_12.SearchText,top:10}).value
                         PaddingLeft: =10
+                        PaddingTop: =0
                         PressedColor: =Self.Color
                         PressedFill: =ColorFade(Self.Fill, -5%)
                         SearchFields: =["Mail"]
@@ -5927,7 +5928,9 @@
                     OnSelect: |-
                         =Set(Departmentselect,false);
                         Set(Lastselect,false)
+                    PaddingBottom: =0
                     PaddingLeft: =10
+                    PaddingTop: =0
                     PressedColor: =Self.Color
                     PressedFill: =ColorFade(Self.Fill, -5%)
                     SearchFields: =["Mail"]

@@ -1205,7 +1205,9 @@
                         InputTextPlaceholder: ="請選擇填申請部門/單位"
                         Items: =Sort(Distinct(Filter(ConfigurationInfo,Type_Name="組織配置"&&(Value1="部門信息"||Value1="單位信息")),Code_No2&"-"&Value2),Result)
                         NoSelectionText: ="請選擇填申請部門/單位"
+                        PaddingBottom: =0
                         PaddingLeft: =10
+                        PaddingTop: =0
                         PressedColor: =Self.Color
                         PressedFill: =ColorFade(Self.Fill, -5%)
                         SearchFields: =["Result"]
@@ -2163,7 +2165,9 @@
                         Items: |-
                             =//Choices(MyContacts.AllOwnerName)
                             Office365用户.SearchUserV2({searchTerm:ComboBox1_11.SearchText,top:10}).value
+                        PaddingBottom: =0
                         PaddingLeft: =10
+                        PaddingTop: =0
                         PressedColor: =Self.Color
                         PressedFill: =ColorFade(Self.Fill, -5%)
                         SearchFields: =["Mail"]
@@ -3710,7 +3714,9 @@
                     OnSelect: |-
                         =Set(Lastselect,false);
                         Set(Departmentselect,false)
+                    PaddingBottom: =0
                     PaddingLeft: =10
+                    PaddingTop: =0
                     PressedColor: =Self.Color
                     PressedFill: =ColorFade(Self.Fill, -5%)
                     SearchFields: =["Mail"]
