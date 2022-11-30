@@ -720,7 +720,9 @@
                         Items: =["部門","服務"]
                         NoSelectionText: ="請選擇部門/服務"
                         OnChange: =Reset(drpFilterDepartmentName);Reset(drpFilterFormTypeName);
+                        PaddingBottom: =0
                         PaddingLeft: =10
+                        PaddingTop: =0
                         PressedColor: =Self.Color
                         PressedFill: =ColorFade(Self.Fill, -5%)
                         SearchFields: =["Value"]
@@ -755,7 +757,9 @@
                         Items: =Distinct(Filter(FormTableType,DepartMentType=drpFilterDepartmentType.Selected.Value),DepartMentName)
                         NoSelectionText: ="請選擇類型/單位"
                         OnChange: =Reset(drpFilterFormTypeName);
+                        PaddingBottom: =
                         PaddingLeft: =10
+                        PaddingTop: =0
                         PressedColor: =Self.Color
                         PressedFill: =ColorFade(Self.Fill, -5%)
                         SearchFields: =["Result"]
@@ -800,7 +804,9 @@
                                     DepartMentName = drpFilterDepartmentName.Selected.Result
                                 ).FormType
                         NoSelectionText: ="請選擇填申請部門/單位"
+                        PaddingBottom: =0
                         PaddingLeft: =10
+                        PaddingTop: =0
                         PressedColor: =Self.Color
                         PressedFill: =ColorFade(Self.Fill, -5%)
                         SearchFields: =["FormType"]
