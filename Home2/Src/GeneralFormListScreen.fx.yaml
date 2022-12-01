@@ -1100,7 +1100,7 @@ GeneralFormListScreen As screen:
                     DisabledBorderColor: =RGBA(219, 219, 219, 1)
                     DisabledColor: =RGBA(149, 149, 149, 1)
                     DisabledFill: =RGBA(244, 244, 244, 1)
-                    DisplayMode: =If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","假期批核人資料表","任職資源申請"],DisplayMode.Edit,DisplayMode.Disabled)
+                    DisplayMode: =If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","假期批核人資料表"],DisplayMode.Edit,DisplayMode.Disabled)
                     Fill: =White
                     FocusedBorderThickness: =1
                     Height: =24
@@ -1139,7 +1139,7 @@ GeneralFormListScreen As screen:
                     Visible: |-
                         =//true
                         //If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","自助假期批核資料表"],true,false)
-                        If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","假期批核人資料表","任職資源申請"],true,false)
+                        If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","假期批核人資料表"],true,false)
                     Width: =24
                     X: =1026
                     Y: =14
@@ -1161,7 +1161,8 @@ GeneralFormListScreen As screen:
                     Icon: =Icon.Trash
                     OnSelect: |-
                         =UpdateContext({
-                            DeletTask:true
+                            DeletTask:true,
+                            DeleteNum:ThisItem.Approval_No
                         })
                     PaddingBottom: =4
                     PaddingTop: =4
@@ -1170,7 +1171,7 @@ GeneralFormListScreen As screen:
                     PressedFill: =ColorFade(Self.Color, 95%)
                     Visible: |-
                         =//If(ThisItem.TaskStatus="001", true , false )
-                        If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","假期批核人資料表","任職資源申請"] && ThisItem.TaskStatus="001",true,false)
+                        If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","假期批核人資料表"] && ThisItem.TaskStatus="001",true,false)
                     Width: =24
                     X: =1050
                     Y: =14
@@ -1582,7 +1583,7 @@ GeneralFormListScreen As screen:
             Y: =31
             ZIndex: =10
 
-    DeleTask_1 As groupContainer.manualLayoutContainer:
+    DeleteTask_1 As groupContainer.manualLayoutContainer:
         Fill: =RGBA(0, 0, 0, 0.3)
         Height: =768
         Visible: =DeletTask
@@ -1629,7 +1630,99 @@ GeneralFormListScreen As screen:
             Fill: =RGBA(0, 134, 208, 1)
             HoverFill: =RGBA(8, 127, 190, 1)
             OnSelect: |-
-                =UpdateContext({DeletTask: false})
+                =If(
+                    LookUp(
+                        Approval_Table,
+                        标题 = DeleteNum
+                    ).Task_Name = "招聘職位申請表",
+                    RemoveIf(
+                        IncomeAccount,
+                        Application_No = LookUp(
+                            ApplitionJobPosition,
+                            ApprovalId = DeleteNum
+                        ).标题
+                    );
+                    RemoveIf(
+                        UploadFile,
+                        ApplicationId = LookUp(
+                            ApplitionJobPosition,
+                            ApprovalId = DeleteNum
+                        ).标题
+                    );
+                    RemoveIf(
+                        ApplitionJobPosition,
+                        ApprovalId = DeleteNum
+                    );
+                    RemoveIf(
+                        ApprovalDetail_Table,
+                        Approval_No = DeleteNum
+                    );
+                    RemoveIf(
+                        Approval_Table,
+                        标题 = DeleteNum
+                    ),
+                    If(
+                        LookUp(
+                            Approval_Table,
+                            标题 = DeleteNum
+                        ).Task_Name = "假期批核人資料表",
+                        RemoveIf(
+                            VacationApprovalForm,
+                            Application_No = DeleteNum
+                        );
+                        RemoveIf(
+                            ApprovalDetail_Table,
+                            Approval_No = DeleteNum
+                        );
+                        RemoveIf(
+                            Approval_Table,
+                            标题 = DeleteNum
+                        ),
+                        //删除1b相关表数据
+                        RemoveIf(
+                            IncomeAccount,
+                            Application_No = LookUp(
+                                ContractNotice,
+                                ApprovalId = DeleteNum
+                            ).标题
+                        );
+                        RemoveIf(
+                            AllowanceInformation,
+                            Application_No = LookUp(
+                                ContractNotice,
+                                ApprovalId = DeleteNum
+                            ).标题
+                        );
+                        RemoveIf(
+                            UploadFile,
+                            ApplicationId = LookUp(
+                                ContractNotice,
+                                ApprovalId = DeleteNum
+                            ).标题
+                        );
+                        RemoveIf(
+                            VacationApprovalForm,
+                            Applicant_No = LookUp(
+                                ContractNotice,
+                                ApprovalId = DeleteNum
+                            ).标题
+                        );
+                        RemoveIf(
+                            ContractNotice,
+                            ApprovalId = DeleteNum
+                        );
+                        RemoveIf(
+                            ApprovalDetail_Table,
+                            Approval_No = DeleteNum
+                        );
+                        RemoveIf(
+                            Approval_Table,
+                            标题 = DeleteNum
+                        )
+                    )
+                );
+                //Select(uploadButton_1);
+                UpdateContext({DeletTask: false})
             PressedColor: =RGBA(255, 255, 255, 1)
             PressedFill: =RGBA(255, 255, 255, 1)
             RadiusBottomLeft: =5
