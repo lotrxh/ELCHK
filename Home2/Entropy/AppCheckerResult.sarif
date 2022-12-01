@@ -6184,6 +6184,66 @@
             {
               "logicalLocations": [
                 {
+                  "fullyQualifiedName": "GeneralFormListScreen.ContainerMain.Container5_3.TaskListGallery.BtnDefaultIconOnly_6.AccessibleLabel"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "GeneralFormListScreen.ContainerMain.Container5_3.TaskListGallery.BtnDefaultIconOnly_6.AccessibleLabel",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "AccessibleLabel",
+                "module": "GeneralFormListScreen",
+                "type": "GeneralFormListScreen.ContainerMain.Container5_3.TaskListGallery.BtnDefaultIconOnly_6"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-AccessibleLabelNeeded",
+          "ruleIndex": 1
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "GeneralFormListScreen.ContainerMain.Container5_3.TaskListGallery.BtnDefaultIconOnly_6.TabIndex"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "GeneralFormListScreen.ContainerMain.Container5_3.TaskListGallery.BtnDefaultIconOnly_6.TabIndex",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "TabIndex",
+                "module": "GeneralFormListScreen",
+                "type": "GeneralFormListScreen.ContainerMain.Container5_3.TaskListGallery.BtnDefaultIconOnly_6"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "acc-TabIndexShouldBeDefinedForInteractiveControl",
+          "ruleIndex": 2
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
                   "fullyQualifiedName": "HomepageScreen.Container3_3.Image8.AccessibleLabel"
                 }
               ],
@@ -8574,6 +8634,36 @@
           },
           "ruleId": "app-ScreenHasManyControls",
           "ruleIndex": 10
+        },
+        {
+          "locations": [
+            {
+              "logicalLocations": [
+                {
+                  "fullyQualifiedName": "GeneralFormListScreen.DeleteNum"
+                }
+              ],
+              "physicalLocation": {
+                "address": {
+                  "fullyQualifiedName": "GeneralFormListScreen.DeleteNum",
+                  "relativeAddress": 0
+                }
+              },
+              "properties": {
+                "member": "DeleteNum",
+                "module": "GeneralFormListScreen",
+                "type": "GeneralFormListScreen"
+              }
+            }
+          ],
+          "message": {
+            "id": "issue"
+          },
+          "properties": {
+            "level": "Medium"
+          },
+          "ruleId": "app-UnusedVariables",
+          "ruleIndex": 6
         },
         {
           "locations": [
