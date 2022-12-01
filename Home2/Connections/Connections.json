@@ -60,33 +60,7 @@
       "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1610-greyhound-localization-RelayFix/1.0.1610.3091/sharepointonline/icon.png",
       "id": "/providers/microsoft.powerapps/apis/shared_sharepointonline"
     },
-    "datasets": {
-      "https://chinasofti0.sharepoint.com/sites/ELCHK_Chinasoft": {
-        "datasetOverride": {
-          "environmentVariableName": "elchk2_shared_sharepointonline_e3cc30c42a434697b011c12278b7e13a"
-        },
-        "dataSources": {
-          "AllowanceInformation": {
-            "tableName": "c3385889-5102-4382-abe2-b6462cf21693",
-            "tableNameOverride": {
-              "environmentVariableName": "elchk2_shared_sharepointonline_980fc2b63b2b494594586756f9f5af0b"
-            }
-          },
-          "IncomeAccount": {
-            "tableName": "270392bf-9452-44f7-8fdb-5f707511dd34",
-            "tableNameOverride": {
-              "environmentVariableName": "elchk2_shared_sharepointonline_44df0204a65b413cba6263faf0488204"
-            }
-          },
-          "UploadFile": {
-            "tableName": "02843b7a-a08e-4e8f-b5a3-dbfc10cec8ef",
-            "tableNameOverride": {
-              "environmentVariableName": "elchk2_shared_sharepointonline_565c4fc6c7454d9bb77ce4aec2eb4c43"
-            }
-          }
-        }
-      }
-    },
+    "datasets": {},
     "dataSources": [
       "MyContacts",
       "TemplateFileList",
@@ -102,10 +76,7 @@
       "FormTableType",
       "ApplitionJobPosition",
       "ContractNotice",
-      "EmploymentResource",
-      "IncomeAccount",
-      "UploadFile",
-      "AllowanceInformation"
+      "EmploymentResource"
     ],
     "dependencies": {},
     "dependents": [

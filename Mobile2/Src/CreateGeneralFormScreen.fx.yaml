@@ -117,7 +117,7 @@
     BottomContainer As groupContainer.manualLayoutContainer:
         Fill: =White
         Height: =60
-        Visible: =If(First(EditUserForm).FlowType="範本" || App.ActiveScreen.Width<600,false,true)
+        Visible: =If(First(EditUserForm).FlowType="範本" || App.ActiveScreen.Width<700,false,true)
         Width: =Parent.Width
         Y: =Parent.Height-Self.Height
         ZIndex: =2
@@ -1089,7 +1089,7 @@
                 LayoutAlignItems: =LayoutAlignItems.Stretch
                 LayoutDirection: =LayoutDirection.Vertical
                 LayoutMinHeight: =100
-                LayoutMinWidth: =250
+                LayoutMinWidth: =400
                 LayoutMode: =LayoutMode.Auto
                 Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
                 ZIndex: =1
@@ -1861,7 +1861,7 @@
                 LayoutAlignItems: =LayoutAlignItems.Stretch
                 LayoutDirection: =LayoutDirection.Vertical
                 LayoutMinHeight: =100
-                LayoutMinWidth: =250
+                LayoutMinWidth: =300
                 LayoutMode: =LayoutMode.Auto
                 PaddingLeft: =20
                 PaddingRight: =20
@@ -2881,7 +2881,7 @@
                 LayoutMinHeight: =100
                 LayoutMinWidth: =250
                 LayoutMode: =LayoutMode.Auto
-                Visible: =If(App.ActiveScreen.Width<600,false,true)
+                Visible: =If(App.ActiveScreen.Width<700,false,true)
                 Width: =DownloadContainer.Width
                 ZIndex: =2
 
@@ -3024,7 +3024,7 @@
         Fill: =RGBA(255, 255, 255, 1)
         Height: =50
         Visible: |-
-            =//If(App.ActiveScreen.Width<600,true,false)
+            =//If(App.ActiveScreen.Width<700,true,false)
             true
         Width: =Parent.Width
         ZIndex: =6
@@ -3497,7 +3497,7 @@
             RadiusTopRight: =4
             Size: =11
             Text: ="完成"
-            Visible: =If(First(EditUserForm).FlowType = "範本" || App.ActiveScreen.Width>600,false,true)
+            Visible: =If(First(EditUserForm).FlowType = "範本" || App.ActiveScreen.Width>700,false,true)
             Width: =100
             X: =Parent.Width-Self.Width-8
             Y: =7
