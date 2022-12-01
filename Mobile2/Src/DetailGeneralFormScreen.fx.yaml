@@ -264,7 +264,7 @@
 
     HeaderContainer_2 As groupContainer.manualLayoutContainer:
         Fill: =RGBA(255, 255, 255, 1)
-        Height: =If(App.ActiveScreen.Width<600,100,50)
+        Height: =If(App.ActiveScreen.Width<700,100,50)
         Width: =Parent.Width
         ZIndex: =1
 
@@ -277,10 +277,10 @@
             PaddingLeft: =1
             PaddingRight: =1
             PaddingTop: =5
-            Visible: =If(App.ActiveScreen.Width<600,true,false)
+            Visible: =If(App.ActiveScreen.Width<700,true,false)
             Width: =Parent.Width
-            X: =If(App.ActiveScreen.Width<600,0,250)
-            Y: =If(App.ActiveScreen.Width<600,50,0)
+            X: =If(App.ActiveScreen.Width<700,0,250)
+            Y: =If(App.ActiveScreen.Width<700,50,0)
             ZIndex: =1
 
             BtnDefaultLg_14 As button:
@@ -1350,7 +1350,7 @@
         LayoutMode: =LayoutMode.Auto
         LayoutOverflowY: =LayoutOverflow.Scroll
         Width: =Parent.Width
-        Y: =If(App.ActiveScreen.Width<600,102,52)
+        Y: =If(App.ActiveScreen.Width<700,102,52)
         ZIndex: =2
 
         InfoContainer_1 As groupContainer.horizontalAutoLayoutContainer:
@@ -1467,7 +1467,7 @@
                                             )
                                         ).TaskStatus = "000"
                                         //移動端不可見
-                                        || App.ActiveScreen.Width<600
+                                        || App.ActiveScreen.Width<700
                                         ,false,true)
                     Width: =165
                     X: =1245
@@ -1825,7 +1825,7 @@
                     RadiusTopRight: =2
                     Size: =10
                     Text: ="下載表格"
-                    Visible: =If(App.ActiveScreen.Width<600,false,true)
+                    Visible: =If(App.ActiveScreen.Width<700,false,true)
                     Width: =165
                     X: =Parent.Width-Self.Width-1
                     Y: =1
@@ -1871,7 +1871,7 @@
                     RadiusTopRight: =2
                     Size: =10
                     Text: ="下載指引"
-                    Visible: =If(App.ActiveScreen.Width<600,false,true)
+                    Visible: =If(App.ActiveScreen.Width<700,false,true)
                     Width: =165
                     X: =Parent.Width-Self.Width-1
                     Y: =1
@@ -1917,7 +1917,7 @@
                     RadiusTopRight: =2
                     Size: =10
                     Text: ="下載範例"
-                    Visible: =If(App.ActiveScreen.Width<600,false,true)
+                    Visible: =If(App.ActiveScreen.Width<700,false,true)
                     Width: =165
                     X: =Parent.Width-Self.Width-1
                     Y: =1
@@ -1963,7 +1963,7 @@
                 LayoutAlignItems: =LayoutAlignItems.Stretch
                 LayoutDirection: =LayoutDirection.Vertical
                 LayoutMinHeight: =100
-                LayoutMinWidth: =250
+                LayoutMinWidth: =400
                 LayoutMode: =LayoutMode.Auto
                 ZIndex: =1
 
@@ -3367,7 +3367,7 @@
                 LayoutAlignItems: =LayoutAlignItems.Stretch
                 LayoutDirection: =LayoutDirection.Vertical
                 LayoutMinHeight: =100
-                LayoutMinWidth: =250
+                LayoutMinWidth: =300
                 LayoutMode: =LayoutMode.Auto
                 PaddingLeft: =20
                 PaddingRight: =20
@@ -4381,7 +4381,7 @@
                                             )
                                         ).ActionNode = "跟進" ))
                                         //手機頁面不可見
-                                        && App.ActiveScreen.Width>600
+                                        && App.ActiveScreen.Width>700
                                         ,true,false))
                         
                                        // true
@@ -4486,7 +4486,7 @@
     BottomContainer_2 As groupContainer.manualLayoutContainer:
         Fill: =White
         Height: =Container11_2.Height
-        Visible: =If(App.ActiveScreen.Width<600,false,true)
+        Visible: =If(App.ActiveScreen.Width<700,false,true)
         Width: =Parent.Width
         Y: =Parent.Height-Self.Height
         ZIndex: =3
