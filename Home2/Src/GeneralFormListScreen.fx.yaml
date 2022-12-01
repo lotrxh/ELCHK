@@ -79,12 +79,12 @@ GeneralFormListScreen As screen:
                 "DepartMentName",
                 LookUp(
                     Approval_Table,
-                    Title = Approval_No
+                    标题 = Approval_No
                 ).DepartMentUnit,
                 "FormDepartMentName",
                 LookUp(
                     Approval_Table,
-                    Title = Approval_No
+                    标题 = Approval_No
                 ).DepartMentName
             )
         );
@@ -119,37 +119,37 @@ GeneralFormListScreen As screen:
                     "FlowTaskName",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).Task_Name,
                     "FlowOrder",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).Application_No,
                     "SubmitApprover",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).'Operator ',
                     "FlowCreateDate",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
-                    ).Created,
+                        标题 = Approval_No
+                    ).创建时间,
                     "DepartMentName",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).DepartMentUnit,
                     "FormType",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).FormType,
                     "Application_Status",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).Application_Status,
                     "CustomerSearch",
                     LookUp(
@@ -172,12 +172,12 @@ GeneralFormListScreen As screen:
                 "DepartMentName",
                 LookUp(
                     Approval_Table,
-                    Title = Approval_No
+                    标题 = Approval_No
                 ).DepartMentUnit,
                 "FormDepartMentName",
                 LookUp(
                     Approval_Table,
-                    Title = Approval_No
+                    标题 = Approval_No
                 ).DepartMentName
             )
         );
@@ -214,37 +214,37 @@ GeneralFormListScreen As screen:
                     "FlowTaskName",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).Task_Name,
                     "FlowOrder",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).Application_No,
                     "SubmitApprover",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).'Operator ',
                     "FlowCreateDate",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
-                    ).Created,
+                        标题 = Approval_No
+                    ).创建时间,
                     "DepartMentName",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).DepartMentUnit,
                     "FormType",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).FormType,
                     "Application_Status",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).Application_Status,
                     "CustomerSearch",
                     LookUp(
@@ -276,12 +276,12 @@ GeneralFormListScreen As screen:
                 "DepartMentName",
                 LookUp(
                     Approval_Table,
-                    Title = Approval_No
+                    标题 = Approval_No
                 ).DepartMentUnit,
                 "FormDepartMentName",
                 LookUp(
                     Approval_Table,
-                    Title = Approval_No
+                    标题 = Approval_No
                 ).DepartMentName
             )
         );
@@ -316,37 +316,37 @@ GeneralFormListScreen As screen:
                     "FlowTaskName",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).Task_Name,
                     "FlowOrder",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).Application_No,
                     "FlowCreateDate",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
-                    ).Created,
+                        标题 = Approval_No
+                    ).创建时间,
                     "SubmitApprover",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).'Operator ',
                     "DepartMentName",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).DepartMentUnit,
                     "FormType",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).FormType,
                     "Application_Status",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).Application_Status,
                     "CustomerSearch",
                     LookUp(
@@ -363,7 +363,7 @@ GeneralFormListScreen As screen:
         Height: =768
         Width: =1126
         X: =240
-        ZIndex: =3
+        ZIndex: =1
 
         Container5_2 As groupContainer.manualLayoutContainer:
             Fill: =RGBA(255, 255, 255, 1)
@@ -446,7 +446,6 @@ GeneralFormListScreen As screen:
                 DisabledBorderColor: =RGBA(219, 219, 219, 1)
                 DisabledColor: =RGBA(149, 149, 149, 1)
                 DisabledFill: =RGBA(244, 244, 244, 1)
-                Fill: =RGBA(255, 255, 255, 1)
                 Height: =32
                 HoverFill: =ColorFade(Self.Fill, -15%)
                 Icon: =Icon.Search
@@ -518,7 +517,7 @@ GeneralFormListScreen As screen:
                     )
                 PaddingBottom: =2
                 PaddingTop: =2
-                PressedColor: =White
+                PressedColor: =ColorFade(Self.Color, -15%)
                 PressedFill: =ColorFade(Self.Fill, -25%)
                 Width: =32
                 X: =1060
@@ -824,7 +823,7 @@ GeneralFormListScreen As screen:
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =12
-                    Text: ="申請人/申請日期"
+                    Text: ="申請人及日期"
                     Width: =137
                     X: =509
                     ZIndex: =5
@@ -1101,7 +1100,7 @@ GeneralFormListScreen As screen:
                     DisabledBorderColor: =RGBA(219, 219, 219, 1)
                     DisabledColor: =RGBA(149, 149, 149, 1)
                     DisabledFill: =RGBA(244, 244, 244, 1)
-                    DisplayMode: =If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","自助假期批核資料表"],DisplayMode.Edit,DisplayMode.Disabled)
+                    DisplayMode: =If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","假期批核人資料表","任職資源申請"],DisplayMode.Edit,DisplayMode.Disabled)
                     Fill: =White
                     FocusedBorderThickness: =1
                     Height: =24
@@ -1115,21 +1114,21 @@ GeneralFormListScreen As screen:
                                 JumpUrl & "&Screen=JobTitleCopyFormScreen&AppIds=" & LookUp(
                                     ApplitionJobPosition,
                                     ApprovalId = TaskListGallery.Selected.Approval_No
-                                ).Title & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmits=true&newApplicationGuid=" & GUID() & "&flowguid=" & GUID()&"&bustype=Edit",{},LaunchTarget.Replace
+                                ).标题 & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmits=true&newApplicationGuid=" & GUID() & "&flowguid=" & GUID()&"&bustype=Edit",{},LaunchTarget.Replace
                             ),
                             ThisItem.FlowTaskName = "假期批核人資料表",
                             Launch(
                                 JumpUrl & "&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
                                     VacationApprovalForm,
                                     Applicant_No = TaskListGallery.Selected.Approval_No
-                                ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&isCopy=true",{},LaunchTarget.Replace
+                                ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&isCopy=true",{},LaunchTarget.Replace
                             ),
                             ThisItem.FlowTaskName = "預備合約通知書(新入職)",
                             Launch(
                                 JumpUrl & "&Screen=ContractNoticeCopyForm&taskNum=" & LookUp(
                                     ContractNotice,
                                     ApprovalId = TaskListGallery.Selected.Approval_No
-                                ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmits=true&newApplicationGuid=" & GUID() & "&flowguid=" & GUID()&"&bustype=Edit",{},LaunchTarget.Replace
+                                ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmits=true&newApplicationGuid=" & GUID() & "&flowguid=" & GUID()&"&bustype=Edit",{},LaunchTarget.Replace
                             )
                         )
                     PaddingBottom: =4
@@ -1138,8 +1137,9 @@ GeneralFormListScreen As screen:
                     PressedColor: =ColorFade(Self.BorderColor, -15%)
                     PressedFill: =ColorFade(Self.Color, 95%)
                     Visible: |-
-                        =true
+                        =//true
                         //If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","自助假期批核資料表"],true,false)
+                        If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","假期批核人資料表","任職資源申請"],true,false)
                     Width: =24
                     X: =1026
                     Y: =14
@@ -1159,7 +1159,10 @@ GeneralFormListScreen As screen:
                     HoverBorderColor: =ColorFade(Self.BorderColor, -25%)
                     HoverColor: =ColorFade(Self.BorderColor, -25%)
                     Icon: =Icon.Trash
-                    OnSelect: =
+                    OnSelect: |-
+                        =UpdateContext({
+                            DeletTask:true
+                        })
                     PaddingBottom: =4
                     PaddingTop: =4
                     PressedBorderColor: =ColorFade(Self.BorderColor, -15%)
@@ -1167,7 +1170,7 @@ GeneralFormListScreen As screen:
                     PressedFill: =ColorFade(Self.Color, 95%)
                     Visible: |-
                         =//If(ThisItem.TaskStatus="001", true , false )
-                        true
+                        If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","假期批核人資料表","任職資源申請"] && ThisItem.TaskStatus="001",true,false)
                     Width: =24
                     X: =1050
                     Y: =14
@@ -1260,20 +1263,20 @@ GeneralFormListScreen As screen:
                                     JumpUrl & "&Screen=JobTitleFormScreen&AppIds=" & LookUp(
                                         ApplitionJobPosition,
                                         ApprovalId = TaskListGallery.Selected.Approval_No
-                                    ).Title & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
+                                    ).标题 & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
                                 ),
                                 ThisItem.TaskStatus = "002",
                                 Launch(
                                     JumpUrl & "&Screen=JobTitleFormDetailScreen&AppIds=" & LookUp(
                                         ApplitionJobPosition,
                                         ApprovalId = TaskListGallery.Selected.Approval_No
-                                    ).Title & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
+                                    ).标题 & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
                                 ),
                                 Launch(
                                     JumpUrl & "&Screen=JobTitleFormDetailScreen&AppIds=" & LookUp(
                                         ApplitionJobPosition,
                                         ApprovalId = TaskListGallery.Selected.Approval_No
-                                    ).Title & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
+                                    ).标题 & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
                                 )
                             ),
                             ThisItem.FlowTaskName = "假期批核人資料表",
@@ -1283,20 +1286,20 @@ GeneralFormListScreen As screen:
                                     JumpUrlA306A111 & "&Screen=VacationFormScreen&taskNum=" & LookUp(
                                         VacationApprovalForm,
                                         Applicant_No = TaskListGallery.Selected.Approval_No
-                                    ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
+                                    ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
                                 ),
                                 ThisItem.TaskStatus = "002",
                                 Launch(
                                     JumpUrlA306A111 & "&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
                                         VacationApprovalForm,
                                         Applicant_No = TaskListGallery.Selected.Approval_No
-                                    ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
+                                    ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
                                 ),
                                 Launch(
                                     JumpUrlA306A111 & "&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
                                         VacationApprovalForm,
                                         Applicant_No = TaskListGallery.Selected.Approval_No
-                                    ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
+                                    ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
                                 )
                             ),
                             ThisItem.FlowTaskName = "預備合約通知書(新入職)",
@@ -1306,20 +1309,20 @@ GeneralFormListScreen As screen:
                                     JumpUrl & "&Screen=ContractNoticeForm&taskNum=" & LookUp(
                                         ContractNotice,
                                         ApprovalId = TaskListGallery.Selected.Approval_No
-                                    ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
+                                    ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
                                 ),
                                 ThisItem.TaskStatus = "002",
                                 Launch(
                                     JumpUrl & "&Screen=ContractNoticeFormDetail&taskNum=" & LookUp(
                                         ContractNotice,
                                         ApprovalId = TaskListGallery.Selected.Approval_No
-                                    ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
+                                    ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
                                 ),
                                 Launch(
                                     JumpUrl & "&Screen=ContractNoticeFormDetail&taskNum=" & LookUp(
                                         ContractNotice,
                                         ApprovalId = TaskListGallery.Selected.Approval_No
-                                    ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
+                                    ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
                                 )
                             ),
                             ThisItem.FlowTaskName = "任職資源申請",
@@ -1329,13 +1332,13 @@ GeneralFormListScreen As screen:
                                     JumpUrlA306A111 & "&Screen=EmploymentFormScreen&taskNum=" & LookUp(
                                         ContractNotice,
                                         ApprovalId = TaskListGallery.Selected.Approval_No
-                                    ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
+                                    ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
                                 ),
                                 Launch(
                                     JumpUrlA306A111 & "&Screen=EmploymentFormDetail&taskNum=" & LookUp(
                                         EmploymentResource,
                                         ApprovalId = TaskListGallery.Selected.Approval_No
-                                    ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
+                                    ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
                                 )
                             ),
                             With(
@@ -1343,7 +1346,7 @@ GeneralFormListScreen As screen:
                                     FormId: LookUp(
                                         GenericFormList,
                                         ApprovalId = ThisItem.Approval_No
-                                    ).Title
+                                    ).标题
                                 },
                                 Launch(
                                     JumpUrlMobileApp & "&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & TaskListGallery.Selected.Approval_No & "&Page=Home",
@@ -1363,7 +1366,7 @@ GeneralFormListScreen As screen:
         Fill: =RGBA(255, 255, 255, 1)
         Height: =768
         Width: =240
-        ZIndex: =4
+        ZIndex: =2
 
         GalleryNav_15 As gallery.galleryVertical:
             Height: =327
@@ -1578,4 +1581,90 @@ GeneralFormListScreen As screen:
             X: =64
             Y: =31
             ZIndex: =10
+
+    DeleTask_1 As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(0, 0, 0, 0.3)
+        Height: =768
+        Visible: =DeletTask
+        Width: =1366
+        ZIndex: =3
+
+        Button1_8 As button:
+            Fill: =RGBA(255, 255, 255, 1)
+            Height: =149
+            HoverFill: =RGBA(255, 255, 255, 1)
+            PressedColor: =RGBA(255, 255, 255, 1)
+            PressedFill: =RGBA(255, 255, 255, 1)
+            RadiusBottomLeft: =0
+            RadiusBottomRight: =0
+            RadiusTopLeft: =0
+            RadiusTopRight: =0
+            Text: ="按钮"
+            Width: =451
+            X: =505
+            Y: =260
+            ZIndex: =1
+
+        Button2_7 As button:
+            Color: =RGBA(0, 134, 208, 1)
+            Fill: =RGBA(255, 255, 255, 1)
+            HoverColor: =RGBA(0, 134, 208, 1)
+            HoverFill: =RGBA(255, 255, 255, 1)
+            OnSelect: |-
+                =UpdateContext({DeletTask:false})
+            PressedColor: =RGBA(0, 134, 208, 1)
+            PressedFill: =RGBA(255, 255, 255, 1)
+            RadiusBottomLeft: =5
+            RadiusBottomRight: =5
+            RadiusTopLeft: =5
+            RadiusTopRight: =5
+            Size: =FountSise
+            Text: ="取消"
+            X: =541
+            Y: =350
+            ZIndex: =4
+
+        Button3_4 As button:
+            BorderColor: =RGBA(230, 230, 230, 1)
+            Fill: =RGBA(0, 134, 208, 1)
+            HoverFill: =RGBA(8, 127, 190, 1)
+            OnSelect: |-
+                =UpdateContext({DeletTask: false})
+            PressedColor: =RGBA(255, 255, 255, 1)
+            PressedFill: =RGBA(255, 255, 255, 1)
+            RadiusBottomLeft: =5
+            RadiusBottomRight: =5
+            RadiusTopLeft: =5
+            RadiusTopRight: =5
+            Size: =FountSise
+            Text: ="確認"
+            X: =764
+            Y: =350
+            ZIndex: =5
+
+        Group44_1 As group:
+            Height: =5
+            Width: =5
+            X: =40
+            Y: =40
+            ZIndex: =6
+
+            Label32_2 As label:
+                Color: =RGBA(255, 0, 0, 1)
+                Font: =Font.'Segoe UI'
+                Height: =41
+                Text: ="確認刪除該條數據！"
+                Width: =248
+                X: =641
+                Y: =271
+                ZIndex: =2
+
+            Icon7_2 As icon.Information:
+                Color: =RGBA(255, 0, 0, 1)
+                Height: =19
+                Icon: =Icon.Information
+                Width: =40
+                X: =601
+                Y: =282
+                ZIndex: =3
 

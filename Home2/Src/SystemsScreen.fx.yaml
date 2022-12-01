@@ -53,23 +53,23 @@ SystemsScreen As screen:
             Align: =Align.Left
             BorderStyle: =BorderStyle.None
             BorderThickness: =0
-            Fill: =RGBA(1, 168, 244, 1)
+            Fill: =glbThemePrimaryColor
             FocusedBorderThickness: =1
             Font: =Font.'Segoe UI'
             FontWeight: =FontWeight.Normal
             Height: =32
-            HoverFill: =RGBA(1, 168, 244, 1)
+            HoverFill: =ColorFade(Self.Fill, -15%)
             OnSelect: |-
                 =UpdateContext({
                     UserSetIsShow:true
                 })
             PaddingLeft: =30
             PressedColor: =RGBA(255, 255, 255, 1)
-            PressedFill: =RGBA(1, 168, 244, 1)
-            RadiusBottomLeft: =0
-            RadiusBottomRight: =0
-            RadiusTopLeft: =0
-            RadiusTopRight: =0
+            PressedFill: =ColorFade(Self.Fill, 20%)
+            RadiusBottomLeft: =4
+            RadiusBottomRight: =4
+            RadiusTopLeft: =4
+            RadiusTopRight: =4
             Size: =FountSise
             Text: ="添加用戶"
             Width: =98
@@ -105,6 +105,7 @@ SystemsScreen As screen:
                 ZIndex: =2
 
             Label27 As label:
+                Align: =Align.Center
                 Color: =RGBA(102, 102, 102, 1)
                 Height: =20
                 OnSelect: =Select(Parent)
@@ -117,6 +118,7 @@ SystemsScreen As screen:
                 ZIndex: =10
 
             Label30 As label:
+                Align: =Align.Center
                 OnSelect: =Select(Parent)
                 Size: =10.5
                 Text: =ThisItem.O_Mechanism_No
@@ -133,10 +135,11 @@ SystemsScreen As screen:
                 Size: =FountSise
                 Text: =ThisItem.Post
                 Width: =135
-                X: =589
+                X: =595
                 ZIndex: =20
 
             Label27_1 As label:
+                Align: =Align.Center
                 Color: =RGBA(149, 149, 149, 1)
                 Height: =20
                 OnSelect: =Select(Parent)
@@ -161,7 +164,7 @@ SystemsScreen As screen:
                 ZIndex: =22
 
             Icon6_4 As icon.Tag:
-                Color: =RGBA(0, 133, 192, 1)
+                Color: =glbThemePrimaryColor
                 Height: =24
                 Icon: =Icon.DocumentWithContent
                 OnSelect: |
@@ -180,7 +183,7 @@ SystemsScreen As screen:
                 ZIndex: =26
 
             Icon6_5 As icon.Tag:
-                Color: =RGBA(0, 133, 192, 1)
+                Color: =glbThemePrimaryColor
                 Height: =24
                 Icon: =Icon.Trash
                 OnSelect: |
@@ -275,17 +278,19 @@ SystemsScreen As screen:
                 ZIndex: =10
 
             Label32_14 As label:
+                Align: =Align.Center
                 Color: =RGBA(25, 32, 41, 100)
                 Font: =Font.'Segoe UI'
                 Height: =48
                 Size: =FountSise
                 Text: ="職員"
                 Width: =135
-                X: =16
+                X: =50
                 Y: =131
                 ZIndex: =12
 
             Label32_16 As label:
+                Align: =Align.Center
                 Color: =RGBA(25, 32, 41, 100)
                 Font: =Font.'Segoe UI'
                 Height: =48
@@ -297,13 +302,14 @@ SystemsScreen As screen:
                 ZIndex: =14
 
             Label32_19 As label:
+                Align: =Align.Center
                 Color: =RGBA(25, 32, 41, 100)
                 Font: =Font.'Segoe UI'
                 Height: =48
                 Size: =FountSise
                 Text: ="單位/部門"
                 Width: =102
-                X: =429
+                X: =405
                 Y: =131
                 ZIndex: =33
 
@@ -334,13 +340,14 @@ SystemsScreen As screen:
             ZIndex: =40
 
         Label32_20 As label:
+            Align: =Align.Center
             Color: =RGBA(25, 32, 41, 100)
             Font: =Font.'Segoe UI'
             Height: =48
             Size: =FountSise
             Text: ="單位/部門編號"
             Width: =124
-            X: =241
+            X: =261
             Y: =131
             ZIndex: =42
 
@@ -462,12 +469,12 @@ SystemsScreen As screen:
 
         Button9_6 As button:
             BorderThickness: =0
-            Fill: =RGBA(1, 168, 244, 1)
+            Fill: =glbThemePrimaryColor
             FocusedBorderThickness: =1
             Font: =Font.'Segoe UI'
             FontWeight: =FontWeight.Normal
             Height: =32
-            HoverFill: =RGBA(1, 168, 244, 1)
+            HoverFill: =ColorFade(Self.Fill, 20%)
             OnSelect: |-
                 =UpdateContext({
                     GAMask:true
@@ -475,7 +482,7 @@ SystemsScreen As screen:
             PaddingLeft: =20
             PaddingRight: =0
             PressedColor: =RGBA(255, 255, 255, 1)
-            PressedFill: =RGBA(1, 168, 244, 1)
+            PressedFill: =ColorFade(Self.Fill, -15%)
             RadiusBottomLeft: =4
             RadiusBottomRight: =4
             RadiusTopLeft: =4
@@ -510,13 +517,14 @@ SystemsScreen As screen:
             ZIndex: =8
 
             Label33_30 As label:
+                Align: =Align.Center
                 Color: =RGBA(73, 77, 82, 100)
                 Font: =Font.'Segoe UI'
                 OnSelect: =Select(Parent)
                 Size: =FountSise
                 Text: =ThisItem.Signer
                 Width: =136
-                X: =284
+                X: =225
                 ZIndex: =1
 
             Rectangle15_6 As rectangle:
@@ -528,37 +536,39 @@ SystemsScreen As screen:
                 ZIndex: =2
 
             Label33_31 As label:
+                Align: =Align.Center
                 Color: =RGBA(73, 77, 82, 100)
                 Font: =Font.'Segoe UI'
                 OnSelect: =Select(Parent)
                 Size: =FountSise
                 Text: =ThisItem.Role
                 Width: =117
-                X: =829
+                X: =792
                 ZIndex: =3
 
             Label33_32 As label:
+                Align: =Align.Center
                 Color: =RGBA(73, 77, 82, 100)
                 Font: =Font.'Segoe UI'
                 OnSelect: =Select(Parent)
                 Size: =FountSise
                 Text: =ThisItem.S_Mechanism
                 Width: =174
-                X: =17
                 ZIndex: =5
 
             Label33_34 As label:
+                Align: =Align.Center
                 Color: =RGBA(73, 77, 82, 100)
                 Font: =Font.'Segoe UI'
                 OnSelect: =Select(Parent)
                 Size: =FountSise
                 Text: =ThisItem.Signer_Email
                 Width: =203
-                X: =536
+                X: =490
                 ZIndex: =9
 
             Icon6_6 As icon.Tag:
-                Color: =RGBA(0, 133, 192, 1)
+                Color: =glbThemePrimaryColor
                 Height: =24
                 Icon: =Icon.DocumentWithContent
                 OnSelect: |-
@@ -573,7 +583,7 @@ SystemsScreen As screen:
                 ZIndex: =10
 
             Icon6_7 As icon.Tag:
-                Color: =RGBA(0, 134, 208, 1)
+                Color: =glbThemePrimaryColor
                 Height: =24
                 Icon: =Icon.Trash
                 OnSelect: |-
@@ -748,27 +758,29 @@ SystemsScreen As screen:
                 Size: =FountSise
                 Text: ="單位/部門"
                 Width: =80
-                X: =51
+                X: =75
                 Y: =165
                 ZIndex: =12
 
             Label46_26 As label:
+                Align: =Align.Center
                 Color: =RGBA(25, 32, 41, 100)
                 Font: =Font.'Segoe UI'
                 Size: =FountSise
                 Text: ="權限"
                 Width: =90
-                X: =850
+                X: =833
                 Y: =165
                 ZIndex: =13
 
             Label46_28 As label:
+                Align: =Align.Center
                 Color: =RGBA(25, 32, 41, 100)
                 Font: =Font.'Segoe UI'
                 Size: =FountSise
                 Text: ="負責人"
                 Width: =163
-                X: =291
+                X: =232
                 Y: =165
                 ZIndex: =14
 
@@ -788,8 +800,8 @@ SystemsScreen As screen:
             Height: =20
             Size: =9
             Text: ="共计："&CountRows(User_Management)&"条"
-            Width: =133
-            X: =1037
+            Width: =105
+            X: =1005
             Y: =645
             ZIndex: =22
 
@@ -829,9 +841,8 @@ SystemsScreen As screen:
                         )
                 Layout: =Layout.Vertical
                 TemplateSize: =40
-                Width: =1139
-                X: =24
-                Y: =112
+                Width: =1110
+                Y: =115
                 ZIndex: =8
 
                 Rectangle15_10 As rectangle:
@@ -843,63 +854,68 @@ SystemsScreen As screen:
                     ZIndex: =2
 
                 Label33_56 As label:
+                    Align: =Align.Center
                     Color: =RGBA(102, 102, 102, 1)
                     Font: =Font.'Segoe UI'
                     OnSelect: =Select(Parent)
                     Size: =FountSise
                     Text: =ThisItem.Value2
                     Width: =174
-                    X: =58
                     ZIndex: =5
 
                 Label33_58 As label:
+                    Align: =Align.Center
                     Color: =RGBA(102, 102, 102, 1)
                     Font: =Font.'Segoe UI'
                     OnSelect: =Select(Parent)
                     Size: =FountSise
                     Text: =ThisItem.Value5
-                    Width: =129
-                    X: =975
+                    Width: =170
+                    X: =860
                     ZIndex: =6
 
                 Label33_57 As label:
+                    Align: =Align.Center
                     Color: =RGBA(102, 102, 102, 1)
                     Font: =Font.'Segoe UI'
                     OnSelect: =Select(Parent)
                     Size: =FountSise
                     Text: =ThisItem.Value3
                     Width: =158
-                    X: =289
+                    X: =174
                     ZIndex: =9
 
                 Label33_61 As label:
+                    Align: =Align.Center
                     Color: =RGBA(102, 102, 102, 1)
                     Font: =Font.'Segoe UI'
                     OnSelect: =Select(Parent)
                     Size: =FountSise
                     Text: =ThisItem.Value4
-                    Width: =180
-                    X: =785
+                    Width: =230
+                    X: =630
                     ZIndex: =11
 
                 Label33_60 As label:
+                    Align: =Align.Center
                     Color: =RGBA(102, 102, 102, 1)
                     Font: =Font.'Segoe UI'
                     OnSelect: =Select(Parent)
                     Size: =FountSise
                     Text: =LookUp(SignerInfo,S_Mechanism=ThisItem.Value2).Signer
                     Width: =127
-                    X: =476
+                    X: =332
                     ZIndex: =12
 
                 Label33_62 As label:
+                    Align: =Align.Center
                     Color: =RGBA(102, 102, 102, 1)
                     Font: =Font.'Segoe UI'
                     OnSelect: =Select(Parent)
                     Size: =FountSise
                     Text: =LookUp(SignerInfo,S_Mechanism=ThisItem.Value2).Signer_Email
-                    Width: =167
-                    X: =603
+                    Width: =170
+                    X: =459
                     ZIndex: =13
 
             Label1_62 As label:
@@ -909,8 +925,8 @@ SystemsScreen As screen:
                 Size: =9
                 Text: ="共计："&CountRows(general_administration)&"条"
                 Width: =105
-                X: =1060
-                Y: =598
+                X: =1005
+                Y: =595
                 ZIndex: =9
 
             Dropdown2_25 As combobox:
@@ -962,74 +978,79 @@ SystemsScreen As screen:
                     RadiusTopLeft: =0
                     RadiusTopRight: =0
                     Text: =""
-                    Width: =1139
-                    X: =24
+                    Width: =1110
                     Y: =67
                     ZIndex: =20
 
                 Label46_58 As label:
+                    Align: =Align.Center
                     Color: =RGBA(25, 32, 41, 100)
                     Font: =Font.'Segoe UI'
                     Height: =48
                     Size: =FountSise
                     Text: ="單位/部門"
-                    Width: =83
-                    X: =81
+                    Width: =174
+                    X: =5
                     Y: =68
                     ZIndex: =21
 
                 Label46_54 As label:
+                    Align: =Align.Center
                     Color: =RGBA(25, 32, 41, 100)
                     Font: =Font.'Segoe UI'
                     Height: =48
                     Size: =FountSise
                     Text: ="電郵"
-                    Width: =92
-                    X: =637
+                    Width: =170
+                    X: =464
                     Y: =68
                     ZIndex: =22
 
                 Label46_53 As label:
+                    Align: =Align.Center
                     Color: =RGBA(25, 32, 41, 100)
                     Font: =Font.'Segoe UI'
                     Height: =48
                     Size: =FountSise
                     Text: ="電郵地址"
-                    Width: =85
-                    X: =1035
+                    Width: =170
+                    X: =865
                     Y: =68
                     ZIndex: =24
 
                 Label46_55 As label:
+                    Align: =Align.Center
                     Color: =RGBA(25, 32, 41, 100)
                     Font: =Font.'Segoe UI'
                     Height: =48
                     Size: =FountSise
                     Text: ="郵寄地址"
-                    Width: =117
-                    X: =820
+                    Width: =230
+                    X: =635
                     Y: =68
                     ZIndex: =25
 
                 Label46_65 As label:
+                    Align: =Align.Center
                     Color: =RGBA(25, 32, 41, 100)
                     Font: =Font.'Segoe UI'
                     Height: =48
                     Size: =FountSise
                     Text: ="服務"
-                    Width: =83
-                    X: =318
+                    Width: =158
+                    X: =179
                     Y: =68
                     ZIndex: =33
 
                 Label46_57 As label:
+                    Align: =Align.Center
                     Color: =RGBA(25, 32, 41, 100)
                     Font: =Font.'Segoe UI'
                     Height: =48
                     Size: =FountSise
                     Text: ="簽批人"
-                    Width: =92
-                    X: =507
+                    Width: =127
+                    X: =337
                     Y: =68
                     ZIndex: =34
 
@@ -1131,6 +1152,7 @@ SystemsScreen As screen:
                 ZIndex: =29
 
                 Label33_49 As label:
+                    Align: =Align.Center
                     Color: =RGBA(73, 77, 82, 100)
                     Font: =Font.'Segoe UI'
                     OnSelect: =Select(Parent)
@@ -1138,7 +1160,7 @@ SystemsScreen As screen:
                     Size: =FountSise
                     Text: =ThisItem.Code_No2
                     Width: =136
-                    X: =130
+                    X: =99
                     ZIndex: =1
 
                 Rectangle15_9 As rectangle:
@@ -1150,13 +1172,14 @@ SystemsScreen As screen:
                     ZIndex: =2
 
                 Label33_52 As label:
+                    Align: =Align.Center
                     Color: =RGBA(73, 77, 82, 100)
                     Font: =Font.'Segoe UI'
                     OnSelect: =Select(Parent)
                     Size: =FountSise
                     Text: =ThisItem.Value2
                     Width: =259
-                    X: =497
+                    X: =408
                     ZIndex: =6
 
             Group11_2 As group:
@@ -1181,22 +1204,24 @@ SystemsScreen As screen:
                     ZIndex: =20
 
                 Label46_21 As label:
+                    Align: =Align.Center
                     Color: =RGBA(25, 32, 41, 100)
                     Font: =Font.'Segoe UI'
                     Size: =FountSise
                     Text: ="編號"
                     Width: =158
-                    X: =171
-                    Y: =65
+                    X: =121
+                    Y: =66
                     ZIndex: =21
 
                 Label46_47 As label:
+                    Align: =Align.Center
                     Color: =RGBA(25, 32, 41, 100)
                     Font: =Font.'Segoe UI'
                     Size: =FountSise
                     Text: ="服務"
                     Width: =211
-                    X: =528
+                    X: =458
                     Y: =68
                     ZIndex: =22
 
@@ -1308,11 +1333,11 @@ SystemsScreen As screen:
             BorderStyle: =BorderStyle.None
             BorderThickness: =0
             DisabledColor: =RGBA(255, 255, 255, 1)
-            Fill: =RGBA(0, 133, 192, 1)
+            Fill: =glbThemePrimaryColor
             FocusedBorderThickness: =0
             FontWeight: =FontWeight.Normal
             HoverBorderColor: =
-            HoverFill: =RGBA(0, 133, 192, 1)
+            HoverFill: =ColorFade(Self.Fill, -15%)
             OnSelect: |
                 =ClearCollect(MechanismType,Filter(ConfigurationInfo,Type_Name="組織配置"&&(Value1 = "單位信息"||Value1="部門信息")));
                 
@@ -1325,7 +1350,7 @@ SystemsScreen As screen:
                         UserInfo,
                         Defaults(UserInfo),
                         {
-                            Title: GUID(),
+                            标题: GUID(),
                             User_Name: UserTextInput.Text,
                             User_Email: UsaerEmaiLTextInput.Text,
                             O_Mechanism_No:Dropdown_Mechanism.Selected.Code_No2,
@@ -1367,7 +1392,7 @@ SystemsScreen As screen:
                 );
             PressedBorderColor: =
             PressedColor: =RGBA(255, 255, 255, 1)
-            PressedFill: =RGBA(0, 133, 192, 1)
+            PressedFill: =ColorFade(Self.Fill, 20%)
             RadiusBottomLeft: =4
             RadiusBottomRight: =4
             RadiusTopLeft: =4
@@ -1559,7 +1584,7 @@ SystemsScreen As screen:
                 ZIndex: =47
 
         SaveBtn_13 As button:
-            BorderColor: =RGBA(0, 134, 208, 1)
+            BorderColor: =glbThemePrimaryColor
             BorderThickness: =1
             Color: =RGBA(0, 134, 208, 1)
             DisabledColor: =RGBA(255, 255, 255, 1)
@@ -2137,7 +2162,7 @@ SystemsScreen As screen:
             Height: =36
             HoverFill: =RGBA(8, 127, 190, 1)
             OnSelect: |-
-                =RemoveIf(UserInfo,Title=UserListGallery_1.Selected.Title);
+                =RemoveIf(UserInfo,标题=UserListGallery_1.Selected.标题);
                 //ClearCollect(TempAllUserTable,UserInfo);
                 UpdateContext({UserDeletShow: false });
             PressedColor: =RGBA(255, 255, 255, 1)
@@ -2211,7 +2236,7 @@ SystemsScreen As screen:
                     IsBlank(UserTextInput_1.Text) && IsBlank(UsaerEmaiLTextInput_1.Text) && IsBlank(UserTextInput_8.Text) && IsBlank(Dropdown_Mechanism_1.Selected.Code_No2) && IsBlank(UserTextInput_10.Text) && IsBlank(Dropdown_post_1.Selected.PR_Name) && IsBlank(UserTextInput_12.Text) && IsBlank(Dropdown_AgentEmail_1.Selected.Agent_Email),
                     UpdateContext({UserEditShow: true}),
                     Patch(
-                        UserInfo,LookUp(UserInfo,Title=UserListGallery_1.Selected.Title),     
+                        UserInfo,LookUp(UserInfo,标题=UserListGallery_1.Selected.标题),     
                             {User_Name: UserTextInput_1.Text},
                             {User_Email: UsaerEmaiLTextInput_1.Text},
                             {O_Mechanism: UserTextInput_8.Text},
@@ -3038,11 +3063,11 @@ SystemsScreen As screen:
         SaveBtn_19 As button:
             BorderThickness: =0
             DisabledColor: =RGBA(255, 255, 255, 1)
-            Fill: =RGBA(0, 133, 192, 1)
+            Fill: =glbThemePrimaryColor
             FocusedBorderThickness: =0
             FontWeight: =FontWeight.Normal
             HoverBorderColor: =
-            HoverFill: =RGBA(0, 133, 192, 1)
+            HoverFill: =ColorFade(Self.Fill, 20%)
             OnSelect: |
                 =UpdateContext(
                     {
@@ -3079,7 +3104,7 @@ SystemsScreen As screen:
                         SignerInfo,
                         Defaults(SignerInfo),
                         {
-                            Title: GUID(),
+                            标题: GUID(),
                             Signer: UserTextInput_3.Text,
                             Signer_Email: Dropdown_Username_4.Selected.User_Email,
                             S_Mechanism: UserTextInput_13.Text,
@@ -3114,7 +3139,7 @@ SystemsScreen As screen:
                 );
             PressedBorderColor: =
             PressedColor: =RGBA(255, 255, 255, 1)
-            PressedFill: =RGBA(0, 133, 192, 1)
+            PressedFill: =ColorFade(Self.Fill, -15%)
             RadiusBottomLeft: =4
             RadiusBottomRight: =4
             RadiusTopLeft: =4
@@ -3227,7 +3252,7 @@ SystemsScreen As screen:
                 ZIndex: =30
 
         SaveBtn_18 As button:
-            BorderColor: =RGBA(0, 134, 208, 1)
+            BorderColor: =glbThemePrimaryColor
             BorderThickness: =1
             Color: =RGBA(0, 134, 208, 1)
             DisabledColor: =RGBA(255, 255, 255, 1)
@@ -3443,7 +3468,7 @@ SystemsScreen As screen:
                         SignerInfo,
                         LookUp(
                             SignerInfo,
-                            Title = GAListGallery_1.Selected.Title
+                            标题 = GAListGallery_1.Selected.标题
                         ),
                         {Signer: UserTextInput_4.Text},
                         {Signer_Email: Dropdown_Username_5.Selected.User_Email},
@@ -3787,7 +3812,7 @@ SystemsScreen As screen:
             OnSelect: |-
                 =RemoveIf(
                     SignerInfo,
-                    Title = GAListGallery_1.Selected.Title
+                    标题 = GAListGallery_1.Selected.标题
                 );
                 //Refresh(SignerInfo);
                 //Reset(GAListGallery_1);
