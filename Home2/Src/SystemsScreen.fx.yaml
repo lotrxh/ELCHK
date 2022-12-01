@@ -3921,7 +3921,7 @@ SystemsScreen As screen:
                 HoverColor: =ColorFade(Self.Color, -15%)
                 HoverFill: =If(ToUserInfoManager<>Blank(),ColorFade(glbThemePrimaryColor, 90%))
                 OnSelect: |-
-                    =UpdateContext({ToUserInfoManager:"權限管理"})
+                    =UpdateContext({ToUserInfoManager:"權限管理"});Concurrent(Reset(TextInput3_4),Reset(Service_Dropdown_1),Reset(Service_Dropdown_2));
                 PaddingBottom: =0
                 PaddingLeft: =0
                 PaddingRight: =0
@@ -3989,7 +3989,7 @@ SystemsScreen As screen:
                 HoverColor: =ColorFade(Self.Color, -15%)
                 HoverFill: =If(ToUserInfoManager<>Blank(),ColorFade(glbThemePrimaryColor, 90%))
                 OnSelect: |-
-                    =UpdateContext({ToUserInfoManager:"用戶管理"})
+                    =UpdateContext({ToUserInfoManager:"用戶管理"});Concurrent(Reset(TextInput4_9),Reset(Dropdown2_22),Reset(Dropdown2_23));
                 PaddingBottom: =0
                 PaddingLeft: =0
                 PaddingRight: =0

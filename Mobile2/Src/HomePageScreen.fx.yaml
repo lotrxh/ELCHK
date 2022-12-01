@@ -243,7 +243,7 @@
                                 Color: =glbNeutralSecondaryColor
                                 Height: =32
                                 OnSelect: =Select(Parent)
-                                Size: =9
+                                Size: =10
                                 Text: |-
                                     =If(App.ActiveScreen.Width>1000,Text(ThisItem.Modified,"dd/mm/yyyy HH:mm"),Text(ThisItem.Modified,"dd/mm/yyyy"))
                                 Tooltip: ="ThisItem.Modified"
@@ -730,7 +730,7 @@
                         SelectionColor: =glbThemePrimaryColor
                         SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                         SelectMultiple: =false
-                        Size: =9
+                        Size: =10
                         Width: =Parent.Width-2
                         X: =1
                         Y: =15
@@ -767,7 +767,7 @@
                         SelectionColor: =glbThemePrimaryColor
                         SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                         SelectMultiple: =false
-                        Size: =9
+                        Size: =10
                         Width: =Parent.Width-2
                         X: =1
                         Y: =67
@@ -814,7 +814,7 @@
                         SelectionColor: =glbThemePrimaryColor
                         SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                         SelectMultiple: =false
-                        Size: =9
+                        Size: =10
                         Width: =Parent.Width-2
                         X: =1
                         Y: =120
