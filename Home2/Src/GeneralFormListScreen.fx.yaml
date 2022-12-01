@@ -1159,15 +1159,65 @@ GeneralFormListScreen As screen:
                     HoverBorderColor: =ColorFade(Self.BorderColor, -25%)
                     HoverColor: =ColorFade(Self.BorderColor, -25%)
                     Icon: =Icon.Trash
-                    OnSelect: =
+                    OnSelect: |-
+                        =Remove(
+                            AllApprovalDataCol,
+                            ThisItem
+                        );
+                        If(
+                            ThisItem.FlowTaskName = "招聘職位申請表",
+                            Concurrent(RemoveIf(
+                                ApprovalDetail_Table,
+                                Approval_No = ThisItem.Approval_No
+                            ),
+                            RemoveIf(
+                                ApplitionJobPosition,
+                                ApprovalId = ThisItem.Approval_No
+                            ))
+                            ,
+                            ThisItem.FlowTaskName = "預備合約通知書(新入職)",
+                            Concurrent(
+                            RemoveIf(
+                                ApprovalDetail_Table,
+                                Approval_No = ThisItem.Approval_No
+                            ),
+                            RemoveIf(
+                                ContractNotice,
+                                ApprovalId = ThisItem.Approval_No
+                            ))
+                            ,
+                            ThisItem.FlowTaskName = "任職資源申請",
+                            Concurrent(RemoveIf(
+                                EmploymentResource,
+                                ApprovalId = ThisItem.Approval_No
+                            ),
+                            RemoveIf(
+                                ApprovalDetail_Table,
+                                Approval_No = ThisItem.Approval_No
+                            )),
+                            ThisItem.FlowTaskName = "假期批核人資料表",
+                            Concurrent(RemoveIf(
+                                ApprovalDetail_Table,
+                                Approval_No = ThisItem.Approval_No
+                            ),
+                            RemoveIf(
+                                VacationApprovalForm,
+                                Applicant_No = ThisItem.Approval_No
+                            ))
+                            
+                        );
+                        RemoveIf(
+                            Approval_Table,
+                            Title = ThisItem.Approval_No
+                        );
+                        Notify("删除成功！",Success,3000)
                     PaddingBottom: =4
                     PaddingTop: =4
                     PressedBorderColor: =ColorFade(Self.BorderColor, -15%)
                     PressedColor: =ColorFade(Self.BorderColor, -15%)
                     PressedFill: =ColorFade(Self.Color, 95%)
-                    Visible: |-
-                        =//If(ThisItem.TaskStatus="001", true , false )
-                        true
+                    Visible: |
+                        =If(ThisItem.TaskStatus="001", true,false)
                     Width: =24
                     X: =1050
                     Y: =14
