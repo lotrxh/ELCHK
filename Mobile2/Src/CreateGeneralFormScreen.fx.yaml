@@ -1215,7 +1215,7 @@
                         SelectionColor: =glbThemePrimaryColor
                         SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                         SelectMultiple: =false
-                        Size: =9
+                        Size: =10
                         Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
                         Width: =300
                         X: =90
@@ -1321,7 +1321,7 @@
                         PaddingRight: =10
                         PressedColor: =RGBA(0, 121, 187, 1)
                         PressedFill: =
-                        Size: =8
+                        Size: =10
                         Tooltip: =
                         Visible: =If(First(EditUserForm).FlowType<>"範本",true,false)
                         Width: =Parent.Width-40
@@ -1591,7 +1591,7 @@
                         PaddingRight: =10
                         PressedColor: =RGBA(0, 121, 187, 1)
                         PressedFill: =
-                        Size: =8
+                        Size: =10
                         Tooltip: =
                         Visible: =If(First(EditUserForm).ModelAttachMent="有"&&First(EditUserForm).FlowType<>"範本",true,false)
                         Width: =Parent.Width-40
@@ -1909,13 +1909,12 @@
 
                     Label6_21 As label:
                         Color: =glbNeutralSecondaryColor
-                        Height: =24
                         OnSelect: =
                         PaddingBottom: =0
                         PaddingLeft: =0
                         PaddingRight: =0
                         PaddingTop: =0
-                        Size: =9
+                        Size: =10
                         Text: =First(ApprovalListCol).Approver&Char(10)&First(ApprovalListCol).ApprovalEmail
                         Width: =447
                         X: =30
@@ -1959,7 +1958,7 @@
                     PressedBorderColor: =
                     PressedColor: =glbNeutralPrimaryColor
                     PressedFill: =
-                    Size: =10
+                    Size: =11
                     Text: ="我是單位負責人／申請無須單位簽署"
                     Visible: =If(FlowType="通用流程" || FlowType="預設流程",true,false)
                     X: =40
@@ -1992,7 +1991,7 @@
                         PaddingLeft: =0
                         PaddingRight: =0
                         PaddingTop: =0
-                        Size: =10
+                        Size: =11
                         Text: ="下一節處理行動"
                         Width: =116
                         X: =30
@@ -2015,7 +2014,7 @@
                         PaddingLeft: =0
                         PaddingRight: =0
                         PaddingTop: =0
-                        Size: =10
+                        Size: =11
                         Text: ="下一節處理人"
                         Width: =147
                         X: =30
@@ -2095,7 +2094,7 @@
                         PaddingLeft: =28
                         PaddingRight: =10
                         PaddingTop: =0
-                        Size: =9
+                        Size: =10
                         Text: |-
                             =//First(Split(CreateApproverCol.AllOwnerName.DisplayName," ").Result).Result&"/"&CreateApproverCol.AllOwnerName.Email
                             If(Lastselect&&TabGallery3_5.Selected.Value="最近",First(Split(CreateApproverCol.AllOwnerName.DisplayName," ").Result).Result&"/"&CreateApproverCol.AllOwnerName.Email,
@@ -2139,8 +2138,8 @@
                         PaddingLeft: =0
                         PaddingRight: =0
                         PaddingTop: =0
-                        Size: =10
-                        Text: ="請輸入抄送人電郵或名稱"
+                        Size: =11
+                        Text: ="抄送人"
                         Width: =147
                         X: =30
                         Y: =145
@@ -2162,6 +2161,7 @@
                         HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                         HoverColor: =Self.Color
                         HoverFill: =ColorFade(Self.Fill, -5%)
+                        InputTextPlaceholder: ="請輸入抄送人電郵或名稱"
                         Items: |-
                             =//Choices(MyContacts.AllOwnerName)
                             Office365用户.SearchUserV2({searchTerm:ComboBox1_11.SearchText,top:10}).value
@@ -2202,7 +2202,7 @@
                         PaddingLeft: =0
                         PaddingRight: =0
                         PaddingTop: =0
-                        Size: =12
+                        Size: =11
                         Text: ="下一節處理行動"
                         Width: =116
                         X: =30
@@ -2225,7 +2225,7 @@
                         PaddingLeft: =0
                         PaddingRight: =0
                         PaddingTop: =0
-                        Size: =12
+                        Size: =11
                         Text: ="下一節處理人"
                         Width: =147
                         X: =30
@@ -2256,7 +2256,7 @@
                         PressedColor: =Self.Color
                         PressedFill: =ColorFade(Self.Fill, -5%)
                         SelectionFill: =glbThemePrimaryColor
-                        Size: =12
+                        Size: =10
                         Width: =120
                         X: =30
                         Y: =28
@@ -2303,7 +2303,7 @@
                         PaddingLeft: =28
                         PaddingRight: =10
                         PaddingTop: =0
-                        Size: =11
+                        Size: =10
                         Text: |-
                             =//First(Split(CreateApproverCol.AllOwnerName.DisplayName," ").Result).Result&"/"&CreateApproverCol.AllOwnerName.Email
                             If(Lastselect&&TabGallery3_5.Selected.Value="最近",First(Split(CreateApproverCol.AllOwnerName.DisplayName," ").Result).Result&"/"&CreateApproverCol.AllOwnerName.Email,
@@ -2350,9 +2350,9 @@
                         PaddingLeft: =0
                         PaddingRight: =0
                         PaddingTop: =0
-                        Size: =12
+                        Size: =11
                         Text: ="抄送人"
-                        Width: =147
+                        Width: =180
                         X: =30
                         Y: =145
                         ZIndex: =11
@@ -2373,6 +2373,7 @@
                         HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                         HoverColor: =Self.Color
                         HoverFill: =ColorFade(Self.Fill, -5%)
+                        InputTextPlaceholder: ="請輸入抄送人電郵或名稱"
                         Items: |-
                             =//Choices(MyContacts.AllOwnerName)
                             Office365用户.SearchUserV2({searchTerm:ComboBox1_13.SearchText,top:10}).value
@@ -2385,7 +2386,7 @@
                             Office365用户.SearchUserV2({searchTerm:ComboBox1_13.SearchText,top:10}).value,ComboBox1_13.SearchText,"Mail")
                         SelectionColor: =glbThemePrimaryColor
                         SelectionFill: =ColorFade(Self.SelectionColor, 90%)
-                        Size: =12
+                        Size: =10
                         Template: =ListItemTemplate.Double
                         Width: =Parent.Width-Self.X-1
                         X: =30
@@ -2626,7 +2627,7 @@
                         PaddingLeft: =0
                         PaddingRight: =0
                         PaddingTop: =0
-                        Size: =12
+                        Size: =11
                         Text: ="下一節處理行動"
                         Width: =116
                         X: =30
@@ -2649,7 +2650,7 @@
                         PaddingLeft: =0
                         PaddingRight: =0
                         PaddingTop: =0
-                        Size: =12
+                        Size: =11
                         Text: ="下一節處理人"
                         Width: =147
                         X: =30
@@ -2681,7 +2682,7 @@
                         PressedColor: =Self.Color
                         PressedFill: =ColorFade(Self.Fill, -5%)
                         SelectionFill: =glbThemePrimaryColor
-                        Size: =12
+                        Size: =10
                         Width: =120
                         X: =30
                         Y: =28
@@ -2729,7 +2730,7 @@
                         PaddingLeft: =28
                         PaddingRight: =10
                         PaddingTop: =0
-                        Size: =11
+                        Size: =10
                         Text: |-
                             =If(Lastselect&&TabGallery3_5.Selected.Value="最近",First(Split(CreateApproverCol.AllOwnerName.DisplayName," ").Result).Result&"/"&CreateApproverCol.AllOwnerName.Email,
                             Departmentselect&&TabGallery3_5.Selected.Value="部門",First(Split(CreateApproverCol.DepartMentEmail.DisplayName," ").Result).Result&"/"&CreateApproverCol.DepartMentEmail.Email,
@@ -2772,9 +2773,9 @@
                         PaddingLeft: =0
                         PaddingRight: =0
                         PaddingTop: =0
-                        Size: =12
+                        Size: =11
                         Text: ="抄送人"
-                        Width: =147
+                        Width: =180
                         X: =30
                         Y: =145
                         ZIndex: =11
@@ -2795,6 +2796,7 @@
                         HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                         HoverColor: =Self.Color
                         HoverFill: =ColorFade(Self.Fill, -5%)
+                        InputTextPlaceholder: ="請輸入抄送人電郵或名稱"
                         Items: |-
                             =//Choices(MyContacts.AllOwnerName).Email
                             Office365用户.SearchUserV2({searchTerm:ComboBox1_15.SearchText,top:10}).value
@@ -2807,7 +2809,7 @@
                             Office365用户.SearchUserV2({searchTerm:ComboBox1_15.SearchText,top:10}).value,ComboBox1_15.SearchText,"Mail")
                         SelectionColor: =glbThemePrimaryColor
                         SelectionFill: =ColorFade(Self.SelectionColor, 90%)
-                        Size: =12
+                        Size: =10
                         Template: =ListItemTemplate.Double
                         Width: =Parent.Width-Self.X-1
                         X: =30

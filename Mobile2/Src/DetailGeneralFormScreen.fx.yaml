@@ -2461,7 +2461,7 @@
                             PaddingTop: =1
                             PressedColor: =RGBA(0, 121, 187, 1)
                             PressedFill: =
-                            Size: =8
+                            Size: =10
                             Tooltip: =
                             Visible: |-
                                 =If(
@@ -3068,7 +3068,7 @@
                             PaddingRight: =10
                             PressedColor: =RGBA(0, 121, 187, 1)
                             PressedFill: =
-                            Size: =8
+                            Size: =10
                             Tooltip: =
                             Visible: |-
                                 =If(
@@ -3901,7 +3901,7 @@
                         PaddingLeft: =0
                         PaddingRight: =0
                         PaddingTop: =0
-                        Size: =10
+                        Size: =11
                         Text: ="下一節處理行動"
                         Width: =116
                         X: =30
@@ -3924,7 +3924,7 @@
                         PaddingLeft: =0
                         PaddingRight: =0
                         PaddingTop: =0
-                        Size: =10
+                        Size: =11
                         Text: ="下一節處理人"
                         Width: =147
                         X: =30
@@ -4156,8 +4156,8 @@
                     PaddingLeft: =30
                     PaddingRight: =0
                     PaddingTop: =0
-                    Size: =10
-                    Text: ="請輸入抄送人電郵或名稱"
+                    Size: =11
+                    Text: ="抄送人"
                     Visible: |-
                         =If(
                             //任務執行完成后不可見
@@ -4212,6 +4212,7 @@
                         HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                         HoverColor: =Self.Color
                         HoverFill: =ColorFade(Self.Fill, -5%)
+                        InputTextPlaceholder: ="請輸入抄送人電郵或名稱"
                         Items: |-
                             =//Choices(MyContacts.AllOwnerName)
                             Office365用户.SearchUserV2({searchTerm:ComboBox1_12.SearchText,top:10}).value
@@ -4278,7 +4279,7 @@
                     PaddingLeft: =30
                     PaddingRight: =0
                     PaddingTop: =0
-                    Size: =10
+                    Size: =11
                     Text: ="處理備註"
                     Width: =70
                     Wrap: =false
@@ -4352,7 +4353,7 @@
                     PaddingLeft: =30
                     PaddingRight: =0
                     PaddingTop: =0
-                    Size: =10
+                    Size: =11
                     Text: ="標籤"
                     Visible: |
                         =With(
