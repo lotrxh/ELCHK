@@ -1141,7 +1141,7 @@ GeneralFormListScreen As screen:
                         //If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","自助假期批核資料表"],true,false)
                         If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","假期批核人資料表"],true,false)
                     Width: =24
-                    X: =1026
+                    X: =1020
                     Y: =14
                     ZIndex: =11
 
@@ -1171,9 +1171,21 @@ GeneralFormListScreen As screen:
                     PressedFill: =ColorFade(Self.Color, 95%)
                     Visible: |-
                         =//If(ThisItem.TaskStatus="001", true , false )
-                        If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","假期批核人資料表"] && ThisItem.TaskStatus="001",true,false)
+                        If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","假期批核人資料表"] && 
+                        //ThisItem.TaskStatus="001"
+                        First(
+                                SortByColumns(
+                                    Filter(
+                                        ApprovalDetail_Table,
+                                        Approval_No = ThisItem.Approval_No
+                                    ),
+                                    "Priortty",
+                                    Descending
+                                )
+                            ).TaskStatus = "001"
+                        ,true,false)
                     Width: =24
-                    X: =1050
+                    X: =1046
                     Y: =14
                     ZIndex: =12
 
@@ -1359,7 +1371,7 @@ GeneralFormListScreen As screen:
                     PaddingBottom: =3
                     PaddingTop: =3
                     Width: =24
-                    X: =1002
+                    X: =995
                     Y: =14
                     ZIndex: =19
 
