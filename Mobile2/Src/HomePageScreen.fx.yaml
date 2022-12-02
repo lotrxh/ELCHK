@@ -1130,6 +1130,6 @@
             Text: ="歡迎你，"&CurrentUserName
             Visible: =If(App.ActiveScreen.Width>700,true,false)
             Width: =191
-            X: =1112
+            X: =Parent.Width-Self.Width-Image7_1.Width-20
             ZIndex: =11
 
