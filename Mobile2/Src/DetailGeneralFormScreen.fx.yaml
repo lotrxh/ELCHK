@@ -2776,7 +2776,7 @@
                             PaddingTop: =0
                             Size: =10
                             Text: =ThisItem.FlowAttachName
-                            Width: =Parent.TemplateWidth/2-8
+                            Width: =Parent.TemplateWidth/2-9.5
                             Wrap: =false
                             X: =10
                             Y: =23
@@ -2858,7 +2858,7 @@
                             RadiusTopRight: =0
                             Size: =10
                             Visible: =If(ThisItem.FlowAttachPWD=Blank(),false,true)
-                            Width: =Parent.Width/2-5
+                            Width: =Parent.Width/2-9.5
                             X: =Parent.Width-Self.Width-1
                             Y: =23
                             ZIndex: =9
