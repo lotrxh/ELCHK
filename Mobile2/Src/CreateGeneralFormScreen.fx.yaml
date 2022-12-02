@@ -431,8 +431,8 @@
                                     Department: drpFilterDepartment_1.Selected.Result,
                                     FormOrder: ApprovalIDNumber.Application_No,
                                     FlowType: First(EditUserForm).FlowType,
-                                    SelectedActions: First(EditUserForm).SelectedActions,
-                                    ReferNumber:"false"//該字段用來判斷申請人是填寫人還是提交人，false代表申請人為填寫人，true代表申請人為提交人（在認爲填寫時，先默認申請人為填寫人）
+                                    SelectedActions: First(EditUserForm).SelectedActions//,
+                                    //ReferNumber:"false"//該字段用來判斷申請人是填寫人還是提交人，false代表申請人為填寫人，true代表申請人為提交人（在認爲填寫時，先默認申請人為填寫人）
                                 }
                             )
                         );
@@ -1959,7 +1959,7 @@
                     PressedColor: =glbNeutralPrimaryColor
                     PressedFill: =
                     Size: =11
-                    Text: ="我是單位負責人／申請無須單位簽署"
+                    Text: ="我是單位負責人 ／ 申請無須單位主任簽署"
                     Visible: =If(FlowType="通用流程" || FlowType="預設流程",true,false)
                     X: =40
                     Y: =238
@@ -3276,8 +3276,8 @@
                                 Department: drpFilterDepartment_1.Selected.Result,
                                 FormOrder: ApprovalIDNumber.Application_No,
                                 FlowType: First(EditUserForm).FlowType,
-                                SelectedActions: First(EditUserForm).SelectedActions,
-                                ReferNumber:"false"//該字段用來判斷申請人是填寫人還是提交人，false代表申請人為填寫人，true代表申請人為提交人（在認爲填寫時，先默認申請人為填寫人）
+                                SelectedActions: First(EditUserForm).SelectedActions//,
+                                //ReferNumber:"false"//該字段用來判斷申請人是填寫人還是提交人，false代表申請人為填寫人，true代表申請人為提交人（在認爲填寫時，先默認申請人為填寫人）
                             }
                         )
                     );

@@ -389,7 +389,7 @@
                     If(
                         IsBlank(TextInput2_34.Text),
                         Notify(
-                            "請在處理備注中填寫拒絕原因。",
+                            "請在處理備註中填寫拒絕原因。",
                             Warning
                         ),
                         //上傳附件
@@ -593,7 +593,7 @@
                     If(
                         IsBlank(TextInput2_34.Text),
                         Notify(
-                            "請在處理備注中填寫退回原因。",
+                            "請在處理備註中填寫退回原因。",
                             Warning
                         ),
                     //更新退回時的审批行动状态为005，表示退回
@@ -659,6 +659,7 @@
                     //UpdateIf(ApprovalDetail_Table,Title=First(SortByColumns(Filter(ApprovalDetail_Table,TaskStatus="004",Approval_No=FLowId),"Priortty",Descending)).Title,{TaskStatus:"002",Advise:""});
                     
                     //更新審批詳情表,如果申請人是提交人退回到提交，新增一條提交申請，如果之前流程中沒有提交或者申請人為填寫人則退回到填寫人，即新增一條填寫申請
+                    /*
                     If(
                         ("提交" in Filter(
                                 ApprovalDetail_Table,
@@ -703,7 +704,9 @@
                                     ActionNode: "提交"
                                 }
                                 )
-                            ),
+                            ),*/
+                    
+                            //退回全部退回到填写人
                             With(
                                 {
                                     Lastsubmit: First(
@@ -744,8 +747,8 @@
                                     ActionNode: "填寫"
                                 }
                                 )
-                            )
-                        );
+                            );
+                        //);
                         //收集当前任务的审批数据
                         ClearCollect(ThisFlowIDapprovetable,
                         Filter
@@ -962,16 +965,7 @@
                                 FilterLabel:TextInput_FilterLabel_2.Text
                             }
                         );
-                        If(
-                            Checkbox2_8.Visible = true,
-                            UpdateIf(
-                            GenericFormList,
-                            标题 = FormListId,
-                            {
-                                ReferNumber:Checkbox2_8.Value
-                            }
-                                )
-                        );
+                        //If(Checkbox2_8.Visible = true,UpdateIf(GenericFormList,标题 = FormListId,{ReferNumber:Checkbox2_8.Value}));
                     
                        With(
                         {
@@ -1171,7 +1165,7 @@
                         Reset(TextInput2_34);
                         Reset(Dropdown1_6);
                         Reset(ComboBox1_12);
-                        Reset(Checkbox2_8);
+                        //Reset(Checkbox2_8);
                     
                         //更新行動狀態
                         ClearCollect(
@@ -2025,7 +2019,7 @@
                         PaddingRight: =0
                         PaddingTop: =0
                         Size: =11
-                        Text: ="申請人及時間"
+                        Text: ="填表人及日期"
                         Width: =140
                         X: =20
                         Y: =363
@@ -2043,52 +2037,9 @@
                         PaddingTop: =0
                         Size: =10
                         Text: |-
-                            =If(
-                                ("提交" in Filter(
-                                    ApprovalDetail_Table,
-                                    Approval_No = FLowId,
-                                    TaskStatus = "004"
-                                ).ActionNode) && (First(EditDetailUserForm_1).ReferNumber = "true"),
-                                First(
-                                    Filter(
-                                        ApprovalDetail_Table,
-                                        Approval_No = FLowId,
-                                        ActionNode = "提交",
-                                        TaskStatus = "004"
-                                    )
-                                ).修改者.DisplayName,
-                                First(EditDetailUserForm_1).创建者.DisplayName
-                            )&Char(10)&If(
-                                ("提交" in Filter(
-                                    ApprovalDetail_Table,
-                                    Approval_No = FLowId,
-                                    TaskStatus = "004"
-                                ).ActionNode) && (First(EditDetailUserForm_1).ReferNumber = "true"),
-                                First(
-                                    Filter(
-                                        ApprovalDetail_Table,
-                                        Approval_No = FLowId,
-                                        ActionNode = "提交",
-                                        TaskStatus = "004"
-                                    )
-                                ).修改者.Email,
-                                First(EditDetailUserForm_1).创建者.Email
-                            )&Char(10)&If(
-                                ("提交" in Filter(
-                                    ApprovalDetail_Table,
-                                    Approval_No = FLowId,
-                                    TaskStatus = "004"
-                                ).ActionNode) && (First(EditDetailUserForm_1).ReferNumber = "true"),
-                                Text(First(
-                                    Filter(
-                                        ApprovalDetail_Table,
-                                        Approval_No = FLowId,
-                                        ActionNode = "提交",
-                                        TaskStatus = "004"
-                                    )
-                                ).修改时间,"dd/mm/yyyy hh:mm"),
-                                Text(First(EditDetailUserForm_1).创建时间,"dd/mm/yyyy hh:mm" )
-                            )
+                            =//If(("提交" in Filter(ApprovalDetail_Table,Approval_No=FLowId,TaskStatus="004").ActionNode)&&(First(EditDetailUserForm_1).ReferNumber="true"),First(Filter(ApprovalDetail_Table,Approval_No=FLowId,ActionNode="提交",TaskStatus="004")).修改者.DisplayName,First(EditDetailUserForm_1).创建者.DisplayName)&Char(10)&If(("提交" in Filter(ApprovalDetail_Table,Approval_No=FLowId,TaskStatus="004").ActionNode)&&(First(EditDetailUserForm_1).ReferNumber="true"),First(Filter(ApprovalDetail_Table,Approval_No=FLowId,ActionNode="提交",TaskStatus="004")).修改者.Email,First(EditDetailUserForm_1).创建者.Email)&Char(10)&If(("提交" in Filter(ApprovalDetail_Table,Approval_No=FLowId,TaskStatus="004").ActionNode)&&(First(EditDetailUserForm_1).ReferNumber="true"),Text(First(Filter(ApprovalDetail_Table,Approval_No=FLowId,ActionNode="提交",TaskStatus="004")).修改时间,"dd/mm/yyyy hh:mm"),Text(First(EditDetailUserForm_1).创建时间,"dd/mm/yyyy hh:mm"))
+                            
+                            First(EditDetailUserForm_1).创建者.DisplayName&Char(10)&First(EditDetailUserForm_1).创建者.Email&Char(10)&Text(First(EditDetailUserForm_1).创建时间,"dd/mm/yyyy hh:mm")
                         Width: =300
                         X: =20
                         Y: =85
@@ -3554,7 +3505,7 @@
                                 PressedFill: =RGBA(0, 0, 0, 0)
                                 Visible: =If(ThisItem.ApprovalBCC=Blank(),false,true)
                                 Width: =32
-                                Y: =36
+                                Y: =34
                                 ZIndex: =2
 
                 ActionFlowGallery As gallery.galleryVertical:
@@ -3710,31 +3661,8 @@
                     Size: =10
                     Text: ="我是申請人"
                     Visible: |-
-                        =With(
-                            {
-                                UEmail: LookUp(
-                                    ApprovalDetail_Table,
-                                    Approval_No = Label5.Text && TaskStatus = "002"
-                                ).ApproverEmail
-                            },
-                            If(
-                                UEmail = User().Email 
-                                && (First(
-                                            SortByColumns(
-                                                Filter(
-                                                    ApprovalDetail_Table,
-                                                    TaskStatus = "002",
-                                                    Approval_No = FLowId
-                                                ),
-                                                "Priortty",
-                                                Descending
-                                            )
-                                        ).ActionNode = "提交" 
-                                    ),
-                                true,
-                                false
-                            )
-                        )
+                        =//With({UEmail:LookUp(ApprovalDetail_Table,Approval_No=Label5.Text&&TaskStatus="002").ApproverEmail},If(UEmail=User().Email&&(First(SortByColumns(Filter(ApprovalDetail_Table,TaskStatus="002",Approval_No=FLowId),"Priortty",Descending)).ActionNode="提交"), true , false ))
+                        false
                     Width: =160
                     X: =40
                     Y: =238
@@ -3760,7 +3688,7 @@
                     PressedColor: =glbNeutralPrimaryColor
                     PressedFill: =
                     Size: =10
-                    Text: ="我是單位負責人／申請無須單位簽署"
+                    Text: ="我是單位負責人 ／ 申請無須單位主任簽署"
                     Visible: |-
                         =With(
                             {
@@ -3781,7 +3709,18 @@
                                                 "Priortty",
                                                 Descending
                                             )
-                                        ).ActionNode = "補充資料" 
+                                        ).ActionNode = "補充資料"
+                                        || First(
+                                            SortByColumns(
+                                                Filter(
+                                                    ApprovalDetail_Table,
+                                                    TaskStatus = "002",
+                                                    Approval_No = FLowId
+                                                ),
+                                                "Priortty",
+                                                Descending
+                                            )
+                                        ).ActionNode = "填寫"
                                     ),
                                 true,
                                 false
@@ -4629,7 +4568,7 @@
                         If(
                             IsBlank(TextInput2_34.Text),
                             Notify(
-                                "請在處理備注中填寫拒絕原因。",
+                                "請在處理備註中填寫拒絕原因。",
                                 Warning
                             ),
                             //上傳附件
@@ -4831,7 +4770,7 @@
                         If(
                             IsBlank(TextInput2_34.Text),
                             Notify(
-                                "請在處理備注中填寫退回原因。",
+                                "請在處理備註中填寫退回原因。",
                                 Warning
                             ),
                         //更新退回時的审批行动状态为005，表示退回
@@ -4897,6 +4836,7 @@
                         //UpdateIf(ApprovalDetail_Table,Title=First(SortByColumns(Filter(ApprovalDetail_Table,TaskStatus="004",Approval_No=FLowId),"Priortty",Descending)).Title,{TaskStatus:"002",Advise:""});
                         
                         //更新審批詳情表,如果申請人是提交人退回到提交，新增一條提交申請，如果之前流程中沒有提交或者申請人為填寫人則退回到填寫人，即新增一條填寫申請
+                        /*
                         If(
                             ("提交" in Filter(
                                     ApprovalDetail_Table,
@@ -4941,7 +4881,9 @@
                                         ActionNode: "提交"
                                     }
                                     )
-                                ),
+                                ),*/
+                        
+                                //退回全部退回到填写人
                                 With(
                                     {
                                         Lastsubmit: First(
@@ -4982,8 +4924,8 @@
                                         ActionNode: "填寫"
                                     }
                                     )
-                                )
-                            );
+                                );
+                            //);
                             //收集当前任务的审批数据
                             ClearCollect(ThisFlowIDapprovetable,
                             Filter
@@ -5194,16 +5136,7 @@
                                     FilterLabel:TextInput_FilterLabel_2.Text
                                 }
                             );
-                            If(
-                                Checkbox2_8.Visible = true,
-                                UpdateIf(
-                                GenericFormList,
-                                标题 = FormListId,
-                                {
-                                    ReferNumber:Checkbox2_8.Value
-                                }
-                                    )
-                            );
+                            //If(Checkbox2_8.Visible = true,UpdateIf(GenericFormList,标题 = FormListId,{ReferNumber:Checkbox2_8.Value}));
                         
                            With(
                             {
@@ -5403,7 +5336,7 @@
                             Reset(TextInput2_34);
                             Reset(Dropdown1_6);
                             Reset(ComboBox1_12);
-                            Reset(Checkbox2_8);
+                            //Reset(Checkbox2_8);
                         
                             //更新行動狀態
                             ClearCollect(
