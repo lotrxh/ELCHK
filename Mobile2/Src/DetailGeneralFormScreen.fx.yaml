@@ -1605,7 +1605,7 @@
                         X: =76
                         ZIndex: =2
 
-                Container13_15 As groupContainer.manualLayoutContainer:
+                Container13_15_Version As groupContainer.manualLayoutContainer:
                     AlignInContainer: =AlignInContainer.SetByContainer
                     Fill: =RGBA(255, 255, 255, 1)
                     Height: =28
@@ -1624,7 +1624,7 @@
                         PaddingTop: =0
                         Size: =10
                         Text: ="表格版本："
-                        Width: =80
+                        Width: =70
                         ZIndex: =1
 
                     Label1_146 As label:
@@ -1638,7 +1638,7 @@
                         Size: =10
                         Text: =First(EditDetailUserForm_2).ModelVersion
                         Width: =120
-                        X: =76
+                        X: =65
                         ZIndex: =2
 
                 Container13_16 As groupContainer.manualLayoutContainer:
@@ -1775,7 +1775,7 @@
                                 ).创建时间,"dd/mm/yyyy hh:mm"),
                                 Text(First(EditDetailUserForm_1).创建时间,"dd/mm/yyyy hh:mm" )
                             )
-                        Width: =120
+                        Width: =113
                         X: =76
                         ZIndex: =2
 

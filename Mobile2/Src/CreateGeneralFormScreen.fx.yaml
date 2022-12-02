@@ -670,7 +670,6 @@
         ZIndex: =5
 
         InfoContainer As groupContainer.horizontalAutoLayoutContainer:
-            AlignInContainer: =AlignInContainer.SetByContainer
             Fill: =RGBA(255, 255, 255, 1)
             FillPortions: =0
             Height: =InfoContainer12_2.Y+InfoContainer12_2.Height
@@ -739,7 +738,7 @@
                 LayoutWrap: =true
                 PaddingBottom: =1
                 PaddingLeft: =15
-                PaddingRight: =10
+                PaddingRight: =1
                 PaddingTop: =1
                 Width: |
                     =Switch(
@@ -904,13 +903,14 @@
                 Container19 As groupContainer.horizontalAutoLayoutContainer:
                     AlignInContainer: =AlignInContainer.SetByContainer
                     FillPortions: =0.8
-                    Height: =38
+                    Height: =30
                     LayoutGap: =10
                     LayoutMinHeight: =100
                     LayoutMinWidth: =If(CreateGeneralFormScreen.Size<=2,Parent.Width-20,250)
                     LayoutMode: =LayoutMode.Auto
+                    PaddingBottom: =1
                     PaddingLeft: =1
-                    PaddingRight: =10
+                    PaddingRight: =1
                     PaddingTop: =1
                     ZIndex: =8
 
