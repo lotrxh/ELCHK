@@ -1,7 +1,7 @@
 StatisticsScreen As screen:
     Fill: =RGBA(230, 230, 230, 1)
     OnVisible: |-
-        =Clear(FilterQuery);ClearCollect(TableNumber,Table({ModelFlowNumber:"全部"},{ModelFlowNumber:"A103"},{ModelFlowNumber:"A104"},{ModelFlowNumber:"A111"},{ModelFlowNumber:"A306"}),ShowColumns(Filter(GenericFormModel,1=1),"ModelFlowNumber"));Collect(FilterQuery,RemoveIf(Distinct(Approval_Table,DepartMentUnit),Result=Blank()),{Result:"全部"});Concurrent(Reset(DatePicker1_4),Reset(DatePicker1_5),Reset(drpFilterPedningDepartment_1),Reset(drpFilterPedningDepartment_2),Reset(drpFilterPedningDepartment_3))
+        =Clear(FilterQuery);ClearCollect(TableNumber,Table({ModelFlowNumber:"全部"},{ModelFlowNumber:"A103"},{ModelFlowNumber:"A104"},{ModelFlowNumber:"A111"},{ModelFlowNumber:"A306"}),ShowColumns(Filter(GenericFormModel,1=1),"ModelFlowNumber"));Collect(FilterQuery,RemoveIf(Distinct(Approval_Table,DepartMentUnit),Result=Blank()),{Result:"全部"});Concurrent(Reset(DatePicker1_4),Reset(DatePicker1_5),Reset(drpFilterPedningDepartment_1),Reset(drpFilterPedningDepartment_2),Reset(drpFilterPedningDepartment_3),Reset(DropdownYear))
 
     Siteinfo_4 As group:
         Height: =5
@@ -460,8 +460,8 @@ StatisticsScreen As screen:
 
     ExportContainer As groupContainer.manualLayoutContainer:
         Height: =71
-        Width: =516
-        X: =830
+        Width: =533
+        X: =825
         Y: =75
         ZIndex: =14
 
@@ -471,7 +471,7 @@ StatisticsScreen As screen:
             Size: =FountSise
             Text: ="月份："
             Width: =54
-            X: =117
+            X: =125
             Y: =28
             ZIndex: =2
 
@@ -480,7 +480,7 @@ StatisticsScreen As screen:
             Text: |-
                 ="報表類型:"
             Width: =79
-            X: =243
+            X: =251
             Y: =22
             ZIndex: =4
 
@@ -508,7 +508,7 @@ StatisticsScreen As screen:
             Size: =11
             Text: ="導出"
             Width: =76
-            X: =437
+            X: =449
             Y: =28
             ZIndex: =5
 
@@ -538,7 +538,7 @@ StatisticsScreen As screen:
             SelectionFill: =glbThemePrimaryColor
             Size: =11
             Width: =72
-            X: =171
+            X: =179
             Y: =28
             ZIndex: =6
 
@@ -557,7 +557,7 @@ StatisticsScreen As screen:
             Height: =34
             HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
             HoverFill: =ColorFade(Self.Fill, -5%)
-            Items: =[1,2]
+            Items: =["全部記錄","統計數字"]
             PaddingBottom: =5
             PaddingRight: =0
             PaddingTop: =5
@@ -566,8 +566,8 @@ StatisticsScreen As screen:
             PressedFill: =ColorFade(Self.Fill, -5%)
             SelectionFill: =glbThemePrimaryColor
             Size: =11
-            Width: =97
-            X: =322
+            Width: =116
+            X: =330
             Y: =28
             ZIndex: =7
 
@@ -595,7 +595,7 @@ StatisticsScreen As screen:
             Height: =34
             HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
             HoverFill: =ColorFade(Self.Fill, -5%)
-            Items: =Sequence(20,20)
+            Items: =Sequence(20,2020)
             PaddingBottom: =5
             PaddingRight: =0
             PaddingTop: =5
@@ -604,8 +604,8 @@ StatisticsScreen As screen:
             PressedFill: =ColorFade(Self.Fill, -5%)
             SelectionFill: =glbThemePrimaryColor
             Size: =11
-            Width: =63
-            X: =54
+            Width: =83
+            X: =42
             Y: =28
             ZIndex: =9
 
