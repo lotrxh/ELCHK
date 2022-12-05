@@ -63,7 +63,7 @@ App As appinfo:
             ).O_Mechanism,If(LookUp(
                 UserInfo,
                 User_Email = CurrentUser
-            ).FormPermission = "全部表單","All","None")
+            ).FormPermission = "全部表格","All","None")
         ));
         */
         //新增多部門及表格類型表單權限過濾測試代碼
@@ -72,7 +72,7 @@ App As appinfo:
             If(
                 LookUp(
                     UserInfo,
-                    User_Email = CurrentUser).FormPermission = "全部表單","All",LookUp(
+                    User_Email = CurrentUser).FormPermission = "全部表格","All",LookUp(
                     UserInfo,
                     User_Email = CurrentUser).FormPermission = Blank(),"None",LookUp(
                     UserInfo,

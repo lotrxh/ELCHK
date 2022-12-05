@@ -71,7 +71,7 @@ SystemsScreen As screen:
             RadiusTopLeft: =4
             RadiusTopRight: =4
             Size: =FountSise
-            Text: ="添加用戶"
+            Text: ="新增用戶"
             Width: =98
             X: =997
             Y: =24
@@ -105,7 +105,6 @@ SystemsScreen As screen:
                 ZIndex: =2
 
             Label27 As label:
-                Align: =Align.Center
                 Color: =RGBA(102, 102, 102, 1)
                 Height: =20
                 OnSelect: =Select(Parent)
@@ -118,7 +117,6 @@ SystemsScreen As screen:
                 ZIndex: =10
 
             Label30 As label:
-                Align: =Align.Center
                 OnSelect: =Select(Parent)
                 Size: =10.5
                 Text: =ThisItem.O_Mechanism_No
@@ -128,18 +126,16 @@ SystemsScreen As screen:
                 ZIndex: =11
 
             Label39 As label:
-                Align: =Align.Center
                 Color: =RGBA(102, 102, 102, 1)
                 Height: =50
                 OnSelect: =Select(Parent)
                 Size: =FountSise
                 Text: =ThisItem.Post
                 Width: =135
-                X: =595
+                X: =630
                 ZIndex: =20
 
             Label27_1 As label:
-                Align: =Align.Center
                 Color: =RGBA(149, 149, 149, 1)
                 Height: =20
                 OnSelect: =Select(Parent)
@@ -152,7 +148,6 @@ SystemsScreen As screen:
                 ZIndex: =21
 
             Label34_1 As label:
-                Align: =Align.Center
                 Color: =RGBA(102, 102, 102, 1)
                 Height: =50
                 OnSelect: =Select(Parent)
@@ -160,7 +155,7 @@ SystemsScreen As screen:
                 Text: |
                     =ThisItem.O_Mechanism
                 Width: =164
-                X: =375
+                X: =400
                 ZIndex: =22
 
             Icon6_4 As icon.Tag:
@@ -178,7 +173,7 @@ SystemsScreen As screen:
                 PaddingBottom: =4
                 PaddingTop: =4
                 Width: =24
-                X: =1030
+                X: =1000
                 Y: =13
                 ZIndex: =26
 
@@ -193,7 +188,7 @@ SystemsScreen As screen:
                 PaddingBottom: =4
                 PaddingTop: =4
                 Width: =24
-                X: =1060
+                X: =1050
                 Y: =13
                 ZIndex: =27
 
@@ -216,6 +211,7 @@ SystemsScreen As screen:
                 PaddingLeft: =0
                 Size: =9.5
                 Text: =ThisItem.Agent_Email
+                Visible: =false
                 Width: =230
                 X: =810
                 Y: =24
@@ -229,7 +225,7 @@ SystemsScreen As screen:
             Size: |-
                 =//FountSise
                 9
-            Text: ="共计："&CountRows(TempAllUserTable)&"条"
+            Text: ="共計："&CountRows(TempAllUserTable)&"條"
             Width: =133
             X: =970
             Y: =645
@@ -278,31 +274,28 @@ SystemsScreen As screen:
                 ZIndex: =10
 
             Label32_14 As label:
-                Align: =Align.Center
                 Color: =RGBA(25, 32, 41, 100)
                 Font: =Font.'Segoe UI'
                 Height: =48
                 Size: =FountSise
                 Text: ="職員"
                 Width: =135
-                X: =50
+                X: =12
                 Y: =131
                 ZIndex: =12
 
             Label32_16 As label:
-                Align: =Align.Center
                 Color: =RGBA(25, 32, 41, 100)
                 Font: =Font.'Segoe UI'
                 Height: =48
                 Size: =FountSise
                 Text: ="職位"
                 Width: =75
-                X: =629
+                X: =635
                 Y: =131
                 ZIndex: =14
 
             Label32_19 As label:
-                Align: =Align.Center
                 Color: =RGBA(25, 32, 41, 100)
                 Font: =Font.'Segoe UI'
                 Height: =48
@@ -319,6 +312,7 @@ SystemsScreen As screen:
                 Height: =48
                 Size: =FountSise
                 Text: ="代理人"
+                Visible: =false
                 Width: =135
                 X: =822
                 Y: =131
@@ -340,14 +334,13 @@ SystemsScreen As screen:
             ZIndex: =40
 
         Label32_20 As label:
-            Align: =Align.Center
             Color: =RGBA(25, 32, 41, 100)
             Font: =Font.'Segoe UI'
             Height: =48
             Size: =FountSise
             Text: ="單位/部門編號"
             Width: =124
-            X: =261
+            X: =240
             Y: =131
             ZIndex: =42
 
@@ -430,14 +423,13 @@ SystemsScreen As screen:
                 Height: =32
                 HoverBorderColor: =RGBA(196, 200, 204, 1)
                 InputTextPlaceholder: ="職位"
-                IsSearchable: =false
                 Items: =Filter(PostRankInfo,PR_Type="職位").PR_Name
                 NoSelectionText: ="職位"
                 PaddingLeft: =12
                 PressedColor: =RGBA(50, 50, 50, 1)
                 PressedFill: =RGBA(0, 0, 0, 1)
                 SearchFields: =["PR_Name"]
-                SearchItems: =[]
+                SearchItems: =Search(Filter(PostRankInfo,PR_Type="職位").PR_Name,Dropdown2_23.SearchText,"PR_Name")
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =
@@ -511,20 +503,18 @@ SystemsScreen As screen:
                 )
             Layout: =Layout.Vertical
             TemplateSize: =40
-            Width: =1078
-            X: =22
+            Width: =1100
             Y: =210
             ZIndex: =8
 
             Label33_30 As label:
-                Align: =Align.Center
                 Color: =RGBA(73, 77, 82, 100)
                 Font: =Font.'Segoe UI'
                 OnSelect: =Select(Parent)
                 Size: =FountSise
                 Text: =ThisItem.Signer
                 Width: =136
-                X: =225
+                X: =206
                 ZIndex: =1
 
             Rectangle15_6 As rectangle:
@@ -536,7 +526,6 @@ SystemsScreen As screen:
                 ZIndex: =2
 
             Label33_31 As label:
-                Align: =Align.Center
                 Color: =RGBA(73, 77, 82, 100)
                 Font: =Font.'Segoe UI'
                 OnSelect: =Select(Parent)
@@ -547,17 +536,16 @@ SystemsScreen As screen:
                 ZIndex: =3
 
             Label33_32 As label:
-                Align: =Align.Center
                 Color: =RGBA(73, 77, 82, 100)
                 Font: =Font.'Segoe UI'
                 OnSelect: =Select(Parent)
                 Size: =FountSise
                 Text: =ThisItem.S_Mechanism
                 Width: =174
+                X: =7
                 ZIndex: =5
 
             Label33_34 As label:
-                Align: =Align.Center
                 Color: =RGBA(73, 77, 82, 100)
                 Font: =Font.'Segoe UI'
                 OnSelect: =Select(Parent)
@@ -578,7 +566,7 @@ SystemsScreen As screen:
                 PaddingBottom: =4
                 PaddingTop: =4
                 Width: =24
-                X: =1009
+                X: =980
                 Y: =7
                 ZIndex: =10
 
@@ -593,7 +581,7 @@ SystemsScreen As screen:
                 PaddingBottom: =4
                 PaddingTop: =4
                 Width: =24
-                X: =1039
+                X: =1030
                 Y: =7
                 ZIndex: =11
 
@@ -711,14 +699,13 @@ SystemsScreen As screen:
                 Height: =32
                 HoverBorderColor: =RGBA(196, 200, 204, 1)
                 InputTextPlaceholder: ="權限"
-                IsSearchable: =false
                 Items: =Filter(ConfigurationInfo,Type_No="0002"&&Code_No1="001").Value2
                 NoSelectionText: ="權限"
                 PaddingLeft: =12
                 PressedColor: =RGBA(50, 50, 50, 1)
                 PressedFill: =RGBA(0, 0, 0, 1)
                 SearchFields: =["Value2"]
-                SearchItems: =[]
+                SearchItems: =Search(Filter(ConfigurationInfo,Type_No="0002"&&Code_No1="001").Value2,Service_Dropdown_2.SearchText,"Value2")
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =
@@ -758,29 +745,27 @@ SystemsScreen As screen:
                 Size: =FountSise
                 Text: ="單位/部門"
                 Width: =80
-                X: =75
+                X: =12
                 Y: =165
                 ZIndex: =12
 
             Label46_26 As label:
-                Align: =Align.Center
                 Color: =RGBA(25, 32, 41, 100)
                 Font: =Font.'Segoe UI'
                 Size: =FountSise
                 Text: ="權限"
                 Width: =90
-                X: =833
+                X: =797
                 Y: =165
                 ZIndex: =13
 
             Label46_28 As label:
-                Align: =Align.Center
                 Color: =RGBA(25, 32, 41, 100)
                 Font: =Font.'Segoe UI'
                 Size: =FountSise
                 Text: ="負責人"
                 Width: =163
-                X: =232
+                X: =211
                 Y: =165
                 ZIndex: =14
 
@@ -790,7 +775,7 @@ SystemsScreen As screen:
                 Size: =FountSise
                 Text: ="郵箱"
                 Width: =114
-                X: =585
+                X: =495
                 Y: =165
                 ZIndex: =15
 
@@ -799,7 +784,7 @@ SystemsScreen As screen:
             Font: =Font.'Segoe UI'
             Height: =20
             Size: =9
-            Text: ="共计："&CountRows(User_Management)&"条"
+            Text: ="共計："&CountRows(User_Management)&"條"
             Width: =105
             X: =1005
             Y: =645
@@ -854,17 +839,16 @@ SystemsScreen As screen:
                     ZIndex: =2
 
                 Label33_56 As label:
-                    Align: =Align.Center
                     Color: =RGBA(102, 102, 102, 1)
                     Font: =Font.'Segoe UI'
                     OnSelect: =Select(Parent)
                     Size: =FountSise
                     Text: =ThisItem.Value2
                     Width: =174
+                    X: =7
                     ZIndex: =5
 
                 Label33_58 As label:
-                    Align: =Align.Center
                     Color: =RGBA(102, 102, 102, 1)
                     Font: =Font.'Segoe UI'
                     OnSelect: =Select(Parent)
@@ -875,7 +859,6 @@ SystemsScreen As screen:
                     ZIndex: =6
 
                 Label33_57 As label:
-                    Align: =Align.Center
                     Color: =RGBA(102, 102, 102, 1)
                     Font: =Font.'Segoe UI'
                     OnSelect: =Select(Parent)
@@ -886,7 +869,6 @@ SystemsScreen As screen:
                     ZIndex: =9
 
                 Label33_61 As label:
-                    Align: =Align.Center
                     Color: =RGBA(102, 102, 102, 1)
                     Font: =Font.'Segoe UI'
                     OnSelect: =Select(Parent)
@@ -897,7 +879,6 @@ SystemsScreen As screen:
                     ZIndex: =11
 
                 Label33_60 As label:
-                    Align: =Align.Center
                     Color: =RGBA(102, 102, 102, 1)
                     Font: =Font.'Segoe UI'
                     OnSelect: =Select(Parent)
@@ -908,7 +889,6 @@ SystemsScreen As screen:
                     ZIndex: =12
 
                 Label33_62 As label:
-                    Align: =Align.Center
                     Color: =RGBA(102, 102, 102, 1)
                     Font: =Font.'Segoe UI'
                     OnSelect: =Select(Parent)
@@ -923,7 +903,7 @@ SystemsScreen As screen:
                 Font: =Font.'Segoe UI'
                 Height: =23
                 Size: =9
-                Text: ="共计："&CountRows(general_administration)&"条"
+                Text: ="共計："&CountRows(general_administration)&"條"
                 Width: =105
                 X: =1005
                 Y: =595
@@ -978,79 +958,73 @@ SystemsScreen As screen:
                     RadiusTopLeft: =0
                     RadiusTopRight: =0
                     Text: =""
-                    Width: =1110
+                    Width: =1111
                     Y: =67
                     ZIndex: =20
 
                 Label46_58 As label:
-                    Align: =Align.Center
                     Color: =RGBA(25, 32, 41, 100)
                     Font: =Font.'Segoe UI'
                     Height: =48
                     Size: =FountSise
                     Text: ="單位/部門"
-                    Width: =174
-                    X: =5
+                    Width: =177
+                    X: =12
                     Y: =68
                     ZIndex: =21
 
                 Label46_54 As label:
-                    Align: =Align.Center
                     Color: =RGBA(25, 32, 41, 100)
                     Font: =Font.'Segoe UI'
                     Height: =48
                     Size: =FountSise
                     Text: ="電郵"
-                    Width: =170
-                    X: =464
+                    Width: =173
+                    X: =472
                     Y: =68
                     ZIndex: =22
 
                 Label46_53 As label:
-                    Align: =Align.Center
                     Color: =RGBA(25, 32, 41, 100)
                     Font: =Font.'Segoe UI'
                     Height: =48
                     Size: =FountSise
                     Text: ="電郵地址"
-                    Width: =170
-                    X: =865
+                    Width: =173
+                    X: =881
                     Y: =68
                     ZIndex: =24
 
                 Label46_55 As label:
-                    Align: =Align.Center
                     Color: =RGBA(25, 32, 41, 100)
                     Font: =Font.'Segoe UI'
                     Height: =48
                     Size: =FountSise
                     Text: ="郵寄地址"
-                    Width: =230
-                    X: =635
+                    Width: =234
+                    X: =646
                     Y: =68
                     ZIndex: =25
 
                 Label46_65 As label:
-                    Align: =Align.Center
                     Color: =RGBA(25, 32, 41, 100)
                     Font: =Font.'Segoe UI'
                     Height: =48
                     Size: =FountSise
                     Text: ="服務"
-                    Width: =158
-                    X: =179
+                    Width: =161
+                    X: =182
                     Y: =68
                     ZIndex: =33
 
                 Label46_57 As label:
-                    Align: =Align.Center
                     Color: =RGBA(25, 32, 41, 100)
                     Font: =Font.'Segoe UI'
                     Height: =48
                     Size: =FountSise
                     Text: ="簽批人"
-                    Width: =127
-                    X: =337
+                    Width: =129
+                    X: =343
                     Y: =68
                     ZIndex: =34
 
@@ -1096,7 +1070,7 @@ SystemsScreen As screen:
                 Font: =Font.'Segoe UI'
                 Height: =23
                 Size: =9
-                Text: ="共计："&CountRows(Servicetable)&"条"
+                Text: ="共計："&CountRows(Servicetable)&"條"
                 Width: =105
                 X: =1006
                 Y: =600
@@ -1115,14 +1089,13 @@ SystemsScreen As screen:
                 Height: =32
                 HoverBorderColor: =RGBA(196, 200, 204, 1)
                 InputTextPlaceholder: ="服務"
-                IsSearchable: =false
                 Items: =Filter(ConfigurationInfo, Value1 = "服務信息").Value2
                 NoSelectionText: ="服務"
                 PaddingLeft: =12
                 PressedColor: =RGBA(50, 50, 50, 1)
                 PressedFill: =RGBA(0, 0, 0, 1)
                 SearchFields: =["Value2"]
-                SearchItems: =[]
+                SearchItems: =Search(Filter(ConfigurationInfo, Value1 = "服務信息").Value2,Dropdown2_29.SearchText,"Value2")
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =
@@ -1146,21 +1119,18 @@ SystemsScreen As screen:
                     )
                 Layout: =Layout.Vertical
                 TemplateSize: =40
-                Width: =1084
-                X: =22
+                Width: =1106
                 Y: =104
                 ZIndex: =29
 
                 Label33_49 As label:
-                    Align: =Align.Center
                     Color: =RGBA(73, 77, 82, 100)
                     Font: =Font.'Segoe UI'
                     OnSelect: =Select(Parent)
-                    PaddingLeft: =22
                     Size: =FountSise
                     Text: =ThisItem.Code_No2
                     Width: =136
-                    X: =99
+                    X: =7
                     ZIndex: =1
 
                 Rectangle15_9 As rectangle:
@@ -1172,7 +1142,6 @@ SystemsScreen As screen:
                     ZIndex: =2
 
                 Label33_52 As label:
-                    Align: =Align.Center
                     Color: =RGBA(73, 77, 82, 100)
                     Font: =Font.'Segoe UI'
                     OnSelect: =Select(Parent)
@@ -1198,31 +1167,28 @@ SystemsScreen As screen:
                     RadiusTopLeft: =0
                     RadiusTopRight: =0
                     Text: =""
-                    Width: =1082
-                    X: =24
+                    Width: =1111
                     Y: =66
                     ZIndex: =20
 
                 Label46_21 As label:
-                    Align: =Align.Center
                     Color: =RGBA(25, 32, 41, 100)
                     Font: =Font.'Segoe UI'
                     Size: =FountSise
                     Text: ="編號"
-                    Width: =158
-                    X: =121
+                    Width: =163
+                    X: =12
                     Y: =66
                     ZIndex: =21
 
                 Label46_47 As label:
-                    Align: =Align.Center
                     Color: =RGBA(25, 32, 41, 100)
                     Font: =Font.'Segoe UI'
                     Size: =FountSise
                     Text: ="服務"
-                    Width: =211
-                    X: =458
-                    Y: =68
+                    Width: =217
+                    X: =413
+                    Y: =66
                     ZIndex: =22
 
         TitleSelectGroup_3 As group:
@@ -1324,7 +1290,7 @@ SystemsScreen As screen:
                 FontWeight: =FontWeight.Semibold
                 Height: =58
                 Size: =TitleSise
-                Text: ="創建用户"
+                Text: ="新增用戶"
                 X: =662
                 ZIndex: =4
 
@@ -1350,7 +1316,7 @@ SystemsScreen As screen:
                         UserInfo,
                         Defaults(UserInfo),
                         {
-                            Title: GUID(),
+                            标题: GUID(),
                             User_Name: UserTextInput.Text,
                             User_Email: UsaerEmaiLTextInput.Text,
                             O_Mechanism_No:Dropdown_Mechanism.Selected.Code_No2,
@@ -1358,7 +1324,7 @@ SystemsScreen As screen:
                             O_Mechanism: UserTextInput_5.Text,
                             Post_No: UserTextInput_7.Text,
                             Post: Dropdown_Post.Selected.PR_Name,
-                            FormPermission:If(Dropdown_FormPermission.Selected.Value = "全部表單","全部表單",Concat(Dropdown_FormPermission_2.SelectedItems,Result&";")),
+                            FormPermission:If(Dropdown_FormPermission.Selected.Value = "全部表格","全部表格",Concat(Dropdown_FormPermission_2.SelectedItems,Result&";")),
                             FormPermission_Sub:Concat(Dropdown_FormPermission_3.SelectedItems,FormType&";"),
                             IsManger:Dropdown_IsManger.Selected.Value
                         }
@@ -1518,14 +1484,13 @@ SystemsScreen As screen:
                 Height: =28
                 HoverBorderColor: =RGBA(196, 200, 204, 1)
                 InputTextPlaceholder: ="請選擇職位"
-                IsSearchable: =false
                 Items: =Filter(PostRankInfo,PR_Type="職位").PR_Name
                 NoSelectionText: =
                 PaddingLeft: =12
                 PressedColor: =RGBA(50, 50, 50, 1)
                 PressedFill: =RGBA(0, 0, 0, 1)
                 SearchFields: =["PR_Name"]
-                SearchItems: =[]
+                SearchItems: =Search(Filter(PostRankInfo,PR_Type="職位").PR_Name,Dropdown_Post.SearchText,"PR_Name")
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =
@@ -1548,6 +1513,7 @@ SystemsScreen As screen:
                 Font: =Font.'Segoe UI'
                 Size: =10.5
                 Text: ="代理人郵箱"
+                Visible: =false
                 X: =692
                 Y: =321
                 ZIndex: =46
@@ -1578,6 +1544,7 @@ SystemsScreen As screen:
                 SelectionTagFill: =
                 SelectMultiple: =false
                 Size: =FountSise
+                Visible: =false
                 Width: =272
                 X: =692
                 Y: =361
@@ -1637,6 +1604,7 @@ SystemsScreen As screen:
                 Font: =Font.'Segoe UI'
                 Size: =10.5
                 Text: ="結束日期"
+                Visible: =false
                 X: =1038
                 Y: =404
                 ZIndex: =50
@@ -1649,6 +1617,7 @@ SystemsScreen As screen:
                 Format: ="dd/mm/yyyy"
                 Height: =28
                 Size: =FountSise
+                Visible: =false
                 Width: =272
                 X: =1038
                 Y: =444
@@ -1666,6 +1635,7 @@ SystemsScreen As screen:
                 Font: =Font.'Segoe UI'
                 Size: =10.5
                 Text: ="開始日期"
+                Visible: =false
                 X: =692
                 Y: =404
                 ZIndex: =52
@@ -1678,6 +1648,7 @@ SystemsScreen As screen:
                 Format: ="dd/mm/yyyy"
                 Height: =28
                 Size: =FountSise
+                Visible: =false
                 Width: =272
                 X: =692
                 Y: =444
@@ -1739,6 +1710,7 @@ SystemsScreen As screen:
                 Font: =Font.'Segoe UI'
                 Size: =10.5
                 Text: ="代理人"
+                Visible: =false
                 X: =1038
                 Y: =321
                 ZIndex: =44
@@ -1766,6 +1738,7 @@ SystemsScreen As screen:
                 RadiusTopLeft: =2
                 RadiusTopRight: =2
                 Size: =10.5
+                Visible: =false
                 Width: =272
                 X: =1038
                 Y: =361
@@ -1799,7 +1772,6 @@ SystemsScreen As screen:
                 Height: =28
                 HoverBorderColor: =RGBA(196, 200, 204, 1)
                 InputTextPlaceholder: ="請選擇機構"
-                IsSearchable: =false
                 Items: =Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="002"||Type_No="0003"&&Code_No1="003").Code_No2
                 NoSelectionText: =
                 OnChange: =Reset(Dropdown_FormPermission);
@@ -1807,7 +1779,7 @@ SystemsScreen As screen:
                 PressedColor: =RGBA(50, 50, 50, 1)
                 PressedFill: =RGBA(0, 0, 0, 1)
                 SearchFields: =["Code_No2"]
-                SearchItems: =[]
+                SearchItems: =Search(Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="002"||Type_No="0003"&&Code_No1="003").Code_No2,Dropdown_Mechanism.SearchText,"Code_No2")
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =
@@ -1873,10 +1845,10 @@ SystemsScreen As screen:
                 Color: =RGBA(25, 32, 41, 100)
                 Font: =Font.'Segoe UI'
                 Size: =10.5
-                Text: ="表單權限"
+                Text: ="表格權限"
                 Visible: =HRAO
                 X: =692
-                Y: =499
+                Y: =326
                 ZIndex: =61
 
             Dropdown_FormPermission As combobox:
@@ -1892,8 +1864,8 @@ SystemsScreen As screen:
                 HoverBorderColor: =RGBA(196, 200, 204, 1)
                 InputTextPlaceholder: ="請選擇職位"
                 Items: |-
-                    =//["全部表單",Dropdown_Mechanism.Selected.Code_No2]
-                    ["全部表單","自定義篩選"]
+                    =//["全部表格",Dropdown_Mechanism.Selected.Code_No2]
+                    ["全部表格","指定表格"]
                 NoSelectionText: =
                 OnChange: |-
                     =Reset(Dropdown_FormPermission_2);
@@ -1903,8 +1875,8 @@ SystemsScreen As screen:
                 PressedFill: =RGBA(0, 0, 0, 1)
                 SearchFields: =["Value"]
                 SearchItems: |-
-                    =Search(//["全部表單",Dropdown_Mechanism.Selected.Code_No2]
-                    ["全部表單","自定義篩選"],Dropdown_FormPermission.SearchText,"Value")
+                    =Search(//["全部表格",Dropdown_Mechanism.Selected.Code_No2]
+                    ["全部表格","指定表格"],Dropdown_FormPermission.SearchText,"Value")
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =
@@ -1913,7 +1885,7 @@ SystemsScreen As screen:
                 Visible: =HRAO
                 Width: =272
                 X: =692
-                Y: =539
+                Y: =366
                 ZIndex: =62
 
         Group45_8 As group:
@@ -1930,7 +1902,7 @@ SystemsScreen As screen:
                 Text: ="是否部門/單位經理"
                 Visible: =SuperUser
                 X: =1038
-                Y: =499
+                Y: =326
                 ZIndex: =63
 
             Dropdown_IsManger As combobox:
@@ -1960,7 +1932,7 @@ SystemsScreen As screen:
                 Visible: =SuperUser
                 Width: =272
                 X: =1038
-                Y: =539
+                Y: =366
                 ZIndex: =64
 
         Group7 As group:
@@ -1982,7 +1954,6 @@ SystemsScreen As screen:
                 Height: =28
                 HoverBorderColor: =RGBA(196, 200, 204, 1)
                 InputTextPlaceholder: ="請選擇部門/服務"
-                IsSearchable: =false
                 Items: |-
                     =//Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="002"||Type_No="0003"&&Code_No1="003").Code_No2
                     Distinct(FormTableType,DepartMentName)
@@ -2007,26 +1978,28 @@ SystemsScreen As screen:
                 PressedColor: =RGBA(50, 50, 50, 1)
                 PressedFill: =RGBA(0, 0, 0, 1)
                 SearchFields: =["Result"]
-                SearchItems: =[]
+                SearchItems: |-
+                    =Search(//Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="002"||Type_No="0003"&&Code_No1="003").Code_No2
+                    Distinct(FormTableType,DepartMentName),Dropdown_FormPermission_2.SearchText,"Result")
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =
                 Size: =FountSise
-                Visible: =If(Dropdown_FormPermission.Selected.Value = "自定義篩選"&&HRAO,true,false)
+                Visible: =If(Dropdown_FormPermission.Selected.Value = "指定表格"&&HRAO,true,false)
                 Width: =272
-                X: =692
-                Y: =622
+                X: =If(Group45_8.Visible = false,1038,692)
+                Y: =If(Group45_8.Visible = false,326,462)
                 ZIndex: =65
 
             Label4_74 As label:
                 Color: =RGBA(25, 32, 41, 100)
                 Font: =Font.'Segoe UI'
                 Size: =10.5
-                Text: ="表單權限-部門/服務選擇"
-                Visible: =If(Dropdown_FormPermission.Selected.Value = "自定義篩選"&&HRAO,true,false)
+                Text: ="表格權限 – 部門或服務"
+                Visible: =If(Dropdown_FormPermission.Selected.Value = "指定表格"&&HRAO,true,false)
                 Width: =166
-                X: =692
-                Y: =582
+                X: =If(Group45_8.Visible = false,1038,692)
+                Y: =If(Group45_8.Visible = false,326,422)
                 ZIndex: =66
 
         Group17 As group:
@@ -2048,7 +2021,6 @@ SystemsScreen As screen:
                 Height: =28
                 HoverBorderColor: =RGBA(196, 200, 204, 1)
                 InputTextPlaceholder: ="請選擇表格類型/單位"
-                IsSearchable: =false
                 Items: |
                     =//Filter(FormTableType,DepartMentName in Dropdown_FormPermission_2.SelectedItems).FormType
                     Ungroup(
@@ -2068,15 +2040,29 @@ SystemsScreen As screen:
                 PressedColor: =RGBA(50, 50, 50, 1)
                 PressedFill: =RGBA(0, 0, 0, 1)
                 SearchFields: =["FormType"]
-                SearchItems: =[]
+                SearchItems: |-
+                    =Search(//Filter(FormTableType,DepartMentName in Dropdown_FormPermission_2.SelectedItems).FormType
+                    Ungroup(
+                        ForAll(
+                            RenameColumns(
+                                Dropdown_FormPermission_2.SelectedItems,"Result","CurrentDepartment"
+                            ),
+                            {
+                                Formtypevalue:
+                                Filter(FormTableType,DepartMentName = CurrentDepartment)
+                            }
+                        ),
+                        "Formtypevalue"
+                    )
+                    ,Dropdown_FormPermission_3.SearchText,"FormType")
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =
                 Size: =FountSise
                 Visible: =If(Dropdown_FormPermission_2.Selected.Result <> Blank()&&HRAO,true,false)
                 Width: =272
-                X: =692
-                Y: =705
+                X: =If(Group45_8.Visible = false,692,1038)
+                Y: =462
                 ZIndex: =67
 
             Label4_82 As label:
@@ -2086,8 +2072,8 @@ SystemsScreen As screen:
                 Text: ="表單權限-表格類型/單位選擇"
                 Visible: =If(Dropdown_FormPermission_2.Selected.Result <> Blank()&&HRAO,true,false)
                 Width: =202
-                X: =692
-                Y: =657
+                X: =If(Group45_8.Visible = false,692,1038)
+                Y: =422
                 ZIndex: =68
 
     UserDeletShow As groupContainer.manualLayoutContainer:
@@ -2162,7 +2148,7 @@ SystemsScreen As screen:
             Height: =36
             HoverFill: =RGBA(8, 127, 190, 1)
             OnSelect: |-
-                =RemoveIf(UserInfo,Title=UserListGallery_1.Selected.Title);
+                =RemoveIf(UserInfo,标题=UserListGallery_1.Selected.标题);
                 //ClearCollect(TempAllUserTable,UserInfo);
                 UpdateContext({UserDeletShow: false });
             PressedColor: =RGBA(255, 255, 255, 1)
@@ -2236,7 +2222,7 @@ SystemsScreen As screen:
                     IsBlank(UserTextInput_1.Text) && IsBlank(UsaerEmaiLTextInput_1.Text) && IsBlank(UserTextInput_8.Text) && IsBlank(Dropdown_Mechanism_1.Selected.Code_No2) && IsBlank(UserTextInput_10.Text) && IsBlank(Dropdown_post_1.Selected.PR_Name) && IsBlank(UserTextInput_12.Text) && IsBlank(Dropdown_AgentEmail_1.Selected.Agent_Email),
                     UpdateContext({UserEditShow: true}),
                     Patch(
-                        UserInfo,LookUp(UserInfo,Title=UserListGallery_1.Selected.Title),     
+                        UserInfo,LookUp(UserInfo,标题=UserListGallery_1.Selected.标题),     
                             {User_Name: UserTextInput_1.Text},
                             {User_Email: UsaerEmaiLTextInput_1.Text},
                             {O_Mechanism: UserTextInput_8.Text},
@@ -2250,8 +2236,8 @@ SystemsScreen As screen:
                             {Agent_Start_Time:DatePicker_AgentStart_1.SelectedDate},
                             {Agent_End_Time:DatePicker_AgentEnd_1.SelectedDate},
                             */
-                            {FormPermission:If(Dropdown_FormPermission_1.Selected.Value = "全部表單","全部表單",Concat(Dropdown_FormPermission_4.SelectedItems,Result&";"))},
-                            {FormPermission_Sub:If(Dropdown_FormPermission_1.Selected.Value = "自定義篩選",Concat(Dropdown_FormPermission_5.SelectedItems,FormType&";"))},
+                            {FormPermission:If(Dropdown_FormPermission_1.Selected.Value = "全部表格","全部表格",Concat(Dropdown_FormPermission_4.SelectedItems,Result&";"))},
+                            {FormPermission_Sub:If(Dropdown_FormPermission_1.Selected.Value = "指定表格",Concat(Dropdown_FormPermission_5.SelectedItems,FormType&";"))},
                             {IsManger:Dropdown_IsManger_1.Selected.Value}
                     );
                     Notify(
@@ -2404,14 +2390,13 @@ SystemsScreen As screen:
                 Height: =28
                 HoverBorderColor: =RGBA(196, 200, 204, 1)
                 InputTextPlaceholder: ="請選擇職位"
-                IsSearchable: =false
                 Items: =Filter(PostRankInfo,PR_Type="職級").PR_Name
                 NoSelectionText: ="請選擇職位"
                 PaddingLeft: =12
                 PressedColor: =RGBA(50, 50, 50, 1)
                 PressedFill: =RGBA(0, 0, 0, 1)
                 SearchFields: =["PR_Name"]
-                SearchItems: =[]
+                SearchItems: =Search(Filter(PostRankInfo,PR_Type="職級").PR_Name,Dropdown_post_1.SearchText,"PR_Name")
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =
@@ -2434,6 +2419,7 @@ SystemsScreen As screen:
                 Font: =Font.'Segoe UI'
                 Size: =10.5
                 Text: ="代理人郵箱"
+                Visible: =false
                 X: =692
                 Y: =322
                 ZIndex: =46
@@ -2468,6 +2454,7 @@ SystemsScreen As screen:
                 SelectionTagFill: =
                 SelectMultiple: =false
                 Size: =FountSise
+                Visible: =false
                 Width: =272
                 X: =692
                 Y: =362
@@ -2528,6 +2515,7 @@ SystemsScreen As screen:
                 Font: =Font.'Segoe UI'
                 Size: =10.5
                 Text: ="結束日期"
+                Visible: =false
                 X: =1038
                 Y: =402
                 ZIndex: =50
@@ -2547,6 +2535,7 @@ SystemsScreen As screen:
                 Height: =28
                 PaddingBottom: =0
                 Size: =FountSise
+                Visible: =false
                 Width: =272
                 X: =1038
                 Y: =442
@@ -2564,6 +2553,7 @@ SystemsScreen As screen:
                 Font: =Font.'Segoe UI'
                 Size: =10.5
                 Text: ="開始日期"
+                Visible: =false
                 X: =692
                 Y: =402
                 ZIndex: =52
@@ -2582,6 +2572,7 @@ SystemsScreen As screen:
                 Height: =28
                 PaddingBottom: =0
                 Size: =FountSise
+                Visible: =false
                 Width: =272
                 X: =692
                 Y: =448
@@ -2643,6 +2634,7 @@ SystemsScreen As screen:
                 Font: =Font.'Segoe UI'
                 Size: =10.5
                 Text: ="代理人"
+                Visible: =false
                 X: =1038
                 Y: =322
                 ZIndex: =44
@@ -2670,6 +2662,7 @@ SystemsScreen As screen:
                 RadiusTopLeft: =2
                 RadiusTopRight: =2
                 Size: =10.5
+                Visible: =false
                 Width: =272
                 X: =1038
                 Y: =362
@@ -2705,7 +2698,6 @@ SystemsScreen As screen:
                 Height: =28
                 HoverBorderColor: =RGBA(196, 200, 204, 1)
                 InputTextPlaceholder: ="請選擇機構"
-                IsSearchable: =false
                 Items: =Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="003").Code_No2
                 NoSelectionText: ="請選擇機構"
                 OnChange: =Reset(Dropdown_FormPermission_1)
@@ -2713,7 +2705,7 @@ SystemsScreen As screen:
                 PressedColor: =RGBA(50, 50, 50, 1)
                 PressedFill: =RGBA(0, 0, 0, 1)
                 SearchFields: =["Code_No2"]
-                SearchItems: =[]
+                SearchItems: =Search(Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="003").Code_No2,Dropdown_Mechanism_1.SearchText,"Code_No2")
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =
@@ -2782,7 +2774,7 @@ SystemsScreen As screen:
                 Text: ="是否部門/單位經理"
                 Visible: =SuperUser
                 X: =1038
-                Y: =485
+                Y: =326
                 ZIndex: =61
 
             Dropdown_IsManger_1 As combobox:
@@ -2814,7 +2806,7 @@ SystemsScreen As screen:
                 Visible: =SuperUser
                 Width: =272
                 X: =1038
-                Y: =525
+                Y: =366
                 ZIndex: =62
 
         Group45_10 As group:
@@ -2828,10 +2820,10 @@ SystemsScreen As screen:
                 Color: =RGBA(25, 32, 41, 100)
                 Font: =Font.'Segoe UI'
                 Size: =10.5
-                Text: ="表單權限"
+                Text: ="表格權限"
                 Visible: =HRAO
                 X: =692
-                Y: =485
+                Y: =326
                 ZIndex: =63
 
             Dropdown_FormPermission_1 As combobox:
@@ -2843,15 +2835,15 @@ SystemsScreen As screen:
                 ChevronHoverFill: =RGBA(153, 153, 153, 1)
                 DefaultSelectedItems: |-
                     =//Table({Value:UserListGallery_1.Selected.FormPermission})
-                    If(First(Table({Value:UserListGallery_1.Selected.FormPermission})).Value = "全部表單",Table({Value:"全部表單"}),First(Table({Value:UserListGallery_1.Selected.FormPermission})).Value = Blank(),Table({Value:""}),Table({Value:"自定義篩選"}))
+                    If(First(Table({Value:UserListGallery_1.Selected.FormPermission})).Value = "全部表格",Table({Value:"全部表格"}),First(Table({Value:UserListGallery_1.Selected.FormPermission})).Value = Blank(),Table({Value:""}),Table({Value:"指定表格"}))
                 DisplayFields: =["Value"]
                 FocusedBorderThickness: =1
                 Height: =28
                 HoverBorderColor: =RGBA(196, 200, 204, 1)
                 InputTextPlaceholder: ="請選擇表單權限"
                 Items: |-
-                    =//["全部表單",Dropdown_Mechanism_1.Selected.Code_No2]
-                    ["全部表單","自定義篩選"]
+                    =//["全部表格",Dropdown_Mechanism_1.Selected.Code_No2]
+                    ["全部表格","指定表格"]
                 NoSelectionText: =
                 OnChange: |-
                     =Reset(Dropdown_FormPermission_4);
@@ -2861,8 +2853,8 @@ SystemsScreen As screen:
                 PressedFill: =RGBA(0, 0, 0, 1)
                 SearchFields: =["Value"]
                 SearchItems: |-
-                    =Search(//["全部表單",Dropdown_Mechanism_1.Selected.Code_No2]
-                    ["全部表單","自定義篩選"],Dropdown_FormPermission_1.SearchText,"Value")
+                    =Search(//["全部表格",Dropdown_Mechanism_1.Selected.Code_No2]
+                    ["全部表格","指定表格"],Dropdown_FormPermission_1.SearchText,"Value")
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =
@@ -2871,7 +2863,7 @@ SystemsScreen As screen:
                 Visible: =HRAO
                 Width: =272
                 X: =692
-                Y: =525
+                Y: =366
                 ZIndex: =64
 
         Group7_1 As group:
@@ -2890,13 +2882,12 @@ SystemsScreen As screen:
                 ChevronHoverFill: =RGBA(153, 153, 153, 1)
                 DefaultSelectedItems: |-
                     =//Table({Code_No2:UserListGallery_1.Selected.FormPermission})
-                    If(UserListGallery_1.Selected.FormPermission <> "全部表單",Filter(Split(UserListGallery_1.Selected.FormPermission,";"),Result<>""))
+                    If(UserListGallery_1.Selected.FormPermission <> "全部表格",Filter(Split(UserListGallery_1.Selected.FormPermission,";"),Result<>""))
                 DisplayFields: =["Result"]
                 FocusedBorderThickness: =1
                 Height: =28
                 HoverBorderColor: =RGBA(196, 200, 204, 1)
                 InputTextPlaceholder: ="請選擇部門/服務"
-                IsSearchable: =false
                 Items: |-
                     =//Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="002"||Type_No="0003"&&Code_No1="003").Code_No2
                     Distinct(FormTableType,DepartMentName)
@@ -2926,26 +2917,28 @@ SystemsScreen As screen:
                 PressedColor: =RGBA(50, 50, 50, 1)
                 PressedFill: =RGBA(0, 0, 0, 1)
                 SearchFields: =["Result"]
-                SearchItems: =[]
+                SearchItems: |-
+                    =Search(//Filter(ConfigurationInfo,Type_No="0003"&&Code_No1="001"||Type_No="0003"&&Code_No1="002"||Type_No="0003"&&Code_No1="003").Code_No2
+                    Distinct(FormTableType,DepartMentName),Dropdown_FormPermission_4.SearchText,"Result")
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =
                 Size: =FountSise
-                Visible: =If(Dropdown_FormPermission_1.Selected.Value = "自定義篩選"&&HRAO,true,false)
+                Visible: =If(Dropdown_FormPermission_1.Selected.Value = "指定表格"&&HRAO,true,false)
                 Width: =272
-                X: =692
-                Y: =611
+                X: =If(Group45_8.Visible = false,1038,692)
+                Y: =If(Group45_9.Visible = false,326,462)
                 ZIndex: =65
 
             Label4_83 As label:
                 Color: =RGBA(25, 32, 41, 100)
                 Font: =Font.'Segoe UI'
                 Size: =10.5
-                Text: ="表單權限-部門/服務選擇"
-                Visible: =If(Dropdown_FormPermission_1.Selected.Value = "自定義篩選"&&HRAO,true,false)
+                Text: ="表格權限 – 部門或服務"
+                Visible: =If(Dropdown_FormPermission_1.Selected.Value = "指定表格"&&HRAO,true,false)
                 Width: =166
-                X: =692
-                Y: =571
+                X: =If(Group45_8.Visible = false,1038,692)
+                Y: =If(Group45_9.Visible = false,326,422)
                 ZIndex: =66
 
         Group17_1 As group:
@@ -2970,7 +2963,6 @@ SystemsScreen As screen:
                 Height: =28
                 HoverBorderColor: =RGBA(196, 200, 204, 1)
                 InputTextPlaceholder: ="請選擇表格類型/單位"
-                IsSearchable: =false
                 Items: |
                     =//Filter(FormTableType,DepartMentName in NameTableEdit).FormType
                     //Filter(FormTableType,DepartMentName in Dropdown_FormPermission_4.SelectedItems).FormType
@@ -2991,26 +2983,41 @@ SystemsScreen As screen:
                 PressedColor: =RGBA(50, 50, 50, 1)
                 PressedFill: =RGBA(0, 0, 0, 1)
                 SearchFields: =["FormType"]
-                SearchItems: =[]
+                SearchItems: |-
+                    =Search(//Filter(FormTableType,DepartMentName in NameTableEdit).FormType
+                    //Filter(FormTableType,DepartMentName in Dropdown_FormPermission_4.SelectedItems).FormType
+                    Ungroup(
+                        ForAll(
+                            RenameColumns(
+                                Dropdown_FormPermission_4.SelectedItems,"Result","CurrentDepartment1"
+                            ),
+                            {
+                                Formtypevalue1:
+                                Filter(FormTableType,DepartMentName = CurrentDepartment1)
+                            }
+                        ),
+                        "Formtypevalue1"
+                    )
+                    ,Dropdown_FormPermission_5.SearchText,"FormType")
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =
                 Size: =FountSise
-                Visible: =If(Dropdown_FormPermission_4.Selected.Result <> Blank()&&HRAO&&Dropdown_FormPermission_1.Selected.Value = "自定義篩選",true,false)
+                Visible: =If(Dropdown_FormPermission_4.Selected.Result <> Blank()&&HRAO&&Dropdown_FormPermission_1.Selected.Value = "指定表格",true,false)
                 Width: =272
-                X: =692
-                Y: =697
+                X: =If(Group45_9.Visible = false,692,1038)
+                Y: =462
                 ZIndex: =68
 
             Label4_89 As label:
                 Color: =RGBA(25, 32, 41, 100)
                 Font: =Font.'Segoe UI'
                 Size: =10.5
-                Text: ="表單權限-表格類型/單位選擇"
-                Visible: =If(Dropdown_FormPermission_4.Selected.Result <> Blank()&&HRAO&&Dropdown_FormPermission_1.Selected.Value = "自定義篩選",true,false)
+                Text: ="表格權限 – 表格類型或單位"
+                Visible: =If(Dropdown_FormPermission_4.Selected.Result <> Blank()&&HRAO&&Dropdown_FormPermission_1.Selected.Value = "指定表格",true,false)
                 Width: =202
-                X: =692
-                Y: =649
+                X: =If(Group45_9.Visible = false,692,1038)
+                Y: =422
                 ZIndex: =69
 
     GAMask As groupContainer.manualLayoutContainer:
@@ -3104,7 +3111,7 @@ SystemsScreen As screen:
                         SignerInfo,
                         Defaults(SignerInfo),
                         {
-                            Title: GUID(),
+                            标题: GUID(),
                             Signer: UserTextInput_3.Text,
                             Signer_Email: Dropdown_Username_4.Selected.User_Email,
                             S_Mechanism: UserTextInput_13.Text,
@@ -3162,7 +3169,7 @@ SystemsScreen As screen:
                 Color: =RGBA(25, 32, 41, 100)
                 Font: =Font.'Segoe UI'
                 Size: =10.5
-                Text: ="负责人"
+                Text: ="負責人"
                 X: =1038
                 Y: =162
                 ZIndex: =6
@@ -3468,7 +3475,7 @@ SystemsScreen As screen:
                         SignerInfo,
                         LookUp(
                             SignerInfo,
-                            Title = GAListGallery_1.Selected.Title
+                            标题 = GAListGallery_1.Selected.标题
                         ),
                         {Signer: UserTextInput_4.Text},
                         {Signer_Email: Dropdown_Username_5.Selected.User_Email},
@@ -3812,7 +3819,7 @@ SystemsScreen As screen:
             OnSelect: |-
                 =RemoveIf(
                     SignerInfo,
-                    Title = GAListGallery_1.Selected.Title
+                    标题 = GAListGallery_1.Selected.标题
                 );
                 //Refresh(SignerInfo);
                 //Reset(GAListGallery_1);
