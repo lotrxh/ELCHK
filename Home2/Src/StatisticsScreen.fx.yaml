@@ -144,8 +144,7 @@ StatisticsScreen As screen:
             FocusedBorderThickness: =1
             Height: =34
             HoverBorderColor: =RGBA(196, 200, 204, 1)
-            InputTextPlaceholder: ="請輸入電郵"
-            IsSearchable: =false
+            InputTextPlaceholder: ="請選擇人員"
             Items: =Distinct(Approval_Table,'Operator ')
             NoSelectionText: =
             OnSelect: =
@@ -153,7 +152,7 @@ StatisticsScreen As screen:
             PressedColor: =RGBA(50, 50, 50, 1)
             PressedFill: =RGBA(0, 0, 0, 0)
             SearchFields: =["Result"]
-            SearchItems: =[]
+            SearchItems: =Search(Distinct(Approval_Table,'Operator '),drpFilterPedningDepartment_1.SearchText,"Result")
             SelectionColor: =RGBA(73, 77, 82, 1)
             SelectionFill: =RGBA(0, 0, 0, 0)
             SelectionTagFill: =
@@ -467,11 +466,13 @@ StatisticsScreen As screen:
         ZIndex: =14
 
         Label20 As label:
+            Align: =Align.Right
+            Height: =34
             Size: =FountSise
             Text: ="月份："
             Width: =54
-            X: =27
-            Y: =25
+            X: =117
+            Y: =28
             ZIndex: =2
 
         Label20_3 As label:
@@ -479,8 +480,8 @@ StatisticsScreen As screen:
             Text: |-
                 ="報表類型:"
             Width: =79
-            X: =192
-            Y: =25
+            X: =243
+            Y: =22
             ZIndex: =4
 
         BtnPrimaryLg_7 As button:
@@ -492,7 +493,7 @@ StatisticsScreen As screen:
             Height: =34
             HoverFill: =ColorFade(Self.Fill, -15%)
             OnSelect: |-
-                =DashboardExportToEmail.Run(Dropdown1_3.Selected.Value,CurrentUser,Dropdown1_4.Selected.Value);
+                =DashboardExportToEmail.Run(DropdownMouth.Selected.Value,CurrentUser,DropdownType.Selected.Value);
                 Notify("電郵已成功匯出！",NotificationType.Success)
             PaddingBottom: =0
             PaddingLeft: =0
@@ -506,12 +507,12 @@ StatisticsScreen As screen:
             RadiusTopRight: =4
             Size: =11
             Text: ="導出"
-            Width: =100
-            X: =387
-            Y: =25
+            Width: =76
+            X: =437
+            Y: =28
             ZIndex: =5
 
-        Dropdown1_3 As dropdown:
+        DropdownMouth As dropdown:
             BorderColor: =glbNeutralTertiaryColor
             BorderThickness: =1
             ChevronBackground: =RGBA(0, 0, 0, 0)
@@ -536,12 +537,12 @@ StatisticsScreen As screen:
             PressedFill: =ColorFade(Self.Fill, -5%)
             SelectionFill: =glbThemePrimaryColor
             Size: =11
-            Width: =107
-            X: =81
-            Y: =25
+            Width: =72
+            X: =171
+            Y: =28
             ZIndex: =6
 
-        Dropdown1_4 As dropdown:
+        DropdownType As dropdown:
             BorderColor: =glbNeutralTertiaryColor
             BorderThickness: =1
             ChevronBackground: =RGBA(0, 0, 0, 0)
@@ -566,9 +567,47 @@ StatisticsScreen As screen:
             SelectionFill: =glbThemePrimaryColor
             Size: =11
             Width: =97
-            X: =265
-            Y: =25
+            X: =322
+            Y: =28
             ZIndex: =7
+
+        Label20_1 As label:
+            Height: =34
+            Size: =FountSise
+            Text: ="年份："
+            Width: =54
+            Y: =28
+            ZIndex: =8
+
+        DropdownYear As dropdown:
+            BorderColor: =glbNeutralTertiaryColor
+            BorderThickness: =1
+            ChevronBackground: =RGBA(0, 0, 0, 0)
+            ChevronDisabledBackground: =RGBA(0, 0, 0, 0)
+            ChevronDisabledFill: =RGBA(202, 202, 202, 1)
+            ChevronFill: =glbNeutralTertiaryColor
+            ChevronHoverBackground: =ColorFade(Self.Fill, -5%)
+            ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
+            Color: =glbNeutralPrimaryColor
+            Default: =Text(Today(),"yy")
+            FocusedBorderColor: =ColorFade(Self.BorderColor, -20%)
+            FocusedBorderThickness: =1
+            Height: =34
+            HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
+            HoverFill: =ColorFade(Self.Fill, -5%)
+            Items: =Sequence(20,20)
+            PaddingBottom: =5
+            PaddingRight: =0
+            PaddingTop: =5
+            PressedBorderColor: =ColorFade(Self.BorderColor, -20%)
+            PressedColor: =Self.Color
+            PressedFill: =ColorFade(Self.Fill, -5%)
+            SelectionFill: =glbThemePrimaryColor
+            Size: =11
+            Width: =63
+            X: =54
+            Y: =28
+            ZIndex: =9
 
     Container3_5 As groupContainer.manualLayoutContainer:
         Fill: =RGBA(255, 255, 255, 1)
