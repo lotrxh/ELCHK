@@ -5,10 +5,12 @@
       <string name="ManualTriggerInput_text_def" />
       <string name="ManualTriggerInput_text_1_def" />
       <number name="ManualTriggerInput_number_def" />
+      <string name="ManualTriggerInput_text_2_def" />
       <object name="ManualTriggerInput">
         <property name="text" type="string" />
         <property name="text_1" type="string" />
         <property name="number" type="number" />
+        <property name="text_2" type="string" />
       </object>
     </jsonTypes>
   </grammars>
@@ -30,6 +32,9 @@
             </param>
             <param style="plain" name="number" path="/number" type="xs:double" required="true">
               <doc title="ExportType" />
+            </param>
+            <param style="plain" name="text_2" path="/text_2" type="xs:string" required="true">
+              <doc title="Year" />
             </param>
           </representation>
         </request>
