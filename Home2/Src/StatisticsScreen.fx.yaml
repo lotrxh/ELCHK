@@ -494,7 +494,7 @@ StatisticsScreen As screen:
             Height: =34
             HoverFill: =ColorFade(Self.Fill, -15%)
             OnSelect: |-
-                =DashboardExportToEmail.Run(DropdownMouth.Selected.Value,CurrentUser,DropdownType.Selected.Value,Text(DropdownYear.Selected.Value));
+                =DashboardExportToEmail.Run(Text(DropdownMouth.Selected.Value),CurrentUser,Text(DropdownType.Selected.Value),Text(DropdownYear.Selected.Value));
                 Notify("電郵已成功匯出！",NotificationType.Success)
             PaddingBottom: =0
             PaddingLeft: =0
