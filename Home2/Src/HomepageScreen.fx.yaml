@@ -37,14 +37,14 @@ HomepageScreen As screen:
                     CurrentRoleFormModelPermssion = "None"
                     ,
                     [
-                        "開始申請",
+                        "首頁",
                         "申請記錄",
                         If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定"),
                         If(If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定")="系統設定",Blank(),CurrentRole || HRAO || SuperUser,"系統設定")
                         
                     ],
                     [
-                        "開始申請",
+                        "首頁",
                         "表格資料",
                         "申請記錄",
                         If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定"),
@@ -53,7 +53,7 @@ HomepageScreen As screen:
                 ),ThisRecord.Value <> Blank())
             Layout: =Layout.Vertical
             OnSelect: =
-            TemplateFill: =If(ThisItem.Value="開始申請", RGBA(102,182,227,0.2),Transparent)
+            TemplateFill: =If(ThisItem.Value="首頁", RGBA(102,182,227,0.2),Transparent)
             TemplatePadding: =0
             TemplateSize: =46
             Width: =240
@@ -65,18 +65,18 @@ HomepageScreen As screen:
                 BorderColor: =Self.Color
                 BorderStyle: =BorderStyle.None
                 BorderThickness: =0
-                Color: =If(ThisItem.Value="開始申請", glbThemePrimaryColor,glbNeutralSecondaryColor)
+                Color: =If(ThisItem.Value="首頁", glbThemePrimaryColor,glbNeutralSecondaryColor)
                 DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                Fill: =If(ThisItem.Value="開始申請", ColorFade(Self.Color, 90%),White)
+                Fill: =If(ThisItem.Value="首頁", ColorFade(Self.Color, 90%),White)
                 FocusedBorderThickness: =1
-                FontWeight: =If(ThisItem.Value="開始申請", FontWeight.Semibold,Normal)
+                FontWeight: =If(ThisItem.Value="首頁", FontWeight.Semibold,Normal)
                 Height: =46
                 HoverBorderColor: =ColorFade(Self.Color, -15%)
                 HoverColor: =ColorFade(Self.Color, -15%)
                 HoverFill: =If(ThisItem.Value<>Blank(),ColorFade(glbThemePrimaryColor, 90%))
                 OnSelect: |-
                     =If(
-                        ThisItem.Value = "開始申請",
+                        ThisItem.Value = "首頁",
                         Navigate(
                             HomepageScreen,
                             ScreenTransition.None
@@ -121,7 +121,7 @@ HomepageScreen As screen:
                 Height: =30
                 Image: |
                     =If(
-                        ThisItem.Value = "開始申請",
+                        ThisItem.Value = "首頁",
                         首页,
                         ThisItem.Value = "表格資料",
                         表格资料,

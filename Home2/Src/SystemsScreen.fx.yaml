@@ -4021,14 +4021,14 @@ SystemsScreen As screen:
                     CurrentRoleFormModelPermssion = "None"
                     ,
                     [
-                        "開始申請",
+                        "首頁",
                         "申請記錄",
                         If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定"),
                         If(If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定")="系統設定",Blank(),CurrentRole || HRAO || SuperUser,"系統設定")
                         
                     ],
                     [
-                        "開始申請",
+                        "首頁",
                         "表格資料",
                         "申請記錄",
                         If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定"),
@@ -4059,7 +4059,7 @@ SystemsScreen As screen:
                 HoverFill: =If(ThisItem.Value<>Blank(),ColorFade(glbThemePrimaryColor, 90%))
                 OnSelect: |-
                     =If(
-                        ThisItem.Value = "開始申請",
+                        ThisItem.Value = "首頁",
                         Navigate(
                             HomepageScreen,
                             ScreenTransition.None
@@ -4104,7 +4104,7 @@ SystemsScreen As screen:
                 Height: =30
                 Image: |
                     =If(
-                        ThisItem.Value = "開始申請",
+                        ThisItem.Value = "首頁",
                         首页,
                         ThisItem.Value = "表格資料",
                         表格资料,
