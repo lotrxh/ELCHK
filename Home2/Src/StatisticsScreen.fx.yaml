@@ -476,12 +476,13 @@ StatisticsScreen As screen:
             ZIndex: =2
 
         Label20_3 As label:
+            Height: =34
             Size: =FountSise
             Text: |-
                 ="報表類型:"
             Width: =79
             X: =251
-            Y: =22
+            Y: =28
             ZIndex: =4
 
         BtnPrimaryLg_7 As button:
@@ -589,7 +590,7 @@ StatisticsScreen As screen:
             ChevronHoverBackground: =ColorFade(Self.Fill, -5%)
             ChevronHoverFill: =ColorFade(Self.BorderColor, -20%)
             Color: =glbNeutralPrimaryColor
-            Default: =Text(Today(),"yy")
+            Default: =Value(Text(Today(),"yyyy"))
             FocusedBorderColor: =ColorFade(Self.BorderColor, -20%)
             FocusedBorderThickness: =1
             Height: =34
