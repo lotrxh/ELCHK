@@ -200,6 +200,7 @@
                             "必填項目不能留空，處理行動及處理人不能留空。",
                             NotificationType.Error
                         ),
+                        If(TextInput_FormPWD_1.Text<>TextInput_FormPWD.Text,Notify("申請表密碼輸入不一致，請重新輸入",Warning),TextInput_zipPWD_1.Text<>TextInput_zipPWD.Text,Notify("附件密碼輸入不一致，請重新輸入",Warning),
                         Set(
                             ApprovalGuid,
                             GUID()
@@ -641,6 +642,7 @@
                         );
                         
                     );
+                    )
                 PaddingBottom: =0
                 PaddingLeft: =0
                 PaddingRight: =0
@@ -1463,7 +1465,7 @@
                                 HoverFill: =ColorFade(Self.Fill, -5%)
                                 LayoutMinWidth: =120
                                 Mode: =TextMode.Password
-                                OnChange: =If(TextInput_FormPWD_1.Text<>TextInput_FormPWD.Text,Notify("密碼輸入不一致，請重新輸入",Warning),TextInput_FormPWD_1.Text=TextInput_FormPWD.Text,Notify("密碼輸入一致",Success,4000))
+                                OnChange: =If(TextInput_FormPWD_1.Text<>TextInput_FormPWD.Text,Notify("申請表密碼輸入不一致，請重新輸入",Warning),TextInput_FormPWD_1.Text=TextInput_FormPWD.Text,Notify("申請表密碼輸入一致",Success,4000))
                                 PaddingBottom: =0
                                 PaddingLeft: =10
                                 PaddingRight: =0
@@ -1739,7 +1741,7 @@
                                 HoverFill: =ColorFade(Self.Fill, -5%)
                                 LayoutMinWidth: =120
                                 Mode: =TextMode.Password
-                                OnChange: =If(TextInput_zipPWD_1.Text<>TextInput_zipPWD.Text,Notify("密碼輸入不一致，請重新輸入",Warning),TextInput_zipPWD_1.Text=TextInput_zipPWD.Text,Notify("密碼輸入一致",Success,4000))
+                                OnChange: =If(TextInput_zipPWD_1.Text<>TextInput_zipPWD.Text,Notify("附件密碼輸入不一致，請重新輸入",Warning),TextInput_zipPWD_1.Text=TextInput_zipPWD.Text,Notify("附件密碼輸入一致",Success,4000))
                                 PaddingBottom: =0
                                 PaddingLeft: =10
                                 PaddingRight: =0
@@ -1826,6 +1828,7 @@
                         HintText: =""
                         HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                         HoverFill: =ColorFade(Self.Fill, -5%)
+                        MaxLength: =255
                         Mode: =TextMode.MultiLine
                         PaddingBottom: =10
                         PaddingLeft: =10
@@ -3045,6 +3048,7 @@
                         "必填項目不能留空，處理行動及處理人不能留空。",
                         NotificationType.Error
                     ),
+                    If(TextInput_FormPWD_1.Text<>TextInput_FormPWD.Text,Notify("申請表密碼輸入不一致，請重新輸入",Warning),TextInput_zipPWD_1.Text<>TextInput_zipPWD.Text,Notify("附件密碼輸入不一致，請重新輸入",Warning),
                     Set(
                         ApprovalGuid,
                         GUID()
@@ -3485,6 +3489,7 @@
                     );
                     
                 );
+                )
             PaddingBottom: =0
             PaddingLeft: =0
             PaddingRight: =0
