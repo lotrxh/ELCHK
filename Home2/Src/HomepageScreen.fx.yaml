@@ -1,6 +1,6 @@
 HomepageScreen As screen:
     Fill: =RGBA(243, 243, 243, 1)
-    OnVisible: |
+    OnVisible: |-
         =ClearCollect(approvalCol,Approval_Table);ClearCollect(ApprovalDetailData,ApprovalDetail_Table);
         // 优先处理
         With({XXX11:Filter(ApprovalDetailData,(CurrentUser in ApproverEmail||CurrentUser in AgentUserEmail)&&TaskStatus<>Blank()&&(TaskStatus="002"||TaskStatus="001")&&DateDiff(Modified,Today())>3)},ClearCollect(Priority_Processing,XXX11));
@@ -23,6 +23,7 @@ HomepageScreen As screen:
         ClearCollect(FormTable2,SortByColumns(FormTable3,"ID",Ascending));
         ClearCollect(FormTable4,Distinct(FormTable2,DepartMentName));
         */
+        Reset(TextInput2_15);
 
     Container3_3 As groupContainer.manualLayoutContainer:
         Fill: =RGBA(255, 255, 255, 1)
