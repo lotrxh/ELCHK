@@ -4220,6 +4220,30 @@
                     PaddingTop: =0
                     Size: =11
                     Text: ="處理備註"
+                    Visible: |-
+                        =If(
+                            //任務執行完成后不可见
+                            "執行" in 
+                                            
+                                                Filter(
+                                                    ApprovalDetail_Table,
+                                                    //TaskStatus = "002",
+                                                    Approval_No = FLowId
+                                                
+                                            
+                                        ).ActionNode 
+                                        //任務拒絕后不可见
+                                       || First(
+                                    SortByColumns(
+                                                Filter(
+                                                    ApprovalDetail_Table,
+                                                    Approval_No = FLowId
+                                                                            ),
+                                                "Priortty",
+                                                Descending
+                                            )
+                                        ).TaskStatus = "000"
+                                        ,false,true)
                     Width: =70
                     Wrap: =false
                     Y: =7
@@ -4231,6 +4255,30 @@
                     LayoutMinHeight: =100
                     LayoutMinWidth: =250
                     PaddingLeft: =30
+                    Visible: |-
+                        =If(
+                            //任務執行完成后不可见
+                            "執行" in 
+                                            
+                                                Filter(
+                                                    ApprovalDetail_Table,
+                                                    //TaskStatus = "002",
+                                                    Approval_No = FLowId
+                                                
+                                            
+                                        ).ActionNode 
+                                        //任務拒絕后不可见
+                                       || First(
+                                    SortByColumns(
+                                                Filter(
+                                                    ApprovalDetail_Table,
+                                                    Approval_No = FLowId
+                                                                            ),
+                                                "Priortty",
+                                                Descending
+                                            )
+                                        ).TaskStatus = "000"
+                                        ,false,true)
                     ZIndex: =12
 
                     TextInput2_34 As text:
