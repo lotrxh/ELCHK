@@ -749,32 +749,8 @@ AdminFormListScreen As screen:
                     FalseText: ="停用中"
                     FocusedBorderThickness: =0
                     Height: =24
-                    OnCheck: |
-                        =//If(ThisItem.ModelName in ApprovalDetailColwithFormName1.FormName,Notify("該表單有待處理任務，當前無法停用，請處理后再停用",Warning))
-                        If(
-                            ThisItem.ModelName in ApprovalDetailColwithFormName1.FormName,
-                            Notify(
-                                "該表單有待處理任務，當前無法停用，請處理后再停用",
-                                Warning
-                            ),
-                            If(
-                                ThisItem.IsEnable = "1",
-                                UpdateIf(
-                                    GenericFormModel,
-                                    ModelName = FormName.Text,
-                                    {IsEnable: 0}
-                                ),
-                                ThisItem.IsEnable = "0",
-                                UpdateIf(
-                                    GenericFormModel,
-                                    ModelName = FormName.Text,
-                                    {IsEnable: 1}
-                                )
-                            )
-                        );
-                        Select(Reset_button);
-                    OnSelect: =
-                    OnUncheck: |
+                    OnCheck: =//If(ThisItem.ModelName in ApprovalDetailColwithFormName1.FormName,Notify("該表單有待處理任務，當前無法停用，請處理后再停用",Warning))
+                    OnSelect: |
                         =If(
                             ThisItem.ModelName in ApprovalDetailColwithFormName1.FormName,
                             Notify(
@@ -797,6 +773,7 @@ AdminFormListScreen As screen:
                             )
                         );
                         Select(Reset_button);
+                    OnUncheck: =
                     Size: =10
                     Tooltip: =
                     TrueFill: =glbLinkColor
