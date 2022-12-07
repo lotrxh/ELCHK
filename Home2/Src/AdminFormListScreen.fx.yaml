@@ -168,7 +168,7 @@ AdminFormListScreen As screen:
         ClearCollect(
             ApprovalDetailColwithFormName1,
             AddColumns(
-                ApprovalDetailCol,
+                ApprovalDetailCol1,
                 "FormName",
                 LookUp(
                     approvalCol1,
@@ -671,7 +671,7 @@ AdminFormListScreen As screen:
                         =//ThisItem.'Modified By'.DisplayName & Char(13) & ThisItem.Modified;
                         //ThisItem.'Modified By'.DisplayName&Char(10)&Text(ThisItem.Modified,"dd/mm/yyyy hh:mm" )
                         ThisItem.'修改者'.DisplayName&Char(10)&Text(ThisItem.修改时间,"dd/mm/yyyy hh:mm" )
-                    Tooltip: =ThisItem.'Modified By'.DisplayName
+                    Tooltip: =ThisItem.修改者.DisplayName
                     VerticalAlign: =VerticalAlign.Top
                     Width: =120
                     Wrap: =false
@@ -744,12 +744,37 @@ AdminFormListScreen As screen:
                 Toggle1_1 As toggleSwitch:
                     Default: =If(ThisItem.IsEnable="1",true,ThisItem.IsEnable="0",false)
                     DisabledBorderColor: =RGBA(0, 13, 75, 1)
+                    DisplayMode: =If(ThisItem.ModelName in ApprovalDetailColwithFormName1.FormName,Disabled,DisplayMode.Edit)
                     FalseFill: =RGBA(202, 202, 202, 1)
                     FalseText: ="停用中"
                     FocusedBorderThickness: =0
                     Height: =24
-                    OnCheck: =
-                    OnSelect: |
+                    OnCheck: |
+                        =//If(ThisItem.ModelName in ApprovalDetailColwithFormName1.FormName,Notify("該表單有待處理任務，當前無法停用，請處理后再停用",Warning))
+                        If(
+                            ThisItem.ModelName in ApprovalDetailColwithFormName1.FormName,
+                            Notify(
+                                "該表單有待處理任務，當前無法停用，請處理后再停用",
+                                Warning
+                            ),
+                            If(
+                                ThisItem.IsEnable = "1",
+                                UpdateIf(
+                                    GenericFormModel,
+                                    ModelName = FormName.Text,
+                                    {IsEnable: 0}
+                                ),
+                                ThisItem.IsEnable = "0",
+                                UpdateIf(
+                                    GenericFormModel,
+                                    ModelName = FormName.Text,
+                                    {IsEnable: 1}
+                                )
+                            )
+                        );
+                        Select(Reset_button);
+                    OnSelect: =
+                    OnUncheck: |
                         =If(
                             ThisItem.ModelName in ApprovalDetailColwithFormName1.FormName,
                             Notify(
@@ -772,8 +797,8 @@ AdminFormListScreen As screen:
                             )
                         );
                         Select(Reset_button);
-                    OnUncheck: =
                     Size: =10
+                    Tooltip: =
                     TrueFill: =glbLinkColor
                     TrueText: ="使用中"
                     Width: =102
