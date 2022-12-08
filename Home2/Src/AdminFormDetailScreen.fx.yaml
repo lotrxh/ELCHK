@@ -1335,7 +1335,7 @@ AdminFormDetailScreen As screen:
                     Items: |-
                         =//Last(EditAttachment.TempAttachMent)//加载编辑表格的附件信息
                         //First(Filter(TemplateFileList,GenericFormId=Label1_88.Text&&TempType=drpFilter_FormType.Selected.Result)).附件
-                        First(Filter(EditAttachment,GenericFormId=Label1_88.Text&&TempType=drpFilter_FormType.Selected.Result)).附件
+                        First(Filter(EditAttachment,GenericFormId=Label1_88.Text&&TempType=drpFilter_FormType.Selected.Result)).Attachments
                     MaxAttachments: =1
                     MaxAttachmentsText: ="最大附件"
                     NoAttachmentsText: ="無附件"
