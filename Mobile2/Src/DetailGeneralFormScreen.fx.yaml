@@ -23,6 +23,12 @@
                     IsBlank(Param("FLowId")),
                     HistoryList.标题,/*/LookUp(Approval_Table,Title=Param("FLowId")).Title*/
                     Param("FLowId")
+                ),
+        
+                approvalNum: If(
+                    IsBlank(Param("approvalNum")),
+                    approvalNum,
+                    Param("approvalNum")
                 )
             }
         );
@@ -384,13 +390,13 @@
                             ).TaskStatus = "000",
                             Notify(
                             "該任務已經被拒絕，請刷新頁面，勿重複操作。",
-                            Warning
+                            Warning,5000
                         ),
                     If(
                         IsBlank(TextInput2_34.Text),
                         Notify(
                             "請在處理備註中填寫拒絕原因。",
-                            Warning
+                            Warning,5000
                         ),
                         //上傳附件
                     If(Last(Attachment_Zip2.Attachments).Name <> Blank(),
@@ -450,6 +456,11 @@
                                 Application_Status:"已拒絕"
                             }
                         );
+                        /*'ELCHKRejectEmailNotify(Production)'.Run(
+                                    approvalNum,
+                                    "---",
+                                    "---"
+                                );*/
                         Reset(TextInput2_30);
                         Reset(TextInput2_31);
                         Reset(TextInput2_35);
@@ -458,8 +469,7 @@
                         Reset(Attachment_Zip2);
                         Notify(
                             "拒絕成功！",
-                            NotificationType.Success,
-                            2000
+                            NotificationType.Success
                         );
                         Reset(TextInput2_34);
                         If(
@@ -4612,13 +4622,13 @@
                                 ).TaskStatus = "000",
                                 Notify(
                                 "該任務已經被拒絕，請刷新頁面，勿重複操作。",
-                                Warning
+                                Warning,5000
                             ),
                         If(
                             IsBlank(TextInput2_34.Text),
                             Notify(
                                 "請在處理備註中填寫拒絕原因。",
-                                Warning
+                                Warning,5000
                             ),
                             //上傳附件
                         If(Last(Attachment_Zip2.Attachments).Name <> Blank(),
@@ -4678,6 +4688,11 @@
                                     Application_Status:"已拒絕"
                                 }
                             );
+                            /*'ELCHKRejectEmailNotify(Production)'.Run(
+                                        approvalNum,
+                                        "---",
+                                        "---"
+                                    );*/
                             Reset(TextInput2_30);
                             Reset(TextInput2_31);
                             Reset(TextInput2_35);
@@ -4686,8 +4701,7 @@
                             Reset(Attachment_Zip2);
                             Notify(
                                 "拒絕成功！",
-                                NotificationType.Success,
-                                2000
+                                NotificationType.Success
                             );
                             Reset(TextInput2_34);
                             If(
@@ -6214,8 +6228,13 @@
                         FocusedBorderThickness: =1
                         Height: =36
                         HoverFill: =ColorFade(Self.Fill, -15%)
-                        OnSelect: |
-                            =If(
+                        OnSelect: |-
+                            =If( ComboBox1_6.Selected.Mail = Blank() && !Checkbox2_4.Value && !Checkbox2_3.Value,
+                            Notify(
+                                "未選擇處理人！",
+                                Warning,5000
+                            ),
+                            If(
                                 CountA(
                                     Filter(
                                         MyContacts,
@@ -6285,6 +6304,7 @@
                             );
                             UpdateContext({SelectUservisiable: false});
                             Reset(ComboBox1_6);
+                            )
                         PaddingBottom: =0
                         PaddingLeft: =0
                         PaddingRight: =0

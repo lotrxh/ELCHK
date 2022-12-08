@@ -271,60 +271,90 @@
                                     FormName:LookUp(Approval_Table,标题=ThisItem.Approval_No).Task_Name
                                     },
                                     If(
-                                        FormName = "招聘職位申請表",
+                                        ThisItem.Task_Name = "招聘職位申請表",
                                         If(
                                             ThisItem.TaskStatus = "001",
                                             Launch(
-                                                JumpUrl&"&Screen=JobTitleFormScreen&AppIds=" & LookUp(
+                                                JumpUrl & "&Screen=JobTitleFormScreen&AppIds=" & LookUp(
                                                     ApplitionJobPosition,
                                                     ApprovalId = Gallery5.Selected.Approval_No
-                                                ).标题 & "&MasterflowId=" & Gallery5.Selected.Approval_No & "&resubmit=true"
+                                                ).Title & "&MasterflowId=" & Gallery5.Selected.Approval_No & "&resubmit=true&bustype=edit"
                                             ),
+                                            ThisItem.TaskStatus = "002",
                                             Launch(
-                                                JumpUrl&"&Screen=JobTitleFormDetailScreen&AppIds=" & LookUp(
+                                                JumpUrl & "&Screen=JobTitleFormDetailScreen&AppIds=" & LookUp(
                                                     ApplitionJobPosition,
                                                     ApprovalId = Gallery5.Selected.Approval_No
-                                                ).标题 & "&MasterflowId=" & Gallery5.Selected.Approval_No & "&resubmit=false"
+                                                ).Title & "&MasterflowId=" & Gallery5.Selected.Approval_No & "&resubmit=false"
+                                            ),
+                                            Launch(
+                                                JumpUrl & "&Screen=JobTitleFormDetailScreen&AppIds=" & LookUp(
+                                                    ApplitionJobPosition,
+                                                    ApprovalId = Gallery5.Selected.Approval_No
+                                                ).Title & "&MasterflowId=" & Gallery5.Selected.Approval_No & "&resubmit=false"
                                             )
                                         ),
-                                        FormName = "假期批核人資料表",
+                                        ThisItem.Task_Name = "假期批核人資料表",
                                         If(
                                             ThisItem.TaskStatus = "001",
                                             Launch(
-                                                JumpUrlA306A111&"&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
+                                                JumpUrlA306A111 & "&Screen=VacationFormScreen&taskNum=" & LookUp(
                                                     VacationApprovalForm,
                                                     Applicant_No = Gallery5.Selected.Approval_No
-                                                ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=true"
+                                                ).Title & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=true&bustype=edit"
+                                            ),
+                                            ThisItem.TaskStatus = "002",
+                                            Launch(
+                                                JumpUrlA306A111 & "&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
+                                                    VacationApprovalForm,
+                                                    Applicant_No = Gallery5.Selected.Approval_No
+                                                ).Title & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
                                             ),
                                             Launch(
-                                                JumpUrlA306A111&"&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
+                                                JumpUrlA306A111 & "&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
                                                     VacationApprovalForm,
                                                     Applicant_No = Gallery5.Selected.Approval_No
-                                                ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
+                                                ).Title & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
                                             )
                                         ),
-                                        FormName = "預備合約通知書(新入職)",
+                                        ThisItem.Task_Name = "預備合約通知書(新入職)",
                                         If(
                                             ThisItem.TaskStatus = "001",
                                             Launch(
-                                                JumpUrl&"&Screen=ContractNoticeForm&taskNum=" & LookUp(
+                                                JumpUrl & "&Screen=ContractNoticeForm&taskNum=" & LookUp(
                                                     ContractNotice,
                                                     ApprovalId = Gallery5.Selected.Approval_No
-                                                ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=true"
+                                                ).Title & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=true&bustype=edit"
+                                            ),
+                                            ThisItem.TaskStatus = "002",
+                                            Launch(
+                                                JumpUrl & "&Screen=ContractNoticeFormDetail&taskNum=" & LookUp(
+                                                    ContractNotice,
+                                                    ApprovalId = Gallery5.Selected.Approval_No
+                                                ).Title & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
                                             ),
                                             Launch(
-                                                JumpUrl&"&Screen=ContractNoticeFormDetail&taskNum=" & LookUp(
+                                                JumpUrl & "&Screen=ContractNoticeFormDetail&taskNum=" & LookUp(
                                                     ContractNotice,
                                                     ApprovalId = Gallery5.Selected.Approval_No
-                                                ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
+                                                ).Title & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
                                             )
                                         ),
-                                        FormName = "任職資源申請",
-                                        Launch(
-                                            JumpUrlA306A111&"&Screen=EmploymentFormDetail&taskNum=" & LookUp(
-                                                EmploymentResource,
-                                                ApprovalId = Gallery5.Selected.Approval_No
-                                            ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
+                                        ThisItem.Task_Name = "任職資源申請",
+                                        If(
+                                            ThisItem.TaskStatus = "001",
+                                            Launch(
+                                                JumpUrlA306A111 & "&Screen=EmploymentFormScreen&taskNum=" & LookUp(
+                                                    ContractNotice,
+                                                    ApprovalId = Gallery5.Selected.Approval_No
+                                                ).Title & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=true&bustype=edit"
+                                            ),
+                                            Launch(
+                                                JumpUrlA306A111 & "&Screen=EmploymentFormDetail&taskNum=" & LookUp(
+                                                    EmploymentResource,
+                                                    ApprovalId = Gallery5.Selected.Approval_No
+                                                ).Title & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
+                                            )
                                         ),
                                         With(
                                             {
@@ -334,7 +364,7 @@
                                                 ).标题,
                                                 FLowId: Gallery5.Selected.Approval_No
                                             },
-                                            Launch(JumpUrlMobileApp&"&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & Gallery5.Selected.Approval_No & "&Page=Moblie"
+                                            Launch(JumpUrlMobileApp&"&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & Gallery5.Selected.Approval_No & "&Page=Moblie" & "&approvalNum=" & Gallery5.Selected.Approval_No
                                             ,{},LaunchTarget.Replace)
                                         )
                                     )

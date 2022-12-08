@@ -4024,8 +4024,13 @@
                         FocusedBorderThickness: =1
                         Height: =36
                         HoverFill: =ColorFade(Self.Fill, -15%)
-                        OnSelect: |
-                            =If(
+                        OnSelect: |-
+                            =If( ComboBox1_5.Selected.Mail = Blank() && !Checkbox2_1.Value && !Checkbox2_2.Value,
+                            Notify(
+                                "未選擇處理人！",
+                                Warning,5000
+                            ),
+                            If(
                                 CountA(
                                     Filter(
                                         MyContacts,
@@ -4105,6 +4110,7 @@
                             
                             //部門簡單流程使用默認推薦郵箱時，需要設定Departmentselect值為true
                             If(FlowType = "部門簡單流程" && Departmentselect<>true,Set(Departmentselect,true));
+                            )
                         PaddingBottom: =0
                         PaddingLeft: =0
                         PaddingRight: =0
