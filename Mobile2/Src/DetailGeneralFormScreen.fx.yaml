@@ -579,6 +579,7 @@
                 Fill: =White
                 FillPortions: =1
                 FocusedBorderThickness: =1
+                FontWeight: =FontWeight.Bold
                 Height: =36
                 HoverBorderColor: =ColorFade(Self.Color, -15%)
                 HoverColor: =ColorFade(Self.Color, -15%)
@@ -606,6 +607,7 @@
                             "請在處理備註中填寫退回原因。",
                             Warning
                         ),
+                        If(TextInput2_35.Text<>TextInput2_30.Text,Notify("申請表密碼輸入不一致，請重新輸入",Warning),TextInput2_37.Text<>TextInput2_31.Text,Notify("附件密碼輸入不一致，請重新輸入",Warning),
                     //更新退回時的审批行动状态为005，表示退回
                        With(
                                 {
@@ -807,6 +809,7 @@
                         )
                     )
                     )
+                    )
                 PaddingBottom: =0
                 PaddingLeft: =0
                 PaddingRight: =0
@@ -863,6 +866,7 @@
                             "請選擇下一節處理行動及處理人。",
                             NotificationType.Error
                         ),
+                        If(TextInput2_35.Text<>TextInput2_30.Text,Notify("申請表密碼輸入不一致，請重新輸入",Warning),TextInput2_37.Text<>TextInput2_31.Text,Notify("附件密碼輸入不一致，請重新輸入",Warning),
                     //上傳
                     If(Last(Attachment_Excel2.Attachments).Name <> Blank(),
                     Set(varAttachmentControl5,JSON(Image2.Image,IncludeBinaryData));
@@ -1276,6 +1280,7 @@
                         );
                         );
                        )
+                    )
                     )
                 PaddingBottom: =0
                 PaddingLeft: =0
@@ -2683,7 +2688,7 @@
                                 HoverFill: =ColorFade(Self.Fill, -5%)
                                 LayoutMinWidth: =120
                                 Mode: =TextMode.Password
-                                OnChange: =If(TextInput2_35.Text<>TextInput2_30.Text,Notify("密碼輸入不一致，請重新輸入",Warning),TextInput2_35.Text=TextInput2_30.Text,Notify("密碼輸入一致",Success,4000))
+                                OnChange: =If(TextInput2_35.Text<>TextInput2_30.Text,Notify("申請表密碼輸入不一致，請重新輸入",Warning),TextInput2_35.Text=TextInput2_30.Text,Notify("申請表密碼輸入一致",Success,4000))
                                 PaddingBottom: =0
                                 PaddingLeft: =10
                                 PaddingRight: =0
@@ -3242,7 +3247,7 @@
                                 HoverFill: =ColorFade(Self.Fill, -5%)
                                 LayoutMinWidth: =120
                                 Mode: =TextMode.Password
-                                OnChange: =If(TextInput2_37.Text<>TextInput2_31.Text,Notify("密碼輸入不一致，請重新輸入",Warning),TextInput2_37.Text=TextInput2_31.Text,Notify("密碼輸入一致",Success,4000))
+                                OnChange: =If(TextInput2_37.Text<>TextInput2_31.Text,Notify("附件密碼輸入不一致，請重新輸入",Warning),TextInput2_37.Text=TextInput2_31.Text,Notify("附件密碼輸入一致",Success,4000))
                                 PaddingBottom: =0
                                 PaddingLeft: =10
                                 PaddingRight: =0
@@ -4836,6 +4841,7 @@
                                 "請在處理備註中填寫退回原因。",
                                 Warning
                             ),
+                            If(TextInput2_35.Text<>TextInput2_30.Text,Notify("申請表密碼輸入不一致，請重新輸入",Warning),TextInput2_37.Text<>TextInput2_31.Text,Notify("附件密碼輸入不一致，請重新輸入",Warning),
                         //更新退回時的审批行动状态为005，表示退回
                            With(
                                     {
@@ -5037,6 +5043,7 @@
                             )
                         )
                         )
+                        )
                     PaddingBottom: =0
                     PaddingLeft: =0
                     PaddingRight: =0
@@ -5091,7 +5098,7 @@
                                 "請選擇下一節處理行動及處理人。",
                                 NotificationType.Error
                             ),
-                            
+                            If(TextInput2_35.Text<>TextInput2_30.Text,Notify("申請表密碼輸入不一致，請重新輸入",Warning),TextInput2_37.Text<>TextInput2_31.Text,Notify("附件密碼輸入不一致，請重新輸入",Warning),
                         //上傳
                         If(Last(Attachment_Excel2.Attachments).Name <> Blank(),
                         Set(varAttachmentControl5,JSON(Image2.Image,IncludeBinaryData));
@@ -5500,6 +5507,7 @@
                             );
                             );
                            )
+                        )
                         )
                     PaddingBottom: =0
                     PaddingLeft: =0
