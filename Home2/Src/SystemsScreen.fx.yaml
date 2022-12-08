@@ -2212,10 +2212,10 @@ SystemsScreen As screen:
         SaveBtn_15 As button:
             BorderThickness: =0
             DisabledColor: =RGBA(255, 255, 255, 1)
-            Fill: =RGBA(0, 133, 192, 1)
+            Fill: =glbThemePrimaryColor
             FocusedBorderThickness: =0
             FontWeight: =FontWeight.Normal
-            HoverFill: =ColorFade(RGBA(0, 133, 192, 1), -20%)
+            HoverFill: =ColorFade(glbThemePrimaryColor, -20%)
             OnSelect: |-
                 =If(
                     IsBlank(UserTextInput_1.Text) && IsBlank(UsaerEmaiLTextInput_1.Text) && IsBlank(UserTextInput_8.Text) && IsBlank(Dropdown_Mechanism_1.Selected.Code_No2) && IsBlank(UserTextInput_10.Text) && IsBlank(Dropdown_post_1.Selected.PR_Name) && IsBlank(UserTextInput_12.Text) && IsBlank(Dropdown_AgentEmail_1.Selected.Agent_Email),
@@ -2261,7 +2261,7 @@ SystemsScreen As screen:
                     Reset(Dropdown_IsManger_1)
                 );
             PressedColor: =RGBA(255, 255, 255, 1)
-            PressedFill: =ColorFade(RGBA(0, 133, 192, 1), -20%)
+            PressedFill: =ColorFade(glbThemePrimaryColor, -20%)
             RadiusBottomLeft: =4
             RadiusBottomRight: =4
             RadiusTopLeft: =4
@@ -2460,7 +2460,7 @@ SystemsScreen As screen:
                 ZIndex: =47
 
         SaveBtn_14 As button:
-            BorderColor: =RGBA(0, 134, 208, 1)
+            BorderColor: =glbThemePrimaryColor
             BorderThickness: =1
             Color: =RGBA(0, 134, 208, 1)
             DisabledColor: =RGBA(255, 255, 255, 1)
@@ -3462,10 +3462,10 @@ SystemsScreen As screen:
         SaveBtn_21 As button:
             BorderThickness: =0
             DisabledColor: =RGBA(255, 255, 255, 1)
-            Fill: =RGBA(0, 133, 192, 1)
+            Fill: =glbThemePrimaryColor
             FocusedBorderThickness: =0
             FontWeight: =FontWeight.Normal
-            HoverFill: =ColorFade(RGBA(0, 133, 192, 1), -20%)
+            HoverFill: =ColorFade(glbThemePrimaryColor, -20%)
             OnSelect: |
                 =If(
                     IsBlank(UserTextInput_4.Text) && IsBlank(Dropdown_Username_5.Selected.User_Email) && IsBlank(Dropdown_OrganizationType_5.Selected.Value2) && IsBlank(DropdownOrganization_Number_5.Selected.Code_No2) && IsBlank(UserTextInput_14.Text),
@@ -3497,7 +3497,7 @@ SystemsScreen As screen:
                     Reset(UserTextInput_14)
                 );
             PressedColor: =RGBA(255, 255, 255, 1)
-            PressedFill: =ColorFade(RGBA(0, 133, 192, 1), -20%)
+            PressedFill: =ColorFade(glbThemePrimaryColor, -20%)
             RadiusBottomLeft: =4
             RadiusBottomRight: =4
             RadiusTopLeft: =4
@@ -3564,7 +3564,7 @@ SystemsScreen As screen:
             ZIndex: =25
 
         SaveBtn_20 As button:
-            BorderColor: =RGBA(0, 134, 208, 1)
+            BorderColor: =glbThemePrimaryColor
             BorderThickness: =1
             Color: =RGBA(0, 134, 208, 1)
             DisabledColor: =RGBA(255, 255, 255, 1)
