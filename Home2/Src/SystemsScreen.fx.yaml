@@ -3093,20 +3093,7 @@ SystemsScreen As screen:
                 );
                 UpdateContext(
                     {
-                        Role_No: If(
-                                Dropdown_OrganizationType_5.Selected.Value2 = "填寫人",
-                                "R001",
-                                Dropdown_OrganizationType_5.Selected.Value2 = "提交人",
-                                "R004",
-                                Dropdown_OrganizationType_5.Selected.Value2 = "審批人",
-                                "R005",
-                                Dropdown_OrganizationType_5.Selected.Value2 = "簽批人",
-                                "R004",
-                                Dropdown_OrganizationType_5.Selected.Value2 = "檢查人",
-                                "R003",
-                                Dropdown_OrganizationType_5.Selected.Value2 = "執行人",
-                                "T001"
-                            )
+                        Role_No:LookUp(ConfigurationInfo,Type_No="0002"&&Value2=Dropdown_OrganizationType_3.Selected.Value2).Code_No2
                     }
                 );
                 If(
@@ -3492,20 +3479,7 @@ SystemsScreen As screen:
                         {S_Mechanism_No: DropdownOrganization_Number_5.Selected.Code_No2},
                         {Role: Dropdown_OrganizationType_5.Selected.Value2},
                         {
-                            Role_No: If(
-                                Dropdown_OrganizationType_5.Selected.Value2 = "填寫人",
-                                "R001",
-                                Dropdown_OrganizationType_5.Selected.Value2 = "提交人",
-                                "R004",
-                                Dropdown_OrganizationType_5.Selected.Value2 = "審批人",
-                                "R005",
-                                Dropdown_OrganizationType_5.Selected.Value2 = "簽批人",
-                                "R004",
-                                Dropdown_OrganizationType_5.Selected.Value2 = "檢查人",
-                                "R003",
-                                Dropdown_OrganizationType_5.Selected.Value2 = "執行人",
-                                "T001"
-                            )
+                         Role_No:LookUp(ConfigurationInfo,Type_No="0002"&&Value2=Dropdown_OrganizationType_3.Selected.Value2).Code_No2
                         }
                     );
                     Notify(
