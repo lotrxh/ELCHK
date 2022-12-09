@@ -3468,20 +3468,27 @@ SystemsScreen As screen:
                 =If(
                     IsBlank(UserTextInput_4.Text) && IsBlank(Dropdown_Username_5.Selected.User_Email) && IsBlank(Dropdown_OrganizationType_5.Selected.Value2) && IsBlank(DropdownOrganization_Number_5.Selected.Code_No2) && IsBlank(UserTextInput_14.Text),
                     UpdateContext({EditGAMask: true}),
-                    Patch(
-                        SignerInfo,
-                        LookUp(
-                            SignerInfo,
-                            Title = GAListGallery_1.Selected.Title
-                        ),
-                        {Signer: UserTextInput_4.Text},
-                        {Signer_Email: Dropdown_Username_5.Selected.User_Email},
-                        {S_Mechanism: UserTextInput_14.Text},
-                        {S_Mechanism_No: DropdownOrganization_Number_5.Selected.Code_No2},
-                        {Role: Dropdown_OrganizationType_5.Selected.Value2},
+                    With(
                         {
-                         Role_No:LookUp(ConfigurationInfo,Type_No="0002"&&Value2=Dropdown_OrganizationType_3.Selected.Value2,Code_No2)
-                        }
+                            RoleNUmber: LookUp(
+                                ConfigurationInfo,
+                                Type_No = "0002" && Value2 = Dropdown_OrganizationType_5.Selected.Value2,
+                                Code_No2
+                            )
+                        },
+                        Patch(
+                            SignerInfo,
+                            LookUp(
+                                SignerInfo,
+                                Title = GAListGallery_1.Selected.Title
+                            ),
+                            {Signer: UserTextInput_4.Text},
+                            {Signer_Email: Dropdown_Username_5.Selected.User_Email},
+                            {S_Mechanism: UserTextInput_14.Text},
+                            {S_Mechanism_No: DropdownOrganization_Number_5.Selected.Code_No2},
+                            {Role: Dropdown_OrganizationType_5.Selected.Value2},
+                            {Role_No: RoleNUmber}
+                        )
                     );
                     Notify(
                         "編輯成功！",
