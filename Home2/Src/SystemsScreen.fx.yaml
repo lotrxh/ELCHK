@@ -3079,7 +3079,7 @@ SystemsScreen As screen:
                 =UpdateContext(
                     {
                         S_Mechanism_T: LookUp(
-                            MechanismType,
+                            ConfigurationInfo,
                             Code_No2 = DropdownOrganization_Number_3.Selected.Code_No2
                         ).Value1
                     }
@@ -3087,7 +3087,7 @@ SystemsScreen As screen:
                 UpdateContext(
                     {
                         O_Service: LookUp(
-                            MechanismType,
+                            ConfigurationInfo,
                             Code_No2 = DropdownOrganization_Number_3.Selected.Code_No2
                         ).Value3
                     }
@@ -3480,7 +3480,7 @@ SystemsScreen As screen:
                         {S_Mechanism_No: DropdownOrganization_Number_5.Selected.Code_No2},
                         {Role: Dropdown_OrganizationType_5.Selected.Value2},
                         {
-                         Role_No:LookUp(ConfigurationInfo,Type_No="0002"&&Value2=Dropdown_OrganizationType_3.Selected.Value2).Code_No2
+                         Role_No:LookUp(ConfigurationInfo,Type_No="0002"&&Value2=Dropdown_OrganizationType_3.Selected.Value2,Code_No2)
                         }
                     );
                     Notify(
