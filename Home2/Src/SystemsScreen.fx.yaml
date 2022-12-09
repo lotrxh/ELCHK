@@ -450,6 +450,7 @@ SystemsScreen As screen:
         RightBg_9 As button:
             DisplayMode: =DisplayMode.View
             Fill: =RGBA(255, 255, 255, 1)
+            Font: =Font.'Segoe UI'
             Height: =768
             RadiusBottomLeft: =4
             RadiusBottomRight: =4
@@ -487,7 +488,7 @@ SystemsScreen As screen:
             ZIndex: =7
 
         GAListGallery_1 As gallery.galleryVertical:
-            Height: =435
+            Height: =484
             Items: |-
                 =Search(
                     Filter(
@@ -786,8 +787,8 @@ SystemsScreen As screen:
             Size: =9
             Text: ="共計："&CountRows(User_Management)&"條"
             Width: =105
-            X: =1005
-            Y: =645
+            X: =1006
+            Y: =GAListGallery_1.Y+GAListGallery_1.Height+20
             ZIndex: =22
 
     OrganizationContainer As groupContainer.manualLayoutContainer:
