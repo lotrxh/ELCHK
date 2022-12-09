@@ -79,12 +79,12 @@ GeneralFormListScreen As screen:
                 "DepartMentName",
                 LookUp(
                     Approval_Table,
-                    Title = Approval_No
+                    标题 = Approval_No
                 ).DepartMentUnit,
                 "FormDepartMentName",
                 LookUp(
                     Approval_Table,
-                    Title = Approval_No
+                    标题 = Approval_No
                 ).DepartMentName
             )
         );
@@ -119,37 +119,37 @@ GeneralFormListScreen As screen:
                     "FlowTaskName",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).Task_Name,
                     "FlowOrder",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).Application_No,
                     "SubmitApprover",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).'Operator ',
                     "FlowCreateDate",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
-                    ).Created,
+                        标题 = Approval_No
+                    ).创建时间,
                     "DepartMentName",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).DepartMentUnit,
                     "FormType",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).FormType,
                     "Application_Status",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).Application_Status,
                     "CustomerSearch",
                     LookUp(
@@ -172,12 +172,12 @@ GeneralFormListScreen As screen:
                 "DepartMentName",
                 LookUp(
                     Approval_Table,
-                    Title = Approval_No
+                    标题 = Approval_No
                 ).DepartMentUnit,
                 "FormDepartMentName",
                 LookUp(
                     Approval_Table,
-                    Title = Approval_No
+                    标题 = Approval_No
                 ).DepartMentName
             )
         );
@@ -214,37 +214,37 @@ GeneralFormListScreen As screen:
                     "FlowTaskName",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).Task_Name,
                     "FlowOrder",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).Application_No,
                     "SubmitApprover",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).'Operator ',
                     "FlowCreateDate",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
-                    ).Created,
+                        标题 = Approval_No
+                    ).创建时间,
                     "DepartMentName",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).DepartMentUnit,
                     "FormType",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).FormType,
                     "Application_Status",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).Application_Status,
                     "CustomerSearch",
                     LookUp(
@@ -276,12 +276,12 @@ GeneralFormListScreen As screen:
                 "DepartMentName",
                 LookUp(
                     Approval_Table,
-                    Title = Approval_No
+                    标题 = Approval_No
                 ).DepartMentUnit,
                 "FormDepartMentName",
                 LookUp(
                     Approval_Table,
-                    Title = Approval_No
+                    标题 = Approval_No
                 ).DepartMentName
             )
         );
@@ -316,37 +316,37 @@ GeneralFormListScreen As screen:
                     "FlowTaskName",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).Task_Name,
                     "FlowOrder",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).Application_No,
                     "FlowCreateDate",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
-                    ).Created,
+                        标题 = Approval_No
+                    ).创建时间,
                     "SubmitApprover",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).'Operator ',
                     "DepartMentName",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).DepartMentUnit,
                     "FormType",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).FormType,
                     "Application_Status",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).Application_Status,
                     "CustomerSearch",
                     LookUp(
@@ -1114,21 +1114,21 @@ GeneralFormListScreen As screen:
                                 JumpUrl & "&Screen=JobTitleCopyFormScreen&AppIds=" & LookUp(
                                     ApplitionJobPosition,
                                     ApprovalId = TaskListGallery.Selected.Approval_No
-                                ).Title & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmits=true&newApplicationGuid=" & GUID() & "&flowguid=" & GUID()&"&bustype=Edit",{},LaunchTarget.Replace
+                                ).标题 & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmits=true&newApplicationGuid=" & GUID() & "&flowguid=" & GUID()&"&bustype=Edit",{},LaunchTarget.Replace
                             ),
                             ThisItem.FlowTaskName = "假期批核人資料表",
                             Launch(
                                 JumpUrl & "&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
                                     VacationApprovalForm,
                                     Applicant_No = TaskListGallery.Selected.Approval_No
-                                ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&isCopy=true",{},LaunchTarget.Replace
+                                ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&isCopy=true",{},LaunchTarget.Replace
                             ),
                             ThisItem.FlowTaskName = "預備合約通知書(新入職)",
                             Launch(
                                 JumpUrl & "&Screen=ContractNoticeCopyForm&taskNum=" & LookUp(
                                     ContractNotice,
                                     ApprovalId = TaskListGallery.Selected.Approval_No
-                                ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmits=true&newApplicationGuid=" & GUID() & "&flowguid=" & GUID()&"&bustype=Edit",{},LaunchTarget.Replace
+                                ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmits=true&newApplicationGuid=" & GUID() & "&flowguid=" & GUID()&"&bustype=Edit",{},LaunchTarget.Replace
                             )
                         )
                     PaddingBottom: =4
@@ -1276,20 +1276,20 @@ GeneralFormListScreen As screen:
                                     JumpUrl & "&Screen=JobTitleFormScreen&AppIds=" & LookUp(
                                         ApplitionJobPosition,
                                         ApprovalId = TaskListGallery.Selected.Approval_No
-                                    ).Title & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
+                                    ).标题 & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
                                 ),
                                 ThisItem.TaskStatus = "002",
                                 Launch(
                                     JumpUrl & "&Screen=JobTitleFormDetailScreen&AppIds=" & LookUp(
                                         ApplitionJobPosition,
                                         ApprovalId = TaskListGallery.Selected.Approval_No
-                                    ).Title & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&canOperation=true"
+                                    ).标题 & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&canOperation=true"
                                 ),
                                 Launch(
                                     JumpUrl & "&Screen=JobTitleFormDetailScreen&AppIds=" & LookUp(
                                         ApplitionJobPosition,
                                         ApprovalId = TaskListGallery.Selected.Approval_No
-                                    ).Title & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
+                                    ).标题 & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
                                 )
                             ),
                             ThisItem.FlowTaskName = "假期批核人資料表",
@@ -1299,20 +1299,20 @@ GeneralFormListScreen As screen:
                                     JumpUrlA306A111 & "&Screen=VacationFormScreen&taskNum=" & LookUp(
                                         VacationApprovalForm,
                                         Applicant_No = TaskListGallery.Selected.Approval_No
-                                    ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
+                                    ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
                                 ),
                                 ThisItem.TaskStatus = "002",
                                 Launch(
                                     JumpUrlA306A111 & "&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
                                         VacationApprovalForm,
                                         Applicant_No = TaskListGallery.Selected.Approval_No
-                                    ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&canOperation=true"
+                                    ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&canOperation=true"
                                 ),
                                 Launch(
                                     JumpUrlA306A111 & "&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
                                         VacationApprovalForm,
                                         Applicant_No = TaskListGallery.Selected.Approval_No
-                                    ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
+                                    ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
                                 )
                             ),
                             ThisItem.FlowTaskName = "預備合約通知書(新入職)",
@@ -1322,20 +1322,20 @@ GeneralFormListScreen As screen:
                                     JumpUrl & "&Screen=ContractNoticeForm&taskNum=" & LookUp(
                                         ContractNotice,
                                         ApprovalId = TaskListGallery.Selected.Approval_No
-                                    ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
+                                    ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
                                 ),
                                 ThisItem.TaskStatus = "002",
                                 Launch(
                                     JumpUrl & "&Screen=ContractNoticeFormDetail&taskNum=" & LookUp(
                                         ContractNotice,
                                         ApprovalId = TaskListGallery.Selected.Approval_No
-                                    ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&canOperation=true"
+                                    ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&canOperation=true"
                                 ),
                                 Launch(
                                     JumpUrl & "&Screen=ContractNoticeFormDetail&taskNum=" & LookUp(
                                         ContractNotice,
                                         ApprovalId = TaskListGallery.Selected.Approval_No
-                                    ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
+                                    ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
                                 )
                             ),
                             ThisItem.FlowTaskName = "任職資源申請",
@@ -1345,13 +1345,13 @@ GeneralFormListScreen As screen:
                                     JumpUrlA306A111 & "&Screen=EmploymentFormScreen&taskNum=" & LookUp(
                                         ContractNotice,
                                         ApprovalId = TaskListGallery.Selected.Approval_No
-                                    ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
+                                    ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
                                 ),
                                 Launch(
                                     JumpUrlA306A111 & "&Screen=EmploymentFormDetail&taskNum=" & LookUp(
                                         EmploymentResource,
                                         ApprovalId = TaskListGallery.Selected.Approval_No
-                                    ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&canOperation=true"
+                                    ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&canOperation=true"
                                 )
                             ),
                             With(
@@ -1359,7 +1359,7 @@ GeneralFormListScreen As screen:
                                     FormId: LookUp(
                                         GenericFormList,
                                         ApprovalId = ThisItem.Approval_No
-                                    ).Title
+                                    ).标题
                                 },
                                 Launch(
                                     JumpUrlMobileApp & "&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & TaskListGallery.Selected.Approval_No & "&Page=Home",
@@ -1670,21 +1670,21 @@ GeneralFormListScreen As screen:
                 =If(
                     LookUp(
                         Approval_Table,
-                        Title = DeleteNum
+                        标题 = DeleteNum
                     ).Task_Name = "招聘職位申請表",
                     RemoveIf(
                         IncomeAccount,
                         Application_No = LookUp(
                             ApplitionJobPosition,
                             ApprovalId = DeleteNum
-                        ).Title
+                        ).标题
                     );
                     RemoveIf(
                         UploadFile,
                         ApplicationId = LookUp(
                             ApplitionJobPosition,
                             ApprovalId = DeleteNum
-                        ).Title
+                        ).标题
                     );
                     RemoveIf(
                         ApplitionJobPosition,
@@ -1696,12 +1696,12 @@ GeneralFormListScreen As screen:
                     );
                     RemoveIf(
                         Approval_Table,
-                        Title = DeleteNum
+                        标题 = DeleteNum
                     ),
                     If(
                         LookUp(
                             Approval_Table,
-                            Title = DeleteNum
+                            标题 = DeleteNum
                         ).Task_Name = "假期批核人資料表",
                         RemoveIf(
                             VacationApprovalForm,
@@ -1713,7 +1713,7 @@ GeneralFormListScreen As screen:
                         );
                         RemoveIf(
                             Approval_Table,
-                            Title = DeleteNum
+                            标题 = DeleteNum
                         ),
                         //删除1b相关表数据
                         RemoveIf(
@@ -1721,28 +1721,28 @@ GeneralFormListScreen As screen:
                             Application_No = LookUp(
                                 ContractNotice,
                                 ApprovalId = DeleteNum
-                            ).Title
+                            ).标题
                         );
                         RemoveIf(
                             AllowanceInformation,
                             Application_No = LookUp(
                                 ContractNotice,
                                 ApprovalId = DeleteNum
-                            ).Title
+                            ).标题
                         );
                         RemoveIf(
                             UploadFile,
                             ApplicationId = LookUp(
                                 ContractNotice,
                                 ApprovalId = DeleteNum
-                            ).Title
+                            ).标题
                         );
                         RemoveIf(
                             VacationApprovalForm,
                             Applicant_No = LookUp(
                                 ContractNotice,
                                 ApprovalId = DeleteNum
-                            ).Title
+                            ).标题
                         );
                         RemoveIf(
                             ContractNotice,
@@ -1754,7 +1754,7 @@ GeneralFormListScreen As screen:
                         );
                         RemoveIf(
                             Approval_Table,
-                            Title = DeleteNum
+                            标题 = DeleteNum
                         )
                     )
                 );
@@ -1853,12 +1853,12 @@ GeneralFormListScreen As screen:
                     "DepartMentName",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).DepartMentUnit,
                     "FormDepartMentName",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).DepartMentName
                 )
             );
@@ -1893,37 +1893,37 @@ GeneralFormListScreen As screen:
                         "FlowTaskName",
                         LookUp(
                             Approval_Table,
-                            Title = Approval_No
+                            标题 = Approval_No
                         ).Task_Name,
                         "FlowOrder",
                         LookUp(
                             Approval_Table,
-                            Title = Approval_No
+                            标题 = Approval_No
                         ).Application_No,
                         "SubmitApprover",
                         LookUp(
                             Approval_Table,
-                            Title = Approval_No
+                            标题 = Approval_No
                         ).'Operator ',
                         "FlowCreateDate",
                         LookUp(
                             Approval_Table,
-                            Title = Approval_No
-                        ).Created,
+                            标题 = Approval_No
+                        ).创建时间,
                         "DepartMentName",
                         LookUp(
                             Approval_Table,
-                            Title = Approval_No
+                            标题 = Approval_No
                         ).DepartMentUnit,
                         "FormType",
                         LookUp(
                             Approval_Table,
-                            Title = Approval_No
+                            标题 = Approval_No
                         ).FormType,
                         "Application_Status",
                         LookUp(
                             Approval_Table,
-                            Title = Approval_No
+                            标题 = Approval_No
                         ).Application_Status,
                         "CustomerSearch",
                         LookUp(
@@ -1946,12 +1946,12 @@ GeneralFormListScreen As screen:
                     "DepartMentName",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).DepartMentUnit,
                     "FormDepartMentName",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).DepartMentName
                 )
             );
@@ -1988,37 +1988,37 @@ GeneralFormListScreen As screen:
                         "FlowTaskName",
                         LookUp(
                             Approval_Table,
-                            Title = Approval_No
+                            标题 = Approval_No
                         ).Task_Name,
                         "FlowOrder",
                         LookUp(
                             Approval_Table,
-                            Title = Approval_No
+                            标题 = Approval_No
                         ).Application_No,
                         "SubmitApprover",
                         LookUp(
                             Approval_Table,
-                            Title = Approval_No
+                            标题 = Approval_No
                         ).'Operator ',
                         "FlowCreateDate",
                         LookUp(
                             Approval_Table,
-                            Title = Approval_No
-                        ).Created,
+                            标题 = Approval_No
+                        ).创建时间,
                         "DepartMentName",
                         LookUp(
                             Approval_Table,
-                            Title = Approval_No
+                            标题 = Approval_No
                         ).DepartMentUnit,
                         "FormType",
                         LookUp(
                             Approval_Table,
-                            Title = Approval_No
+                            标题 = Approval_No
                         ).FormType,
                         "Application_Status",
                         LookUp(
                             Approval_Table,
-                            Title = Approval_No
+                            标题 = Approval_No
                         ).Application_Status,
                         "CustomerSearch",
                         LookUp(
@@ -2050,12 +2050,12 @@ GeneralFormListScreen As screen:
                     "DepartMentName",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).DepartMentUnit,
                     "FormDepartMentName",
                     LookUp(
                         Approval_Table,
-                        Title = Approval_No
+                        标题 = Approval_No
                     ).DepartMentName
                 )
             );
@@ -2090,37 +2090,37 @@ GeneralFormListScreen As screen:
                         "FlowTaskName",
                         LookUp(
                             Approval_Table,
-                            Title = Approval_No
+                            标题 = Approval_No
                         ).Task_Name,
                         "FlowOrder",
                         LookUp(
                             Approval_Table,
-                            Title = Approval_No
+                            标题 = Approval_No
                         ).Application_No,
                         "FlowCreateDate",
                         LookUp(
                             Approval_Table,
-                            Title = Approval_No
-                        ).Created,
+                            标题 = Approval_No
+                        ).创建时间,
                         "SubmitApprover",
                         LookUp(
                             Approval_Table,
-                            Title = Approval_No
+                            标题 = Approval_No
                         ).'Operator ',
                         "DepartMentName",
                         LookUp(
                             Approval_Table,
-                            Title = Approval_No
+                            标题 = Approval_No
                         ).DepartMentUnit,
                         "FormType",
                         LookUp(
                             Approval_Table,
-                            Title = Approval_No
+                            标题 = Approval_No
                         ).FormType,
                         "Application_Status",
                         LookUp(
                             Approval_Table,
-                            Title = Approval_No
+                            标题 = Approval_No
                         ).Application_Status,
                         "CustomerSearch",
                         LookUp(
