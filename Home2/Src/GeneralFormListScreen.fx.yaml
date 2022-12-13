@@ -58,7 +58,7 @@ GeneralFormListScreen As screen:
                 CurrentUser in ApproverEmail && (TaskStatus = "000" || TaskStatus = "001" || TaskStatus = "004" || TaskStatus = "006" || TaskStatus = "002" || TaskStatus = "005")
             )
         );
-        //生成带部门字段的ApprovalDetail_Table待理任务
+        //生成带部门和任务名称字段的ApprovalDetail_Table待處理任务
         ClearCollect(
             ApprovalDetailColwithdepartment,
             AddColumns(
@@ -85,7 +85,26 @@ GeneralFormListScreen As screen:
                 LookUp(
                     Approval_Table,
                     标题 = Approval_No
-                ).DepartMentName
+                ).DepartMentName,
+                "TaskName",
+                LookUp(
+                    Approval_Table,
+                    标题 = Approval_No
+                ).Task_Name    
+            )
+        );
+        //過濾一期待處理認爲
+        ClearCollect(
+            ApprovalDetailColwithPhase1,
+            Filter(ApprovalDetailColwithdepartment,
+            TaskName = "任職資源申請" || TaskName = "招聘職位申請表" || TaskName = "假期批核人資料表" || TaskName = "預備合約通知書(新入職)"
+            )
+        );
+        //過濾二期待處理認爲
+        ClearCollect(
+            ApprovalDetailColwithPhase2,
+            Filter(ApprovalDetailColwithdepartment,
+            TaskName <> "任職資源申請" && TaskName <> "招聘職位申請表" && TaskName <> "假期批核人資料表" && TaskName <> "預備合約通知書(新入職)"
             )
         );
         //生成待处理集合，新增Ismanger判断
@@ -97,11 +116,12 @@ GeneralFormListScreen As screen:
                         ApprovalDetailCol,
                         1 = 1
                     ),
+                    ClearCollect(NewApprovalTable,ApprovalDetailColwithPhase1,
                     Filter(
-                        ApprovalDetailColwithdepartment,
+                        ApprovalDetailColwithPhase2,
                         CurrentUser in ApproverEmail || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermissionForm in FormDepartMentName
                     )
-                )
+                ))
             },
             ClearCollect(
                 FilterPendingDataCol,
@@ -164,7 +184,7 @@ GeneralFormListScreen As screen:
                 )
             )
         );
-        //生成带部门字段的ApprovalDetail_Table已处理任务
+        //生成带部门和任務名稱字段的ApprovalDetail_Table已处理任务
         ClearCollect(
             ProcessedDetailColwithdepartment,
             AddColumns(
@@ -178,10 +198,31 @@ GeneralFormListScreen As screen:
                 LookUp(
                     Approval_Table,
                     标题 = Approval_No
-                ).DepartMentName
+                ).DepartMentName,
+                "TaskName",
+                LookUp(
+                    Approval_Table,
+                    标题 = Approval_No
+                ).Task_Name
             )
         );
-        ///生成已处理集合，新增Ismanger判断
+        /*
+        //過濾一期已处理認爲
+        ClearCollect(
+            ProcessedDetailColwithPhase1,
+            Filter(ProcessedDetailColwithdepartment,
+            TaskName = "任職資源申請" || TaskName = "招聘職位申請表" || TaskName = "假期批核人資料表" || TaskName = "預備合約通知書(新入職)"
+            )
+        );
+        //過濾二期已处理認爲
+        ClearCollect(
+            ProcessedDetailColwithPhase2,
+            Filter(ProcessedDetailColwithdepartment,
+            TaskName <> "任職資源申請" && TaskName <> "招聘職位申請表" && TaskName <> "假期批核人資料表" && TaskName <> "預備合約通知書(新入職)"
+            )
+        );
+        */
+        //生成已处理集合，新增Ismanger判断
         With(
             {
                 ProcessedListCol: If(
@@ -254,7 +295,7 @@ GeneralFormListScreen As screen:
                 )
             )
         );
-        //生成带部门字段的ApprovalDetail_Table全部任务
+        //生成带部门和任務名稱字段的ApprovalDetail_Table全部任务
         ClearCollect(
             ComplatelDetailColwithdepartment,
             AddColumns(
@@ -282,10 +323,29 @@ GeneralFormListScreen As screen:
                 LookUp(
                     Approval_Table,
                     标题 = Approval_No
-                ).DepartMentName
+                ).DepartMentName,
+                "TaskName",
+                LookUp(
+                    Approval_Table,
+                    标题 = Approval_No
+                ).Task_Name
             )
         );
-        // 生成所有集合，新增Ismanger判断
+        //過濾一期全部認爲
+        ClearCollect(
+            AllDetailColwithPhase1,
+            Filter(ComplatelDetailColwithdepartment,
+            TaskName = "任職資源申請" || TaskName = "招聘職位申請表" || TaskName = "假期批核人資料表" || TaskName = "預備合約通知書(新入職)"
+            )
+        );
+        //過濾二期全部認爲
+        ClearCollect(
+            AllDetailColwithPhase2,
+            Filter(ComplatelDetailColwithdepartment,
+            TaskName <> "任職資源申請" && TaskName <> "招聘職位申請表" && TaskName <> "假期批核人資料表" && TaskName <> "預備合約通知書(新入職)"
+            )
+        );
+        //生成所有集合，新增Ismanger判断
         With(
             {
                 AllApprovalList: If(
@@ -294,11 +354,12 @@ GeneralFormListScreen As screen:
                         ComplatelDetailCol,
                         TaskStatus <> Blank()
                     ),
+                    ClearCollect(AllTaskTable,AllDetailColwithPhase1,
                     Filter(
-                        ComplatelDetailColwithdepartment,
+                        AllDetailColwithPhase2,
                         TaskStatus <> Blank() && (CurrentUser in ApproverEmail || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermissionForm in FormDepartMentName)
                     )
-                )
+                ))
             },
             ClearCollect(
                 AllApprovalListDataCol,
