@@ -750,7 +750,7 @@ HomepageScreen As screen:
 
             Gallery5 As gallery.galleryVertical:
                 Height: =160
-                Items: =Sort(Filter(ApprovalDetail_Table,ApproverEmail = CurrentUser,TaskStatus = "002"),修改时间,Descending)
+                Items: =Sort(Filter(ApprovalDetail_Table,ApproverEmail = CurrentUser,TaskStatus = "002"),修改时间,Ascending)
                 Layout: =Layout.Vertical
                 OnSelect: =
                 ShowScrollbar: =false
