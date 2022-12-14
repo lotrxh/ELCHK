@@ -27,7 +27,7 @@
         
                 approvalNum: If(
                     IsBlank(Param("approvalNum")),
-                    approvalNum,
+                    First(EditDetailUserForm_1).ApprovalId,
                     Param("approvalNum")
                 )
             }
@@ -467,6 +467,7 @@
                         Reset(TextInput2_37);
                         Reset(Attachment_Excel2);
                         Reset(Attachment_Zip2);
+                        Elchk_Phase2RejectedEmailSentingFLow.Run(approvalNum);
                         Notify(
                             "拒絕成功！",
                             NotificationType.Success
@@ -796,6 +797,7 @@
                         Reset(TextInput2_37);
                         Reset(Attachment_Excel2);
                         Reset(Attachment_Zip2);
+                        Elchk_Phase2ReturnEmailSentingFlow.Run(approvalNum);
                         Notify(
                             "退回成功！",
                             NotificationType.Success,
@@ -1076,6 +1078,7 @@
                                 )
                             );
                             Refresh(ApprovalDetail_Table);
+                            Elchk_Phase2CompletedEmailSentingFlow.Run(approvalNum);
                              Notify(
                             "執行成功！",
                             NotificationType.Success,
@@ -4703,6 +4706,7 @@
                             Reset(TextInput2_37);
                             Reset(Attachment_Excel2);
                             Reset(Attachment_Zip2);
+                            Elchk_Phase2RejectedEmailSentingFLow.Run(approvalNum);
                             Notify(
                                 "拒絕成功！",
                                 NotificationType.Success
@@ -5029,6 +5033,7 @@
                             Reset(TextInput2_37);
                             Reset(Attachment_Excel2);
                             Reset(Attachment_Zip2);
+                            Elchk_Phase2ReturnEmailSentingFlow.Run(approvalNum);
                             Notify(
                                 "退回成功！",
                                 NotificationType.Success,
@@ -5303,6 +5308,7 @@
                                     )
                                 );
                                 Refresh(ApprovalDetail_Table);
+                                Elchk_Phase2CompletedEmailSentingFlow.Run(approvalNum);
                                  Notify(
                                 "執行成功！",
                                 NotificationType.Success,
@@ -5625,7 +5631,7 @@
                 LayoutMinHeight: =287
                 LayoutMinWidth: =320
                 TemplatePadding: =0
-                TemplateSize: =90
+                TemplateSize: =100
                 Width: =551
                 X: =592
                 Y: =356
@@ -5645,12 +5651,12 @@
                     Width: =250
                     Wrap: =false
                     X: =19
-                    Y: =55
+                    Y: =65
                     ZIndex: =2
 
                 UploaderLabel_5 As label:
                     Color: =glbNeutralSecondaryColor
-                    Height: =45
+                    Height: =55
                     OnSelect: =Select(Parent)
                     PaddingBottom: =0
                     PaddingLeft: =0
@@ -5658,7 +5664,7 @@
                     PaddingTop: =0
                     Size: =11
                     Text: =ThisItem.创建者.DisplayName&Char(10)&ThisItem.创建时间
-                    Width: =198
+                    Width: =250
                     X: =19
                     Y: =5
                     ZIndex: =6
@@ -5687,7 +5693,7 @@
                     PressedFill: =RGBA(0, 0, 0, 0)
                     Width: =21
                     X: =248
-                    Y: =55
+                    Y: =65
                     ZIndex: =7
 
                 TextInput2_39 As text:
@@ -5718,7 +5724,7 @@
                     Visible: =If(ThisItem.UploadFilePWD=Blank(),false,true)
                     Width: =250
                     X: =288
-                    Y: =55
+                    Y: =65
                     ZIndex: =9
 
                 Show_Pwd_5 As icon.Add:
@@ -5747,7 +5753,7 @@
                     Visible: =If(ThisItem.IsSelected,ShowPwd2&&!IsBlank(TextInput2_39),true&&!IsBlank(TextInput2_39))
                     Width: =21
                     X: =517
-                    Y: =55
+                    Y: =65
                     ZIndex: =10
 
                 Hide_Pwd_5 As icon.Hide:
@@ -5772,7 +5778,7 @@
                     Visible: =If(ThisItem.IsSelected,ShowHidePwd2)
                     Width: =21
                     X: =517
-                    Y: =55
+                    Y: =65
                     ZIndex: =11
 
     SelectUserContainer_3 As groupContainer.horizontalAutoLayoutContainer:
