@@ -992,7 +992,29 @@
                         ,
                     
                        // 勾選后直接执行，并且审批完成
-                       
+                            With(
+                            {
+                                CurrentLastData: First(
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            TaskStatus = "002",
+                                            Approval_No = FLowId
+                                        ),
+                                        "Priortty",
+                                        Descending
+                                    )
+                                )
+                            },
+                            UpdateIf(
+                                ApprovalDetail_Table,
+                                标题 = CurrentLastData.标题,
+                                {
+                                    TaskStatus: "004",
+                                    Advise: TextInput2_34.Text
+                                }
+                            )
+                        );
                         Patch(
                             ApprovalDetail_Table,
                             Defaults(ApprovalDetail_Table),
@@ -1029,29 +1051,6 @@
                             {
                                 Application_Status:"任務完成"
                             }
-                        );
-                         With(
-                            {
-                                CurrentLastData: First(
-                                    SortByColumns(
-                                        Filter(
-                                            ApprovalDetail_Table,
-                                            TaskStatus = "002",
-                                            Approval_No = FLowId
-                                        ),
-                                        "Priortty",
-                                        Descending
-                                    )
-                                )
-                            },
-                            UpdateIf(
-                                ApprovalDetail_Table,
-                                标题 = CurrentLastData.标题,
-                                {
-                                    TaskStatus: "004",
-                                    Advise: TextInput2_34.Text
-                                }
-                            )
                         );
                         Reset(TextInput2_34);
                         Reset(Dropdown1_6);
@@ -5219,7 +5218,29 @@
                             ,
                         
                            // 勾選后直接执行，并且审批完成
-                           
+                            With(
+                                {
+                                    CurrentLastData: First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                TaskStatus = "002",
+                                                Approval_No = FLowId
+                                            ),
+                                            "Priortty",
+                                            Descending
+                                        )
+                                    )
+                                },
+                                UpdateIf(
+                                    ApprovalDetail_Table,
+                                    标题 = CurrentLastData.标题,
+                                    {
+                                        TaskStatus: "004",
+                                        Advise: TextInput2_34.Text
+                                    }
+                                )
+                            );
                             Patch(
                                 ApprovalDetail_Table,
                                 Defaults(ApprovalDetail_Table),
@@ -5257,29 +5278,7 @@
                                     Application_Status:"任務完成"
                                 }
                             );
-                             With(
-                                {
-                                    CurrentLastData: First(
-                                        SortByColumns(
-                                            Filter(
-                                                ApprovalDetail_Table,
-                                                TaskStatus = "002",
-                                                Approval_No = FLowId
-                                            ),
-                                            "Priortty",
-                                            Descending
-                                        )
-                                    )
-                                },
-                                UpdateIf(
-                                    ApprovalDetail_Table,
-                                    标题 = CurrentLastData.标题,
-                                    {
-                                        TaskStatus: "004",
-                                        Advise: TextInput2_34.Text
-                                    }
-                                )
-                            );
+                        
                             Reset(TextInput2_34);
                             Reset(Dropdown1_6);
                             Reset(ComboBox1_12);
