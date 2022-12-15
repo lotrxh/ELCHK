@@ -1179,7 +1179,7 @@ GeneralFormListScreen As screen:
                             ),
                             ThisItem.FlowTaskName = "假期批核人資料表",
                             Launch(
-                                JumpUrl & "&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
+                                JumpUrl & "&Screen=VacationFormScreen&taskNum=" & LookUp(
                                     VacationApprovalForm,
                                     Applicant_No = TaskListGallery.Selected.Approval_No
                                 ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&isCopy=true&bustype=Edit",{},LaunchTarget.Replace
