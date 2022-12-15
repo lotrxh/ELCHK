@@ -1316,7 +1316,7 @@ SystemsScreen As screen:
                         UserInfo,
                         Defaults(UserInfo),
                         {
-                            标题: GUID(),
+                            Title: GUID(),
                             User_Name: UserTextInput.Text,
                             User_Email: UsaerEmaiLTextInput.Text,
                             O_Mechanism_No:Dropdown_Mechanism.Selected.Code_No2,
@@ -2148,7 +2148,7 @@ SystemsScreen As screen:
             Height: =36
             HoverFill: =RGBA(8, 127, 190, 1)
             OnSelect: |-
-                =RemoveIf(UserInfo,标题=UserListGallery_1.Selected.标题);
+                =RemoveIf(UserInfo,Title=UserListGallery_1.Selected.Title);
                 //ClearCollect(TempAllUserTable,UserInfo);
                 UpdateContext({UserDeletShow: false });
             PressedColor: =RGBA(255, 255, 255, 1)
@@ -2222,7 +2222,7 @@ SystemsScreen As screen:
                     IsBlank(UserTextInput_1.Text) && IsBlank(UsaerEmaiLTextInput_1.Text) && IsBlank(UserTextInput_8.Text) && IsBlank(Dropdown_Mechanism_1.Selected.Code_No2) && IsBlank(UserTextInput_10.Text) && IsBlank(Dropdown_post_1.Selected.PR_Name) && IsBlank(UserTextInput_12.Text) && IsBlank(Dropdown_AgentEmail_1.Selected.Agent_Email),
                     UpdateContext({UserEditShow: true}),
                     Patch(
-                        UserInfo,LookUp(UserInfo,标题=UserListGallery_1.Selected.标题),     
+                        UserInfo,LookUp(UserInfo,Title=UserListGallery_1.Selected.Title),     
                             {User_Name: UserTextInput_1.Text},
                             {User_Email: UsaerEmaiLTextInput_1.Text},
                             {O_Mechanism: UserTextInput_8.Text},
@@ -3108,7 +3108,7 @@ SystemsScreen As screen:
                         SignerInfo,
                         Defaults(SignerInfo),
                         {
-                            标题: GUID(),
+                            Title: GUID(),
                             Signer: UserTextInput_3.Text,
                             Signer_Email: Dropdown_Username_4.Selected.User_Email,
                             S_Mechanism: UserTextInput_13.Text,
@@ -3480,7 +3480,7 @@ SystemsScreen As screen:
                             SignerInfo,
                             LookUp(
                                 SignerInfo,
-                                标题 = GAListGallery_1.Selected.标题
+                                Title = GAListGallery_1.Selected.Title
                             ),
                             {Signer: UserTextInput_4.Text},
                             {Signer_Email: Dropdown_Username_5.Selected.User_Email},
@@ -3827,7 +3827,7 @@ SystemsScreen As screen:
             OnSelect: |-
                 =RemoveIf(
                     SignerInfo,
-                    标题 = GAListGallery_1.Selected.标题
+                    Title = GAListGallery_1.Selected.Title
                 );
                 //Refresh(SignerInfo);
                 //Reset(GAListGallery_1);
