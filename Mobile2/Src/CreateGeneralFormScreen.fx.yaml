@@ -1500,7 +1500,7 @@
                     PaddingLeft: =20
                     PaddingRight: =20
                     Visible: |-
-                        =If(First(EditUserForm).ModelAttachMent="有"&&First(EditUserForm).FlowType<>"範本",true,false)
+                        =If((First(EditUserForm).ModelAttachMent="有"||First(EditUserForm).ModelAttachMent="可選")&&First(EditUserForm).FlowType<>"範本",true,false)
                         //true
                     ZIndex: =2
 
@@ -1549,7 +1549,7 @@
                             PaddingRight: =0
                             PaddingTop: =0
                             Size: =11
-                            Text: =If(First(EditUserForm).ModelAttachMent="有","必填",First(EditUserForm).ModelAttachMent="選填","選填")
+                            Text: =If(First(EditUserForm).ModelAttachMent="有","必填",First(EditUserForm).ModelAttachMent="可選","選填")
                             Visible: =If(Label6_6.Visible=true,false,true)
                             Width: =40
                             ZIndex: =4
@@ -1595,7 +1595,7 @@
                         PressedFill: =
                         Size: =10
                         Tooltip: =
-                        Visible: =If(First(EditUserForm).ModelAttachMent="有"&&First(EditUserForm).FlowType<>"範本",true,false)
+                        Visible: =If((First(EditUserForm).ModelAttachMent="有"||First(EditUserForm).ModelAttachMent="可選")&&First(EditUserForm).FlowType<>"範本",true,false)
                         Width: =Parent.Width-40
                         X: =20
                         Y: =35
