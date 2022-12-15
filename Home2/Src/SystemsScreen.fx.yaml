@@ -41,13 +41,380 @@ SystemsScreen As screen:
         );
         UpdateContext({prelodingvisable:true});
 
+    Container3_9 As groupContainer.manualLayoutContainer:
+        Fill: =RGBA(255, 255, 255, 1)
+        Height: =768
+        Width: =240
+        ZIndex: =1
+
+        XITong As groupContainer.manualLayoutContainer:
+            Height: =123
+            Width: =160
+            X: =60
+            Y: =GalleryNav_10.Height+100
+            ZIndex: =1
+
+            QuanxianManager As label:
+                Align: =Align.Center
+                Color: =glbNeutralSecondaryColor
+                OnSelect: |-
+                    =UpdateContext({ToUserInfoManager:"權限管理"})
+                Size: =11
+                Text: ="權限管理"
+                Visible: =If((SuperUser&&!CurrentRole) || (HRAO&&!CurrentRole),false,true)//增加二期權限判斷，SuperUser和HRAO只能查看用戶管理頁面
+                Width: =120
+                X: =40
+                Y: =80
+                ZIndex: =1
+
+            ZuzhiManager As label:
+                Align: =Align.Center
+                Color: =glbNeutralSecondaryColor
+                OnSelect: |-
+                    =UpdateContext({ToUserInfoManager:"組織機構"})
+                Size: =11
+                Text: ="組織機構"
+                Visible: =If((SuperUser&&!CurrentRole) || (HRAO&&!CurrentRole),false,true)//增加二期權限判斷，SuperUser和HRAO只能查看用戶管理頁面
+                Width: =120
+                X: =40
+                Y: =40
+                ZIndex: =2
+
+            UserManager As label:
+                Align: =Align.Center
+                Color: =glbNeutralSecondaryColor
+                Height: =34
+                OnSelect: |-
+                    =UpdateContext({ToUserInfoManager:"用戶管理"})
+                Size: =11
+                Text: ="用戶管理"
+                Width: =120
+                X: =40
+                Y: =6
+                ZIndex: =3
+
+            QuanxianManager1 As button:
+                BorderColor: =Self.Color
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                Color: =If(ToUserInfoManager="權限管理", glbThemePrimaryColor,glbNeutralSecondaryColor)
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =If(ToUserInfoManager="權限管理", ColorFade(Self.Color, 90%),White)
+                FocusedBorderThickness: =1
+                FontWeight: =If(ToUserInfoManager="權限管理", FontWeight.Semibold,Normal)
+                Height: =34
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =If(ToUserInfoManager<>Blank(),ColorFade(glbThemePrimaryColor, 90%))
+                OnSelect: |-
+                    =UpdateContext({ToUserInfoManager:"權限管理"});Concurrent(Reset(TextInput3_4),Reset(Service_Dropdown_1),Reset(Service_Dropdown_2));
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =11
+                Text: ="權限管理"
+                Visible: =If((SuperUser&&!CurrentRole) || (HRAO&&!CurrentRole),false,true)//增加二期權限判斷，SuperUser和HRAO只能查看用戶管理頁面
+                Width: =120
+                X: =40
+                Y: =86
+                ZIndex: =4
+
+            ZuzhiManager1 As button:
+                BorderColor: =Self.Color
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                Color: =If(ToUserInfoManager="組織機構", glbThemePrimaryColor,glbNeutralSecondaryColor)
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =If(ToUserInfoManager="組織機構", ColorFade(Self.Color, 90%),White)
+                FocusedBorderThickness: =1
+                FontWeight: =If(ToUserInfoManager="組織機構", FontWeight.Semibold,Normal)
+                Height: =34
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =If(ToUserInfoManager<>Blank(),ColorFade(glbThemePrimaryColor, 90%))
+                OnSelect: |-
+                    =UpdateContext({ToUserInfoManager:"組織機構"})
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =11
+                Text: ="組織機構"
+                Visible: =If((SuperUser&&!CurrentRole) || (HRAO&&!CurrentRole),false,true)//增加二期權限判斷，SuperUser和HRAO只能查看用戶管理頁面
+                Width: =120
+                X: =40
+                Y: =46
+                ZIndex: =5
+
+            UserManager1 As button:
+                BorderColor: =Self.Color
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                Color: =If(ToUserInfoManager="用戶管理", glbThemePrimaryColor,glbNeutralSecondaryColor)
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                Fill: =If(ToUserInfoManager="用戶管理", ColorFade(Self.Color, 90%),White)
+                FocusedBorderThickness: =1
+                FontWeight: =If(ToUserInfoManager="用戶管理", FontWeight.Semibold,Normal)
+                Height: =34
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =If(ToUserInfoManager<>Blank(),ColorFade(glbThemePrimaryColor, 90%))
+                OnSelect: |-
+                    =UpdateContext({ToUserInfoManager:"用戶管理"});Concurrent(Reset(TextInput4_9),Reset(Dropdown2_22),Reset(Dropdown2_23));
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =ColorFade(Self.Color, 95%)
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =11
+                Text: ="用戶管理"
+                Width: =120
+                X: =40
+                Y: =6
+                ZIndex: =6
+
+        GalleryNav_10 As gallery.galleryVertical:
+            Height: =46*CountRows(GalleryNav_10.AllItems)
+            Items: |
+                =Filter(If(
+                    CurrentRoleFormModelPermssion = "None"
+                    ,
+                    [
+                        "首頁",
+                        "申請記錄",
+                        If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定"),
+                        If(If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定")="系統設定",Blank(),CurrentRole || HRAO || SuperUser,"系統設定")
+                        
+                    ],
+                    [
+                        "首頁",
+                        "表格資料",
+                        "申請記錄",
+                        If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定"),
+                        If(If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定")="系統設定",Blank(),CurrentRole || HRAO || SuperUser,"系統設定")
+                    ]
+                ),ThisRecord.Value <> Blank())
+            Layout: =Layout.Vertical
+            OnSelect: =
+            TemplateFill: =If(ThisItem.Value="系統設定", RGBA(102,182,227,0.2),Transparent)
+            TemplatePadding: =0
+            TemplateSize: =46
+            Width: =240
+            Y: =100
+            ZIndex: =2
+
+            BtnDefault_17 As button:
+                Align: =Align.Left
+                BorderColor: =RGBA(255, 255, 255, 1)
+                BorderThickness: =0
+                Color: =If(ThisItem.Value="系統設定", glbThemePrimaryColor,glbNeutralSecondaryColor)
+                DisabledBorderColor: =
+                Fill: =If(ThisItem.Value="系統設定", ColorFade(Self.Color, 90%),White)
+                FocusedBorderThickness: =1
+                FontWeight: =If(ThisItem.Value="系統設定", FontWeight.Semibold,Normal)
+                Height: =46
+                HoverBorderColor: =
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =If(ThisItem.Value<>Blank(),ColorFade(glbThemePrimaryColor, 90%))
+                OnSelect: |-
+                    =If(
+                        ThisItem.Value = "首頁",
+                        Navigate(
+                            HomepageScreen,
+                            ScreenTransition.None
+                        ),
+                        ThisItem.Value = "表格資料",
+                        Navigate(AdminFormListScreen,
+                            ScreenTransition.None
+                        ),
+                        ThisItem.Value = "數據統計",
+                        Navigate(StatisticsScreen,
+                            ScreenTransition.None
+                        //Launch("https://apps.powerapps.com/play/c030168f-5133-4c9d-8e17-3c870ba99ab4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=StatisticsScreen"
+                        ),
+                    
+                        ThisItem.Value = "系統設定",
+                        Navigate(SystemsScreen,None,{ToUserInfoManager:"用戶管理"}),
+                        //Launch("https://apps.powerapps.com/play/c030168f-5133-4c9d-8e17-3c870ba99ab4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=UserScreen"),
+                    
+                        ThisItem.Value = "申請記錄",
+                        Navigate(
+                            GeneralFormListScreen,
+                            ScreenTransition.None,{ListID:1}
+                        )
+                    )
+                PaddingBottom: =0
+                PaddingLeft: =104
+                PaddingRight: =0
+                PaddingTop: =0
+                PressedBorderColor: =
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =12
+                Text: =ThisItem.Value
+                Width: =240
+                ZIndex: =1
+
+            Image2_11 As image:
+                Height: =30
+                Image: |
+                    =If(
+                        ThisItem.Value = "首頁",
+                        首页,
+                        ThisItem.Value = "表格資料",
+                        表格资料,
+                        ThisItem.Value = "數據統計",
+                        数据,
+                        ThisItem.Value = "系統設定",
+                        设置,
+                        ThisItem.Value = "申請記錄",
+                        申请列表
+                    )
+                OnSelect: =Select(Parent)
+                Width: =30
+                X: =60
+                Y: =10
+                ZIndex: =2
+
+        GalleryNav_18 As gallery.galleryVertical:
+            Height: =60
+            Items: =["IT服務台","用戶手冊","意見收集"]
+            Layout: =Layout.Vertical
+            TemplatePadding: =0
+            TemplateSize: =60
+            Width: =240
+            WrapCount: =3
+            Y: =690
+            ZIndex: =3
+
+            Image2_12 As image:
+                Height: =26
+                Image: |
+                    =If(
+                        ThisItem.Value = "IT服務台",
+                        工作台,
+                        ThisItem.Value = "用戶手冊",
+                        手册,
+                        ThisItem.Value = "意見收集",
+                        意见箱
+                    )
+                OnSelect: =Select(Parent)
+                Width: =26
+                X: =27
+                Y: =6
+                ZIndex: =1
+
+            BtnDefault_22 As button:
+                BorderColor: =Self.Color
+                BorderStyle: =BorderStyle.None
+                BorderThickness: =1
+                Color: =glbNeutralSecondaryColor
+                DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                DisabledFill: =RGBA(0, 0, 0, 0)
+                Fill: =RGBA(0, 0, 0, 0)
+                FocusedBorderThickness: =1
+                FontWeight: =Normal
+                Height: =60
+                HoverBorderColor: =ColorFade(Self.Color, -15%)
+                HoverColor: =ColorFade(Self.Color, -15%)
+                HoverFill: =
+                OnSelect: |-
+                    =If(
+                        ThisItem.Value = "意見箱",
+                        Launch("https://forms.office.com/Pages/ResponsePage.aspx?id=3bukt5xuKUm1pGVQ_urXfI59VMuh5BdPgBsZQOZA1aFUNVFDTEVCTkU1OTZEWE1HUUExTkNEVlJBNSQlQCN0PWcu"),
+                        ThisItem.Value = "IT服務台",
+                        Launch("https://elcss-14cebfd770be55.sharepoint.com/sites/elcssbriefcase/HelpDeskPlus/Pages/Default.aspx?SPHostUrl=https%3A%2F%2Felcss%2Esharepoint%2Ecom%2Fsites%2Felcssbriefcase&SPLanguage=en%2DUS&SPClientTag=1&SPProductNumber=16%2E0%2E22112%2E12002&SPAppWebUrl=https%3A%2F%2Felcss%2D14cebfd770be55%2Esharepoint%2Ecom%2Fsites%2Felcssbriefcase%2FHelpDeskPlus"),
+                        ThisItem.Value = "用戶手冊",
+                        Download("https://elcss.sharepoint.com/:w:/r/sites/eps-prd/_layouts/15/download.aspx?SourceUrl=/sites/eps-prd/TempExcel/ePS%E7%B3%BB%E7%B5%B1-%E7%94%A8%E6%88%B6%E6%89%8B%E5%86%8A%20V1.3.4.pdf")
+                    )
+                PaddingBottom: =0
+                PaddingLeft: =0
+                PaddingRight: =0
+                PaddingTop: =34
+                PressedBorderColor: =ColorFade(Self.Color, -25%)
+                PressedColor: =ColorFade(Self.Color, -25%)
+                PressedFill: =
+                RadiusBottomLeft: =4
+                RadiusBottomRight: =4
+                RadiusTopLeft: =4
+                RadiusTopRight: =4
+                Size: =9
+                Text: =ThisItem.Value
+                Width: =70
+                X: =5
+                ZIndex: =2
+
+        Label8_7 As label:
+            Color: =RGBA(149, 149, 149, 1)
+            Height: =20
+            Italic: =true
+            Size: =8
+            Text: ="Version 1.0.0"
+            Width: =160
+            X: =64
+            Y: =56
+            ZIndex: =4
+
+        Image8_4 As image:
+            Height: =40
+            Image: =logo_only_icon
+            Width: =40
+            X: =20
+            Y: =10
+            ZIndex: =5
+
+        Label1_103 As label:
+            Color: =RGBA(54, 52, 52, 1)
+            Height: =21
+            Size: =12
+            Text: ="ELCSS-HK"
+            Width: =100
+            X: =64
+            Y: =10
+            ZIndex: =6
+
+        Label1_104 As label:
+            Color: =RGBA(116, 116, 116, 1)
+            Height: =21
+            Size: =7
+            Text: ="eProcessing System (ePS)"
+            Width: =160
+            X: =64
+            Y: =31
+            ZIndex: =7
+
     UserManagementContainer As groupContainer.manualLayoutContainer:
         Fill: =RGBA(255, 255, 255, 1)
         Height: =768
         Visible: =If(ToUserInfoManager = "用戶管理", true, false)
         Width: =1111
         X: =252
-        ZIndex: =1
+        ZIndex: =2
 
         Button9_4 As button:
             Align: =Align.Left
@@ -445,7 +812,7 @@ SystemsScreen As screen:
         Visible: =If(ToUserInfoManager = "權限管理", true, false)
         Width: =1111
         X: =252
-        ZIndex: =2
+        ZIndex: =3
 
         RightBg_9 As button:
             DisplayMode: =DisplayMode.View
@@ -796,7 +1163,7 @@ SystemsScreen As screen:
         Visible: =If(ToUserInfoManager = "組織機構", true, false)
         Width: =1111
         X: =252
-        ZIndex: =3
+        ZIndex: =4
 
         RightBg_10 As button:
             DisplayMode: =DisplayMode.View
@@ -1253,7 +1620,7 @@ SystemsScreen As screen:
         Height: =768
         Visible: =UserSetIsShow
         Width: =1366
-        ZIndex: =4
+        ZIndex: =5
 
         Button4_21 As button:
             BorderThickness: =0
@@ -2081,7 +2448,7 @@ SystemsScreen As screen:
         Height: =768
         Visible: =UserDeletShow
         Width: =1366
-        ZIndex: =5
+        ZIndex: =6
 
         Button1_5 As button:
             BorderStyle: =BorderStyle.None
@@ -2169,7 +2536,7 @@ SystemsScreen As screen:
         Height: =768
         Visible: =UserEditShow
         Width: =1366
-        ZIndex: =6
+        ZIndex: =7
 
         Button4_24 As button:
             BorderThickness: =0
@@ -3025,7 +3392,7 @@ SystemsScreen As screen:
         Height: =768
         Visible: =GAMask
         Width: =1366
-        ZIndex: =7
+        ZIndex: =8
 
         Button4_26 As button:
             BorderThickness: =0
@@ -3415,7 +3782,7 @@ SystemsScreen As screen:
         Height: =768
         Visible: =EditGAMask
         Width: =1366
-        ZIndex: =8
+        ZIndex: =9
 
         Button4_27 As button:
             BorderThickness: =0
@@ -3783,7 +4150,7 @@ SystemsScreen As screen:
         Height: =768
         Visible: =DeletGAMask
         Width: =1366
-        ZIndex: =9
+        ZIndex: =10
 
         Button1_6 As button:
             Fill: =RGBA(255, 255, 255, 1)
@@ -3869,371 +4236,4 @@ SystemsScreen As screen:
                 X: =601
                 Y: =282
                 ZIndex: =3
-
-    Container3_9 As groupContainer.manualLayoutContainer:
-        Fill: =RGBA(255, 255, 255, 1)
-        Height: =768
-        Width: =240
-        ZIndex: =12
-
-        XITong As groupContainer.manualLayoutContainer:
-            Height: =123
-            Width: =160
-            X: =60
-            Y: =GalleryNav_10.Height+100
-            ZIndex: =1
-
-            QuanxianManager As label:
-                Align: =Align.Center
-                Color: =glbNeutralSecondaryColor
-                OnSelect: |-
-                    =UpdateContext({ToUserInfoManager:"權限管理"})
-                Size: =11
-                Text: ="權限管理"
-                Visible: =If((SuperUser&&!CurrentRole) || (HRAO&&!CurrentRole),false,true)//增加二期權限判斷，SuperUser和HRAO只能查看用戶管理頁面
-                Width: =120
-                X: =40
-                Y: =80
-                ZIndex: =1
-
-            ZuzhiManager As label:
-                Align: =Align.Center
-                Color: =glbNeutralSecondaryColor
-                OnSelect: |-
-                    =UpdateContext({ToUserInfoManager:"組織機構"})
-                Size: =11
-                Text: ="組織機構"
-                Visible: =If((SuperUser&&!CurrentRole) || (HRAO&&!CurrentRole),false,true)//增加二期權限判斷，SuperUser和HRAO只能查看用戶管理頁面
-                Width: =120
-                X: =40
-                Y: =40
-                ZIndex: =2
-
-            UserManager As label:
-                Align: =Align.Center
-                Color: =glbNeutralSecondaryColor
-                Height: =34
-                OnSelect: |-
-                    =UpdateContext({ToUserInfoManager:"用戶管理"})
-                Size: =11
-                Text: ="用戶管理"
-                Width: =120
-                X: =40
-                Y: =6
-                ZIndex: =3
-
-            QuanxianManager1 As button:
-                BorderColor: =Self.Color
-                BorderStyle: =BorderStyle.None
-                BorderThickness: =1
-                Color: =If(ToUserInfoManager="權限管理", glbThemePrimaryColor,glbNeutralSecondaryColor)
-                DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                Fill: =If(ToUserInfoManager="權限管理", ColorFade(Self.Color, 90%),White)
-                FocusedBorderThickness: =1
-                FontWeight: =If(ToUserInfoManager="權限管理", FontWeight.Semibold,Normal)
-                Height: =34
-                HoverBorderColor: =ColorFade(Self.Color, -15%)
-                HoverColor: =ColorFade(Self.Color, -15%)
-                HoverFill: =If(ToUserInfoManager<>Blank(),ColorFade(glbThemePrimaryColor, 90%))
-                OnSelect: |-
-                    =UpdateContext({ToUserInfoManager:"權限管理"});Concurrent(Reset(TextInput3_4),Reset(Service_Dropdown_1),Reset(Service_Dropdown_2));
-                PaddingBottom: =0
-                PaddingLeft: =0
-                PaddingRight: =0
-                PaddingTop: =0
-                PressedBorderColor: =ColorFade(Self.Color, -25%)
-                PressedColor: =ColorFade(Self.Color, -25%)
-                PressedFill: =ColorFade(Self.Color, 95%)
-                RadiusBottomLeft: =4
-                RadiusBottomRight: =4
-                RadiusTopLeft: =4
-                RadiusTopRight: =4
-                Size: =11
-                Text: ="權限管理"
-                Visible: =If((SuperUser&&!CurrentRole) || (HRAO&&!CurrentRole),false,true)//增加二期權限判斷，SuperUser和HRAO只能查看用戶管理頁面
-                Width: =120
-                X: =40
-                Y: =86
-                ZIndex: =4
-
-            ZuzhiManager1 As button:
-                BorderColor: =Self.Color
-                BorderStyle: =BorderStyle.None
-                BorderThickness: =1
-                Color: =If(ToUserInfoManager="組織機構", glbThemePrimaryColor,glbNeutralSecondaryColor)
-                DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                Fill: =If(ToUserInfoManager="組織機構", ColorFade(Self.Color, 90%),White)
-                FocusedBorderThickness: =1
-                FontWeight: =If(ToUserInfoManager="組織機構", FontWeight.Semibold,Normal)
-                Height: =34
-                HoverBorderColor: =ColorFade(Self.Color, -15%)
-                HoverColor: =ColorFade(Self.Color, -15%)
-                HoverFill: =If(ToUserInfoManager<>Blank(),ColorFade(glbThemePrimaryColor, 90%))
-                OnSelect: |-
-                    =UpdateContext({ToUserInfoManager:"組織機構"})
-                PaddingBottom: =0
-                PaddingLeft: =0
-                PaddingRight: =0
-                PaddingTop: =0
-                PressedBorderColor: =ColorFade(Self.Color, -25%)
-                PressedColor: =ColorFade(Self.Color, -25%)
-                PressedFill: =ColorFade(Self.Color, 95%)
-                RadiusBottomLeft: =4
-                RadiusBottomRight: =4
-                RadiusTopLeft: =4
-                RadiusTopRight: =4
-                Size: =11
-                Text: ="組織機構"
-                Visible: =If((SuperUser&&!CurrentRole) || (HRAO&&!CurrentRole),false,true)//增加二期權限判斷，SuperUser和HRAO只能查看用戶管理頁面
-                Width: =120
-                X: =40
-                Y: =46
-                ZIndex: =5
-
-            UserManager1 As button:
-                BorderColor: =Self.Color
-                BorderStyle: =BorderStyle.None
-                BorderThickness: =1
-                Color: =If(ToUserInfoManager="用戶管理", glbThemePrimaryColor,glbNeutralSecondaryColor)
-                DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                Fill: =If(ToUserInfoManager="用戶管理", ColorFade(Self.Color, 90%),White)
-                FocusedBorderThickness: =1
-                FontWeight: =If(ToUserInfoManager="用戶管理", FontWeight.Semibold,Normal)
-                Height: =34
-                HoverBorderColor: =ColorFade(Self.Color, -15%)
-                HoverColor: =ColorFade(Self.Color, -15%)
-                HoverFill: =If(ToUserInfoManager<>Blank(),ColorFade(glbThemePrimaryColor, 90%))
-                OnSelect: |-
-                    =UpdateContext({ToUserInfoManager:"用戶管理"});Concurrent(Reset(TextInput4_9),Reset(Dropdown2_22),Reset(Dropdown2_23));
-                PaddingBottom: =0
-                PaddingLeft: =0
-                PaddingRight: =0
-                PaddingTop: =0
-                PressedBorderColor: =ColorFade(Self.Color, -25%)
-                PressedColor: =ColorFade(Self.Color, -25%)
-                PressedFill: =ColorFade(Self.Color, 95%)
-                RadiusBottomLeft: =4
-                RadiusBottomRight: =4
-                RadiusTopLeft: =4
-                RadiusTopRight: =4
-                Size: =11
-                Text: ="用戶管理"
-                Width: =120
-                X: =40
-                Y: =6
-                ZIndex: =6
-
-        GalleryNav_10 As gallery.galleryVertical:
-            Height: =46*CountRows(GalleryNav_10.AllItems)
-            Items: |
-                =Filter(If(
-                    CurrentRoleFormModelPermssion = "None"
-                    ,
-                    [
-                        "首頁",
-                        "申請記錄",
-                        If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定"),
-                        If(If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定")="系統設定",Blank(),CurrentRole || HRAO || SuperUser,"系統設定")
-                        
-                    ],
-                    [
-                        "首頁",
-                        "表格資料",
-                        "申請記錄",
-                        If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定"),
-                        If(If(CurrentRole,"數據統計",CurrentRole || HRAO || SuperUser,"系統設定")="系統設定",Blank(),CurrentRole || HRAO || SuperUser,"系統設定")
-                    ]
-                ),ThisRecord.Value <> Blank())
-            Layout: =Layout.Vertical
-            OnSelect: =
-            TemplateFill: =If(ThisItem.Value="系統設定", RGBA(102,182,227,0.2),Transparent)
-            TemplatePadding: =0
-            TemplateSize: =46
-            Width: =240
-            Y: =100
-            ZIndex: =2
-
-            BtnDefault_17 As button:
-                Align: =Align.Left
-                BorderColor: =RGBA(255, 255, 255, 1)
-                BorderThickness: =0
-                Color: =If(ThisItem.Value="系統設定", glbThemePrimaryColor,glbNeutralSecondaryColor)
-                DisabledBorderColor: =
-                Fill: =If(ThisItem.Value="系統設定", ColorFade(Self.Color, 90%),White)
-                FocusedBorderThickness: =1
-                FontWeight: =If(ThisItem.Value="系統設定", FontWeight.Semibold,Normal)
-                Height: =46
-                HoverBorderColor: =
-                HoverColor: =ColorFade(Self.Color, -15%)
-                HoverFill: =If(ThisItem.Value<>Blank(),ColorFade(glbThemePrimaryColor, 90%))
-                OnSelect: |-
-                    =If(
-                        ThisItem.Value = "首頁",
-                        Navigate(
-                            HomepageScreen,
-                            ScreenTransition.None
-                        ),
-                        ThisItem.Value = "表格資料",
-                        Navigate(AdminFormListScreen,
-                            ScreenTransition.None
-                        ),
-                        ThisItem.Value = "數據統計",
-                        Navigate(StatisticsScreen,
-                            ScreenTransition.None
-                        //Launch("https://apps.powerapps.com/play/c030168f-5133-4c9d-8e17-3c870ba99ab4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=StatisticsScreen"
-                        ),
-                    
-                        ThisItem.Value = "系統設定",
-                        Navigate(SystemsScreen,None,{ToUserInfoManager:"用戶管理"}),
-                        //Launch("https://apps.powerapps.com/play/c030168f-5133-4c9d-8e17-3c870ba99ab4?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c&Screen=UserScreen"),
-                    
-                        ThisItem.Value = "申請記錄",
-                        Navigate(
-                            GeneralFormListScreen,
-                            ScreenTransition.None,{ListID:1}
-                        )
-                    )
-                PaddingBottom: =0
-                PaddingLeft: =104
-                PaddingRight: =0
-                PaddingTop: =0
-                PressedBorderColor: =
-                PressedColor: =ColorFade(Self.Color, -25%)
-                PressedFill: =
-                RadiusBottomLeft: =4
-                RadiusBottomRight: =4
-                RadiusTopLeft: =4
-                RadiusTopRight: =4
-                Size: =12
-                Text: =ThisItem.Value
-                Width: =240
-                ZIndex: =1
-
-            Image2_11 As image:
-                Height: =30
-                Image: |
-                    =If(
-                        ThisItem.Value = "首頁",
-                        首页,
-                        ThisItem.Value = "表格資料",
-                        表格资料,
-                        ThisItem.Value = "數據統計",
-                        数据,
-                        ThisItem.Value = "系統設定",
-                        设置,
-                        ThisItem.Value = "申請記錄",
-                        申请列表
-                    )
-                OnSelect: =Select(Parent)
-                Width: =30
-                X: =60
-                Y: =10
-                ZIndex: =2
-
-        GalleryNav_18 As gallery.galleryVertical:
-            Height: =60
-            Items: =["IT服務台","用戶手冊","意見收集"]
-            Layout: =Layout.Vertical
-            TemplatePadding: =0
-            TemplateSize: =60
-            Width: =240
-            WrapCount: =3
-            Y: =690
-            ZIndex: =3
-
-            Image2_12 As image:
-                Height: =26
-                Image: |
-                    =If(
-                        ThisItem.Value = "IT服務台",
-                        工作台,
-                        ThisItem.Value = "用戶手冊",
-                        手册,
-                        ThisItem.Value = "意見收集",
-                        意见箱
-                    )
-                OnSelect: =Select(Parent)
-                Width: =26
-                X: =27
-                Y: =6
-                ZIndex: =1
-
-            BtnDefault_22 As button:
-                BorderColor: =Self.Color
-                BorderStyle: =BorderStyle.None
-                BorderThickness: =1
-                Color: =glbNeutralSecondaryColor
-                DisabledBorderColor: =RGBA(219, 219, 219, 1)
-                DisabledFill: =RGBA(0, 0, 0, 0)
-                Fill: =RGBA(0, 0, 0, 0)
-                FocusedBorderThickness: =1
-                FontWeight: =Normal
-                Height: =60
-                HoverBorderColor: =ColorFade(Self.Color, -15%)
-                HoverColor: =ColorFade(Self.Color, -15%)
-                HoverFill: =
-                OnSelect: |-
-                    =If(
-                        ThisItem.Value = "意見箱",
-                        Launch("https://forms.office.com/Pages/ResponsePage.aspx?id=3bukt5xuKUm1pGVQ_urXfI59VMuh5BdPgBsZQOZA1aFUNVFDTEVCTkU1OTZEWE1HUUExTkNEVlJBNSQlQCN0PWcu"),
-                        ThisItem.Value = "IT服務台",
-                        Launch("https://elcss-14cebfd770be55.sharepoint.com/sites/elcssbriefcase/HelpDeskPlus/Pages/Default.aspx?SPHostUrl=https%3A%2F%2Felcss%2Esharepoint%2Ecom%2Fsites%2Felcssbriefcase&SPLanguage=en%2DUS&SPClientTag=1&SPProductNumber=16%2E0%2E22112%2E12002&SPAppWebUrl=https%3A%2F%2Felcss%2D14cebfd770be55%2Esharepoint%2Ecom%2Fsites%2Felcssbriefcase%2FHelpDeskPlus"),
-                        ThisItem.Value = "用戶手冊",
-                        Download("https://elcss.sharepoint.com/:w:/r/sites/eps-prd/_layouts/15/download.aspx?SourceUrl=/sites/eps-prd/TempExcel/ePS%E7%B3%BB%E7%B5%B1-%E7%94%A8%E6%88%B6%E6%89%8B%E5%86%8A%20V1.3.4.pdf")
-                    )
-                PaddingBottom: =0
-                PaddingLeft: =0
-                PaddingRight: =0
-                PaddingTop: =34
-                PressedBorderColor: =ColorFade(Self.Color, -25%)
-                PressedColor: =ColorFade(Self.Color, -25%)
-                PressedFill: =
-                RadiusBottomLeft: =4
-                RadiusBottomRight: =4
-                RadiusTopLeft: =4
-                RadiusTopRight: =4
-                Size: =9
-                Text: =ThisItem.Value
-                Width: =70
-                X: =5
-                ZIndex: =2
-
-        Label8_7 As label:
-            Color: =RGBA(149, 149, 149, 1)
-            Height: =20
-            Italic: =true
-            Size: =8
-            Text: ="Version 1.0.0"
-            Width: =160
-            X: =64
-            Y: =56
-            ZIndex: =4
-
-        Image8_4 As image:
-            Height: =40
-            Image: =logo_only_icon
-            Width: =40
-            X: =20
-            Y: =10
-            ZIndex: =5
-
-        Label1_103 As label:
-            Color: =RGBA(54, 52, 52, 1)
-            Height: =21
-            Size: =12
-            Text: ="ELCSS-HK"
-            Width: =100
-            X: =64
-            Y: =10
-            ZIndex: =6
-
-        Label1_104 As label:
-            Color: =RGBA(116, 116, 116, 1)
-            Height: =21
-            Size: =7
-            Text: ="eProcessing System (ePS)"
-            Width: =160
-            X: =64
-            Y: =31
-            ZIndex: =7
 
