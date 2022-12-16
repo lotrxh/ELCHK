@@ -598,11 +598,6 @@
                                 )
                             )
                         );
-                        Notify(
-                            "填寫成功！",
-                            NotificationType.Success,
-                            2000
-                        );
                         If(
                             (FlowType = "通用流程" && !IsBlank(ComboBox1_11.Selected.Mail))
                             || (FlowType = "預設流程"&& !IsBlank(ComboBox1_15.Selected.Mail))
@@ -611,6 +606,11 @@
                         Elchk_Phase2CCEmailSentingFlow.Run(
                             ApprovalGuid
                             )
+                        );
+                        Notify(
+                            "填寫成功！",
+                            NotificationType.Success,
+                            2000
                         );
                         If(
                             If(
@@ -3452,6 +3452,15 @@
                                 UploadFlowAttachMent,
                                 标题 = FormModelTitle
                             )
+                        )
+                    );
+                    If(
+                        (FlowType = "通用流程" && !IsBlank(ComboBox1_11.Selected.Mail))
+                        || (FlowType = "預設流程"&& !IsBlank(ComboBox1_15.Selected.Mail))
+                        || (FlowType = "部門簡單流程"&& !IsBlank(ComboBox1_13.Selected.Mail))
+                        ,          
+                    Elchk_Phase2CCEmailSentingFlow.Run(
+                        ApprovalGuid
                         )
                     );
                     Notify(

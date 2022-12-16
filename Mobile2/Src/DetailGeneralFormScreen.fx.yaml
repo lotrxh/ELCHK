@@ -468,6 +468,13 @@
                         Reset(Attachment_Excel2);
                         Reset(Attachment_Zip2);
                         Elchk_Phase2RejectedEmailSentingFLow.Run(approvalNum);
+                        If(
+                            !IsBlank(ComboBox1_12.Selected.Mail)
+                            ,          
+                        Elchk_Phase2CCEmailSentingFlow.Run(
+                            approvalNum
+                            )
+                        );
                         Notify(
                             "拒絕成功！",
                             NotificationType.Success
@@ -798,6 +805,13 @@
                         Reset(Attachment_Excel2);
                         Reset(Attachment_Zip2);
                         Elchk_Phase2ReturnEmailSentingFlow.Run(approvalNum);
+                        If(
+                            !IsBlank(ComboBox1_12.Selected.Mail)
+                            ,          
+                        Elchk_Phase2CCEmailSentingFlow.Run(
+                            approvalNum
+                            )
+                        );
                         Notify(
                             "退回成功！",
                             NotificationType.Success,
@@ -1079,6 +1093,13 @@
                             );
                             Refresh(ApprovalDetail_Table);
                             Elchk_Phase2CompletedEmailSentingFlow.Run(approvalNum);
+                            If(
+                            !IsBlank(ComboBox1_12.Selected.Mail)
+                            ,          
+                        Elchk_Phase2CCEmailSentingFlow.Run(
+                            approvalNum
+                            )
+                        );
                              Notify(
                             "執行成功！",
                             NotificationType.Success,
@@ -1266,6 +1287,13 @@
                                     标题 = FormListId
                                 )
                             );
+                            If(
+                            !IsBlank(ComboBox1_12.Selected.Mail)
+                            ,          
+                        Elchk_Phase2CCEmailSentingFlow.Run(
+                            approvalNum
+                            )
+                        );
                     Notify(
                             "審批成功！",
                             NotificationType.Success,
@@ -4711,6 +4739,13 @@
                             Reset(Attachment_Excel2);
                             Reset(Attachment_Zip2);
                             Elchk_Phase2RejectedEmailSentingFLow.Run(approvalNum);
+                            If(
+                                !IsBlank(ComboBox1_12.Selected.Mail)
+                                ,          
+                            Elchk_Phase2CCEmailSentingFlow.Run(
+                                approvalNum
+                                )
+                            );
                             Notify(
                                 "拒絕成功！",
                                 NotificationType.Success
@@ -5038,6 +5073,13 @@
                             Reset(Attachment_Excel2);
                             Reset(Attachment_Zip2);
                             Elchk_Phase2ReturnEmailSentingFlow.Run(approvalNum);
+                            If(
+                                !IsBlank(ComboBox1_12.Selected.Mail)
+                                ,          
+                            Elchk_Phase2CCEmailSentingFlow.Run(
+                                approvalNum
+                                )
+                            );
                             Notify(
                                 "退回成功！",
                                 NotificationType.Success,
@@ -5313,6 +5355,13 @@
                                 );
                                 Refresh(ApprovalDetail_Table);
                                 Elchk_Phase2CompletedEmailSentingFlow.Run(approvalNum);
+                                If(
+                                !IsBlank(ComboBox1_12.Selected.Mail)
+                                ,          
+                            Elchk_Phase2CCEmailSentingFlow.Run(
+                                approvalNum
+                                )
+                            );
                                  Notify(
                                 "執行成功！",
                                 NotificationType.Success,
@@ -5502,6 +5551,13 @@
                                         标题 = FormListId
                                     )
                                 );
+                                If(
+                                !IsBlank(ComboBox1_12.Selected.Mail)
+                                ,          
+                            Elchk_Phase2CCEmailSentingFlow.Run(
+                                approvalNum
+                                )
+                            );
                         Notify(
                                 "審批成功！",
                                 NotificationType.Success,
