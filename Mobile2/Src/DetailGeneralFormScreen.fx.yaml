@@ -1102,8 +1102,12 @@
                                 {
                                     标题: GUID(),
                                     Approval_No: FLowId,
-                                    Advise: "",
-                                    ApprovalBCC: "",
+                                    Advise: TextInput2_34.Text,
+                                    ApprovalBCC: Concat(
+                                        ComboBox1_12.SelectedItems.Mail,
+                                        Mail,
+                                        ","
+                                        ),
                                     Approver: CurrentUserName,
                                     ApproverEmail: User().Email,
                                     Priortty: First(
@@ -5326,14 +5330,19 @@
                             If(
                                 Checkbox2_7.Value = true,
                             //記錄提交人信息记录
+                                
                                 Patch(
                                     ApprovalDetail_Table,
                                     Defaults(ApprovalDetail_Table),
                                     {
                                         标题: GUID(),
                                         Approval_No: FLowId,
-                                        Advise: "",
-                                        ApprovalBCC: "",
+                                        Advise: TextInput2_34.Text,
+                                        ApprovalBCC: Concat(
+                                            ComboBox1_12.SelectedItems.Mail,
+                                            Mail,
+                                            ","
+                                            ),
                                         Approver: CurrentUserName,
                                         ApproverEmail: User().Email,
                                         Priortty: First(
@@ -5350,7 +5359,8 @@
                                         ActionNode:"提交"
                                     }
                                 );
-                                );
+                            );
+                                
                             //更新當前行動狀態為完成，新增下一節行動
                             With(
                                     {
