@@ -1405,7 +1405,7 @@ GeneralFormListScreen As screen:
                                 ThisItem.TaskStatus = "001",
                                 Launch(
                                     JumpUrlA306A111 & "&Screen=EmploymentFormScreen&taskNum=" & LookUp(
-                                        ContractNotice,
+                                        EmploymentResource,
                                         ApprovalId = TaskListGallery.Selected.Approval_No
                                     ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
                                 ),
