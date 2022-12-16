@@ -1369,6 +1369,12 @@ GeneralFormListScreen As screen:
                                         VacationApprovalForm,
                                         Applicant_No = TaskListGallery.Selected.Approval_No
                                     ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&canOperation=true"
+                                ),
+                                Launch(
+                                    JumpUrlA306A111 & "&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
+                                        VacationApprovalForm,
+                                        Applicant_No = TaskListGallery.Selected.Approval_No
+                                    ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&canOperation=true"
                                 )
                             ),
                             ThisItem.FlowTaskName = "預備合約通知書(新入職)",
