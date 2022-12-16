@@ -1,4 +1,21 @@
 {
+  "05f5b4b8-8a0a-44fb-a871-081a914abc24": {
+    "connectionParameters": {
+      "sku": "Enterprise"
+    },
+    "connectionRef": {
+      "displayName": "邮件",
+      "iconUri": "https://connectoricons-prod.azureedge.net/u/laborbol/fixes/sendmail-fix-build/1.0.1613.3110/sendmail/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_sendmail"
+    },
+    "datasets": {},
+    "dataSources": [],
+    "dependencies": {},
+    "dependents": [
+      "2a67a196-27dc-4e17-9fcc-2fa58ba00c1f"
+    ],
+    "id": "05f5b4b8-8a0a-44fb-a871-081a914abc24"
+  },
   "0c36f8d9-69f4-4640-a4c0-a261fba6399b": {
     "connectionParameters": {
       "sku": "Enterprise"
@@ -127,7 +144,6 @@
       "bcd40ab7-e611-4213-984b-7f73871c8b64",
       "287f6682-b92c-4246-80f0-1326e26fae62",
       "83d9330d-d546-424c-9a7b-d74e916b531e",
-      "7eb99b76-ab3b-4c62-b432-5ae06507c60a",
       "ccb7033c-2ac8-4b1f-ad58-b29d1a889453"
     ],
     "id": "0c36f8d9-69f4-4640-a4c0-a261fba6399b"
@@ -184,7 +200,7 @@
     "dependents": [],
     "id": "287f6682-b92c-4246-80f0-1326e26fae62"
   },
-  "7eb99b76-ab3b-4c62-b432-5ae06507c60a": {
+  "2a67a196-27dc-4e17-9fcc-2fa58ba00c1f": {
     "connectionParameters": {
       "workFlowCallbackUri": "https://prod-179.westus.logic.azure.com:443/workflows/0b3b3961e9ea424ca50d3ed14b17af5f/triggers/manual/paths/invoke?api-version=2016-06-01&sp=%2Ftriggers%2Fmanual%2Frun&sv=1.0&sig=Dc6nSYuIe3t2RIp_k4-jQ7iaY-cVxVhVOuInu7K-ajI",
       "workflowEndpoint": "/subscriptions/427976e2-4271-4308-afb8-d28d53a6ad06/resourceGroups/c3dcdfe3b2ca40eabd831e6b704f5108-b2a0811f3ef0494d9e01b8b13dd82f9d/providers/Microsoft.Logic/workflows/d0c749c4-8526-437e-a386-a59a134195ae",
@@ -197,12 +213,6 @@
       "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1534/1.0.1534.2605/logicflows/icon.png",
       "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
       "parameterHints": {
-        "0c36f8d9-69f4-4640-a4c0-a261fba6399b": {
-          "value": "shared_sharepointonline"
-        },
-        "895cae90-cdfd-4cd8-a7b0-de19eb5baa7e": {
-          "value": "shared_sendmail"
-        },
         "workflowEntityId": {
           "value": "1f3f08a2-887b-ed11-81ac-0022480819b5"
         },
@@ -211,12 +221,6 @@
         }
       },
       "parameterHintsV2": {
-        "shared_sendmail": {
-          "value": "895cae90-cdfd-4cd8-a7b0-de19eb5baa7e"
-        },
-        "shared_sharepointonline": {
-          "value": "0c36f8d9-69f4-4640-a4c0-a261fba6399b"
-        },
         "workflowEntityId": {
           "value": "1f3f08a2-887b-ed11-81ac-0022480819b5"
         },
@@ -230,11 +234,29 @@
       "Elchk_Phase2CompletedEmailSentingFlow"
     ],
     "dependencies": {
-      "shared_sendmail": "895cae90-cdfd-4cd8-a7b0-de19eb5baa7e",
-      "shared_sharepointonline": "0c36f8d9-69f4-4640-a4c0-a261fba6399b"
+      "shared_sendmail_1": "05f5b4b8-8a0a-44fb-a871-081a914abc24",
+      "shared_sharepointonline_3": "4993c4da-f503-4cbb-a796-fad1eadba530",
+      "shared_sharepointonline_4": "f353db91-768a-4a5f-8d91-563fa4e44bc4"
     },
     "dependents": [],
-    "id": "7eb99b76-ab3b-4c62-b432-5ae06507c60a"
+    "id": "2a67a196-27dc-4e17-9fcc-2fa58ba00c1f"
+  },
+  "4993c4da-f503-4cbb-a796-fad1eadba530": {
+    "connectionParameters": {
+      "sku": "Enterprise"
+    },
+    "connectionRef": {
+      "displayName": "SharePoint",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1610-greyhound-localization-RelayFix/1.0.1610.3091/sharepointonline/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_sharepointonline"
+    },
+    "datasets": {},
+    "dataSources": [],
+    "dependencies": {},
+    "dependents": [
+      "2a67a196-27dc-4e17-9fcc-2fa58ba00c1f"
+    ],
+    "id": "4993c4da-f503-4cbb-a796-fad1eadba530"
   },
   "83d9330d-d546-424c-9a7b-d74e916b531e": {
     "connectionParameters": {
@@ -303,7 +325,6 @@
     "dependents": [
       "287f6682-b92c-4246-80f0-1326e26fae62",
       "83d9330d-d546-424c-9a7b-d74e916b531e",
-      "7eb99b76-ab3b-4c62-b432-5ae06507c60a",
       "ccb7033c-2ac8-4b1f-ad58-b29d1a889453"
     ],
     "id": "895cae90-cdfd-4cd8-a7b0-de19eb5baa7e"
@@ -425,5 +446,22 @@
     },
     "dependents": [],
     "id": "ccb7033c-2ac8-4b1f-ad58-b29d1a889453"
+  },
+  "f353db91-768a-4a5f-8d91-563fa4e44bc4": {
+    "connectionParameters": {
+      "sku": "Enterprise"
+    },
+    "connectionRef": {
+      "displayName": "SharePoint",
+      "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1610-greyhound-localization-RelayFix/1.0.1610.3091/sharepointonline/icon.png",
+      "id": "/providers/microsoft.powerapps/apis/shared_sharepointonline"
+    },
+    "datasets": {},
+    "dataSources": [],
+    "dependencies": {},
+    "dependents": [
+      "2a67a196-27dc-4e17-9fcc-2fa58ba00c1f"
+    ],
+    "id": "f353db91-768a-4a5f-8d91-563fa4e44bc4"
   }
 }
