@@ -1027,7 +1027,12 @@
                                 标题 = CurrentLastData.标题,
                                 {
                                     TaskStatus: "004",
-                                    Advise: TextInput2_34.Text
+                                    Advise: TextInput2_34.Text,
+                                    ApprovalBCC: Concat(
+                                    ComboBox1_12.SelectedItems.Mail,
+                                    Mail,
+                                    ","
+                                )
                                 }
                             )
                         );
@@ -5288,7 +5293,12 @@
                                     标题 = CurrentLastData.标题,
                                     {
                                         TaskStatus: "004",
-                                        Advise: TextInput2_34.Text
+                                        Advise: TextInput2_34.Text,
+                                        ApprovalBCC: Concat(
+                                        ComboBox1_12.SelectedItems.Mail,
+                                        Mail,
+                                        ","
+                                    )
                                     }
                                 )
                             );
