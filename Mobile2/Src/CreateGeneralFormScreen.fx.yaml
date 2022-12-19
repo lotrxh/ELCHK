@@ -607,6 +607,24 @@
                             ApprovalGuid
                             )
                         );
+                        Patch(
+                            DailyMail,
+                                Defaults(DailyMail),
+                                    {
+                                        标题: GUID(),
+                                        TaskName: First(EditUserForm).ModelName,
+                                        TaskOrder: ApprovalIDNumber.Application_No,
+                                        TaskOperator: User().Email,
+                                        ApprovalStatus: "待："&If(FlowType = "通用流程" && !IsBlank(LookUp(GenericFormModel,标题 = FormModelId).SelectedActions),Dropdown1_5.Selected.Result,
+                                            If(FlowType = "預設流程",Dropdown1_9.Selected.Result,FlowType = "部門簡單流程",Dropdown1_7.Selected.Value)),
+                                        TaskRemarks: TextInput_FormMark.Text,
+                                        TaskSummary: "",
+                                        ReceiverEmail: If(FlowType = "通用流程",Last(Split(Label1_137.Text,"/")).Result,
+                                            FlowType = "預設流程",Last(Split(Label1_155.Text,"/")).Result,
+                                            FlowType = "部門簡單流程",Last(Split(Label1_153.Text,"/")).Result),
+                                        DepartMent:drpFilterDepartment_1.Selected.Result
+                                    }
+                        );
                         Notify(
                             "填寫成功！",
                             NotificationType.Success,
@@ -3462,6 +3480,24 @@
                     Elchk_Phase2CCEmailSentingFlow.Run(
                         ApprovalGuid
                         )
+                    );
+                    Patch(
+                        DailyMail,
+                            Defaults(DailyMail),
+                                {
+                                    标题: GUID(),
+                                    TaskName: First(EditUserForm).ModelName,
+                                    TaskOrder: ApprovalIDNumber.Application_No,
+                                    TaskOperator: User().Email,
+                                    ApprovalStatus: "待："&If(FlowType = "通用流程" && !IsBlank(LookUp(GenericFormModel,标题 = FormModelId).SelectedActions),Dropdown1_5.Selected.Result,
+                                        If(FlowType = "預設流程",Dropdown1_9.Selected.Result,FlowType = "部門簡單流程",Dropdown1_7.Selected.Value)),
+                                    TaskRemarks: TextInput_FormMark.Text,
+                                    TaskSummary: "",
+                                    ReceiverEmail: If(FlowType = "通用流程",Last(Split(Label1_137.Text,"/")).Result,
+                                        FlowType = "預設流程",Last(Split(Label1_155.Text,"/")).Result,
+                                        FlowType = "部門簡單流程",Last(Split(Label1_153.Text,"/")).Result),
+                                    DepartMent:drpFilterDepartment_1.Selected.Result
+                                }
                     );
                     Notify(
                         "填寫成功！",

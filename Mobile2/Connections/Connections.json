@@ -59,6 +59,12 @@
               "environmentVariableName": "elchk2_shared_sharepointonline_833798cb35d84b0dad844d3e5e68b98a"
             }
           },
+          "DailyMail": {
+            "tableName": "4b760543-9cb4-4f3e-aff3-452fbfe2e630",
+            "tableNameOverride": {
+              "environmentVariableName": "elchk2_shared_sharepointonline_3ab1cc3c8a4a47079e85326850104d57"
+            }
+          },
           "FormTableType": {
             "tableName": "19d1ccbe-4397-4633-8745-9e38e19964ce",
             "tableNameOverride": {
@@ -137,7 +143,8 @@
       "ContractNotice",
       "TemplateFileList",
       "UploadFlowAttachMent",
-      "UserInfo"
+      "UserInfo",
+      "DailyMail"
     ],
     "dependencies": {},
     "dependents": [
@@ -213,6 +220,15 @@
       "iconUri": "https://connectoricons-prod.azureedge.net/releases/v1.0.1534/1.0.1534.2605/logicflows/icon.png",
       "id": "/providers/microsoft.powerapps/apis/shared_logicflows",
       "parameterHints": {
+        "05f5b4b8-8a0a-44fb-a871-081a914abc24": {
+          "value": "shared_sendmail_1"
+        },
+        "4993c4da-f503-4cbb-a796-fad1eadba530": {
+          "value": "shared_sharepointonline_3"
+        },
+        "f353db91-768a-4a5f-8d91-563fa4e44bc4": {
+          "value": "shared_sharepointonline_4"
+        },
         "workflowEntityId": {
           "value": "1f3f08a2-887b-ed11-81ac-0022480819b5"
         },
@@ -221,6 +237,15 @@
         }
       },
       "parameterHintsV2": {
+        "shared_sendmail_1": {
+          "value": "05f5b4b8-8a0a-44fb-a871-081a914abc24"
+        },
+        "shared_sharepointonline_3": {
+          "value": "4993c4da-f503-4cbb-a796-fad1eadba530"
+        },
+        "shared_sharepointonline_4": {
+          "value": "f353db91-768a-4a5f-8d91-563fa4e44bc4"
+        },
         "workflowEntityId": {
           "value": "1f3f08a2-887b-ed11-81ac-0022480819b5"
         },
