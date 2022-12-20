@@ -1105,6 +1105,44 @@
                             approvalNum
                             )
                         );
+                         //知悉通知-執行完成dailymail發送信息收集
+                        With(
+                        {
+                            UEmail: LookUp(
+                                ApprovalDetail_Table,
+                                Approval_No = Label5.Text && ActionNode = "填寫"
+                            ).ApproverEmail&","&LookUp(
+                                ApprovalDetail_Table,
+                                Approval_No = Label5.Text && ActionNode = "提交"
+                            ).ApproverEmail
+                        },
+                        If(Label1_148.Text in DailyMail.TaskOrder,
+                            UpdateIf(
+                                DailyMail,
+                                TaskOrder = Label1_148.Text,
+                                    {
+                                        TaskOperator: User().Email,
+                                        ApprovalStatus: "任務完成",
+                                        ReceiverEmail: UEmail
+                                    }
+                                ),
+                            Patch(
+                            DailyMail,
+                                Defaults(DailyMail),
+                                    {
+                                        标题: GUID(),
+                                        TaskName: First(EditDetailUserForm_1).ModelName,
+                                        TaskOrder: Label1_148.Text,
+                                        TaskOperator: User().Email,
+                                        ApprovalStatus: "任務完成",
+                                        TaskRemarks: Label9_31.Text,
+                                        TaskSummary: "",
+                                        ReceiverEmail: UEmail,
+                                        DepartMent:Label9_37.Text
+                                    }
+                                );
+                            );
+                        );
                              Notify(
                             "執行成功！",
                             NotificationType.Success,
@@ -1206,6 +1244,7 @@
                                     ActionNode:Dropdown1_6.Selected.Result
                                 }
                             );
+                            //dailymail待處理通知信息收集
                         If(Label1_148.Text in DailyMail.TaskOrder,
                             UpdateIf(
                                 DailyMail,
@@ -5397,6 +5436,44 @@
                                 approvalNum
                                 )
                             );
+                            //知悉通知-執行完成dailymail發送信息收集
+                            With(
+                            {
+                                UEmail: LookUp(
+                                    ApprovalDetail_Table,
+                                    Approval_No = Label5.Text && ActionNode = "填寫"
+                                ).ApproverEmail&","&LookUp(
+                                    ApprovalDetail_Table,
+                                    Approval_No = Label5.Text && ActionNode = "提交"
+                                ).ApproverEmail
+                            },
+                            If(Label1_148.Text in DailyMail.TaskOrder,
+                                UpdateIf(
+                                    DailyMail,
+                                    TaskOrder = Label1_148.Text,
+                                        {
+                                            TaskOperator: User().Email,
+                                            ApprovalStatus: "任務完成",
+                                            ReceiverEmail: UEmail
+                                        }
+                                    ),
+                                Patch(
+                                DailyMail,
+                                    Defaults(DailyMail),
+                                        {
+                                            标题: GUID(),
+                                            TaskName: First(EditDetailUserForm_1).ModelName,
+                                            TaskOrder: Label1_148.Text,
+                                            TaskOperator: User().Email,
+                                            ApprovalStatus: "任務完成",
+                                            TaskRemarks: Label9_31.Text,
+                                            TaskSummary: "",
+                                            ReceiverEmail: UEmail,
+                                            DepartMent:Label9_37.Text
+                                        }
+                                    );
+                                );
+                            );
                                  Notify(
                                 "執行成功！",
                                 NotificationType.Success,
@@ -5500,6 +5577,7 @@
                                         ActionNode:Dropdown1_6.Selected.Result
                                     }
                                 );
+                                //dailymail待處理通知信息收集
                                 If(Label1_148.Text in DailyMail.TaskOrder,
                                 UpdateIf(
                                     DailyMail,
