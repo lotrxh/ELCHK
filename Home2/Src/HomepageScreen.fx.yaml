@@ -3,16 +3,15 @@ HomepageScreen As screen:
     OnVisible: |-
         =ClearCollect(approvalCol,Approval_Table);ClearCollect(ApprovalDetailData,ApprovalDetail_Table);
         // 优先处理
-        With({XXX11:Filter(ApprovalDetailData,(CurrentUser in ApproverEmail||CurrentUser in AgentUserEmail)&&TaskStatus<>Blank()&&(TaskStatus="002"||TaskStatus="001")&&DateDiff(Modified,Today())>3)},ClearCollect(Priority_Processing,XXX11));
+        With({XXX11:Filter(ApprovalDetailData,(CurrentUser in ApproverEmail||CurrentUser in AgentUserEmail)&&TaskStatus<>Blank()&&(TaskStatus="002"||TaskStatus="001")&&DateDiff(修改时间,Today())>3)},ClearCollect(Priority_Processing,XXX11));
         // 待处理
         With({SearchPendingData:Filter(ApprovalDetailData,(CurrentUser in ApproverEmail||CurrentUser<>Blank()&&CurrentUser in AgentUserEmail)&&(TaskStatus="001"||TaskStatus="002"))},ClearCollect(FilterPendingDataCol,SearchPendingData));
         
         ClearCollect(DataModelName,GenericFormModel);
-        Patch(DataModelName,Defaults(DataModelName),{ModelName:"招聘職位申請表",ModelDescription:"招聘表格",ModelFlowNumber:"A103",ModelDepartment:"行政部"});
-        Patch(DataModelName,Defaults(DataModelName),{ModelName:"假期批核人資料表",ModelDescription:"假期表格",ModelFlowNumber:"A306",ModelDepartment:"行政部"});
-        Patch(DataModelName,Defaults(DataModelName),{ModelName:"任職資源申請",ModelDescription:"IT財務指引表格",ModelFlowNumber:"A111",ModelDepartment:"行政部"});
-        Patch(DataModelName,Defaults(DataModelName),{ModelName:"預備合約通知書(新入職)",ModelDescription:"預備合約表格",ModelFlowNumber:"A104",ModelDepartment:"行政部"});
-        
+        Patch(DataModelName,Defaults(DataModelName),{ModelName:"招聘職位申請表",ModelDescription:"申請招聘空缺",ModelFlowNumber:"X0101",ModelDepartment:"新入職",ModelType:"全部"});
+        // Patch(DataModelName,Defaults(DataModelName),{ModelName:"假期批核人資料表",ModelDescription:"假期表格",ModelFlowNumber:"A306",ModelDepartment:"行政部"});
+        Patch(DataModelName,Defaults(DataModelName),{ModelName:"任職資源申請",ModelDescription:"申請卡片及系統帳戶等資源",ModelFlowNumber:"X0103",ModelDepartment:"新入職",ModelType:"全部"});
+        Patch(DataModelName,Defaults(DataModelName),{ModelName:"預備合約通知書(新入職)",ModelDescription:"只適用於新入職申請",ModelFlowNumber:"X0102",ModelDepartment:"新入職",ModelType:"全部"});
         //創建首頁部門集合
         /*
         ClearCollect(FormTable3,FormTableType);
@@ -309,9 +308,9 @@ HomepageScreen As screen:
 
             TabGallery3_3 As gallery.galleryHorizontal:
                 Height: =32
-                Items: =["部門","服務"]
+                Items: =["部門","服務","功能"]
                 TemplatePadding: =0
-                TemplateSize: =90
+                TemplateSize: =60
                 Width: =180
                 X: =20
                 Y: =12
@@ -331,7 +330,6 @@ HomepageScreen As screen:
                     Size: =12
                     Text: =ThisItem.Value
                     Width: =60
-                    X: =15
                     ZIndex: =1
 
                 Rectangle2_6 As rectangle:
@@ -339,7 +337,7 @@ HomepageScreen As screen:
                     Height: =3
                     OnSelect: =Select(Parent)
                     Visible: =If(ThisItem.IsSelected, true, false)
-                    Width: =90
+                    Width: =60
                     Y: =29
                     ZIndex: =2
 
@@ -353,7 +351,7 @@ HomepageScreen As screen:
                     HoverFill: =
                     OnSelect: =Select(Parent)
                     Text: ="Button"
-                    Width: =90
+                    Width: =60
                     ZIndex: =3
 
             Gallery2_1 As gallery.galleryVertical:
@@ -487,7 +485,7 @@ HomepageScreen As screen:
                                         Defaults(MyContacts),
                                         {
                                             TaskFormName: "招聘職位申請表",
-                                            Title: GUID(),
+                                            标题: GUID(),
                                             UserEmail: User().Email,
                                             ContatsType: "",
                                             ModelFlowNumber: "A103"
@@ -514,7 +512,7 @@ HomepageScreen As screen:
                                         Defaults(MyContacts),
                                         {
                                             TaskFormName: "假期批核人資料表",
-                                            Title: GUID(),
+                                            标题: GUID(),
                                             UserEmail: User().Email,
                                             ContatsType: "",
                                             ModelFlowNumber: "A306"
@@ -540,7 +538,7 @@ HomepageScreen As screen:
                                         Defaults(MyContacts),
                                         {
                                             TaskFormName: "任職資源申請",
-                                            Title: GUID(),
+                                            标题: GUID(),
                                             UserEmail: User().Email,
                                             ContatsType: "",
                                             ModelFlowNumber: "A111"
@@ -566,7 +564,7 @@ HomepageScreen As screen:
                                         Defaults(MyContacts),
                                         {
                                             TaskFormName: "預備合約通知書(新入職)",
-                                            Title: GUID(),
+                                            标题: GUID(),
                                             UserEmail: User().Email,
                                             ContatsType: "",
                                             ModelFlowNumber: "A104"
@@ -591,7 +589,7 @@ HomepageScreen As screen:
                                         Defaults(MyContacts),
                                         {
                                             TaskFormName: ThisItem.ModelName,
-                                            Title: GUID(),
+                                            标题: GUID(),
                                             UserEmail: User().Email,
                                             ContatsType: "",
                                             TaskFormDescription: ThisItem.ModelDescription,
@@ -604,7 +602,7 @@ HomepageScreen As screen:
                                     FormModelId: LookUp(
                                         GenericFormModel,
                                         ModelFlowNumber = ThisItem.ModelFlowNumber
-                                    ).Title
+                                    ).标题
                                 },
                                 Launch(
                                     JumpUrlMobileApp&"&Screen=CreateGeneralFormScreen&FormModelId="&FormModelId & "&Page=Home",
@@ -750,7 +748,7 @@ HomepageScreen As screen:
 
             Gallery5 As gallery.galleryVertical:
                 Height: =160
-                Items: =Sort(Filter(ApprovalDetail_Table,ApproverEmail = CurrentUser,TaskStatus = "002"),Modified,Ascending)
+                Items: =Sort(Filter(ApprovalDetail_Table,ApproverEmail = CurrentUser,TaskStatus = "002"),修改时间,Ascending)
                 Layout: =Layout.Vertical
                 OnSelect: =
                 ShowScrollbar: =false
@@ -778,7 +776,7 @@ HomepageScreen As screen:
                     OnSelect: |-
                         =With(
                         {
-                        FormName:LookUp(Approval_Table,Title=ThisItem.Approval_No).Task_Name
+                        FormName:LookUp(Approval_Table,标题=ThisItem.Approval_No).Task_Name
                         },
                         If(
                             FormName = "招聘職位申請表",
@@ -788,13 +786,13 @@ HomepageScreen As screen:
                                     JumpUrl&"&Screen=JobTitleFormScreen&AppIds=" & LookUp(
                                         ApplitionJobPosition,
                                         ApprovalId = Gallery5.Selected.Approval_No
-                                    ).Title & "&MasterflowId=" & Gallery5.Selected.Approval_No & "&resubmit=true"
+                                    ).标题 & "&MasterflowId=" & Gallery5.Selected.Approval_No & "&resubmit=true"
                                 ),
                                 Launch(
                                     JumpUrl&"&Screen=JobTitleFormDetailScreen&AppIds=" & LookUp(
                                         ApplitionJobPosition,
                                         ApprovalId = Gallery5.Selected.Approval_No
-                                    ).Title & "&MasterflowId=" & Gallery5.Selected.Approval_No & "&resubmit=false"
+                                    ).标题 & "&MasterflowId=" & Gallery5.Selected.Approval_No & "&resubmit=false"
                                 )
                             ),
                             FormName = "假期批核人資料表",
@@ -804,13 +802,13 @@ HomepageScreen As screen:
                                     JumpUrlA306A111&"&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
                                         VacationApprovalForm,
                                         Applicant_No = Gallery5.Selected.Approval_No
-                                    ).Title & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=true"
+                                    ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=true"
                                 ),
                                 Launch(
                                     JumpUrlA306A111&"&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
                                         VacationApprovalForm,
                                         Applicant_No = Gallery5.Selected.Approval_No
-                                    ).Title & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
+                                    ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
                                 )
                             ),
                             FormName = "預備合約通知書(新入職)",
@@ -820,13 +818,13 @@ HomepageScreen As screen:
                                     JumpUrl&"&Screen=ContractNoticeForm&taskNum=" & LookUp(
                                         ContractNotice,
                                         ApprovalId = Gallery5.Selected.Approval_No
-                                    ).Title & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=true"
+                                    ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=true"
                                 ),
                                 Launch(
                                     JumpUrl&"&Screen=ContractNoticeFormDetail&taskNum=" & LookUp(
                                         ContractNotice,
                                         ApprovalId = Gallery5.Selected.Approval_No
-                                    ).Title & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
+                                    ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
                                 )
                             ),
                             FormName = "任職資源申請",
@@ -834,14 +832,14 @@ HomepageScreen As screen:
                                 JumpUrlA306A111&"&Screen=EmploymentFormDetail&taskNum=" & LookUp(
                                     EmploymentResource,
                                     ApprovalId = Gallery5.Selected.Approval_No
-                                ).Title & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
+                                ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
                             ),
                             With(
                                 {
                                     FormId: LookUp(
                                         GenericFormList,
                                         ApprovalId = ThisItem.Approval_No
-                                    ).Title
+                                    ).标题
                                 },
                                 Launch(JumpUrlMobileApp&"&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & Gallery5.Selected.Approval_No & "&Page=Home"
                                 ,{},LaunchTarget.Replace)
@@ -867,8 +865,8 @@ HomepageScreen As screen:
                         Height: =32
                         OnSelect: =Select(Parent)
                         Size: =10
-                        Text: =LookUp(Approval_Table,Title=ThisItem.Approval_No).Application_No
-                        Tooltip: =LookUp(Approval_Table,Title=ThisItem.Approval_No).Application_No
+                        Text: =LookUp(Approval_Table,标题=ThisItem.Approval_No).Application_No
+                        Tooltip: =LookUp(Approval_Table,标题=ThisItem.Approval_No).Application_No
                         Width: =142
                         Wrap: =false
                         ZIndex: =1
@@ -881,8 +879,8 @@ HomepageScreen As screen:
                         Text: |-
                             =//LookUp(Approval_Table,Title=ThisItem.Approval_No).DepartMentUnit
                             
-                            If(CountA(Split(LookUp(Approval_Table,Title=ThisItem.Approval_No).DepartMentUnit,"-").Result)=2,First(Split(LookUp(Approval_Table,Title=ThisItem.Approval_No).DepartMentUnit,"-")).Result,First(Split(LookUp(Approval_Table,Title=ThisItem.Approval_No).DepartMentUnit,"-")).Result&"-"&Index(Split(LookUp(Approval_Table,Title=ThisItem.Approval_No).DepartMentUnit,"-"),2).Result)
-                        Tooltip: =LookUp(Approval_Table,Title=ThisItem.Approval_No).DepartMentUnit
+                            If(CountA(Split(LookUp(Approval_Table,标题=ThisItem.Approval_No).DepartMentUnit,"-").Result)=2,First(Split(LookUp(Approval_Table,标题=ThisItem.Approval_No).DepartMentUnit,"-")).Result,First(Split(LookUp(Approval_Table,标题=ThisItem.Approval_No).DepartMentUnit,"-")).Result&"-"&Index(Split(LookUp(Approval_Table,标题=ThisItem.Approval_No).DepartMentUnit,"-"),2).Result)
+                        Tooltip: =LookUp(Approval_Table,标题=ThisItem.Approval_No).DepartMentUnit
                         Width: =100
                         Wrap: =false
                         X: =418
@@ -893,8 +891,8 @@ HomepageScreen As screen:
                         Height: =32
                         OnSelect: =Select(Parent)
                         Size: =10
-                        Text: =LookUp(Approval_Table,Title=ThisItem.Approval_No).Task_Name
-                        Tooltip: =LookUp(Approval_Table,Title=ThisItem.Approval_No).Task_Name
+                        Text: =LookUp(Approval_Table,标题=ThisItem.Approval_No).Task_Name
+                        Tooltip: =LookUp(Approval_Table,标题=ThisItem.Approval_No).Task_Name
                         Width: =276
                         Wrap: =false
                         X: =142
@@ -907,9 +905,9 @@ HomepageScreen As screen:
                         OnSelect: =Select(Parent)
                         Size: =9
                         Text: |-
-                            =Text(ThisItem.Modified,"dd/mm/yyyy HH:mm")
+                            =Text(ThisItem.修改时间,"dd/mm/yyyy HH:mm")
                         Tooltip: |-
-                            =Text(ThisItem.Modified,"dd/mm/yyyy HH:mm")
+                            =Text(ThisItem.修改时间,"dd/mm/yyyy HH:mm")
                         Width: =115
                         Wrap: =false
                         X: =518
@@ -1214,7 +1212,7 @@ HomepageScreen As screen:
                                         Defaults(MyContacts),
                                         {
                                             TaskFormName: "招聘職位申請表",
-                                            Title: GUID(),
+                                            标题: GUID(),
                                             UserEmail: User().Email,
                                             ContatsType: "",
                                             ModelFlowNumber: "A103"
@@ -1241,7 +1239,7 @@ HomepageScreen As screen:
                                         Defaults(MyContacts),
                                         {
                                             TaskFormName: "假期批核人資料表",
-                                            Title: GUID(),
+                                            标题: GUID(),
                                             UserEmail: User().Email,
                                             ContatsType: "",
                                             ModelFlowNumber: "A306"
@@ -1267,7 +1265,7 @@ HomepageScreen As screen:
                                         Defaults(MyContacts),
                                         {
                                             TaskFormName: "任職資源申請",
-                                            Title: GUID(),
+                                            标题: GUID(),
                                             UserEmail: User().Email,
                                             ContatsType: "",
                                             ModelFlowNumber: "A111"
@@ -1293,7 +1291,7 @@ HomepageScreen As screen:
                                         Defaults(MyContacts),
                                         {
                                             TaskFormName: "預備合約通知書(新入職)",
-                                            Title: GUID(),
+                                            标题: GUID(),
                                             UserEmail: User().Email,
                                             ContatsType: "",
                                             ModelFlowNumber: "A104"
@@ -1318,7 +1316,7 @@ HomepageScreen As screen:
                                         Defaults(MyContacts),
                                         {
                                             TaskFormName: ThisItem.ModelName,
-                                            Title: GUID(),
+                                            标题: GUID(),
                                             UserEmail: User().Email,
                                             ContatsType: "",
                                             TaskFormDescription: ThisItem.ModelDescription,
@@ -1331,7 +1329,7 @@ HomepageScreen As screen:
                                     FormModelId: LookUp(
                                         GenericFormModel,
                                         ModelFlowNumber = ThisItem.ModelFlowNumber
-                                    ).Title
+                                    ).标题
                                 },
                                 Launch(
                                     JumpUrlMobileApp&"&Screen=CreateGeneralFormScreen&FormModelId="&FormModelId & "&Page=Home",
