@@ -324,20 +324,20 @@
                                                 JumpUrl & "&Screen=ContractNoticeForm&taskNum=" & LookUp(
                                                     ContractNotice,
                                                     ApprovalId = Gallery5.Selected.Approval_No
-                                                ).Title & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=true&bustype=edit"
+                                                ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=true&bustype=edit"
                                             ),
                                             ThisItem.TaskStatus = "002",
                                             Launch(
                                                 JumpUrl & "&Screen=ContractNoticeFormDetail&taskNum=" & LookUp(
                                                     ContractNotice,
                                                     ApprovalId = Gallery5.Selected.Approval_No
-                                                ).Title & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
+                                                ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
                                             ),
                                             Launch(
                                                 JumpUrl & "&Screen=ContractNoticeFormDetail&taskNum=" & LookUp(
                                                     ContractNotice,
                                                     ApprovalId = Gallery5.Selected.Approval_No
-                                                ).Title & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
+                                                ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
                                             )
                                         ),
                                         ThisItem.Task_Name = "任職資源申請",
@@ -347,7 +347,7 @@
                                                 JumpUrlA306A111 & "&Screen=EmploymentFormScreen&taskNum=" & LookUp(
                                                     ContractNotice,
                                                     ApprovalId = Gallery5.Selected.Approval_No
-                                                ).Title & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=true&bustype=edit"
+                                                ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=true&bustype=edit"
                                             ),
                                             Launch(
                                                 JumpUrlA306A111 & "&Screen=EmploymentFormDetail&taskNum=" & LookUp(

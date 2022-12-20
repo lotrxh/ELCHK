@@ -1206,7 +1206,32 @@
                                     ActionNode:Dropdown1_6.Selected.Result
                                 }
                             );
-                    
+                        If(Label1_148.Text in DailyMail.TaskOrder,
+                            UpdateIf(
+                                DailyMail,
+                                TaskOrder = Label1_148.Text,
+                                    {
+                                        TaskOperator: User().Email,
+                                        ApprovalStatus: "待：" & Dropdown1_6.Selected.Result,
+                                        ReceiverEmail: Last(Split(Label1_138.Text,"/")).Result
+                                    }
+                                ),
+                            Patch(
+                            DailyMail,
+                                Defaults(DailyMail),
+                                    {
+                                        标题: GUID(),
+                                        TaskName: First(EditDetailUserForm_1).ModelName,
+                                        TaskOrder: Label1_148.Text,
+                                        TaskOperator: User().Email,
+                                        ApprovalStatus: "待：" & Dropdown1_6.Selected.Result,
+                                        TaskRemarks: Label9_31.Text,
+                                        TaskSummary: "",
+                                        ReceiverEmail: Last(Split(Label1_138.Text,"/")).Result,
+                                        DepartMent:Label9_37.Text
+                                    }
+                                );
+                            );
                         //重置控件
                         Reset(TextInput2_34);
                         Reset(Dropdown1_6);
@@ -5475,7 +5500,32 @@
                                         ActionNode:Dropdown1_6.Selected.Result
                                     }
                                 );
-                        
+                                If(Label1_148.Text in DailyMail.TaskOrder,
+                                UpdateIf(
+                                    DailyMail,
+                                    TaskOrder = Label1_148.Text,
+                                        {
+                                            TaskOperator: User().Email,
+                                            ApprovalStatus: "待：" & Dropdown1_6.Selected.Result,
+                                            ReceiverEmail: Last(Split(Label1_138.Text,"/")).Result
+                                        }
+                                    ),
+                                Patch(
+                                DailyMail,
+                                    Defaults(DailyMail),
+                                        {
+                                            标题: GUID(),
+                                            TaskName: First(EditDetailUserForm_1).ModelName,
+                                            TaskOrder: Label1_148.Text,
+                                            TaskOperator: User().Email,
+                                            ApprovalStatus: "待：" & Dropdown1_6.Selected.Result,
+                                            TaskRemarks: Label9_31.Text,
+                                            TaskSummary: "",
+                                            ReceiverEmail: Last(Split(Label1_138.Text,"/")).Result,
+                                            DepartMent:Label9_37.Text
+                                        }
+                                    );
+                                );
                             //重置控件
                             Reset(TextInput2_34);
                             Reset(Dropdown1_6);
