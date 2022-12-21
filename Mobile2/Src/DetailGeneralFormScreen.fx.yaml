@@ -483,7 +483,12 @@
                                 ApprovalDetail_Table,
                                 Approval_No = Label5.Text )
                                     ,ApproverEmail,","
-                                        )
+                                        ),
+                            Action000: First(Filter(
+                                                ApprovalDetail_Table,
+                                                TaskStatus = "000",
+                                                Approval_No = FLowId
+                                            )).ActionNode
                         },
                         If(Label1_148.Text in DailyMail.TaskOrder,
                             UpdateIf(
@@ -491,7 +496,8 @@
                                 TaskOrder = Label1_148.Text,
                                     {
                                         TaskOperator: User().Email,
-                                        ApprovalStatus: "已拒絕",
+                                        ApprovalStatus: Action000 & "：被拒絕",
+                                        TaskRemarks: "曾處理之申請",
                                         ReceiverEmail: UEmail
                                     }
                                 ),
@@ -503,9 +509,9 @@
                                         TaskName: First(EditDetailUserForm_1).ModelName,
                                         TaskOrder: Label1_148.Text,
                                         TaskOperator: User().Email,
-                                        ApprovalStatus: "已拒絕",
-                                        TaskRemarks: Label9_31.Text,
-                                        TaskSummary: "",
+                                        ApprovalStatus: Action000 & "：被拒絕",
+                                        TaskRemarks: "曾處理之申請",
+                                        TaskSummary: Label9_31.Text,
                                         ReceiverEmail: UEmail,
                                         DepartMent:Label9_37.Text
                                     }
@@ -849,6 +855,49 @@
                             approvalNum
                             )
                         );
+                        //知悉通知-退回dailymail發送信息收集
+                        With(
+                        {
+                            UEmail: Concat(
+                                            Filter(
+                                ApprovalDetail_Table,
+                                Approval_No = Label5.Text )
+                                    ,ApproverEmail,","
+                                        ),
+                            Action005: First(Filter(
+                                                ApprovalDetail_Table,
+                                                TaskStatus = "005",
+                                                Approval_No = FLowId
+                                            )).ActionNode
+                        },
+                        If(Label1_148.Text in DailyMail.TaskOrder,
+                            UpdateIf(
+                                DailyMail,
+                                TaskOrder = Label1_148.Text,
+                                    {
+                                        TaskOperator: User().Email,
+                                        ApprovalStatus: Action005 & "：被退回",
+                                        TaskRemarks: "曾處理之申請",
+                                        ReceiverEmail: UEmail
+                                    }
+                                ),
+                            Patch(
+                            DailyMail,
+                                Defaults(DailyMail),
+                                    {
+                                        标题: GUID(),
+                                        TaskName: First(EditDetailUserForm_1).ModelName,
+                                        TaskOrder: Label1_148.Text,
+                                        TaskOperator: User().Email,
+                                        ApprovalStatus: Action005 & "：被退回",
+                                        TaskRemarks: "曾處理之申請",
+                                        TaskSummary: Label9_31.Text,
+                                        ReceiverEmail: UEmail,
+                                        DepartMent:Label9_37.Text
+                                    }
+                                );
+                            );
+                        );
                         Notify(
                             "退回成功！",
                             NotificationType.Success,
@@ -1159,7 +1208,8 @@
                                 TaskOrder = Label1_148.Text,
                                     {
                                         TaskOperator: User().Email,
-                                        ApprovalStatus: "任務完成",
+                                        ApprovalStatus: "執行：完成",
+                                        TaskRemarks: "我的申請",
                                         ReceiverEmail: UEmail
                                     }
                                 ),
@@ -1171,9 +1221,9 @@
                                         TaskName: First(EditDetailUserForm_1).ModelName,
                                         TaskOrder: Label1_148.Text,
                                         TaskOperator: User().Email,
-                                        ApprovalStatus: "任務完成",
-                                        TaskRemarks: Label9_31.Text,
-                                        TaskSummary: "",
+                                        ApprovalStatus: "執行：完成",
+                                        TaskRemarks: "我的申請",
+                                        TaskSummary: Label9_31.Text,
                                         ReceiverEmail: UEmail,
                                         DepartMent:Label9_37.Text
                                     }
@@ -1282,7 +1332,7 @@
                                 }
                             );
                             //dailymail待處理通知信息收集
-                        If(Label1_148.Text in DailyMail.TaskOrder,
+                        /*If(Label1_148.Text in DailyMail.TaskOrder,
                             UpdateIf(
                                 DailyMail,
                                 TaskOrder = Label1_148.Text,
@@ -1307,7 +1357,7 @@
                                         DepartMent:Label9_37.Text
                                     }
                                 );
-                            );
+                            );*/
                         //重置控件
                         Reset(TextInput2_34);
                         Reset(Dropdown1_6);
@@ -4860,7 +4910,12 @@
                                     ApprovalDetail_Table,
                                     Approval_No = Label5.Text )
                                         ,ApproverEmail,","
-                                            )
+                                            ),
+                                Action000: First(Filter(
+                                                    ApprovalDetail_Table,
+                                                    TaskStatus = "000",
+                                                    Approval_No = FLowId
+                                                )).ActionNode
                             },
                             If(Label1_148.Text in DailyMail.TaskOrder,
                                 UpdateIf(
@@ -4868,7 +4923,8 @@
                                     TaskOrder = Label1_148.Text,
                                         {
                                             TaskOperator: User().Email,
-                                            ApprovalStatus: "已拒絕",
+                                            ApprovalStatus: Action000 & "：被拒絕",
+                                            TaskRemarks: "曾處理之申請",
                                             ReceiverEmail: UEmail
                                         }
                                     ),
@@ -4880,9 +4936,9 @@
                                             TaskName: First(EditDetailUserForm_1).ModelName,
                                             TaskOrder: Label1_148.Text,
                                             TaskOperator: User().Email,
-                                            ApprovalStatus: "已拒絕",
-                                            TaskRemarks: Label9_31.Text,
-                                            TaskSummary: "",
+                                            ApprovalStatus: Action000 & "：被拒絕",
+                                            TaskRemarks: "曾處理之申請",
+                                            TaskSummary: Label9_31.Text,
                                             ReceiverEmail: UEmail,
                                             DepartMent:Label9_37.Text
                                         }
@@ -5223,6 +5279,49 @@
                                 approvalNum
                                 )
                             );
+                            //知悉通知-退回dailymail發送信息收集
+                            With(
+                            {
+                                UEmail: Concat(
+                                                Filter(
+                                    ApprovalDetail_Table,
+                                    Approval_No = Label5.Text )
+                                        ,ApproverEmail,","
+                                            ),
+                                Action005: First(Filter(
+                                                    ApprovalDetail_Table,
+                                                    TaskStatus = "005",
+                                                    Approval_No = FLowId
+                                                )).ActionNode
+                            },
+                            If(Label1_148.Text in DailyMail.TaskOrder,
+                                UpdateIf(
+                                    DailyMail,
+                                    TaskOrder = Label1_148.Text,
+                                        {
+                                            TaskOperator: User().Email,
+                                            ApprovalStatus: Action005 & "：被退回",
+                                            TaskRemarks: "曾處理之申請",
+                                            ReceiverEmail: UEmail
+                                        }
+                                    ),
+                                Patch(
+                                DailyMail,
+                                    Defaults(DailyMail),
+                                        {
+                                            标题: GUID(),
+                                            TaskName: First(EditDetailUserForm_1).ModelName,
+                                            TaskOrder: Label1_148.Text,
+                                            TaskOperator: User().Email,
+                                            ApprovalStatus: Action005 & "：被退回",
+                                            TaskRemarks: "曾處理之申請",
+                                            TaskSummary: Label9_31.Text,
+                                            ReceiverEmail: UEmail,
+                                            DepartMent:Label9_37.Text
+                                        }
+                                    );
+                                );
+                            );
                             Notify(
                                 "退回成功！",
                                 NotificationType.Success,
@@ -5527,7 +5626,8 @@
                                     TaskOrder = Label1_148.Text,
                                         {
                                             TaskOperator: User().Email,
-                                            ApprovalStatus: "任務完成",
+                                            ApprovalStatus: "執行：完成",
+                                            TaskRemarks: "我的申請",
                                             ReceiverEmail: UEmail
                                         }
                                     ),
@@ -5539,9 +5639,9 @@
                                             TaskName: First(EditDetailUserForm_1).ModelName,
                                             TaskOrder: Label1_148.Text,
                                             TaskOperator: User().Email,
-                                            ApprovalStatus: "任務完成",
-                                            TaskRemarks: Label9_31.Text,
-                                            TaskSummary: "",
+                                            ApprovalStatus: "執行：完成",
+                                            TaskRemarks: "我的申請",
+                                            TaskSummary: Label9_31.Text,
                                             ReceiverEmail: UEmail,
                                             DepartMent:Label9_37.Text
                                         }
@@ -5652,7 +5752,7 @@
                                     }
                                 );
                                 //dailymail待處理通知信息收集
-                                If(Label1_148.Text in DailyMail.TaskOrder,
+                                /*If(Label1_148.Text in DailyMail.TaskOrder,
                                 UpdateIf(
                                     DailyMail,
                                     TaskOrder = Label1_148.Text,
@@ -5677,7 +5777,7 @@
                                             DepartMent:Label9_37.Text
                                         }
                                     );
-                                );
+                                );*/
                             //重置控件
                             Reset(TextInput2_34);
                             Reset(Dropdown1_6);

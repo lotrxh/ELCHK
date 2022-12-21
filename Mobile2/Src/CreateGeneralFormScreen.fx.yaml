@@ -607,7 +607,7 @@
                             ApprovalGuid
                             )
                         );
-                        Patch(
+                        /*Patch(
                             DailyMail,
                                 Defaults(DailyMail),
                                     {
@@ -624,7 +624,7 @@
                                             FlowType = "部門簡單流程",Last(Split(Label1_153.Text,"/")).Result),
                                         DepartMent:drpFilterDepartment_1.Selected.Result
                                     }
-                        );
+                        );*/
                         Notify(
                             "填寫成功！",
                             NotificationType.Success,
@@ -3481,7 +3481,7 @@
                         ApprovalGuid
                         )
                     );
-                    Patch(
+                    /*Patch(
                         DailyMail,
                             Defaults(DailyMail),
                                 {
@@ -3498,7 +3498,7 @@
                                         FlowType = "部門簡單流程",Last(Split(Label1_153.Text,"/")).Result),
                                     DepartMent:drpFilterDepartment_1.Selected.Result
                                 }
-                    );
+                    );*/
                     Notify(
                         "填寫成功！",
                         NotificationType.Success,
