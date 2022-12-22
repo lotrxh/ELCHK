@@ -493,7 +493,7 @@ HomepageScreen As screen:
                                     )
                                 );
                             Launch(
-                                JumpUrl & "&Screen=JobTitleFormScreen&newApplicationGuid=" & GUID() & "&flowguid=" & GUID() & "&bustype=New",
+                                JumpUrl & "&Screen=JobTitleFormScreen&newApplicationGuid=" & GUID() & "&flowguid=" & GUID() & "&bustype=New&resubmit=false",
                                 {},
                                 LaunchTarget.Replace
                             ),
