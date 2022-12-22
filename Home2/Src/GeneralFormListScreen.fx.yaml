@@ -1334,15 +1334,15 @@ GeneralFormListScreen As screen:
                             ThisItem.FlowTaskName = "招聘職位申請表",
                             If(
                                 First(
-                                SortByColumns(
-                                    Filter(
-                                        ApprovalDetail_Table,
-                                        Approval_No = ThisItem.Approval_No
-                                    ),
-                                    "Priortty",
-                                    Descending
-                                )
-                            ).TaskStatus = "001",
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            Approval_No = ThisItem.Approval_No
+                                        ),
+                                        "Priortty",
+                                        Descending
+                                    )
+                                ).TaskStatus = "001",
                                 Launch(
                                     JumpUrl & "&Screen=JobTitleFormScreen&AppIds=" & LookUp(
                                         ApplitionJobPosition,
@@ -1350,15 +1350,15 @@ GeneralFormListScreen As screen:
                                     ).Title & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
                                 ),
                                 First(
-                                SortByColumns(
-                                    Filter(
-                                        ApprovalDetail_Table,
-                                        Approval_No = ThisItem.Approval_No
-                                    ),
-                                    "Priortty",
-                                    Descending
-                                )
-                            ).TaskStatus = "002",
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            Approval_No = ThisItem.Approval_No
+                                        ),
+                                        "Priortty",
+                                        Descending
+                                    )
+                                ).TaskStatus = "002",
                                 Launch(
                                     JumpUrl & "&Screen=JobTitleFormDetailScreen&AppIds=" & LookUp(
                                         ApplitionJobPosition,
@@ -1369,21 +1369,21 @@ GeneralFormListScreen As screen:
                                     JumpUrl & "&Screen=JobTitleFormDetailScreen&AppIds=" & LookUp(
                                         ApplitionJobPosition,
                                         ApprovalId = TaskListGallery.Selected.Approval_No
-                                    ).Title & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
+                                    ).Title & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&canOperation=true"
                                 )
                             ),
                             ThisItem.FlowTaskName = "假期批核人資料表",
                             If(
                                 First(
-                                SortByColumns(
-                                    Filter(
-                                        ApprovalDetail_Table,
-                                        Approval_No = ThisItem.Approval_No
-                                    ),
-                                    "Priortty",
-                                    Descending
-                                )
-                            ).TaskStatus = "001",
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            Approval_No = ThisItem.Approval_No
+                                        ),
+                                        "Priortty",
+                                        Descending
+                                    )
+                                ).TaskStatus = "001",
                                 Launch(
                                     JumpUrlA306A111 & "&Screen=VacationFormScreen&taskNum=" & LookUp(
                                         VacationApprovalForm,
@@ -1391,15 +1391,15 @@ GeneralFormListScreen As screen:
                                     ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
                                 ),
                                 First(
-                                SortByColumns(
-                                    Filter(
-                                        ApprovalDetail_Table,
-                                        Approval_No = ThisItem.Approval_No
-                                    ),
-                                    "Priortty",
-                                    Descending
-                                )
-                            ).TaskStatus = "002",
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            Approval_No = ThisItem.Approval_No
+                                        ),
+                                        "Priortty",
+                                        Descending
+                                    )
+                                ).TaskStatus = "002",
                                 Launch(
                                     JumpUrlA306A111 & "&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
                                         VacationApprovalForm,
@@ -1416,15 +1416,15 @@ GeneralFormListScreen As screen:
                             ThisItem.FlowTaskName = "預備合約通知書(新入職)",
                             If(
                                 First(
-                                SortByColumns(
-                                    Filter(
-                                        ApprovalDetail_Table,
-                                        Approval_No = ThisItem.Approval_No
-                                    ),
-                                    "Priortty",
-                                    Descending
-                                )
-                            ).TaskStatus = "001",
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            Approval_No = ThisItem.Approval_No
+                                        ),
+                                        "Priortty",
+                                        Descending
+                                    )
+                                ).TaskStatus = "001",
                                 Launch(
                                     JumpUrl & "&Screen=ContractNoticeForm&taskNum=" & LookUp(
                                         ContractNotice,
@@ -1432,15 +1432,15 @@ GeneralFormListScreen As screen:
                                     ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
                                 ),
                                 First(
-                                SortByColumns(
-                                    Filter(
-                                        ApprovalDetail_Table,
-                                        Approval_No = ThisItem.Approval_No
-                                    ),
-                                    "Priortty",
-                                    Descending
-                                )
-                            ).TaskStatus = "002",
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            Approval_No = ThisItem.Approval_No
+                                        ),
+                                        "Priortty",
+                                        Descending
+                                    )
+                                ).TaskStatus = "002",
                                 Launch(
                                     JumpUrl & "&Screen=ContractNoticeFormDetail&taskNum=" & LookUp(
                                         ContractNotice,
@@ -1451,21 +1451,21 @@ GeneralFormListScreen As screen:
                                     JumpUrl & "&Screen=ContractNoticeFormDetail&taskNum=" & LookUp(
                                         ContractNotice,
                                         ApprovalId = TaskListGallery.Selected.Approval_No
-                                    ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false"
+                                    ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&canOperation=true"
                                 )
                             ),
                             ThisItem.FlowTaskName = "任職資源申請",
                             If(
                                 First(
-                                SortByColumns(
-                                    Filter(
-                                        ApprovalDetail_Table,
-                                        Approval_No = ThisItem.Approval_No
-                                    ),
-                                    "Priortty",
-                                    Descending
-                                )
-                            ).TaskStatus = "001",
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            Approval_No = ThisItem.Approval_No
+                                        ),
+                                        "Priortty",
+                                        Descending
+                                    )
+                                ).TaskStatus = "001",
                                 Launch(
                                     JumpUrlA306A111 & "&Screen=EmploymentFormScreen&taskNum=" & LookUp(
                                         EmploymentResource,
