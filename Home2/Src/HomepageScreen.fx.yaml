@@ -841,7 +841,7 @@ HomepageScreen As screen:
                                         ApprovalId = ThisItem.Approval_No
                                     ).标题
                                 },
-                                Launch(JumpUrlMobileApp&"&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & Gallery5.Selected.Approval_No & "&Page=Home"
+                                Launch(JumpUrlMobileApp&"&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & Gallery5.Selected.Approval_No & "&Page=Home" & "&approvalNum=" & Gallery5.Selected.Approval_No
                                 ,{},LaunchTarget.Replace)
                             )
                         )

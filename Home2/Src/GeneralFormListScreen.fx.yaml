@@ -1487,7 +1487,7 @@ GeneralFormListScreen As screen:
                                     ).标题
                                 },
                                 Launch(
-                                    JumpUrlMobileApp & "&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & TaskListGallery.Selected.Approval_No & "&Page=Home",
+                                    JumpUrlMobileApp & "&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & TaskListGallery.Selected.Approval_No & "&Page=Home" & "&approvalNum=" & TaskListGallery.Selected.Approval_No,
                                     {},
                                     LaunchTarget.Replace
                                 )
