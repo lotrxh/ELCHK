@@ -40,10 +40,10 @@
             )
         );
         ClearCollect(DataModelName,GenericFormModel);
-        Patch(DataModelName,Defaults(DataModelName),{ModelName:"招聘職位申請表",ModelDescription:"招聘表格",ModelFlowNumber:"A103",ModelDepartment:"行政部"});
-        Patch(DataModelName,Defaults(DataModelName),{ModelName:"假期批核人資料表",ModelDescription:"假期表格",ModelFlowNumber:"A306",ModelDepartment:"行政部"});
-        Patch(DataModelName,Defaults(DataModelName),{ModelName:"任職資源申請",ModelDescription:"IT財務指引表格",ModelFlowNumber:"A111",ModelDepartment:"行政部"});
-        Patch(DataModelName,Defaults(DataModelName),{ModelName:"預備合約通知書(新入職)",ModelDescription:"預備合約表格",ModelFlowNumber:"A104",ModelDepartment:"行政部"});
+        Patch(DataModelName,Defaults(DataModelName),{ModelName:"招聘職位申請表",ModelDescription:"申請招聘空缺",ModelFlowNumber:"X0101",ModelDepartment:"新入職",ModelType:"全部"});
+        // Patch(DataModelName,Defaults(DataModelName),{ModelName:"假期批核人資料表",ModelDescription:"假期表格",ModelFlowNumber:"A306",ModelDepartment:"行政部"});
+        Patch(DataModelName,Defaults(DataModelName),{ModelName:"任職資源申請",ModelDescription:"申請卡片及系統帳戶等資源",ModelFlowNumber:"X0103",ModelDepartment:"新入職",ModelType:"全部"});
+        Patch(DataModelName,Defaults(DataModelName),{ModelName:"預備合約通知書(新入職)",ModelDescription:"只適用於新入職申請",ModelFlowNumber:"X0102",ModelDepartment:"新入職",ModelType:"全部"});
 
     MainflowContainer_1 As groupContainer.verticalAutoLayoutContainer:
         Fill: =RGBA(242, 242, 242, 1)
@@ -747,7 +747,7 @@
                         HoverFill: =ColorFade(Self.Fill, -5%)
                         InputTextPlaceholder: ="請選擇部門/服務"
                         IsSearchable: =false
-                        Items: =["部門","服務"]
+                        Items: =["部門","服務","功能"]
                         NoSelectionText: ="請選擇部門/服務"
                         OnChange: =Reset(drpFilterDepartmentName);Reset(drpFilterFormTypeName);
                         PaddingBottom: =0
