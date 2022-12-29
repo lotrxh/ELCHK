@@ -483,29 +483,25 @@
                         //知悉通知-拒絕dailymail發送信息收集
                         With(
                         {
-                            UEmail: Concat(
+                            UEmail: 
+                                Distinct(
                                             Filter(
                                 ApprovalDetail_Table,
-                                Approval_No = Label5.Text )
-                                    ,ApproverEmail,","
-                                        ),
+                                Approval_No = Label5.Text ),ApproverEmail)
+                                    ,
                             Action000: First(Filter(
                                                 ApprovalDetail_Table,
                                                 TaskStatus = "000",
                                                 Approval_No = FLowId
                                             )).ActionNode
                         },
-                        If(Label1_148.Text in DailyMail.TaskOrder,
-                            UpdateIf(
+                        
+                        RemoveIf(
                                 DailyMail,
-                                TaskOrder = Label1_148.Text,
-                                    {
-                                        TaskOperator: User().Email,
-                                        ApprovalStatus: Action000 & "：被拒絕",
-                                        TaskRemarks: "曾處理之申請",
-                                        ReceiverEmail: UEmail
-                                    }
-                                ),
+                                TaskOrder = Label1_148.Text
+                                );
+                        ForAll(
+                                UEmail,
                             Patch(
                             DailyMail,
                                 Defaults(DailyMail),
@@ -517,7 +513,7 @@
                                         ApprovalStatus: Action000 & "：被拒絕",
                                         TaskRemarks: "曾處理之申請",
                                         TaskSummary: Label9_31.Text,
-                                        ReceiverEmail: UEmail,
+                                        ReceiverEmail: UEmail[@Result],
                                         DepartMent:Label9_37.Text
                                     }
                                 );
@@ -863,29 +859,25 @@
                         //知悉通知-退回dailymail發送信息收集
                         With(
                         {
-                            UEmail: Concat(
+                            UEmail: 
+                                Distinct(
                                             Filter(
                                 ApprovalDetail_Table,
-                                Approval_No = Label5.Text )
-                                    ,ApproverEmail,","
-                                        ),
+                                Approval_No = Label5.Text ),ApproverEmail)
+                                    ,
                             Action005: First(Filter(
                                                 ApprovalDetail_Table,
                                                 TaskStatus = "005",
                                                 Approval_No = FLowId
                                             )).ActionNode
                         },
-                        If(Label1_148.Text in DailyMail.TaskOrder,
-                            UpdateIf(
+                        
+                        RemoveIf(
                                 DailyMail,
-                                TaskOrder = Label1_148.Text,
-                                    {
-                                        TaskOperator: User().Email,
-                                        ApprovalStatus: Action005 & "：被退回",
-                                        TaskRemarks: "曾處理之申請",
-                                        ReceiverEmail: UEmail
-                                    }
-                                ),
+                                TaskOrder = Label1_148.Text
+                                );
+                        ForAll(
+                                UEmail,
                             Patch(
                             DailyMail,
                                 Defaults(DailyMail),
@@ -897,7 +889,7 @@
                                         ApprovalStatus: Action005 & "：被退回",
                                         TaskRemarks: "曾處理之申請",
                                         TaskSummary: Label9_31.Text,
-                                        ReceiverEmail: UEmail,
+                                        ReceiverEmail: UEmail[@Result],
                                         DepartMent:Label9_37.Text
                                     }
                                 );
@@ -1199,25 +1191,20 @@
                          //知悉通知-執行完成dailymail發送信息收集
                         With(
                         {
-                            UEmail: LookUp(
+                            UEmail1: LookUp(
                                 ApprovalDetail_Table,
                                 Approval_No = Label5.Text && ActionNode = "填寫"
-                            ).ApproverEmail&","&LookUp(
+                            ).ApproverEmail,
+                            UEMail2: LookUp(
                                 ApprovalDetail_Table,
                                 Approval_No = Label5.Text && ActionNode = "提交"
                             ).ApproverEmail
                         },
-                        If(Label1_148.Text in DailyMail.TaskOrder,
-                            UpdateIf(
+                        
+                            RemoveIf(
                                 DailyMail,
-                                TaskOrder = Label1_148.Text,
-                                    {
-                                        TaskOperator: User().Email,
-                                        ApprovalStatus: "執行：完成",
-                                        TaskRemarks: "我的申請",
-                                        ReceiverEmail: UEmail
-                                    }
-                                ),
+                                TaskOrder = Label1_148.Text
+                                );
                             Patch(
                             DailyMail,
                                 Defaults(DailyMail),
@@ -1229,7 +1216,24 @@
                                         ApprovalStatus: "執行：完成",
                                         TaskRemarks: "我的申請",
                                         TaskSummary: Label9_31.Text,
-                                        ReceiverEmail: UEmail,
+                                        ReceiverEmail: UEmail1,
+                                        DepartMent:Label9_37.Text
+                                    }
+                                );
+                            If(
+                                UEmail1 <> UEMail2,
+                        Patch(
+                            DailyMail,
+                                Defaults(DailyMail),
+                                    {
+                                        标题: GUID(),
+                                        TaskName: First(EditDetailUserForm_1).ModelName,
+                                        TaskOrder: Label1_148.Text,
+                                        TaskOperator: User().Email,
+                                        ApprovalStatus: "執行：完成",
+                                        TaskRemarks: "我的申請",
+                                        TaskSummary: Label9_31.Text,
+                                        ReceiverEmail: UEMail2,
                                         DepartMent:Label9_37.Text
                                     }
                                 );
@@ -4910,29 +4914,25 @@
                             //知悉通知-拒絕dailymail發送信息收集
                             With(
                             {
-                                UEmail: Concat(
+                                UEmail: 
+                                    Distinct(
                                                 Filter(
                                     ApprovalDetail_Table,
-                                    Approval_No = Label5.Text )
-                                        ,ApproverEmail,","
-                                            ),
+                                    Approval_No = Label5.Text ),ApproverEmail)
+                                        ,
                                 Action000: First(Filter(
                                                     ApprovalDetail_Table,
                                                     TaskStatus = "000",
                                                     Approval_No = FLowId
                                                 )).ActionNode
                             },
-                            If(Label1_148.Text in DailyMail.TaskOrder,
-                                UpdateIf(
+                            
+                            RemoveIf(
                                     DailyMail,
-                                    TaskOrder = Label1_148.Text,
-                                        {
-                                            TaskOperator: User().Email,
-                                            ApprovalStatus: Action000 & "：被拒絕",
-                                            TaskRemarks: "曾處理之申請",
-                                            ReceiverEmail: UEmail
-                                        }
-                                    ),
+                                    TaskOrder = Label1_148.Text
+                                    );
+                            ForAll(
+                                    UEmail,
                                 Patch(
                                 DailyMail,
                                     Defaults(DailyMail),
@@ -4944,7 +4944,7 @@
                                             ApprovalStatus: Action000 & "：被拒絕",
                                             TaskRemarks: "曾處理之申請",
                                             TaskSummary: Label9_31.Text,
-                                            ReceiverEmail: UEmail,
+                                            ReceiverEmail: UEmail[@Result],
                                             DepartMent:Label9_37.Text
                                         }
                                     );
@@ -5287,29 +5287,25 @@
                             //知悉通知-退回dailymail發送信息收集
                             With(
                             {
-                                UEmail: Concat(
+                                UEmail: 
+                                    Distinct(
                                                 Filter(
                                     ApprovalDetail_Table,
-                                    Approval_No = Label5.Text )
-                                        ,ApproverEmail,","
-                                            ),
+                                    Approval_No = Label5.Text ),ApproverEmail)
+                                        ,
                                 Action005: First(Filter(
                                                     ApprovalDetail_Table,
                                                     TaskStatus = "005",
                                                     Approval_No = FLowId
                                                 )).ActionNode
                             },
-                            If(Label1_148.Text in DailyMail.TaskOrder,
-                                UpdateIf(
+                            
+                            RemoveIf(
                                     DailyMail,
-                                    TaskOrder = Label1_148.Text,
-                                        {
-                                            TaskOperator: User().Email,
-                                            ApprovalStatus: Action005 & "：被退回",
-                                            TaskRemarks: "曾處理之申請",
-                                            ReceiverEmail: UEmail
-                                        }
-                                    ),
+                                    TaskOrder = Label1_148.Text
+                                    );
+                            ForAll(
+                                    UEmail,
                                 Patch(
                                 DailyMail,
                                     Defaults(DailyMail),
@@ -5321,7 +5317,7 @@
                                             ApprovalStatus: Action005 & "：被退回",
                                             TaskRemarks: "曾處理之申請",
                                             TaskSummary: Label9_31.Text,
-                                            ReceiverEmail: UEmail,
+                                            ReceiverEmail: UEmail[@Result],
                                             DepartMent:Label9_37.Text
                                         }
                                     );
@@ -5617,25 +5613,20 @@
                             //知悉通知-執行完成dailymail發送信息收集
                             With(
                             {
-                                UEmail: LookUp(
+                                UEmail1: LookUp(
                                     ApprovalDetail_Table,
                                     Approval_No = Label5.Text && ActionNode = "填寫"
-                                ).ApproverEmail&","&LookUp(
+                                ).ApproverEmail,
+                                UEMail2: LookUp(
                                     ApprovalDetail_Table,
                                     Approval_No = Label5.Text && ActionNode = "提交"
                                 ).ApproverEmail
                             },
-                            If(Label1_148.Text in DailyMail.TaskOrder,
-                                UpdateIf(
+                            
+                                RemoveIf(
                                     DailyMail,
-                                    TaskOrder = Label1_148.Text,
-                                        {
-                                            TaskOperator: User().Email,
-                                            ApprovalStatus: "執行：完成",
-                                            TaskRemarks: "我的申請",
-                                            ReceiverEmail: UEmail
-                                        }
-                                    ),
+                                    TaskOrder = Label1_148.Text
+                                    );
                                 Patch(
                                 DailyMail,
                                     Defaults(DailyMail),
@@ -5647,12 +5638,30 @@
                                             ApprovalStatus: "執行：完成",
                                             TaskRemarks: "我的申請",
                                             TaskSummary: Label9_31.Text,
-                                            ReceiverEmail: UEmail,
+                                            ReceiverEmail: UEmail1,
+                                            DepartMent:Label9_37.Text
+                                        }
+                                    );
+                                If(
+                                    UEmail1 <> UEMail2,
+                            Patch(
+                                DailyMail,
+                                    Defaults(DailyMail),
+                                        {
+                                            标题: GUID(),
+                                            TaskName: First(EditDetailUserForm_1).ModelName,
+                                            TaskOrder: Label1_148.Text,
+                                            TaskOperator: User().Email,
+                                            ApprovalStatus: "執行：完成",
+                                            TaskRemarks: "我的申請",
+                                            TaskSummary: Label9_31.Text,
+                                            ReceiverEmail: UEMail2,
                                             DepartMent:Label9_37.Text
                                         }
                                     );
                                 );
                             );
+                            
                                  Notify(
                                 "執行成功！",
                                 NotificationType.Success,
