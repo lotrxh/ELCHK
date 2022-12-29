@@ -33,6 +33,11 @@
             }
         );
         
+        //網絡中斷提示
+        If(
+            IsBlank(Label5.Text),Notify("網路問題，申請內容出錯",NotificationType.Warning,3000)
+        );
+        
         
         Reset(TextInput2_34);
         //设置密码不可见,设置显示隐藏密码按钮初始值
