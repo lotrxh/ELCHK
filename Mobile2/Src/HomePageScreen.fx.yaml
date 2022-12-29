@@ -827,7 +827,6 @@
                         HoverColor: =Self.Color
                         HoverFill: =ColorFade(Self.Fill, -5%)
                         InputTextPlaceholder: ="請選擇填申請部門/單位"
-                        IsSearchable: =false
                         Items: |-
                             =Filter(
                                     FormTableType,
@@ -840,7 +839,11 @@
                         PressedColor: =Self.Color
                         PressedFill: =ColorFade(Self.Fill, -5%)
                         SearchFields: =["FormType"]
-                        SearchItems: =[]
+                        SearchItems: |-
+                            =Search(Filter(
+                                    FormTableType,
+                                    DepartMentName = drpFilterDepartmentName.Selected.Result
+                                ).FormType,drpFilterFormTypeName.SearchText,"FormType")
                         SelectionColor: =glbThemePrimaryColor
                         SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                         SelectMultiple: =false
