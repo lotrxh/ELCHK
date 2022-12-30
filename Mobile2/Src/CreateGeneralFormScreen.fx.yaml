@@ -195,7 +195,7 @@
                 OnSelect: |
                     =//左边填写内容上传必選項判斷及流程必選項
                     If(
-                        (Attachment_Excel.Visible = true && Last(Attachment_Excel.Attachments).Name = Blank()) || (Label6_6.Visible = true && Last(Attachment_Zip.Attachments).Name = Blank()) || (Label6_7.Visible = true && IsBlank(TextInput_FormPWD) && IsBlank(TextInput_FormPWD_1)) || (Label6_8.Visible = true && IsBlank(TextInput_zipPWD) && IsBlank(TextInput_zipPWD_1)) || IsEmpty(drpFilterDepartment_1.SelectedItems) || (FlowType = "預設流程" && (Dropdown1_9.Selected.Result = Blank() || Label1_155.Text = "/")) || (FlowType = "通用流程" && (Dropdown1_5.Selected.Result = Blank() || Label1_137.Text = "/")) || (FlowType = "部門簡單流程" && Label1_153.Text = "/"),
+                        (Attachment_Excel.Visible = true && Last(Attachment_Excel.Attachments).Name = Blank()) || (Attachment_Zip.Visible = true && Last(Attachment_Zip.Attachments).Name = Blank()) || (Label6_7.Visible = true && IsBlank(TextInput_FormPWD) && IsBlank(TextInput_FormPWD_1)) || (Label6_8.Visible = true && IsBlank(TextInput_zipPWD) && IsBlank(TextInput_zipPWD_1)) || IsEmpty(drpFilterDepartment_1.SelectedItems) || (FlowType = "預設流程" && (Dropdown1_9.Selected.Result = Blank() || Label1_155.Text = "/")) || (FlowType = "通用流程" && (Dropdown1_5.Selected.Result = Blank() || Label1_137.Text = "/")) || (FlowType = "部門簡單流程" && Label1_153.Text = "/"),
                         Notify(
                             "必填項目不能留空，處理行動及處理人不能留空。",
                             NotificationType.Error
@@ -206,132 +206,8 @@
                             GUID()
                         );
                         
-                    //左边填写内容上传
-                    Set(
-                            GenericFormlistGuid,
-                            GUID()
-                        );
-                        ClearCollect(
-                            NewUserForm,//創建NewUserForm集合用作後續更新list-GenericUploadAttachMentFile中的FormId
-                            Patch(
-                                GenericFormList,
-                                Defaults(GenericFormList),
-                                {
-                                    标题: GenericFormlistGuid,
-                                    ApprovalId: ApprovalGuid,
-                                    ModelId: First(EditUserForm).标题,
-                                    ModelName: First(EditUserForm).ModelName,
-                                    UploadFileId: Last(GenericUploadAttachMentFile).标题,
-                                    //目前取的是最后一个附件的id
-                                    MarkValue: TextInput_FormMark.Text,
-                                    FormType: First(EditUserForm).ModelType,
-                                    Department: drpFilterDepartment_1.Selected.Result,
-                                    FormOrder: ApprovalIDNumber.Application_No,
-                                    FlowType: First(EditUserForm).FlowType,
-                                    SelectedActions: First(EditUserForm).SelectedActions//,
-                                    //ReferNumber:"false"//該字段用來判斷申請人是填寫人還是提交人，false代表申請人為填寫人，true代表申請人為提交人（在認爲填寫時，先默認申請人為填寫人）
-                                }
-                            )
-                        );
-                    //执行flow上传表格到list
-                            If(
-                                Last(Attachment_Excel.Attachments).Name <> Blank(),
-                                Set(
-                                    varAttachmentControl1,
-                                    JSON(
-                                        Image4_2.Image,
-                                        IncludeBinaryData
-                                    )
-                                );
-                                Set(
-                                    varBase64Only1,
-                                    Mid(
-                                        varAttachmentControl1,
-                                        Find(
-                                            ",",
-                                            varAttachmentControl1
-                                        ) + 1,
-                                        Len(varAttachmentControl1) - Find (
-                                            ",",
-                                            varAttachmentControl1
-                                        ) - 1
-                                    )
-                                );
-                                ELCHK_UploadFiletoSharepoint.Run(
-                                    "GenericUploadAttachMentFile",
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    GUID(),
-                                    GenericFormlistGuid,
-                                    First(EditUserForm).ModelType,
-                                    Last(Attachment_Excel.Attachments).Name,
-                                    TextInput_FormPWD.Text,
-                                    Last(Attachment_Excel.Attachments).Name,
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    varBase64Only1,
-                                    "",
-                                    ""
-                                )
-                            );
-                            
-                    //执行flow上传附件到list
-                            If(
-                                Last(Attachment_Zip.Attachments).Name <> Blank(),
-                                Set(
-                                    varAttachmentControl2,
-                                    JSON(
-                                        Image4_1.Image,
-                                        IncludeBinaryData
-                                    )
-                                );
-                                Set(
-                                    varBase64Only2,
-                                    Mid(
-                                        varAttachmentControl2,
-                                        Find(
-                                            ",",
-                                            varAttachmentControl2
-                                        ) + 1,
-                                        Len(varAttachmentControl2) - Find (
-                                            ",",
-                                            varAttachmentControl2
-                                        ) - 1
-                                    )
-                                );
-                                ELCHK_UploadFiletoSharepoint.Run(
-                                    "UploadFlowAttachMent",
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    "",
-                                    GenericFormlistGuid,
-                                    ApprovalGuid,
-                                    TextInput_zipPWD.Text,
-                                    Last(Attachment_Zip.Attachments).Name,
-                                    Last(Attachment_Zip.Attachments).Name,
-                                    "",
-                                    "",
-                                    varBase64Only2
-                                )
-                            );
                     //填寫人是否直接提交
-                    If(
+                        If(
                             Checkbox2_5.Value = true,
                     //記錄提交人信息记录
                             Patch(
@@ -473,7 +349,7 @@
                         );
                         
                     //需要收集app_no
-                    Set(
+                        Set(
                             ApprovalIDNumber,
                             Patch(
                                 Approval_Table,
@@ -533,9 +409,134 @@
                                 }
                             )
                         );
-                    
+                        
+                    //左边填写内容上传
+                        Set(
+                            GenericFormlistGuid,
+                            GUID()
+                        );
+                        ClearCollect(
+                            NewUserForm,//創建NewUserForm集合用作後續更新list-GenericUploadAttachMentFile中的FormId
+                            Patch(
+                                GenericFormList,
+                                Defaults(GenericFormList),
+                                {
+                                    标题: GenericFormlistGuid,
+                                    ApprovalId: ApprovalGuid,
+                                    ModelId: First(EditUserForm).标题,
+                                    ModelName: First(EditUserForm).ModelName,
+                                    UploadFileId: Last(GenericUploadAttachMentFile).标题,
+                                    //目前取的是最后一个附件的id
+                                    MarkValue: TextInput_FormMark.Text,
+                                    FormType: First(EditUserForm).ModelType,
+                                    Department: drpFilterDepartment_1.Selected.Result,
+                                    FormOrder: ApprovalIDNumber.Application_No,
+                                    FlowType: First(EditUserForm).FlowType,
+                                    SelectedActions: First(EditUserForm).SelectedActions//,
+                                    //ReferNumber:"false"//該字段用來判斷申請人是填寫人還是提交人，false代表申請人為填寫人，true代表申請人為提交人（在認爲填寫時，先默認申請人為填寫人）
+                                }
+                            )
+                        );
+                        
+                    //执行flow上传表格到list
+                            If(
+                                Last(Attachment_Excel.Attachments).Name <> Blank(),
+                                Set(
+                                    varAttachmentControl1,
+                                    JSON(
+                                        Image4_2.Image,
+                                        IncludeBinaryData
+                                    )
+                                );
+                                Set(
+                                    varBase64Only1,
+                                    Mid(
+                                        varAttachmentControl1,
+                                        Find(
+                                            ",",
+                                            varAttachmentControl1
+                                        ) + 1,
+                                        Len(varAttachmentControl1) - Find (
+                                            ",",
+                                            varAttachmentControl1
+                                        ) - 1
+                                    )
+                                );
+                                ELCHK_UploadFiletoSharepoint.Run(
+                                    "GenericUploadAttachMentFile",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    GUID(),
+                                    GenericFormlistGuid,
+                                    First(EditUserForm).ModelType,
+                                    Last(Attachment_Excel.Attachments).Name,
+                                    TextInput_FormPWD.Text,
+                                    Last(Attachment_Excel.Attachments).Name,
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    varBase64Only1,
+                                    "",
+                                    ""
+                                )
+                            );
+                            
+                    //执行flow上传附件到list
+                            If(
+                                Last(Attachment_Zip.Attachments).Name <> Blank(),
+                                Set(
+                                    varAttachmentControl2,
+                                    JSON(
+                                        Image4_1.Image,
+                                        IncludeBinaryData
+                                    )
+                                );
+                                Set(
+                                    varBase64Only2,
+                                    Mid(
+                                        varAttachmentControl2,
+                                        Find(
+                                            ",",
+                                            varAttachmentControl2
+                                        ) + 1,
+                                        Len(varAttachmentControl2) - Find (
+                                            ",",
+                                            varAttachmentControl2
+                                        ) - 1
+                                    )
+                                );
+                                ELCHK_UploadFiletoSharepoint.Run(
+                                    "UploadFlowAttachMent",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    "",
+                                    GenericFormlistGuid,
+                                    ApprovalGuid,
+                                    TextInput_zipPWD.Text,
+                                    Last(Attachment_Zip.Attachments).Name,
+                                    Last(Attachment_Zip.Attachments).Name,
+                                    "",
+                                    "",
+                                    varBase64Only2
+                                )
+                        );
                         //收集当前用户的申请部门信息用作下一次创建任务时主动带入
-                    If(
+                        If(
                             CountA(
                                 Filter(
                                     MyContacts,
@@ -560,7 +561,7 @@
                                 {ApplyDepartment: drpFilterDepartment_1.Selected.Result}
                             )
                         );
-                        
+                        //執行cc郵件flow
                         If(
                             (FlowType = "通用流程" && !IsBlank(ComboBox1_11.Selected.Mail))
                             || (FlowType = "預設流程"&& !IsBlank(ComboBox1_15.Selected.Mail))
@@ -570,7 +571,6 @@
                             ApprovalGuid
                             )
                         );
-                        
                         Notify(
                             "填寫成功！",
                             NotificationType.Success,
@@ -600,7 +600,7 @@
                                     )
                                 ).Result
                             ) = User().Email,
-                            //下一節點操作人為當前填用戶時，帶入信息到任務詳情頁面    
+                    //下一節點操作人為當前填用戶時，帶入信息到任務詳情頁面    
                     With(
                             {FormModelTitle: First(NewUserForm).标题},
                         //创建集合EditDetailUserForm_1收集表格信息，用作帶入表格名称、流程等数据
@@ -636,16 +636,15 @@
                                 )
                             )
                         );
-                        //下一节点处理人为当前用户时，跳转到任务详情页面
+                    //下一节点处理人为当前用户时，跳转到任务详情页面    
                             Navigate(
                                 DetailGeneralFormScreen,
                                 None,
                                 {HistoryList: ApprovalIDNumber}
-                            );
-                            ,
+                            ),
                     //下一节点处理人不是当前用户时，返回認爲列表
-                    If(
-                        Param("Page")="Home",
+                        If(
+                            Param("Page")="Home",
                             Launch(JumpUrlClientAPP & "&Screen=GeneralFormListScreen",{},LaunchTarget.Replace),
                             Navigate(HomePageScreen,ScreenTransition.None)
                         )
@@ -3053,7 +3052,7 @@
             OnSelect: |
                 =//左边填写内容上传必選項判斷及流程必選項
                 If(
-                    (Attachment_Excel.Visible = true && Last(Attachment_Excel.Attachments).Name = Blank()) || (Label6_6.Visible = true && Last(Attachment_Zip.Attachments).Name = Blank()) || (Label6_7.Visible = true && IsBlank(TextInput_FormPWD) && IsBlank(TextInput_FormPWD_1)) || (Label6_8.Visible = true && IsBlank(TextInput_zipPWD) && IsBlank(TextInput_zipPWD_1)) || IsEmpty(drpFilterDepartment_1.SelectedItems) || (FlowType = "預設流程" && (Dropdown1_9.Selected.Result = Blank() || Label1_155.Text = "/")) || (FlowType = "通用流程" && (Dropdown1_5.Selected.Result = Blank() || Label1_137.Text = "/")) || (FlowType = "部門簡單流程" && Label1_153.Text = "/"),
+                    (Attachment_Excel.Visible = true && Last(Attachment_Excel.Attachments).Name = Blank()) || (Attachment_Zip.Visible = true && Last(Attachment_Zip.Attachments).Name = Blank()) || (Label6_7.Visible = true && IsBlank(TextInput_FormPWD) && IsBlank(TextInput_FormPWD_1)) || (Label6_8.Visible = true && IsBlank(TextInput_zipPWD) && IsBlank(TextInput_zipPWD_1)) || IsEmpty(drpFilterDepartment_1.SelectedItems) || (FlowType = "預設流程" && (Dropdown1_9.Selected.Result = Blank() || Label1_155.Text = "/")) || (FlowType = "通用流程" && (Dropdown1_5.Selected.Result = Blank() || Label1_137.Text = "/")) || (FlowType = "部門簡單流程" && Label1_153.Text = "/"),
                     Notify(
                         "必填項目不能留空，處理行動及處理人不能留空。",
                         NotificationType.Error
@@ -3064,132 +3063,8 @@
                         GUID()
                     );
                     
-                //左边填写内容上传
-                Set(
-                        GenericFormlistGuid,
-                        GUID()
-                    );
-                    ClearCollect(
-                        NewUserForm,//創建NewUserForm集合用作後續更新list-GenericUploadAttachMentFile中的FormId
-                        Patch(
-                            GenericFormList,
-                            Defaults(GenericFormList),
-                            {
-                                标题: GenericFormlistGuid,
-                                ApprovalId: ApprovalGuid,
-                                ModelId: First(EditUserForm).标题,
-                                ModelName: First(EditUserForm).ModelName,
-                                UploadFileId: Last(GenericUploadAttachMentFile).标题,
-                                //目前取的是最后一个附件的id
-                                MarkValue: TextInput_FormMark.Text,
-                                FormType: First(EditUserForm).ModelType,
-                                Department: drpFilterDepartment_1.Selected.Result,
-                                FormOrder: ApprovalIDNumber.Application_No,
-                                FlowType: First(EditUserForm).FlowType,
-                                SelectedActions: First(EditUserForm).SelectedActions//,
-                                //ReferNumber:"false"//該字段用來判斷申請人是填寫人還是提交人，false代表申請人為填寫人，true代表申請人為提交人（在認爲填寫時，先默認申請人為填寫人）
-                            }
-                        )
-                    );
-                //执行flow上传表格到list
-                        If(
-                            Last(Attachment_Excel.Attachments).Name <> Blank(),
-                            Set(
-                                varAttachmentControl1,
-                                JSON(
-                                    Image4_2.Image,
-                                    IncludeBinaryData
-                                )
-                            );
-                            Set(
-                                varBase64Only1,
-                                Mid(
-                                    varAttachmentControl1,
-                                    Find(
-                                        ",",
-                                        varAttachmentControl1
-                                    ) + 1,
-                                    Len(varAttachmentControl1) - Find (
-                                        ",",
-                                        varAttachmentControl1
-                                    ) - 1
-                                )
-                            );
-                            ELCHK_UploadFiletoSharepoint.Run(
-                                "GenericUploadAttachMentFile",
-                                "",
-                                "",
-                                "",
-                                "",
-                                "",
-                                "",
-                                GUID(),
-                                GenericFormlistGuid,
-                                First(EditUserForm).ModelType,
-                                Last(Attachment_Excel.Attachments).Name,
-                                TextInput_FormPWD.Text,
-                                Last(Attachment_Excel.Attachments).Name,
-                                "",
-                                "",
-                                "",
-                                "",
-                                "",
-                                varBase64Only1,
-                                "",
-                                ""
-                            )
-                        );
-                        
-                //执行flow上传附件到list
-                        If(
-                            Last(Attachment_Zip.Attachments).Name <> Blank(),
-                            Set(
-                                varAttachmentControl2,
-                                JSON(
-                                    Image4_1.Image,
-                                    IncludeBinaryData
-                                )
-                            );
-                            Set(
-                                varBase64Only2,
-                                Mid(
-                                    varAttachmentControl2,
-                                    Find(
-                                        ",",
-                                        varAttachmentControl2
-                                    ) + 1,
-                                    Len(varAttachmentControl2) - Find (
-                                        ",",
-                                        varAttachmentControl2
-                                    ) - 1
-                                )
-                            );
-                            ELCHK_UploadFiletoSharepoint.Run(
-                                "UploadFlowAttachMent",
-                                "",
-                                "",
-                                "",
-                                "",
-                                "",
-                                "",
-                                "",
-                                "",
-                                "",
-                                "",
-                                "",
-                                "",
-                                GenericFormlistGuid,
-                                ApprovalGuid,
-                                TextInput_zipPWD.Text,
-                                Last(Attachment_Zip.Attachments).Name,
-                                Last(Attachment_Zip.Attachments).Name,
-                                "",
-                                "",
-                                varBase64Only2
-                            )
-                        );
                 //填寫人是否直接提交
-                If(
+                    If(
                         Checkbox2_5.Value = true,
                 //記錄提交人信息记录
                         Patch(
@@ -3331,7 +3206,7 @@
                     );
                     
                 //需要收集app_no
-                Set(
+                    Set(
                         ApprovalIDNumber,
                         Patch(
                             Approval_Table,
@@ -3391,9 +3266,134 @@
                             }
                         )
                     );
-                
+                    
+                //左边填写内容上传
+                    Set(
+                        GenericFormlistGuid,
+                        GUID()
+                    );
+                    ClearCollect(
+                        NewUserForm,//創建NewUserForm集合用作後續更新list-GenericUploadAttachMentFile中的FormId
+                        Patch(
+                            GenericFormList,
+                            Defaults(GenericFormList),
+                            {
+                                标题: GenericFormlistGuid,
+                                ApprovalId: ApprovalGuid,
+                                ModelId: First(EditUserForm).标题,
+                                ModelName: First(EditUserForm).ModelName,
+                                UploadFileId: Last(GenericUploadAttachMentFile).标题,
+                                //目前取的是最后一个附件的id
+                                MarkValue: TextInput_FormMark.Text,
+                                FormType: First(EditUserForm).ModelType,
+                                Department: drpFilterDepartment_1.Selected.Result,
+                                FormOrder: ApprovalIDNumber.Application_No,
+                                FlowType: First(EditUserForm).FlowType,
+                                SelectedActions: First(EditUserForm).SelectedActions//,
+                                //ReferNumber:"false"//該字段用來判斷申請人是填寫人還是提交人，false代表申請人為填寫人，true代表申請人為提交人（在認爲填寫時，先默認申請人為填寫人）
+                            }
+                        )
+                    );
+                    
+                //执行flow上传表格到list
+                        If(
+                            Last(Attachment_Excel.Attachments).Name <> Blank(),
+                            Set(
+                                varAttachmentControl1,
+                                JSON(
+                                    Image4_2.Image,
+                                    IncludeBinaryData
+                                )
+                            );
+                            Set(
+                                varBase64Only1,
+                                Mid(
+                                    varAttachmentControl1,
+                                    Find(
+                                        ",",
+                                        varAttachmentControl1
+                                    ) + 1,
+                                    Len(varAttachmentControl1) - Find (
+                                        ",",
+                                        varAttachmentControl1
+                                    ) - 1
+                                )
+                            );
+                            ELCHK_UploadFiletoSharepoint.Run(
+                                "GenericUploadAttachMentFile",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                GUID(),
+                                GenericFormlistGuid,
+                                First(EditUserForm).ModelType,
+                                Last(Attachment_Excel.Attachments).Name,
+                                TextInput_FormPWD.Text,
+                                Last(Attachment_Excel.Attachments).Name,
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                varBase64Only1,
+                                "",
+                                ""
+                            )
+                        );
+                        
+                //执行flow上传附件到list
+                        If(
+                            Last(Attachment_Zip.Attachments).Name <> Blank(),
+                            Set(
+                                varAttachmentControl2,
+                                JSON(
+                                    Image4_1.Image,
+                                    IncludeBinaryData
+                                )
+                            );
+                            Set(
+                                varBase64Only2,
+                                Mid(
+                                    varAttachmentControl2,
+                                    Find(
+                                        ",",
+                                        varAttachmentControl2
+                                    ) + 1,
+                                    Len(varAttachmentControl2) - Find (
+                                        ",",
+                                        varAttachmentControl2
+                                    ) - 1
+                                )
+                            );
+                            ELCHK_UploadFiletoSharepoint.Run(
+                                "UploadFlowAttachMent",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                "",
+                                GenericFormlistGuid,
+                                ApprovalGuid,
+                                TextInput_zipPWD.Text,
+                                Last(Attachment_Zip.Attachments).Name,
+                                Last(Attachment_Zip.Attachments).Name,
+                                "",
+                                "",
+                                varBase64Only2
+                            )
+                    );
                     //收集当前用户的申请部门信息用作下一次创建任务时主动带入
-                If(
+                    If(
                         CountA(
                             Filter(
                                 MyContacts,
@@ -3418,7 +3418,7 @@
                             {ApplyDepartment: drpFilterDepartment_1.Selected.Result}
                         )
                     );
-                    
+                    //執行cc郵件flow
                     If(
                         (FlowType = "通用流程" && !IsBlank(ComboBox1_11.Selected.Mail))
                         || (FlowType = "預設流程"&& !IsBlank(ComboBox1_15.Selected.Mail))
@@ -3428,7 +3428,6 @@
                         ApprovalGuid
                         )
                     );
-                    
                     Notify(
                         "填寫成功！",
                         NotificationType.Success,
@@ -3458,7 +3457,7 @@
                                 )
                             ).Result
                         ) = User().Email,
-                        //下一節點操作人為當前填用戶時，帶入信息到任務詳情頁面    
+                //下一節點操作人為當前填用戶時，帶入信息到任務詳情頁面    
                 With(
                         {FormModelTitle: First(NewUserForm).标题},
                     //创建集合EditDetailUserForm_1收集表格信息，用作帶入表格名称、流程等数据
@@ -3494,16 +3493,15 @@
                             )
                         )
                     );
-                    //下一节点处理人为当前用户时，跳转到任务详情页面
+                //下一节点处理人为当前用户时，跳转到任务详情页面    
                         Navigate(
                             DetailGeneralFormScreen,
                             None,
                             {HistoryList: ApprovalIDNumber}
-                        );
-                        ,
+                        ),
                 //下一节点处理人不是当前用户时，返回認爲列表
-                If(
-                    Param("Page")="Home",
+                    If(
+                        Param("Page")="Home",
                         Launch(JumpUrlClientAPP & "&Screen=GeneralFormListScreen",{},LaunchTarget.Replace),
                         Navigate(HomePageScreen,ScreenTransition.None)
                     )
