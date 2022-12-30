@@ -1,6 +1,6 @@
 App As appinfo:
     BackEnabled: =false
-    OnStart: |
+    OnStart: |+
         =//设置主色
         Set(glbThemePrimaryColor,ColorValue( "#2C4D96" ));
         Set(glbThemeSecondaryColor,ColorValue( "#4E505C" ));
@@ -44,30 +44,17 @@ App As appinfo:
                 User_Email = CurrentUser
             ).O_Mechanism,Blank())
         );
-        If(
-            Last(
-            Split(
-                CurrentUser,
-                "@"
-            ).Result
-        ).Result = "chinasofti.com",
-        //中软环境
+        
+        //App跳轉URL
         Set(JumpUrlClientAPP,"https://apps.powerapps.com/play/d3797d8e-d0c9-4874-937a-30a8d585aad5?tenantId=c3dcdfe3-b2ca-40ea-bd83-1e6b704f5108");
+        Set(JumpUrl,"https://apps.powerapps.com/play/2577c26c-399a-4273-8a73-63493c2c2b5e?tenantId=c3dcdfe3-b2ca-40ea-bd83-1e6b704f5108");//103104
+        Set(JumpUrlA306A111,"https://apps.powerapps.com/play/b0025bec-9f38-4504-ae8a-a3f3a67cc67f?tenantId=c3dcdfe3-b2ca-40ea-bd83-1e6b704f5108");
+        Set(JumpUrlMobileApp,"https://apps.powerapps.com/play/c6567b74-5830-4ae0-a2c7-9f36f51e4174?tenantId=c3dcdfe3-b2ca-40ea-bd83-1e6b704f5108");
         //Set(FormModelIds,"0ac169c4-a9eb-4ca3-90cf-ded41a4065d3");//部門簡單流程
         Set(FormModelIds,"62bad786-f289-44c8-b75e-d1eadc1ecf1e");//通用流程
         //Set(FormModelIds,"3edf6495-c680-4c51-8698-a0e32f6194db");//范本
-        Set(AttachmentDownloadUrl,"https://chinasofti0.sharepoint.com/sites/ELCHK_Chinasoft/Lists/TemplateFileList/Attachments/");//测试环境
-        Set(JumpUrl,"https://apps.powerapps.com/play/2577c26c-399a-4273-8a73-63493c2c2b5e?tenantId=c3dcdfe3-b2ca-40ea-bd83-1e6b704f5108");
-        Set(JumpUrlA306A111,"https://apps.powerapps.com/play/b0025bec-9f38-4504-ae8a-a3f3a67cc67f?tenantId=c3dcdfe3-b2ca-40ea-bd83-1e6b704f5108");
-        Set(JumpUrlMobileApp,"https://apps.powerapps.com/play/c6567b74-5830-4ae0-a2c7-9f36f51e4174?tenantId=c3dcdfe3-b2ca-40ea-bd83-1e6b704f5108");//中软环境
-        ,
-        //客户环境
-        Set(JumpUrlClientAPP,"https://apps.powerapps.com/play/b70eb978-b287-42ca-b2b6-c32f2b467617?tenantId=b7a4bbdd-6e9c-4929-b5a4-6550feead77c");
-        Set(FormModelIds,"a19e1c08-1583-4214-8304-fe5abbbebd8b");//通用流程
-        //Set(FormModelIds,"8ba53e27-a2a8-473c-a7ea-a0061da6f79d");//預設流程
-        //Set(FormModelIds,"ac07f223-d5d5-4a88-bf85-a343548908f4");//部門簡單流程
-        Set(AttachmentDownloadUrl,"https://elcss.sharepoint.com/sites/eps-uat-2/Lists/TemplateFileList/Attachments/");//UAT环境
-        );
+        //Set(AttachmentDownloadUrl,"https://chinasofti0.sharepoint.com/sites/ELCHK_Chinasoft/Lists/TemplateFileList/Attachments/");//目前不用
+        
     StartScreen: |-
         =If(
             Param("Screen") = "CreateGeneralFormScreen",
