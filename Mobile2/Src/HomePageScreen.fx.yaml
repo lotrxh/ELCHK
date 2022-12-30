@@ -285,13 +285,13 @@
                                                 JumpUrl & "&Screen=JobTitleFormDetailScreen&AppIds=" & LookUp(
                                                     ApplitionJobPosition,
                                                     ApprovalId = Gallery5.Selected.Approval_No
-                                                ).Title & "&MasterflowId=" & Gallery5.Selected.Approval_No & "&resubmit=false"
+                                                ).Title & "&MasterflowId=" & Gallery5.Selected.Approval_No & "&resubmit=false&canOperation=true"
                                             ),
                                             Launch(
                                                 JumpUrl & "&Screen=JobTitleFormDetailScreen&AppIds=" & LookUp(
                                                     ApplitionJobPosition,
                                                     ApprovalId = Gallery5.Selected.Approval_No
-                                                ).Title & "&MasterflowId=" & Gallery5.Selected.Approval_No & "&resubmit=false"
+                                                ).Title & "&MasterflowId=" & Gallery5.Selected.Approval_No & "&resubmit=false&canOperation=true"
                                             )
                                         ),
                                         ThisItem.Task_Name = "假期批核人資料表",
@@ -308,13 +308,13 @@
                                                 JumpUrlA306A111 & "&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
                                                     VacationApprovalForm,
                                                     Applicant_No = Gallery5.Selected.Approval_No
-                                                ).Title & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
+                                                ).Title & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false&canOperation=true"
                                             ),
                                             Launch(
                                                 JumpUrlA306A111 & "&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
                                                     VacationApprovalForm,
                                                     Applicant_No = Gallery5.Selected.Approval_No
-                                                ).Title & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
+                                                ).Title & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false&canOperation=true"
                                             )
                                         ),
                                         ThisItem.Task_Name = "預備合約通知書(新入職)",
@@ -331,13 +331,13 @@
                                                 JumpUrl & "&Screen=ContractNoticeFormDetail&taskNum=" & LookUp(
                                                     ContractNotice,
                                                     ApprovalId = Gallery5.Selected.Approval_No
-                                                ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
+                                                ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false&canOperation=true"
                                             ),
                                             Launch(
                                                 JumpUrl & "&Screen=ContractNoticeFormDetail&taskNum=" & LookUp(
                                                     ContractNotice,
                                                     ApprovalId = Gallery5.Selected.Approval_No
-                                                ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
+                                                ).标题 & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false&canOperation=true"
                                             )
                                         ),
                                         ThisItem.Task_Name = "任職資源申請",
@@ -353,7 +353,7 @@
                                                 JumpUrlA306A111 & "&Screen=EmploymentFormDetail&taskNum=" & LookUp(
                                                     EmploymentResource,
                                                     ApprovalId = Gallery5.Selected.Approval_No
-                                                ).Title & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false"
+                                                ).Title & "&approvalNum=" & Gallery5.Selected.Approval_No & "&resubmit=false&canOperation=true"
                                             )
                                         ),
                                         With(
