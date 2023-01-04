@@ -1709,7 +1709,7 @@ SystemsScreen As screen:
                             O_Mechanism: UserTextInput_5.Text,
                             Post_No: UserTextInput_7.Text,
                             Post: Dropdown_Post.Selected.PR_Name,
-                            FormPermission:If(Dropdown_FormPermission.Selected.Value = "全部表格","全部表格",Concat(Dropdown_FormPermission_2.SelectedItems,Result&";")),
+                            FormPermission:If(Dropdown_FormPermission.Selected.Value = "全部表格","全部表格",Dropdown_FormPermission.Selected.Value = "沒有表格權限","",Dropdown_FormPermission.Selected.Value = "指定表格",Concat(Dropdown_FormPermission_2.SelectedItems,Result&";")),
                             FormPermission_Sub:Concat(Dropdown_FormPermission_3.SelectedItems,FormType&";"),
                             IsManger:Dropdown_IsManger.Selected.Value
                         }
@@ -2250,7 +2250,7 @@ SystemsScreen As screen:
                 InputTextPlaceholder: ="請選擇職位"
                 Items: |-
                     =//["全部表格",Dropdown_Mechanism.Selected.Code_No2]
-                    ["全部表格","指定表格"]
+                    ["全部表格","指定表格","沒有表格權限"]
                 NoSelectionText: =
                 OnChange: |-
                     =Reset(Dropdown_FormPermission_2);
@@ -2261,7 +2261,7 @@ SystemsScreen As screen:
                 SearchFields: =["Value"]
                 SearchItems: |-
                     =Search(//["全部表格",Dropdown_Mechanism.Selected.Code_No2]
-                    ["全部表格","指定表格"],Dropdown_FormPermission.SearchText,"Value")
+                    ["全部表格","指定表格","沒有表格權限"],Dropdown_FormPermission.SearchText,"Value")
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =
@@ -2621,7 +2621,7 @@ SystemsScreen As screen:
                             {Agent_Start_Time:DatePicker_AgentStart_1.SelectedDate},
                             {Agent_End_Time:DatePicker_AgentEnd_1.SelectedDate},
                             */
-                            {FormPermission:If(Dropdown_FormPermission_1.Selected.Value = "全部表格","全部表格",Concat(Dropdown_FormPermission_4.SelectedItems,Result&";"))},
+                            {FormPermission:If(Dropdown_FormPermission_1.Selected.Value = "全部表格","全部表格",Dropdown_FormPermission_1.Selected.Value = "沒有表格權限","",Dropdown_FormPermission_1.Selected.Value = "指定表格",Concat(Dropdown_FormPermission_4.SelectedItems,Result&";"))},
                             {FormPermission_Sub:If(Dropdown_FormPermission_1.Selected.Value = "指定表格",Concat(Dropdown_FormPermission_5.SelectedItems,FormType&";"))},
                             {IsManger:Dropdown_IsManger_1.Selected.Value}
                     );
@@ -3220,7 +3220,7 @@ SystemsScreen As screen:
                 ChevronHoverFill: =RGBA(153, 153, 153, 1)
                 DefaultSelectedItems: |-
                     =//Table({Value:UserListGallery_1.Selected.FormPermission})
-                    If(First(Table({Value:UserListGallery_1.Selected.FormPermission})).Value = "全部表格",Table({Value:"全部表格"}),First(Table({Value:UserListGallery_1.Selected.FormPermission})).Value = Blank(),Table({Value:""}),Table({Value:"指定表格"}))
+                    If(First(Table({Value:UserListGallery_1.Selected.FormPermission})).Value = "全部表格",Table({Value:"全部表格"}),First(Table({Value:UserListGallery_1.Selected.FormPermission})).Value = Blank(),Table({Value:"沒有表格權限"}),Table({Value:"指定表格"}))
                 DisplayFields: =["Value"]
                 FocusedBorderThickness: =1
                 Height: =28
@@ -3228,7 +3228,7 @@ SystemsScreen As screen:
                 InputTextPlaceholder: ="請選擇表單權限"
                 Items: |-
                     =//["全部表格",Dropdown_Mechanism_1.Selected.Code_No2]
-                    ["全部表格","指定表格"]
+                    ["全部表格","指定表格","沒有表格權限"]
                 NoSelectionText: =
                 OnChange: |-
                     =Reset(Dropdown_FormPermission_4);
@@ -3239,7 +3239,7 @@ SystemsScreen As screen:
                 SearchFields: =["Value"]
                 SearchItems: |-
                     =Search(//["全部表格",Dropdown_Mechanism_1.Selected.Code_No2]
-                    ["全部表格","指定表格"],Dropdown_FormPermission_1.SearchText,"Value")
+                    ["全部表格","指定表格","沒有表格權限"],Dropdown_FormPermission_1.SearchText,"Value")
                 SelectionColor: =RGBA(73, 77, 82, 1)
                 SelectionFill: =RGBA(0, 0, 0, 0)
                 SelectionTagFill: =

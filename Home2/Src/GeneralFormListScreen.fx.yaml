@@ -1,8 +1,7 @@
 GeneralFormListScreen As screen:
     Fill: =RGBA(243, 243, 243, 1)
     OnVisible: |
-        =
-        //生成待处理集合
+        =//生成待处理集合
         ClearCollect(
             ApprovalDetailCol,
             Filter(
@@ -93,18 +92,18 @@ GeneralFormListScreen As screen:
                 ).Task_Name    
             )
         );
-        //過濾一期待處理認爲
+        //過濾一期當前用戶待處理任務
         ClearCollect(
             ApprovalDetailColwithPhase1,
             Filter(ApprovalDetailColwithdepartment,
-            TaskName = "任職資源申請" || TaskName = "招聘職位申請表" || TaskName = "假期批核人資料表" || TaskName = "預備合約通知書(新入職)"
+            (TaskName = "任職資源申請" || TaskName = "招聘職位申請表" || TaskName = "假期批核人資料表" || TaskName = "預備合約通知書(新入職)") && CurrentUser in ApproverEmail 
             )
         );
-        //過濾二期待處理認爲
+        //過濾二期全部待處理任務
         ClearCollect(
             ApprovalDetailColwithPhase2,
             Filter(ApprovalDetailColwithdepartment,
-            TaskName <> "任職資源申請" && TaskName <> "招聘職位申請表" && TaskName <> "假期批核人資料表" && TaskName <> "預備合約通知書(新入職)"
+            TaskName <> "任職資源申請" && TaskName <> "招聘職位申請表" && TaskName <> "假期批核人資料表" && TaskName <> "預備合約通知書(新入職)" && TaskName <> Blank()
             )
         );
         //生成待处理集合，新增Ismanger判断
@@ -207,14 +206,14 @@ GeneralFormListScreen As screen:
             )
         );
         /*
-        //過濾一期已处理認爲
+        //過濾一期已处理任務
         ClearCollect(
             ProcessedDetailColwithPhase1,
             Filter(ProcessedDetailColwithdepartment,
             TaskName = "任職資源申請" || TaskName = "招聘職位申請表" || TaskName = "假期批核人資料表" || TaskName = "預備合約通知書(新入職)"
             )
         );
-        //過濾二期已处理認爲
+        //過濾二期已处理任務
         ClearCollect(
             ProcessedDetailColwithPhase2,
             Filter(ProcessedDetailColwithdepartment,
@@ -331,18 +330,18 @@ GeneralFormListScreen As screen:
                 ).Task_Name
             )
         );
-        //過濾一期全部認爲
+        //過濾一期當前用戶全部任務
         ClearCollect(
             AllDetailColwithPhase1,
             Filter(ComplatelDetailColwithdepartment,
-            TaskName = "任職資源申請" || TaskName = "招聘職位申請表" || TaskName = "假期批核人資料表" || TaskName = "預備合約通知書(新入職)"
+            (TaskName = "任職資源申請" || TaskName = "招聘職位申請表" || TaskName = "假期批核人資料表" || TaskName = "預備合約通知書(新入職)") && CurrentUser in ApproverEmail 
             )
         );
-        //過濾二期全部認爲
+        //過濾二期全部任務
         ClearCollect(
             AllDetailColwithPhase2,
             Filter(ComplatelDetailColwithdepartment,
-            TaskName <> "任職資源申請" && TaskName <> "招聘職位申請表" && TaskName <> "假期批核人資料表" && TaskName <> "預備合約通知書(新入職)"
+            TaskName <> "任職資源申請" && TaskName <> "招聘職位申請表" && TaskName <> "假期批核人資料表" && TaskName <> "預備合約通知書(新入職)" && TaskName <> Blank()
             )
         );
         //生成所有集合，新增Ismanger判断
@@ -1991,18 +1990,18 @@ GeneralFormListScreen As screen:
                     ).Task_Name    
                 )
             );
-            //過濾一期待處理認爲
+            //過濾一期當前用戶待處理任務
             ClearCollect(
                 ApprovalDetailColwithPhase1,
                 Filter(ApprovalDetailColwithdepartment,
-                TaskName = "任職資源申請" || TaskName = "招聘職位申請表" || TaskName = "假期批核人資料表" || TaskName = "預備合約通知書(新入職)"
+                (TaskName = "任職資源申請" || TaskName = "招聘職位申請表" || TaskName = "假期批核人資料表" || TaskName = "預備合約通知書(新入職)") && CurrentUser in ApproverEmail 
                 )
             );
-            //過濾二期待處理認爲
+            //過濾二期待處理任務
             ClearCollect(
                 ApprovalDetailColwithPhase2,
                 Filter(ApprovalDetailColwithdepartment,
-                TaskName <> "任職資源申請" && TaskName <> "招聘職位申請表" && TaskName <> "假期批核人資料表" && TaskName <> "預備合約通知書(新入職)"
+                TaskName <> "任職資源申請" && TaskName <> "招聘職位申請表" && TaskName <> "假期批核人資料表" && TaskName <> "預備合約通知書(新入職)" && TaskName <> Blank()
                 )
             );
             //生成待处理集合，新增Ismanger判断
@@ -2229,18 +2228,18 @@ GeneralFormListScreen As screen:
                     ).Task_Name
                 )
             );
-            //過濾一期全部認爲
+            //過濾一期當前用戶任務
             ClearCollect(
                 AllDetailColwithPhase1,
                 Filter(ComplatelDetailColwithdepartment,
-                TaskName = "任職資源申請" || TaskName = "招聘職位申請表" || TaskName = "假期批核人資料表" || TaskName = "預備合約通知書(新入職)"
+                (TaskName = "任職資源申請" || TaskName = "招聘職位申請表" || TaskName = "假期批核人資料表" || TaskName = "預備合約通知書(新入職)") && CurrentUser in ApproverEmail 
                 )
             );
-            //過濾二期全部認爲
+            //過濾二期全部任務
             ClearCollect(
                 AllDetailColwithPhase2,
                 Filter(ComplatelDetailColwithdepartment,
-                TaskName <> "任職資源申請" && TaskName <> "招聘職位申請表" && TaskName <> "假期批核人資料表" && TaskName <> "預備合約通知書(新入職)"
+                TaskName <> "任職資源申請" && TaskName <> "招聘職位申請表" && TaskName <> "假期批核人資料表" && TaskName <> "預備合約通知書(新入職)" && TaskName <> Blank()
                 )
             );
             //生成所有集合，新增Ismanger判断
