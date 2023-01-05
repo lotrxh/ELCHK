@@ -1792,6 +1792,43 @@
                         X: =76
                         ZIndex: =2
 
+                Container13_16_Order As groupContainer.manualLayoutContainer:
+                    AlignInContainer: =AlignInContainer.SetByContainer
+                    Fill: =RGBA(255, 255, 255, 1)
+                    FillPortions: =0
+                    Height: =28
+                    LayoutMinHeight: =100
+                    LayoutMinWidth: =250
+                    Width: =300
+                    ZIndex: =4
+
+                    Label1_147 As label:
+                        Color: =glbNeutralSecondaryColor
+                        Height: =28
+                        Italic: =true
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =10
+                        Text: ="申請編號："
+                        Width: =70
+                        ZIndex: =1
+
+                    Label1_148 As label:
+                        Color: =glbNeutralPrimaryColor
+                        Height: =28
+                        Italic: =true
+                        PaddingBottom: =0
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =0
+                        Size: =10
+                        Text: =First(EditDetailUserForm_1).FormOrder
+                        Width: =200
+                        X: =65
+                        ZIndex: =2
+
                 Container13_15_Version As groupContainer.manualLayoutContainer:
                     AlignInContainer: =AlignInContainer.SetByContainer
                     Fill: =RGBA(255, 255, 255, 1)
@@ -1799,7 +1836,7 @@
                     LayoutMinHeight: =100
                     LayoutMinWidth: =250
                     Width: =250
-                    ZIndex: =4
+                    ZIndex: =5
 
                     Label1_145 As label:
                         Color: =glbNeutralSecondaryColor
@@ -1826,41 +1863,6 @@
                         Text: =First(EditDetailUserForm_2).ModelVersion
                         Width: =120
                         X: =65
-                        ZIndex: =2
-
-                Container13_16 As groupContainer.manualLayoutContainer:
-                    AlignInContainer: =AlignInContainer.SetByContainer
-                    Fill: =RGBA(255, 255, 255, 1)
-                    FillPortions: =0
-                    Height: =28
-                    LayoutMinHeight: =100
-                    LayoutMinWidth: =250
-                    Visible: =false
-                    Width: =300
-                    ZIndex: =5
-
-                    Label1_147 As label:
-                        Color: =glbNeutralSecondaryColor
-                        Height: =28
-                        PaddingBottom: =0
-                        PaddingLeft: =0
-                        PaddingRight: =0
-                        PaddingTop: =0
-                        Size: =10
-                        Text: ="申請編號："
-                        Width: =80
-                        ZIndex: =1
-
-                    Label1_148 As label:
-                        Color: =glbNeutralPrimaryColor
-                        Height: =28
-                        PaddingBottom: =0
-                        PaddingLeft: =0
-                        PaddingRight: =0
-                        PaddingTop: =0
-                        Size: =10
-                        Text: =First(EditDetailUserForm_1).FormOrder
-                        X: =76
                         ZIndex: =2
 
                 Container13_17 As groupContainer.manualLayoutContainer:
