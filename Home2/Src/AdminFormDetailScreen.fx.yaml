@@ -891,7 +891,6 @@ AdminFormDetailScreen As screen:
                     DropTargetTextColor: =glbLinkColor
                     Fill: =ColorFade(glbLinkColor, 95%)
                     FocusedBorderThickness: =1
-                    FontWeight: =FontWeight.Lighter
                     Height: =80
                     HoverColor: =ColorFade(Self.Color, -25%)
                     HoverFill: =ColorFade(glbLinkColor, 80%)
@@ -902,7 +901,7 @@ AdminFormDetailScreen As screen:
                     ItemHoverFill: =ColorFade(glbLinkColor, 80%)
                     Items: |-
                         =//Last(EditAttachment2.TempAttachMent)//加载编辑表格的附件信息
-                        First(Filter(EditAttachment2,GenericFormId=Label1_88.Text&&TempType="示範表格TT")).Attachments
+                        First(Filter(EditAttachment2,GenericFormId=Label1_88.Text&&TempType="示範表格TT")).附件
                     MaxAttachments: =1
                     MaxAttachmentsText: ="最大附件"
                     NoAttachmentsText: ="無附件"
@@ -1034,7 +1033,7 @@ AdminFormDetailScreen As screen:
                     ItemHoverFill: =ColorFade(glbLinkColor, 80%)
                     Items: |-
                         =//Last(EditAttachment3.TempAttachMent)//加载编辑表格的附件信息
-                        First(Filter(EditAttachment3,GenericFormId=Label1_88.Text&&TempType="填寫指引TT")).Attachments
+                        First(Filter(EditAttachment3,GenericFormId=Label1_88.Text&&TempType="填寫指引TT")).附件
                     MaxAttachments: =1
                     MaxAttachmentsText: ="最大附件"
                     NoAttachmentsText: ="無附件"
