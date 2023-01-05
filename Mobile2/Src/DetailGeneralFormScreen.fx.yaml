@@ -4774,7 +4774,7 @@
                                 || (
                                     (CurrentRoleTaskPermissionForm = First(EditDetailUserForm_2).ModelDepartment || CurrentRoleTaskPermission = First(EditDetailUserForm_1).Department) 
                                     && !("執行" in Filter(ApprovalDetail_Table,Approval_No = FLowId).ActionNode) 
-                                    && (DateDiff(Now(),First(SortByColumns(Filter(ApprovalDetail_Table,TaskStatus = "002",Approval_No = FLowId),"Priortty",Descending)).创建时间) > 30)
+                                    && (DateDiff(First(SortByColumns(Filter(ApprovalDetail_Table,TaskStatus = "002",Approval_No = FLowId),"Priortty",Descending)).创建时间,Now()) > 30)
                                     ),
                                 DisplayMode.Edit,
                                 DisplayMode.Disabled
