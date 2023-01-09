@@ -920,11 +920,11 @@ GeneralFormListScreen As screen:
                 Items: |-
                     =If(
                         TabGallery3_4.Selected.Value = "全部",
-                        AllApprovalDataCol,
+                        FirstN(AllApprovalDataCol,2000),
                         TabGallery3_4.Selected.Value = "待我處理",
-                        AllPendingApprovalData,
+                        FirstN(AllPendingApprovalData,2000),
                         TabGallery3_4.Selected.Value = "我已處理",
-                        AllinprogressApprovalData
+                        FirstN(AllinprogressApprovalData,2000)
                     )
                 Layout: =Layout.Vertical
                 OnSelect: =
