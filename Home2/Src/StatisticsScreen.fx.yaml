@@ -285,7 +285,7 @@ StatisticsScreen As screen:
                                         drpFilterPedningDepartment_2.Selected.ModelFlowNumber
                                     ),
                                     IsBlank(drpFilterPedningDepartment_1.Selected.Result) || 'Operator ' = drpFilterPedningDepartment_1.Selected.Result,
-                                    创建时间 >= DatePicker1_4.SelectedDate && 创建时间 <= DateAdd(DatePicker1_5.SelectedDate,1,Days)
+                                    Created >= DatePicker1_4.SelectedDate && Created <= DateAdd(DatePicker1_5.SelectedDate,1,Days)
                                 ),
                                 "DepartMentUnit",
                                 "DepartMentUnitData"
@@ -414,7 +414,7 @@ StatisticsScreen As screen:
                                         true,
                                         false
                                     ) || DepartMentUnit = drpFilterPedningDepartment_3.Selected.Result,
-                                    创建时间 >= DatePicker1_4.SelectedDate && 创建时间 <= DateAdd(DatePicker1_5.SelectedDate,1,Days)
+                                    Created >= DatePicker1_4.SelectedDate && Created <= DateAdd(DatePicker1_5.SelectedDate,1,Days)
                                 ),
                                 "Task_Name",
                                 "TaskN"
@@ -532,7 +532,7 @@ StatisticsScreen As screen:
             Height: =34
             HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
             HoverFill: =ColorFade(Self.Fill, -5%)
-            Items: =Sequence(Last(Split(Text(Today(),"yyyy-mm"),"-")).Result-1,1,1)
+            Items: =Sequence(If(Value(Last(Split(Text(Today(),"yyyy-mm"),"-")).Result)>=1,1,Value(Last(Split(Text(Today(),"yyyy-mm"),"-")).Result)),1,1)
             PaddingBottom: =5
             PaddingRight: =0
             PaddingTop: =5
