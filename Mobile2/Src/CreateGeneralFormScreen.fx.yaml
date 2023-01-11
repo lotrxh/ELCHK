@@ -566,27 +566,16 @@
                             (FlowType = "通用流程" && !IsBlank(ComboBox1_11.Selected.Mail))
                             || (FlowType = "預設流程"&& !IsBlank(ComboBox1_15.Selected.Mail))
                             || (FlowType = "部門簡單流程"&& !IsBlank(ComboBox1_13.Selected.Mail))
-                            ,  
-                        If(     
-                            Elchk_Phase2CCEmailSentingFlow.Run(
+                            ,          
+                        Elchk_Phase2CCEmailSentingFlow.Run(
                             ApprovalGuid
-                            ).success = "true",
-                            Notify("抄送郵件發送成功，填寫成功！",
-                            NotificationType.Success,
-                            2000),
-                            Notify(
-                            "抄送郵件發送失敗，請聯絡系統管理員！",
-                            NotificationType.Error,
-                            5000)
-                            ),
+                            )
+                        );
                         Notify(
                             "填寫成功！",
                             NotificationType.Success,
                             2000
                         );
-                        );
-                        
-                        
                         If(
                             If(
                                 FlowType = "通用流程",
