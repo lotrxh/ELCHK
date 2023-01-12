@@ -17,16 +17,22 @@
                     "TaskStatus",
                     "AgentUserEmail",
                     "ActionNode",
-                    "Modified"
+                    "Modified",
+                    "Created"
                 ),
                 CurrentUser in ApproverEmail,
                 TaskStatus = "001" || TaskStatus = "002"
             ),
-                "DepartMentUnit",
+                "DepartMentName",
                 LookUp(
                     Approval_Table,
                     标题 = Approval_No
                 ).DepartMentUnit,
+                "FormDepartMentName",
+                LookUp(
+                    Approval_Table,
+                    标题 = Approval_No
+                ).DepartMentName,
                 "Application_No",
                 LookUp(
                     Approval_Table,
@@ -39,6 +45,15 @@
                 ).Task_Name
             )
         );
+        //過濾二期超過30天待處理任務
+        ClearCollect(
+            ApprovalDetailColwithPhase2_30days1,
+            Filter(ApprovalDetailColwithdepartment,
+            Task_Name <> "任職資源申請" && Task_Name <> "招聘職位申請表" && Task_Name <> "假期批核人資料表" && Task_Name <> "預備合約通知書(新入職)" && Task_Name <> Blank() && DateDiff(Created,Now()) > 30 && !(CurrentUser in ApproverEmail) &&
+            (CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermissionForm in FormDepartMentName)
+            )
+        );
+        ClearCollect(PandingTask,ApprovalDetailColwithdepartment,ApprovalDetailColwithPhase2_30days1);
         ClearCollect(DataModelName,GenericFormModel);
         Patch(DataModelName,Defaults(DataModelName),{ModelName:"招聘職位申請表",ModelDescription:"申請招聘空缺",ModelFlowNumber:"X0101",ModelDepartment:"新入職",ModelType:"全部"});
         // Patch(DataModelName,Defaults(DataModelName),{ModelName:"假期批核人資料表",ModelDescription:"假期表格",ModelFlowNumber:"A306",ModelDepartment:"行政部"});
@@ -187,7 +202,7 @@
                                     CountA(
                                         ApprovalDetailColwithdepartment.ActionNode)*80,
                                         400)
-                            Items: =Search(SortByColumns(ApprovalDetailColwithdepartment,"Modified",Descending),TextInput2_15.Text,"DepartMentUnit","Application_No","Task_Name")
+                            Items: =Search(SortByColumns(PandingTask,"Modified",Ascending),TextInput2_15.Text,"DepartMentName","Application_No","Task_Name")
                             Layout: =Layout.Vertical
                             LayoutMinHeight: =287
                             LayoutMinWidth: =320
@@ -219,7 +234,7 @@
                                 Size: =10
                                 Text: |-
                                     =//ThisItem.DepartMentUnit
-                                    If(CountA(Split(ThisItem.DepartMentUnit,"-").Result)=2,First(Split(ThisItem.DepartMentUnit,"-")).Result,First(Split(ThisItem.DepartMentUnit,"-")).Result&"-"&Index(Split(ThisItem.DepartMentUnit,"-"),2).Result)
+                                    If(CountA(Split(ThisItem.DepartMentName,"-").Result)=2,First(Split(ThisItem.DepartMentName,"-")).Result,First(Split(ThisItem.DepartMentName,"-")).Result&"-"&Index(Split(ThisItem.DepartMentName,"-"),2).Result)
                                 Tooltip: ="ThisItem.DepartMentUnit"
                                 Wrap: =false
                                 X: =Gallery5.Width-Icon5_6.Width-Label11_1.Width-10
@@ -443,7 +458,7 @@
                         ZIndex: =2
 
                     TaskNameGallery_2 As gallery.galleryVertical:
-                        Height: =72
+                        Height: =80
                         Items: |-
                             =If(
                                 TextInput2_16.Text = "",
@@ -488,7 +503,7 @@
                         Layout: =Layout.Vertical
                         ShowScrollbar: =false
                         TemplatePadding: =0
-                        TemplateSize: =70
+                        TemplateSize: =80
                         Width: =Parent.Width-2
                         WrapCount: =3
                         X: =1
