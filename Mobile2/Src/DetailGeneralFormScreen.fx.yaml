@@ -475,7 +475,9 @@
                                     ComboBox1_12.SelectedItems.Mail,
                                     Mail,
                                     ","
-                                )
+                                ),
+                                ApproverEmail:User().Email,
+                                Approver: CurrentUserName
                             }
                         );
                         UpdateIf(
@@ -4886,7 +4888,9 @@
                                         ComboBox1_12.SelectedItems.Mail,
                                         Mail,
                                         ","
-                                    )
+                                    ),
+                                    ApproverEmail:User().Email,
+                                    Approver: CurrentUserName
                                 }
                             );
                             UpdateIf(
