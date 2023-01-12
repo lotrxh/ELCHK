@@ -71,7 +71,8 @@ GeneralFormListScreen As screen:
                     "Priortty",
                     "TaskStatus",
                     "AgentUserEmail",
-                    "ActionNode"
+                    "ActionNode",
+                    "Created"
                 ),
                 TaskStatus = "001" || TaskStatus = "002"
             ),
@@ -106,6 +107,13 @@ GeneralFormListScreen As screen:
             TaskName <> "任職資源申請" && TaskName <> "招聘職位申請表" && TaskName <> "假期批核人資料表" && TaskName <> "預備合約通知書(新入職)" && TaskName <> Blank()
             )
         );
+        //過濾二期超過30天待處理任務
+        ClearCollect(
+            ApprovalDetailColwithPhase2_30days,
+            Filter(ApprovalDetailColwithdepartment,
+            TaskName <> "任職資源申請" && TaskName <> "招聘職位申請表" && TaskName <> "假期批核人資料表" && TaskName <> "預備合約通知書(新入職)" && TaskName <> Blank() && DateDiff(Created,Now()) > 30
+            )
+        );
         //生成待处理集合，新增Ismanger判断
         With(
             {
@@ -118,9 +126,12 @@ GeneralFormListScreen As screen:
                     ClearCollect(NewApprovalTable,ApprovalDetailColwithPhase1,
                     Filter(
                         ApprovalDetailColwithPhase2,
-                        CurrentUser in ApproverEmail || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermissionForm in FormDepartMentName
+                        CurrentUser in ApproverEmail),
+                        Filter(
+                        ApprovalDetailColwithPhase2_30days,
+                        CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermissionForm in FormDepartMentName)
                     )
-                ))
+                )
             },
             ClearCollect(
                 FilterPendingDataCol,
@@ -1969,7 +1980,8 @@ GeneralFormListScreen As screen:
                         "Priortty",
                         "TaskStatus",
                         "AgentUserEmail",
-                        "ActionNode"
+                        "ActionNode",
+                        "Created"
                     ),
                     TaskStatus = "001" || TaskStatus = "002"
                 ),
@@ -1997,11 +2009,18 @@ GeneralFormListScreen As screen:
                 (TaskName = "任職資源申請" || TaskName = "招聘職位申請表" || TaskName = "假期批核人資料表" || TaskName = "預備合約通知書(新入職)") && CurrentUser in ApproverEmail 
                 )
             );
-            //過濾二期待處理任務
+            //過濾二期全部待處理任務
             ClearCollect(
                 ApprovalDetailColwithPhase2,
                 Filter(ApprovalDetailColwithdepartment,
                 TaskName <> "任職資源申請" && TaskName <> "招聘職位申請表" && TaskName <> "假期批核人資料表" && TaskName <> "預備合約通知書(新入職)" && TaskName <> Blank()
+                )
+            );
+            //過濾二期超過30天待處理任務
+            ClearCollect(
+                ApprovalDetailColwithPhase2_30days,
+                Filter(ApprovalDetailColwithdepartment,
+                TaskName <> "任職資源申請" && TaskName <> "招聘職位申請表" && TaskName <> "假期批核人資料表" && TaskName <> "預備合約通知書(新入職)" && TaskName <> Blank() && DateDiff(Created,Now()) > 30
                 )
             );
             //生成待处理集合，新增Ismanger判断
@@ -2016,9 +2035,12 @@ GeneralFormListScreen As screen:
                         ClearCollect(NewApprovalTable,ApprovalDetailColwithPhase1,
                         Filter(
                             ApprovalDetailColwithPhase2,
-                            CurrentUser in ApproverEmail || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermissionForm in FormDepartMentName
+                            CurrentUser in ApproverEmail),
+                            Filter(
+                            ApprovalDetailColwithPhase2_30days,
+                            CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermissionForm in FormDepartMentName)
                         )
-                    ))
+                    )
                 },
                 ClearCollect(
                     FilterPendingDataCol,
@@ -2104,14 +2126,14 @@ GeneralFormListScreen As screen:
                 )
             );
             /*
-            //過濾一期已处理認爲
+            //過濾一期已处理任務
             ClearCollect(
                 ProcessedDetailColwithPhase1,
                 Filter(ProcessedDetailColwithdepartment,
                 TaskName = "任職資源申請" || TaskName = "招聘職位申請表" || TaskName = "假期批核人資料表" || TaskName = "預備合約通知書(新入職)"
                 )
             );
-            //過濾二期已处理認爲
+            //過濾二期已处理任務
             ClearCollect(
                 ProcessedDetailColwithPhase2,
                 Filter(ProcessedDetailColwithdepartment,
@@ -2228,7 +2250,7 @@ GeneralFormListScreen As screen:
                     ).Task_Name
                 )
             );
-            //過濾一期當前用戶任務
+            //過濾一期當前用戶全部任務
             ClearCollect(
                 AllDetailColwithPhase1,
                 Filter(ComplatelDetailColwithdepartment,
