@@ -320,7 +320,8 @@ GeneralFormListScreen As screen:
                     "TaskStatus",
                     "Editor",
                     "AgentUserEmail",
-                    "ActionNode"
+                    "ActionNode",
+                    "Created"
                 ),
                 TaskStatus = "000" || TaskStatus = "001" || TaskStatus = "004" || TaskStatus = "006" || TaskStatus = "002" || TaskStatus = "005"
             ),
@@ -355,6 +356,7 @@ GeneralFormListScreen As screen:
             TaskName <> "任職資源申請" && TaskName <> "招聘職位申請表" && TaskName <> "假期批核人資料表" && TaskName <> "預備合約通知書(新入職)" && TaskName <> Blank()
             )
         );
+        
         //生成所有集合，新增Ismanger判断
         With(
             {
@@ -367,9 +369,12 @@ GeneralFormListScreen As screen:
                     ClearCollect(AllTaskTable,AllDetailColwithPhase1,
                     Filter(
                         AllDetailColwithPhase2,
-                        TaskStatus <> Blank() && (CurrentUser in ApproverEmail || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermissionForm in FormDepartMentName)
+                        TaskStatus <> Blank() && CurrentUser in ApproverEmail ),
+                        Filter(
+                        ApprovalDetailColwithPhase2_30days,
+                        CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermissionForm in FormDepartMentName)
                     )
-                ))
+                )
             },
             ClearCollect(
                 AllApprovalListDataCol,
@@ -2229,7 +2234,8 @@ GeneralFormListScreen As screen:
                         "TaskStatus",
                         "Editor",
                         "AgentUserEmail",
-                        "ActionNode"
+                        "ActionNode",
+                        "Created"
                     ),
                     TaskStatus = "000" || TaskStatus = "001" || TaskStatus = "004" || TaskStatus = "006" || TaskStatus = "002" || TaskStatus = "005"
                 ),
@@ -2264,6 +2270,7 @@ GeneralFormListScreen As screen:
                 TaskName <> "任職資源申請" && TaskName <> "招聘職位申請表" && TaskName <> "假期批核人資料表" && TaskName <> "預備合約通知書(新入職)" && TaskName <> Blank()
                 )
             );
+            
             //生成所有集合，新增Ismanger判断
             With(
                 {
@@ -2276,9 +2283,12 @@ GeneralFormListScreen As screen:
                         ClearCollect(AllTaskTable,AllDetailColwithPhase1,
                         Filter(
                             AllDetailColwithPhase2,
-                            TaskStatus <> Blank() && (CurrentUser in ApproverEmail || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermissionForm in FormDepartMentName)
+                            TaskStatus <> Blank() && CurrentUser in ApproverEmail ),
+                            Filter(
+                            ApprovalDetailColwithPhase2_30days,
+                            CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermissionForm in FormDepartMentName)
                         )
-                    ))
+                    )
                 },
                 ClearCollect(
                     AllApprovalListDataCol,
