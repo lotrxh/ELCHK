@@ -289,7 +289,7 @@
             },
             Set(UserPermission,
             If(
-                User().Email in UEmail || User().Email in UEmail1 || (CurrentRoleTaskPermissionForm = First(EditDetailUserForm_2).ModelDepartment || CurrentRoleTaskPermission = First(EditDetailUserForm_1).Department) 
+                User().Email in UEmail || User().Email in UEmail1 || CurrentRoleTaskPermissionForm = First(EditDetailUserForm_2).ModelDepartment || CurrentRoleTaskPermission = First(EditDetailUserForm_1).Department
                 ,
                 DisplayMode.Edit,
                 DisplayMode.Disabled
