@@ -40,6 +40,8 @@ HomepageScreen As screen:
             )
         );
         //過濾二期超過30天待處理任務
+        If(
+        CurrentRoleTaskPermission <> "NoManger",
         ClearCollect(
             ApprovalDetailColwithPhase2_30days1,
             Filter(ApprovalDetailColwithdepartment,
@@ -51,6 +53,12 @@ HomepageScreen As screen:
         With({XXX11:Filter(ApprovalDetailData,(CurrentUser in ApproverEmail||CurrentUser in AgentUserEmail)&&TaskStatus<>Blank()&&(TaskStatus="002"||TaskStatus="001")&&DateDiff(修改时间,Today())>3)},ClearCollect(Priority_Processing,XXX11,ApprovalDetailColwithPhase2_30days1));
         // 待处理
         With({SearchPendingData:Filter(ApprovalDetailData,(CurrentUser in ApproverEmail||CurrentUser<>Blank()&&CurrentUser in AgentUserEmail)&&(TaskStatus="001"||TaskStatus="002"))},ClearCollect(FilterPendingDataCol,SearchPendingData,ApprovalDetailColwithPhase2_30days1));
+        ,
+        // 优先处理
+        With({XXX11:Filter(ApprovalDetailData,(CurrentUser in ApproverEmail||CurrentUser in AgentUserEmail)&&TaskStatus<>Blank()&&(TaskStatus="002"||TaskStatus="001")&&DateDiff(修改时间,Today())>3)},ClearCollect(Priority_Processing,XXX11));
+        // 待处理
+        With({SearchPendingData:Filter(ApprovalDetailData,(CurrentUser in ApproverEmail||CurrentUser<>Blank()&&CurrentUser in AgentUserEmail)&&(TaskStatus="001"||TaskStatus="002"))},ClearCollect(FilterPendingDataCol,SearchPendingData));
+        );
         
         ClearCollect(DataModelName,GenericFormModel);
         Patch(DataModelName,Defaults(DataModelName),{ModelName:"招聘職位申請表",ModelDescription:"申請招聘空缺",ModelFlowNumber:"X0101",ModelDepartment:"新入職",ModelType:"全部"});
