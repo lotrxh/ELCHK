@@ -33,22 +33,7 @@
             }
         );
         
-        With(
-            {
-                UEmail: LookUp(
-                    ApprovalDetail_Table,
-                    Approval_No = Label5.Text
-                ).ApproverEmail
-            },
-            Set(UserPermission,
-            If(
-                User().Email in UEmail
-                ,
-                DisplayMode.Edit,
-                DisplayMode.Disabled
-            )
-            )
-        );
+        
         
         //網絡中斷提示
         If(
@@ -289,6 +274,28 @@
         //创建集合EditDetailUserAttachment2获得附件信息，用作带入表格附件
         Refresh(GenericUploadAttachMentFile);
         Refresh(UploadFlowAttachMent);
+        
+        //任务详情查看权限设定
+        With(
+            {
+                UEmail: Filter(
+                    ApprovalDetail_Table,
+                    Approval_No = Label5.Text
+                ).ApproverEmail,
+                UEmail1: Filter(
+                    ApprovalDetail_Table,
+                    Approval_No = Label5.Text
+                ).ApprovalBCC
+            },
+            Set(UserPermission,
+            If(
+                User().Email in UEmail || User().Email in UEmail1 || (CurrentRoleTaskPermissionForm = First(EditDetailUserForm_2).ModelDepartment || CurrentRoleTaskPermission = First(EditDetailUserForm_1).Department) 
+                ,
+                DisplayMode.Edit,
+                DisplayMode.Disabled
+            )
+            )
+        );
 
     HeaderContainer_2 As groupContainer.manualLayoutContainer:
         Fill: =RGBA(255, 255, 255, 1)
