@@ -33,6 +33,23 @@
             }
         );
         
+        With(
+            {
+                UEmail: LookUp(
+                    ApprovalDetail_Table,
+                    Approval_No = Label5.Text
+                ).ApproverEmail
+            },
+            Set(UserPermission,
+            If(
+                User().Email in UEmail
+                ,
+                DisplayMode.Edit,
+                DisplayMode.Disabled
+            )
+            )
+        );
+        
         //網絡中斷提示
         If(
             IsBlank(Label5.Text),Notify("網路問題，申請內容出錯",NotificationType.Warning,3000)
@@ -1981,7 +1998,7 @@
                                     GenericFormId=Label1_144.Text,
                                     TempType = Label1_142.Text
                                 ).TempFileName
-                            ) > 0,
+                            ) > 0 && UserPermission,
                             DisplayMode.Edit,
                             Disabled
                         )
@@ -2027,7 +2044,7 @@
                                     GenericFormId=Label1_144.Text,
                                     TempType = "填寫指引TT"
                                 ).TempFileName
-                            ) > 0,
+                            ) > 0 && UserPermission,
                             DisplayMode.Edit,
                             Disabled
                         )
@@ -2073,7 +2090,7 @@
                                     GenericFormId=Label1_144.Text,
                                     TempType = "示範表格TT"
                                 ).TempFileName
-                            ) > 0,
+                            ) > 0 && UserPermission,
                             DisplayMode.Edit,
                             Disabled
                         )
@@ -2337,6 +2354,7 @@
                                 DisabledBorderColor: =RGBA(219, 219, 219, 1)
                                 DisabledColor: =RGBA(149, 149, 149, 1)
                                 DisabledFill: =RGBA(0, 0, 0, 0)
+                                DisplayMode: =UserPermission
                                 FocusedBorderThickness: =1
                                 Height: =32
                                 HoverBorderColor: =glbThemePrimaryColor
@@ -2366,6 +2384,7 @@
                                 DisabledBorderColor: =RGBA(219, 219, 219, 1)
                                 DisabledColor: =RGBA(149, 149, 149, 1)
                                 DisabledFill: =RGBA(0, 0, 0, 0)
+                                DisplayMode: =UserPermission
                                 FocusedBorderThickness: =1
                                 Height: =32
                                 HoverBorderColor: =glbThemePrimaryColor
@@ -2417,6 +2436,7 @@
                             DisabledBorderColor: =RGBA(219, 219, 219, 1)
                             DisabledColor: =RGBA(149, 149, 149, 1)
                             DisabledFill: =RGBA(244, 244, 244, 1)
+                            DisplayMode: =UserPermission
                             Fill: =White
                             FocusedBorderThickness: =1
                             Height: =32
@@ -3005,6 +3025,7 @@
                             DisabledBorderColor: =RGBA(219, 219, 219, 1)
                             DisabledColor: =RGBA(149, 149, 149, 1)
                             DisabledFill: =RGBA(0, 0, 0, 0)
+                            DisplayMode: =UserPermission
                             FocusedBorderThickness: =1
                             Height: =32
                             HoverBorderColor: =glbThemePrimaryColor
@@ -3060,6 +3081,7 @@
                             DisabledBorderColor: =RGBA(219, 219, 219, 1)
                             DisabledColor: =RGBA(149, 149, 149, 1)
                             DisabledFill: =RGBA(0, 0, 0, 0)
+                            DisplayMode: =UserPermission
                             FocusedBorderThickness: =1
                             Height: =32
                             HoverBorderColor: =glbThemePrimaryColor
