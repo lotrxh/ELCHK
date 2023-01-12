@@ -19,7 +19,7 @@
                     "ActionNode",
                     "Modified"
                 ),
-                ApproverEmail = CurrentUser,
+                CurrentUser in ApproverEmail,
                 TaskStatus = "001" || TaskStatus = "002"
             ),
                 "DepartMentUnit",
@@ -192,7 +192,6 @@
                             LayoutMinHeight: =287
                             LayoutMinWidth: =320
                             OnSelect: =
-                            ShowScrollbar: =false
                             TemplatePadding: =0
                             TemplateSize: =80
                             Transition: =Transition.Pop
@@ -372,7 +371,7 @@
                                 PaddingBottom: =3
                                 PaddingTop: =3
                                 Width: =30
-                                X: =Gallery5.Width-Self.Width-5
+                                X: =Gallery5.Width-Self.Width-15
                                 Y: =26
                                 ZIndex: =6
 
