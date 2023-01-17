@@ -465,9 +465,9 @@ GeneralFormListScreen As screen:
                 HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                 HoverColor: =Self.Color
                 HoverFill: =ColorFade(Self.Fill, -5%)
-                InputTextPlaceholder: ="選擇部門"
+                InputTextPlaceholder: ="表格部門/服務/功能"
                 Items: =Sort(Distinct(Filter(ConfigurationInfo,Type_Name="組織配置"&&(Value1="部門信息"||Value1="單位信息")),Code_No2&"-"&Value2),Result)
-                NoSelectionText: ="表格部門/服務"
+                NoSelectionText: ="表格部門/服務/功能"
                 PaddingLeft: =10
                 PressedColor: =Self.Color
                 PressedFill: =ColorFade(Self.Fill, -5%)
@@ -497,7 +497,7 @@ GeneralFormListScreen As screen:
                 HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                 HoverColor: =Self.Color
                 HoverFill: =ColorFade(Self.Fill, -5%)
-                InputTextPlaceholder: ="表格類型"
+                InputTextPlaceholder: ="表格類型/單位"
                 Items: =Distinct(FormTableType,FormType)
                 NoSelectionText: ="表格類型/單位"
                 PaddingLeft: =10
@@ -982,7 +982,28 @@ GeneralFormListScreen As screen:
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =10
-                    Text: =If(Len(ThisItem.FlowOrder) = 15,Left(ThisItem.FlowOrder,4),Len(ThisItem.FlowOrder) = 16,Left(ThisItem.FlowOrder,5))&Char(10)&ThisItem.FlowTaskName
+                    Text: |-
+                        =If(
+                            Len(ThisItem.FlowOrder) = 15,
+                            If(
+                            Left(
+                                ThisItem.FlowOrder,
+                                4
+                            ) = "A103","X0101",Left(
+                                ThisItem.FlowOrder,
+                                4
+                            ) = "A111","X0103",
+                            Left(
+                                ThisItem.FlowOrder,
+                                4
+                            ) = "A104","X0102","A306"
+                            ),
+                            Len(ThisItem.FlowOrder) = 16,
+                            Left(
+                                ThisItem.FlowOrder,
+                                5
+                            )
+                        ) & Char(10) & ThisItem.FlowTaskName
                     Tooltip: =ThisItem.FlowTaskName
                     Width: =246
                     Wrap: =false
