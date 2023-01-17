@@ -1,7 +1,7 @@
 "HomePageScreen As screen.'phoneLayout_FluidGridWithHeaderPageLayout_ver3.0'":
     Fill: =RGBA(242, 242, 242, 1)
     OnHidden: =
-    OnVisible: |-
+    OnVisible: |+
         =//生成带部门Taskname字段的ApprovalDetail_Table待理任务
         ClearCollect(
             ApprovalDetailColwithdepartment,
@@ -45,12 +45,63 @@
                 ).Task_Name
             )
         );
-        
+        //生成带部门Taskname字段的ApprovalDetail_Table全部待理任务
+        ClearCollect(
+            ApprovalDetailColwithdepartmentAll,
+            AddColumns(
+                Filter(
+                ShowColumns(
+                    ApprovalDetail_Table,
+                    "Title",
+                    "Approval_No",
+                    "Approver",
+                    "ApproverEmail",
+                    "Priortty",
+                    "TaskStatus",
+                    "AgentUserEmail",
+                    "ActionNode",
+                    "Modified",
+                    "Created"
+                ),
+                TaskStatus = "001" || TaskStatus = "002"
+            ),
+                "DepartMentName",
+                LookUp(
+                    Approval_Table,
+                    标题 = Approval_No
+                ).DepartMentUnit,
+                "FormDepartMentName",
+                LookUp(
+                    Approval_Table,
+                    标题 = Approval_No
+                ).DepartMentName,
+                "Application_No",
+                LookUp(
+                    Approval_Table,
+                    标题 = Approval_No
+                ).Application_No,
+                "Task_Name",
+                LookUp(
+                    Approval_Table,
+                    标题 = Approval_No
+                ).Task_Name
+            )
+        );
+        //過濾二期超過30天待處理任務
+        ClearCollect(
+            ApprovalDetailColwithPhase2_30days1,
+            Filter(ApprovalDetailColwithdepartmentAll,
+            Task_Name <> "任職資源申請" && Task_Name <> "招聘職位申請表" && Task_Name <> "假期批核人資料表" && Task_Name <> "預備合約通知書(新入職)" && Task_Name <> Blank() && DateDiff(Created,Now()) > 30 && !(CurrentUser in ApproverEmail) &&
+            (CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermissionForm in FormDepartMentName)
+            )
+        );
+        ClearCollect(PandingTask,ApprovalDetailColwithdepartment,ApprovalDetailColwithPhase2_30days1);
         ClearCollect(DataModelName,GenericFormModel);
         Patch(DataModelName,Defaults(DataModelName),{ModelName:"招聘職位申請表",ModelDescription:"申請招聘空缺",ModelFlowNumber:"X0101",ModelDepartment:"新入職",ModelType:"全部"});
         // Patch(DataModelName,Defaults(DataModelName),{ModelName:"假期批核人資料表",ModelDescription:"假期表格",ModelFlowNumber:"A306",ModelDepartment:"行政部"});
         Patch(DataModelName,Defaults(DataModelName),{ModelName:"任職資源申請",ModelDescription:"申請卡片及系統帳戶等資源",ModelFlowNumber:"X0103",ModelDepartment:"新入職",ModelType:"全部"});
         Patch(DataModelName,Defaults(DataModelName),{ModelName:"預備合約通知書(新入職)",ModelDescription:"只適用於新入職申請",ModelFlowNumber:"X0102",ModelDepartment:"新入職",ModelType:"全部"});
+        
 
     MainflowContainer_1 As groupContainer.verticalAutoLayoutContainer:
         Fill: =RGBA(242, 242, 242, 1)
@@ -194,7 +245,7 @@
                                     CountA(
                                         ApprovalDetailColwithdepartment.ActionNode)*80,
                                         400)
-                            Items: =Search(SortByColumns(ApprovalDetailColwithdepartment,"Modified",Ascending),TextInput2_15.Text,"DepartMentName","Application_No","Task_Name")
+                            Items: =Search(SortByColumns(PandingTask,"Modified",Ascending),TextInput2_15.Text,"DepartMentName","Application_No","Task_Name")
                             Layout: =Layout.Vertical
                             LayoutMinHeight: =287
                             LayoutMinWidth: =320
