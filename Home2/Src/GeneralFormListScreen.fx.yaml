@@ -982,7 +982,28 @@ GeneralFormListScreen As screen:
                     PaddingRight: =0
                     PaddingTop: =0
                     Size: =10
-                    Text: =If(Len(ThisItem.FlowOrder) = 15,Left(ThisItem.FlowOrder,4),Len(ThisItem.FlowOrder) = 16,Left(ThisItem.FlowOrder,5))&Char(10)&ThisItem.FlowTaskName
+                    Text: |-
+                        =If(
+                            Len(ThisItem.FlowOrder) = 15,
+                            If(
+                            Left(
+                                ThisItem.FlowOrder,
+                                4
+                            ) = "A103","X0101",Left(
+                                ThisItem.FlowOrder,
+                                4
+                            ) = "A111","X0103",
+                            Left(
+                                ThisItem.FlowOrder,
+                                4
+                            ) = "A104","X0102","A306"
+                            ),
+                            Len(ThisItem.FlowOrder) = 16,
+                            Left(
+                                ThisItem.FlowOrder,
+                                5
+                            )
+                        ) & Char(10) & ThisItem.FlowTaskName
                     Tooltip: =ThisItem.FlowTaskName
                     Width: =246
                     Wrap: =false
