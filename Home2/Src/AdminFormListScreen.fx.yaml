@@ -1129,7 +1129,7 @@ AdminFormListScreen As screen:
                 OnSelect: |-
                     =If(
                         ThisItem.Value = "意見箱",
-                        Launch("https://forms.office.com/Pages/ResponsePage.aspx?id=3bukt5xuKUm1pGVQ_urXfI59VMuh5BdPgBsZQOZA1aFUNVFDTEVCTkU1OTZEWE1HUUExTkNEVlJBNSQlQCN0PWcu"),
+                        Launch("https://forms.office.com/r/QtGdCLDD9X"),
                         ThisItem.Value = "IT服務台",
                         Launch("https://elcss-14cebfd770be55.sharepoint.com/sites/elcssbriefcase/HelpDeskPlus/Pages/Default.aspx?SPHostUrl=https%3A%2F%2Felcss%2Esharepoint%2Ecom%2Fsites%2Felcssbriefcase&SPLanguage=en%2DUS&SPClientTag=1&SPProductNumber=16%2E0%2E22112%2E12002&SPAppWebUrl=https%3A%2F%2Felcss%2D14cebfd770be55%2Esharepoint%2Ecom%2Fsites%2Felcssbriefcase%2FHelpDeskPlus"),
                         ThisItem.Value = "用戶手冊",

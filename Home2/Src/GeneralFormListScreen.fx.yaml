@@ -71,7 +71,8 @@ GeneralFormListScreen As screen:
                     "Priortty",
                     "TaskStatus",
                     "AgentUserEmail",
-                    "ActionNode"
+                    "ActionNode",
+                    "Created"
                 ),
                 TaskStatus = "001" || TaskStatus = "002"
             ),
@@ -99,11 +100,18 @@ GeneralFormListScreen As screen:
             (TaskName = "任職資源申請" || TaskName = "招聘職位申請表" || TaskName = "假期批核人資料表" || TaskName = "預備合約通知書(新入職)") && CurrentUser in ApproverEmail 
             )
         );
-        //過濾二期待處理任務
+        //過濾二期全部待處理任務
         ClearCollect(
             ApprovalDetailColwithPhase2,
             Filter(ApprovalDetailColwithdepartment,
             TaskName <> "任職資源申請" && TaskName <> "招聘職位申請表" && TaskName <> "假期批核人資料表" && TaskName <> "預備合約通知書(新入職)" && TaskName <> Blank()
+            )
+        );
+        //過濾二期超過30天待處理任務
+        ClearCollect(
+            ApprovalDetailColwithPhase2_30days,
+            Filter(ApprovalDetailColwithdepartment,
+            TaskName <> "任職資源申請" && TaskName <> "招聘職位申請表" && TaskName <> "假期批核人資料表" && TaskName <> "預備合約通知書(新入職)" && TaskName <> Blank() && DateDiff(Created,Now()) > 30
             )
         );
         //生成待处理集合，新增Ismanger判断
@@ -118,9 +126,12 @@ GeneralFormListScreen As screen:
                     ClearCollect(NewApprovalTable,ApprovalDetailColwithPhase1,
                     Filter(
                         ApprovalDetailColwithPhase2,
-                        CurrentUser in ApproverEmail || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermissionForm in FormDepartMentName
+                        CurrentUser in ApproverEmail),
+                        Filter(
+                        ApprovalDetailColwithPhase2_30days,
+                        CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermissionForm in FormDepartMentName)
                     )
-                ))
+                )
             },
             ClearCollect(
                 FilterPendingDataCol,
@@ -206,14 +217,14 @@ GeneralFormListScreen As screen:
             )
         );
         /*
-        //過濾一期已处理認爲
+        //過濾一期已处理任務
         ClearCollect(
             ProcessedDetailColwithPhase1,
             Filter(ProcessedDetailColwithdepartment,
             TaskName = "任職資源申請" || TaskName = "招聘職位申請表" || TaskName = "假期批核人資料表" || TaskName = "預備合約通知書(新入職)"
             )
         );
-        //過濾二期已处理認爲
+        //過濾二期已处理任務
         ClearCollect(
             ProcessedDetailColwithPhase2,
             Filter(ProcessedDetailColwithdepartment,
@@ -309,7 +320,8 @@ GeneralFormListScreen As screen:
                     "TaskStatus",
                     "Editor",
                     "AgentUserEmail",
-                    "ActionNode"
+                    "ActionNode",
+                    "Created"
                 ),
                 TaskStatus = "000" || TaskStatus = "001" || TaskStatus = "004" || TaskStatus = "006" || TaskStatus = "002" || TaskStatus = "005"
             ),
@@ -330,7 +342,7 @@ GeneralFormListScreen As screen:
                 ).Task_Name
             )
         );
-        //過濾一期當前用戶任務
+        //過濾一期當前用戶全部任務
         ClearCollect(
             AllDetailColwithPhase1,
             Filter(ComplatelDetailColwithdepartment,
@@ -344,6 +356,7 @@ GeneralFormListScreen As screen:
             TaskName <> "任職資源申請" && TaskName <> "招聘職位申請表" && TaskName <> "假期批核人資料表" && TaskName <> "預備合約通知書(新入職)" && TaskName <> Blank()
             )
         );
+        
         //生成所有集合，新增Ismanger判断
         With(
             {
@@ -356,9 +369,12 @@ GeneralFormListScreen As screen:
                     ClearCollect(AllTaskTable,AllDetailColwithPhase1,
                     Filter(
                         AllDetailColwithPhase2,
-                        TaskStatus <> Blank() && (CurrentUser in ApproverEmail || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermissionForm in FormDepartMentName)
+                        TaskStatus <> Blank() && CurrentUser in ApproverEmail ),
+                        Filter(
+                        ApprovalDetailColwithPhase2_30days,
+                        CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermissionForm in FormDepartMentName)
                     )
-                ))
+                )
             },
             ClearCollect(
                 AllApprovalListDataCol,
@@ -450,14 +466,13 @@ GeneralFormListScreen As screen:
                 HoverColor: =Self.Color
                 HoverFill: =ColorFade(Self.Fill, -5%)
                 InputTextPlaceholder: ="選擇部門"
-                IsSearchable: =false
                 Items: =Sort(Distinct(Filter(ConfigurationInfo,Type_Name="組織配置"&&(Value1="部門信息"||Value1="單位信息")),Code_No2&"-"&Value2),Result)
                 NoSelectionText: ="表格部門/服務"
                 PaddingLeft: =10
                 PressedColor: =Self.Color
                 PressedFill: =ColorFade(Self.Fill, -5%)
                 SearchFields: =["Result"]
-                SearchItems: =[]
+                SearchItems: =Search(Sort(Distinct(Filter(ConfigurationInfo,Type_Name="組織配置"&&(Value1="部門信息"||Value1="單位信息")),Code_No2&"-"&Value2),Result),ComboBox1_5.SearchText,"Result")
                 SelectionColor: =glbThemePrimaryColor
                 SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                 Size: =10
@@ -483,14 +498,13 @@ GeneralFormListScreen As screen:
                 HoverColor: =Self.Color
                 HoverFill: =ColorFade(Self.Fill, -5%)
                 InputTextPlaceholder: ="表格類型"
-                IsSearchable: =false
                 Items: =Distinct(FormTableType,FormType)
                 NoSelectionText: ="表格類型/單位"
                 PaddingLeft: =10
                 PressedColor: =Self.Color
                 PressedFill: =ColorFade(Self.Fill, -5%)
                 SearchFields: =["Result"]
-                SearchItems: =[]
+                SearchItems: =Search(Distinct(FormTableType,FormType),ComboBox1_6.SearchText,"Result")
                 SelectionColor: =glbThemePrimaryColor
                 SelectionFill: =ColorFade(Self.SelectionColor, 90%)
                 Size: =10
@@ -650,7 +664,7 @@ GeneralFormListScreen As screen:
                 FocusedBorderColor: =glbNeutralSecondaryColor
                 FocusedBorderThickness: =1
                 Height: =32
-                HintText: ="請輸入申請編號、申請人、表格或標籤"
+                HintText: ="請輸入申請編號、填表人、表格或標籤"
                 HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                 HoverFill: =ColorFade(Self.Fill, -5%)
                 PaddingBottom: =0
@@ -1657,7 +1671,7 @@ GeneralFormListScreen As screen:
                 OnSelect: |-
                     =If(
                         ThisItem.Value = "意見箱",
-                        Launch("https://forms.office.com/Pages/ResponsePage.aspx?id=3bukt5xuKUm1pGVQ_urXfI59VMuh5BdPgBsZQOZA1aFUNVFDTEVCTkU1OTZEWE1HUUExTkNEVlJBNSQlQCN0PWcu"),
+                        Launch("https://forms.office.com/r/QtGdCLDD9X"),
                         ThisItem.Value = "IT服務台",
                         Launch("https://elcss-14cebfd770be55.sharepoint.com/sites/elcssbriefcase/HelpDeskPlus/Pages/Default.aspx?SPHostUrl=https%3A%2F%2Felcss%2Esharepoint%2Ecom%2Fsites%2Felcssbriefcase&SPLanguage=en%2DUS&SPClientTag=1&SPProductNumber=16%2E0%2E22112%2E12002&SPAppWebUrl=https%3A%2F%2Felcss%2D14cebfd770be55%2Esharepoint%2Ecom%2Fsites%2Felcssbriefcase%2FHelpDeskPlus"),
                         ThisItem.Value = "用戶手冊",
@@ -1746,7 +1760,7 @@ GeneralFormListScreen As screen:
         Label32_2 As label:
             Color: =RGBA(246, 88, 16, 1)
             Height: =56
-            Text: ="確認刪除該條數據！"
+            Text: ="請確認是否刪除此數據？"
             Width: =187
             X: =658
             Y: =315
@@ -1969,7 +1983,8 @@ GeneralFormListScreen As screen:
                         "Priortty",
                         "TaskStatus",
                         "AgentUserEmail",
-                        "ActionNode"
+                        "ActionNode",
+                        "Created"
                     ),
                     TaskStatus = "001" || TaskStatus = "002"
                 ),
@@ -1997,11 +2012,18 @@ GeneralFormListScreen As screen:
                 (TaskName = "任職資源申請" || TaskName = "招聘職位申請表" || TaskName = "假期批核人資料表" || TaskName = "預備合約通知書(新入職)") && CurrentUser in ApproverEmail 
                 )
             );
-            //過濾二期待處理任務
+            //過濾二期全部待處理任務
             ClearCollect(
                 ApprovalDetailColwithPhase2,
                 Filter(ApprovalDetailColwithdepartment,
                 TaskName <> "任職資源申請" && TaskName <> "招聘職位申請表" && TaskName <> "假期批核人資料表" && TaskName <> "預備合約通知書(新入職)" && TaskName <> Blank()
+                )
+            );
+            //過濾二期超過30天待處理任務
+            ClearCollect(
+                ApprovalDetailColwithPhase2_30days,
+                Filter(ApprovalDetailColwithdepartment,
+                TaskName <> "任職資源申請" && TaskName <> "招聘職位申請表" && TaskName <> "假期批核人資料表" && TaskName <> "預備合約通知書(新入職)" && TaskName <> Blank() && DateDiff(Created,Now()) > 30
                 )
             );
             //生成待处理集合，新增Ismanger判断
@@ -2016,9 +2038,12 @@ GeneralFormListScreen As screen:
                         ClearCollect(NewApprovalTable,ApprovalDetailColwithPhase1,
                         Filter(
                             ApprovalDetailColwithPhase2,
-                            CurrentUser in ApproverEmail || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermissionForm in FormDepartMentName
+                            CurrentUser in ApproverEmail),
+                            Filter(
+                            ApprovalDetailColwithPhase2_30days,
+                            CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermissionForm in FormDepartMentName)
                         )
-                    ))
+                    )
                 },
                 ClearCollect(
                     FilterPendingDataCol,
@@ -2104,14 +2129,14 @@ GeneralFormListScreen As screen:
                 )
             );
             /*
-            //過濾一期已处理認爲
+            //過濾一期已处理任務
             ClearCollect(
                 ProcessedDetailColwithPhase1,
                 Filter(ProcessedDetailColwithdepartment,
                 TaskName = "任職資源申請" || TaskName = "招聘職位申請表" || TaskName = "假期批核人資料表" || TaskName = "預備合約通知書(新入職)"
                 )
             );
-            //過濾二期已处理認爲
+            //過濾二期已处理任務
             ClearCollect(
                 ProcessedDetailColwithPhase2,
                 Filter(ProcessedDetailColwithdepartment,
@@ -2207,7 +2232,8 @@ GeneralFormListScreen As screen:
                         "TaskStatus",
                         "Editor",
                         "AgentUserEmail",
-                        "ActionNode"
+                        "ActionNode",
+                        "Created"
                     ),
                     TaskStatus = "000" || TaskStatus = "001" || TaskStatus = "004" || TaskStatus = "006" || TaskStatus = "002" || TaskStatus = "005"
                 ),
@@ -2228,7 +2254,7 @@ GeneralFormListScreen As screen:
                     ).Task_Name
                 )
             );
-            //過濾一期當前用戶任務
+            //過濾一期當前用戶全部任務
             ClearCollect(
                 AllDetailColwithPhase1,
                 Filter(ComplatelDetailColwithdepartment,
@@ -2242,6 +2268,7 @@ GeneralFormListScreen As screen:
                 TaskName <> "任職資源申請" && TaskName <> "招聘職位申請表" && TaskName <> "假期批核人資料表" && TaskName <> "預備合約通知書(新入職)" && TaskName <> Blank()
                 )
             );
+            
             //生成所有集合，新增Ismanger判断
             With(
                 {
@@ -2254,9 +2281,12 @@ GeneralFormListScreen As screen:
                         ClearCollect(AllTaskTable,AllDetailColwithPhase1,
                         Filter(
                             AllDetailColwithPhase2,
-                            TaskStatus <> Blank() && (CurrentUser in ApproverEmail || CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermissionForm in FormDepartMentName)
+                            TaskStatus <> Blank() && CurrentUser in ApproverEmail ),
+                            Filter(
+                            ApprovalDetailColwithPhase2_30days,
+                            CurrentRoleTaskPermission in DepartMentName || CurrentRoleTaskPermissionForm in FormDepartMentName)
                         )
-                    ))
+                    )
                 },
                 ClearCollect(
                     AllApprovalListDataCol,
