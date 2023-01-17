@@ -476,7 +476,7 @@
                                     Mail,
                                     ","
                                 )
-                                //,ApproverEmail:User().Email,Approver: CurrentUserName
+                                ,ApproverEmail:User().Email,Approver: CurrentUserName
                             }
                         );
                         UpdateIf(
@@ -4888,7 +4888,7 @@
                                         Mail,
                                         ","
                                     )
-                                    //,ApproverEmail:User().Email,Approver: CurrentUserName
+                                    ,ApproverEmail:User().Email,Approver: CurrentUserName
                                 }
                             );
                             UpdateIf(
