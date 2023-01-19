@@ -241,9 +241,9 @@
                                 =//400
                                 If(
                                     CountA(
-                                        ApprovalDetailColwithdepartment.ActionNode)<5,
+                                        PandingTask.ActionNode)<5,
                                     CountA(
-                                        ApprovalDetailColwithdepartment.ActionNode)*80,
+                                        PandingTask.ActionNode)*80,
                                         400)
                             Items: =Search(SortByColumns(PandingTask,"Modified",Ascending),TextInput2_15.Text,"DepartMentName","Application_No","Task_Name")
                             Layout: =Layout.Vertical
@@ -264,7 +264,7 @@
                                 OnSelect: =Select(Parent)
                                 Size: =10
                                 Text: =ThisItem.Application_No
-                                Tooltip: ="ThisItem.Application_No"
+                                Tooltip: =ThisItem.Application_No
                                 Wrap: =false
                                 Y: =7
                                 ZIndex: =1
@@ -278,7 +278,7 @@
                                 Text: |-
                                     =//ThisItem.DepartMentUnit
                                     If(CountA(Split(ThisItem.DepartMentName,"-").Result)=2,First(Split(ThisItem.DepartMentName,"-")).Result,First(Split(ThisItem.DepartMentName,"-")).Result&"-"&Index(Split(ThisItem.DepartMentName,"-"),2).Result)
-                                Tooltip: ="ThisItem.DepartMentUnit"
+                                Tooltip: =ThisItem.DepartMentName
                                 Wrap: =false
                                 X: =Gallery5.Width-Icon5_6.Width-Label11_1.Width-10
                                 Y: =7
@@ -290,7 +290,7 @@
                                 OnSelect: =Select(Parent)
                                 Size: =10
                                 Text: =ThisItem.Task_Name
-                                Tooltip: ="ThisItem.Task_Name"
+                                Tooltip: =ThisItem.Task_Name
                                 Wrap: =false
                                 Y: =39
                                 ZIndex: =3
@@ -303,7 +303,7 @@
                                 Size: =10
                                 Text: |-
                                     =If(App.ActiveScreen.Width>1000,Text(ThisItem.Modified,"dd/mm/yyyy HH:mm"),Text(ThisItem.Modified,"dd/mm/yyyy"))
-                                Tooltip: ="ThisItem.Modified"
+                                Tooltip: =ThisItem.Modified
                                 Wrap: =false
                                 X: =Gallery5.Width-Icon5_6.Width-Label11_1.Width-10
                                 Y: =39
