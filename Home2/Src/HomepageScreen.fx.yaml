@@ -997,6 +997,22 @@ HomepageScreen As screen:
                         X: =502
                         ZIndex: =4
 
+                Icon6_8 As icon.Tag:
+                    Color: =glbThemePrimaryColor
+                    Height: =24
+                    Icon: =Icon.DocumentWithContent
+                    OnSelect: |-
+                        =UpdateContext({
+                            EditGAMask:true
+                        })
+                    PaddingBottom: =4
+                    PaddingTop: =4
+                    Visible: =false
+                    Width: =24
+                    X: =617
+                    Y: =4
+                    ZIndex: =7
+
             LineRectangle_3 As rectangle:
                 Fill: =RGBA(221, 79, 14, 1)
                 Height: =1

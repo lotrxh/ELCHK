@@ -1235,7 +1235,8 @@ GeneralFormListScreen As screen:
                     Visible: |-
                         =//true
                         //If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","自助假期批核資料表"],true,false)
-                        If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","假期批核人資料表"],true,false)
+                        //If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","假期批核人資料表"],true,false)
+                        false
                     Width: =24
                     X: =1020
                     Y: =14
@@ -1267,19 +1268,10 @@ GeneralFormListScreen As screen:
                     PressedFill: =ColorFade(Self.Color, 95%)
                     Visible: |-
                         =//If(ThisItem.TaskStatus="001", true , false )
-                        If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","假期批核人資料表"] && 
+                        //If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","假期批核人資料表"]&&
                         //ThisItem.TaskStatus="001"
-                        First(
-                                SortByColumns(
-                                    Filter(
-                                        ApprovalDetail_Table,
-                                        Approval_No = ThisItem.Approval_No
-                                    ),
-                                    "Priortty",
-                                    Descending
-                                )
-                            ).TaskStatus = "001"
-                        ,true,false)
+                        //First(SortByColumns(Filter(ApprovalDetail_Table,Approval_No=ThisItem.Approval_No),"Priortty",Descending)).TaskStatus="001", true , false )
+                        false
                     Width: =24
                     X: =1046
                     Y: =14
@@ -1529,10 +1521,574 @@ GeneralFormListScreen As screen:
                         )
                     PaddingBottom: =3
                     PaddingTop: =3
+                    Visible: =false
                     Width: =24
                     X: =995
                     Y: =14
                     ZIndex: =19
+
+                BtnLgIconOnly_5 As icon.Add:
+                    BorderColor: =Self.Fill
+                    BorderThickness: =1
+                    Color: =glbThemePrimaryColor
+                    DisabledBorderColor: =RGBA(219, 219, 219, 1)
+                    DisabledColor: =RGBA(149, 149, 149, 1)
+                    DisabledFill: =RGBA(244, 244, 244, 1)
+                    Height: =24
+                    HoverFill: =ColorFade(Self.Fill, -15%)
+                    Icon: =Icon.DocumentWithContent
+                    OnSelect: |-
+                        =If(
+                            ThisItem.FlowTaskName = "招聘職位申請表",
+                            If(
+                                First(
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            Approval_No = ThisItem.Approval_No
+                                        ),
+                                        "Priortty",
+                                        Descending
+                                    )
+                                ).TaskStatus = "001",
+                                Launch(
+                                    JumpUrl & "&Screen=JobTitleFormScreen&AppIds=" & LookUp(
+                                        ApplitionJobPosition,
+                                        ApprovalId = TaskListGallery.Selected.Approval_No
+                                    ).标题 & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
+                                ),
+                                First(
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            Approval_No = ThisItem.Approval_No
+                                        ),
+                                        "Priortty",
+                                        Descending
+                                    )
+                                ).TaskStatus = "002",
+                                Launch(
+                                    JumpUrl & "&Screen=JobTitleFormDetailScreen&AppIds=" & LookUp(
+                                        ApplitionJobPosition,
+                                        ApprovalId = TaskListGallery.Selected.Approval_No
+                                    ).标题 & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&canOperation=true"
+                                ),
+                                Launch(
+                                    JumpUrl & "&Screen=JobTitleFormDetailScreen&AppIds=" & LookUp(
+                                        ApplitionJobPosition,
+                                        ApprovalId = TaskListGallery.Selected.Approval_No
+                                    ).标题 & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&canOperation=true"
+                                )
+                            ),
+                            ThisItem.FlowTaskName = "假期批核人資料表",
+                            If(
+                                First(
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            Approval_No = ThisItem.Approval_No
+                                        ),
+                                        "Priortty",
+                                        Descending
+                                    )
+                                ).TaskStatus = "001",
+                                Launch(
+                                    JumpUrlA306A111 & "&Screen=VacationFormScreen&taskNum=" & LookUp(
+                                        VacationApprovalForm,
+                                        Applicant_No = TaskListGallery.Selected.Approval_No
+                                    ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
+                                ),
+                                First(
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            Approval_No = ThisItem.Approval_No
+                                        ),
+                                        "Priortty",
+                                        Descending
+                                    )
+                                ).TaskStatus = "002",
+                                Launch(
+                                    JumpUrlA306A111 & "&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
+                                        VacationApprovalForm,
+                                        Applicant_No = TaskListGallery.Selected.Approval_No
+                                    ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&canOperation=true"
+                                ),
+                                Launch(
+                                    JumpUrlA306A111 & "&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
+                                        VacationApprovalForm,
+                                        Applicant_No = TaskListGallery.Selected.Approval_No
+                                    ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&canOperation=true"
+                                )
+                            ),
+                            ThisItem.FlowTaskName = "預備合約通知書(新入職)",
+                            If(
+                                First(
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            Approval_No = ThisItem.Approval_No
+                                        ),
+                                        "Priortty",
+                                        Descending
+                                    )
+                                ).TaskStatus = "001",
+                                Launch(
+                                    JumpUrl & "&Screen=ContractNoticeForm&taskNum=" & LookUp(
+                                        ContractNotice,
+                                        ApprovalId = TaskListGallery.Selected.Approval_No
+                                    ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
+                                ),
+                                First(
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            Approval_No = ThisItem.Approval_No
+                                        ),
+                                        "Priortty",
+                                        Descending
+                                    )
+                                ).TaskStatus = "002",
+                                Launch(
+                                    JumpUrl & "&Screen=ContractNoticeFormDetail&taskNum=" & LookUp(
+                                        ContractNotice,
+                                        ApprovalId = TaskListGallery.Selected.Approval_No
+                                    ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&canOperation=true"
+                                ),
+                                Launch(
+                                    JumpUrl & "&Screen=ContractNoticeFormDetail&taskNum=" & LookUp(
+                                        ContractNotice,
+                                        ApprovalId = TaskListGallery.Selected.Approval_No
+                                    ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&canOperation=true"
+                                )
+                            ),
+                            ThisItem.FlowTaskName = "任職資源申請",
+                            If(
+                                First(
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            Approval_No = ThisItem.Approval_No
+                                        ),
+                                        "Priortty",
+                                        Descending
+                                    )
+                                ).TaskStatus = "001",
+                                Launch(
+                                    JumpUrlA306A111 & "&Screen=EmploymentFormScreen&taskNum=" & LookUp(
+                                        EmploymentResource,
+                                        ApprovalId = TaskListGallery.Selected.Approval_No
+                                    ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
+                                ),
+                                Launch(
+                                    JumpUrlA306A111 & "&Screen=EmploymentFormDetail&taskNum=" & LookUp(
+                                        EmploymentResource,
+                                        ApprovalId = TaskListGallery.Selected.Approval_No
+                                    ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&canOperation=true"
+                                )
+                            ),
+                            With(
+                                {
+                                    FormId: LookUp(
+                                        GenericFormList,
+                                        ApprovalId = ThisItem.Approval_No
+                                    ).标题
+                                },
+                                Launch(
+                                    JumpUrlMobileApp & "&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & TaskListGallery.Selected.Approval_No & "&Page=Home" & "&approvalNum=" & TaskListGallery.Selected.Approval_No,
+                                    {},
+                                    LaunchTarget.Replace
+                                )
+                            )
+                        )
+                    PaddingBottom: =2
+                    PaddingTop: =2
+                    PressedColor: =ColorFade(Self.Color, -15%)
+                    PressedFill: =ColorFade(Self.Fill, -25%)
+                    Visible: =false
+                    Width: =24
+                    X: =995
+                    Y: =14
+                    ZIndex: =20
+
+                Group22_1 As group:
+                    Height: =5
+                    Width: =5
+                    X: =-818
+                    Y: =7
+                    ZIndex: =23
+
+                    Image5_3 As image:
+                        Height: =24
+                        Image: |-
+                            ="data:image/svg+xml," & EncodeUrl("<svg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' version='1.1' id='mdi-square-edit-outline' width='24' height='24' viewBox='0 0 24 24'><path fill='#2C4D96' d='M5,3C3.89,3 3,3.89 3,5V19A2,2 0 0,0 5,21H19A2,2 0 0,0 21,19V12H19V19H5V5H12V3H5M17.78,4C17.61,4 17.43,4.07 17.3,4.2L16.08,5.41L18.58,7.91L19.8,6.7C20.06,6.44 20.06,6 19.8,5.75L18.25,4.2C18.12,4.07 17.95,4 17.78,4M15.37,6.12L8,13.5V16H10.5L17.87,8.62L15.37,6.12Z' /></svg>")
+                        PaddingBottom: =2
+                        PaddingTop: =2
+                        Width: =24
+                        X: =995
+                        Y: =14
+                        ZIndex: =21
+
+                    Edit_button_1 As button:
+                        AutoDisableOnSelect: =false
+                        BorderStyle: =BorderStyle.None
+                        Color: =RGBA(0, 0, 0, 0)
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =24
+                        HoverColor: =RGBA(0, 0, 0, 0)
+                        HoverFill: =RGBA(0, 0, 0, 0)
+                        OnSelect: |-
+                            =If(
+                                ThisItem.FlowTaskName = "招聘職位申請表",
+                                If(
+                                    First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                Approval_No = ThisItem.Approval_No
+                                            ),
+                                            "Priortty",
+                                            Descending
+                                        )
+                                    ).TaskStatus = "001",
+                                    Launch(
+                                        JumpUrl & "&Screen=JobTitleFormScreen&AppIds=" & LookUp(
+                                            ApplitionJobPosition,
+                                            ApprovalId = TaskListGallery.Selected.Approval_No
+                                        ).标题 & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
+                                    ),
+                                    First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                Approval_No = ThisItem.Approval_No
+                                            ),
+                                            "Priortty",
+                                            Descending
+                                        )
+                                    ).TaskStatus = "002",
+                                    Launch(
+                                        JumpUrl & "&Screen=JobTitleFormDetailScreen&AppIds=" & LookUp(
+                                            ApplitionJobPosition,
+                                            ApprovalId = TaskListGallery.Selected.Approval_No
+                                        ).标题 & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&canOperation=true"
+                                    ),
+                                    Launch(
+                                        JumpUrl & "&Screen=JobTitleFormDetailScreen&AppIds=" & LookUp(
+                                            ApplitionJobPosition,
+                                            ApprovalId = TaskListGallery.Selected.Approval_No
+                                        ).标题 & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&canOperation=true"
+                                    )
+                                ),
+                                ThisItem.FlowTaskName = "假期批核人資料表",
+                                If(
+                                    First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                Approval_No = ThisItem.Approval_No
+                                            ),
+                                            "Priortty",
+                                            Descending
+                                        )
+                                    ).TaskStatus = "001",
+                                    Launch(
+                                        JumpUrlA306A111 & "&Screen=VacationFormScreen&taskNum=" & LookUp(
+                                            VacationApprovalForm,
+                                            Applicant_No = TaskListGallery.Selected.Approval_No
+                                        ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
+                                    ),
+                                    First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                Approval_No = ThisItem.Approval_No
+                                            ),
+                                            "Priortty",
+                                            Descending
+                                        )
+                                    ).TaskStatus = "002",
+                                    Launch(
+                                        JumpUrlA306A111 & "&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
+                                            VacationApprovalForm,
+                                            Applicant_No = TaskListGallery.Selected.Approval_No
+                                        ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&canOperation=true"
+                                    ),
+                                    Launch(
+                                        JumpUrlA306A111 & "&Screen=VacationFormDetailScreen&taskNum=" & LookUp(
+                                            VacationApprovalForm,
+                                            Applicant_No = TaskListGallery.Selected.Approval_No
+                                        ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&canOperation=true"
+                                    )
+                                ),
+                                ThisItem.FlowTaskName = "預備合約通知書(新入職)",
+                                If(
+                                    First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                Approval_No = ThisItem.Approval_No
+                                            ),
+                                            "Priortty",
+                                            Descending
+                                        )
+                                    ).TaskStatus = "001",
+                                    Launch(
+                                        JumpUrl & "&Screen=ContractNoticeForm&taskNum=" & LookUp(
+                                            ContractNotice,
+                                            ApprovalId = TaskListGallery.Selected.Approval_No
+                                        ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
+                                    ),
+                                    First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                Approval_No = ThisItem.Approval_No
+                                            ),
+                                            "Priortty",
+                                            Descending
+                                        )
+                                    ).TaskStatus = "002",
+                                    Launch(
+                                        JumpUrl & "&Screen=ContractNoticeFormDetail&taskNum=" & LookUp(
+                                            ContractNotice,
+                                            ApprovalId = TaskListGallery.Selected.Approval_No
+                                        ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&canOperation=true"
+                                    ),
+                                    Launch(
+                                        JumpUrl & "&Screen=ContractNoticeFormDetail&taskNum=" & LookUp(
+                                            ContractNotice,
+                                            ApprovalId = TaskListGallery.Selected.Approval_No
+                                        ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&canOperation=true"
+                                    )
+                                ),
+                                ThisItem.FlowTaskName = "任職資源申請",
+                                If(
+                                    First(
+                                        SortByColumns(
+                                            Filter(
+                                                ApprovalDetail_Table,
+                                                Approval_No = ThisItem.Approval_No
+                                            ),
+                                            "Priortty",
+                                            Descending
+                                        )
+                                    ).TaskStatus = "001",
+                                    Launch(
+                                        JumpUrlA306A111 & "&Screen=EmploymentFormScreen&taskNum=" & LookUp(
+                                            EmploymentResource,
+                                            ApprovalId = TaskListGallery.Selected.Approval_No
+                                        ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
+                                    ),
+                                    Launch(
+                                        JumpUrlA306A111 & "&Screen=EmploymentFormDetail&taskNum=" & LookUp(
+                                            EmploymentResource,
+                                            ApprovalId = TaskListGallery.Selected.Approval_No
+                                        ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&canOperation=true"
+                                    )
+                                ),
+                                With(
+                                    {
+                                        FormId: LookUp(
+                                            GenericFormList,
+                                            ApprovalId = ThisItem.Approval_No
+                                        ).标题
+                                    },
+                                    Launch(
+                                        JumpUrlMobileApp & "&Screen=DetailGeneralFormScreen&FormId=" & FormId & "&FLowId=" & TaskListGallery.Selected.Approval_No & "&Page=Home" & "&approvalNum=" & TaskListGallery.Selected.Approval_No,
+                                        {},
+                                        LaunchTarget.Replace
+                                    )
+                                )
+                            )
+                        PaddingBottom: =2
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =2
+                        PressedColor: =RGBA(0, 0, 0, 0)
+                        PressedFill: =RGBA(0, 0, 0, 0)
+                        Size: =12
+                        Text: ="編輯"
+                        Width: =24
+                        X: =995
+                        Y: =14
+                        ZIndex: =22
+
+                Group22_2 As group:
+                    Height: =5
+                    Width: =5
+                    X: =-955
+                    Y: =10
+                    ZIndex: =25
+
+                    Image5_4 As image:
+                        Height: =24
+                        Image: |-
+                            ="data:image/svg+xml," & EncodeUrl("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>     <g>         <path fill='none' d='M0 0h24v24H0z'/>         <path fill='#2C4D96' d='M7 6V3a1 1 0 0 1 1-1h12a1 1 0 0 1 1 1v14a1 1 0 0 1-1 1h-3v3c0 .552-.45 1-1.007 1H4.007A1.001 1.001 0 0 1 3 21l.003-14c0-.552.45-1 1.007-1H7zM5.003 8L5 20h10V8H5.003zM9 6h8v10h2V4H9v2z'/>     </g> </svg>")
+                        OnSelect: |-
+                            =If(
+                                ThisItem.FlowTaskName = "招聘職位申請表",
+                                Launch(
+                                    JumpUrl & "&Screen=JobTitleCopyFormScreen&AppIds=" & LookUp(
+                                        ApplitionJobPosition,
+                                        ApprovalId = TaskListGallery.Selected.Approval_No
+                                    ).标题 & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmits=true&newApplicationGuid=" & GUID() & "&flowguid=" & GUID()&"&bustype=Edit",{},LaunchTarget.Replace
+                                ),
+                                ThisItem.FlowTaskName = "假期批核人資料表",
+                                Launch(
+                                    JumpUrlA306A111 & "&Screen=VacationFormScreen&taskNum=" & LookUp(
+                                        VacationApprovalForm,
+                                        Applicant_No = TaskListGallery.Selected.Approval_No
+                                    ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&isCopy=true",{},LaunchTarget.Replace
+                                ),
+                                ThisItem.FlowTaskName = "預備合約通知書(新入職)",
+                                Launch(
+                                    JumpUrl & "&Screen=ContractNoticeCopyForm&taskNum=" & LookUp(
+                                        ContractNotice,
+                                        ApprovalId = TaskListGallery.Selected.Approval_No
+                                    ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmits=true&newApplicationGuid=" & GUID() & "&flowguid=" & GUID()&"&bustype=Edit",{},LaunchTarget.Replace
+                                )
+                            )
+                        PaddingBottom: =2
+                        PaddingTop: =2
+                        Visible: |+
+                            =//true
+                            //If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","自助假期批核資料表"],true,false)
+                            If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","假期批核人資料表"],true,false)
+                            
+                        Width: =24
+                        X: =1020
+                        Y: =14
+                        ZIndex: =23
+
+                    Copy_button_1 As button:
+                        AutoDisableOnSelect: =false
+                        BorderStyle: =BorderStyle.None
+                        Color: =RGBA(0, 0, 0, 0)
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =24
+                        HoverColor: =RGBA(0, 0, 0, 0)
+                        HoverFill: =RGBA(0, 0, 0, 0)
+                        OnSelect: |-
+                            =If(
+                                ThisItem.FlowTaskName = "招聘職位申請表",
+                                Launch(
+                                    JumpUrl & "&Screen=JobTitleCopyFormScreen&AppIds=" & LookUp(
+                                        ApplitionJobPosition,
+                                        ApprovalId = TaskListGallery.Selected.Approval_No
+                                    ).标题 & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmits=true&newApplicationGuid=" & GUID() & "&flowguid=" & GUID()&"&bustype=Edit",{},LaunchTarget.Replace
+                                ),
+                                ThisItem.FlowTaskName = "假期批核人資料表",
+                                Launch(
+                                    JumpUrlA306A111 & "&Screen=VacationFormScreen&taskNum=" & LookUp(
+                                        VacationApprovalForm,
+                                        Applicant_No = TaskListGallery.Selected.Approval_No
+                                    ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&isCopy=true",{},LaunchTarget.Replace
+                                ),
+                                ThisItem.FlowTaskName = "預備合約通知書(新入職)",
+                                Launch(
+                                    JumpUrl & "&Screen=ContractNoticeCopyForm&taskNum=" & LookUp(
+                                        ContractNotice,
+                                        ApprovalId = TaskListGallery.Selected.Approval_No
+                                    ).标题 & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmits=true&newApplicationGuid=" & GUID() & "&flowguid=" & GUID()&"&bustype=Edit",{},LaunchTarget.Replace
+                                )
+                            )
+                        PaddingBottom: =2
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =2
+                        PressedColor: =RGBA(0, 0, 0, 0)
+                        PressedFill: =RGBA(0, 0, 0, 0)
+                        Size: =12
+                        Text: ="編輯"
+                        Visible: |+
+                            =//true
+                            //If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","自助假期批核資料表"],true,false)
+                            If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","假期批核人資料表"],true,false)
+                            
+                        Width: =24
+                        X: =1020
+                        Y: =14
+                        ZIndex: =24
+
+                Group22_3 As group:
+                    Height: =5
+                    Width: =5
+                    X: =20
+                    Y: =10
+                    ZIndex: =27
+
+                    Image5_5 As image:
+                        Height: =24
+                        Image: |-
+                            ="data:image/svg+xml," & EncodeUrl("<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'>     <g>         <path fill='none' d='M0 0h24v24H0z'/>         <path fill='#2C4D96' d='M7 4V2h10v2h5v2h-2v15a1 1 0 0 1-1 1H5a1 1 0 0 1-1-1V6H2V4h5zM6 6v14h12V6H6zm3 3h2v8H9V9zm4 0h2v8h-2V9z'/>     </g> </svg>")
+                        OnSelect: |-
+                            =UpdateContext({
+                                DeletTask:true,
+                                DeleteNum:ThisItem.Approval_No
+                            })
+                        PaddingBottom: =2
+                        PaddingTop: =2
+                        Visible: |-
+                            =//If(ThisItem.TaskStatus="001", true , false )
+                            If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","假期批核人資料表"] && 
+                            //ThisItem.TaskStatus="001"
+                            First(
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            Approval_No = ThisItem.Approval_No
+                                        ),
+                                        "Priortty",
+                                        Descending
+                                    )
+                                ).TaskStatus = "001"
+                            ,true,false)
+                        Width: =24
+                        X: =1046
+                        Y: =14
+                        ZIndex: =25
+
+                    Delete_button_1 As button:
+                        AutoDisableOnSelect: =false
+                        BorderStyle: =BorderStyle.None
+                        Color: =RGBA(0, 0, 0, 0)
+                        Fill: =RGBA(0, 0, 0, 0)
+                        Height: =24
+                        HoverColor: =RGBA(0, 0, 0, 0)
+                        HoverFill: =RGBA(0, 0, 0, 0)
+                        OnSelect: |-
+                            =UpdateContext({
+                                DeletTask:true,
+                                DeleteNum:ThisItem.Approval_No
+                            })
+                        PaddingBottom: =2
+                        PaddingLeft: =0
+                        PaddingRight: =0
+                        PaddingTop: =2
+                        PressedColor: =RGBA(0, 0, 0, 0)
+                        PressedFill: =RGBA(0, 0, 0, 0)
+                        Size: =12
+                        Text: ="編輯"
+                        Visible: |-
+                            =//If(ThisItem.TaskStatus="001", true , false )
+                            If(ThisItem.FlowTaskName in ["招聘職位申請表","預備合約通知書(新入職)","假期批核人資料表"] && 
+                            //ThisItem.TaskStatus="001"
+                            First(
+                                    SortByColumns(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            Approval_No = ThisItem.Approval_No
+                                        ),
+                                        "Priortty",
+                                        Descending
+                                    )
+                                ).TaskStatus = "001"
+                            ,true,false)
+                        Width: =24
+                        X: =1046
+                        Y: =14
+                        ZIndex: =26
 
     Container3_7 As groupContainer.manualLayoutContainer:
         Fill: =RGBA(255, 255, 255, 1)
