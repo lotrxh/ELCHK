@@ -465,9 +465,9 @@ GeneralFormListScreen As screen:
                 HoverBorderColor: =ColorFade(Self.BorderColor, -20%)
                 HoverColor: =Self.Color
                 HoverFill: =ColorFade(Self.Fill, -5%)
-                InputTextPlaceholder: ="表格部門/服務/功能"
+                InputTextPlaceholder: ="申请部門/单位"
                 Items: =Sort(Distinct(Filter(ConfigurationInfo,Type_Name="組織配置"&&(Value1="部門信息"||Value1="單位信息")),Code_No2&"-"&Value2),Result)
-                NoSelectionText: ="表格部門/服務/功能"
+                NoSelectionText: ="申请部門/单位"
                 PaddingLeft: =10
                 PressedColor: =Self.Color
                 PressedFill: =ColorFade(Self.Fill, -5%)
