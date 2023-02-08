@@ -1875,6 +1875,19 @@ GeneralFormListScreen As screen:
                                             ApprovalId = TaskListGallery.Selected.Approval_No
                                         ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
                                     ),
+                                    First(
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            Approval_No = ThisItem.Approval_No,
+                                            TaskStatus = "002"
+                                        )
+                                    ).Priortty = "1",
+                                    Launch(
+                                        JumpUrlA306A111 & "&Screen=EmploymentFormScreen&taskNum=" & LookUp(
+                                            EmploymentResource,
+                                            ApprovalId = TaskListGallery.Selected.Approval_No
+                                        ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
+                                    ),
                                     Launch(
                                         JumpUrlA306A111 & "&Screen=EmploymentFormDetail&taskNum=" & LookUp(
                                             EmploymentResource,
