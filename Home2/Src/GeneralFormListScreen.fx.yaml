@@ -1759,20 +1759,17 @@ GeneralFormListScreen As screen:
                                         ).Title & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
                                     ),
                                     First(
-                                        SortByColumns(
-                                            Filter(
-                                                ApprovalDetail_Table,
-                                                Approval_No = ThisItem.Approval_No
-                                            ),
-                                            "Priortty",
-                                            Descending
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            Approval_No = ThisItem.Approval_No,
+                                            TaskStatus = "002"
                                         )
-                                    ).TaskStatus = "002",
+                                    ).Priortty = "1",
                                     Launch(
-                                        JumpUrl & "&Screen=JobTitleFormDetailScreen&AppIds=" & LookUp(
+                                        JumpUrl & "&Screen=JobTitleFormScreen&AppIds=" & LookUp(
                                             ApplitionJobPosition,
                                             ApprovalId = TaskListGallery.Selected.Approval_No
-                                        ).Title & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&canOperation=true"
+                                        ).Title & "&MasterflowId=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
                                     ),
                                     Launch(
                                         JumpUrl & "&Screen=JobTitleFormDetailScreen&AppIds=" & LookUp(
@@ -1841,20 +1838,17 @@ GeneralFormListScreen As screen:
                                         ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
                                     ),
                                     First(
-                                        SortByColumns(
-                                            Filter(
-                                                ApprovalDetail_Table,
-                                                Approval_No = ThisItem.Approval_No
-                                            ),
-                                            "Priortty",
-                                            Descending
+                                        Filter(
+                                            ApprovalDetail_Table,
+                                            Approval_No = ThisItem.Approval_No,
+                                            TaskStatus = "002"
                                         )
-                                    ).TaskStatus = "002",
+                                    ).Priortty = "1",
                                     Launch(
-                                        JumpUrl & "&Screen=ContractNoticeFormDetail&taskNum=" & LookUp(
+                                        JumpUrl & "&Screen=ContractNoticeForm&taskNum=" & LookUp(
                                             ContractNotice,
                                             ApprovalId = TaskListGallery.Selected.Approval_No
-                                        ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=false&canOperation=true"
+                                        ).Title & "&approvalNum=" & TaskListGallery.Selected.Approval_No & "&resubmit=true&bustype=edit"
                                     ),
                                     Launch(
                                         JumpUrl & "&Screen=ContractNoticeFormDetail&taskNum=" & LookUp(
